@@ -1,0 +1,64 @@
+\documentclass[12pt]{scrartcl}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath, amssymb}
+\usepackage{svg}
+\usepackage{graphicx}
+\usepackage{pdfpages}
+\usepackage{minted}
+\usepackage[colorlinks=true, linkcolor=black, urlcolor=blue]{hyperref}
+\usepackage{geometry}
+\geometry{a4paper, margin=1in}
+
+\title{\vspace{5cm}\textbf{Use Case:} data-driven camera calibration for light field camera systems}
+\author{\textbf{Author: } Youssef Daoudi El Boukhrissi (4277022)}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\newpage
+\pagenumbering{arabic}
+
+\section*{Use Case: Cross-Shaped Camera Array 
+\newline
+[Center + North/East/South/West]}
+
+\subsection*{Phase 1 — Initial Lab Calibration (once)}
+\begin{itemize}
+  \item Per-camera intrinsics with checkerboard across diverse poses and distances.
+  \item Pairwise extrinsics for overlapping pairs \newline(Center$\leftrightarrow$N/E/S/W, optionally neighbour$\leftrightarrow$neighbour).
+  \item Global refinement over all cameras and points to remove pairwise inconsistencies.
+  \item Store a baseline (the ``good'' state) for later comparison.
+\end{itemize}
+
+\subsection*{Phase 2 - In-Field Self-Check (periodic or event-based)}
+\begin{itemize}
+  \item \textbf{Triggers:} fixed interval (e.g., hourly), temperature jumps, restart, or detected shock.
+  \item \textbf{Short capture window:} record a brief sequence during normal operation.
+  \item \textbf{Health metrics:}
+    \begin{itemize}
+      \item Reprojection error (windowed): median over the latest frames per camera/pair.
+      \item Parameter estimation error: deviation of current parameter estimates from the baseline/reference calibration (or \emph{ground truth} if independently measured).
+      \item Parameter \emph{drift}\footnote{By "drift" we mean Small, gradual changes caused by temperature, vibration, or focus shifts—can misalign the array. Even tiny misalignments degrade depth accuracy, cause stitching artifacts, and reduce overall 3D consistency.}
+    \end{itemize}
+  \item \textbf{Decision:} If the combined health score (0 - 100) drops below a threshold over multiple windows, request online recalibration.
+\end{itemize}
+
+\subsection*{Phase 3 — Target-Free Online Recalibration}
+\begin{itemize}
+  \item \textbf{Trigger:} Start only when the health score has stayed below a threshold across multiple windows. When the health score stays $\leq 70$ across $\geq 3$ consecutive windows (e.g., 20s each).
+  \item \textbf{Short data window:} Use a brief, recent multi-camera sequence from normal operation (no targets).
+  \item \textbf{What to update:} Only adjust drift-sensitive internal parameters (principal point; small low-order distortion if needed). Keep the rig geometry fixed (no baseline changes).
+  \item \textbf{Method (multi-camera BA):} Run bundle adjustment on the latest frames so that corresponding scene points align consistently in all views (i.e., lower reprojection error). No checkerboard required.
+  \item \textbf{Commit rule:} Apply the update only if health metrics clearly improve; otherwise defer and retry later.
+\end{itemize}
+
+\subsection*{Extras (optional but recommended)}
+\begin{itemize}
+  \item \textbf{Rollback \& versioning:} keep the last known-good calibration and auto-rollback if a new update worsens the health metrics.
+\end{itemize}
+
+\end{document}
