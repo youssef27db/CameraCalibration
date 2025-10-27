@@ -1,0 +1,73 @@
+\documentclass[12pt]{scrartcl}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath, amssymb}
+\usepackage{svg}
+\usepackage{graphicx}
+\usepackage{pdfpages}
+\usepackage{minted}
+\usepackage[colorlinks=true, linkcolor=black, urlcolor=blue]{hyperref}
+\usepackage{geometry}
+\geometry{a4paper, margin=1in}
+
+\title{\vspace{5cm}\textbf{Requirements:} data-driven camera calibration for light field camera systems}
+\author{\textbf{Author: } Youssef Daoudi El Boukhrissi (4277022)}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\newpage
+\pagenumbering{arabic}
+
+\section*{Requirements for the Cross-Shaped Camera Array Calibration}
+
+Based on the described use case and the methods presented in the reference paper
+(LiFCal),
+the following requirements define the functional scope and measurable performance goals
+for the implementation in this Bachelor’s thesis.
+
+\subsection*{Functional Requirements}
+\begin{itemize}
+  \item \textbf{FR1 - MLA Initial Calibration:} 
+  The system shall perform an initial calibration for all cameras in the cross-shaped array
+  using standard OpenCV procedures (checkerboard-based intrinsic and extrinsic estimation).
+  \item \textbf{FR2 – Joint Optimization (Bundle Adjustment):} 
+  The system shall refine the camera parameters through a multi-camera bundle adjustment (based on the GitHub-Repo (LiFCal))
+  minimizing the reprojection error across all overlapping fields of view.
+  \item \textbf{FR3 – Periodic Health Monitoring:} 
+  The system shall continuously evaluate the calibration quality during operation by computing
+  a health score based on reprojection error, parameter estimation error, and parameter drift.
+  \item \textbf{FR4 – Automatic Trigger for Recalibration:}
+  When the health score remains $\leq70$ over $\geq3$ consecutive time windows,
+  the system shall initiate a target-free online recalibration using recent multi-camera data.
+  \item \textbf{FR5 – Selective Parameter Update:}
+  The recalibration process shall adjust only internal drift-sensitive parameters
+  (principal point, possibly low-order distortion) while keeping the rig geometry fixed.
+  \item \textbf{FR6 – Rollback Mechanism:}
+  The system shall automatically revert to the last known-good calibration
+  if post-update health metrics do not improve or degrade.
+  \item \textbf{FR7 – Result Logging:}
+  The system shall log all calibration runs, health scores, and parameter changes for evaluation
+  and reproducibility.
+\end{itemize}
+
+\subsection*{Non-Functional Requirements}
+\begin{itemize}
+  \item \textbf{NFR1 – Portability:} 
+  The calibration framework shall be implemented in Python/C++ with OpenCV
+  and remain adaptable to different camera configurations (e.g., Raytrix R5, R25, or similar).
+  \item \textbf{NFR2 – Modularity:} 
+  Each component (data acquisition, health monitoring, bundle adjustment, logging)
+  shall be designed as a separate, reusable module.
+  \item \textbf{NFR3 – Reproducibility:} 
+  Calibration and monitoring results shall be exportable in a standardized format
+  (e.g., JSON) to ensure consistent evaluation.
+  \item \textbf{NFR4 – Robustness to Scene Variation:} 
+  The calibration process shall tolerate moderate lighting and texture variations
+  without significant loss of accuracy (health score drop $\leq10$ points).
+\end{itemize}
+
+\end{document}
