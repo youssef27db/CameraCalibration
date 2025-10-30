@@ -26,25 +26,32 @@
 \newline
 [Center + North/East/South/West]}
 
+
 \subsection*{Phase 1 — Initial Lab Calibration (once)}
 \begin{itemize}
-  \item Per-camera intrinsics with checkerboard across diverse poses and distances.
-  \item Pairwise extrinsics for overlapping pairs \newline(Center$\leftrightarrow$N/E/S/W, optionally neighbour$\leftrightarrow$neighbour).
-  \item Global refinement over all cameras and points to remove pairwise inconsistencies.
-  \item Store a baseline (the ``good'' state) for later comparison.
+  \item \textbf{Option A (target-based, OpenCV):} Checkerboard-based initialization to estimate intrinsic parameters.
+  \item \textbf{Option B (target-free, LiFCal):} Sequence-based initialization without a calibration target, estimating    plenoptic intrinsics directly from image observations.
+  \item \textbf{Global refinement:} Joint bundle adjustment over the collected frames/image points to minimize reprojection error and obtain a consistent calibration.
+  \item \textbf{Baseline:} Store the resulting calibration as the known-good reference for later comparison.
 \end{itemize}
 
-\subsection*{Phase 2 - In-Field Self-Check (periodic or event-based)}
+\subsection*{Phase 2 — In-Field Self-Check (periodic or event-based)}
 \begin{itemize}
   \item \textbf{Triggers:} fixed interval (e.g., hourly), temperature jumps, restart, or detected shock.
-  \item \textbf{Short capture window:} record a brief sequence during normal operation.
-  \item \textbf{Health metrics:}
+  \item \textbf{Short capture window:} record a brief sequence during normal operation (no targets).
+  \item \textbf{Option A — Model-based check (baseline comparison):}
     \begin{itemize}
-      \item Reprojection error (windowed): median over the latest frames per camera/pair.
-      \item Parameter estimation error: deviation of current parameter estimates from the baseline/reference calibration (or \emph{ground truth} if independently measured).
-      \item Parameter \emph{drift}\footnote{By "drift" we mean Small, gradual changes caused by temperature, vibration, or focus shifts—can misalign the array. Even tiny misalignments degrade depth accuracy, cause stitching artifacts, and reduce overall 3D consistency.}
+      \item \emph{Windowed reprojection error:} median over the latest frames/micro-images.
+      \item \emph{Parameter estimation error:} deviation of key parameters (principal point, effective focal length, low-order distortion) from the baseline/reference calibration.
+      \item \emph{Parameter drift:} normalized change of these parameters across consecutive windows.
     \end{itemize}
-  \item \textbf{Decision:} If the combined health score (0 - 100) drops below a threshold over multiple windows, request online recalibration.
+  \item \textbf{Option B — Feature-based check (persistent tracks):}
+    \begin{itemize}
+      \item Detect one or a few stable features (e.g., corners/patches) visible across the short window; track with a robust matcher.
+      \item \emph{Track-consistency error:} difference between observed feature motion and the motion predicted by the baseline calibration.
+    \end{itemize}
+  \item \textbf{Decision:} Trigger online recalibration if the Option~A metrics exceed thresholds for $\geq 3$ consecutive windows
+        \emph{or} if the Option~B track-consistency error persists above threshold over the same period.
 \end{itemize}
 
 \subsection*{Phase 3 — Target-Free Online Recalibration}
