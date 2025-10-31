@@ -56,6 +56,20 @@ ret, mtx, dist, rotation_vecs, translation_vecs = cv2.calibrateCamera(objpoints,
 print("Kameramatrix:\n", mtx)
 print("\nVerzerrungskoeffizienten:\n", dist)
 
+# Gib für jede gefundene Ansicht die Rotationsmatrix und den Translationsvektor aus.
+# OpenCV liefert Rotationsvektoren (Rodrigues). Wir konvertieren sie in Matrizen mit cv2.Rodrigues.
+if rotation_vecs is not None and len(rotation_vecs) > 0:
+    print("\nRotationsmatrizen und Translationsvektoren pro Ansicht:")
+    for i, (rvec, tvec) in enumerate(zip(rotation_vecs, translation_vecs)):
+        # rvec ist ein 3x1 Vektor; Rodrigues liefert die 3x3 Rotationsmatrix
+        R, _ = cv2.Rodrigues(rvec)
+        print(f"\nAnsicht {i}:")
+        print("Rotationsmatrix (R):\n", R)
+        # tvec ist üblicherweise ein (3,1) Vektor
+        print("Translationsvektor (t):\n", tvec.reshape(-1, 1))
+else:
+    print("Keine Rotations-/Translationsvektoren gefunden. Überprüfe, ob genügend gültige Bilder vorhanden sind.")
+
 # Berechne den Reprojektionsfehler
 total_error = 0
 
