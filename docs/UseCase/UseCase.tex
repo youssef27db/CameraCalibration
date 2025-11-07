@@ -29,8 +29,7 @@
 
 \subsection*{Phase 1 — Initial Lab Calibration (once)}
 \begin{itemize}
-  \item \textbf{Option A (target-based, OpenCV):} Checkerboard-based initialization to estimate intrinsic parameters.
-  \item \textbf{Option B (target-free, LiFCal):} Sequence-based initialization without a calibration target, estimating    plenoptic intrinsics directly from image observations.
+  \item \textbf{Target-based, OpenCV:} Checkerboard-based initialization to estimate intrinsic/extrinsic parameters.
   \item \textbf{Global refinement:} Joint bundle adjustment over the collected frames/image points to minimize reprojection error and obtain a consistent calibration.
   \item \textbf{Baseline:} Store the resulting calibration as the known-good reference for later comparison.
 \end{itemize}
