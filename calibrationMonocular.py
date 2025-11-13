@@ -2,6 +2,10 @@ import numpy as np
 import cv2
 import glob
 
+
+# im Docker False, lokal auf True setzen
+SHOW_IMAGES = False  
+
 # Definiere die Anzahl der inneren Ecken in der Schachbrettmuster
 chessboard_size = (6, 8)
 # abbruchkriterien für die Kalibrierung
@@ -37,18 +41,21 @@ for fname in images:
         img = cv2.drawChessboardCorners(img, chessboard_size, corners2, ret)
         
         # Zeige das Bild und warte auf Tasteneingabe (ESC zum Beenden, Leertaste für nächstes Bild)
-        cv2.imshow('img', img)
-        k = cv2.waitKey(0)
+        if SHOW_IMAGES:
+            cv2.imshow('img', img)
+            k = cv2.waitKey(0)
 
-        if k == 27:
-            break
-        elif k == 32:
-            index += 1
-            if index >= len(images):
-                print("Keine weiteren Bilder.")
-                index = 0
+            if k == 27:
+                break
+            elif k == 32:
+                index += 1
+                if index >= len(images):
+                    print("Keine weiteren Bilder.")
+                    index = 0
 
-cv2.destroyAllWindows()
+            cv2.destroyAllWindows()
+
+    
 
 # Kalibriere die Kamera mit den gesammelten Punkten
 ret, mtx, dist, rotation_vecs, translation_vecs = cv2.calibrateCamera(objpoints, imgpoints, gray.shape[::-1], None, None)
@@ -94,10 +101,11 @@ mapx, mapy = cv2.initUndistortRectifyMap(mtx, -dist_distort, None, mtx, (w, h), 
 distorted_img = cv2.remap(img, mapx, mapy, cv2.INTER_LINEAR)
 
 
-cv2.imshow("Original", img)
-cv2.imshow("Verzerrt", distorted_img)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
+if SHOW_IMAGES: 
+    cv2.imshow("Original", img)
+    cv2.imshow("Verzerrt", distorted_img)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
 
 # Entzerre das verzerrte Bild
 img = cv2.imread('images/img0.png')
@@ -111,6 +119,7 @@ undistorted_img = cv2.undistort(img, mtx, dist, None, newcameramtx)
 x, y, w, h = roi
 undistorted_img = undistorted_img[y:y+h, x:x+w]
 
-cv2.imshow('Entzerrt', undistorted_img)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
+if SHOW_IMAGES:
+    cv2.imshow('Entzerrt', undistorted_img)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()

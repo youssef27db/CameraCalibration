@@ -1,0 +1,22 @@
+# ninja log v5
+322	3054	1763056715245316400	CMakeFiles/LibLiFCal.dir/src/CalibrationData/Constraints/Constraints.cpp.o	9530e8dc5b5954ac
+334	4406	1763056716610730400	CMakeFiles/LibLiFCal.dir/src/CalibrationData/ExtrinsicOrientation/ExtrinsicOrientation.cpp.o	1b39c4a00d0c71f0
+279	4899	1763056717109870300	CMakeFiles/LibLiFCal.dir/src/CalibrationData/ImagePoints/Images.cpp.o	18cc6e9f5dc8946f
+273	5147	1763056717355723300	CMakeFiles/LibLiFCal.dir/src/CalibrationData/ExtrinsicOrientation/ExtrinsicOrientations.cpp.o	8f3069ac245b97ef
+305	5242	1763056717445986600	CMakeFiles/LibLiFCal.dir/src/CalibrationData/ArucoDetection/ArucoDetection.cpp.o	5694b720ba280e7d
+345	7928	1763056720128899100	CMakeFiles/LibLiFCal.dir/src/CalibrationData/IntrinsicOrientation/IntrinsicOrientation.cpp.o	b06e54ae10829ae8
+293	9754	1763056721954210200	CMakeFiles/LibLiFCal.dir/src/CalibrationData/CalibrationData.cpp.o	7b3f1ca2bae43ba7
+285	38177	1763056750346366200	CMakeFiles/LibLiFCal.dir/src/CameraCalibration.cpp.o	3e14603cbded6307
+354	539	1763056785825400100	CMakeFiles/LibLiFCal.dir/src/MicroLensGrid/MicroLens.cpp.o	a68dbc662266a0c
+348	702	1763056785985169300	CMakeFiles/LibLiFCal.dir/src/MicroLensGrid/EpiPolarLine.cpp.o	5311f2612ec2e4a2
+366	2933	1763056788229326100	CMakeFiles/LibLiFCal.dir/src/MicroLensGrid/MicroLensGrid.cpp.o	801c64fa13650386
+336	3587	1763056788883332200	CMakeFiles/LibLiFCal.dir/src/CalibrationData/ObjectPoints/ObjectPoints.cpp.o	6c58105db0931b7
+558	3807	1763056789083015000	CMakeFiles/LibLiFCal.dir/src/thirdparty/pugixml-1.7/src/pugixml.cpp.o	3b4a161afad065f8
+374	4625	1763056789915426100	CMakeFiles/LibLiFCal.dir/src/Utility/FileManagement.cpp.o	76f86f49c55d93e5
+386	6566	1763056791845219800	CMakeFiles/LibLiFCal.dir/src/Utility/myUtility/myUtility.cpp.o	1a4dfc151b7c7c59
+382	6859	1763056792148582300	CMakeFiles/LibLiFCal.dir/src/Utility/Settings.cpp.o	a1f9b43fd539267c
+341	8054	1763056793334447900	CMakeFiles/LibLiFCal.dir/src/ColmapReconstructor/ColmapReconstructor.cpp.o	15d8caa92038675e
+420	3136	1763056925803485900	CMakeFiles/LibLiFCal.dir/src/main.cpp.o	75686a687871c8a6
+415	3184	1763056925849413000	CMakeFiles/LiFCal.dir/src/main.cpp.o	a0312fff7eabb634
+3147	45979	1763056968630103800	lib/libLibLiFCal.a	23fb0c7461a5be85
+45982	75780	1763056998438572400	bin/LiFCal	a483769fc2e4b15
