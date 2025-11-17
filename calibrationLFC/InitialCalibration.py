@@ -4,7 +4,7 @@ from CalibrationState import CalibrationState
 
 class InitialCalibration:
 
-    def __init__(self, chessboardSize=(6,8), squareSize=0.02):
+    def __init__(self, chessboardSize=(8,8), squareSize=0.02):
         self.chessboardSize = chessboardSize
         self.squareSize = squareSize
         self.criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 30, 0.001)
