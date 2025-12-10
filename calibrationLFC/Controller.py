@@ -3,12 +3,12 @@ from ResultLogger import ResultLogger
 
 class Controller:
 
-    def __init__(self):
+    def __init__(self, bundleAdjust):
         self.initialCalibration = InitialCalibration()
         self.scoreHistory = []
         self.currentState = None
         self.resultLogger = ResultLogger()
-        self.bundleAdjust = True
+        self.bundleAdjust = bundleAdjust
 
     def runInitialCalibration(self, imageSet):
         print("Controller: starting initial calibration...")
