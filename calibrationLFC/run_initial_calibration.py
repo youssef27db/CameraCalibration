@@ -36,7 +36,7 @@ def main():
     imageSet = ImageSet(BASE_DIR, NUM_POSES, CAM_IDS)
 
     print("Instantiating Controller and InitialCalibration...")
-    controller = Controller(bundleAdjust = True)
+    controller = Controller(bundleAdjust = False)
     logger = controller.resultLogger
 
     print("\nQuick checks (pose 0): file exists / corners detected")
@@ -46,7 +46,7 @@ def main():
         cornersFound = None
 
         try:
-            cornersFound, corners, size = controller.initialCalibration.detectCorners(path)
+            cornersFound, _, _ = controller.initialCalibration.detectCorners(path)
         except Exception as e:
             cornersFound = f"error: {e.__class__.__name__}"
         print(f" {cam}: {path} - exists={exists} - corners={cornersFound}")
