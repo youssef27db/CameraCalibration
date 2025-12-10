@@ -6,9 +6,8 @@ from scipy.optimize import least_squares
 
 class InitialCalibration:
 
-    def __init__(self, chessboardSize=(8,8), squareSize=0.11):
+    def __init__(self, chessboardSize=(8,8)):
         self.chessboardSize = chessboardSize
-        self.squareSize = squareSize
         self.criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 30, 0.001)
 
     # ---------------------------
@@ -18,7 +17,6 @@ class InitialCalibration:
         cols, rows = self.chessboardSize
         objp = np.zeros((cols * rows, 3), np.float32)
         objp[:, :2] = np.mgrid[0:cols, 0:rows].T.reshape(-1, 2)
-        objp *= self.squareSize
         return objp
 
     def detectCorners(self, imagePath):

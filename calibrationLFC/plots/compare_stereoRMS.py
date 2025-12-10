@@ -11,7 +11,7 @@ CALIB_LFC_DIR = os.path.dirname(THIS_DIR)
 
 # Pfad zum Kalibrierungsergebnis
 CALIB_RESULT_PATH = os.path.join(
-    CALIB_LFC_DIR, "results", "calibration_initial_imageset2_20251201_214619.json"
+    CALIB_LFC_DIR, "results", "calibration_initial_imageset1_20251210_171918.json"
 )
 
 def load_stereo_rms(path):
