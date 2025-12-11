@@ -8,16 +8,7 @@
 2025-12-11 00:15:54,791 [INFO] Stored initial calibration to 'calibration_initial_imageset4_20251211_001554.json' (intrinsics for 13 cams, extrinsics for 13 cams, bundleAdjustf: True).
 2025-12-11 01:04:43,572 [INFO] Stored initial calibration to 'calibration_initial_imageset5_20251211_010443.json' (intrinsics for 13 cams, extrinsics for 13 cams, bundleAdjustf: False).
 2025-12-11 02:41:48,122 [INFO] Stored initial calibration to 'calibration_initial_imageset5_20251211_024148.json' (intrinsics for 13 cams, extrinsics for 13 cams, bundleAdjustf: True).
-2025-12-11 02:58:26,595 [INFO] Stored initial calibration to 'calibration_initial_imageset6_20251211_025826.json' (intrinsics for 13 cams, extrinsics for 13 cams, bundleAdjustf: False).
 2025-12-11 04:08:49,338 [INFO] Stored initial calibration to 'calibration_initial_imageset6_20251211_040849.json' (intrinsics for 13 cams, extrinsics for 13 cams, bundleAdjustf: False).
-2025-12-11 04:34:04,314 [INFO] Stored initial calibration to 'calibration_initial_imageset6_20251211_043404.json' (intrinsics for 13 cams, extrinsics for 13 cams, bundleAdjustf: False).
-2025-12-11 08:11:15,655 [ERROR] Calibration failed with exception: 'InitialCalibration' object has no attribute 'run'
-Traceback (most recent call last):
-  File "C:\Users\Youssef\Desktop\UNI\S7\Bachelorarbeit\CameraCalibration\calibrationLFC\run_initial_calibration.py", line 56, in main
-    calibrationState = controller.runInitialCalibration(imageSet)
-                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Youssef\Desktop\UNI\S7\Bachelorarbeit\CameraCalibration\calibrationLFC\Controller.py", line 15, in runInitialCalibration
-    calibrationState = self.initialCalibration.run(imageSet, self.bundleAdjust)
-                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-AttributeError: 'InitialCalibration' object has no attribute 'run'
 2025-12-11 09:39:02,907 [INFO] Stored initial calibration to 'calibration_initial_imageset6_20251211_093902.json' (intrinsics for 13 cams, extrinsics for 13 cams, bundleAdjustf: True).
+2025-12-11 10:02:49,472 [INFO] Stored initial calibration to 'calibration_initial_imageset7_20251211_100249.json' (intrinsics for 13 cams, extrinsics for 13 cams, bundleAdjustf: True).
+2025-12-11 10:19:53,659 [INFO] Stored initial calibration to 'calibration_initial_imageset7_20251211_101953.json' (intrinsics for 13 cams, extrinsics for 13 cams, bundleAdjustf: False).

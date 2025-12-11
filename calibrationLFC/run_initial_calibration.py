@@ -20,8 +20,8 @@ from Controller import Controller
 # -------------------------
 # Configuration
 # -------------------------
-BASE_DIR = "imageset6"  # folder with images
-NUM_POSES = 36
+BASE_DIR = "imageset5"  # folder with images
+NUM_POSES = 18
 CAM_IDS = [
     "Center",
     "Up1", "Up2", "Up3",

@@ -20,7 +20,7 @@ CALIB_PATH = os.path.join(
 
 GT_PATH = os.path.join(
     PROJECT_ROOT, "TestEnvironment", "params",
-    "groundtruth_extrinsics_Rig1_set1.json"
+    "groundtruth_extrinsics_Rig2_set2.json"
 )
 
 CAM_IDS = [
