@@ -15,7 +15,7 @@ PROJECT_ROOT = os.path.dirname(CALIB_LFC_DIR)
 
 CALIB_PATH = os.path.join(
     CALIB_LFC_DIR, "results",
-    "calibration_initial_imageset6_20251211_040849.json" 
+    "calibration_initial_imageset6_20251211_093902.json" 
 )
 
 GT_PATH = os.path.join(

@@ -126,7 +126,7 @@ class InitialCalibration:
         return state
     
     # -------------------------------------------------------
-    # Step 3: Global Bundle Adjustment auf Extrinsics
+    # Step 3: Global Bundle Adjustment auf Extrinsics (robust)
     # -------------------------------------------------------
     def bundleAdjustExtrinsics(self, imageSet, state, refCamId):
         """
@@ -139,13 +139,12 @@ class InitialCalibration:
         """
         objp = self.createObjectPoints()
         cameraIds = list(imageSet.cameraIds)
-        num_cams = len(cameraIds)
         if refCamId not in cameraIds:
             raise ValueError("refCamId not in imageSet.cameraIds")
 
         ref_idx = cameraIds.index(refCamId)
 
-        # ---------- 1) Initiale Board-Posen via PnP in der Referenzkamera ----------
+        # ---------- 1) Initiale Board-Posen via PnP-RANSAC in der Referenzkamera ----------
         K_ref = state.intrinsics[refCamId]["cameraMatrix"]
         dist_ref = state.intrinsics[refCamId]["distortionCoeffs"]
 
@@ -159,11 +158,19 @@ class InitialCalibration:
             if not ok:
                 continue
 
-            # PnP: Board im Ref-Cam-System
-            ok_pnp, rvec, tvec = cv2.solvePnP(
-                objp, corners, K_ref, dist_ref, flags=cv2.SOLVEPNP_ITERATIVE
+            # solvePnPRansac für robustere Board-Posen
+            ok_pnp, rvec, tvec, inliers = cv2.solvePnPRansac(
+                objp,
+                corners,
+                K_ref,
+                dist_ref,
+                reprojectionError=2.0,   
+                confidence=0.99,
+                flags=cv2.SOLVEPNP_ITERATIVE
             )
-            if not ok_pnp:
+
+            if not ok_pnp or inliers is None or len(inliers) < 10:
+                # zu wenig verlässliche Punkte -> Pose skippen
                 continue
 
             pose_rvecs[pose] = rvec.astype(np.float64).reshape(3)
@@ -183,7 +190,7 @@ class InitialCalibration:
             if cam == refCamId:
                 continue
             if cam not in state.extrinsics:
-                # falls StereoCalibrate die Kamera nicht gesetzt hat
+                # falls stereoCalibrate die Kamera nicht gesetzt hat
                 continue
 
             optim_cams.append(ci)
@@ -234,7 +241,7 @@ class InitialCalibration:
 
         x0 = np.concatenate([param_cam, param_pose])
 
-        # Hilfsfunktionen für Parameter-Decoding
+        # ---------- Hilfsfunktionen für Parameter-Decoding ----------
         def decode_params(params):
             # cams
             cam_rvecs = {}
@@ -321,16 +328,20 @@ class InitialCalibration:
 
             return np.concatenate(residual_list)
 
-        # ---------- 6) Optimierung ----------
+        # ---------- 6) Optimierung (robust, soft_l1) ----------
         result = least_squares(
             residuals,
             x0,
             verbose=2,
-            method="lm"  # Levenberg-Marquardt (für kleine Probleme gut)
+            method="trf",       
+            loss="soft_l1",     
+            f_scale=1.0         
         )
 
-        print(f"[BA] Done. Final cost: {result.cost:.4f}, "
-              f"RMS per coord: {np.sqrt(2*result.cost/len(result.fun)):.4f} px")
+        print(
+            f"[BA] Done. Final cost: {result.cost:.4f}, "
+            f"RMS per coord: {np.sqrt(2*result.cost/len(result.fun)):.4f} px"
+        )
 
         # ---------- 7) Ergebnis zurück in state.extrinsics schreiben ----------
         cam_rvecs_opt, cam_tvecs_opt, pose_r_opt, pose_t_opt = decode_params(result.x)
