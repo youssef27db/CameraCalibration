@@ -20,8 +20,8 @@ from Controller import Controller
 # -------------------------
 # Configuration
 # -------------------------
-BASE_DIR = "imageset3"  # folder with images
-NUM_POSES = 41
+BASE_DIR = "imageset6"  # folder with images
+NUM_POSES = 36
 CAM_IDS = [
     "Center",
     "Up1", "Up2", "Up3",
@@ -36,7 +36,7 @@ def main():
     imageSet = ImageSet(BASE_DIR, NUM_POSES, CAM_IDS)
 
     print("Instantiating Controller and InitialCalibration...")
-    controller = Controller(bundleAdjust = False)
+    controller = Controller(bundleAdjust = True)
     logger = controller.resultLogger
 
     print("\nQuick checks (pose 0): file exists / corners detected")

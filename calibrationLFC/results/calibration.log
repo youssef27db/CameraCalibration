@@ -2,7 +2,12 @@
 2025-12-08 17:11:10,953 [INFO] Stored initial calibration to 'calibration_initial_imageset2_20251208_171110.json' (intrinsics for 13 cams, extrinsics for 13 cams, bundleAdjustf: False).
 2025-12-10 17:19:18,878 [INFO] Stored initial calibration to 'calibration_initial_imageset1_20251210_171918.json' (intrinsics for 13 cams, extrinsics for 13 cams, bundleAdjustf: False).
 2025-12-10 17:48:25,216 [INFO] Stored initial calibration to 'calibration_initial_imageset1_20251210_174825.json' (intrinsics for 13 cams, extrinsics for 13 cams, bundleAdjustf: True).
-2025-12-10 21:42:16,281 [INFO] Stored initial calibration to 'calibration_initial_imageset3_20251210_214216.json' (intrinsics for 13 cams, extrinsics for 13 cams, bundleAdjustf: False).
-2025-12-10 22:06:41,902 [INFO] Stored initial calibration to 'calibration_initial_imageset3_20251210_220641.json' (intrinsics for 13 cams, extrinsics for 13 cams, bundleAdjustf: True).
 2025-12-10 22:53:01,432 [INFO] Stored initial calibration to 'calibration_initial_imageset3_20251210_225301.json' (intrinsics for 13 cams, extrinsics for 13 cams, bundleAdjustf: True).
 2025-12-10 22:54:03,890 [INFO] Stored initial calibration to 'calibration_initial_imageset3_20251210_225403.json' (intrinsics for 13 cams, extrinsics for 13 cams, bundleAdjustf: False).
+2025-12-10 23:44:47,455 [INFO] Stored initial calibration to 'calibration_initial_imageset4_20251210_234447.json' (intrinsics for 13 cams, extrinsics for 13 cams, bundleAdjustf: False).
+2025-12-11 00:15:54,791 [INFO] Stored initial calibration to 'calibration_initial_imageset4_20251211_001554.json' (intrinsics for 13 cams, extrinsics for 13 cams, bundleAdjustf: True).
+2025-12-11 01:04:43,572 [INFO] Stored initial calibration to 'calibration_initial_imageset5_20251211_010443.json' (intrinsics for 13 cams, extrinsics for 13 cams, bundleAdjustf: False).
+2025-12-11 02:41:48,122 [INFO] Stored initial calibration to 'calibration_initial_imageset5_20251211_024148.json' (intrinsics for 13 cams, extrinsics for 13 cams, bundleAdjustf: True).
+2025-12-11 02:58:26,595 [INFO] Stored initial calibration to 'calibration_initial_imageset6_20251211_025826.json' (intrinsics for 13 cams, extrinsics for 13 cams, bundleAdjustf: False).
+2025-12-11 04:08:49,338 [INFO] Stored initial calibration to 'calibration_initial_imageset6_20251211_040849.json' (intrinsics for 13 cams, extrinsics for 13 cams, bundleAdjustf: False).
+2025-12-11 04:34:04,314 [INFO] Stored initial calibration to 'calibration_initial_imageset6_20251211_043404.json' (intrinsics for 13 cams, extrinsics for 13 cams, bundleAdjustf: False).
