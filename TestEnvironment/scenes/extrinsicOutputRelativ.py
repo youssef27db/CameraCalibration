@@ -2,16 +2,14 @@ import bpy
 import json
 import mathutils
 
-# Blender -> OpenCV Koordinatentransformation
-# Blender:  X rechts, Y nach vorne, Z nach oben
-# OpenCV:   X rechts, Y nach unten, Z nach vorne
+# Blender -> OpenCV Koordinaten (Achsen flip)
 B_TO_CV = mathutils.Matrix((
     (1,  0,  0),
     (0, -1,  0),
     (0,  0, -1),
 ))
 
-# Mapping: so heißen deine Kamera-Objekte in Blender
+# Kamera-Objekte
 CAM_OBJECTS = {
     "Center": "Camera_Center",
     "Up1":    "Camera_Up1",
@@ -28,77 +26,94 @@ CAM_OBJECTS = {
     "Right3": "Camera_Right3",
 }
 
+# Name deines Parents (Empty). Falls anders: anpassen.
+RIG_PARENT_NAME = "Leer"
 
-def get_pose_cv(obj: bpy.types.Object):
+def get_uniform_world_scale_from_parent(parent_obj: bpy.types.Object) -> float:
     """
-    Liefert die Pose der Kamera im OpenCV-System als Welt->Kamera-Extrinsics:
-
-        X_cam = R_cv * X_world + t_cv
-
-    Wichtig: wir benutzen matrix_world.inverted(), damit wir
-    die OpenCV-Konvention Welt->Kamera bekommen.
+    Erwartet uniform scale (x==y==z). Bei dir: 0.5.
+    Gibt world-scale des Parent zurück.
     """
-    # Welt->Kamera (OpenGL-/Blender-Style)
-    M_wc = obj.matrix_world.inverted()
-    loc, rot_quat, scale = M_wc.decompose()
+    if parent_obj is None:
+        return 1.0
+    sx, sy, sz = parent_obj.matrix_world.to_scale()
+    # Wenn nicht uniform, warnen (dann wird's komplizierter)
+    if abs(sx - sy) > 1e-6 or abs(sx - sz) > 1e-6:
+        print(f"[WARN] Parent scale not uniform: {sx}, {sy}, {sz}. Using sx.")
+    return float(sx)
 
-    # reine Rotation ohne Scale
-    R_bl = rot_quat.to_matrix().to_3x3()
+def matrix_world_no_scale(obj: bpy.types.Object) -> mathutils.Matrix:
+    """
+    Entfernt Scale-Anteile aus der matrix_world, behält aber Translation + Rotation.
+    """
+    loc, rot, _ = obj.matrix_world.decompose()
+    M = rot.to_matrix().to_4x4()
+    M.translation = loc
+    return M
+
+def get_pose_cv_world_to_cam(obj: bpy.types.Object, scale_correction: float):
+    """
+    Liefert OpenCV-Extrinsics Welt->Kamera:
+        X_cam = R * X_world + t
+
+    scale_correction: Faktor, um Parent-Scale rauszurechnen.
+      - Wenn Parent scale=0.5, dann scale_correction = 1/0.5 = 2.0
+    """
+    # Weltpose ohne Scale (damit keine Scher/Scale in der Rotation steckt)
+    M_w = matrix_world_no_scale(obj)
+
+    # Welt -> Kamera
+    M_wc = M_w.inverted()
+
+    loc, rot, _ = M_wc.decompose()
+    R_bl = rot.to_matrix().to_3x3()
     t_bl = loc
 
-    # Blender -> OpenCV-Achsen
+    # Blender -> OpenCV Achsen
     R_cv = B_TO_CV @ R_bl @ B_TO_CV.transposed()
     t_cv = B_TO_CV @ t_bl
 
+    # >>> Skalenkorrektur: Translation in "echte" Meter bringen
+    t_cv = t_cv * scale_correction
+
     return R_cv, t_cv
 
-
 def export_relative_extrinsics(save_path: str):
-    """
-    Exportiert für jede Kamera Extrinsics relativ zur Center-Kamera:
-        X_cam = R_rel * X_center + T_rel
+    parent = bpy.data.objects.get(RIG_PARENT_NAME, None)
+    parent_scale = get_uniform_world_scale_from_parent(parent)
+    scale_correction = 1.0 / parent_scale if parent_scale != 0 else 1.0
 
-    R_rel und T_rel sind im OpenCV-System und kompatibel mit deinen
-    Kalibrierungs-Extrinsics aus OpenCV.
-    """
-    # Referenzkamera = Center
-    ref_name = "Center"
-    ref_obj = bpy.data.objects[CAM_OBJECTS[ref_name]]
+    print(f"[INFO] Parent '{RIG_PARENT_NAME}' world scale = {parent_scale}")
+    print(f"[INFO] scale_correction = {scale_correction}")
 
-    R0, t0 = get_pose_cv(ref_obj)   # Welt->Center
+    ref_obj = bpy.data.objects[CAM_OBJECTS["Center"]]
+    R0, t0 = get_pose_cv_world_to_cam(ref_obj, scale_correction)
     R0_T = R0.transposed()
 
-    output = {}
+    out = {}
 
     for cam_id, obj_name in CAM_OBJECTS.items():
         cam_obj = bpy.data.objects[obj_name]
-        Rj, tj = get_pose_cv(cam_obj)   # Welt->Cam_j
+        Rj, tj = get_pose_cv_world_to_cam(cam_obj, scale_correction)
 
         if cam_id == "Center":
-            # Referenz: Identität
             R_rel = mathutils.Matrix.Identity(3)
             T_rel = mathutils.Vector((0.0, 0.0, 0.0))
         else:
-            # relative Extrinsics von Center zu Cam_j:
-            # R_rel = R_j * R_0^T
-            # T_rel = t_j - R_rel * t_0
+            # relative Extrinsics von Center -> Cam_j (OpenCV kompatibel)
             R_rel = Rj @ R0_T
             T_rel = tj - R_rel @ t0
 
-        R_list = [[float(R_rel[i][j]) for j in range(3)] for i in range(3)]
-        T_list = [float(T_rel.x), float(T_rel.y), float(T_rel.z)]
-
-        output[cam_id] = {
-            "rotationMatrix": R_list,
-            "translationVector": T_list,
+        out[cam_id] = {
+            "rotationMatrix": [[float(R_rel[i][j]) for j in range(3)] for i in range(3)],
+            "translationVector": [float(T_rel.x), float(T_rel.y), float(T_rel.z)],
         }
 
-    with open(save_path, "w") as f:
-        json.dump(output, f, indent=2)
+    with open(save_path, "w", encoding="utf-8") as f:
+        json.dump(out, f, indent=2)
 
     print("Export complete →", save_path)
 
-
-# Ausführen: speichert im gleichen Ordner wie die .blend-Datei
-save_path = bpy.path.abspath("//groundtruth_extrinsics_relative.json")
+# Speichern im .blend-Ordner
+save_path = bpy.path.abspath("//groundtruth_extrinsics_Rig1_set5.json")
 export_relative_extrinsics(save_path)

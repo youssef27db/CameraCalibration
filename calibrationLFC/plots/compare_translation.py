@@ -15,12 +15,12 @@ PROJECT_ROOT = os.path.dirname(CALIB_LFC_DIR)
 
 CALIB_PATH = os.path.join(
     CALIB_LFC_DIR, "results",
-    "calibration_initial_imageset6_20251211_093902.json" 
+    "calibration_initial_imageset7_20251215_203849.json" 
 )
 
 GT_PATH = os.path.join(
     PROJECT_ROOT, "TestEnvironment", "params",
-    "groundtruth_extrinsics_Rig2_set2.json"
+    "groundtruth_extrinsics_Rig3_set7.json"
 )
 
 CAM_IDS = [
@@ -48,7 +48,7 @@ def main():
         # Groundtruth
         t_gt = np.array(gt[cam]["translationVector"], dtype=float).reshape(3)
         # Kalibrierung
-        t_est = np.array(extr_est[cam]["translationVector"], dtype=float).reshape(3)
+        t_est = np.array(extr_est[cam]["translationVector"], dtype=float).reshape(3) 
 
         T_gt.append(t_gt)
         T_est.append(t_est)

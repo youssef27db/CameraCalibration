@@ -10,12 +10,12 @@ PROJECT_ROOT = os.path.dirname(CALIB_LFC_DIR)
 
 CALIB_PATH = os.path.join(
     CALIB_LFC_DIR, "results",
-    "calibration_initial_imageset5_20251211_122735.json"  
+    "calibration_initial_imageset7_20251215_203849.json"  
 )
 
 GT_PATH = os.path.join(
     PROJECT_ROOT, "TestEnvironment", "params",
-    "groundtruth_extrinsics_Rig1_Set1.json"
+    "groundtruth_extrinsics_Rig3_set7.json"
 )
 
 CAM_IDS = [
@@ -65,7 +65,7 @@ def main():
         T_est = as_vec3(extr_est[cam]["translationVector"])
 
         R_gt = np.array(gt[cam]["rotationMatrix"], dtype=float)
-        T_gt = as_vec3(gt[cam]["translationVector"])
+        T_gt = as_vec3(gt[cam]["translationVector"]) 
 
         # --- Rotationsfehler ---
         R_err = R_est @ R_gt.T

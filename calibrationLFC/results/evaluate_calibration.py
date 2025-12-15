@@ -28,18 +28,17 @@ CAM_IDS = [
 # Kalibrations-JSONs
 # -------------------------------------------------------
 CALIB_FILES = {
-    "imageset1": RESULTS_DIR / "calibration_initial_imageset1_20251210_171918.json",
-    "imageset2": RESULTS_DIR / "calibration_initial_imageset2_20251208_171110.json",
-    "imageset3": RESULTS_DIR / "calibration_initial_imageset3_20251210_225403.json",
-    "imageset4": RESULTS_DIR / "calibration_initial_imageset4_20251210_234447.json",
-    "imageset5": RESULTS_DIR / "calibration_initial_imageset5_20251211_010443.json",
-    "imageset6": RESULTS_DIR / "calibration_initial_imageset6_20251211_093902.json",
-    "imageset7": RESULTS_DIR / "calibration_initial_imageset7_20251211_100249.json",
+    "imageset1": RESULTS_DIR / "calibration_initial_imageset1_20251215_173701.json",
+    "imageset2": RESULTS_DIR / "calibration_initial_imageset2_20251215_181903.json",
+    "imageset3": RESULTS_DIR / "calibration_initial_imageset3_20251215_185041.json",
+    "imageset4": RESULTS_DIR / "calibration_initial_imageset4_20251215_165644.json",
+    "imageset5": RESULTS_DIR / "calibration_initial_imageset5_20251215_191121.json",
+    "imageset6": RESULTS_DIR / "calibration_initial_imageset6_20251215_201527.json",
+    "imageset7": RESULTS_DIR / "calibration_initial_imageset7_20251215_203849.json",
 }
 
 # -------------------------------------------------------
 # Groundtruth pro Kalibration
-# (falls Dateinamen anders: hier einmal korrigieren)
 # -------------------------------------------------------
 
 GT_FILES = {
@@ -50,9 +49,9 @@ GT_FILES = {
     "imageset4": GT_DIR / "groundtruth_extrinsics_Rig0.json",
 
     # verschiedene Rigs/Sets:
-    "imageset5": GT_DIR / "groundtruth_extrinsics_Rig1_set1.json",
-    "imageset6": GT_DIR / "groundtruth_extrinsics_Rig2_set2.json",
-    "imageset7": GT_DIR / "groundtruth_extrinsics_Rig3_Set3.json",  # Achtung: großes S wie in deinem Plot
+    "imageset5": GT_DIR / "groundtruth_extrinsics_Rig1_set5.json",
+    "imageset6": GT_DIR / "groundtruth_extrinsics_Rig2_set6.json",
+    "imageset7": GT_DIR / "groundtruth_extrinsics_Rig3_set7.json",  
 }
 
 # -------------------------------------------------------
@@ -60,12 +59,12 @@ GT_FILES = {
 # -------------------------------------------------------
 
 SCENARIOS = {
-    "A_Robustheit_ohneBA": ["imageset1", "imageset2", "imageset3", "imageset4"],
+    "A_Robustheit": ["imageset1", "imageset2", "imageset3", "imageset4"],
     "B_Generalisation":    ["imageset5", "imageset6", "imageset7"],
 }
 
 # -------------------------------------------------------
-# Hilfsfunktionen (analog zu deinem Plot)
+# Hilfsfunktionen
 # -------------------------------------------------------
 
 def rot_angle_deg(R):
@@ -107,7 +106,6 @@ def compute_metrics_for_file(calib_path: Path, gt_path: Path):
     extr_est = calib["state"]["extrinsics"]
     intr_est = calib["state"]["intrinsics"]
 
-    image_dir = meta.get("imageDir", "?")
     bundle_adjust = bool(meta.get("bundleAdjust", False))
     num_poses = int(meta.get("numPoses", -1))
 
@@ -147,7 +145,6 @@ def compute_metrics_for_file(calib_path: Path, gt_path: Path):
     mean_reproj = float(np.mean(reproj_err)) if reproj_err else float("nan")
 
     return {
-        "imageDir": image_dir,
         "bundleAdjust": bundle_adjust,
         "numPoses": num_poses,
         "mean_dT": mean_dT,
@@ -166,7 +163,6 @@ def print_per_file_table(results_by_name):
     """
     header = (
         f"{'Name':<12} "
-        f"{'imageDir':<10} "
         f"{'#Poses':>6} "
         f"{'BA':<4} "
         f"{'mean ΔT [m]':>12} "
@@ -180,7 +176,6 @@ def print_per_file_table(results_by_name):
         ba_flag = "yes" if res["bundleAdjust"] else "no"
         print(
             f"{name:<12} "
-            f"{res['imageDir']:<10} "
             f"{res['numPoses']:6d} "
             f"{ba_flag:<4} "
             f"{res['mean_dT']:12.5f} "
