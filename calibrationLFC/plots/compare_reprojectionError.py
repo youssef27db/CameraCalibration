@@ -11,7 +11,7 @@ CALIB_LFC_DIR = os.path.dirname(THIS_DIR)
 
 # Pfad zum Kalibrierungsergebnis
 CALIB_RESULT_PATH = os.path.join(
-    CALIB_LFC_DIR, "results", "calibration_initial_imageset7_20251211_100249.json"
+    CALIB_LFC_DIR, "results", "calibration_initial_imageset7_20251215_203849.json"
 )
 
 def load_reprojection_errors(path):
