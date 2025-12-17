@@ -32,7 +32,7 @@ CALIB_FILES = {
     "imageset2": RESULTS_DIR / "calibration_initial_imageset2_20251215_181903.json",
     "imageset3": RESULTS_DIR / "calibration_initial_imageset3_20251215_185041.json",
     "imageset4": RESULTS_DIR / "calibration_initial_imageset4_20251215_165644.json",
-    "imageset5": RESULTS_DIR / "calibration_initial_imageset5_20251215_191121.json",
+    "imageset5": RESULTS_DIR / "calibration_initial_imageset5_20251217_011656.json",
     "imageset6": RESULTS_DIR / "calibration_initial_imageset6_20251215_201527.json",
     "imageset7": RESULTS_DIR / "calibration_initial_imageset7_20251215_203849.json",
 }
