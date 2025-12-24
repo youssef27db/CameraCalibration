@@ -1,5 +1,7 @@
+from typing import List
+
 class ImageSet:
-    def __init__(self, baseDir: str, numPoses: int, cameraIds: list[str]):
+    def __init__(self, baseDir: str, numPoses: int, cameraIds: List[str]):
         self.baseDir = baseDir
         self.numPoses = numPoses
         self.cameraIds = cameraIds
