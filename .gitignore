@@ -1,0 +1,6 @@
+# LiFCal example data (too large for git)
+external/LiFCal/LiFCal_ExampleData/
+
+# build/output folders
+external/LiFCal/build*/
+external/LiFCal/colmap_output/
