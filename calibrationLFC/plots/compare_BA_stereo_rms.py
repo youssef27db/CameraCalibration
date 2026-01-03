@@ -6,8 +6,8 @@ import matplotlib.pyplot as plt
 
 # Resolve results paths relative to repository root (two levels up from this script)
 ROOT = Path(__file__).resolve().parents[1]
-PATH_NO_BA = ROOT/"results"/"calibration_initial_imageset4_20251210_234447.json"  # ohne bundleAdjust
-PATH_BA    = ROOT/"results"/"calibration_initial_imageset4_20251211_001554.json"  # mit bundleAdjust
+PATH_NO_BA = ROOT/"results"/"calibration_initial_imageset5_20251217_015917.json"  # ohne bundleAdjust
+PATH_BA    = ROOT/"results"/"calibration_initial_imageset5_20251217_011656.json"  # mit bundleAdjust
 
 
 def load_stereo_rms(path):
