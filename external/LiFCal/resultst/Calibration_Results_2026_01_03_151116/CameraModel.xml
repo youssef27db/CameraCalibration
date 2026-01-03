@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Root>
+	<CalibrationModel>Plenoptic</CalibrationModel>
+	<ImageSize units="pix">
+		<Width>1024</Width>
+		<Height>1024</Height>
+	</ImageSize>
+	<PixelSize units="mm">0.00550</PixelSize>
+	<PrincipalPoint units="pix">
+		<x>501.67334095602843</x>
+		<y>520.41770589700525</y>
+	</PrincipalPoint>
+	<FocalLength units="mm">16.747548710997879</FocalLength>
+	<MainLensMlaDistance units="mm">15.833047575678226</MainLensMlaDistance>
+	<SensorMlaDistance units="mm">0.37610746529237105</SensorMlaDistance>
+	<RadialDistortion units="mm">
+		<A0>-0.00087505497011891803</A0>
+		<A1>4.3307987528513416e-06</A1>
+	</RadialDistortion>
+	<TangentialDistortion units="mm">
+		<B0>2.0547189991925954e-06</B0>
+		<B1>-7.1998299817914023e-05</B1>
+	</TangentialDistortion>
+	<MicroLensCenterAdjustment>true</MicroLensCenterAdjustment>
+</Root>
