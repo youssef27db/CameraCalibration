@@ -30,41 +30,49 @@
 \subsection*{Phase 1 — Initial Lab Calibration (once)}
 \begin{itemize}
   \item \textbf{Target-based, OpenCV:} Checkerboard-based initialization to estimate intrinsic/extrinsic parameters.
-  \item \textbf{Global refinement:} Joint bundle adjustment over the collected frames/image points to minimize reprojection error and obtain a consistent calibration.
+  \item \textbf{Global refinement:} Bundle adjustment over the collected images points to improve estimated parameters and obtain a consistent calibration.
   \item \textbf{Baseline:} Store the resulting calibration as the known-good reference for later comparison.
 \end{itemize}
 
-\subsection*{Phase 2 — In-Field Self-Check (periodic or event-based)}
+\subsection*{Phase 2 — Health-Check (periodic)}
+
 \begin{itemize}
-  \item \textbf{Triggers:} fixed interval (e.g., hourly), temperature jumps, restart, or detected shock.
-  \item \textbf{Short capture window:} record a brief sequence during normal operation (no targets).
-  \item \textbf{Option A — Model-based check (baseline comparison):}
-    \begin{itemize}
-      \item \emph{Windowed reprojection error:} median over the latest frames/micro-images.
-      \item \emph{Parameter estimation error:} deviation of key parameters (principal point, effective focal length, low-order distortion) from the baseline/reference calibration.
-      \item \emph{Parameter drift:} normalized change of these parameters across consecutive windows.
-    \end{itemize}
-  \item \textbf{Option B — Feature-based check (persistent tracks):}
-    \begin{itemize}
-      \item Detect one or a few stable features (e.g., corners/patches) visible across the short window; track with a robust matcher.
-      \item \emph{Track-consistency error:} difference between observed feature motion and the motion predicted by the baseline calibration.
-    \end{itemize}
-  \item \textbf{Decision:} Trigger online recalibration if the Option~A metrics exceed thresholds for $\geq 3$ consecutive windows
-        \emph{or} if the Option~B track-consistency error persists above threshold over the same period.
+  \item \textbf{Trigger:} Fixed interval (e.g.\ every 3 minutes), temperature changes, or system restart.
+
+  \item \textbf{Small image set (sampling):} 
+  Periodically capture a small, recent image set during normal operation.
+
+  \item \textbf{Parameter-based health metrics:}
+  \begin{itemize}
+    \item \emph{Intrinsic deviation:} Relative deviation of key intrinsic parameters (e.g.\ principal point, effective focal length, low-order distortion) compared to the reference (initial) calibration.
+    \item \emph{Extrinsic deviation:} Change of estimated extrinsic parameters relative to the reference calibration.
+    \item \emph{Parameter drift:} Normalized parameter change between consecutive health-check windows.
+  \end{itemize}
+
+  \item \textbf{Health score:} 
+  Combine the normalized intrinsic and extrinsic deviations into a single health score.
+
+  \item \textbf{Decision:} 
+  If the health score exceeds a predefined threshold for $\geq 2$ consecutive health-check windows, the calibration is considered degraded and Phase~3 is triggered.
 \end{itemize}
 
 \subsection*{Phase 3 — Target-Free Online Recalibration}
-\begin{itemize}
-  \item \textbf{Trigger:} Start only when the health score has stayed below a threshold across multiple windows. When the health score stays $\leq 70$ across $\geq 3$ consecutive windows (e.g., 20s each).
-  \item \textbf{Short data window:} Use a brief, recent multi-camera sequence from normal operation (no targets).
-  \item \textbf{What to update:} Only adjust drift-sensitive internal parameters (principal point; small low-order distortion if needed). Keep the rig geometry fixed (no baseline changes).
-  \item \textbf{Method (multi-camera BA):} Run bundle adjustment on the latest frames so that corresponding scene points align consistently in all views (i.e., lower reprojection error). No checkerboard required.
-  \item \textbf{Commit rule:} Apply the update only if health metrics clearly improve; otherwise defer and retry later.
-\end{itemize}
 
-\subsection*{Extras (optional but recommended)}
 \begin{itemize}
-  \item \textbf{Rollback \& versioning:} keep the last known-good calibration and auto-rollback if a new update worsens the health metrics.
+  \item \textbf{Larger image set:} 
+  Collect a larger image set from recent normal operation to increase parameter stability.
+
+  \item \textbf{Re-estimation scope:}
+  \begin{itemize}
+    \item Re-estimate intrinsic and extrinsic calibration parameters using the larger image set.
+    \item Keep structural properties of the camera rig (e.g.\ baseline and physical layout) fixed.
+  \end{itemize}
+
+  \item \textbf{Method:} 
+  Perform a LiFCal-based parameter estimation on the extended image set.
+
+  \item \textbf{Commit rule:} 
+  The updated calibration is adopted only if the resulting parameter deviations and health score improve compared to the previous calibration; otherwise, the update is discarded and retried later.
 \end{itemize}
 
 \end{document}
