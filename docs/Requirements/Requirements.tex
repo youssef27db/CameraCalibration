@@ -31,27 +31,44 @@ for the implementation in this Bachelor’s thesis.
 
 \subsection*{Functional Requirements}
 \begin{itemize}
-  \item \textbf{FR1 - MLA Initial Calibration:} 
-  The system shall perform an initial calibration for all cameras in the cross-shaped array
-  using standard OpenCV procedures (checkerboard-based intrinsic and extrinsic estimation).
-  \item \textbf{FR2 – Joint Optimization (Bundle Adjustment):} 
-  The system shall refine the camera parameters through a multi-camera bundle adjustment (based on the GitHub-Repo (LiFCal))
-  minimizing the reprojection error across all overlapping fields of view.
-  \item \textbf{FR3 – Periodic Health Monitoring:} 
-  The system shall continuously evaluate the calibration quality during operation by computing
-  a health score based on reprojection error, parameter estimation error, and parameter drift.
-  \item \textbf{FR4 – Automatic Trigger for Recalibration:}
-  When the health score remains $\leq70$ over $\geq3$ consecutive time windows,
-  the system shall initiate a target-free online recalibration using recent multi-camera data.
-  \item \textbf{FR5 – Selective Parameter Update:}
-  The recalibration process shall adjust only internal drift-sensitive parameters
-  (principal point, possibly low-order distortion) while keeping the rig geometry fixed.
-  \item \textbf{FR6 – Rollback Mechanism:}
-  The system shall automatically revert to the last known-good calibration
-  if post-update health metrics do not improve or degrade.
-  \item \textbf{FR7 – Result Logging:}
-  The system shall log all calibration runs, health scores, and parameter changes for evaluation
-  and reproducibility.
+
+  \item \textbf{FR1 – Initial Reference Calibration (Target-based):}
+  The system shall perform a one-time, checkerboard-based initial calibration using OpenCV
+  to estimate intrinsic and extrinsic parameters for the cross-shaped camera array.
+  The resulting calibration shall be stored as the reference (baseline) calibration.
+
+  \item \textbf{FR2 – Static Scene Assumption with Varying Camera Poses:}
+  The system shall assume that the observed scene remains static during health-check and recalibration image sets,
+  while allowing the camera array to take different poses across captured images.
+
+  \item \textbf{FR3 – Periodic Health Monitoring (Parameter-based):}
+  The system shall periodically (e.g.\ every 3 minutes) capture a small image set during normal operation
+  and compute calibration health metrics based on:
+  (i) intrinsic deviation from the baseline, (ii) extrinsic deviation from the baseline,
+  and (iii) normalized parameter drift between consecutive monitoring windows.
+
+  \item \textbf{FR4 – Health Score Computation:}
+  The system shall combine the normalized intrinsic/extrinsic deviations and drift metrics
+  into a single scalar health score representing the current calibration quality (Score: [0 - 100]).
+
+  \item \textbf{FR5 – Automatic Trigger for Target-Free Recalibration:}
+  If the health score exceeds a predefined threshold for a configurable number of consecutive monitoring windows,
+  the system shall automatically initiate Phase~3 (target-free online recalibration).
+
+  \item \textbf{FR6 – Target-Free Online Recalibration (LiFCal-based):}
+  The system shall collect a larger image set from recent normal operation
+  and perform a LiFCal-based parameter estimation on this extended image set
+  without using calibration targets (no checkerboard).
+
+  \item \textbf{FR7 – Acceptance and Rollback Rule:}
+  The updated calibration shall be adopted only if the post-recalibration health score improves
+  compared to the previously active calibration; otherwise, the system shall revert to the last known-good calibration.
+
+  \item \textbf{FR8 – Logging and Traceability:}
+  The system shall log all health-check runs and recalibration runs, including timestamps,
+  used image sets, calibration parameters, health scores, and acceptance decisions,
+  to support evaluation and reproducibility.
+
 \end{itemize}
 
 \subsection*{Non-Functional Requirements}
