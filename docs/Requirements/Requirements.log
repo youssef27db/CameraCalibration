@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.12.24)  4 JAN 2026 20:11
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.12.24)  7 JAN 2026 17:54
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -740,7 +740,7 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
 
 {C:/Users/Youssef/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}{C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ec.enc}]
-LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 35.
+LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 36.
  (C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/lm\ts1lmr.fd
 File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
@@ -748,13 +748,13 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has b
 <to be read again> 
                    \relax 
 l.79   \item \textbf
-                    {NFR2 – Modularity:} [1{C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ts1.enc}]
+                    {NFR3 – Reproducibility:} [1{C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ts1.enc}]
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 87.
+(Font)              <8> on input line 84.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 87.
+(Font)              <6> on input line 84.
  [2{C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathsy.enc}{C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-rm.enc}]
-runsystem(latexminted cleantemp  --timestamp 20260104201119 5A2EBFB8BAA378CFCFCBA58BBB1380C2)...disabled (restricted).
+runsystem(latexminted cleantemp  --timestamp 20260107175434 5A2EBFB8BAA378CFCFCBA58BBB1380C2)...disabled (restricted).
 
  (Requirements.aux)
  ***********
@@ -765,13 +765,13 @@ L3 programming layer <2025-11-06>
 Here is how much of TeX's memory you used:
  22044 strings out of 467871
  443013 string characters out of 5417407
- 1116490 words of memory out of 5000000
+ 1117490 words of memory out of 5000000
  50568 multiletter control sequences out of 15000+600000
  675329 words of font info for 78 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  108i,7n,107p,11338b,586s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr17.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmssbx10.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb>
-Output written on Requirements.pdf (3 pages, 129160 bytes).
+Output written on Requirements.pdf (3 pages, 128632 bytes).
 PDF statistics:
  59 PDF objects out of 1000 (max. 8388607)
  6 named destinations out of 1000 (max. 500000)
