@@ -1,4 +1,5 @@
-calibrationLFC/__pycache__
+calibrationLFC/__pycache__/
+/data/external/LiFCal/LiFCal_Data/__pycache__/
 external/LiFCal/colmap_output/
 external/LiFCal/build*/
 external/LiFCal/build/
