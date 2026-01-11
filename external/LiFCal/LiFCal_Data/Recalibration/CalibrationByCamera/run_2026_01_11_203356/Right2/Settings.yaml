@@ -18,13 +18,13 @@ Camera.rawImageHeight: 720
 #--------------------------------------------------------------------------------------------
 
 # Path of the total focus images.
-Path.totalFocusImages: "../../LiFCal_Data/Recalibration/LiFCal_Imageset/focus/Up1"
+Path.totalFocusImages: "/data/external/LiFCal/LiFCal_Data/Recalibration/LiFCal_Imageset/focus/Right2"
 
 # Micro lens calibration file path.
-Path.microLensCalibration: "../../LiFCal_Data/Recalibration/MLA_Calibration.xml"
+Path.microLensCalibration: "/data/external/LiFCal/LiFCal_Data/Recalibration/MLA_Calibration.xml"
 
 # Path to the virtual depth data.
-Path.virtualDepthData: "../../LiFCal_Data/Recalibration/LiFCal_Imageset/depth/Up1"
+Path.virtualDepthData: "/data/external/LiFCal/LiFCal_Data/Recalibration/LiFCal_Imageset/depth/Right2"
 
 #--------------------------------------------------------------------------------------------
 # Configuration
