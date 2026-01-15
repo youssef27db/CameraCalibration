@@ -1,2 +1,7 @@
-2026-01-14 18:50:45,603 [INFO] Stored initial calibration to 'calibration_initial_imageset5_20260114_185045.json' (intrinsics for 13 cams, extrinsics for 13 cams, bundleAdjustf: True).
-2026-01-14 18:50:45,623 [INFO] HealthScore = 92.99 (method=initial)
+2026-01-15 15:52:20,750 [INFO] Stored initial calibration to 'calibration_initial_imageset5_20260115_155220.json' (intrinsics for 13 cams, extrinsics for 13 cams, bundleAdjustf: True).
+2026-01-15 15:52:20,750 [INFO] HealthScore = 92.99 (method=initial)
+2026-01-15 15:52:20,752 [INFO] Baseline created: baseline.json (new=92.99, method=initial)
+2026-01-15 15:52:20,779 [INFO] HealthScore = 92.99 (method=initial)
+2026-01-15 16:00:10,582 [INFO] Stored lifcal recalibration to 'calibration_lifcal_20260115_160010.json' (cams=13).
+2026-01-15 16:00:10,583 [INFO] HealthScore = 54.15 (method=lifcal)
+2026-01-15 16:00:10,583 [INFO] Baseline kept: baseline.json (old=92.99 >= new=54.15, method=lifcal)

@@ -5,7 +5,6 @@ import subprocess
 from datetime import datetime
 import lifcal_to_json
 
-
 # CONFIG
 LIFCAL_BIN = "/data/external/LiFCal/build/bin/LiFCal"
 
@@ -202,6 +201,27 @@ def main():
         print("[OK] COMBINED:", combined_path)
     except Exception as e:
         print("[WARN] combined.json not created:", e)
+    
+     # ---- LOG + HEALTH + BASELINE UPDATE
+    try:
+        import sys
+        CALIB_ROOT = "/data/calibrationLFC"
+        if CALIB_ROOT not in sys.path:
+            sys.path.insert(0, CALIB_ROOT)
+
+        from ResultLogger import ResultLogger
+        logger = ResultLogger(baseDir="/data/baseline")
+        score = logger.logRecalibration(
+            combined_json_path=combined_path,
+            meta={
+                "runType": "recalib",
+                "imageDir": "LiFCal_Imageset",
+                "bundleAdjust": True
+            }
+        )
+        print(f"[OK] HealthScore (lifcal) = {score:.2f}")
+    except Exception as e:
+        print("[WARN] LiFCal logging/health failed:", e)
 
 
 if __name__ == "__main__":

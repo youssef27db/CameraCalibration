@@ -18,7 +18,9 @@
       "Right2",
       "Right3"
     ],
-    "bundleAdjust": true
+    "bundleAdjust": true,
+    "health": 92.98787036613861,
+    "method": "initial"
   },
   "state": {
     "intrinsics": {

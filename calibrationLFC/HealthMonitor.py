@@ -30,16 +30,17 @@
 
 import re
 import json
+import math
 from typing import Dict, Any, Optional
 
 
 # -------------------------
 # Shared thresholds
 # -------------------------
-R_BEST: float = 0.03
-R_WORST: float = 1.0
-S_BEST: float = 0.0
-S_WORST: float = 50.0
+R_BEST = 0.03
+R_WORST = 1.0
+S_BEST = 0.0
+S_WORST = 50.0
 
 
 # -------------------------
@@ -193,44 +194,61 @@ def compute_lifcal_health_from_xy(
         },
     }
 
-
-def compute_lifcal_health_from_protocol(protocol_path: str) -> Dict[str, Any]:
-    vals = parse_lifcal_protocol(protocol_path)
-    if any(v is None for v in vals.values()):
-        return {"health": 0.0, "method": "lifcal", "details": {"reason": "missing std/mae values"}}
-
-    return compute_lifcal_health_from_xy(
-        vals["x_std"], vals["y_std"], vals["x_mae"], vals["y_mae"]
-    )
-
-
-def compute_lifcal_health_from_parameters_json(parameters_json_path: str) -> Dict[str, Any]:
+def compute_lifcal_health_from_combined_dict(combined: Dict[str, Any]) -> Dict[str, Any]:
     """
-    If you store LiFCal numbers in parameters.json somewhere, you can use this too.
-    Expects e.g.:
-      state.lifcal.reprojection.x_std, ...
+    combined.json structure (wie bei dir):
+      combined["state"]["parameters"][cam]["reprojection"]["x_std" ... "y_mae"]
+
+    Returns:
+      {"health": float, "method": "lifcal", "perCam": {...}}
     """
-    with open(parameters_json_path, "r", encoding="utf-8") as f:
-        data = json.load(f)
+    params_all = combined.get("state", {}).get("parameters", {})
+    if not isinstance(params_all, dict) or len(params_all) == 0:
+        return {"health": 0.0, "method": "lifcal", "perCam": {}}
 
-    st = data.get("state", {})
-    rep = None
+    per_cam = {}
+    scores = []
 
-    if isinstance(st.get("lifcal"), dict):
-        rep = st["lifcal"].get("reprojection")
+    for cam, p in params_all.items():
+        rep = (p or {}).get("reprojection", {}) or {}
 
-    if rep is None and isinstance(st.get("reprojection"), dict):
-        rep = st.get("reprojection")
+        x_std = rep.get("x_std", None)
+        y_std = rep.get("y_std", None)
+        x_mae = rep.get("x_mae", None)
+        y_mae = rep.get("y_mae", None)
 
-    if not isinstance(rep, dict):
-        return {"health": 0.0, "method": "lifcal", "details": {"reason": "no reprojection dict found"}}
+        # wenn irgendwas fehlt -> cam skippen (oder 0 geben)
+        if any(v is None for v in [x_std, y_std, x_mae, y_mae]):
+            per_cam[cam] = {"health": 0.0, "reason": "missing reprojection fields"}
+            continue
 
-    x_std = _safe_float(rep.get("x_std"), None)
-    y_std = _safe_float(rep.get("y_std"), None)
-    x_mae = _safe_float(rep.get("x_mae"), None)
-    y_mae = _safe_float(rep.get("y_mae"), None)
+        std_mag = math.sqrt(float(x_std) ** 2 + float(y_std) ** 2)
+        mae_mag = math.sqrt(float(x_mae) ** 2 + float(y_mae) ** 2)
 
-    if None in (x_std, y_std, x_mae, y_mae):
-        return {"health": 0.0, "method": "lifcal", "details": {"reason": "missing x/y std/mae"}}
+        E_std = clamp((std_mag - S_BEST) / (S_WORST - S_BEST), 0.0, 1.0)
+        E_mae = clamp((mae_mag - R_BEST) / (R_WORST - R_BEST), 0.0, 1.0)
 
-    return compute_lifcal_health_from_xy(x_std, y_std, x_mae, y_mae)
+        health = 100.0 * (1.0 - (0.6 * (E_std ** 2) + 0.4 * (E_mae ** 2)))
+        health = clamp(health, 0.0, 100.0)
+
+        per_cam[cam] = {
+            "health": float(health),
+            "std_mag": float(std_mag),
+            "mae_mag": float(mae_mag),
+            "E_std": float(E_std),
+            "E_mae": float(E_mae),
+        }
+        scores.append(float(health))
+
+    if len(scores) == 0:
+        return {"health": 0.0, "method": "lifcal", "perCam": per_cam}
+
+    # GLOBAL: einfach Mittelwert über Kameras
+    global_health = sum(scores) / len(scores)
+
+    return {"health": float(global_health), "method": "lifcal", "perCam": per_cam}
+
+def compute_lifcal_health_from_combined_path(combined_json_path: str) -> Dict[str, Any]:
+    with open(combined_json_path, "r", encoding="utf-8") as f:
+        combined = json.load(f)
+    return compute_lifcal_health_from_combined_dict(combined)

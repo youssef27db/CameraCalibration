@@ -1,0 +1,61 @@
+%YAML:1.0
+
+#--------------------------------------------------------------------------------------------
+# Camera data
+#--------------------------------------------------------------------------------------------
+
+# Size of a pixel in mm
+Camera.pixelSize: 0.0055
+
+# Width of the raw image in pixels
+Camera.rawImageWidth: 1280
+
+# Height of the raw image in pixels
+Camera.rawImageHeight: 720
+
+#--------------------------------------------------------------------------------------------
+# File paths
+#--------------------------------------------------------------------------------------------
+
+# Path of the total focus images.
+Path.totalFocusImages: "/data/external/LiFCal/LiFCal_Data/Recalibration/LiFCal_Imageset/focus/Up2"
+
+# Micro lens calibration file path.
+Path.microLensCalibration: "/data/external/LiFCal/LiFCal_Data/Recalibration/MLA_Calibration.xml"
+
+# Path to the virtual depth data.
+Path.virtualDepthData: "/data/external/LiFCal/LiFCal_Data/Recalibration/LiFCal_Imageset/depth/Up2"
+
+#--------------------------------------------------------------------------------------------
+# Configuration
+#--------------------------------------------------------------------------------------------
+
+# Number of 3D points used for the light field bundle adjustment
+Config.numberPoints: 500
+
+# Number of the used OpenCV marker dictionary
+Config.markerDictionary: 10
+
+#--------------------------------------------------------------------------------------------
+# Defining camera model
+#--------------------------------------------------------------------------------------------
+
+# Number of radial distortion parameters (0 - 2).
+Model.numberRadialDistParam: 2
+
+# Do you want to define tangential distortion?
+Model.tangentialDist: true
+
+# Do you want to adjust the micro lens centers (if yes raw image pixel distortion is applied)?
+Model.adjustMicroLensCenters: true
+
+# Do you want to refine extrinsic orientations?
+Model.refineExtrinsicOrientations: true
+
+# Do you want to refine the coordinates of the 3d calibration points?
+Model.refineCoordinatesPoints: true
+
+# Do you want to use a robust cost function?
+Model.robustCostFunction: true
+
+
