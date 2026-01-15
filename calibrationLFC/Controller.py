@@ -1,5 +1,7 @@
 from InitialCalibration import InitialCalibration
 from ResultLogger import ResultLogger
+from HealthMonitor import compute_initial_health_from_state
+
 
 class Controller:
 
@@ -24,9 +26,26 @@ class Controller:
         self.resultLogger.logInitialCalibration(calibrationState, meta=meta)
 
         return calibrationState
-    
-    def recalibration(self, imageSet):
-        pass
 
-    def selfHealthCheck(self, imageSet):
-        pass
+    def selfHealthCheck(self, calibrationState) -> float:
+        """
+        Computes ONE global health score (0..100) for the whole calibration.
+        """
+        try:
+            state_dict = calibrationState.__getState__()
+        except Exception as e:
+            self.resultLogger.logger.error(
+                f"HealthCheck: could not extract state dict: {e}", exc_info=True
+            )
+            return 0.0
+
+        try:
+            report = compute_initial_health_from_state(state_dict)
+            score = float(report["health"])
+            self.resultLogger.logger.info(
+                f"HealthScore = {score:.2f} (method={report.get('method')})"
+            )
+            return score
+        except Exception as e:
+            self.resultLogger.logger.error(f"HealthCheck failed: {e}", exc_info=True)
+            return 0.0

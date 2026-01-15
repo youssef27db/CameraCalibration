@@ -13,7 +13,7 @@ class ResultLogger:
     - Writes a line-based log file (calibration.log)
     """
 
-    def __init__(self, baseDir="results"):
+    def __init__(self, baseDir="/data/baseline"):
         self.baseDir = baseDir
         os.makedirs(baseDir, exist_ok=True)
 

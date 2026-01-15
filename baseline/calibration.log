@@ -1,0 +1,2 @@
+2026-01-14 18:50:45,603 [INFO] Stored initial calibration to 'calibration_initial_imageset5_20260114_185045.json' (intrinsics for 13 cams, extrinsics for 13 cams, bundleAdjustf: True).
+2026-01-14 18:50:45,623 [INFO] HealthScore = 92.99 (method=initial)

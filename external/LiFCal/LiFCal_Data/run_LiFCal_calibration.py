@@ -192,7 +192,7 @@ def main():
 
     print("DONE.")
 
-    # ? COMBINED: jetzt nach der loop, run_root = session_out
+    # COMBINED: jetzt nach der loop, run_root = session_out
     try:
         combined_path = lifcal_to_json.build_combined_parameters_json(
             run_root=session_out,

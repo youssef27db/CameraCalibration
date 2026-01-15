@@ -20,8 +20,8 @@ from Controller import Controller
 # -------------------------
 # Configuration
 # -------------------------
-BASE_DIR = "sets/imageset1"  # folder with images
-NUM_POSES = 41
+BASE_DIR = "/data/calibrationLFC/sets/imageset5"  # folder with images
+NUM_POSES = 28
 CAM_IDS = [
     "Center",
     "Up1", "Up2", "Up3",
@@ -36,7 +36,7 @@ def main():
     imageSet = ImageSet(BASE_DIR, NUM_POSES, CAM_IDS)
 
     print("Instantiating Controller and InitialCalibration...")
-    controller = Controller(bundleAdjust = False)
+    controller = Controller(bundleAdjust = True)
     logger = controller.resultLogger
 
     print("\nQuick checks (pose 0): file exists / corners detected")
@@ -112,11 +112,15 @@ def main():
             print(f" stereoRMS = {rms:.6f}")
         else:
             print("Extrinsics: (no data)")
-
-
+        
+    # ===== HealthScore =====
+    print("\n==============================")
+    print("   Health Score")
+    print("==============================")
+    score = controller.selfHealthCheck(calibrationState)
+    print(f"Global HealthScore = {score:.2f} / 100")
 
 if __name__ == "__main__":
-    # If the script is executed from repository root, adjust sys.path so imports work
     repoRoot = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     if repoRoot not in sys.path:
         sys.path.insert(0, repoRoot)
