@@ -1,8 +1,8 @@
 import cv2, glob, os
 import numpy as np
 
-src="/data/external/LiFCal/LiFCal_Data/Recalibration/LiFCal_Imageset/depth/Down1"
-dst="/data/external/LiFCal/LiFCal_Data/Recalibration/LiFCal_Imageset/depth/Down1"
+src="/data/external/LiFCal/LiFCal_Data/Recalibration/LiFCal_Imageset/depth_blender/Up3"
+dst="/data/external/LiFCal/LiFCal_Data/Recalibration/LiFCal_Imageset/depth_blender/Up3"
 os.makedirs(dst, exist_ok=True)
 
 paths=sorted(glob.glob(src+"/*.png"))
