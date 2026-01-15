@@ -5,3 +5,41 @@
 2026-01-15 16:00:10,582 [INFO] Stored lifcal recalibration to 'calibration_lifcal_20260115_160010.json' (cams=13).
 2026-01-15 16:00:10,583 [INFO] HealthScore = 54.15 (method=lifcal)
 2026-01-15 16:00:10,583 [INFO] Baseline kept: baseline.json (old=92.99 >= new=54.15, method=lifcal)
+2026-01-15 20:32:35,504 [INFO] Starting periodic LiFCal scheduler.
+2026-01-15 20:32:35,504 [INFO] Interval: 300s
+2026-01-15 20:32:35,504 [INFO] Lock: /tmp/lifcal_periodic.lock
+2026-01-15 20:32:35,505 [INFO] === CYCLE START ===
+2026-01-15 20:32:35,505 [INFO] Imageset looks ready. Skipping run_imageset_creation.py.
+2026-01-15 20:32:35,505 [INFO] RUN: /usr/bin/python3 /data/external/LiFCal/LiFCal_Data/run_LiFCal_calibration.py
+2026-01-15 20:40:37,230 [INFO] Stored lifcal recalibration to 'calibration_lifcal_20260115_204037.json' (cams=13).
+2026-01-15 20:40:37,230 [INFO] HealthScore = 53.95 (method=lifcal)
+2026-01-15 20:40:37,230 [INFO] Baseline kept: baseline.json (old=92.99 >= new=53.95, method=lifcal)
+2026-01-15 20:40:37,250 [INFO] Output: /data/external/LiFCal/LiFCal_Data/Recalibration/CalibrationByCamera/run_2026_01_15_203235
+[OK] COMBINED: /data/external/LiFCal/LiFCal_Data/Recalibration/CalibrationByCamera/run_2026_01_15_203235/combined.json
+[OK] HealthScore (lifcal) = 53.95
+
+2026-01-15 20:40:37,250 [INFO] Latest combined.json: /data/external/LiFCal/LiFCal_Data/Recalibration/CalibrationByCamera/run_2026_01_15_203235/combined.json
+2026-01-15 20:40:37,422 [INFO] Stored lifcal recalibration to 'calibration_lifcal_20260115_204037.json' (cams=13).
+2026-01-15 20:40:37,423 [INFO] HealthScore = 53.95 (method=lifcal)
+2026-01-15 20:40:37,423 [INFO] Baseline kept: baseline.json (old=92.99 >= new=53.95, method=lifcal)
+2026-01-15 20:40:37,423 [INFO] LiFCal HealthScore logged via ResultLogger: 53.95
+2026-01-15 20:40:37,423 [INFO] === CYCLE END ===
+2026-01-15 20:40:37,424 [INFO] Sleeping 1.0s
+
+2026-01-15 20:40:38,425 [INFO] === CYCLE START ===
+2026-01-15 20:40:38,426 [INFO] Imageset looks ready. Skipping run_imageset_creation.py.
+2026-01-15 20:40:38,426 [INFO] RUN: /usr/bin/python3 /data/external/LiFCal/LiFCal_Data/run_LiFCal_calibration.py
+2026-01-15 20:49:26,157 [INFO] Stored lifcal recalibration to 'calibration_lifcal_20260115_204926.json' (cams=13).
+2026-01-15 20:49:26,157 [INFO] HealthScore = 52.05 (method=lifcal)
+2026-01-15 20:49:26,158 [INFO] Baseline kept: baseline.json (old=92.99 >= new=52.05, method=lifcal)
+2026-01-15 20:49:26,178 [INFO] Output: /data/external/LiFCal/LiFCal_Data/Recalibration/CalibrationByCamera/run_2026_01_15_204038
+[OK] COMBINED: /data/external/LiFCal/LiFCal_Data/Recalibration/CalibrationByCamera/run_2026_01_15_204038/combined.json
+[OK] HealthScore (lifcal) = 52.05
+
+2026-01-15 20:49:26,178 [INFO] Latest combined.json: /data/external/LiFCal/LiFCal_Data/Recalibration/CalibrationByCamera/run_2026_01_15_204038/combined.json
+2026-01-15 20:49:26,186 [INFO] Stored lifcal recalibration to 'calibration_lifcal_20260115_204926.json' (cams=13).
+2026-01-15 20:49:26,186 [INFO] HealthScore = 52.05 (method=lifcal)
+2026-01-15 20:49:26,187 [INFO] Baseline kept: baseline.json (old=92.99 >= new=52.05, method=lifcal)
+2026-01-15 20:49:26,187 [INFO] LiFCal HealthScore logged via ResultLogger: 52.05
+2026-01-15 20:49:26,187 [INFO] === CYCLE END ===
+2026-01-15 20:49:26,187 [INFO] Sleeping 1.0s

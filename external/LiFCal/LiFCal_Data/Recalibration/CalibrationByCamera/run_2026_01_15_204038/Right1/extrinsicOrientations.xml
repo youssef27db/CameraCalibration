@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Root>
+	<Frame id="3">
+		<Rotation>
+			<Coeff i="0">-0.0096839366475107644</Coeff>
+			<Coeff i="1">-0.06242516366062003</Coeff>
+			<Coeff i="2">0.16712321271253885</Coeff>
+		</Rotation>
+		<Translation>
+			<Coeff i="0">49.04407124752376</Coeff>
+			<Coeff i="1">5.4683468399073636</Coeff>
+			<Coeff i="2">853.68118913884416</Coeff>
+		</Translation>
+	</Frame>
+	<Frame id="2">
+		<Rotation>
+			<Coeff i="0">3.1090353041153822</Coeff>
+			<Coeff i="1">2.8839322422174112</Coeff>
+			<Coeff i="2">3.3087549568684724</Coeff>
+		</Rotation>
+		<Translation>
+			<Coeff i="0">-67.833914715326799</Coeff>
+			<Coeff i="1">0.58971009468843127</Coeff>
+			<Coeff i="2">862.36973797151927</Coeff>
+		</Translation>
+	</Frame>
+</Root>

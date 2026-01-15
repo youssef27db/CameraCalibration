@@ -183,13 +183,8 @@ def main():
                 fallback_cy=360.0,         # wird ignoriert (nur kompatibilität)
                 out_name="parameters.json"
             )
-            print(f"[OK] {cam}: parameters.json -> {json_path}")
         except Exception as e:
             print(f"[WARN] {cam}: JSON Export fehlgeschlagen: {e}")
-
-        print(f"[OK] {cam}: gespeichert in {cam_out}")
-
-    print("DONE.")
 
     # COMBINED: jetzt nach der loop, run_root = session_out
     try:
