@@ -24,64 +24,89 @@
 
 \section*{Requirements for the Cross-Shaped Camera Array Calibration}
 
-Based on the described use case and the methods presented in the reference paper (LiFCal),
+Based on the implemented calibration framework and the applied LiFCal-based methodology,
 the following requirements define the functional scope and measurable performance goals
-for the implementation in this Bachelor’s thesis.
-The system assumes a predominantly static scene during calibration and monitoring,
-while allowing the camera array to take different poses across captured image sets.
+of the system developed in this Bachelor’s thesis.
+The system assumes a predominantly static scene during calibration and monitoring
+while allowing different camera array poses across captured image sets.
 
 \subsection*{Functional Requirements}
 \begin{itemize}
 
-  \item \textbf{FR1 – Initial Reference Calibration (Target-based):}
+  
+  \item \textbf{FR1 – Initial Reference Calibration (Target-based):} \\
   The system shall perform a one-time, checkerboard-based initial calibration using OpenCV
   to estimate intrinsic and extrinsic parameters for the cross-shaped camera array.
-  The resulting calibration shall be stored as the reference (baseline) calibration.
+  This initial calibration shall be stored as the baseline calibration and serve as
+  the reference state for all subsequent health evaluations and recalibration decisions.
 
-  \item \textbf{FR2 – Periodic Health Monitoring (Parameter-based):}
-  The system shall periodically (e.g.\ every 3 minutes) capture a small image set during normal operation
-  and compute calibration health metrics based on:
-  (i) intrinsic deviation from the baseline, (ii) extrinsic deviation from the baseline,
-  and (iii) normalized parameter drift between consecutive monitoring windows.
+  \item \textbf{FR2 – Parameter Export and Standardized Representation:} \\
+  The system shall export all calibration results (initial calibration and LiFCal-based recalibration)
+  in a standardized, machine-readable JSON format, including intrinsic parameters,
+  extrinsic poses, reprojection error statistics, timestamps, and metadata.
 
-  \item \textbf{FR3 – Health Score Computation:}
-  The system shall combine the normalized intrinsic/extrinsic deviations and drift metrics
-  into a single scalar health score representing the current calibration quality (Score: [0 - 100]).
+  \item \textbf{FR3 – Periodic Calibration Health Monitoring:} \\
+  The system shall periodically evaluate the calibration quality by computing
+  a global health score based on the currently active calibration parameters.
+  The monitoring process shall operate automatically and independently of user interaction.
 
-  \item \textbf{FR4 – Automatic Trigger for Target-Free Recalibration:}
-  If the health score exceeds a predefined threshold for a configurable number of consecutive monitoring windows,
-  the system shall automatically initiate Phase~3 (target-free online recalibration).
+  \item \textbf{FR4 – Health Score Computation (Global Scalar Metric):} \\
+  The system shall compute a single scalar health score in the range $[0,100]$
+  representing the overall calibration quality of the complete camera array.
+  For the initial calibration, the health score shall be derived from
+  reprojection error statistics.
+  For LiFCal-based recalibration, the health score shall be derived from
+  LiFCal-specific reprojection and consistency metrics extracted from the combined parameter set.
 
-  \item \textbf{FR5 – Target-Free Online Recalibration (LiFCal-based):}
-  The system shall collect a larger image set from recent normal operation
-  and perform a LiFCal-based parameter estimation on this extended image set
-  without using calibration targets (no checkerboard).
+  \item \textbf{FR5 – Target-Free Online Recalibration (LiFCal-based):} \\
+  The system shall support target-free recalibration using LiFCal
+  based on focus images and virtual depth data generated from recent image sets.
+  The recalibration process shall not require calibration targets
+  and shall operate on automatically prepared image sets.
 
-  \item \textbf{FR6 – Acceptance and Rollback Rule:}
-  The updated calibration shall be adopted only if the post-recalibration health score improves
-  compared to the previously active calibration; otherwise, the system shall revert to the last known-good calibration.
+  \item \textbf{FR6 – Acceptance and Baseline Update Rule:} \\
+  The system shall compare the health score of a newly computed calibration
+  against the health score of the currently stored baseline calibration.
+  The new calibration shall be accepted and stored as the new baseline
+  only if its health score is strictly higher than the baseline score;
+  otherwise, the system shall retain the previous baseline calibration.
 
-  \item \textbf{FR7 – Logging and Traceability:}
-  The system shall log all health-check runs and recalibration runs, including timestamps,
-  used image sets, calibration parameters, health scores, and acceptance decisions,
-  to support evaluation and reproducibility.
+  \item \textbf{FR7 – Automated Periodic Recalibration Scheduling:} \\
+  The system shall support automated, periodic execution of the LiFCal-based
+  recalibration process at a configurable time interval (e.g.\ every 5 minutes).
+  Each recalibration cycle shall be executed independently and evaluated
+  using the defined health score mechanism.
+
+  \item \textbf{FR8 – Logging and Traceability:} \\
+  The system shall log all calibration and recalibration runs,
+  including timestamps, used image sets, computed health scores,
+  baseline update decisions, and error states.
+  This information shall be stored persistently to support evaluation,
+  debugging, and reproducibility.
+
 
 \end{itemize}
 
 \subsection*{Non-Functional Requirements}
 \begin{itemize}
-  \item \textbf{NFR1 – Portability:} 
-  The calibration framework shall be implemented in Python/C++ with OpenCV
-  and remain adaptable to different camera configurations (e.g., Raytrix R5, R25, or similar).
-  \item \textbf{NFR2 – Modularity:} 
-  Each component (data acquisition, health monitoring, bundle adjustment, logging)
-  shall be designed as a separate, reusable module.
-  \item \textbf{NFR3 – Reproducibility:} 
-  Calibration and monitoring results shall be exportable in a standardized format
-  (e.g., JSON) to ensure consistent evaluation.
-  \item \textbf{NFR4 – Robustness to Scene Variation:} 
-  The calibration process shall tolerate moderate lighting and texture variations
-  without significant loss of accuracy (health score drop $\leq10$ points).
+ \item \textbf{NFR1 – Modularity:} \\
+  The system shall be structured into modular components
+  (initial calibration, LiFCal recalibration, health monitoring,
+  scheduling, and logging) to support extensibility and maintainability.
+
+  \item \textbf{NFR2 – Reproducibility:} \\
+  All calibration results and health evaluations shall be reproducible
+  using stored JSON files and logged metadata.
+
+  \item \textbf{NFR3 – Robustness:} \\
+  The calibration and monitoring pipeline shall tolerate moderate
+  variations in scene content and illumination without system failure,
+  even if recalibration quality temporarily degrades.
+
+  \item \textbf{NFR4 – Automation:} \\
+  The calibration framework shall operate fully automatically
+  after initial setup, without requiring manual intervention
+  during periodic monitoring and recalibration.
 \end{itemize}
 
 \end{document}

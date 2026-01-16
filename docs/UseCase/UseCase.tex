@@ -26,53 +26,62 @@
 \newline
 [Center + North/East/South/West]}
 
-
-\subsection*{Phase 1 — Initial Lab Calibration (once)}
+\subsection*{Phase 1 — Initial Reference Calibration (once)}
 \begin{itemize}
-  \item \textbf{Target-based, OpenCV:} Checkerboard-based initialization to estimate intrinsic/extrinsic parameters.
-  \item \textbf{Global refinement:} Bundle adjustment over the collected images points to improve estimated parameters and obtain a consistent calibration.
-  \item \textbf{Baseline:} Store the resulting calibration as the known-good reference for later comparison.
+  \item \textbf{Target-based, OpenCV:}
+  Perform a one-time checkerboard-based calibration to estimate intrinsic and extrinsic parameters
+  for all cameras of the cross-shaped array.
+
+  \item \textbf{Optional refinement:}
+  Apply an optional global refinement (bundle adjustment) to improve consistency of the estimated parameters.
+
+  \item \textbf{Baseline creation:}
+  Compute a global health score for the initial calibration and store the result as \texttt{baseline.json}.
+  This baseline represents the known-good reference calibration for later recalibration decisions.
+
+  \item \textbf{Logging:}
+  Store the full initial calibration as a timestamped JSON file and write a summary line to \texttt{calibration.log}.
 \end{itemize}
 
-\subsection*{Phase 2 — Health-Check (periodic)}
-
+\subsection*{Phase 2 — Automated Recalibration Attempts (periodic scheduler)}
 \begin{itemize}
-  \item \textbf{Trigger:} Fixed interval (e.g.\ every 3 minutes), temperature changes, or system restart.
+  \item \textbf{Trigger:}
+  A fixed time interval (e.g.\ every 5 minutes) executes an automated recalibration cycle.
 
-  \item \textbf{Small image set (sampling):} 
-  Periodically capture a small, recent image set during normal operation.
+  \item \textbf{Conditional data preparation (optional):}
+  If LiFCal-compatible data (\texttt{LiFCal\_Data} with focus and depth directories) is already present and complete,
+  the system reuses it. Otherwise, the system runs \texttt{run\_imageset\_creation.py} to generate the required inputs
+  (focus images and virtual depth).
 
-  \item \textbf{Parameter-based health metrics:}
+  \item \textbf{LiFCal recalibration run:}
+  Execute \texttt{run\_LiFCal\_calibration.py} which:
   \begin{itemize}
-    \item \emph{Intrinsic deviation:} Relative deviation of key intrinsic parameters (e.g.\ principal point, effective focal length, low-order distortion) compared to the reference (initial) calibration.
-    \item \emph{Extrinsic deviation:} Change of estimated extrinsic parameters relative to the reference calibration.
-    \item \emph{Parameter drift:} Normalized parameter change between consecutive health-check windows.
+    \item runs LiFCal recalibration for each camera (Center, Up/Down/Left/Right),
+    \item exports per-camera parameter JSON files (\texttt{parameters.json}),
+    \item creates a combined multi-camera result (\texttt{combined.json}).
   \end{itemize}
 
-  \item \textbf{Health score:} 
-  Combine the normalized intrinsic and extrinsic deviations into a single health score.
-
-  \item \textbf{Decision:} 
-  If the health score exceeds a predefined threshold for $\geq 2$ consecutive health-check windows, the calibration is considered degraded and Phase~3 is triggered.
+  \item \textbf{Logging and traceability:}
+  Store the combined LiFCal result as a timestamped JSON file in \texttt{/data/baseline}
+  and append all relevant run information to \texttt{calibration.log}.
 \end{itemize}
 
-\subsection*{Phase 3 — Target-Free Online Recalibration}
-
+\subsection*{Phase 3 — Health Evaluation and Baseline Update Rule (commit decision)}
 \begin{itemize}
-  \item \textbf{Larger image set:} 
-  Collect a larger image set from recent normal operation to increase parameter stability.
+  \item \textbf{Health score (LiFCal):}
+  Compute a single global health score (range $[0,100]$) from the LiFCal combined parameter result (\texttt{combined.json}).
+  The score represents the calibration quality of the complete camera array for this recalibration cycle.
 
-  \item \textbf{Re-estimation scope:}
-  \begin{itemize}
-    \item Re-estimate intrinsic and extrinsic calibration parameters using the larger image set.
-    \item Keep structural properties of the camera rig (e.g.\ baseline and physical layout) fixed.
-  \end{itemize}
+  \item \textbf{Comparison against baseline:}
+  Compare the new LiFCal health score with the health score stored in the baseline calibration.
 
-  \item \textbf{Method:} 
-  Perform a LiFCal-based parameter estimation on the extended image set.
+  \item \textbf{Acceptance rule (commit):}
+  If the new health score is strictly higher than the baseline score, replace \texttt{baseline.json}
+  with the new combined calibration result. Otherwise, keep the existing baseline unchanged.
 
-  \item \textbf{Commit rule:} 
-  The updated calibration is adopted only if the resulting parameter deviations and health score improve compared to the previous calibration; otherwise, the update is discarded and retried later.
+  \item \textbf{Continuous improvement loop:}
+  The scheduler repeats the recalibration cycle periodically. Over time, improved recalibration runs can update the baseline,
+  enabling a data-driven refinement process without manual intervention.
 \end{itemize}
 
 \end{document}

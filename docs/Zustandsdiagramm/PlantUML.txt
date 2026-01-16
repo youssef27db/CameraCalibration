@@ -3,46 +3,54 @@ title Zustandsdiagramm: Datengetriebene Kalibrierung eines LFC-Systems
 
 [*] --> Uncalibrated
 
-state "Initial Lab Calibration" as InitCalib {
+state "Initial Reference Calibration" as InitCalib {
   [*] --> CapturingTargets
-  CapturingTargets : Checkerboard-Aufnahmen sammeln
-  CapturingTargets --> EstimatingParameters : Posen vorhanden
 
-  EstimatingParameters : Intrinsics/Extrinsics schätzen\n(OpenCV, StereoCalib, BA)
-  EstimatingParameters --> BaselineReady : Parameter stabil \n(ReprojectionError < 0.1)
+  CapturingTargets : Checkerboard-Aufnahmen erfassen
+  CapturingTargets --> EstimatingParameters : Bilder vollständig
 
-  BaselineReady : Referenzkalibrierung gespeichert
+  EstimatingParameters : Intrinsics & Extrinsics schätzen\n(OpenCV, optional BA)
+  EstimatingParameters --> BaselineCreated
+
+  BaselineCreated : HealthScore berechnen\nBaseline.json erzeugen
 }
 
 Uncalibrated --> InitCalib : runInitialCalibration()
-InitCalib --> Operational : Kalibrierungszustand gespeichert
+InitCalib --> Operational : Baseline vorhanden
 
 state Operational {
-  [*] --> HealthCheck
 
-  HealthCheck : HealthScore wird\nperiodisch oder event-basiert geprüft
+  [*] --> SchedulerIdle
 
-  ' Health-Check OK
-  HealthCheck --> HealthCheck : selfHealthCheck()\n[HealthScore > 70]
+  SchedulerIdle : Periodischer Scheduler\n(z.B. alle 5 Minuten)
+  SchedulerIdle --> PrepareImageset : cycleStart()
 
-  ' Wiederholt schlechte Werte -> Rekalibrierung anstoßen
-  HealthCheck --> Recalibration : recalibration()\n[HealthScore <= 70]
+  PrepareImageset : Prüfe LiFCal_Data\n(focus/depth)
+  PrepareImageset --> RunLiFCal : Daten vorhanden
+  PrepareImageset --> RunImageSetCreation : Daten fehlen
 
-  state Recalibration {
-    [*] --> UpdatingParams
-    UpdatingParams : Recalibration (LiFCal)
-    UpdatingParams --> EvaluateUpdate
-    EvaluateUpdate : HealthScore_neu mit HealthMonitor\nneu berechnen
-  }
+  RunImageSetCreation : run_imageset_creation.py
+  RunImageSetCreation --> RunLiFCal
 
-  ' Update ist besser -> übernehmen
-  Recalibration --> HealthCheck : commitUpdate()\n[HealthScore_neu > HealthScore_alt]
+  RunLiFCal : LiFCal-Rekalibrierung\n(pro Kamera)
+  RunLiFCal --> CombineResults
 
-  ' Update ist nicht besser -> verwerfen
-  Recalibration --> Rollback : rollbackBaseline()\n[HealthScore_neu <= HealthScore_alt]
+  CombineResults : parameters.json → combined.json
+  CombineResults --> EvaluateHealth
 
-  Rollback : Vorherige Kalibrierung\nwiederhergestellt
-  Rollback --> HealthCheck : restoreBaseline()
+  EvaluateHealth : LiFCal-HealthScore\nberechnen
+
+  ' Verbesserung → neue Baseline
+  EvaluateHealth --> UpdateBaseline : [Score_neu > Score_baseline]
+
+  ' Keine Verbesserung → Baseline bleibt
+  EvaluateHealth --> KeepBaseline : [Score_neu ≤ Score_baseline]
+
+  UpdateBaseline : baseline.json aktualisieren
+  UpdateBaseline --> SchedulerIdle
+
+  KeepBaseline : baseline unverändert
+  KeepBaseline --> SchedulerIdle
 }
 
 Operational --> [*]
