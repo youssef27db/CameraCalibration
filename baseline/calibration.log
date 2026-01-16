@@ -43,3 +43,7 @@
 2026-01-15 20:49:26,187 [INFO] LiFCal HealthScore logged via ResultLogger: 52.05
 2026-01-15 20:49:26,187 [INFO] === CYCLE END ===
 2026-01-15 20:49:26,187 [INFO] Sleeping 1.0s
+2026-01-16 16:45:46,043 [INFO] Stored initial calibration to 'calibration_initial_imageset5_20260116_164546.json' (intrinsics for 13 cams, extrinsics for 13 cams, bundleAdjustf: True).
+2026-01-16 16:45:46,043 [INFO] HealthScore = 92.99 (method=initial)
+2026-01-16 16:45:46,044 [INFO] Baseline kept: baseline.json (old=92.99 >= new=92.99, method=initial)
+2026-01-16 16:45:46,067 [INFO] HealthScore = 92.99 (method=initial)
