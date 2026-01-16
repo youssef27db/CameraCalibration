@@ -315,6 +315,9 @@ All calibration results are stored as JSON for later evaluation.
 * Plot scripts exist for evaluation but are not required for operation
 * The system is designed for research and prototyping
 * Real sensor input can later replace synthetic or static datasets
+* The `TestEnvironment` directory contains all Blender scenes required for evaluation.
+* The `docs` directory contains all documentation and diagrams, including UML class diagrams, use case diagrams, and requirements.
+
 
 ---
 
