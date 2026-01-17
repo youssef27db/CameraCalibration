@@ -1,15 +1,17 @@
 """
-Small test runner for initial calibration.
+Test runner for initial calibration.
 
-How to run (from repository root):
+Usage:
   cd calibrationLFC
-  python run_initial_calibration.py
+  python run_initial_calibration.py --base_dir /path/to/imageset --num_poses 28 --bundle-adjust
+  python run_initial_calibration.py --base_dir /path/to/imageset --num_poses 28 --no-bundle-adjust
 
-This script performs quick checks (file existence, corner detection on pose 0)
-and then calls the controller to run the initial calibration. It prints a short
-summary at the end.
+Performs validation checks (file existence, corner detection on pose 0)
+then runs the complete initial calibration pipeline. Outputs summary statistics
+for intrinsics, extrinsics, and health score.
 """
 
+import argparse
 import os
 import sys
 
@@ -17,11 +19,9 @@ from ImageSet import ImageSet
 from Controller import Controller
 
 
-# -------------------------
-# Configuration
-# -------------------------
-BASE_DIR = "/data/calibrationLFC/sets/imageset5"  # folder with images
-NUM_POSES = 28
+# Default configuration parameters
+DEFAULT_BASE_DIR = "/data/calibrationLFC/sets/imageset5"
+DEFAULT_NUM_POSES = 28
 CAM_IDS = [
     "Center",
     "Up1", "Up2", "Up3",
@@ -31,12 +31,33 @@ CAM_IDS = [
 ]
 
 
-def main():
+def parse_args():
+    parser = argparse.ArgumentParser(description="Run initial camera calibration")
+    parser.add_argument("--base_dir", default=DEFAULT_BASE_DIR, help="Path to imageset directory")
+    parser.add_argument("--num_poses", type=int, default=DEFAULT_NUM_POSES, help="Number of poses in the imageset")
+    parser.add_argument(
+        "--bundle-adjust",
+        dest="bundle_adjust",
+        action="store_true",
+        help="Enable bundle adjustment (default)",
+    )
+    parser.add_argument(
+        "--no-bundle-adjust",
+        dest="bundle_adjust",
+        action="store_false",
+        help="Disable bundle adjustment",
+    )
+    parser.set_defaults(bundle_adjust=True)
+    return parser.parse_args()
+
+
+def main(args):
+    """Run complete initial calibration pipeline with validation and summary output."""
     print("Creating ImageSet...")
-    imageSet = ImageSet(BASE_DIR, NUM_POSES, CAM_IDS)
+    imageSet = ImageSet(args.base_dir, args.num_poses, CAM_IDS)
 
     print("Instantiating Controller and InitialCalibration...")
-    controller = Controller(bundleAdjust = True)
+    controller = Controller(bundleAdjust=args.bundle_adjust)
     logger = controller.resultLogger
 
     print("\nQuick checks (pose 0): file exists / corners detected")
@@ -72,14 +93,14 @@ def main():
     intr = stateDict.get("intrinsics", {})
     extr = stateDict.get("extrinsics", {})
 
-    print("\n==============================")
-    print("   Calibration Summary")
-    print("==============================")
+    # Print calibration results per camera
+    print("\nCalibration Results by Camera")
+    print("=" * 50)
 
     for cam in CAM_IDS:
         print(f"\n--- {cam} ---")
 
-        # ===== Intrinsics =====
+        # Intrinsic parameters
         if cam in intr:
             data = intr[cam]
             K = data["cameraMatrix"]
@@ -96,7 +117,7 @@ def main():
         else:
             print("Intrinsics: (no data)")
 
-        # ===== Extrinsics =====
+        # Extrinsic parameters
         if cam in extr:
             data = extr[cam]
             R = data["rotationMatrix"]
@@ -111,17 +132,17 @@ def main():
             print(" T =", T)
             print(f" stereoRMS = {rms:.6f}")
         else:
-            print("Extrinsics: (no data)")
-        
-    # ===== HealthScore =====
-    print("\n==============================")
-    print("   Health Score")
-    print("==============================")
+            print("  Extrinsics: (no data)")
+
+    # Print health score
+    print("\nOverall Health Score")
+    print("=" * 50)
     score = controller.selfHealthCheck(calibrationState)
     print(f"Global HealthScore = {score:.2f} / 100")
 
 if __name__ == "__main__":
+    # Set up Python path to find calibrationLFC modules
     repoRoot = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     if repoRoot not in sys.path:
         sys.path.insert(0, repoRoot)
-    main()
+    main(parse_args())

@@ -1,3 +1,5 @@
+"""Runs LiFCal recalibration for all cameras and exports results to JSON."""
+
 import os
 import re
 import shutil
@@ -5,13 +7,11 @@ import subprocess
 from datetime import datetime
 import lifcal_to_json
 
-# CONFIG
+# Configuration paths
 LIFCAL_BIN = "/data/external/LiFCal/build/bin/LiFCal"
 
 SETTINGS = "/data/external/LiFCal/LiFCal_Data/Recalibration/Settings.yaml"
 FIXED_PARAMS = "/data/external/LiFCal/LiFCal_Data/Recalibration/Fixed_Paramerters.txt"
-
-# MLA-Pfad
 MLA_CALIB_XML = "/data/external/LiFCal/LiFCal_Data/Recalibration/MLA_Calibration.xml"
 
 ROOT_IMAGESET = "/data/external/LiFCal/LiFCal_Data/Recalibration/LiFCal_Imageset"
@@ -29,22 +29,26 @@ CAMERA_IDS = [
 
 
 def read_text(path: str) -> str:
+    """Read text file with UTF-8 encoding."""
     with open(path, "r", encoding="utf-8", errors="replace") as f:
         return f.read()
 
 
 def write_text(path: str, s: str) -> None:
+    """Write text to file, creating directories if needed."""
     os.makedirs(os.path.dirname(path), exist_ok=True)
     with open(path, "w", encoding="utf-8") as f:
         f.write(s)
 
 
-def _replace_yaml_key_line(text: str, key: str, new_val: str) -> str:
+def replace_yaml_key_line(text: str, key: str, new_val: str) -> str:
     """
-    Ersetzt Zeilen wie:
+    Replace YAML key-value lines.
+    
+    Replaces lines like:
       Key: something
       Key: "something"
-    durch:
+    with:
       Key: "new_val"
     """
     pattern = re.compile(rf"^({re.escape(key)}\s*:\s*)(.*)$", re.MULTILINE)
@@ -52,14 +56,16 @@ def _replace_yaml_key_line(text: str, key: str, new_val: str) -> str:
 
 
 def patch_settings_yaml(template_text: str, focus_dir: str, depth_dir: str, mla_xml: str) -> str:
+    """Update YAML settings with camera-specific paths."""
     out = template_text
-    out = _replace_yaml_key_line(out, "Path.totalFocusImages", focus_dir)
-    out = _replace_yaml_key_line(out, "Path.virtualDepthData", depth_dir)
-    out = _replace_yaml_key_line(out, "Path.microLensCalibration", mla_xml)
+    out = replace_yaml_key_line(out, "Path.totalFocusImages", focus_dir)
+    out = replace_yaml_key_line(out, "Path.virtualDepthData", depth_dir)
+    out = replace_yaml_key_line(out, "Path.microLensCalibration", mla_xml)
     return out
 
 
 def run_lifcal_recalib(settings_path: str, fixed_params_path: str, store_dir: str) -> int:
+    """Run LiFCal recalibration and return exit code."""
     os.makedirs(store_dir, exist_ok=True)
 
     cmd = [LIFCAL_BIN, "recalib", settings_path, fixed_params_path]
@@ -81,11 +87,13 @@ def run_lifcal_recalib(settings_path: str, fixed_params_path: str, store_dir: st
 
 def find_results_folder(store_dir: str) -> str:
     """
-    LiFCal legt meist einen Unterordner Calibration_Results_... an.
-    Wenn nicht: store_dir selbst.
+    Find LiFCal results folder.
+    
+    LiFCal typically creates a Calibration_Results_... subdirectory.
+    If not found, returns store_dir itself.
     """
     if not os.path.isdir(store_dir):
-        raise RuntimeError(f"store_dir existiert nicht: {store_dir}")
+        raise RuntimeError(f"store_dir does not exist: {store_dir}")
 
     subdirs = []
     for name in os.listdir(store_dir):
@@ -101,6 +109,7 @@ def find_results_folder(store_dir: str) -> str:
 
 
 def copy_essentials(result_dir: str, out_cam_dir: str) -> None:
+    """Copy calibrationProtocol.txt and extrinsicOrientations.xml to output directory."""
     proto = os.path.join(result_dir, "calibrationProtocol.txt")
     extr = os.path.join(result_dir, "extrinsicOrientations.xml")
 
@@ -110,21 +119,22 @@ def copy_essentials(result_dir: str, out_cam_dir: str) -> None:
     if not os.path.isfile(extr):
         missing.append("extrinsicOrientations.xml")
     if missing:
-        raise RuntimeError(f"Fehlende Dateien in {result_dir}: {missing}")
+        raise RuntimeError(f"Missing files in {result_dir}: {missing}")
 
     shutil.copy2(proto, os.path.join(out_cam_dir, "calibrationProtocol.txt"))
     shutil.copy2(extr, os.path.join(out_cam_dir, "extrinsicOrientations.xml"))
 
 
 def main():
+    """Main pipeline: run LiFCal for each camera, export JSON, and log health."""
     if not os.path.isfile(LIFCAL_BIN):
-        raise SystemExit(f"LiFCal binary nicht gefunden: {LIFCAL_BIN}")
+        raise SystemExit(f"LiFCal binary not found: {LIFCAL_BIN}")
     if not os.path.isfile(SETTINGS):
-        raise SystemExit(f"Settings template nicht gefunden: {SETTINGS}")
+        raise SystemExit(f"Settings template not found: {SETTINGS}")
     if not os.path.isfile(FIXED_PARAMS):
-        raise SystemExit(f"Fixed parameters file nicht gefunden: {FIXED_PARAMS}")
+        raise SystemExit(f"Fixed parameters file not found: {FIXED_PARAMS}")
     if not os.path.isfile(MLA_CALIB_XML):
-        raise SystemExit(f"MLA_Calibration.xml nicht gefunden: {MLA_CALIB_XML}")
+        raise SystemExit(f"MLA_Calibration.xml not found: {MLA_CALIB_XML}")
 
     templ = read_text(SETTINGS)
 
@@ -139,10 +149,10 @@ def main():
         depth_dir = os.path.join(DEPTH_ROOT, cam)
 
         if not os.path.isdir(focus_dir):
-            print(f"[SKIP] {cam}: focus dir fehlt: {focus_dir}")
+            print(f"[SKIP] {cam}: focus dir missing: {focus_dir}")
             continue
         if not os.path.isdir(depth_dir):
-            print(f"[SKIP] {cam}: depth dir fehlt: {depth_dir}")
+            print(f"[SKIP] {cam}: depth dir missing: {depth_dir}")
             continue
 
         cam_out = os.path.join(session_out, cam)
@@ -178,15 +188,15 @@ def main():
                 cam_id=cam,
                 image_dir="LiFCal_Imageset",
                 run_type="recalib",
-                pixel_size_mm=0.0055,      # wird akzeptiert/ignoriert wenn protocol pixelSize hat
-                fallback_cx=640.0,         # wird ignoriert (nur kompatibilität)
-                fallback_cy=360.0,         # wird ignoriert (nur kompatibilität)
+                pixel_size_mm=0.0055,
+                fallback_cx=640.0,  # compatibility only
+                fallback_cy=360.0,  # compatibility only
                 out_name="parameters.json"
             )
         except Exception as e:
-            print(f"[WARN] {cam}: JSON Export fehlgeschlagen: {e}")
+            print(f"[WARN] {cam}: JSON export failed: {e}")
 
-    # COMBINED: jetzt nach der loop, run_root = session_out
+    # Build combined JSON from all cameras
     try:
         combined_path = lifcal_to_json.build_combined_parameters_json(
             run_root=session_out,
@@ -197,7 +207,7 @@ def main():
     except Exception as e:
         print("[WARN] combined.json not created:", e)
     
-     # ---- LOG + HEALTH + BASELINE UPDATE
+    # Log health score and update baseline
     try:
         import sys
         CALIB_ROOT = "/data/calibrationLFC"

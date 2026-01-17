@@ -1,21 +1,20 @@
 import matplotlib
-matplotlib.use("Agg")  # <-- wichtig für Docker / headless
+matplotlib.use("Agg")  # Headless mode for Docker/server environments
 
 import json
 import os
 import numpy as np
 import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3d import Axes3D  # noqa: F401 (wird für 3D benötigt)
+from mpl_toolkits.mplot3d import Axes3D  
 
-# ===================== Pfade =====================
-
-# Dieser Dateiordner = calibrationLFC/plots
+# Paths 
+# This file's directory = calibrationLFC/plots
 THIS_DIR = os.path.dirname(os.path.abspath(__file__))
 
-# calibrationLFC-Ordner
+# calibrationLFC directory
 CALIB_LFC_DIR = os.path.dirname(THIS_DIR)
 
-# Projektroot = eine Ebene höher (CameraCalibration)
+# Project root
 PROJECT_ROOT = os.path.dirname(CALIB_LFC_DIR)
 
 CALIB_PATH = os.path.join(
@@ -42,7 +41,7 @@ CAM_IDS = [
 # ===================== Main =====================
 
 def main():
-    # ---------- JSON laden ----------
+    # Load JSON files
     with open(GT_PATH, "r", encoding="utf-8") as f:
         gt = json.load(f)
 
@@ -51,7 +50,7 @@ def main():
 
     extr_est = calib["state"]["extrinsics"]
 
-    # ---------- Translationen einsammeln ----------
+    # Collect translation vectors
     T_gt = []
     T_est = []
 
@@ -65,15 +64,16 @@ def main():
     T_gt = np.stack(T_gt, axis=0)
     T_est = np.stack(T_est, axis=0)
 
-    # ---------- Fehler ----------
+    # Calculate errors
     errors = np.linalg.norm(T_est - T_gt, axis=1)
     mean_error = np.mean(errors)
 
-    # ---------- Achsen ----------
+    # Extract axes
     X_gt, Y_gt, Z_gt = T_gt[:, 0], T_gt[:, 1], T_gt[:, 2]
     X_est, Y_est, Z_est = T_est[:, 0], T_est[:, 1], T_est[:, 2]
 
     def set_equal_3d(ax):
+        """Set equal aspect ratio for 3D plot."""
         xs = np.concatenate([X_gt, X_est])
         ys = np.concatenate([Y_gt, Y_est])
         zs = np.concatenate([Z_gt, Z_est])
@@ -87,7 +87,7 @@ def main():
         ax.set_ylim(y_mid - max_range / 2, y_mid + max_range / 2)
         ax.set_zlim(z_mid - max_range / 2, z_mid + max_range / 2)
 
-    # ---------- Plot ----------
+    # Create plot
     plt.style.use("seaborn-v0_8-whitegrid")
 
     fig = plt.figure(figsize=(14, 6))
@@ -96,7 +96,7 @@ def main():
         fontsize=14,
     )
 
-    # ===== Groundtruth =====
+    # Plot 1: Groundtruth only
     ax1 = fig.add_subplot(1, 2, 1, projection="3d")
     ax1.scatter(X_gt, Y_gt, Z_gt, c="black", s=40, label="Groundtruth")
 
@@ -110,7 +110,7 @@ def main():
     set_equal_3d(ax1)
     ax1.legend()
 
-    # ===== Vergleich =====
+    # Plot 2: Comparison
     ax2 = fig.add_subplot(1, 2, 2, projection="3d")
 
     ax2.scatter(X_gt, Y_gt, Z_gt, c="black", s=40, label="Groundtruth")
@@ -131,7 +131,7 @@ def main():
     set_equal_3d(ax2)
     ax2.legend()
 
-    # ---------- Mean Error ----------
+    # Display mean error
     fig.text(
         0.70,
         0.01,
@@ -142,12 +142,12 @@ def main():
 
     plt.tight_layout()
 
-    # ---------- SPEICHERN ----------
+    # Save plot
     out_path = os.path.join(THIS_DIR, "compare_translation.png")
     plt.savefig(out_path, dpi=200, bbox_inches="tight")
     plt.close(fig)
 
-    print(f"Plot gespeichert unter:\n{out_path}")
+    print(f"Plot saved to:\n{out_path}")
     print(f"Mean translation error: {mean_error:.3f} m")
 
 

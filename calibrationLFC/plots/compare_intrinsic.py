@@ -1,29 +1,33 @@
+import matplotlib
+matplotlib.use("Agg")  # Headless mode for Docker/server environments
+
 import json
 import os
 import numpy as np
 import matplotlib.pyplot as plt
 
-# Dieser Dateiordner = calibrationLFC/plots
+# Paths
+# This file's directory = calibrationLFC/plots
 THIS_DIR = os.path.dirname(os.path.abspath(__file__))
 
-# calibrationLFC-Ordner
+# calibrationLFC directory
 CALIB_LFC_DIR = os.path.dirname(THIS_DIR)
 
-# Projektroot = eine Ebene höher (CameraCalibration)
+# Project root
 PROJECT_ROOT = os.path.dirname(CALIB_LFC_DIR)
 
-# Pfad zur Groundtruth-Datei
+# Path to groundtruth file
 GROUNDTRUTH_PATH = os.path.join(
     PROJECT_ROOT, "TestEnvironment", "params", "groundTruth_ideal.json"
 )
 
-# Pfad zum Kalibrierungsergebnis
+# Path to calibration result
 CALIB_RESULT_PATH = os.path.join(
     CALIB_LFC_DIR, "results", "calibration_initial_imageset5_20251217_011656.json"
 )
 
-
 def load_groundtruth_intrinsics(path):
+    """Load groundtruth intrinsic parameters."""
     with open(path, "r") as f:
         data = json.load(f)
     intr = data["intrinsics"]
@@ -35,6 +39,7 @@ def load_groundtruth_intrinsics(path):
 
 
 def load_calibrated_intrinsics(path):
+    """Load calibrated intrinsic parameters for all cameras."""
     with open(path, "r") as f:
         data = json.load(f)
 
@@ -58,7 +63,7 @@ def main():
     fx_gt, fy_gt, cx_gt, cy_gt = load_groundtruth_intrinsics(GROUNDTRUTH_PATH)
     cams, fx_est, fy_est, cx_est, cy_est = load_calibrated_intrinsics(CALIB_RESULT_PATH)
 
-    # Differenzen (est - gt)
+    # Differences (est - gt)
     d_fx = fx_est - fx_gt
     d_fy = fy_est - fy_gt
     d_cx = cx_est - cx_gt
@@ -70,7 +75,7 @@ def main():
 
     fig, axes = plt.subplots(1, 2, figsize=(13, 5), sharex=True)
 
-    # ------------------ Plot 1: Brennweiten (fx, fy) ------------------
+    # Plot 1: Focal lengths (fx, fy)
     ax1 = axes[0]
     ax1.plot(x, d_fx, marker="o", linestyle="-", linewidth=2,
              color="#1f77b4", label="Δfx")
@@ -85,7 +90,7 @@ def main():
     ax1.legend()
     ax1.grid(alpha=0.3)
 
-    # ------------------ Plot 2: Hauptpunkt (cx, cy) -------------------
+    # Plot 2: Principal point (cx, cy)
     ax2 = axes[1]
     ax2.plot(x, d_cx, marker="^", linestyle="-", linewidth=2,
              color="#2ca02c", label="Δcx")
@@ -102,7 +107,13 @@ def main():
 
     fig.suptitle("Abweichung der geschätzten Intrinsics gegenüber Ground-Truth", fontsize=14)
     plt.tight_layout()
-    plt.show()
+
+    # Save plot
+    out_path = os.path.join(THIS_DIR, "compare_intrinsic.png")
+    plt.savefig(out_path, dpi=200, bbox_inches="tight")
+    plt.close(fig)
+
+    print(f"Plot saved to:\n{out_path}")
 
 
 if __name__ == "__main__":

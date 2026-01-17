@@ -2,20 +2,16 @@ import json
 import numpy as np
 from pathlib import Path
 
-
-# -------------------------------------------------------
-# Pfade
-# -------------------------------------------------------
-
+# Paths
 THIS_DIR = Path(__file__).resolve().parent
 CALIB_LFC_DIR = THIS_DIR.parent          # calibrationLFC/
 PROJECT_ROOT = CALIB_LFC_DIR.parent      # CameraCalibration/
 RESULTS_DIR = CALIB_LFC_DIR / "results"
 
-# Groundtruth-Basisordner
+# Groundtruth base directory
 GT_DIR = PROJECT_ROOT / "TestEnvironment" / "params"
 
-# Kamerareihenfolge
+# Camera order
 CAM_IDS = [
     "Center",
     "Up1", "Up2", "Up3",
@@ -24,9 +20,7 @@ CAM_IDS = [
     "Right1", "Right2", "Right3",
 ]
 
-# -------------------------------------------------------
-# Kalibrations-JSONs
-# -------------------------------------------------------
+# Calibration JSONs
 CALIB_FILES = {
     "imageset1": RESULTS_DIR / "calibration_initial_imageset1_20251215_173701.json",
     "imageset2": RESULTS_DIR / "calibration_initial_imageset2_20251215_181903.json",
@@ -37,46 +31,36 @@ CALIB_FILES = {
     "imageset7": RESULTS_DIR / "calibration_initial_imageset7_20251215_203849.json",
 }
 
-# -------------------------------------------------------
-# Groundtruth pro Kalibration
-# -------------------------------------------------------
-
+# Groundtruth per calibration
 GT_FILES = {
-    # Rig0 für imageset1–4
+    # Rig0 for imageset1–4
     "imageset1": GT_DIR / "groundtruth_extrinsics_Rig0.json",
     "imageset2": GT_DIR / "groundtruth_extrinsics_Rig0.json",
     "imageset3": GT_DIR / "groundtruth_extrinsics_Rig0.json",
     "imageset4": GT_DIR / "groundtruth_extrinsics_Rig0.json",
 
-    # verschiedene Rigs/Sets:
+    # Different rigs/sets:
     "imageset5": GT_DIR / "groundtruth_extrinsics_Rig1_set5.json",
     "imageset6": GT_DIR / "groundtruth_extrinsics_Rig2_set6.json",
     "imageset7": GT_DIR / "groundtruth_extrinsics_Rig3_set7.json",  
 }
 
-# -------------------------------------------------------
-# Szenario-Gruppierung für die Thesis-Tabelle
-# -------------------------------------------------------
-
+# Scenario grouping for thesis table
 SCENARIOS = {
     "A_Robustheit": ["imageset1", "imageset2", "imageset3", "imageset4"],
     "B_Generalisation":    ["imageset5", "imageset6", "imageset7"],
 }
 
-# -------------------------------------------------------
-# Hilfsfunktionen
-# -------------------------------------------------------
-
+# Helper functions
 def rot_angle_deg(R):
-    """Rotationswinkel (deg) aus 3x3-Rotationsmatrix."""
+    """Extract rotation angle (degrees) from 3x3 rotation matrix."""
     tr = np.trace(R)
     c = (tr - 1.0) / 2.0
     c = np.clip(c, -1.0, 1.0)
     return float(np.degrees(np.arccos(c)))
 
-
 def as_vec3(v):
-    """Beliebige Translation robust zu 3er-Vektor machen."""
+    """Convert any translation vector to robust 3-element vector."""
     arr = np.array(v, dtype=float).reshape(-1)
     if arr.size != 3:
         raise ValueError(f"Expected 3 entries for translation, got {arr.size}")
@@ -85,15 +69,14 @@ def as_vec3(v):
 
 def compute_metrics_for_file(calib_path: Path, gt_path: Path):
     """
-    Lädt eine Kalibrations-JSON und die Groundtruth-JSON
-    und berechnet:
+    Loads a calibration JSON and groundtruth JSON and computes:
       - numPoses
       - mean ΔT (m)
       - mean ΔR (°)
-      - mean ReprojektionError (px, aus intrinsics)
+      - mean reprojection error (px, from intrinsics)
 
-    Definitionen wie in deinem Extrinsic-Plot:
-      ΔR_cam = Winkel(R_est * R_gt^T)
+    Definitions as in your extrinsic plot:
+      ΔR_cam = angle(R_est * R_gt^T)
       ΔT_cam = || T_est - T_gt ||_2
     """
     with open(gt_path, "r", encoding="utf-8") as f:
@@ -118,28 +101,28 @@ def compute_metrics_for_file(calib_path: Path, gt_path: Path):
             print(f"[WARN] Camera '{cam}' not in both files for {calib_path.name}, skipping this cam.")
             continue
 
-        # --- Extrinsics ---
+        # Extrinsics
         R_est = np.array(extr_est[cam]["rotationMatrix"], dtype=float)
         R_gt  = np.array(gt[cam]["rotationMatrix"], dtype=float)
 
         T_est = as_vec3(extr_est[cam]["translationVector"])
         T_gt  = as_vec3(gt[cam]["translationVector"])
 
-        # Rotationsfehler wie im Plot
+        # Rotation error as in plot
         R_err = R_est @ R_gt.T
         ang = rot_angle_deg(R_err)
 
-        # Translationsfehler (absolut, m)
+        # Translation error (absolute, m)
         d_abs = float(np.linalg.norm(T_est - T_gt))
 
         rot_err.append(ang)
         trans_err.append(d_abs)
 
-        # Intrinsische ReprojektionError
+        # Intrinsic reprojection error
         if cam in intr_est:
             reproj_err.append(float(intr_est[cam]["reprojectionError"]))
 
-    # Mittelwerte
+    # Mean values
     mean_dT = float(np.mean(trans_err))     if trans_err else float("nan")
     mean_dR = float(np.mean(rot_err))       if rot_err else float("nan")
     mean_reproj = float(np.mean(reproj_err)) if reproj_err else float("nan")
@@ -152,21 +135,17 @@ def compute_metrics_for_file(calib_path: Path, gt_path: Path):
         "mean_reproj": mean_reproj,
     }
 
-
-# -------------------------------------------------------
-# Tabellen-Ausgabe (Konsole)
-# -------------------------------------------------------
-
+# Table output (console)
 def print_per_file_table(results_by_name):
     """
-    Gibt eine Zeile pro Kalibrations-JSON aus.
+    Prints one line per calibration JSON.
     """
     header = (
         f"{'Name':<12} "
         f"{'#Poses':>6} "
         f"{'BA':<4} "
-        f"{'mean ΔT [m]':>12} "
-        f"{'mean ΔR [°]':>12} "
+        f"{'mean dT [m]':>12} "
+        f"{'mean dR [deg]':>13} "
         f"{'mean reproj [px]':>16}"
     )
     print(header)
@@ -183,20 +162,19 @@ def print_per_file_table(results_by_name):
             f"{res['mean_reproj']:16.5f}"
         )
 
-
 def print_scenario_table(results_by_name):
     """
-    Aggregiert über Szenarien (Robustheit / Generalisation)
-    und gibt eine kompakte Tabelle aus.
+    Aggregates over scenarios (Robustness / Generalization)
+    and prints a compact table.
     """
-    print("\n\nSzenario-Zusammenfassung:\n")
+    print("\n\nScenario Summary:\n")
 
     header = (
         f"{'Szenario':<22} "
         f"{'#Runs':>6} "
-        f"{'Ø#Poses':>8} "
-        f"{'mean ΔT [m]':>12} "
-        f"{'mean ΔR [°]':>12} "
+        f"{'Avg#Poses':>9} "
+        f"{'mean dT [m]':>12} "
+        f"{'mean dR [deg]':>13} "
         f"{'mean reproj [px]':>16}"
     )
     print(header)
@@ -230,16 +208,11 @@ def print_scenario_table(results_by_name):
         print(
             f"{scen_name:<22} "
             f"{num_runs:6d} "
-            f"{mean_poses:8.1f} "
+            f"{mean_poses:9.1f} "
             f"{mean_dT:12.5f} "
-            f"{mean_dR:12.5f} "
+            f"{mean_dR:13.5f} "
             f"{mean_reproj:16.5f}"
         )
-
-
-# -------------------------------------------------------
-# MAIN
-# -------------------------------------------------------
 
 def main():
     results_by_name = {}
@@ -264,7 +237,7 @@ def main():
         print("[ERROR] No valid results computed. Check file paths.")
         return
 
-    print("Detaillierte Ergebnisse pro Kalibration:\n")
+    print("Detailed results per calibration:\n")
     print_per_file_table(results_by_name)
 
     print_scenario_table(results_by_name)

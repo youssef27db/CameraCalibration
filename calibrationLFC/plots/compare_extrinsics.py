@@ -1,9 +1,12 @@
+import matplotlib
+matplotlib.use("Agg")  # Headless mode for Docker/server environments
+
 import json
 import os
 import numpy as np
 import matplotlib.pyplot as plt
 
-# ---------------- Pfade ----------------
+# Pfade 
 THIS_DIR = os.path.dirname(os.path.abspath(__file__))
 CALIB_LFC_DIR = os.path.dirname(THIS_DIR)
 PROJECT_ROOT = os.path.dirname(CALIB_LFC_DIR)
@@ -28,7 +31,7 @@ CAM_IDS = [
 
 
 def rot_angle_deg(R):
-    """Rotationswinkel (deg) aus 3x3-Rotationsmatrix."""
+    """Extract rotation angle (degrees) from 3x3 rotation matrix."""
     tr = np.trace(R)
     c = (tr - 1.0) / 2.0
     c = np.clip(c, -1.0, 1.0)
@@ -36,7 +39,7 @@ def rot_angle_deg(R):
 
 
 def as_vec3(v):
-    """Beliebige Translation (Liste / 2D-Liste) robust zu 3er-Vektor machen."""
+    """Convert any translation vector (list/nested list) to 3-element vector."""
     arr = np.array(v, dtype=float).reshape(-1)
     if arr.size != 3:
         raise ValueError(f"Expected 3 entries for translation, got {arr.size}")
@@ -44,7 +47,7 @@ def as_vec3(v):
 
 
 def main():
-    # ---------- JSON laden ----------
+    # Load JSON files
     with open(CALIB_PATH, "r", encoding="utf-8") as f:
         calib = json.load(f)
     extr_est = calib["state"]["extrinsics"]
@@ -93,7 +96,7 @@ def main():
     plt.style.use("seaborn-v0_8-whitegrid")
     fig, axes = plt.subplots(1, 2, figsize=(14, 6), sharex=True)
 
-    # ---------- Plot 1: Rotationsfehler ----------
+    # Plot 1: Rotation error
     ax1 = axes[0]
     ax1.bar(x, rot_err_deg, color="#7f3cff")
     ax1.set_xticks(x)
@@ -108,7 +111,7 @@ def main():
              transform=ax1.transAxes,
              va="top", ha="left")
 
-    # ---------- Plot 2: Translationsfehler (Meter) ----------
+    # Plot 2: Translation error (meters)
     ax2 = axes[1]
     ax2.bar(x, trans_err_abs, color="#ff3ccf")
     ax2.set_xticks(x)
@@ -125,7 +128,15 @@ def main():
 
     fig.suptitle("Qualität der Extrinsics: Groundtruth vs. Kalibrierung", fontsize=14)
     plt.tight_layout()
-    plt.show()
+
+    # Save plot
+    out_path = os.path.join(THIS_DIR, "compare_extrinsics.png")
+    plt.savefig(out_path, dpi=200, bbox_inches="tight")
+    plt.close(fig)
+
+    print(f"Plot saved to:\n{out_path}")
+    print(f"Mean rotation error: {mean_rot:.2f}°")
+    print(f"Mean translation error: {mean_abs:.3f} m")
 
 
 if __name__ == "__main__":

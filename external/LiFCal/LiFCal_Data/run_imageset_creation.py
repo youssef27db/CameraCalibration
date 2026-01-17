@@ -1,3 +1,5 @@
+"""Organizes focus images by camera and generates depth maps for LiFCal recalibration."""
+
 import os
 import re
 import shutil
@@ -8,7 +10,7 @@ ROOT = "/data/external/LiFCal/LiFCal_Data/Recalibration/LiFCal_Imageset"
 FOCUS_DIR = os.path.join(ROOT, "focus")
 DEPTH_DIR = os.path.join(ROOT, "depth")
 
-# Wenn True: Original-Dateien im focus-Basisordner werden nach dem Sortieren gelöscht
+# If True: original files in focus root directory are deleted after sorting
 CLEAN_FOCUS_ROOT_AFTER = True
 
 CAMERA_IDS = [
@@ -18,18 +20,20 @@ CAMERA_IDS = [
     "Right1", "Right2", "Right3"
 ]
 
-# Dateinamen: pose000_Center.png ... pose000_Down3.png
+# Expected filenames: pose000_Center.png ... pose000_Down3.png
 PATTERN = re.compile(
     r"^(pose\d+)_(Center|Up[123]|Down[123]|Left[123]|Right[123])\.(png|jpg|jpeg)$",
     re.IGNORECASE
 )
 
 def ensure_camera_subfolders(base_dir: str):
+    """Create subdirectory for each camera ID under base_dir."""
     os.makedirs(base_dir, exist_ok=True)
     for cid in CAMERA_IDS:
         os.makedirs(os.path.join(base_dir, cid), exist_ok=True)
 
 def group_focus_images_by_pose():
+    """Group focus images by pose ID from flat directory structure."""
     pose_to_cam = defaultdict(dict)
     for fn in sorted(os.listdir(FOCUS_DIR)):
         m = PATTERN.match(fn)
@@ -40,7 +44,7 @@ def group_focus_images_by_pose():
     return pose_to_cam
 
 def copy_focus_into_camera_folders(pose: str, cam_to_path: dict):
-    # focus/<CamId>/<pose>_<CamId>.png
+    """Copy focus images into camera-specific subdirectories (focus/<CamId>/<pose>_<CamId>.png)."""
     for cam, src in cam_to_path.items():
         ext = os.path.splitext(src)[1].lower()
         dst = os.path.join(FOCUS_DIR, cam, f"{pose}_{cam}{ext}")
@@ -48,13 +52,14 @@ def copy_focus_into_camera_folders(pose: str, cam_to_path: dict):
             shutil.copy2(src, dst)
 
 def cleanup_focus_root():
-    # löscht NUR lose Dateien direkt in focus/ (nicht in Unterordnern)
+    """Delete only loose files directly in focus/ (not in subdirectories)."""
     for fn in os.listdir(FOCUS_DIR):
         p = os.path.join(FOCUS_DIR, fn)
         if os.path.isfile(p) and PATTERN.match(fn):
             os.remove(p)
 
 def main():
+    """Main pipeline: organize focus images and generate depth maps."""
     if not os.path.isdir(FOCUS_DIR):
         raise SystemExit(f"focus folder not found: {FOCUS_DIR}")
 
@@ -63,7 +68,7 @@ def main():
 
     pose_to_cam = group_focus_images_by_pose()
     if not pose_to_cam:
-        raise SystemExit("Keine Focus-Bilder gefunden. Erwartet: pose000_Center.png usw.")
+        raise SystemExit("No focus images found. Expected: pose000_Center.png etc.")
 
     poses = sorted(pose_to_cam.keys())
     print("Found poses:", len(poses))
@@ -71,13 +76,13 @@ def main():
     for i, pose in enumerate(poses, start=1):
         cam_to_focus_path = pose_to_cam[pose]
 
-        # 1) Focus-Bilder pro Kamera einsortieren (kopieren)
+        # Sort focus images into camera folders
         copy_focus_into_camera_folders(pose, cam_to_focus_path)
 
-        # 2) Depthmaps pro Pose rechnen lassen
+        # Generate depth maps for this pose
         depthmaps = depthmap.generate_depthmaps_for_pose(cam_to_focus_path)
 
-        # 3) Speichern: depth/<CamId>/<pose>_<CamId>_depth.png
+        # Save depth maps: depth/<CamId>/<pose>_<CamId>_depth.png
         for cam, depth_u16 in depthmaps.items():
             out_path = os.path.join(DEPTH_DIR, cam, f"{pose}_{cam}_depth.png")
             ok = depthmap.imwrite_u16(out_path, depth_u16)

@@ -1,32 +1,28 @@
-# ============================================================
-# HealthScore-Formeln (0..100)
-# ============================================================
-#
-# (A) INITIAL Calibration (OpenCV/Controller JSON)
-# -----------------------------------------------
-# HealthScore_initial = 100 * [ 1 - (0.6 * E_reproj^2 + 0.4 * E_rms^2) ]
-#
-# E_reproj = clamp( (reproj_mean - R_BEST) / (R_WORST - R_BEST), 0, 1 )
-# E_rms    = clamp( (rms_mean    - S_BEST) / (S_WORST - S_BEST), 0, 1 )
-#
-# Uses:
-#   - intrinsics[*].reprojectionError  (per camera)
-#   - extrinsics[*].stereoRms          (per camera)
-#
-#
-# (B) LiFCal Calibration (protocol-based)
-# ---------------------------------------
-# HealthScore_lifcal = 100 * [ 1 - (0.6 * E_std^2 + 0.4 * E_mae^2) ]
-#
-# E_std = clamp( ( sqrt(x_std^2 + y_std^2) - S_BEST ) / (S_WORST - S_BEST), 0, 1 )
-# E_mae = clamp( ( sqrt(x_mae^2 + y_mae^2) - R_BEST ) / (R_WORST - R_BEST), 0, 1 )
-#
-# Uses:
-#   - std.Dev. x/y  and mae x/y from LiFCal calibrationProtocol.txt
-#
-# Shared thresholds (for BOTH methods):
-#   R_BEST = 0.03, R_WORST = 1.0, S_BEST = 0.0, S_WORST = 50.0
-# ============================================================
+"""
+HealthScore Formulas (0..100)
+
+(A) INITIAL Calibration (OpenCV/Controller JSON)
+    HealthScore_initial = 100 * [ 1 - (0.6 * E_reproj^2 + 0.4 * E_rms^2) ]
+
+    E_reproj = clamp( (reproj_mean - R_BEST) / (R_WORST - R_BEST), 0, 1 )
+    E_rms    = clamp( (rms_mean    - S_BEST) / (S_WORST - S_BEST), 0, 1 )
+
+    Uses:
+      - intrinsics[*].reprojectionError  (per camera)
+      - extrinsics[*].stereoRms          (per camera)
+
+(B) LiFCal Calibration (protocol-based)
+    HealthScore_lifcal = 100 * [ 1 - (0.6 * E_std^2 + 0.4 * E_mae^2) ]
+
+    E_std = clamp( ( sqrt(x_std^2 + y_std^2) - S_BEST ) / (S_WORST - S_BEST), 0, 1 )
+    E_mae = clamp( ( sqrt(x_mae^2 + y_mae^2) - R_BEST ) / (R_WORST - R_BEST), 0, 1 )
+
+    Uses:
+      - std.Dev. x/y  and mae x/y from LiFCal calibrationProtocol.txt
+
+Shared thresholds (for BOTH methods):
+  R_BEST = 0.03, R_WORST = 1.0, S_BEST = 0.0, S_WORST = 50.0
+"""
 
 import re
 import json
@@ -34,19 +30,15 @@ import math
 from typing import Dict, Any, Optional
 
 
-# -------------------------
 # Shared thresholds
-# -------------------------
 R_BEST = 0.03
 R_WORST = 1.0
 S_BEST = 0.0
 S_WORST = 50.0
 
 
-# -------------------------
-# Utilities
-# -------------------------
 def clamp(x: float, lo: float = 0.0, hi: float = 1.0) -> float:
+    """Clamp value between lower and upper bounds."""
     if x < lo:
         return lo
     if x > hi:
@@ -54,7 +46,8 @@ def clamp(x: float, lo: float = 0.0, hi: float = 1.0) -> float:
     return x
 
 
-def _safe_float(v, default=None):
+def safe_float(v, default=None):
+    """Convert value to float safely, return default on error."""
     try:
         if v is None:
             return default
@@ -63,15 +56,12 @@ def _safe_float(v, default=None):
         return default
 
 
-def _score_from_errors(E_a: float, E_b: float, w_a: float = 0.6, w_b: float = 0.4) -> float:
-    # 100 * (1 - (w_a*E_a^2 + w_b*E_b^2)), clamped
+def score_from_errors(E_a: float, E_b: float, w_a: float = 0.6, w_b: float = 0.4) -> float:
+    """Compute health score from two normalized error metrics."""
     val = 100.0 * (1.0 - (w_a * (E_a ** 2) + w_b * (E_b ** 2)))
     return clamp(val / 100.0, 0.0, 1.0) * 100.0
 
 
-# ============================================================
-# INITIAL calibration scoring
-# ============================================================
 def compute_initial_health_from_state(
     state_dict: Dict[str, Any],
     r_best: float = R_BEST,
@@ -80,7 +70,7 @@ def compute_initial_health_from_state(
     s_worst: float = S_WORST,
 ) -> Dict[str, Any]:
     """
-    Controller-friendly: returns dict with key 'health'.
+    Compute health score from initial calibration state.
 
     Reads from state_dict:
       state.intrinsics[cam].reprojectionError
@@ -89,7 +79,7 @@ def compute_initial_health_from_state(
     Returns:
       {"health": float, "method": "initial", "details": {...}}
     """
-    st = state_dict.get("state", state_dict)  # allow passing just "state"
+    st = state_dict.get("state", state_dict)
     intr = st.get("intrinsics", {}) or {}
     extr = st.get("extrinsics", {}) or {}
 
@@ -97,12 +87,12 @@ def compute_initial_health_from_state(
     rms_vals = []
 
     for cam, intr_data in intr.items():
-        reproj = _safe_float(intr_data.get("reprojectionError"), None)
+        reproj = safe_float(intr_data.get("reprojectionError"), None)
         if reproj is not None:
             reproj_vals.append(reproj)
 
         ex = extr.get(cam, {})
-        rms = _safe_float(ex.get("stereoRms"), None)
+        rms = safe_float(ex.get("stereoRms"), None)
         if rms is not None:
             rms_vals.append(rms)
 
@@ -119,7 +109,7 @@ def compute_initial_health_from_state(
     E_reproj = clamp((reproj_mean - r_best) / (r_worst - r_best), 0.0, 1.0)
     E_rms = clamp((rms_mean - s_best) / (s_worst - s_best), 0.0, 1.0)
 
-    score = _score_from_errors(E_reproj, E_rms)
+    score = score_from_errors(E_reproj, E_rms)
 
     return {
         "health": float(score),
@@ -139,17 +129,15 @@ def compute_initial_health_from_state(
     }
 
 
-# ============================================================
-# LiFCal scoring (protocol-based)
-# ============================================================
 def parse_lifcal_protocol(protocol_path: str) -> Dict[str, Optional[float]]:
+    """Parse LiFCal calibration protocol text file for error metrics."""
     txt = open(protocol_path, "r", encoding="utf-8", errors="ignore").read()
 
     def find_float(pattern: str) -> Optional[float]:
         m = re.search(pattern, txt, re.MULTILINE)
         if not m:
             return None
-        return _safe_float(m.group(1), None)
+        return safe_float(m.group(1), None)
 
     x_std = find_float(r"std\.\s*Dev\.\s*x:\s*([0-9.+-eE]+)")
     y_std = find_float(r"std\.\s*Dev\.\s*y:\s*([0-9.+-eE]+)")
@@ -169,13 +157,14 @@ def compute_lifcal_health_from_xy(
     s_best: float = S_BEST,
     s_worst: float = S_WORST,
 ) -> Dict[str, Any]:
+    """Compute LiFCal health score from x/y standard deviation and MAE values."""
     std_norm = (x_std * x_std + y_std * y_std) ** 0.5
     mae_norm = (x_mae * x_mae + y_mae * y_mae) ** 0.5
 
     E_std = clamp((std_norm - s_best) / (s_worst - s_best), 0.0, 1.0)
     E_mae = clamp((mae_norm - r_best) / (r_worst - r_best), 0.0, 1.0)
 
-    score = _score_from_errors(E_std, E_mae)
+    score = score_from_errors(E_std, E_mae)
 
     return {
         "health": float(score),
@@ -196,7 +185,9 @@ def compute_lifcal_health_from_xy(
 
 def compute_lifcal_health_from_combined_dict(combined: Dict[str, Any]) -> Dict[str, Any]:
     """
-    combined.json structure (wie bei dir):
+    Compute LiFCal health from combined.json structure.
+
+    Structure:
       combined["state"]["parameters"][cam]["reprojection"]["x_std" ... "y_mae"]
 
     Returns:
@@ -217,7 +208,7 @@ def compute_lifcal_health_from_combined_dict(combined: Dict[str, Any]) -> Dict[s
         x_mae = rep.get("x_mae", None)
         y_mae = rep.get("y_mae", None)
 
-        # wenn irgendwas fehlt -> cam skippen (oder 0 geben)
+        # Skip camera if any field is missing
         if any(v is None for v in [x_std, y_std, x_mae, y_mae]):
             per_cam[cam] = {"health": 0.0, "reason": "missing reprojection fields"}
             continue
@@ -243,12 +234,14 @@ def compute_lifcal_health_from_combined_dict(combined: Dict[str, Any]) -> Dict[s
     if len(scores) == 0:
         return {"health": 0.0, "method": "lifcal", "perCam": per_cam}
 
-    # GLOBAL: einfach Mittelwert über Kameras
+    # Global health: average across all cameras
     global_health = sum(scores) / len(scores)
 
     return {"health": float(global_health), "method": "lifcal", "perCam": per_cam}
 
+
 def compute_lifcal_health_from_combined_path(combined_json_path: str) -> Dict[str, Any]:
+    """Load combined.json from file and compute LiFCal health."""
     with open(combined_json_path, "r", encoding="utf-8") as f:
         combined = json.load(f)
     return compute_lifcal_health_from_combined_dict(combined)

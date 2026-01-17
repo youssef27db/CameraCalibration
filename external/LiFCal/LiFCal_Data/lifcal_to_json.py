@@ -8,7 +8,7 @@ import numpy as np
 import cv2
 
 
-def _parse_protocol(protocol_path: str) -> dict:
+def parse_protocol(protocol_path: str) -> dict:
     txt = open(protocol_path, "r", encoding="utf-8", errors="ignore").read()
 
     def find_float(pattern: str, default=None) -> Optional[float]:
@@ -58,7 +58,7 @@ def _parse_protocol(protocol_path: str) -> dict:
     }
 
 
-def _parse_extrinsics_xml(xml_path: str) -> Dict[str, Any]:
+def parse_extrinsics_xml(xml_path: str) -> Dict[str, Any]:
     root = ET.parse(xml_path).getroot()
     out: Dict[str, Any] = {}
 
@@ -103,17 +103,17 @@ def export_lifcal_parameters_json_in_place(
     protocol_name: str = "calibrationProtocol.txt",
     extr_name: str = "extrinsicOrientations.xml",
     out_name: str = "parameters.json",
-    # Alias (damit dein Runner nix ändern muss)
+    # Aliases (kept for runner compatibility)
     pixel_size_mm: Optional[float] = None,
-    fallback_cx: Optional[float] = None,  # wird nur akzeptiert, nicht genutzt
-    fallback_cy: Optional[float] = None,  # wird nur akzeptiert, nicht genutzt
+    fallback_cx: Optional[float] = None,  # accepted for compatibility, not used
+    fallback_cy: Optional[float] = None,  # accepted for compatibility, not used
 ) -> str:
     """
-    result_dir: Ordner mit calibrationProtocol.txt + extrinsicOrientations.xml
-    schreibt: result_dir/parameters.json
+    Writes LiFCal parameters.json for a single camera.
 
-    Wichtig: fallback_cx/fallback_cy werden nur akzeptiert (Kompatibilität),
-    weil wir keine KameraMatrix mehr speichern.
+    - Expects calibrationProtocol.txt and extrinsicOrientations.xml in result_dir
+    - Produces result_dir/parameters.json
+    - fallback_cx/fallback_cy are accepted for compatibility only; camera matrix is not stored.
     """
     if pixel_size_mm is not None:
         pixel_size_mm_fallback = float(pixel_size_mm)
@@ -126,15 +126,15 @@ def export_lifcal_parameters_json_in_place(
     if not os.path.isfile(extr_path):
         raise FileNotFoundError(extr_path)
 
-    protocol = _parse_protocol(protocol_path)
-    extr_by_pose = _parse_extrinsics_xml(extr_path)
+    protocol = parse_protocol(protocol_path)
+    extr_by_pose = parse_extrinsics_xml(extr_path)
 
-    # Pixel size fallback
+    # Ensure pixel size is available
     px = protocol.get("pixelSizeMm", None)
     if px is None or (not np.isfinite(px)) or px <= 0:
         protocol["pixelSizeMm"] = float(pixel_size_mm_fallback)
 
-    # kompakter reprojectionError (avg mae)
+    # Compact reprojection error (average MAE)
     rep = protocol.get("reprojection", {})
     x_mae = rep.get("x_mae", None)
     y_mae = rep.get("y_mae", None)
@@ -181,7 +181,9 @@ def export_lifcal_parameters_json_in_place(
 
 def build_combined_parameters_json(run_root: str, camera_ids: list, out_name: str = "combined.json") -> str:
     """
-    Erwartet pro Kamera: run_root/<CamId>/parameters.json
+    Combines per-camera parameters.json files into a single combined.json.
+
+    Expects each camera to have: run_root/<CamId>/parameters.json
     """
     combined = {
         "meta": {

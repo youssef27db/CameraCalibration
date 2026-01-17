@@ -1,6 +1,11 @@
 from typing import List
 
 class ImageSet:
+    """
+    Represents a set of calibration images organized by pose and camera.
+    Provides utilities for constructing image file paths.
+    """
+    
     def __init__(self, baseDir: str, numPoses: int, cameraIds: List[str]):
         self.baseDir = baseDir
         self.numPoses = numPoses

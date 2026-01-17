@@ -1,3 +1,5 @@
+"""Periodic LiFCal scheduler that prepares imagesets, runs calibration, and logs health."""
+
 import os
 import sys
 import time
@@ -6,10 +8,7 @@ import logging
 import subprocess
 from datetime import datetime
 
-# -------------------------
-# CONFIG
-# -------------------------
-INTERVAL_SECONDS = 5 * 60  # 5 minutes
+INTERVAL_SECONDS = 5 * 60  # 5 Minutes interval
 
 RUN_IMAGESET_CREATION = "/data/external/LiFCal/LiFCal_Data/run_imageset_creation.py"
 RUN_LIFCAL_CALIB      = "/data/external/LiFCal/LiFCal_Data/run_LiFCal_calibration.py"
@@ -20,7 +19,7 @@ LOG_PATH        = os.path.join(BASELINE_DIR, "calibration.log")
 
 LOCK_PATH = "/tmp/lifcal_periodic.lock"
 
-# Where prepared images live (must match your pipeline)
+# Prepared images
 ROOT_IMAGESET = "/data/external/LiFCal/LiFCal_Data/Recalibration/LiFCal_Imageset"
 FOCUS_ROOT    = os.path.join(ROOT_IMAGESET, "focus")   # focus/<CamId>/*.png
 DEPTH_ROOT    = os.path.join(ROOT_IMAGESET, "depth")   # depth/<CamId>/*_depth.png
@@ -32,15 +31,12 @@ CAMERA_IDS = [
     "Right1", "Right2", "Right3"
 ]
 
-# How many poses you expect at minimum to consider it "ready"
-# (set small so it works for your 3 poses test too)
+# Minimum number of poses required per camera
 MIN_POSES_PER_CAM = 1
 
 
-# -------------------------
-# Logging helper
-# -------------------------
 def setup_logger():
+    """Create logger that writes to file and stdout."""
     os.makedirs(BASELINE_DIR, exist_ok=True)
     logger = logging.getLogger("lifcal_periodic")
     logger.setLevel(logging.INFO)
@@ -57,10 +53,8 @@ def setup_logger():
     return logger
 
 
-# -------------------------
-# Locking
-# -------------------------
 def acquire_lock(logger) -> bool:
+    """Create lock file to prevent overlapping scheduler cycles."""
     if os.path.exists(LOCK_PATH):
         logger.warning(f"Lock exists, skipping this cycle: {LOCK_PATH}")
         return False
@@ -74,6 +68,7 @@ def acquire_lock(logger) -> bool:
 
 
 def release_lock(logger):
+    """Remove lock file after a cycle completes."""
     try:
         if os.path.exists(LOCK_PATH):
             os.remove(LOCK_PATH)
@@ -81,10 +76,8 @@ def release_lock(logger):
         logger.error(f"Could not remove lock: {e}")
 
 
-# -------------------------
-# Subprocess runner
-# -------------------------
 def run_cmd(logger, cmd, cwd=None) -> int:
+    """Run a subprocess, log combined stdout/stderr, and return exit code."""
     logger.info(f"RUN: {' '.join(cmd)}")
     try:
         p = subprocess.run(
@@ -105,10 +98,8 @@ def run_cmd(logger, cmd, cwd=None) -> int:
         return 1
 
 
-# -------------------------
-# Imageset readiness check
-# -------------------------
-def _count_images_in_dir(d: str, exts=(".png", ".jpg", ".jpeg")) -> int:
+def count_images_in_dir(d: str, exts=(".png", ".jpg", ".jpeg")) -> int:
+    """Count images in directory matching expected extensions."""
     if not os.path.isdir(d):
         return 0
     cnt = 0
@@ -119,10 +110,7 @@ def _count_images_in_dir(d: str, exts=(".png", ".jpg", ".jpeg")) -> int:
 
 
 def needs_imageset_creation(logger) -> bool:
-    """
-    Returns True if we should run run_imageset_creation.py,
-    False if current LiFCal_Imageset looks usable already.
-    """
+    """Check if imageset exists and has enough images per camera; trigger creation if not."""
     if not os.path.isdir(ROOT_IMAGESET):
         logger.info("Imageset missing: ROOT_IMAGESET not found.")
         return True
@@ -130,13 +118,12 @@ def needs_imageset_creation(logger) -> bool:
         logger.info("Imageset missing: focus/depth folders not found.")
         return True
 
-    # For each camera: focus/<cam> and depth/<cam> must exist and contain at least MIN_POSES_PER_CAM files
     for cam in CAMERA_IDS:
         fdir = os.path.join(FOCUS_ROOT, cam)
         ddir = os.path.join(DEPTH_ROOT, cam)
 
-        fcnt = _count_images_in_dir(fdir, exts=(".png", ".jpg", ".jpeg"))
-        dcnt = _count_images_in_dir(ddir, exts=(".png", ".jpg", ".jpeg"))
+        fcnt = count_images_in_dir(fdir, exts=(".png", ".jpg", ".jpeg"))
+        dcnt = count_images_in_dir(ddir, exts=(".png", ".jpg", ".jpeg"))
 
         if fcnt < MIN_POSES_PER_CAM:
             logger.info(f"Imageset not ready: focus/{cam} has {fcnt} images (<{MIN_POSES_PER_CAM}).")
@@ -144,16 +131,12 @@ def needs_imageset_creation(logger) -> bool:
         if dcnt < MIN_POSES_PER_CAM:
             logger.info(f"Imageset not ready: depth/{cam} has {dcnt} images (<{MIN_POSES_PER_CAM}).")
             return True
-
-    # If we reach here, we consider it usable
     logger.info("Imageset looks ready. Skipping run_imageset_creation.py.")
     return False
 
 
-# -------------------------
-# Utility: find latest LiFCal run folder and combined.json
-# -------------------------
 def find_latest_run_dir(out_root: str) -> str:
+    """Return latest run_* directory inside output root, or empty string if none."""
     if not os.path.isdir(out_root):
         return ""
     runs = []
@@ -168,16 +151,15 @@ def find_latest_run_dir(out_root: str) -> str:
 
 
 def combined_json_path(run_dir: str) -> str:
+    """Return path to combined.json inside run directory if present."""
     if not run_dir:
         return ""
     p = os.path.join(run_dir, "combined.json")
     return p if os.path.isfile(p) else ""
 
 
-# -------------------------
-# Optional: call your ResultLogger for LiFCal combined.json
-# -------------------------
 def try_log_lifcal_with_resultlogger(logger, combined_path: str):
+    """Use ResultLogger to record LiFCal health score and update baseline."""
     try:
         repo_dir = "/data/calibrationLFC"
         if repo_dir not in sys.path:
@@ -199,10 +181,8 @@ def try_log_lifcal_with_resultlogger(logger, combined_path: str):
         return False
 
 
-# -------------------------
-# One cycle
-# -------------------------
 def run_cycle(logger):
+    """Execute one scheduler cycle: prepare imageset, run LiFCal, log health."""
     # 1) Only prepare imageset if needed
     if needs_imageset_creation(logger):
         if not os.path.isfile(RUN_IMAGESET_CREATION):
@@ -240,10 +220,8 @@ def run_cycle(logger):
         logger.info("LiFCal finished, but no baseline/health logging was executed.")
 
 
-# -------------------------
-# Main loop
-# -------------------------
 def main():
+    """Periodic loop that runs LiFCal recalibration on a schedule."""
     logger = setup_logger()
     logger.info("Starting periodic LiFCal scheduler.")
     logger.info(f"Interval: {INTERVAL_SECONDS}s")

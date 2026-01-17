@@ -1,20 +1,25 @@
+import matplotlib
+matplotlib.use("Agg")  # Headless mode for Docker/server environments
+
 import json
 import os
 import numpy as np
 import matplotlib.pyplot as plt
 
-# Dieser Dateiordner = calibrationLFC/plots
+# Paths 
+# This file's directory = calibrationLFC/plots
 THIS_DIR = os.path.dirname(os.path.abspath(__file__))
 
-# calibrationLFC-Ordner
+# calibrationLFC directory
 CALIB_LFC_DIR = os.path.dirname(THIS_DIR)
 
-# Pfad zum Kalibrierungsergebnis
+# Path to calibration result
 CALIB_RESULT_PATH = os.path.join(
     CALIB_LFC_DIR, "results", "calibration_initial_imageset5_20251217_011656.json"
 )
 
 def load_reprojection_errors(path):
+    """Load reprojection errors from calibration result."""
     with open(path, "r") as f:
         data = json.load(f)
 
@@ -37,12 +42,12 @@ def main():
 
     plt.style.use("seaborn-v0_8-whitegrid")
 
-    plt.figure(figsize=(12, 5))
+    fig = plt.figure(figsize=(12, 5))
 
     plt.plot(
         x, errors,
         marker="o", linestyle="-", linewidth=2,
-        color="#9d4edd",  # schönes Lila
+        color="#9d4edd",
         label="Reprojection Error"
     )
 
@@ -55,7 +60,13 @@ def main():
     plt.legend()
 
     plt.tight_layout()
-    plt.show()
+
+    # Save plot
+    out_path = os.path.join(THIS_DIR, "compare_reprojectionError.png")
+    plt.savefig(out_path, dpi=200, bbox_inches="tight")
+    plt.close(fig)
+
+    print(f"Plot saved to:\n{out_path}")
 
 
 if __name__ == "__main__":

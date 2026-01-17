@@ -1,20 +1,25 @@
+import matplotlib
+matplotlib.use("Agg")  # Headless mode for Docker/server environments
+
 import json
 import os
 import numpy as np
 import matplotlib.pyplot as plt
 
-# Dieser Dateiordner = calibrationLFC/plots
+# Paths 
+# This file's directory = calibrationLFC/plots
 THIS_DIR = os.path.dirname(os.path.abspath(__file__))
 
-# calibrationLFC-Ordner
+# calibrationLFC directory
 CALIB_LFC_DIR = os.path.dirname(THIS_DIR)
 
-# Pfad zum Kalibrierungsergebnis
+# Path to calibration result
 CALIB_RESULT_PATH = os.path.join(
-    CALIB_LFC_DIR, "results", "calibration_initial_imageset4_20251210_234447.json"
+    CALIB_LFC_DIR, "results", "calibration_initial_imageset5_20251217_011656.json"
 )
 
 def load_stereo_rms(path):
+    """Load stereo RMS values from calibration result."""
     with open(path, "r") as f:
         data = json.load(f)
 
@@ -60,13 +65,19 @@ def main():
     ax.grid(alpha=0.3)
     ax.legend()
 
-    # Optional: y-Achse etwas Luft nach oben/unten
+    # Add some margin to y-axis
     ymin = max(0.0, rms_vals.min() - 1.0)
     ymax = rms_vals.max() + 1.0
     ax.set_ylim(ymin, ymax)
 
     plt.tight_layout()
-    plt.show()
+
+    # Save plot
+    out_path = os.path.join(THIS_DIR, "compare_stereoRMS.png")
+    plt.savefig(out_path, dpi=200, bbox_inches="tight")
+    plt.close(fig)
+
+    print(f"Plot saved to:\n{out_path}")
 
 
 if __name__ == "__main__":

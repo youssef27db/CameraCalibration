@@ -4,10 +4,10 @@ import numpy as np
 from typing import Optional, Dict
 
 
-def _build_matchers():
+def build_matchers():
     left_matcher = cv2.StereoSGBM_create(
         minDisparity=0,
-        numDisparities=128,  # muss durch 16 teilbar sein
+        numDisparities=128,  # must be divisible by 16
         blockSize=7,
         P1=8 * 7 * 7,
         P2=32 * 7 * 7,
@@ -35,7 +35,7 @@ def _build_matchers():
     return left_matcher, right_matcher, wls
 
 
-_LEFT_MATCHER, _RIGHT_MATCHER, _WLS = _build_matchers()
+_LEFT_MATCHER, _RIGHT_MATCHER, _WLS = build_matchers()
 
 
 def imwrite_u16(path: str, img_u16: np.ndarray) -> bool:
@@ -46,7 +46,7 @@ def imwrite_u16(path: str, img_u16: np.ndarray) -> bool:
     return bool(cv2.imwrite(path, img_u16))
 
 
-def _disparity(left_gray: np.ndarray, right_gray: np.ndarray) -> np.ndarray:
+def disparity(left_gray: np.ndarray, right_gray: np.ndarray) -> np.ndarray:
     """
     Returns disparity as float32 with NaNs for invalid (<=0).
     """
@@ -63,7 +63,7 @@ def _disparity(left_gray: np.ndarray, right_gray: np.ndarray) -> np.ndarray:
     return d
 
 
-def _to_u16_from_disp(disp: np.ndarray) -> np.ndarray:
+def to_u16_from_disp(disp: np.ndarray) -> np.ndarray:
     """
     Disp -> uint16 scaling robust via percentile.
     """
@@ -78,24 +78,24 @@ def _to_u16_from_disp(disp: np.ndarray) -> np.ndarray:
     return depth16
 
 
-def _fuse_disparities_median(disp_list: list) -> np.ndarray:
+def fuse_disparities_median(disp_list: list) -> np.ndarray:
     """
     Fuses disparities robustly without 'All-NaN slice' warnings.
     Returns float32 disparity with 0 where nothing is valid.
     """
     stack = np.stack(disp_list, axis=0)  # (K,H,W)
 
-    # wo mindestens 1 Wert gültig ist
+    # Locations where at least one value is valid
     valid_any = np.any(~np.isnan(stack), axis=0)
 
-    # Ergebnis initial 0
+    # Initialize result with zeros
     disp_final = np.zeros(stack.shape[1:], dtype=np.float32)
 
-    # Median nur dort berechnen, wo valid_any True ist
+    # Compute median only where we have valid data
     if np.any(valid_any):
         disp_final[valid_any] = np.nanmedian(stack[:, valid_any], axis=0)
 
-    # optional: negative/0 entfernen
+    # Remove non-positive disparities
     disp_final[disp_final <= 0] = 0.0
     return disp_final
 
@@ -135,42 +135,42 @@ def generate_depthmaps_for_pose(cam_to_focus_path: Dict[str, str]) -> Dict[str, 
         disp_list = []
 
         if cam == "Center":
-            # Center nutzt alle anderen Views
+            # Center uses all other views
             for other_cam, other_img in imgs.items():
                 if other_cam == "Center":
                     continue
-                d = _disparity(img, other_img)
-                # nur aufnehmen wenn überhaupt irgendwas valid ist
+                d = disparity(img, other_img)
+                # Keep only if there is any valid disparity
                 if np.any(~np.isnan(d)):
                     disp_list.append(d)
 
         else:
-            # 1) Gegenrichtung falls vorhanden
+            # Opposite direction if available
             opp = opposite_name(cam)
             if opp is not None and opp in imgs:
                 if cam.startswith("Right") or cam.startswith("Down"):
-                    d = _disparity(imgs[opp], img)
+                    d = disparity(imgs[opp], img)
                 else:
-                    d = _disparity(img, imgs[opp])
+                    d = disparity(img, imgs[opp])
 
                 if np.any(~np.isnan(d)):
                     disp_list.append(d)
 
-            # 2) Center dazu
+            # Add Center view
             if "Center" in imgs:
-                d = _disparity(img, imgs["Center"])
+                d = disparity(img, imgs["Center"])
                 if np.any(~np.isnan(d)):
                     disp_list.append(d)
 
         if not disp_list:
-            # keine sinnvolle Disparity -> überspringen
+            # No valid disparity found; skip
             continue
 
-        # 3) Robust Fusion
-        disp_final = _fuse_disparities_median(disp_list)
+        # Robust fusion
+        disp_final = fuse_disparities_median(disp_list)
 
-        # 4) -> uint16
-        depth16 = _to_u16_from_disp(disp_final)
+        # Convert to uint16 depth map
+        depth16 = to_u16_from_disp(disp_final)
         depthmaps[cam] = depth16
 
     return depthmaps
