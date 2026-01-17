@@ -3,8 +3,8 @@ Test runner for initial calibration.
 
 Usage:
   cd calibrationLFC
-  python run_initial_calibration.py --base_dir /path/to/imageset --num_poses 28 --bundle-adjust
-  python run_initial_calibration.py --base_dir /path/to/imageset --num_poses 28 --no-bundle-adjust
+  python3 run_initial_calibration.py --base_dir /path/to/imageset --num_poses 28 --bundle-adjust
+  python3 run_initial_calibration.py --base_dir /path/to/imageset --num_poses 28 --no-bundle-adjust
 
 Performs validation checks (file existence, corner detection on pose 0)
 then runs the complete initial calibration pipeline. Outputs summary statistics

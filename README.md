@@ -132,7 +132,48 @@ sets/
 
 ```bash
 cd /data/calibrationLFC
-python3 run_initial_calibration.py
+
+python3 run_initial_calibration.py \
+  --base_dir /data/calibrationLFC/sets/imageset5 \
+  --num_poses 28 \
+  --bundle-adjust
+```
+
+### Command Line Arguments
+
+#### `--base_dir`
+Path to the image set directory.
+
+```bash
+--base_dir /data/calibrationLFC/sets/imageset5
+```
+
+---
+
+#### `--num_poses`
+Number of calibration poses in the image set.
+
+```bash
+--num_poses 28
+```
+
+---
+
+#### `--bundle-adjust` (default)
+Enables **bundle adjustment**, which globally refines camera intrinsics and
+extrinsics to minimize reprojection error.
+
+```bash
+--bundle-adjust
+```
+
+---
+
+#### `--no-bundle-adjust`
+Disables bundle adjustment and stops after the initial calibration stage.
+
+```bash
+--no-bundle-adjust
 ```
 
 ### What Happens
@@ -142,7 +183,7 @@ python3 run_initial_calibration.py
 * Optional bundle adjustment is applied
 * Calibration is stored as JSON
 * A global Health Score is computed
-* If no baseline exists ? `baseline.json` is created automatically
+* If no baseline exists: `baseline.json` is created automatically
 * Calibration is saved in /baseline as calibration_initial_imagesetX_20260116_164546.json
 
 ### Log Output
