@@ -1,0 +1,32 @@
+*******************************************************************************
+***   LiFCal: Online Light Field Camera Calibration via Bundle Adjustment   ***
+*******************************************************************************
+
+*** Intrinsic Parameters ***
+Pixel Size: 0.005 mm
+	fL   : 50.000000000000000
+	bL0  : 63.960000000000008
+	B    :  0.400000000000000
+	cx   : 732.045071146493001
+	cy   : 346.941600114590926
+	a0   : -0.006651914593788
+	a1   :  0.000792299049108
+	b0   :  0.012385806767556
+	b1   : -0.051015193322008
+
+	Did micro lens center adjustment
+*** Additional Settings ***
+	Distortion defined on MLA plane.
+
+	Extrinsic Orientations were refined.
+
+	3D Object coordinates were refined.
+
+	Robust cost function was used for estimation.
+
+*** Statistics ***
+	Reprojection errors:
+	std. Dev. x:            6.62180
+	std. Dev. y:            6.33985
+	mae x:                 39.48339
+	mae y:                 16.55143

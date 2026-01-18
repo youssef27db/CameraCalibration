@@ -47,3 +47,40 @@
 2026-01-16 16:45:46,043 [INFO] HealthScore = 92.99 (method=initial)
 2026-01-16 16:45:46,044 [INFO] Baseline kept: baseline.json (old=92.99 >= new=92.99, method=initial)
 2026-01-16 16:45:46,067 [INFO] HealthScore = 92.99 (method=initial)
+2026-01-18 14:50:13,453 [INFO] Starting periodic LiFCal scheduler.
+2026-01-18 14:50:13,453 [INFO] Interval: 300s
+2026-01-18 14:50:13,454 [INFO] Lock: /tmp/lifcal_periodic.lock
+2026-01-18 14:50:13,454 [INFO] === CYCLE START ===
+2026-01-18 14:50:13,454 [INFO] Imageset missing: focus/depth folders not found.
+2026-01-18 14:50:13,454 [INFO] RUN: /usr/bin/python3 /data/external/LiFCal/LiFCal_Data/run_imageset_creation.py
+2026-01-18 14:51:45,412 [INFO] Found poses: 11
+[1/11] pose000: views=13 depthmaps=13
+[2/11] pose001: views=13 depthmaps=13
+[3/11] pose002: views=13 depthmaps=13
+[4/11] pose003: views=13 depthmaps=13
+[5/11] pose004: views=13 depthmaps=13
+[6/11] pose005: views=13 depthmaps=13
+[7/11] pose006: views=13 depthmaps=13
+[8/11] pose007: views=13 depthmaps=13
+[9/11] pose008: views=13 depthmaps=13
+[10/11] pose009: views=13 depthmaps=13
+[11/11] pose010: views=13 depthmaps=13
+DONE.
+Focus by camera: /data/external/LiFCal/LiFCal_Data/Recalibration/LiFCal_Imageset/focus
+Depth by camera: /data/external/LiFCal/LiFCal_Data/Recalibration/LiFCal_Imageset/depth
+
+2026-01-18 14:51:45,412 [INFO] RUN: /usr/bin/python3 /data/external/LiFCal/LiFCal_Data/run_LiFCal_calibration.py
+2026-01-18 15:00:49,763 [INFO] Stored lifcal recalibration to 'calibration_lifcal_20260118_150049.json' (cams=13).
+2026-01-18 15:00:49,763 [INFO] HealthScore = 59.47 (method=lifcal)
+2026-01-18 15:00:49,763 [INFO] Baseline kept: baseline.json (old=92.99 >= new=59.47, method=lifcal)
+2026-01-18 15:00:49,787 [INFO] Output: /data/external/LiFCal/LiFCal_Data/Recalibration/CalibrationByCamera/run_2026_01_18_145145
+[OK] COMBINED: /data/external/LiFCal/LiFCal_Data/Recalibration/CalibrationByCamera/run_2026_01_18_145145/combined.json
+[OK] HealthScore (lifcal) = 59.47
+
+2026-01-18 15:00:49,787 [INFO] Latest combined.json: /data/external/LiFCal/LiFCal_Data/Recalibration/CalibrationByCamera/run_2026_01_18_145145/combined.json
+2026-01-18 15:00:49,880 [INFO] Stored lifcal recalibration to 'calibration_lifcal_20260118_150049.json' (cams=13).
+2026-01-18 15:00:49,880 [INFO] HealthScore = 59.47 (method=lifcal)
+2026-01-18 15:00:49,881 [INFO] Baseline kept: baseline.json (old=92.99 >= new=59.47, method=lifcal)
+2026-01-18 15:00:49,881 [INFO] LiFCal HealthScore logged via ResultLogger: 59.47
+2026-01-18 15:00:49,881 [INFO] === CYCLE END ===
+2026-01-18 15:00:49,881 [INFO] Sleeping 1.0s

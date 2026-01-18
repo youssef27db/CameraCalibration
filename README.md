@@ -102,15 +102,23 @@ pip install numpy opencv-python scipy
 sudo apt install -y build-essential cmake libopencv-dev
 ```
 
-### External Dependency: LiFCal
+### External Dependency: LiFCal Build & Environment Setup 
 
-* Compiled LiFCal binary
-* Expected path:
+LiFCal is an **external C++ project** and requires a properly configured build environment.
 
-```bash
-/data/external/LiFCal/build/bin/LiFCal
+Before using this calibration pipeline, **make sure that LiFCal itself is built and installed correctly**.
+
+All required steps for setting up the LiFCal environment - including:
+
+- required system libraries  
+- compiler and CMake requirements  
+- build and installation instructions  
+
+are documented in the following file:
+
+```text
+/data/external/LiFCal/installation/README.md
 ```
-
 ---
 
 ## Phase 1 - Initial Calibration (Checkerboard)
@@ -225,8 +233,8 @@ Unlike Phase 1, no calibration target is required. Focus images and depth maps a
 Images must be stored as:
 
 ```text
-/data/external/LiFCal/LiFCal_Data/Recalibration/
-|--- LiFCal_Imageset/
+/data/external/LiFCal/LiFCal_Data/Recalibration/LiFCal_Imageset
+|--- focus/
     |--- pose_000_Center.png
     |--- pose_000_Down1.png
     |--- pose_000_Down2.png
@@ -236,6 +244,8 @@ Images must be stored as:
     |--- pose_001_Down1.png
     |--- ...
 ```
+
+There is allready an example in the folder /LiFCal_Imageset.
 
 Requirements:
 
