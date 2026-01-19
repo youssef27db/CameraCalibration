@@ -1,0 +1,306 @@
+\documentclass[12pt]{scrartcl}
+
+% -------------------------
+% Language / Encoding
+% -------------------------
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{lmodern}
+
+% -------------------------
+% Layout
+% -------------------------
+\usepackage{geometry}
+\geometry{a4paper, margin=1in}
+
+% -------------------------
+% Math / Graphics
+% -------------------------
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{svg}
+\usepackage{pdfpages}
+
+% -------------------------
+% Links
+% -------------------------
+\usepackage[colorlinks=true, linkcolor=black, urlcolor=blue, citecolor=black]{hyperref}
+
+% -------------------------
+% Code
+% -------------------------
+\usepackage{listings}
+\lstset{
+  basicstyle=\ttfamily\small,
+  frame=single,
+  numbers=left,
+  numberstyle=\tiny,
+  breaklines=true,
+  tabsize=2
+}
+
+% -------------------------
+% Bibliography
+% -------------------------
+\usepackage[numbers]{natbib}
+
+% -------------------------
+% Meta
+% -------------------------
+\newcommand{\thesistitle}{Data-driven camera calibration for light field camera systems}
+\newcommand{\authorname}{Youssef Daoudi El Boukhrissi}
+\newcommand{\matriculation}{4277022}
+\newcommand{\supervisor}{Prof.\ Dr.\ J{\"u}rgen Hesser}
+\newcommand{\university}{Heidelberg University}
+\newcommand{\submissiondate}{28.02.2026}
+\newcommand{\authormail}{youssefdaoudi275@gmail.com}
+
+\begin{document}
+
+% =========================================================
+% Title Page
+% =========================================================
+\begin{titlepage}
+\thispagestyle{empty}
+
+\begin{center}
+    \vspace*{2.5cm}
+
+    {\large \textbf{University of Heidelberg}\par}
+    \vspace{0.3cm}
+    {\large \textbf{Faculty of Mathematics and Computer Science}\par}
+    \vspace{0.15cm}
+    {\large \textbf{Institute of Computer Science}\par}
+    \vspace{0.15cm}
+    {\large \textbf{Research Group: \textit{<to be defined>}}\par}
+
+    \vspace{2.2cm}
+
+    {\large Bachelor's Thesis in Computer Science\par}
+
+    \vspace{2.4cm}
+
+    {\LARGE\bfseries Data-driven camera calibration\par}
+    \vspace{0.3cm}
+    {\LARGE\bfseries for light field camera systems\par}
+\end{center}
+
+\vfill
+\begin{flushleft}
+Name: Youssef Daoudi El Boukhrissi\\
+Student ID: 4277022\\
+Supervisor: Prof.\ Dr.\ Jürgen Hesser\\
+Submission date: 28 February 2026
+\end{flushleft}
+
+\end{titlepage}
+
+\pagenumbering{roman}
+
+% =========================================================
+% Abstract
+% =========================================================
+\section*{Abstract}
+\cite{LiFCal}
+% Write later
+\cleardoublepage
+
+% =========================================================
+% TOC
+% =========================================================
+\tableofcontents
+\clearpage
+\pagenumbering{arabic}
+
+% =========================================================
+% Chapter 1
+% =========================================================
+\section{Introduction}
+\clearpage
+
+% =========================================================
+% Chapter 2: Theoretical Background
+% =========================================================
+\section{Theoretical Background}
+
+\subsection{Pinhole Camera Model}
+% Camera projection model, intrinsic/extrinsic separation
+
+\subsection{Lens Distortion}
+
+\subsubsection{Radial Distortion}
+
+\subsubsection{Tangential Distortion}
+
+\subsection{Camera Calibration}
+
+\subsubsection{Calibration Parameters and Error Metrics}
+% Intrinsics, extrinsics, reprojection error
+
+\subsubsection{Target-Based Camera Calibration}
+% Checkerboard-based calibration (OpenCV)
+
+\subsubsection{Bundle Adjustment}
+% Joint optimization of camera parameters and structure
+
+\subsection{Light Field Camera Systems}
+
+\subsubsection{Multi-Camera Light Field Systems}
+% Camera arrays (e.g. cross-shaped setup with 13 cameras)
+
+\subsubsection{Micro-Lens-Array-Based Light Field Cameras}
+% MLA-based systems as used in LiFCal
+
+\subsection{State of the Art in Light Field Camera Calibration}
+
+\clearpage
+
+% =========================================================
+% Chapter Three: Material and Method
+% =========================================================
+\section{Material and Method}
+
+% ---------------------------------------------------------
+% 3.1 Material
+% ---------------------------------------------------------
+\subsection{Material}
+
+\subsubsection{Synthetic Data Generation with Blender}
+% Blender-based scene setup
+% Camera array geometry
+% Pose variation
+% Motivation for synthetic data and reproducibility
+
+\subsubsection{Image Sets and Ground Truth Definition}
+% Image set structure
+% Naming conventions
+% Pose sampling
+% Ground truth availability
+
+\subsubsection{Runtime Environment and Toolchain}
+% Operating system
+% Programming language and libraries
+% External tools (OpenCV, LiFCal)
+% Custom scripts and execution workflow
+
+% ---------------------------------------------------------
+% 3.2 Method
+% ---------------------------------------------------------
+\subsection{Method}
+
+\subsubsection{Use Case Description}
+% Overall system workflow
+% Initial calibration, health monitoring, recalibration phases
+
+\subsubsection{Requirements Analysis}
+% Functional requirements
+% Non-functional requirements
+% Traceability to implementation
+
+\subsubsection{UML Class Diagram}
+% Main software components
+% Responsibilities and relationships
+
+\subsubsection{Health Monitoring and Decision Metrics}
+% Health score computation
+% Initial calibration health
+% LiFCal-based health
+% Acceptance and rollback logic
+
+\subsubsection{State Diagram}
+% System states
+% Transitions between calibration phases
+% Periodic execution and decision flow
+
+\clearpage
+
+% =========================================================
+% Chapter 4: Results and Evaluation
+% =========================================================
+\section{Results and Evaluation}
+
+\subsection{Results of Initial Calibration}
+
+\subsubsection{Intrinsic Accuracy}
+% fx, fy deviation
+% cx, cy deviation
+
+\subsubsection{Extrinsic Accuracy}
+% 3D camera positions
+% Translation error per camera
+% Rotation error per camera
+
+\subsubsection{Reprojection and RMS Error}
+% RMS and reprojection error per camera
+
+
+\subsection{Results of LiFCal-Based Recalibration}
+
+\subsubsection{Reprojection Error after LiFCal}
+
+\subsubsection{Health Score Evolution}
+% Health score before/after LiFCal
+% Comparison to baseline
+\clearpage
+
+% =========================================================
+% Chapter 5: Discussion of the Results
+% =========================================================
+\section{Discussion of the Results}
+
+\subsection{Interpretation of Initial Calibration Results}
+% Why errors are low
+% Role of checkerboard + ground truth
+% Stability across cameras
+
+\subsection{Limitations of LiFCal in the Given Setup}
+% Camera type mismatch
+% Dependence on depth maps
+% Synthetic vs real assumptions
+
+\subsection{Comparison between Initial Calibration and LiFCal}
+% What improves
+% What degrades
+% What cannot be compared fairly
+
+\subsection{Comparison to state of the Art}
+
+\subsection{Potential}
+\clearpage
+
+% =========================================================
+% Chapter 6: Conclusion and Outlook
+% =========================================================
+\section{Conclusion and Outlook}
+
+\subsection{Conclusion}
+% What was implemented
+% What worked well
+% What was learned
+
+\subsection{Outlook}
+% Real hardware LF camera
+% Better depth estimation
+% Alternative target-free methods
+
+% =========================================================
+% Appendix
+% =========================================================
+\appendix
+\section{Appendix}
+
+% =========================================================
+% Acknowledgment
+% =========================================================
+\cleardoublepage
+\section*{Acknowledgment}
+
+% =========================================================
+% Bibliography
+% =========================================================
+\cleardoublepage
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}

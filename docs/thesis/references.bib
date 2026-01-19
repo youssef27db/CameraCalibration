@@ -1,0 +1,95 @@
+#========================================================
+# 2.2. Lens Distortion
+#========================================================
+
+@misc{opencv_calib3d_docs,
+  author       = {{OpenCV Developers}},
+  title        = {Camera Calibration and 3D Reconstruction — OpenCV Documentation},
+  howpublished = {OpenCV 4.x Documentation, calib3d module},
+  year         = {2025},
+  url          = {https://docs.opencv.org/4.x/d9/d0c/group__calib3d.html},
+  note         = {Accessed: 2026-01-19},
+}
+
+#========================================================
+# 2.3. Classical Camera Calibration
+#========================================================
+
+@misc{OpenCV_Calibration,
+    title        = {Camera Calibration with OpenCV},
+    author       = {{OpenCV Contributors}},
+    howpublished = {\url{https://docs.opencv.org/4.x/dc/dbb/tutorial_py_calibration.html}},
+    year         = {2024},
+    note         = {Accessed: 2026-01-19}
+}
+
+#========================================================
+# 2.4. Light Field Camera Calibration References
+#========================================================
+
+@article{multi_camera_calibration,
+  author       = {Yichao Xu and Kazuki Maeno and Hajime Nagahara and Rin-ichiro Taniguchi},
+  title        = {Camera array calibration for light field acquisition},
+  journal      = {Frontiers of Computer Science},
+  year         = {2015},
+  volume       = {9},
+  number       = {5},
+  pages        = {691--702},
+  doi          = {10.1007/s11704-015-4237-4},
+  url          = {https://link.springer.com/article/10.1007/s11704-015-4237-4},
+  abstract     = {Light field cameras are becoming popular in computer vision and graphics, and camera arrays are one way to acquire a 4D light field. This paper proposes a calibration method for a camera array and a rectification method to generate a light field image, using a two-step algorithm with closed-form initialization and nonlinear refinement, extending Zhang’s calibration method to camera arrays with a rigid camera constraint to improve accuracy and efficiency.}  
+}
+
+#https://lightfields.stanford.edu/mvlf/
+@inproceedings{TheStanfordMultiviewLightField,
+    author = {Donald G. Dansereau and Bernd Girod and Gordon Wetzstein},
+    title = {{LiFF}: Light Field Features in Scale and Depth},
+    booktitle = {Computer Vision and Pattern Recognition ({CVPR})},
+    year = {2019},
+    month = jun,
+    organization={IEEE},
+    URL = {http://dgd.vision/Papers/dansereau2019liff.pdf}
+}
+
+@article{taguchi2022multi_cameras_light_field_rendering,
+  author       = {Y. Taguchi and others},
+  title        = {Demonstration of a novel multi-cameras light field rendering system and its application},
+  journal      = {Optik},
+  year         = {2022},
+  volume       = {253},
+  pages        = {167759},
+  doi          = {10.1016/j.ijleo.2021.167759},
+  url          = {https://www.sciencedirect.com/science/article/pii/S0030402621013528},
+  abstract     = {This work presents a system using an array of off-the-shelf cameras with synchronized capture to acquire and render a real-scene light field for 3D display, enabling a large image array (e.g., 41×61 views) and rendering without pixel interpolation or virtual view synthesis, verified experimentally for 3D reconstruction and display.}
+}
+
+@misc{vaish2003_lightfield_camera_calibration,
+  author       = {Vaibhav Vaish},
+  title        = {Light Field Camera Calibration},
+  howpublished = {Stanford Graphics Laboratory project page},
+  year         = {2003},
+  url          = {https://graphics.stanford.edu/~vaibhav/projects/lfca_calib/},
+  note         = {Describes implementation details of geometric calibration for a multi-camera light field array including feature detection, correspondence and nonlinear bundle adjustment},  
+}
+
+
+# 2.4.2 MLA-Light Field Camera
+@misc{LiFCal,
+    title     = {LiFCal: Online Light Field Camera Calibration via Bundle Adjustment},
+    author    = {Fleith, Aymeric and Ahmed, Doaa and Cremers, Daniel and Zeller, Niclas},
+    howpublished = {\url{https://arxiv.org/abs/2408.11682}},
+    year      = {2024}
+}
+
+@inproceedings{anisimov2021calibration_auto_refinement,
+  author       = {Yuriy Anisimov and Gerd Reis and Didier Stricker},
+  title        = {Calibration and Auto-Refinement for Light Field Cameras},
+  booktitle    = {Proceedings of the 29th International Conference in Central Europe on Computer Graphics, Visualization and Computer Vision (WSCG)},
+  year         = {2021},
+  pages        = {253--261},
+  address      = {Pilsen, Czech Republic},
+  publisher    = {Vaclav Skala - UNION Agency},
+  isbn         = {978-80-86943-34-3},
+  url          = {https://www.dfki.de/fileadmin/user_upload/import/11659_wscg-j53.pdf},
+  note         = {PDF accessed 2026-01-19. Light field camera calibration and rectification based on pattern-based parameter extraction and correspondence-based refinement with nonlinear optimization}  
+}
