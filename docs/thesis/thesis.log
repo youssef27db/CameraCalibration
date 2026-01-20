@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.12.24)  19 JAN 2026 17:54
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.12.24)  20 JAN 2026 17:00
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -683,47 +683,47 @@ LaTeX Font Info:    Trying to load font information for T1+lmss on input line 10
  (C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmss.fd
 File: t1lmss.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 ) [1] (thesis.toc
-LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 4.
+LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 3.
  (C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/lm\ot1lmr.fd
 File: ot1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OML+lmm on input line 4.
+LaTeX Font Info:    Trying to load font information for OML+lmm on input line 3.
  (C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/lm\omllmm.fd
 File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 4.
+LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 3.
  (C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/lm\omslmsy.fd
 File: omslmsy.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 4.
+LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 3.
  (C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/lm\omxlmex.fd
 File: omxlmex.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 4.
+(Font)              <12> on input line 3.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 4.
+(Font)              <8> on input line 3.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 4.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 4.
+(Font)              <6> on input line 3.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 3.
  (C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 4.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 3.
  (C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-))
+) [2
+
+
+])
 \tf@toc=\write4
 \openout4 = `thesis.toc'.
 
- [2
-
-
-] [3]
+ [3]
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.120 \clearpage
+l.138 \clearpage
                  [1
 
 ] [2
@@ -753,17 +753,17 @@ L3 programming layer <2025-11-06>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 19865 strings out of 467871
- 356804 string characters out of 5417407
- 930729 words of memory out of 5000000
- 48363 multiletter control sequences out of 15000+600000
+ 19873 strings out of 467871
+ 356884 string characters out of 5417407
+ 931729 words of memory out of 5000000
+ 48367 multiletter control sequences out of 15000+600000
  671729 words of font info for 69 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 108i,7n,107p,11299b,483s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 108i,7n,107p,11299b,668s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbxi10.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmssbx10.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt12.pfb>
-Output written on thesis.pdf (12 pages, 172208 bytes).
+Output written on thesis.pdf (12 pages, 175570 bytes).
 PDF statistics:
- 321 PDF objects out of 1000 (max. 8388607)
- 60 named destinations out of 1000 (max. 500000)
- 357 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 342 PDF objects out of 1000 (max. 8388607)
+ 64 named destinations out of 1000 (max. 500000)
+ 389 words of extra memory for PDF output out of 10000 (max. 10000000)
 
