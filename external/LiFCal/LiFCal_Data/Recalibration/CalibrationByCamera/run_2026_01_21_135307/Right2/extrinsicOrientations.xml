@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Root>
+	<Frame id="20">
+		<Rotation>
+			<Coeff i="0">3.0997025652965444</Coeff>
+			<Coeff i="1">3.0218460970840875</Coeff>
+			<Coeff i="2">-3.0101229321234824</Coeff>
+		</Rotation>
+		<Translation>
+			<Coeff i="0">-9.1229741555230426</Coeff>
+			<Coeff i="1">2.5684501751306006</Coeff>
+			<Coeff i="2">194.38834024154667</Coeff>
+		</Translation>
+	</Frame>
+	<Frame id="19">
+		<Rotation>
+			<Coeff i="0">3.0870623367549044</Coeff>
+			<Coeff i="1">2.9051072404659046</Coeff>
+			<Coeff i="2">-2.976638486312714</Coeff>
+		</Rotation>
+		<Translation>
+			<Coeff i="0">-2.9772946545946399</Coeff>
+			<Coeff i="1">0.74205021232268142</Coeff>
+			<Coeff i="2">223.08920726482231</Coeff>
+		</Translation>
+	</Frame>
+	<Frame id="17">
+		<Rotation>
+			<Coeff i="0">3.0376516994546909</Coeff>
+			<Coeff i="1">2.7985224645904423</Coeff>
+			<Coeff i="2">-2.915129985632241</Coeff>
+		</Rotation>
+		<Translation>
+			<Coeff i="0">-27.06991562378764</Coeff>
+			<Coeff i="1">-0.47409430005745268</Coeff>
+			<Coeff i="2">218.77260422555997</Coeff>
+		</Translation>
+	</Frame>
+	<Frame id="16">
+		<Rotation>
+			<Coeff i="0">3.0964541206225422</Coeff>
+			<Coeff i="1">-3.2122359420252495</Coeff>
+			<Coeff i="2">3.3465395344605633</Coeff>
+		</Rotation>
+		<Translation>
+			<Coeff i="0">0.9686765613635322</Coeff>
+			<Coeff i="1">1.8334859549128886</Coeff>
+			<Coeff i="2">250.27831979526727</Coeff>
+		</Translation>
+	</Frame>
+	<Frame id="1">
+		<Rotation>
+			<Coeff i="0">-0.033179932121980449</Coeff>
+			<Coeff i="1">0.10924118966728621</Coeff>
+			<Coeff i="2">0.12482650803115526</Coeff>
+		</Rotation>
+		<Translation>
+			<Coeff i="0">-6.9345088482628912</Coeff>
+			<Coeff i="1">-2.7620509695880702</Coeff>
+			<Coeff i="2">181.11898146077496</Coeff>
+		</Translation>
+	</Frame>
+	<Frame id="14">
+		<Rotation>
+			<Coeff i="0">-0.045622385038291365</Coeff>
+			<Coeff i="1">-0.13364544538535988</Coeff>
+			<Coeff i="2">0.15847103971720314</Coeff>
+		</Rotation>
+		<Translation>
+			<Coeff i="0">17.673945041602323</Coeff>
+			<Coeff i="1">-0.21829098869112526</Coeff>
+			<Coeff i="2">211.83694530317575</Coeff>
+		</Translation>
+	</Frame>
+	<Frame id="2">
+		<Rotation>
+			<Coeff i="0">-0.054697100236771129</Coeff>
+			<Coeff i="1">0.10380195601056773</Coeff>
+			<Coeff i="2">0.17590452015170988</Coeff>
+		</Rotation>
+		<Translation>
+			<Coeff i="0">-6.3199374256914806</Coeff>
+			<Coeff i="1">-2.3021578901622721</Coeff>
+			<Coeff i="2">198.54055246924844</Coeff>
+		</Translation>
+	</Frame>
+	<Frame id="15">
+		<Rotation>
+			<Coeff i="0">3.1102992741269486</Coeff>
+			<Coeff i="1">-3.0133176984772687</Coeff>
+			<Coeff i="2">-3.0225583673650154</Coeff>
+		</Rotation>
+		<Translation>
+			<Coeff i="0">21.959814349224533</Coeff>
+			<Coeff i="1">2.8429839643917023</Coeff>
+			<Coeff i="2">214.36776750772378</Coeff>
+		</Translation>
+	</Frame>
+	<Frame id="3">
+		<Rotation>
+			<Coeff i="0">3.089153712190519</Coeff>
+			<Coeff i="1">3.0213662672022905</Coeff>
+			<Coeff i="2">-2.9900543868819378</Coeff>
+		</Rotation>
+		<Translation>
+			<Coeff i="0">-4.7680805955731715</Coeff>
+			<Coeff i="1">1.5060993329339267</Coeff>
+			<Coeff i="2">209.15374753319543</Coeff>
+		</Translation>
+	</Frame>
+	<Frame id="4">
+		<Rotation>
+			<Coeff i="0">-0.055856182083418582</Coeff>
+			<Coeff i="1">0.099448940542149186</Coeff>
+			<Coeff i="2">0.15841203109541815</Coeff>
+		</Rotation>
+		<Translation>
+			<Coeff i="0">-7.2650902145902192</Coeff>
+			<Coeff i="1">-5.9461491849811594</Coeff>
+			<Coeff i="2">184.73431674034234</Coeff>
+		</Translation>
+	</Frame>
+	<Frame id="5">
+		<Rotation>
+			<Coeff i="0">-0.044326030314539973</Coeff>
+			<Coeff i="1">0.11795806220845084</Coeff>
+			<Coeff i="2">0.16679825120164402</Coeff>
+		</Rotation>
+		<Translation>
+			<Coeff i="0">-6.6034055876067299</Coeff>
+			<Coeff i="1">-0.87564297975706229</Coeff>
+			<Coeff i="2">247.5599584430725</Coeff>
+		</Translation>
+	</Frame>
+	<Frame id="6">
+		<Rotation>
+			<Coeff i="0">-0.0094373220029708733</Coeff>
+			<Coeff i="1">-0.1071001988857166</Coeff>
+			<Coeff i="2">0.16236188709890076</Coeff>
+		</Rotation>
+		<Translation>
+			<Coeff i="0">21.317731425190544</Coeff>
+			<Coeff i="1">2.706957943058649</Coeff>
+			<Coeff i="2">154.58762034132508</Coeff>
+		</Translation>
+	</Frame>
+	<Frame id="8">
+		<Rotation>
+			<Coeff i="0">-0.051682980114367214</Coeff>
+			<Coeff i="1">-0.15262501503767692</Coeff>
+			<Coeff i="2">0.04171564726427876</Coeff>
+		</Rotation>
+		<Translation>
+			<Coeff i="0">19.9193001282989</Coeff>
+			<Coeff i="1">3.4068116289304067</Coeff>
+			<Coeff i="2">244.00834479087612</Coeff>
+		</Translation>
+	</Frame>
+	<Frame id="9">
+		<Rotation>
+			<Coeff i="0">3.0882886808877048</Coeff>
+			<Coeff i="1">-2.7784627942188225</Coeff>
+			<Coeff i="2">3.2380403999821064</Coeff>
+		</Rotation>
+		<Translation>
+			<Coeff i="0">47.813027944345635</Coeff>
+			<Coeff i="1">4.9461518071186994</Coeff>
+			<Coeff i="2">188.77404604216471</Coeff>
+		</Translation>
+	</Frame>
+	<Frame id="11">
+		<Rotation>
+			<Coeff i="0">2.4701152437196674</Coeff>
+			<Coeff i="1">4.6460468554597298</Coeff>
+			<Coeff i="2">5.8392286004650158</Coeff>
+		</Rotation>
+		<Translation>
+			<Coeff i="0">106.01494967350459</Coeff>
+			<Coeff i="1">2.0094005660257315</Coeff>
+			<Coeff i="2">257.06470020629462</Coeff>
+		</Translation>
+	</Frame>
+	<Frame id="12">
+		<Rotation>
+			<Coeff i="0">3.1021025083952529</Coeff>
+			<Coeff i="1">-3.0040862796737935</Coeff>
+			<Coeff i="2">3.2558465580178026</Coeff>
+		</Rotation>
+		<Translation>
+			<Coeff i="0">20.572581573904067</Coeff>
+			<Coeff i="1">4.0705851447783221</Coeff>
+			<Coeff i="2">211.3417039674583</Coeff>
+		</Translation>
+	</Frame>
+	<Frame id="13">
+		<Rotation>
+			<Coeff i="0">3.086448966535897</Coeff>
+			<Coeff i="1">2.9927064156963663</Coeff>
+			<Coeff i="2">3.2479338893158713</Coeff>
+		</Rotation>
+		<Translation>
+			<Coeff i="0">-3.4571287494858618</Coeff>
+			<Coeff i="1">-0.2272390220803778</Coeff>
+			<Coeff i="2">181.07565774530727</Coeff>
+		</Translation>
+	</Frame>
+</Root>

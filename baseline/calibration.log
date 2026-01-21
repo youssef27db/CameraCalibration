@@ -84,3 +84,6 @@ Depth by camera: /data/external/LiFCal/LiFCal_Data/Recalibration/LiFCal_Imageset
 2026-01-18 15:00:49,881 [INFO] LiFCal HealthScore logged via ResultLogger: 59.47
 2026-01-18 15:00:49,881 [INFO] === CYCLE END ===
 2026-01-18 15:00:49,881 [INFO] Sleeping 1.0s
+2026-01-21 15:01:31,956 [INFO] Stored lifcal recalibration to 'calibration_lifcal_20260121_150131.json' (cams=13).
+2026-01-21 15:01:31,956 [INFO] HealthScore = 58.74 (method=lifcal)
+2026-01-21 15:01:31,962 [INFO] Baseline kept: baseline.json (old=92.99 >= new=58.74, method=lifcal)
