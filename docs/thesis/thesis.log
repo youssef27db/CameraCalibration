@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.12.24)  20 JAN 2026 17:00
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.12.24)  21 JAN 2026 14:01
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -712,21 +712,46 @@ File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 LaTeX Font Info:    Trying to load font information for U+msb on input line 3.
  (C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-) [2
+)
+pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.47 ...umberline {6.2}Outlook}{6}{subsection.6.2}
+                                                  % [2
 
 
 ])
 \tf@toc=\write4
 \openout4 = `thesis.toc'.
 
- [3]
+
+pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.113 \clearpage
+                 [3] (thesis.lof)
+\tf@lof=\write5
+\openout5 = `thesis.lof'.
+
+
+pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.119 \clearpage
+                 [4
+
+]
+LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 142.
+ (C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/lm\ts1lmr.fd
+File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.138 \clearpage
+l.152 \clearpage
                  [1
 
-] [2
+{C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ts1.enc}] [2
 
 ] [3
 
@@ -753,17 +778,17 @@ L3 programming layer <2025-11-06>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 19873 strings out of 467871
- 356884 string characters out of 5417407
+ 19923 strings out of 467871
+ 358153 string characters out of 5417407
  931729 words of memory out of 5000000
- 48367 multiletter control sequences out of 15000+600000
- 671729 words of font info for 69 fonts, out of 8000000 for 9000
+ 48410 multiletter control sequences out of 15000+600000
+ 675102 words of font info for 71 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 108i,7n,107p,11299b,668s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 108i,7n,107p,11299b,667s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbxi10.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmssbx10.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt12.pfb>
-Output written on thesis.pdf (12 pages, 175570 bytes).
+Output written on thesis.pdf (13 pages, 178915 bytes).
 PDF statistics:
- 342 PDF objects out of 1000 (max. 8388607)
- 64 named destinations out of 1000 (max. 500000)
+ 349 PDF objects out of 1000 (max. 8388607)
+ 63 named destinations out of 1000 (max. 500000)
  389 words of extra memory for PDF output out of 10000 (max. 10000000)
 

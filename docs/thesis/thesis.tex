@@ -95,8 +95,8 @@ Submission date: 28 February 2026
 \end{flushleft}
 
 \end{titlepage}
+\pagenumbering{gobble}
 
-\pagenumbering{roman}
 
 % =========================================================
 % Abstract
@@ -111,6 +111,13 @@ Submission date: 28 February 2026
 % =========================================================
 \tableofcontents
 \clearpage
+
+% =========================================================
+% figures
+% =========================================================
+\listoffigures
+\clearpage
+
 \pagenumbering{arabic}
 
 % =========================================================
@@ -128,9 +135,16 @@ Submission date: 28 February 2026
 % Practical problems in long-term and real-world setups
 
 \subsection{Research Questions}
-% RQ1: ...
-% RQ2: ...
-% RQ3: ...
+
+The following research questions guide this thesis:
+
+\begin{itemize}
+  \item \textbf{RQ1:} Can the target-free calibration method LiFCal be used to automatically calibrate a multi-camera light field system without human interaction or the use of a checkerboard?
+
+  \item \textbf{RQ2:} How well does LiFCal perform when calibrating a multi-camera light field system, and can it replace a classical checkerboard-based calibration?
+
+  \item \textbf{RQ3:} Under which conditions and requirements can an automatic, target-free recalibration of a multi-camera light field system be successfully performed?
+\end{itemize}
 
 \subsection{Structure of the Thesis}
 % Brief overview of all chapters
