@@ -67,7 +67,7 @@ def main():
 
     plt.xticks(x, cams, rotation=45)
     plt.ylabel("Reprojection Std (Pixel)")
-    plt.title("Reprojection Standardabweichung pro Kamera")
+    plt.title("Reprojection Standard Deviation per Camera")
     plt.grid(alpha=0.3)
     plt.legend()
 

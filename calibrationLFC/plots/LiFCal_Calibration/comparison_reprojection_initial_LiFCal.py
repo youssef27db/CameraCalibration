@@ -99,7 +99,7 @@ def main():
 
     plt.xticks(x, cams_init, rotation=45)
     plt.ylabel("Reprojection Error (Pixel)")
-    plt.title("Reprojection Error Vergleich: Initial vs. LiFCal")
+    plt.title("Reprojection Error Comparison: Initial vs. LiFCal")
     plt.grid(alpha=0.3)
     plt.legend()
 

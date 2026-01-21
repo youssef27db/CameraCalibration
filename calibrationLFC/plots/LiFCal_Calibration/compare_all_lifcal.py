@@ -98,7 +98,7 @@ def main():
         )
     ax.axhline(0, linewidth=1)
     ax.set_ylabel("x_std (Pixel)")
-    ax.set_title("Reprojection Std Vergleich (x_std) pro Kamera")
+    ax.set_title("Reprojection Std Comparison (x_std) per Camera")
     ax.grid(alpha=0.3)
     ax.legend()
 
@@ -114,7 +114,7 @@ def main():
         )
     ax.axhline(0, linewidth=1)
     ax.set_ylabel("y_std (Pixel)")
-    ax.set_title("Reprojection Std Vergleich (y_std) pro Kamera")
+    ax.set_title("Reprojection Std Comparison (y_std) per Camera")
     ax.grid(alpha=0.3)
     ax.legend()
 
