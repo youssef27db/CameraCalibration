@@ -10,11 +10,20 @@
   note         = {Stanford University, CS231A: Computer Vision, Accessed: 2026-01-21}
 }
 
+# and for camera calibration
 @misc{MathWorksCameraCalibration,
   author       = {{MathWorks}},
   title        = {Camera Calibration},
   howpublished = {\url{https://de.mathworks.com/help/vision/ug/camera-calibration.html}},
   year         = {2024},
+  note         = {Accessed: 2026-01-21}
+}
+
+@misc{stanford_pinhole2026,
+  author       = {Stanford University, Computer Vision Group},
+  title        = {Lecture 2: Camera Models – Pinhole Camera Model},
+  year         = {2015},
+  howpublished = {\url{https://cvgl.stanford.edu/teaching/cs231a_winter1415/lecture/lecture2_camera_models_note.pdf}},
   note         = {Accessed: 2026-01-21}
 }
 
@@ -31,6 +40,26 @@
   note         = {Accessed: 2026-01-19},
 }
 
+@misc{ScienceDirectLensDistortion,
+  author       = {{Elsevier}},
+  title        = {Lens Distortion},
+  howpublished = {\url{https://www.sciencedirect.com/topics/engineering/lens-distortion}},
+  year         = {2024},
+  note         = {ScienceDirect Topics, Accessed: 2026-01-21}
+}
+
+@article{ricolfe2010lens,
+  title={Lens distortion models evaluation},
+  author={Ricolfe‐Viala, Carlos and S{\'a}nchez‐Salmer{\'o}n, Antonio‐Jos{\'e}},
+  journal={Applied Optics},
+  volume={49},
+  number={30},
+  pages={5914--5928},
+  year={2010},
+  url = {https://www.researchgate.net/publication/47510646_Lens_distortion_models_evaluation},
+  doi={10.1364/AO.49.005914}
+}
+
 #========================================================
 # 2.3. Classical Camera Calibration
 #========================================================
@@ -42,6 +71,41 @@
     year         = {2024},
     note         = {Accessed: 2026-01-19}
 }
+
+@article{song2025camera,
+  title        = {Camera Calibration via Circular Patterns: A Comprehensive Framework with Measurement Uncertainty and Unbiased Projection Model},
+  author       = {Song, Chaehyeon and Lee, Dongjae and Lim, Jongwoo and Kim, Ayoung},
+  journal      = {arXiv preprint arXiv:2506.16842},
+  year         = {2025},
+  url          = {https://arxiv.org/abs/2506.16842},
+  note         = {Accessed: 2026-01-21}
+}
+
+@misc{matlab_bundleadjustment,
+  author       = {MathWorks, Inc.},
+  title        = {bundleAdjustment - Adjust collection of 3‑D points and camera poses},
+  year         = {2026},
+  howpublished = {\url{https://de.mathworks.com/help/vision/ref/bundleadjustment.html}},
+  note         = {Accessed: 2026‑01‑21}
+}
+
+@misc{cremers2019bundleadjustment,
+  author       = {Cremers, Daniel},
+  title        = {Bundle Adjustment \& Nonlinear Optimization},
+  year         = {2019},
+  howpublished = {\url{https://cvg.cit.tum.de/_media/teaching/ss2019/mvg2019/material/multiviewgeometry7.pdf}},
+  note         = {Vorlesungsunterlage, Technische Universit\"at M\"unchen},
+  institution  = {Technical University of Munich, Computer Vision Group},
+  accessed     = {2026-01-21}
+}
+
+# misc{MathWorksCameraCalibration,
+#   author       = {{MathWorks}},
+#   title        = {Camera Calibration},
+#   howpublished = {\url{https://de.mathworks.com/help/vision/ug/camera-calibration.html}},
+#   year         = {2024},
+#   note         = {Accessed: 2026-01-21}
+# }
 
 #========================================================
 # 2.4. Light Field Camera Calibration References
@@ -113,3 +177,86 @@
   url          = {https://www.dfki.de/fileadmin/user_upload/import/11659_wscg-j53.pdf},
   note         = {PDF accessed 2026-01-19. Light field camera calibration and rectification based on pattern-based parameter extraction and correspondence-based refinement with nonlinear optimization}  
 }
+
+
+#========================================================
+# 2.5. State of the Art LFC-Calibration
+#========================================================
+
+@ARTICLE{10649654,
+  author  = {Zhang, Yaning and Wang, Yingqian and Wu, Tianhao and Yang, Jungang and An, Wei},
+  journal = {IEEE Transactions on Circuits and Systems for Video Technology}, 
+  title   = {Fixed Relative Pose Prior for Camera Array Self-Calibration}, 
+  year    = {2025},
+  volume  = {35},
+  number  = {1},
+  pages   = {981-985},
+  url     = {https://ieeexplore.ieee.org/document/10649654},
+  keywords= {Cameras;Calibration;Image reconstruction;Recording;Circuits and systems;Feature extraction;Accuracy;Camera arrays;self-calibration;light field;structure from motion;multiview},
+  doi     = {10.1109/TCSVT.2024.3450706}
+}
+
+@INPROCEEDINGS{7548887,
+  author={Dima, Elijs and Sjostrom, Mårten and Olsson, Roger},
+  booktitle={2016 3DTV-Conference: The True Vision - Capture, Transmission and Display of 3D Video (3DTV-CON)}, 
+  title={Assessment of multi-camera calibration algorithms for two-dimensional camera arrays relative to ground truth position and direction}, 
+  year={2016},
+  volume={},
+  number={},
+  pages={1-4},
+  url = {https://ieeexplore.ieee.org/document/7548887},
+  keywords={Cameras;Calibration;Distortion;Estimation;Lenses;Transmission line matrix methods;Matrix decomposition;Camera calibration;multi-view image da-taset;2D camera array;self-calibration;calibration assessment},
+  doi={10.1109/3DTV.2016.7548887}
+  }
+
+@INPROCEEDINGS{9172948,
+  author={Yang, Jungang and Xiao, Chao and Wang, Pu and Luo, Yougan and An, Chengjin},
+  booktitle={2019 IEEE International Conference on Signal, Information and Data Processing (ICSIDP)}, 
+  title={Camera Array Calibration Using a Simple Checkerboard Pattern}, 
+  year={2019},
+  volume={},
+  number={},
+  pages={1-5},
+  url = {https://ieeexplore.ieee.org/document/9172948},
+  keywords={Array signal processing;Apertures;Parallel processing;Cameras;Data processing;Light fields;Calibration;Arrays;camera array;light field imaging;synthetic aperture imaging;camera calibration},
+  doi={10.1109/ICSIDP47821.2019.9172948}
+  }
+
+@ARTICLE{9923591,
+  author={Ge, Pengxiang and Wang, Huanqing and Wang, Yonghong and Wang, Biao},
+  journal={IEEE Sensors Journal}, 
+  title={Calibration of Ring Multicamera System With Transparent Target for Panoramic Measurement}, 
+  year={2022},
+  volume={22},
+  number={23},
+  pages={23154-23164},
+  url = {https://ieeexplore.ieee.org/document/9923591},
+  keywords={Cameras;Calibration;Imaging;Area measurement;Sensors;Distortion;Glass;Calibration;digital image correlation (DIC);measurement;refraction correction model},
+  doi={10.1109/JSEN.2022.3214080}
+  }
+
+@ARTICLE{9998530,
+  author={Zhou, Feng and Li, Jing and Dai, Yanran and Liu, Lichen and Qin, Haidong and Jiang, Yuqi and Hong, Shikuan and Zhao, Bo and Yang, Tao},
+  journal={IEEE Sensors Journal}, 
+  title={Time-Series Fusion-Based Multicamera Self-Calibration for Free-View Video Generation in Low-Texture Sports Scene}, 
+  year={2023},
+  volume={23},
+  number={3},
+  pages={2956-2969},
+  url = {https://ieeexplore.ieee.org/document/9998530},
+  keywords={Calibration;Cameras;Feature extraction;Sports;Deep learning;Visualization;Robustness;Camera calibration;free-view video synthesis;low texture;time-series fusion},
+  doi={10.1109/JSEN.2022.3230792}
+  }
+
+@INPROCEEDINGS{10456113,
+  author={Xie, Zhaomin and Zhao, Mengxiao and He, Yujia},
+  booktitle={2023 5th International Conference on Frontiers Technology of Information and Computer (ICFTIC)}, 
+  title={Research on Depth Information Acquisition of Array Camera Based on Depth Map Fusion}, 
+  year={2023},
+  volume={},
+  number={},
+  pages={759-762},
+  url = {https://ieeexplore.ieee.org/document/10456113},
+  keywords={Computer vision;Stereo image processing;Cameras;Calibration;depth acquisition;array camera;depth map fusion},
+  doi={10.1109/ICFTIC59930.2023.10456113}}
+

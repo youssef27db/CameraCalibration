@@ -86,7 +86,7 @@ def main():
     plt.plot(
         x, init_errors,
         marker="o", linestyle="-", linewidth=2,
-        label="Initial Calibration (RMS)"
+        label="Initial Calibration (Repr. Err.)"
     )
 
     plt.plot(
