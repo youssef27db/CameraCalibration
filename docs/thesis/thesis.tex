@@ -1,35 +1,16 @@
 \documentclass[12pt]{scrartcl}
-
-% -------------------------
-% Language / Encoding
-% -------------------------
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
 \usepackage{lmodern}
-
-% -------------------------
-% Layout
-% -------------------------
 \usepackage{geometry}
 \geometry{a4paper, margin=1in}
-
-% -------------------------
-% Math / Graphics
-% -------------------------
+\setlength\parindent{0pt}
 \usepackage{amsmath,amssymb}
 \usepackage{graphicx}
 \usepackage{svg}
 \usepackage{pdfpages}
-
-% -------------------------
-% Links
-% -------------------------
 \usepackage[colorlinks=true, linkcolor=black, urlcolor=blue, citecolor=black]{hyperref}
-
-% -------------------------
-% Code
-% -------------------------
 \usepackage{listings}
 \lstset{
   basicstyle=\ttfamily\small,
@@ -39,15 +20,9 @@
   breaklines=true,
   tabsize=2
 }
-
-% -------------------------
-% Bibliography
-% -------------------------
 \usepackage[numbers]{natbib}
 
-% -------------------------
 % Meta
-% -------------------------
 \newcommand{\thesistitle}{Data-driven camera calibration for light field camera systems}
 \newcommand{\authorname}{Youssef Daoudi El Boukhrissi}
 \newcommand{\matriculation}{4277022}
@@ -102,7 +77,6 @@ Submission date: 28 February 2026
 % Abstract
 % =========================================================
 \section*{Abstract}
-\cite{LiFCal}
 % Write later
 \cleardoublepage
 
@@ -156,34 +130,106 @@ The following research questions guide this thesis:
 % =========================================================
 \section{Theoretical Background}
 
+% Chapter 2.1 Pinhole Camera Model
 \subsection{Pinhole Camera Model}
-% Camera projection model, intrinsic/extrinsic separation
 
+Cameras are the primary devices used to capture visual
+information from the real world into an image. To process and analyze this information
+computationally, it is necessary to describe the imaging process using a 
+camera model \cite{StanfordCS231ACameraModels}.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/Pinhole-Camera.png}
+    \caption{Illustration of the pinhole camera model. Source: \cite{MathWorksCameraCalibration}.}
+    \label{fig:pinhole_camera_model}
+\end{figure}
+
+The pinhole camera model describes a simple imaging system in which light rays
+from a 3D scene pass through a small aperture and are projected through the focal point
+onto a 2D image plane \cite{StanfordCS231ACameraModels}. The aperture limits the incoming light such
+that each point in the scene is mapped to a single point on the image plane. In this model,
+the projected image is inverted due to the geometry of the projection, as shown in
+\autoref{fig:pinhole_camera_model}.
+\vspace{0.2cm}
+
+To define the mapping from 3D world coordinates to 2D image coordinates,
+the model is mathematically described using two types of parameters \cite{MathWorksCameraCalibration}.
+
+\vspace{0.2cm}
+\begin{itemize}
+  \item \textbf{Intrinsic Parameters: \hspace{6mm}} 
+  \[
+  K = 
+  \begin{bmatrix}
+  f_x & s & c_x \\
+  0 & f_y & c_y \\
+  0 & 0 & 1
+  \end{bmatrix}
+  \] 
+  
+  \vspace{0.3cm}
+  where $(f_x, f_y)$ are the focal lengths in pixel units along the x and y axes,
+  $s$ is the skew coefficient between the axes, and $(c_x, c_y)$ is the principal point (optical center) in pixel coordinates.
+  $K$ is also known as the camera matrix.
+
+  \item \textbf{Extrinsic Parameters:} 
+  \[
+  [R \mid t] = 
+  \begin{bmatrix}
+  r_{11} & r_{12} & r_{13} & t_x \\
+  r_{21} & r_{22} & r_{23} & t_y \\
+  r_{31} & r_{32} & r_{33} & t_z
+  \end{bmatrix}
+  \]
+
+  \vspace{0.3cm}
+  where $R$ is a $3 \times 3$ rotation matrix representing the orientation of the camera
+  with respect to the world coordinate system, and $t$ is a $3 \times 1$ translation vector
+  representing the position of the camera center in world coordinates.
+\end{itemize}
+
+These parameters form the basis of camera calibration, which aims to estimate them accurately.
+Also note that in practice, cameras use lenses to focus light onto the image sensor,
+which introduces distortions not accounted for in the idealized pinhole model.
+
+% Chapter 2.2 Lens Distortion
 \subsection{Lens Distortion}
 
+
+% Chapter 2.2.1 Radial Distortion
 \subsubsection{Radial Distortion}
 
+% Chapter 2.2.2 Radial Distortion
 \subsubsection{Tangential Distortion}
 
+% Chapter 2.3 Camera Calibration
 \subsection{Camera Calibration}
 
+% 2.3.1 Calibration Parameters and Error Metrics
 \subsubsection{Calibration Parameters and Error Metrics}
 % Intrinsics, extrinsics, reprojection error
 
+% 2.3.2 Target-Based Camera Calibration
 \subsubsection{Target-Based Camera Calibration}
 % Checkerboard-based calibration (OpenCV)
 
+% 2.3.3 Bundle Adjustment
 \subsubsection{Bundle Adjustment}
 % Joint optimization of camera parameters and structure
 
+% 2.4 Light Field Cameras Systems
 \subsection{Light Field Camera Systems}
 
+% 2.4.1 Multi-Camera Light Field Systems
 \subsubsection{Multi-Camera Light Field Systems}
 % Camera arrays (e.g. cross-shaped setup with 13 cameras)
 
+% 2.4.2 Micro-Lens-Array-Based Light Field Cameras
 \subsubsection{Micro-Lens-Array-Based Light Field Cameras}
 % MLA-based systems as used in LiFCal
 
+% 2.5 State of the Art in Light Field Camera Calibration
 \subsection{State of the Art in Light Field Camera Calibration}
 
 \clearpage
