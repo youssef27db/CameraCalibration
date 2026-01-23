@@ -1,9 +1,15 @@
-\begin{thebibliography}{2}
+\begin{thebibliography}{4}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
   \providecommand{\doi}[1]{doi: #1}\else
   \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[{Elsevier}(2024)]{ScienceDirectLensDistortion}
+{Elsevier}.
+\newblock Lens distortion.
+\newblock
+  \url{https://www.sciencedirect.com/topics/engineering/lens-distortion}, 2024.
 
 \bibitem[Li et~al.(2020)]{StanfordCS231ACameraModels}
 Fei-Fei Li et~al.
@@ -17,5 +23,13 @@ Fei-Fei Li et~al.
 \newblock Camera calibration.
 \newblock
   \url{https://de.mathworks.com/help/vision/ug/camera-calibration.html}, 2024.
+
+\bibitem[Ricolfe‐Viala and S{\'a}nchez‐Salmer{\'o}n(2010)]{ricolfe2010lens}
+Carlos Ricolfe‐Viala and Antonio‐Jos{\'e} S{\'a}nchez‐Salmer{\'o}n.
+\newblock Lens distortion models evaluation.
+\newblock \emph{Applied Optics}, 49\penalty0 (30):\penalty0 5914--5928, 2010.
+\newblock \doi{10.1364/AO.49.005914}.
+\newblock URL
+  \url{https://www.researchgate.net/publication/47510646_Lens_distortion_models_evaluation}.
 
 \end{thebibliography}

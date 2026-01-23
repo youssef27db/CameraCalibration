@@ -146,11 +146,7 @@ camera model \cite{StanfordCS231ACameraModels}.
 \end{figure}
 
 The pinhole camera model describes a simple imaging system in which light rays
-from a 3D scene pass through a small aperture and are projected through the focal point
-onto a 2D image plane \cite{StanfordCS231ACameraModels}. The aperture limits the incoming light such
-that each point in the scene is mapped to a single point on the image plane. In this model,
-the projected image is inverted due to the geometry of the projection, as shown in
-\autoref{fig:pinhole_camera_model}.
+from a 3D scene pass through a small aperture and are projected through the focal point onto a 2D image plane \cite{StanfordCS231ACameraModels}. The aperture limits the incoming light such that each point in the scene is mapped to a single point on the image plane. In this model, the projected image is inverted due to the geometry of the projection, as shown in \autoref{fig:pinhole_camera_model}.
 \vspace{0.2cm}
 
 To define the mapping from 3D world coordinates to 2D image coordinates,
@@ -189,19 +185,41 @@ the model is mathematically described using two types of parameters \cite{MathWo
   representing the position of the camera center in world coordinates.
 \end{itemize}
 
-These parameters form the basis of camera calibration, which aims to estimate them accurately.
-Also note that in practice, cameras use lenses to focus light onto the image sensor,
-which introduces distortions not accounted for in the idealized pinhole model.
+These parameters form the basis of camera calibration, which aims to estimate them accurately. However in practice, cameras use lenses to focus light onto the image sensor, which introduces distortions not accounted for in the idealized pinhole model.
 
 % Chapter 2.2 Lens Distortion
 \subsection{Lens Distortion}
+
+The camera matrix alone is not sufficient to model real imaging systems, as the
+ideal pinhole camera model assumes a lens-free projection. In practice, however, camera lenses introduce various optical distortions that must be taken into account to accurately describe the image formation process \cite{MathWorksCameraCalibration}.
+\newline
+
+Lens distortion is defined as an optical aberration that causes straight lines in the real world to appear curved in the captured image \cite{ScienceDirectLensDistortion}. Since distortion alters the geometric relationship between 3D world points and their 2D image projections, it has a direct impact on the accuracy of camera calibration.
+If lens distortion is not properly modeled, the estimated intrinsic and extrinsic parameters can become biased, leading to unreliable calibration results \cite{ricolfe2010lens}.
+\newline
+
+In most camera calibration models, lens distortion is represented using a small
+set of parametric functions. The two most common types of distortion considered
+in practice are radial distortion and tangential distortion.
 
 
 % Chapter 2.2.1 Radial Distortion
 \subsubsection{Radial Distortion}
 
+- Small Definition
+
+- figure
+
+- Mathematics
+
 % Chapter 2.2.2 Radial Distortion
 \subsubsection{Tangential Distortion}
+
+- Small Definition
+
+- figure
+
+- Mathematics
 
 % Chapter 2.3 Camera Calibration
 \subsection{Camera Calibration}
