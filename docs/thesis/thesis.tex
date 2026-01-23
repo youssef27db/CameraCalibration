@@ -206,35 +206,139 @@ in practice are radial distortion and tangential distortion.
 % Chapter 2.2.1 Radial Distortion
 \subsubsection{Radial Distortion}
 
-- Small Definition
+Radial distortion is caused by the spherical shape of camera lenses, which leads
+to different refraction of light from the image center to the outer regions.
+This causes straight lines in the image to appear curved, resulting in barrel
+or pincushion distortion \cite{RadialDistortion}.
+\vspace{0.2cm}
 
-- figure
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/Radial-Distortion.png}
+    \caption{Comparison of different types of radial distortion. Source: \cite{opencv_calib3d_docs}.}
+    \label{fig:radial_distortion}
+\end{figure}
 
-- Mathematics
+The formal definition of radial distortion is given as follows \cite{MathWorksCameraCalibration}:
 
-% Chapter 2.2.2 Radial Distortion
+\begin{align}
+x_{distorted} = x \left( 1 + k_1 r^2 + k_2 r^4 + k_3 r^6 \right) \label{eq:1}
+\end{align}
+
+\begin{align}
+y_{distorted} = y \left( 1 + k_1 r^2 + k_2 r^4 + k_3 r^6 \right) \label{eq:2}
+\end{align}
+
+\vspace{0.2mm}
+where $x$ and $y$ denote the undistorted normalized image coordinates in the camera coordinate system.
+The radius $r$ represents the distance of a point from the image center and is
+defined as:
+
+\begin{align}
+r^2 = x^2 + y^2 \label{eq:3}
+\end{align}
+
+The coefficients $k_1$, $k_2$, and $k_3$ in \eqref{eq:1} and \eqref{eq:2} control the strength
+of radial lens distortion. In practice, the first coefficient $k_1$ has the dominant influence
+on the distortion type: negative values of $k_1$ typically result in barrel
+distortion, while positive values lead to pincushion distortion.
+
+
+% Chapter 2.2.2 Tangential Distortion
 \subsubsection{Tangential Distortion}
 
-- Small Definition
+Tangential distortion occurs when the image sensor and the camera lens
+are not perfectly aligned or parallel to each other \cite{MathWorksCameraCalibration}.
+As a result, image points are displaced tangentially with respect to the optical axis.
+\autoref{fig:tangential_distortion} illustrates the geometric cause of tangential distortion
+and its effect on the captured image.
 
-- figure
+\vspace{0.2cm}
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures/Tangential-Distortion.png}
+    \hspace{1cm}
+    \includegraphics[width=0.3\textwidth]{figures/Tangential-Distortion2.png}
+    \caption{Visualization of tangential distortion. Source: \cite{MathWorksCameraCalibration}, \cite{Lin2024Stereo}.}
+    \label{fig:tangential_distortion}
+\end{figure}
 
-- Mathematics
+The formal definition of tangential distortion is given by the following equations \cite{MathWorksCameraCalibration}:
+
+\begin{align}
+x_{\text{distorted}} = x + \left( 2 p_1 x y + p_2 \left( r^2 + 2x^2 \right) \right)
+\label{eq:tangential_x}
+\end{align}
+
+\begin{align}
+y_{\text{distorted}} = y + \left( p_1 \left( r^2 + 2y^2 \right) + 2 p_2 x y \right)
+\label{eq:tangential_y}
+\end{align}
+
+\vspace{0.2cm}
+Here, $x$ and $y$ denote the undistorted normalized image coordinates in the camera coordinate system.
+The radius $r$ represents the distance of a point from the image center and is defined as:
+
+\begin{align}
+r^2 = x^2 + y^2
+\label{eq:tangential_r}
+\end{align}
+
+The coefficients $p_1$ and $p_2$ describe how strong the tangential lens distortion is.
+This type of distortion is caused by mechanical misalignment of the lens elements relative
+to the image sensor, resulting in a displacement of image points.
+Although tangential distortion is typically less pronounced than radial distortion,
+it can still negatively affect the camera calibration accuracy if not properly modeled.
 
 % Chapter 2.3 Camera Calibration
 \subsection{Camera Calibration}
 
+- What is camera calibration in general terms?
+
+- Why is camera calibration a fundamental prerequisite for accurate computer vision?
+
+- Why do we need a camera calibration
+
+- How does camera calibration relate to the previous sections (camera model and distortion)?
+
 % 2.3.1 Calibration Parameters and Error Metrics
 \subsubsection{Calibration Parameters and Error Metrics}
-% Intrinsics, extrinsics, reprojection error
+
+- What is camera calibration and which parameters are estimated?
+
+- How are intrinsic and extrinsic parameters defined and interpreted?
+
+- What is the reprojection error and how is it computed?
+
+- Why is the reprojection error commonly used as a calibration quality metric?
+
+- What are the limitations of reprojection-based error measures?
 
 % 2.3.2 Target-Based Camera Calibration
 \subsubsection{Target-Based Camera Calibration}
-% Checkerboard-based calibration (OpenCV)
+
+- What is target-based camera calibration?
+
+- Why are calibration targets (e.g. checkerboards) used?
+
+- How does checkerboard-based calibration work in principle?
+
+- What assumptions are made about the scene and camera setup?
+
+- What are the strengths and limitations of target-based calibration?
 
 % 2.3.3 Bundle Adjustment
 \subsubsection{Bundle Adjustment}
-% Joint optimization of camera parameters and structure
+
+- What is bundle adjustment in the context of camera calibration?
+
+- Which parameters are jointly optimized during bundle adjustment?
+
+- Why does bundle adjustment improve calibration accuracy?
+
+- How is bundle adjustment formulated as an optimization problem?
+
+- What are practical challenges of bundle adjustment in multi-camera systems?
 
 % 2.4 Light Field Cameras Systems
 \subsection{Light Field Camera Systems}

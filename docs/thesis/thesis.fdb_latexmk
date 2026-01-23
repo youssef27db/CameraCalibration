@@ -1,13 +1,13 @@
 # Fdb version 4
-["bibtex thesis"] 1769169533.09892 "thesis.aux" "thesis.bbl" "thesis" 1769169537.07939 0
-  "./references.bib" 1769094079 11701 04c50b29b5336f7f6a9fbb969a495ed9 ""
+["bibtex thesis"] 1769182060.26219 "thesis.aux" "thesis.bbl" "thesis" 1769182077.97892 0
+  "./references.bib" 1769179688 12550 32a3b6e07cad052cc4005e32d8116be1 ""
   "C:/Users/Youssef/AppData/Local/Programs/MiKTeX/bibtex/bst/natbib/plainnat.bst" 1284455456 26816 ffe5423d2019860bad9f54bc402fac15 ""
-  "thesis.aux" 1769169535 24788 1579dd918479cbd01a847130d701bd04 "pdflatex"
+  "thesis.aux" 1769182076 26523 9ad822cdcf9f9d366b1e422f5b9711f4 "pdflatex"
   (generated)
   "thesis.bbl"
   "thesis.blg"
   (rewritten before read)
-["pdflatex"] 1769169533.68026 "c:/Users/Youssef/Desktop/UNI/S7/Bachelorarbeit/Data-Driven-Camera-Calibration/docs/thesis/thesis.tex" "thesis.pdf" "thesis" 1769169537.08017 0
+["pdflatex"] 1769182074.955 "c:/Users/Youssef/Desktop/UNI/S7/Bachelorarbeit/Data-Driven-Camera-Calibration/docs/thesis/thesis.tex" "thesis.pdf" "thesis" 1769182077.97977 0
   "C:/Users/Youssef/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1769097630 80909 eab91d9745dd2edfd62a31d53cd5fe15 ""
   "C:/Users/Youssef/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1766607759 13334480 b92fcb493ecc752ef4c30cc4c325b5bb ""
   "C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ec.enc" 1256929440 2375 baa924870cfb487815765f9094cf3728 ""
@@ -25,6 +25,8 @@
   "C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/tfm/public/lm/ec-lmbx12.tfm" 1256929440 12088 d750ac78274fa7c9f73ba09914c04f8a ""
   "C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/tfm/public/lm/ec-lmr12.tfm" 1256929440 12092 7b1546e2d096cfd5dcbd4049b0b1ec2e ""
   "C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/tfm/public/lm/ec-lmr17.tfm" 1256929440 12156 ca1ae6a3c8564e89597f1f993fba1608 ""
+  "C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/tfm/public/lm/ec-lmr6.tfm" 1256929440 12048 c1068d0f4772be9b0ec447692e1d6d82 ""
+  "C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/tfm/public/lm/ec-lmr8.tfm" 1256929440 12064 9b9ade9f64cb32ce1d9a88d21fbd5c2d ""
   "C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/tfm/public/lm/ec-lmri12.tfm" 1256929440 17144 271aaf9ebb339934b04110dc5211fba4 ""
   "C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/tfm/public/lm/ec-lmss12.tfm" 1256929440 11232 955a7245396175d9219648eadc654ac9 ""
   "C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/tfm/public/lm/ec-lmssbx10.tfm" 1256929440 11168 06d87f5698fd1b642d96449b7c8d90b0 ""
@@ -164,13 +166,16 @@
   "C:/Users/Youssef/AppData/Local/Programs/MiKTeX/tex/latex/trimspaces/trimspaces.sty" 1253169183 1380 971a51b00a14503ddf754cab24c3f209 ""
   "C:/Users/Youssef/AppData/Local/Programs/MiKTeX/tex/latex/url/url.sty" 1388490452 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
   "C:/Users/Youssef/AppData/Local/Programs/MiKTeX/tex/latex/xcolor/xcolor.sty" 1729265222 55384 b454dec21c2d9f45ec0b793f0995b992 ""
-  "c:/Users/Youssef/Desktop/UNI/S7/Bachelorarbeit/Data-Driven-Camera-Calibration/docs/thesis/thesis.tex" 1769169528 13208 12793b6ba0758a7615d8f704620432b6 ""
+  "c:/Users/Youssef/Desktop/UNI/S7/Bachelorarbeit/Data-Driven-Camera-Calibration/docs/thesis/thesis.tex" 1769182074 17654 eb97d387e257696ba2830681e0496665 ""
   "figures/Pinhole-Camera.png" 1769093567 15984 36a3698864eadca0397b3f9a23806a6d ""
-  "thesis.aux" 1769169535 24788 1579dd918479cbd01a847130d701bd04 "pdflatex"
-  "thesis.bbl" 1769169533 1305 f069cdb639a512c678c6ffd76176ff36 "bibtex thesis"
-  "thesis.lof" 1769169535 250 b068301a7b02bb8993c714b43016fb47 "pdflatex"
-  "thesis.tex" 1769169528 13208 12793b6ba0758a7615d8f704620432b6 ""
-  "thesis.toc" 1769169535 4502 dada5b58f6c154f9c5595ea62777d525 "pdflatex"
+  "figures/Radial-Distortion.png" 1769174021 178122 aab6a45e11af0895e2f0a6af87527eee ""
+  "figures/Tangential-Distortion.png" 1769176646 6600 744b57483dba1eb8e4e06432ffb42612 ""
+  "figures/Tangential-Distortion2.png" 1769179199 44429 a62f9c4378736f52f6b132086aed0a39 ""
+  "thesis.aux" 1769182076 26523 9ad822cdcf9f9d366b1e422f5b9711f4 "pdflatex"
+  "thesis.bbl" 1769182060 2384 149c666b91d10ef73c4d5bface0d94d2 "bibtex thesis"
+  "thesis.lof" 1769182076 584 23cc3a90bba2a3c94ae1c1680815c18c "pdflatex"
+  "thesis.tex" 1769182074 17654 eb97d387e257696ba2830681e0496665 ""
+  "thesis.toc" 1769182076 4502 7632405f8e972d8bb9d6ccb9a058c133 "pdflatex"
   (generated)
   "thesis.aux"
   "thesis.lof"

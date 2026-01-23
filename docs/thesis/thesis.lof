@@ -1,3 +1,5 @@
 \babel@toc {english}{}\relax 
 \contentsline {figure}{\numberline {1}{\ignorespaces Illustration of the pinhole camera model. Source: \cite {MathWorksCameraCalibration}.}}{2}{figure.1}%
+\contentsline {figure}{\numberline {2}{\ignorespaces Comparison of different types of radial distortion. Source: \cite {opencv_calib3d_docs}.}}{3}{figure.2}%
+\contentsline {figure}{\numberline {3}{\ignorespaces Visualization of tangential distortion. Source: \cite {MathWorksCameraCalibration}, \cite {Lin2024Stereo}.}}{4}{figure.3}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

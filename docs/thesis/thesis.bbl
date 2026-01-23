@@ -1,9 +1,17 @@
-\begin{thebibliography}{4}
+\begin{thebibliography}{7}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
   \providecommand{\doi}[1]{doi: #1}\else
   \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[{Elsevier}(2022)]{RadialDistortion}
+{Elsevier}.
+\newblock Radial distortion.
+\newblock
+  \url{https://www.sciencedirect.com/topics/computer-science/radial-distortion},
+  2022.
+\newblock Definition from ScienceDirect Topics: Computer Science.
 
 \bibitem[{Elsevier}(2024)]{ScienceDirectLensDistortion}
 {Elsevier}.
@@ -18,11 +26,26 @@ Fei-Fei Li et~al.
   \url{https://web.stanford.edu/class/cs231a/course_notes/01-camera-models.pdf},
   2020.
 
+\bibitem[Lin et~al.(2024)Lin, Chen, Xiao, and Chang]{Lin2024Stereo}
+Shih-Hao Lin, En-Tze Chen, Jia-Jun Xiao, and Ching-Yuan Chang.
+\newblock Stereo digital image correlation (3d-dic) for non-contact measurement
+  and refinement of delta robot arm displacement and jerk.
+\newblock \emph{The International Journal of Advanced Manufacturing
+  Technology}, 133\penalty0 (5-6):\penalty0 2809--2822, July 2024.
+\newblock \doi{10.1007/s00170-024-13957-2}.
+\newblock URL \url{https://doi.org/10.1007/s00170-024-13957-2}.
+
 \bibitem[{MathWorks}(2024)]{MathWorksCameraCalibration}
 {MathWorks}.
 \newblock Camera calibration.
 \newblock
   \url{https://de.mathworks.com/help/vision/ug/camera-calibration.html}, 2024.
+
+\bibitem[{OpenCV Developers}(2025)]{opencv_calib3d_docs}
+{OpenCV Developers}.
+\newblock Camera calibration and 3d reconstruction — opencv documentation.
+\newblock OpenCV 4.x Documentation, calib3d module, 2025.
+\newblock URL \url{https://docs.opencv.org/4.x/d9/d0c/group__calib3d.html}.
 
 \bibitem[Ricolfe‐Viala and S{\'a}nchez‐Salmer{\'o}n(2010)]{ricolfe2010lens}
 Carlos Ricolfe‐Viala and Antonio‐Jos{\'e} S{\'a}nchez‐Salmer{\'o}n.
