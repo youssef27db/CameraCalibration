@@ -1,9 +1,16 @@
-\begin{thebibliography}{9}
+\begin{thebibliography}{13}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
   \providecommand{\doi}[1]{doi: #1}\else
   \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[{CamCalib}(2022)]{CamCalibReprojectionError}
+{CamCalib}.
+\newblock The reprojection error.
+\newblock \url{https://www.camcalib.io/post/what-is-the-reprojection-error},
+  2022.
+\newblock CamCalib blog, accessed 2026-01-21.
 
 \bibitem[{Elsevier}(2022)]{RadialDistortion}
 {Elsevier}.
@@ -18,6 +25,23 @@
 \newblock Lens distortion.
 \newblock
   \url{https://www.sciencedirect.com/topics/engineering/lens-distortion}, 2024.
+
+\bibitem[Hartley and Zisserman(2003)]{Hartley2003}
+Richard Hartley and Andrew Zisserman.
+\newblock \emph{Multiple View Geometry in Computer Vision}.
+\newblock Cambridge University Press, Cambridge, UK, 2nd edition, 2003.
+\newblock ISBN 0521540518.
+\newblock URL
+  \url{http://www.r-5.org/files/books/computers/algo-list/image-processing/vision/Richard_Hartley_Andrew_Zisserman-Multiple_View_Geometry_in_Computer_Vision-EN.pdf}.
+
+\bibitem[Huang et~al.(2016)Huang, Liu, Liu, and Jian]{Huang2016Camera}
+Jiachun Huang, Shaoli Liu, Jianhua Liu, and Zehua Jian.
+\newblock Camera calibration results: Reprojection error and relative
+  positions.
+\newblock \emph{Scientific Reports}, 2016.
+\newblock URL
+  \url{https://www.researchgate.net/figure/Camera-calibration-results-a-Reprojection-error-and-b-relative-positions-of-the_fig9_301715405}.
+\newblock In Fig. 5.
 
 \bibitem[Li et~al.(2020)]{StanfordCS231ACameraModels}
 Fei-Fei Li et~al.
@@ -40,6 +64,12 @@ Shih-Hao Lin, En-Tze Chen, Jia-Jun Xiao, and Ching-Yuan Chang.
 \newblock Camera calibration.
 \newblock
   \url{https://de.mathworks.com/help/vision/ug/camera-calibration.html}, 2024.
+
+\bibitem[{OpenCV Contributors}(2024)]{OpenCV_Calibration}
+{OpenCV Contributors}.
+\newblock Camera calibration with opencv.
+\newblock
+  \url{https://docs.opencv.org/4.x/dc/dbb/tutorial_py_calibration.html}, 2024.
 
 \bibitem[{OpenCV Developers}(2025)]{opencv_calib3d_docs}
 {OpenCV Developers}.

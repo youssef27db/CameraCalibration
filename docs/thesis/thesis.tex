@@ -301,31 +301,56 @@ Camera calibration is required for many tasks in 3D computer vision and photomet
 
 In practice, cameras are often calibrated using targets with known geometric properties. Planar targets, such as checkerboard patterns, are widely used because they are easy to handle and lead to reliable results \cite{888718}. Several images of the target are captured from different viewpoints and orientations. Based on these images, the camera parameters can be estimated with relatively small calibration errors. For this reason, target-based calibration methods are commonly used in many computer vision applications.
 
-% 2.3.1 Calibration Parameters and Error Metrics
-\subsubsection{Calibration Parameters and Error Metrics}
-
-- What is camera calibration and which parameters are estimated?
-
-- How are intrinsic and extrinsic parameters defined and interpreted?
-
-- What is the reprojection error and how is it computed?
-
-- Why is the reprojection error commonly used as a calibration quality metric?
-
-- What are the limitations of reprojection-based error measures?
-
-% 2.3.2 Target-Based Camera Calibration
+% 2.3.1 Target-Based Camera Calibration
 \subsubsection{Target-Based Camera Calibration}
 
-- What is target-based camera calibration?
+There are various approaches for target-based camera calibration. One of the most common methods uses a checkerboard pattern, as mentioned before. The checkerboard consists of a regular grid of black and white squares with known dimensions, as shown in \autoref{fig:checkerboard}.
 
-- Why are calibration targets (e.g. checkerboards) used?
+\vspace{0.2cm}
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.35\textwidth]{figures/checkerboard.png}
+    \caption{Example of a checkerboard and detected corner points. Source: \cite{OpenCV_Calibration}.}
+    \label{fig:checkerboard}
+\end{figure}
 
-- How does checkerboard-based calibration work in principle?
+During the calibration process, control points are extracted from the images. In the case of a checkerboard, these control points correspond to the corner points of the squares \cite{song2025camera}. The positions of these corners are known in the coordinate system of the calibration target. By capturing multiple images of the checkerboard from different angles and distances, a set of 2D image points can be obtained that correspond to the known 3D points of the target. Based on these point correspondences, an optimization problem can be formulated to estimate the intrinsic and extrinsic camera parameters as well as the lens distortion coefficients \cite{888718}.
+\newline
 
-- What assumptions are made about the scene and camera setup?
+This calibration approach is implemented in widely used computer vision libraries such as OpenCV \cite{OpenCV_Calibration}. It can be applied to
+single-camera setups and multi-camera systems. Besides checkerboards, other types of calibration targets exist, for example circular dot patterns \cite{song2025camera}. In some cases, these patterns can achieve higher accuracy, especially when the image quality is low. However, they also require physical targets and a manual calibration setup.
+\newline
 
-- What are the strengths and limitations of target-based calibration?
+The main limitations of target-based calibration methods are the required manual placement of the target and the need to capture images with different poses. In addition, the calibration accuracy depends on factors such as the quality of the corner detection, the number of images used, and the diversity of viewpoints during data acquisition \cite{888718}. Despite these limitations, target-based calibration remains a standard method in many computer vision applications due to its simplicity and reliable performance.
+
+% 2.3.2 Calibration Parameters and Error Metrics
+\subsubsection{Calibration Parameters and Error Metrics}
+
+To evaluate the quality of a camera calibration, different error metrics are used. These metrics describe how well the estimated camera parameters fit the observed image data. In practice, this is done by comparing detected image points with points that are projected using the calibrated camera model. The most common metric is the reprojection error \cite{MathWorksCameraCalibration}.
+
+\vspace{0.2cm}
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.5\textwidth]{figures/reprojection_error.png}
+    \caption{Visualization of reprojection error. Source: \cite{CamCalibReprojectionError}.}
+    \label{fig:reprojection_error}
+\end{figure}
+
+After a calibration, known 3D points are projected back onto the image plane. The reprojection error measures the distance between the observed image points and the corresponding projected points. It is usually computed as the average Euclidean distance and is given in pixel units \cite{CamCalibReprojectionError}. It can be defined as
+
+\begin{align}
+e = \frac{1}{N} \sum_{i=0}^{N-1} \| \mathbf{p}_i - \mathbf{q}_i \|_2 .
+\label{eq:7}
+\end{align}
+
+Here, $\mathbf{p}_i$ represents the observed feature points in the image, while $\mathbf{q}_i$ denotes the projected points obtained from the calibrated camera model. In general, a smaller reprojection error indicates a better calibration. What is considered a good value depends on the application, but for accurate calibrations the reprojection error is often between 0.1 and 0.5 pixels \cite{Huang2016Camera}.
+\newline
+
+Another commonly used measure is the root mean square (RMS) error \cite{Hartley2003}. It summarizes the reprojection error over all calibration points and is computed as:
+
+\begin{align} \epsilon_{\mathrm{res}} = \left( \frac{1}{2n} \sum_{i=1}^{n} \big\| \mathbf{p}'_i - \mathbf{q}'_i \big\|_2^2 \right)^{1/2} \label{eq:8} \end{align}
+
+The RMS error provides a single value that describes the overall calibration accuracy and is often used to compare different calibration results.
 
 % 2.3.3 Bundle Adjustment
 \subsubsection{Bundle Adjustment}
