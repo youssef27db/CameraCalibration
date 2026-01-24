@@ -290,16 +290,16 @@ to the image sensor, resulting in a displacement of image points.
 Although tangential distortion is typically less pronounced than radial distortion,
 it can still negatively affect the camera calibration accuracy if not properly modeled.
 
-% Chapter 2.3 Camera Calibration
+% 2.3 Camera Calibration
 \subsection{Camera Calibration}
 
-- What is camera calibration in general terms?
+The goal of camera calibration, also known as camera resectioning, is to estimate the parameters of a camera model. These parameters include the intrinsic parameters, the extrinsic parameters, and the lens distortion coefficients \cite{MathWorksCameraCalibration}. Knowing these parameters makes it possible to correct distortions in the recorded images and to perform metric measurements in the scene, for example to estimate object sizes or distances from image data.
+\newline
 
-- Why is camera calibration a fundamental prerequisite for accurate computer vision?
+Camera calibration is required for many tasks in 3D computer vision and photometry. Applications such as depth estimation, 3D reconstruction, or pose estimation rely on a precise mapping from 3D world coordinates to 2D image coordinates \cite{song2025camera}. If the calibration is inaccurate, errors can propagate through the processing pipeline and reduce the quality of the final results.
+\newline
 
-- Why do we need a camera calibration
-
-- How does camera calibration relate to the previous sections (camera model and distortion)?
+In practice, cameras are often calibrated using targets with known geometric properties. Planar targets, such as checkerboard patterns, are widely used because they are easy to handle and lead to reliable results \cite{888718}. Several images of the target are captured from different viewpoints and orientations. Based on these images, the camera parameters can be estimated with relatively small calibration errors. For this reason, target-based calibration methods are commonly used in many computer vision applications.
 
 % 2.3.1 Calibration Parameters and Error Metrics
 \subsubsection{Calibration Parameters and Error Metrics}

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.12.24)  23 JAN 2026 16:27
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.12.24)  24 JAN 2026 12:10
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -716,7 +716,7 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.47 ...umberline {6.2}Outlook}{9}{subsection.6.2}
+l.47 ...mberline {6.2}Outlook}{10}{subsection.6.2}
                                                   % [2
 
 
@@ -785,15 +785,25 @@ File: figures/Tangential-Distortion2.png Graphic file (type png)
 <use figures/Tangential-Distortion2.png>
 Package pdftex.def Info: figures/Tangential-Distortion2.png  used on input line 261.
 (pdftex.def)             Requested size: 135.89174pt x 121.10193pt.
- [4 <./figures/Tangential-Distortion.png> <./figures/Tangential-Distortion2.png>] [5] [6
+ [4 <./figures/Tangential-Distortion.png> <./figures/Tangential-Distortion2.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 296--298
 
-] [7
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 299--301
+
+ []
+
+[5] [6] [7
 
 ] [8
 
 ] [9
 
 ] [10
+
+] [11
 
 
 ] (thesis.bbl
@@ -815,7 +825,7 @@ Underfull \hbox (badness 1331) in paragraph at lines 51--57
 \T1/lmr/m/n/12 els eval-u-a-tion.  \T1/lmr/m/it/12 Ap-plied Op-tics\T1/lmr/m/n/12 , 49(30):5914--5928, 2010.  doi: $10 . 1364 / AO .
  []
 
-) [11
+) [12
 
 
 ] (thesis.aux)
@@ -825,17 +835,17 @@ L3 programming layer <2025-11-06>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 20021 strings out of 467871
- 360604 string characters out of 5417407
+ 20030 strings out of 467871
+ 360749 string characters out of 5417407
  931729 words of memory out of 5000000
- 48484 multiletter control sequences out of 15000+600000
+ 48490 multiletter control sequences out of 15000+600000
  681073 words of font info for 73 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  108i,11n,107p,11323b,665s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmex10.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi12.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi8.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr8.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri12.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmssbx10.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt12.pfb>
-Output written on thesis.pdf (16 pages, 515687 bytes).
+Output written on thesis.pdf (17 pages, 522849 bytes).
 PDF statistics:
- 463 PDF objects out of 1000 (max. 8388607)
- 81 named destinations out of 1000 (max. 500000)
+ 475 PDF objects out of 1000 (max. 8388607)
+ 84 named destinations out of 1000 (max. 500000)
  409 words of extra memory for PDF output out of 10000 (max. 10000000)
 

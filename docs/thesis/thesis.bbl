@@ -1,4 +1,4 @@
-\begin{thebibliography}{7}
+\begin{thebibliography}{9}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -54,5 +54,20 @@ Carlos Ricolfe‐Viala and Antonio‐Jos{\'e} S{\'a}nchez‐Salmer{\'o}n.
 \newblock \doi{10.1364/AO.49.005914}.
 \newblock URL
   \url{https://www.researchgate.net/publication/47510646_Lens_distortion_models_evaluation}.
+
+\bibitem[Song et~al.(2025)Song, Lee, Lim, and Kim]{song2025camera}
+Chaehyeon Song, Dongjae Lee, Jongwoo Lim, and Ayoung Kim.
+\newblock Camera calibration via circular patterns: A comprehensive framework
+  with measurement uncertainty and unbiased projection model.
+\newblock \emph{arXiv preprint arXiv:2506.16842}, 2025.
+\newblock URL \url{https://arxiv.org/abs/2506.16842}.
+
+\bibitem[Zhang(2000)]{888718}
+Z.~Zhang.
+\newblock A flexible new technique for camera calibration.
+\newblock \emph{IEEE Transactions on Pattern Analysis and Machine
+  Intelligence}, 22\penalty0 (11):\penalty0 1330--1334, 2000.
+\newblock \doi{10.1109/34.888718}.
+\newblock URL \url{https://ieeexplore.ieee.org/document/888718}.
 
 \end{thebibliography}
