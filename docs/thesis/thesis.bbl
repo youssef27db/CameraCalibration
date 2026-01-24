@@ -1,4 +1,4 @@
-\begin{thebibliography}{13}
+\begin{thebibliography}{16}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -11,6 +11,14 @@
 \newblock \url{https://www.camcalib.io/post/what-is-the-reprojection-error},
   2022.
 \newblock CamCalib blog, accessed 2026-01-21.
+
+\bibitem[Cremers(2019)]{cremers2019bundleadjustment}
+Daniel Cremers.
+\newblock Bundle adjustment \& nonlinear optimization.
+\newblock
+  \url{https://cvg.cit.tum.de/_media/teaching/ss2019/mvg2019/material/multiviewgeometry7.pdf},
+  2019.
+\newblock Vorlesungsunterlage, Technische Universit\"at M\"unchen.
 
 \bibitem[{Elsevier}(2022)]{RadialDistortion}
 {Elsevier}.
@@ -42,6 +50,14 @@ Jiachun Huang, Shaoli Liu, Jianhua Liu, and Zehua Jian.
 \newblock URL
   \url{https://www.researchgate.net/figure/Camera-calibration-results-a-Reprojection-error-and-b-relative-positions-of-the_fig9_301715405}.
 \newblock In Fig. 5.
+
+\bibitem[Kumar(2024)]{Baeldung2024BundleAdjustment}
+Dhiraj Kumar.
+\newblock What is bundle adjustment?
+\newblock Baeldung on Computer Science, 2024.
+\newblock URL
+  \url{https://www.baeldung.com/cs/computer-vision-bundle-adjustment}.
+\newblock Last updated March 18, 2024.
 
 \bibitem[Li et~al.(2020)]{StanfordCS231ACameraModels}
 Fei-Fei Li et~al.
@@ -91,6 +107,19 @@ Chaehyeon Song, Dongjae Lee, Jongwoo Lim, and Ayoung Kim.
   with measurement uncertainty and unbiased projection model.
 \newblock \emph{arXiv preprint arXiv:2506.16842}, 2025.
 \newblock URL \url{https://arxiv.org/abs/2506.16842}.
+
+\bibitem[Triggs et~al.(2000)Triggs, McLauchlan, Hartley, and
+  Fitzgibbon]{Triggs2000BundleAdjustment}
+Bill Triggs, Philip~F. McLauchlan, Richard~I. Hartley, and Andrew~W.
+  Fitzgibbon.
+\newblock Bundle adjustment -- a modern synthesis.
+\newblock In Bill Triggs, Andrew Zisserman, and Richard Szeliski, editors,
+  \emph{Vision Algorithms: Theory and Practice}, volume 1883 of \emph{Lecture
+  Notes in Computer Science}, pages 298--372, London, UK, 2000.
+  Springer-Verlag.
+\newblock \doi{10.1007/3-540-44480-7\_21}.
+\newblock URL
+  \url{https://www.cs.jhu.edu/~misha/ReadingSeminar/Papers/Triggs00.pdf}.
 
 \bibitem[Zhang(2000)]{888718}
 Z.~Zhang.

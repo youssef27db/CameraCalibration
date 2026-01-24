@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.12.24)  24 JAN 2026 14:53
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.12.24)  24 JAN 2026 15:46
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -716,7 +716,7 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.47 ...mberline {6.2}Outlook}{11}{subsection.6.2}
+l.47 ...mberline {6.2}Outlook}{12}{subsection.6.2}
                                                   % [2
 
 
@@ -752,7 +752,7 @@ l.126 \clearpage
                  [1
 
 {C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ts1.enc}]
-<figures/Pinhole-Camera.png, id=150, 412.54124pt x 226.8475pt>
+<figures/Pinhole-Camera.png, id=154, 412.54124pt x 226.8475pt>
 File: figures/Pinhole-Camera.png Graphic file (type png)
 <use figures/Pinhole-Camera.png>
 Package pdftex.def Info: figures/Pinhole-Camera.png  used on input line 143.
@@ -769,18 +769,18 @@ Underfull \hbox (badness 10000) in paragraph at lines 197--200
 
  []
 
-<figures/Radial-Distortion.png, id=174, 950.3505pt x 363.15675pt>
+<figures/Radial-Distortion.png, id=178, 950.3505pt x 363.15675pt>
 File: figures/Radial-Distortion.png Graphic file (type png)
 <use figures/Radial-Distortion.png>
 Package pdftex.def Info: figures/Radial-Distortion.png  used on input line 217.
 (pdftex.def)             Requested size: 362.37569pt x 138.472pt.
 [3 <./figures/Radial-Distortion.png>]
-<figures/Tangential-Distortion.png, id=191, 362.35374pt x 193.72375pt>
+<figures/Tangential-Distortion.png, id=195, 362.35374pt x 193.72375pt>
 File: figures/Tangential-Distortion.png Graphic file (type png)
 <use figures/Tangential-Distortion.png>
 Package pdftex.def Info: figures/Tangential-Distortion.png  used on input line 259.
 (pdftex.def)             Requested size: 271.7835pt x 145.30426pt.
-<figures/Tangential-Distortion2.png, id=192, 237.88875pt x 211.992pt>
+<figures/Tangential-Distortion2.png, id=196, 237.88875pt x 211.992pt>
 File: figures/Tangential-Distortion2.png Graphic file (type png)
 <use figures/Tangential-Distortion2.png>
 Package pdftex.def Info: figures/Tangential-Distortion2.png  used on input line 261.
@@ -795,7 +795,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 299--301
 
  []
 
-<figures/checkerboard.png, id=214, 340.27126pt x 363.15675pt>
+<figures/checkerboard.png, id=218, 340.27126pt x 363.15675pt>
 File: figures/checkerboard.png Graphic file (type png)
 <use figures/checkerboard.png>
 Package pdftex.def Info: figures/checkerboard.png  used on input line 312.
@@ -810,7 +810,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 320--323
 
  []
 
-<figures/reprojection_error.png, id=230, 1023.825pt x 850.17625pt>
+<figures/reprojection_error.png, id=234, 1023.825pt x 850.17625pt>
 File: figures/reprojection_error.png Graphic file (type png)
 <use figures/reprojection_error.png>
 Package pdftex.def Info: figures/reprojection_error.png  used on input line 334.
@@ -820,15 +820,25 @@ Underfull \hbox (badness 10000) in paragraph at lines 346--348
 
  []
 
-[7] [8
 
-] [9
+Underfull \hbox (badness 10000) in paragraph at lines 358--360
+
+ []
+
+<figures/bundle_adjustement.png, id=249, 752.8125pt x 421.575pt>
+File: figures/bundle_adjustement.png Graphic file (type png)
+<use figures/bundle_adjustement.png>
+Package pdftex.def Info: figures/bundle_adjustement.png  used on input line 366.
+(pdftex.def)             Requested size: 249.13371pt x 139.51257pt.
+[7 <./figures/bundle_adjustement.png>] [8] [9
 
 ] [10
 
 ] [11
 
 ] [12
+
+] [13
 
 
 ] (thesis.bbl
@@ -841,66 +851,76 @@ Underfull \hbox (badness 7925) in paragraph at lines 9--14
  []
 
 
-Underfull \hbox (badness 6910) in paragraph at lines 16--22
+Underfull \hbox (badness 10000) in paragraph at lines 16--22
+\T1/lmtt/m/n/12 tum . de / _media / teaching / ss2019 / mvg2019 / material / multiviewgeometry7 .
+ []
+
+
+Underfull \hbox (badness 6910) in paragraph at lines 24--30
 []\T1/lmr/m/n/12 Elsevier.  Ra-dial dis-tor-tion.  [][]$\T1/lmtt/m/n/12 https : / / www . sciencedirect . com / topics /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 24--28
+Underfull \hbox (badness 10000) in paragraph at lines 32--36
 []\T1/lmr/m/n/12 Elsevier.  Lens dis-tor-tion.  [][]$\T1/lmtt/m/n/12 https : / / www . sciencedirect . com / topics /
  []
 
 
-Underfull \hbox (badness 1028) in paragraph at lines 30--36
+Underfull \hbox (badness 1028) in paragraph at lines 38--44
 \T1/lmr/m/n/12 0521540518.  URL [][]$\T1/lmtt/m/n/12 http : / / www . r-[]5 . org / files / books / computers / algo-[]list /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 30--36
+Underfull \hbox (badness 10000) in paragraph at lines 38--44
 \T1/lmtt/m/n/12 image-[]processing / vision / Richard _ Hartley _ Andrew _ Zisserman-[]Multiple _
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 38--45
+Underfull \hbox (badness 10000) in paragraph at lines 46--53
 []\T1/lmr/m/n/12 Jiachun Huang, Shaoli Liu, Jian-hua Liu, and Ze-hua Jian.  Cam-
  []
 
 
-Underfull \hbox (badness 3758) in paragraph at lines 38--45
+Underfull \hbox (badness 3758) in paragraph at lines 46--53
 \T1/lmr/m/n/12 era cal-i-bra-tion re-sults: Re-pro-jec-tion er-ror and rel-a-tive po-si-tions.  \T1/lmr/m/it/12 Sci-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 38--45
+Underfull \hbox (badness 10000) in paragraph at lines 46--53
 \T1/lmr/m/it/12 en-tific Re-ports\T1/lmr/m/n/12 , 2016.  URL [][]$\T1/lmtt/m/n/12 https : / / www . researchgate . net / figure /
  []
 
 
-Overfull \hbox (70.68524pt too wide) in paragraph at lines 38--45
+Overfull \hbox (70.68524pt too wide) in paragraph at lines 46--53
 \T1/lmtt/m/n/12 Camera-[]calibration-[]results-[]a-[]Reprojection-[]error-[]and-[]b-[]relative-[]positions-[]of-[]the _
  []
 
-[13
+
+Underfull \hbox (badness 10000) in paragraph at lines 55--61
+\T1/lmr/m/n/12 URL [][]$\T1/lmtt/m/n/12 https : / / www . baeldung . com / cs / computer-[]vision-[]bundle-[]adjustment$[][]\T1/lmr/m/n/12 .
+ []
+
+[14
 
 
-]) [14] (thesis.aux)
+]) [15] (thesis.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2025-11-06>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 20076 strings out of 467871
- 361787 string characters out of 5417407
+ 20098 strings out of 467871
+ 362494 string characters out of 5417407
  931729 words of memory out of 5000000
- 48523 multiletter control sequences out of 15000+600000
+ 48540 multiletter control sequences out of 15000+600000
  689901 words of font info for 76 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  108i,13n,107p,11323b,665s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmex10.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi12.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi8.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr8.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri12.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmssbx10.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy8.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt12.pfb>
-Output written on thesis.pdf (19 pages, 1083750 bytes).
+Output written on thesis.pdf (20 pages, 1117496 bytes).
 PDF statistics:
- 534 PDF objects out of 1000 (max. 8388607)
- 94 named destinations out of 1000 (max. 500000)
- 419 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 560 PDF objects out of 1000 (max. 8388607)
+ 99 named destinations out of 1000 (max. 500000)
+ 424 words of extra memory for PDF output out of 10000 (max. 10000000)
 

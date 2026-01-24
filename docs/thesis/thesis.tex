@@ -355,15 +355,20 @@ The RMS error provides a single value that describes the overall calibration acc
 % 2.3.3 Bundle Adjustment
 \subsubsection{Bundle Adjustment}
 
-- What is bundle adjustment in the context of camera calibration?
+Bundle adjustment is a method for improving a 3D reconstruction by refining both the positions of 3D points and the camera parameters at the same time \cite{Triggs2000BundleAdjustment}. The name comes from the “bundles” of light rays from the 3D points to the cameras, which are adjusted together to make the reconstruction more accurate. The parameters that are optimized together usually include the 3D coordinates of the points, the extrinsic parameters, and sometimes the intrinsic parameters \cite{cremers2019bundleadjustment}.
+\newline
 
-- Which parameters are jointly optimized during bundle adjustment?
+This joint optimization improves calibration accuracy because it ensures that all cameras and points are consistent with each other. As a result, projection errors are reduced and small misalignments are corrected that would remain if cameras or points were adjusted separately \cite{Triggs2000BundleAdjustment}. This idea is illustrated in \autoref{fig:bundle_adjustment}.
 
-- Why does bundle adjustment improve calibration accuracy?
+\vspace{0.2cm}
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.55\textwidth]{figures/bundle_adjustement.png}
+    \caption{Visual representation of bundle adjustment. Source: \cite{Baeldung2024BundleAdjustment}.}
+    \label{fig:bundle_adjustment}
+\end{figure}
 
-- How is bundle adjustment formulated as an optimization problem?
-
-- What are practical challenges of bundle adjustment in multi-camera systems?
+Mathematically, bundle adjustment is formulated as an optimization problem that minimizes the reprojection error. This optimization is usually solved using nonlinear least squares methods and takes advantage of the fact that the problem structure is largely sparse \cite{cremers2019bundleadjustment}.
 
 % 2.4 Light Field Cameras Systems
 \subsection{Light Field Camera Systems}
