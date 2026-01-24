@@ -1,4 +1,4 @@
-\begin{thebibliography}{16}
+\begin{thebibliography}{18}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -33,6 +33,20 @@ Daniel Cremers.
 \newblock Lens distortion.
 \newblock
   \url{https://www.sciencedirect.com/topics/engineering/lens-distortion}, 2024.
+
+\bibitem[Fleith et~al.(2024)Fleith, Ahmed, Cremers, and Zeller]{LiFCal}
+Aymeric Fleith, Doaa Ahmed, Daniel Cremers, and Niclas Zeller.
+\newblock Lifcal: Online light field camera calibration via bundle adjustment.
+\newblock \url{https://arxiv.org/abs/2408.11682}, 2024.
+
+\bibitem[{German Aerospace Center (DLR) – Institute of Robotics and
+  Mechatronics}(2026)]{DLR2026LightFieldCameras}
+{German Aerospace Center (DLR) – Institute of Robotics and Mechatronics}.
+\newblock Light field cameras.
+\newblock DLR Research Expertise: 3D Perception, 2026.
+\newblock URL
+  \url{https://www.dlr.de/en/rm/research/expertise/3d-perception/light-field-cameras}.
+\newblock Accessed January 24, 2026.
 
 \bibitem[Hartley and Zisserman(2003)]{Hartley2003}
 Richard Hartley and Andrew Zisserman.

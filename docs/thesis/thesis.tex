@@ -373,13 +373,37 @@ Mathematically, bundle adjustment is formulated as an optimization problem that 
 % 2.4 Light Field Cameras Systems
 \subsection{Light Field Camera Systems}
 
+A standard camera captures a 2D projection of the 3D world. Light field cameras, on the other hand, have the ability to capture more information. They record not only the intensity of light rays but also their direction \cite{DLR2026LightFieldCameras}. This property allows the creation of accurate depth maps and refocus the image after it has been taken \cite{LiFCal}. Therefore light field cameras are growing in importance for applications in computer vision, robotics, augmented reality, and other applications.
+\newline
+
+The four-dimensional nature of light fields means that their processing currently needs relatively high computational resources \cite{DLR2026LightFieldCameras}. However, the evolution of hardware and algorithms is making light field cameras more practical for real-world applications. 
+\newline
+
+There are mainly two different types of light field camera systems: multi-camera arrays and micro-lens-array-based cameras. Each type has its own advantages and disadvantages, which will be discussed in the following sections.
+
 % 2.4.1 Multi-Camera Light Field Systems
 \subsubsection{Multi-Camera Light Field Systems}
 % Camera arrays (e.g. cross-shaped setup with 13 cameras)
 
+How is a multi-camera light field system structured?
+
+How do multiple cameras sample the light field?
+
+What are the main advantages of camera arrays?
+
+What are the main challenges of multi-camera setups?
+
 % 2.4.2 Micro-Lens-Array-Based Light Field Cameras
 \subsubsection{Micro-Lens-Array-Based Light Field Cameras}
 % MLA-based systems as used in LiFCal
+
+How does a micro-lens array capture a light field?
+
+How is spatial and angular information encoded?
+
+What are the main advantages of MLA-based cameras?
+
+What are the main limitations compared to camera arrays?
 
 % 2.5 State of the Art in Light Field Camera Calibration
 \subsection{State of the Art in Light Field Camera Calibration}
