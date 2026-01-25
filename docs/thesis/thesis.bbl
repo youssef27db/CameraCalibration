@@ -1,4 +1,4 @@
-\begin{thebibliography}{18}
+\begin{thebibliography}{20}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -122,6 +122,12 @@ Chaehyeon Song, Dongjae Lee, Jongwoo Lim, and Ayoung Kim.
 \newblock \emph{arXiv preprint arXiv:2506.16842}, 2025.
 \newblock URL \url{https://arxiv.org/abs/2506.16842}.
 
+\bibitem[{Stanford Computer Graphics Laboratory}(2011)]{StanfordArrayProject}
+{Stanford Computer Graphics Laboratory}.
+\newblock The stanford multi-camera array.
+\newblock Project page, Stanford University, 2011.
+\newblock URL \url{https://graphics.stanford.edu/projects/array/}.
+
 \bibitem[Triggs et~al.(2000)Triggs, McLauchlan, Hartley, and
   Fitzgibbon]{Triggs2000BundleAdjustment}
 Bill Triggs, Philip~F. McLauchlan, Richard~I. Hartley, and Andrew~W.
@@ -134,6 +140,16 @@ Bill Triggs, Philip~F. McLauchlan, Richard~I. Hartley, and Andrew~W.
 \newblock \doi{10.1007/3-540-44480-7\_21}.
 \newblock URL
   \url{https://www.cs.jhu.edu/~misha/ReadingSeminar/Papers/Triggs00.pdf}.
+
+\bibitem[Xu et~al.(2015)Xu, Maeno, Nagahara, and ichiro
+  Taniguchi]{multi_camera_calibration}
+Yichao Xu, Kazuki Maeno, Hajime Nagahara, and Rin ichiro Taniguchi.
+\newblock Camera array calibration for light field acquisition.
+\newblock \emph{Frontiers of Computer Science}, 9\penalty0 (5):\penalty0
+  691--702, 2015.
+\newblock \doi{10.1007/s11704-015-4237-4}.
+\newblock URL
+  \url{https://link.springer.com/article/10.1007/s11704-015-4237-4}.
 
 \bibitem[Zhang(2000)]{888718}
 Z.~Zhang.

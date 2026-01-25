@@ -9,6 +9,7 @@
 \usepackage{amsmath,amssymb}
 \usepackage{graphicx}
 \usepackage{svg}
+\usepackage{xurl}
 \usepackage{pdfpages}
 \usepackage[colorlinks=true, linkcolor=black, urlcolor=blue, citecolor=black]{hyperref}
 \usepackage{listings}
@@ -385,13 +386,19 @@ There are mainly two different types of light field camera systems: multi-camera
 \subsubsection{Multi-Camera Light Field Systems}
 % Camera arrays (e.g. cross-shaped setup with 13 cameras)
 
-How is a multi-camera light field system structured?
+Multi-camera arrays are one way to capture light fields. This type of system is structured by arranging multiple individual cameras in a geometric configuration \cite{multi_camera_calibration}. Each camera captures a different viewpoint of the scene, enabling the system to record a 4D light field. In practice, there are different approaches to arranging the cameras. For example, in \cite{StanfordArrayProject}, an array of 128 cameras in a square grid is used, while in other works cross-shaped structures with fewer cameras are employed \cite{multi_camera_calibration}, as shown in \autoref{fig:multi_camera_array}.
 
-How do multiple cameras sample the light field?
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.7\textwidth]{figures/multi_camera_array.png}
+    \caption{Representation of a multi-camera system. Source: \cite{multi_camera_calibration}.}
+    \label{fig:multi_camera_array}
+\end{figure}
 
-What are the main advantages of camera arrays?
+Besides the advantages of a multi-camera setup, such as improved depth accuracy and refocusing capabilities, there are also challenges. The calibration of such systems is more complex and requires higher computational effort due to the larger number of cameras involved \cite{multi_camera_calibration}.
+\newline
 
-What are the main challenges of multi-camera setups?
+It is also essential to keep the cameras properly aligned and synchronized. Even small errors in alignment or timing can cause artifacts or undesired results in the final image. Therefore, multi-camera light field systems require a very precise setup and calibration to work as intended.
 
 % 2.4.2 Micro-Lens-Array-Based Light Field Cameras
 \subsubsection{Micro-Lens-Array-Based Light Field Cameras}

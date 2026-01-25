@@ -133,6 +133,10 @@ INPUT C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex\generic\pgf\systemlayer
 INPUT C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex\generic\pgf\systemlayer\pgfsysprotocol.code.tex
 INPUT C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex\generic\pgf\systemlayer\pgfsysprotocol.code.tex
 INPUT C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex\generic\pgf\systemlayer\pgfsysprotocol.code.tex
+INPUT C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex\latex\xurl\xurl.sty
+INPUT C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex\latex\xurl\xurl.sty
+INPUT C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex\latex\url\url.sty
+INPUT C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex\latex\url\url.sty
 INPUT C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex\latex\pdfpages\pdfpages.sty
 INPUT C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex\latex\pdfpages\pdfpages.sty
 INPUT C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex\latex\base\ifthen.sty
@@ -174,8 +178,6 @@ INPUT C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex\generic\intcalc\intcalc
 INPUT C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex\latex\hyperref\puenc.def
 INPUT C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex\latex\hyperref\puenc.def
 INPUT C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex\latex\hyperref\puenc.def
-INPUT C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex\latex\url\url.sty
-INPUT C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex\latex\url\url.sty
 INPUT C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex\generic\bitset\bitset.sty
 INPUT C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex\generic\bitset\bitset.sty
 INPUT C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex\generic\bigintcalc\bigintcalc.sty
@@ -353,6 +355,13 @@ INPUT .\figures\bundle_adjustement.png
 INPUT .\figures\bundle_adjustement.png
 INPUT .\figures\bundle_adjustement.png
 INPUT .\figures\bundle_adjustement.png
+INPUT .\figures\multi_camera_array.png
+INPUT .\figures\multi_camera_array.png
+INPUT .\figures\multi_camera_array.png
+INPUT .\figures\multi_camera_array.png
+INPUT .\figures\multi_camera_array.png
+INPUT .\figures\multi_camera_array.png
+INPUT .\figures\multi_camera_array.png
 INPUT .\thesis.bbl
 INPUT .\thesis.bbl
 INPUT thesis.bbl

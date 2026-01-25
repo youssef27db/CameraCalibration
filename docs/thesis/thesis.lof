@@ -5,4 +5,5 @@
 \contentsline {figure}{\numberline {4}{\ignorespaces Example of a checkerboard and detected corner points. Source: \cite {OpenCV_Calibration}.}}{5}{figure.4}%
 \contentsline {figure}{\numberline {5}{\ignorespaces Visualization of reprojection error. Source: \cite {CamCalibReprojectionError}.}}{6}{figure.5}%
 \contentsline {figure}{\numberline {6}{\ignorespaces Visual representation of bundle adjustment. Source: \cite {Baeldung2024BundleAdjustment}.}}{7}{figure.6}%
+\contentsline {figure}{\numberline {7}{\ignorespaces Representation of a multi-camera system. Source: \cite {multi_camera_calibration}.}}{8}{figure.7}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.12.24)  24 JAN 2026 21:36
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.12.24)  25 JAN 2026 18:44
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -392,6 +392,11 @@ File: pgfsyssoftpath.code.tex 2025-08-29 v3.1.11a (3.1.11a)
 \pgfsyssoftpath@bigbuffer@items=\count309
 ) (C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlayer\pgfsysprotocol.code.tex
 File: pgfsysprotocol.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+)) (C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/xurl\xurl.sty
+Package: xurl 2022/01/09 v 0.10 modify URL breaks
+ (C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/url\url.sty
+\Urlmuskip=\muskip18
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )) (C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/pdfpages\pdfpages.sty
 Package: pdfpages 2025/07/23 v0.6g Insert pages of external PDF documents (AM)
  (C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/base\ifthen.sty
@@ -478,10 +483,6 @@ Package hyperref Info: Backreferencing OFF on input line 4215.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
 Package hyperref Info: Bookmarks ON on input line 4462.
 \c@Hy@tempcnt=\count321
- (C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/url\url.sty
-\Urlmuskip=\muskip18
-Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
-)
 LaTeX Info: Redefining \url on input line 4801.
 \XeTeXLinkMargin=\dimen189
  (C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/generic/bitset\bitset.sty
@@ -561,14 +562,14 @@ Class scrartcl Info: loading recommended package `bookmark'.
 (scrartcl)           `bookmarkpackage=false' before \begin{document} and
 (scrartcl)           you can avoid this message adding:
 (scrartcl)             \usepackage{bookmark}
-(scrartcl)           before \begin{document} on input line 34.
+(scrartcl)           before \begin{document} on input line 35.
  (C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/bookmark\bookmark.sty
 Package: bookmark 2023-12-10 v1.31 PDF bookmarks (HO)
  (C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/bookmark\bkm-pdftex.def
 File: bkm-pdftex.def 2023-12-10 v1.31 bookmark driver for pdfTeX and luaTeX (HO)
 \BKM@id=\count337
 ))
-LaTeX Font Info:    Trying to load font information for T1+lmr on input line 34.
+LaTeX Font Info:    Trying to load font information for T1+lmr on input line 35.
  (C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmr.fd
 File: t1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 ) (C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdftex.def
@@ -577,33 +578,33 @@ File: l3backend-pdftex.def 2025-10-09 L3 backend support: PDF output (pdfTeX)
 ) (thesis.aux)
 \openout1 = `thesis.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-Package scrbase Info: activating english \abstractname on input line 34.
-Package scrbase Info: activating english \partname on input line 34.
-Package scrbase Info: activating english \figurename on input line 34.
-Package scrbase Info: activating english \tablename on input line 34.
-Package scrbase Info: activating english \contentsname on input line 34.
-Package scrbase Info: activating english \listfigurename on input line 34.
-Package scrbase Info: activating english \listtablename on input line 34.
-Package scrbase Info: activating english \refname on input line 34.
-Package scrbase Info: activating english \indexname on input line 34.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 35.
+LaTeX Font Info:    ... okay on input line 35.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 35.
+LaTeX Font Info:    ... okay on input line 35.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 35.
+LaTeX Font Info:    ... okay on input line 35.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 35.
+LaTeX Font Info:    ... okay on input line 35.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 35.
+LaTeX Font Info:    ... okay on input line 35.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 35.
+LaTeX Font Info:    ... okay on input line 35.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 35.
+LaTeX Font Info:    ... okay on input line 35.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 35.
+LaTeX Font Info:    ... okay on input line 35.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 35.
+LaTeX Font Info:    ... okay on input line 35.
+Package scrbase Info: activating english \abstractname on input line 35.
+Package scrbase Info: activating english \partname on input line 35.
+Package scrbase Info: activating english \figurename on input line 35.
+Package scrbase Info: activating english \tablename on input line 35.
+Package scrbase Info: activating english \contentsname on input line 35.
+Package scrbase Info: activating english \listfigurename on input line 35.
+Package scrbase Info: activating english \listtablename on input line 35.
+Package scrbase Info: activating english \refname on input line 35.
+Package scrbase Info: activating english \indexname on input line 35.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -672,14 +673,14 @@ Package: lscape 2020/05/28 v3.02 Landscape Pages (DPC)
 )
 Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
 ))
-Package hyperref Info: Link coloring ON on input line 34.
+Package hyperref Info: Link coloring ON on input line 35.
 \c@lstlisting=\count345
-Package tocbasic Info: setting babel extension for `lol' on input line 34.
+Package tocbasic Info: setting babel extension for `lol' on input line 35.
 \scr@dte@lstlisting@maxnumwidth=\skip74
  [1
 
 {C:/Users/Youssef/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}{C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ec.enc}]
-LaTeX Font Info:    Trying to load font information for T1+lmss on input line 79.
+LaTeX Font Info:    Trying to load font information for T1+lmss on input line 80.
  (C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmss.fd
 File: t1lmss.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 ) [1] (thesis.toc
@@ -716,7 +717,7 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.47 ...mberline {6.2}Outlook}{12}{subsection.6.2}
+l.47 ...mberline {6.2}Outlook}{13}{subsection.6.2}
                                                   % [2
 
 
@@ -728,7 +729,7 @@ l.47 ...mberline {6.2}Outlook}{12}{subsection.6.2}
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.87 \clearpage
+l.88 \clearpage
                 [3] (thesis.lof)
 \tf@lof=\write5
 \openout5 = `thesis.lof'.
@@ -737,112 +738,120 @@ l.87 \clearpage
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.93 \clearpage
+l.94 \clearpage
                 [4
 
 ]
-LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 116.
+LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 117.
  (C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/lm\ts1lmr.fd
 File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.126 \clearpage
+l.127 \clearpage
                  [1
 
 {C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ts1.enc}]
-<figures/Pinhole-Camera.png, id=154, 412.54124pt x 226.8475pt>
+<figures/Pinhole-Camera.png, id=158, 412.54124pt x 226.8475pt>
 File: figures/Pinhole-Camera.png Graphic file (type png)
 <use figures/Pinhole-Camera.png>
-Package pdftex.def Info: figures/Pinhole-Camera.png  used on input line 143.
+Package pdftex.def Info: figures/Pinhole-Camera.png  used on input line 144.
 (pdftex.def)             Requested size: 362.37569pt x 199.26642pt.
  [2
 
 {C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathit.enc}{C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-rm.enc}{C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathex.enc}{C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathsy.enc} <./figures/Pinhole-Camera.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 193--196
+Underfull \hbox (badness 10000) in paragraph at lines 194--197
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 197--200
+Underfull \hbox (badness 10000) in paragraph at lines 198--201
 
  []
 
-<figures/Radial-Distortion.png, id=178, 950.3505pt x 363.15675pt>
+<figures/Radial-Distortion.png, id=182, 950.3505pt x 363.15675pt>
 File: figures/Radial-Distortion.png Graphic file (type png)
 <use figures/Radial-Distortion.png>
-Package pdftex.def Info: figures/Radial-Distortion.png  used on input line 217.
+Package pdftex.def Info: figures/Radial-Distortion.png  used on input line 218.
 (pdftex.def)             Requested size: 362.37569pt x 138.472pt.
 [3 <./figures/Radial-Distortion.png>]
-<figures/Tangential-Distortion.png, id=195, 362.35374pt x 193.72375pt>
+<figures/Tangential-Distortion.png, id=199, 362.35374pt x 193.72375pt>
 File: figures/Tangential-Distortion.png Graphic file (type png)
 <use figures/Tangential-Distortion.png>
-Package pdftex.def Info: figures/Tangential-Distortion.png  used on input line 259.
+Package pdftex.def Info: figures/Tangential-Distortion.png  used on input line 260.
 (pdftex.def)             Requested size: 271.7835pt x 145.30426pt.
-<figures/Tangential-Distortion2.png, id=196, 237.88875pt x 211.992pt>
+<figures/Tangential-Distortion2.png, id=200, 237.88875pt x 211.992pt>
 File: figures/Tangential-Distortion2.png Graphic file (type png)
 <use figures/Tangential-Distortion2.png>
-Package pdftex.def Info: figures/Tangential-Distortion2.png  used on input line 261.
+Package pdftex.def Info: figures/Tangential-Distortion2.png  used on input line 262.
 (pdftex.def)             Requested size: 135.89174pt x 121.10193pt.
  [4 <./figures/Tangential-Distortion.png> <./figures/Tangential-Distortion2.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 296--298
+Underfull \hbox (badness 10000) in paragraph at lines 297--299
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 299--301
+Underfull \hbox (badness 10000) in paragraph at lines 300--302
 
  []
 
-<figures/checkerboard.png, id=218, 340.27126pt x 363.15675pt>
+<figures/checkerboard.png, id=222, 340.27126pt x 363.15675pt>
 File: figures/checkerboard.png Graphic file (type png)
 <use figures/checkerboard.png>
-Package pdftex.def Info: figures/checkerboard.png  used on input line 312.
+Package pdftex.def Info: figures/checkerboard.png  used on input line 313.
 (pdftex.def)             Requested size: 158.54152pt x 169.20415pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 317--319
+Underfull \hbox (badness 10000) in paragraph at lines 318--320
 
  []
 
 [5 <./figures/checkerboard.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 320--323
+Underfull \hbox (badness 10000) in paragraph at lines 321--324
 
  []
 
-<figures/reprojection_error.png, id=234, 1023.825pt x 850.17625pt>
+<figures/reprojection_error.png, id=238, 1023.825pt x 850.17625pt>
 File: figures/reprojection_error.png Graphic file (type png)
 <use figures/reprojection_error.png>
-Package pdftex.def Info: figures/reprojection_error.png  used on input line 334.
+Package pdftex.def Info: figures/reprojection_error.png  used on input line 335.
 (pdftex.def)             Requested size: 226.48395pt x 188.0642pt.
 [6 <./figures/reprojection_error.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 346--348
+Underfull \hbox (badness 10000) in paragraph at lines 347--349
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 358--360
+Underfull \hbox (badness 10000) in paragraph at lines 359--361
 
  []
 
-<figures/bundle_adjustement.png, id=249, 752.8125pt x 421.575pt>
+<figures/bundle_adjustement.png, id=253, 752.8125pt x 421.575pt>
 File: figures/bundle_adjustement.png Graphic file (type png)
 <use figures/bundle_adjustement.png>
-Package pdftex.def Info: figures/bundle_adjustement.png  used on input line 366.
+Package pdftex.def Info: figures/bundle_adjustement.png  used on input line 367.
 (pdftex.def)             Requested size: 249.13371pt x 139.51257pt.
 [7 <./figures/bundle_adjustement.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 376--378
+Underfull \hbox (badness 10000) in paragraph at lines 377--379
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 379--381
+Underfull \hbox (badness 10000) in paragraph at lines 380--382
 
  []
 
-[8] [9
+<figures/multi_camera_array.png, id=277, 428.802pt x 242.1045pt>
+File: figures/multi_camera_array.png Graphic file (type png)
+<use figures/multi_camera_array.png>
+Package pdftex.def Info: figures/multi_camera_array.png  used on input line 393.
+(pdftex.def)             Requested size: 317.07614pt x 179.02892pt.
 
-] [10
+Underfull \hbox (badness 10000) in paragraph at lines 398--400
+
+ []
+
+[8 <./figures/multi_camera_array.png>] [9] [10
 
 ] [11
 
@@ -850,87 +859,34 @@ Underfull \hbox (badness 10000) in paragraph at lines 379--381
 
 ] [13
 
+] [14
+
 
 ] (thesis.bbl
 LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 11.
  (C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmtt.fd
 File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-)
-Underfull \hbox (badness 7925) in paragraph at lines 9--14
-[]\T1/lmr/m/n/12 CamCalib.  The re-pro-jec-tion er-ror.  [][]$\T1/lmtt/m/n/12 https : / / www . camcalib . io / post /
- []
+) [15
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 16--22
-\T1/lmtt/m/n/12 tum . de / _media / teaching / ss2019 / mvg2019 / material / multiviewgeometry7 .
- []
-
-
-Underfull \hbox (badness 6910) in paragraph at lines 24--30
-[]\T1/lmr/m/n/12 Elsevier.  Ra-dial dis-tor-tion.  [][]$\T1/lmtt/m/n/12 https : / / www . sciencedirect . com / topics /
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 32--36
-[]\T1/lmr/m/n/12 Elsevier.  Lens dis-tor-tion.  [][]$\T1/lmtt/m/n/12 https : / / www . sciencedirect . com / topics /
- []
-
-
-Underfull \hbox (badness 1028) in paragraph at lines 52--58
-\T1/lmr/m/n/12 0521540518.  URL [][]$\T1/lmtt/m/n/12 http : / / www . r-[]5 . org / files / books / computers / algo-[]list /
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 52--58
-\T1/lmtt/m/n/12 image-[]processing / vision / Richard _ Hartley _ Andrew _ Zisserman-[]Multiple _
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 60--67
-[]\T1/lmr/m/n/12 Jiachun Huang, Shaoli Liu, Jian-hua Liu, and Ze-hua Jian.  Cam-
- []
-
-
-Underfull \hbox (badness 3758) in paragraph at lines 60--67
-\T1/lmr/m/n/12 era cal-i-bra-tion re-sults: Re-pro-jec-tion er-ror and rel-a-tive po-si-tions.  \T1/lmr/m/it/12 Sci-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 60--67
-\T1/lmr/m/it/12 en-tific Re-ports\T1/lmr/m/n/12 , 2016.  URL [][]$\T1/lmtt/m/n/12 https : / / www . researchgate . net / figure /
- []
-
-
-Overfull \hbox (70.68524pt too wide) in paragraph at lines 60--67
-\T1/lmtt/m/n/12 Camera-[]calibration-[]results-[]a-[]Reprojection-[]error-[]and-[]b-[]relative-[]positions-[]of-[]the _
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 69--75
-\T1/lmr/m/n/12 URL [][]$\T1/lmtt/m/n/12 https : / / www . baeldung . com / cs / computer-[]vision-[]bundle-[]adjustment$[][]\T1/lmr/m/n/12 .
- []
-
-[14
-
-
-]) [15] (thesis.aux)
+]) [16] (thesis.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2025-11-06>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 20106 strings out of 467871
- 362672 string characters out of 5417407
- 931729 words of memory out of 5000000
- 48546 multiletter control sequences out of 15000+600000
+ 20149 strings out of 467871
+ 363836 string characters out of 5417407
+ 944030 words of memory out of 5000000
+ 48581 multiletter control sequences out of 15000+600000
  689901 words of font info for 76 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  108i,13n,107p,11323b,665s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmex10.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi12.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi8.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr8.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri12.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmssbx10.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy8.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt12.pfb>
-Output written on thesis.pdf (20 pages, 1120603 bytes).
+Output written on thesis.pdf (21 pages, 1231686 bytes).
 PDF statistics:
- 569 PDF objects out of 1000 (max. 8388607)
- 101 named destinations out of 1000 (max. 500000)
- 424 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 591 PDF objects out of 1000 (max. 8388607)
+ 105 named destinations out of 1000 (max. 500000)
+ 429 words of extra memory for PDF output out of 10000 (max. 10000000)
 
