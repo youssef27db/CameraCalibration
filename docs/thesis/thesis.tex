@@ -425,14 +425,201 @@ Overall, existing work shows that calibration accuracy in light field systems re
 \clearpage
 
 % =========================================================
-% Chapter Three: Material and Method
+% Chapter Three: Method and Material
 % =========================================================
-\section{Material and Method}
+\section{Methods and Materials}
 
 % ---------------------------------------------------------
-% 3.1 Material
+% 3.1 Method
 % ---------------------------------------------------------
-\subsection{Material}
+\subsection{Methods}
+
+\subsubsection{Overall approach}
+
+The goal of this thesis is to develop and evaluate an automatic calibration framework for multi-camera light field systems based on the target-free calibration method proposed by Fleith et al.~\cite{LiFCal}. As discussed in the state of the art, classical target-based calibration approaches require manual intervention and careful placement of calibration targets, which limits their applicability in long-term deployments or scenarios with restricted human access.
+\newline
+
+The proposed approach uses a reliable target-based calibration as an initial reference and ground truth. This initial calibration is performed using a checkerboard pattern and serves as a baseline for evaluating subsequent target-free recalibration steps. After this initial setup, the system captures a small set of images from the scene and applies LiFCal to automatically recalibrate the multi-camera system. To assess whether the target-free recalibration is acceptable, a health monitoring mechanism is introduced. This mechanism compares the calibration results obtained from LiFCal with the baseline calibration using defined decision metrics. If the recalibration achieves a calibration quality comparable to or better than the initial calibration, it is accepted and replaces the previous baseline. Otherwise, the system retains the existing calibration parameters.
+\newline
+
+This workflow is designed to enable periodic self-recalibration without manual intervention. A potential application scenario is a robotic system deployed in a remote or inaccessible environment, where mechanical shifts or environmental changes may degrade calibration quality over time. By regularly capturing image sets and applying the proposed recalibration process, the system can maintain accurate camera parameters throughout its operation.
+\newline
+
+To clearly describe the interaction between the individual components and calibration phases, a use case description is introduced in the following section.
+
+\subsubsection{Use Case Description}
+
+The following use case describes the intended workflow of the proposed automatic calibration framework for a cross-shaped multi-camera light field system consisting of a central camera and twelve surrounding cameras, arranged in four cardinal directions (North, East, South, and West). The workflow is structured into three consecutive phases: an initial reference calibration, periodic target-free recalibration, and a health-based decision step.
+
+\vspace{0.3cm}
+
+\paragraph{Phase 1 — Initial Reference Calibration (once)}
+\begin{itemize}
+  \item \textbf{Target-based calibration (OpenCV):}
+  A one-time checkerboard-based calibration is performed to estimate the intrinsic
+  and extrinsic parameters for all cameras of the cross-shaped array.
+
+  \item \textbf{Optional refinement:}
+  An optional global refinement using bundle adjustment is applied to improve
+  consistency across all camera parameters.
+
+  \item \textbf{Baseline creation:}
+  A global health score is computed for the initial calibration and stored as
+  \texttt{baseline.json}. This baseline represents the known-good reference
+  calibration for subsequent recalibration decisions.
+
+  \item \textbf{Logging:}
+  The complete initial calibration is stored as a timestamped JSON file and a
+  summary entry is appended to \texttt{calibration.log}.
+\end{itemize}
+
+\vspace{0.2cm}
+
+\paragraph{Phase 2 — Automated Recalibration Attempts (periodic scheduler)}
+\begin{itemize}
+  \item \textbf{Trigger:}
+  An automated recalibration cycle is executed at fixed time intervals
+  (e.g.\ every five minutes).
+
+  \item \textbf{Conditional data preparation:}
+  If LiFCal-compatible data (focus and depth directories) already exists and is
+  complete, it is reused. Otherwise, the system generates the required inputs by
+  running \texttt{run\_imageset\_creation.py}.
+
+  \item \textbf{LiFCal recalibration run:}
+  The script \texttt{run\_LiFCal\_calibration.py} executes LiFCal-based
+  recalibration for all cameras in the array and produces per-camera parameter
+  files as well as a combined multi-camera result.
+
+  \item \textbf{Logging and traceability:}
+  The combined recalibration result is stored as a timestamped JSON file and all
+  relevant execution details are appended to \texttt{calibration.log}.
+\end{itemize}
+
+\vspace{0.2cm}
+
+\paragraph{Phase 3 — Health Evaluation and Baseline Update Rule}
+\begin{itemize}
+  \item \textbf{Health score computation:}
+  A single global health score in the range $[0,100]$ is computed from the combined
+  LiFCal calibration result.
+
+  \item \textbf{Comparison against baseline:}
+  The newly computed health score is compared to the score stored in the current
+  baseline calibration.
+
+  \item \textbf{Acceptance rule:}
+  If the new health score is strictly higher than the baseline score, the baseline
+  calibration is replaced by the new result. Otherwise, the existing baseline
+  remains unchanged.
+
+  \item \textbf{Continuous improvement loop:}
+  The recalibration process is repeated periodically, allowing improved calibration
+  results to update the baseline over time without manual intervention.
+\end{itemize}
+
+This structure allows the system to maintain accurate calibration parameters over time, adapting to changes in the environment or camera setup. The health-based decision mechanism ensures that only beneficial recalibrations are accepted, preserving the integrity of the calibration throughout the system's operation.
+\newline
+
+This use case serves as the conceptual basis for the requirements analysis and system design presented in the following sections.
+\clearpage
+
+\subsubsection{Requirements Analysis}
+
+The requirements for the proposed automatic calibration framework are divided into functional and non-functional requirements. These requirements define the necessary features and qualities of the system to achieve the intended use case. 
+
+\paragraph{Functional Requirements}
+
+\begin{itemize}
+
+  \item \textbf{FR1 – Initial Reference Calibration (Target-based):} \\
+  The system shall perform a one-time, checkerboard-based initial calibration using OpenCV
+  to estimate intrinsic and extrinsic parameters for the cross-shaped camera array.
+  This initial calibration shall be stored as the baseline calibration and serve as
+  the reference state for all subsequent health evaluations and recalibration decisions.
+
+  \item \textbf{FR2 – Parameter Export and Standardized Representation:} \\
+  The system shall export all calibration results (initial calibration and LiFCal-based recalibration)
+  in a standardized, machine-readable JSON format, including intrinsic parameters,
+  extrinsic poses, reprojection error statistics, timestamps, and metadata.
+
+  \item \textbf{FR3 – Periodic Calibration Health Monitoring:} \\
+  The system shall periodically (at least once per configured scheduler interval) evaluate the calibration quality by computing a global health score.
+
+  \item \textbf{FR4 – Health Score Computation (Global Scalar Metric):} \\
+  The system shall compute a single scalar health score in the range $[0,100]$
+  representing the overall calibration quality of the complete camera array.
+  For the initial calibration, the health score shall be derived from
+  reprojection error statistics.
+  For LiFCal-based recalibration, the health score shall be derived from
+  LiFCal-specific reprojection and consistency metrics extracted from the combined parameter set.
+
+  \item \textbf{FR5 – Target-Free Online Recalibration (LiFCal-based):} \\
+  The system shall execute a LiFCal-based target-free recalibration using automatically prepared focus images and virtual depth data whenever a recalibration cycle is triggered.
+
+  \item \textbf{FR6 – Acceptance and Baseline Update Rule:} \\
+  The system shall compare the health score of a newly computed calibration
+  against the health score of the currently stored baseline calibration.
+  The new calibration shall be accepted and stored as the new baseline
+  only if its health score is strictly higher than the baseline score;
+  otherwise, the system shall retain the previous baseline calibration.
+
+  \item \textbf{FR7 – Automated Periodic Recalibration Scheduling:} \\
+  The system shall support automated, periodic execution of the LiFCal-based recalibration process at a configurable time interval (minimum every 5 minutes).
+
+  \item \textbf{FR8 – Logging and Traceability:} \\
+  The system shall log every calibration and recalibration run, including at least timestamps, used image sets, computed health scores, baseline update decisions, and error states.
+  
+  \item \textbf{FR9 – Abort and Logging on Recalibration Failure:} \\ The system shall abort the current recalibration cycle if a recalibration run fails. In such cases, the system shall retain the currently active baseline calibration and record a descriptive error message, including the failure reason, in the calibration log.
+\end{itemize}
+
+\paragraph{Non-Functional Requirements}
+\begin{itemize}
+ \item \textbf{NFR1 – Modularity:} \\
+  The system shall be structured into modular components
+  (initial calibration, LiFCal recalibration, health monitoring, scheduling, and logging) to support extensibility and maintainability.
+
+  \item \textbf{NFR2 – Reproducibility:} \\
+  All calibration results and health evaluations shall be reproducible using stored JSON files and logged metadata.
+
+  \item \textbf{NFR3 – Robustness:} \\
+  The calibration and monitoring pipeline shall tolerate moderate variations in scene content and illumination without system failure, even if recalibration quality temporarily degrades.
+
+  \item \textbf{NFR4 – Automation:} \\
+  The calibration framework shall operate fully automatically
+  after initial setup, without requiring manual intervention
+  during periodic monitoring and recalibration.
+
+  \item \textbf{NFR5 – Transparency:} \\
+  The system shall provide access to intermediate calibration metrics and logged decision outcomes to allow inspection and analysis of health score computations and acceptance decisions.
+\end{itemize}
+
+\vspace{0.2cm}
+These requirements form the basis for the system design and implementation presented in the following sections. They were derived following the guidelines and best practices of IEEE Std~830--1998 \cite{720574} and directly support the intended use case of the proposed calibration framework. The functional requirements are reflected in the architectural decisions, UML diagrams, and implementation steps, while the non-functional requirements address relevant quality aspects such as robustness, automation, and maintainability.
+\newline
+
+The requirements specification is intentionally kept compact and focused. It is not intended to represent a complete industrial requirements document, but rather a research-oriented specification that is appropriate for the scope and objectives of this bachelor thesis.
+
+\subsubsection{UML Class Diagram}
+% Main software components
+% Responsibilities and relationships
+
+\subsubsection{Health Monitoring and Decision Metrics}
+% Health score computation
+% Initial calibration health
+% LiFCal-based health
+% Acceptance and rollback logic
+
+\subsubsection{State Diagram}
+% System states
+% Transitions between calibration phases
+% Periodic execution and decision flow
+
+
+% ---------------------------------------------------------
+% 3.2 Material
+% ---------------------------------------------------------
+\subsection{Materials}
 
 \subsubsection{Synthetic Data Generation with Blender}
 % Blender-based scene setup
@@ -451,35 +638,6 @@ Overall, existing work shows that calibration accuracy in light field systems re
 % Programming language and libraries
 % External tools (OpenCV, LiFCal)
 % Custom scripts and execution workflow
-
-% ---------------------------------------------------------
-% 3.2 Method
-% ---------------------------------------------------------
-\subsection{Method}
-
-\subsubsection{Use Case Description}
-% Overall system workflow
-% Initial calibration, health monitoring, recalibration phases
-
-\subsubsection{Requirements Analysis}
-% Functional requirements
-% Non-functional requirements
-% Traceability to implementation
-
-\subsubsection{UML Class Diagram}
-% Main software components
-% Responsibilities and relationships
-
-\subsubsection{Health Monitoring and Decision Metrics}
-% Health score computation
-% Initial calibration health
-% LiFCal-based health
-% Acceptance and rollback logic
-
-\subsubsection{State Diagram}
-% System states
-% Transitions between calibration phases
-% Periodic execution and decision flow
 
 \clearpage
 
