@@ -1,9 +1,20 @@
-\begin{thebibliography}{20}
+\begin{thebibliography}{29}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
   \providecommand{\doi}[1]{doi: #1}\else
   \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Anisimov et~al.(2021)Anisimov, Reis, and
+  Stricker]{anisimov2021calibration_auto_refinement}
+Yuriy Anisimov, Gerd Reis, and Didier Stricker.
+\newblock Calibration and auto-refinement for light field cameras.
+\newblock In \emph{Proceedings of the 29th International Conference in Central
+  Europe on Computer Graphics, Visualization and Computer Vision (WSCG)}, pages
+  253--261, Pilsen, Czech Republic, 2021. Vaclav Skala - UNION Agency.
+\newblock ISBN 978-80-86943-34-3.
+\newblock URL
+  \url{https://www.dfki.de/fileadmin/user_upload/import/11659_wscg-j53.pdf}.
 
 \bibitem[{CamCalib}(2022)]{CamCalibReprojectionError}
 {CamCalib}.
@@ -19,6 +30,15 @@ Daniel Cremers.
   \url{https://cvg.cit.tum.de/_media/teaching/ss2019/mvg2019/material/multiviewgeometry7.pdf},
   2019.
 \newblock Vorlesungsunterlage, Technische Universit\"at M\"unchen.
+
+\bibitem[Dima et~al.(2016)Dima, Sjostrom, and Olsson]{7548887}
+Elijs Dima, Mårten Sjostrom, and Roger Olsson.
+\newblock Assessment of multi-camera calibration algorithms for two-dimensional
+  camera arrays relative to ground truth position and direction.
+\newblock In \emph{2016 3DTV-Conference: The True Vision - Capture,
+  Transmission and Display of 3D Video (3DTV-CON)}, pages 1--4, 2016.
+\newblock \doi{10.1109/3DTV.2016.7548887}.
+\newblock URL \url{https://ieeexplore.ieee.org/document/7548887}.
 
 \bibitem[{Elsevier}(2022)]{RadialDistortion}
 {Elsevier}.
@@ -38,6 +58,15 @@ Daniel Cremers.
 Aymeric Fleith, Doaa Ahmed, Daniel Cremers, and Niclas Zeller.
 \newblock Lifcal: Online light field camera calibration via bundle adjustment.
 \newblock \url{https://arxiv.org/abs/2408.11682}, 2024.
+
+\bibitem[Ge et~al.(2022)Ge, Wang, Wang, and Wang]{9923591}
+Pengxiang Ge, Huanqing Wang, Yonghong Wang, and Biao Wang.
+\newblock Calibration of ring multicamera system with transparent target for
+  panoramic measurement.
+\newblock \emph{IEEE Sensors Journal}, 22\penalty0 (23):\penalty0 23154--23164,
+  2022.
+\newblock \doi{10.1109/JSEN.2022.3214080}.
+\newblock URL \url{https://ieeexplore.ieee.org/document/9923591}.
 
 \bibitem[{German Aerospace Center (DLR) – Institute of Robotics and
   Mechatronics}(2026)]{DLR2026LightFieldCameras}
@@ -65,6 +94,13 @@ Jiachun Huang, Shaoli Liu, Jianhua Liu, and Zehua Jian.
   \url{https://www.researchgate.net/figure/Camera-calibration-results-a-Reprojection-error-and-b-relative-positions-of-the_fig9_301715405}.
 \newblock In Fig. 5.
 
+\bibitem[Jones(2025)]{HedleyJonesCalibrationCheckerboards}
+Mark~Hedley Jones.
+\newblock Calibration checkerboard collection.
+\newblock Online project page, 2025.
+\newblock URL
+  \url{https://markhedleyjones.com/projects/calibration-checkerboard-collection}.
+
 \bibitem[Kumar(2024)]{Baeldung2024BundleAdjustment}
 Dhiraj Kumar.
 \newblock What is bundle adjustment?
@@ -72,6 +108,15 @@ Dhiraj Kumar.
 \newblock URL
   \url{https://www.baeldung.com/cs/computer-vision-bundle-adjustment}.
 \newblock Last updated March 18, 2024.
+
+\bibitem[Lee and Ji(2017)]{LeeJi2017LightfieldReconstruction}
+Philip~K. Lee and Anqi~R. Ji.
+\newblock Comparison of lightfield reconstruction methods using undersampled
+  data.
+\newblock Technical Report EE367 Winter 2017 Project Report, Stanford
+  University, Department of Electrical Engineering, 2017.
+\newblock URL
+  \url{https://stanford.edu/class/ee367/Winter2017/lee_ji_ee367_win17_report.pdf}.
 
 \bibitem[Li et~al.(2020)]{StanfordCS231ACameraModels}
 Fei-Fei Li et~al.
@@ -141,6 +186,15 @@ Bill Triggs, Philip~F. McLauchlan, Richard~I. Hartley, and Andrew~W.
 \newblock URL
   \url{https://www.cs.jhu.edu/~misha/ReadingSeminar/Papers/Triggs00.pdf}.
 
+\bibitem[Xie et~al.(2023)Xie, Zhao, and He]{10456113}
+Zhaomin Xie, Mengxiao Zhao, and Yujia He.
+\newblock Research on depth information acquisition of array camera based on
+  depth map fusion.
+\newblock In \emph{2023 5th International Conference on Frontiers Technology of
+  Information and Computer (ICFTIC)}, pages 759--762, 2023.
+\newblock \doi{10.1109/ICFTIC59930.2023.10456113}.
+\newblock URL \url{https://ieeexplore.ieee.org/document/10456113}.
+
 \bibitem[Xu et~al.(2015)Xu, Maeno, Nagahara, and ichiro
   Taniguchi]{multi_camera_calibration}
 Yichao Xu, Kazuki Maeno, Hajime Nagahara, and Rin ichiro Taniguchi.
@@ -151,6 +205,22 @@ Yichao Xu, Kazuki Maeno, Hajime Nagahara, and Rin ichiro Taniguchi.
 \newblock URL
   \url{https://link.springer.com/article/10.1007/s11704-015-4237-4}.
 
+\bibitem[Yang et~al.(2019)Yang, Xiao, Wang, Luo, and An]{9172948}
+Jungang Yang, Chao Xiao, Pu~Wang, Yougan Luo, and Chengjin An.
+\newblock Camera array calibration using a simple checkerboard pattern.
+\newblock In \emph{2019 IEEE International Conference on Signal, Information
+  and Data Processing (ICSIDP)}, pages 1--5, 2019.
+\newblock \doi{10.1109/ICSIDP47821.2019.9172948}.
+\newblock URL \url{https://ieeexplore.ieee.org/document/9172948}.
+
+\bibitem[Zhang et~al.(2025)Zhang, Wang, Wu, Yang, and An]{10649654}
+Yaning Zhang, Yingqian Wang, Tianhao Wu, Jungang Yang, and Wei An.
+\newblock Fixed relative pose prior for camera array self-calibration.
+\newblock \emph{IEEE Transactions on Circuits and Systems for Video
+  Technology}, 35\penalty0 (1):\penalty0 981--985, 2025.
+\newblock \doi{10.1109/TCSVT.2024.3450706}.
+\newblock URL \url{https://ieeexplore.ieee.org/document/10649654}.
+
 \bibitem[Zhang(2000)]{888718}
 Z.~Zhang.
 \newblock A flexible new technique for camera calibration.
@@ -158,5 +228,16 @@ Z.~Zhang.
   Intelligence}, 22\penalty0 (11):\penalty0 1330--1334, 2000.
 \newblock \doi{10.1109/34.888718}.
 \newblock URL \url{https://ieeexplore.ieee.org/document/888718}.
+
+\bibitem[Zhou et~al.(2023)Zhou, Li, Dai, Liu, Qin, Jiang, Hong, Zhao, and
+  Yang]{9998530}
+Feng Zhou, Jing Li, Yanran Dai, Lichen Liu, Haidong Qin, Yuqi Jiang, Shikuan
+  Hong, Bo~Zhao, and Tao Yang.
+\newblock Time-series fusion-based multicamera self-calibration for free-view
+  video generation in low-texture sports scene.
+\newblock \emph{IEEE Sensors Journal}, 23\penalty0 (3):\penalty0 2956--2969,
+  2023.
+\newblock \doi{10.1109/JSEN.2022.3230792}.
+\newblock URL \url{https://ieeexplore.ieee.org/document/9998530}.
 
 \end{thebibliography}

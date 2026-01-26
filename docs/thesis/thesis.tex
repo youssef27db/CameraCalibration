@@ -131,13 +131,12 @@ The following research questions guide this thesis:
 % =========================================================
 \section{Theoretical Background}
 
+This chapter introduced the theoretical foundations required for this thesis. It covered the pinhole camera model, including intrinsic and extrinsic parameters as well as lens distortion, as the basis for geometric camera modeling. Building on this, common camera calibration methods and error metrics were presented, including target-based calibration and bundle adjustment. The chapter also introduced light field camera systems, their main system types, and the state of the art in their calibration. Together, these concepts provide the necessary background for the calibration approach and experiments presented in the following chapters.
+
 % Chapter 2.1 Pinhole Camera Model
 \subsection{Pinhole Camera Model}
 
-Cameras are the primary devices used to capture visual
-information from the real world into an image. To process and analyze this information
-computationally, it is necessary to describe the imaging process using a 
-camera model \cite{StanfordCS231ACameraModels}.
+Cameras are the primary devices used to capture visual information from the real world into an image. To process and analyze this information computationally, it is necessary to describe the imaging process using a  camera model \cite{StanfordCS231ACameraModels}.
 
 \begin{figure}[htbp]
     \centering
@@ -165,7 +164,7 @@ the model is mathematically described using two types of parameters \cite{MathWo
   \end{bmatrix}
   \] 
   
-  \vspace{0.3cm}
+  \vspace{0.1cm}
   where $(f_x, f_y)$ are the focal lengths in pixel units along the x and y axes,
   $s$ is the skew coefficient between the axes, and $(c_x, c_y)$ is the principal point (optical center) in pixel coordinates.
   $K$ is also known as the camera matrix.
@@ -180,10 +179,7 @@ the model is mathematically described using two types of parameters \cite{MathWo
   \end{bmatrix}
   \]
 
-  \vspace{0.3cm}
-  where $R$ is a $3 \times 3$ rotation matrix representing the orientation of the camera
-  with respect to the world coordinate system, and $t$ is a $3 \times 1$ translation vector
-  representing the position of the camera center in world coordinates.
+  where $R$ is a $3 \times 3$ rotation matrix representing the orientation of the camera with respect to the world coordinate system, and $t$ is a $3 \times 1$ translation vector representing the position of the camera center in world coordinates.
 \end{itemize}
 
 These parameters form the basis of camera calibration, which aims to estimate them accurately. However in practice, cameras use lenses to focus light onto the image sensor, which introduces distortions not accounted for in the idealized pinhole model.
@@ -211,11 +207,10 @@ Radial distortion is caused by the spherical shape of camera lenses, which leads
 to different refraction of light from the image center to the outer regions.
 This causes straight lines in the image to appear curved, resulting in barrel
 or pincushion distortion \cite{RadialDistortion}.
-\vspace{0.2cm}
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.8\textwidth]{figures/Radial-Distortion.png}
+    \includegraphics[width=0.75\textwidth]{figures/Radial-Distortion.png}
     \caption{Comparison of different types of radial distortion. Source: \cite{opencv_calib3d_docs}.}
     \label{fig:radial_distortion}
 \end{figure}
@@ -231,28 +226,20 @@ y_{distorted} = y \left( 1 + k_1 r^2 + k_2 r^4 + k_3 r^6 \right) \label{eq:2}
 \end{align}
 
 \vspace{0.2mm}
-where $x$ and $y$ denote the undistorted normalized image coordinates in the camera coordinate system.
-The radius $r$ represents the distance of a point from the image center and is
-defined as:
+where $x$ and $y$ denote the undistorted normalized image coordinates in the camera coordinate system. The radius $r$ represents the distance of a point from the image center and is defined as:
 
 \begin{align}
 r^2 = x^2 + y^2 \label{eq:3}
 \end{align}
 
-The coefficients $k_1$, $k_2$, and $k_3$ in \eqref{eq:1} and \eqref{eq:2} control the strength
-of radial lens distortion. In practice, the first coefficient $k_1$ has the dominant influence
-on the distortion type: negative values of $k_1$ typically result in barrel
-distortion, while positive values lead to pincushion distortion.
+The coefficients $k_1$, $k_2$, and $k_3$ in \eqref{eq:1} and \eqref{eq:2} control the strength of radial lens distortion. In practice, the first coefficient $k_1$ has the dominant influence on the distortion type: negative values of $k_1$ typically result in barrel distortion, while positive values lead to pincushion distortion.
 
 
 % Chapter 2.2.2 Tangential Distortion
 \subsubsection{Tangential Distortion}
 
 Tangential distortion occurs when the image sensor and the camera lens
-are not perfectly aligned or parallel to each other \cite{MathWorksCameraCalibration}.
-As a result, image points are displaced tangentially with respect to the optical axis.
-\autoref{fig:tangential_distortion} illustrates the geometric cause of tangential distortion
-and its effect on the captured image.
+are not perfectly aligned or parallel to each other \cite{MathWorksCameraCalibration}. As a result, image points are displaced tangentially with respect to the optical axis. \autoref{fig:tangential_distortion} illustrates the geometric cause of tangential distortion and its effect on the captured image.
 
 \vspace{0.2cm}
 \begin{figure}[htbp]
@@ -277,19 +264,14 @@ y_{\text{distorted}} = y + \left( p_1 \left( r^2 + 2y^2 \right) + 2 p_2 x y \rig
 \end{align}
 
 \vspace{0.2cm}
-Here, $x$ and $y$ denote the undistorted normalized image coordinates in the camera coordinate system.
-The radius $r$ represents the distance of a point from the image center and is defined as:
+Here, $x$ and $y$ denote the undistorted normalized image coordinates in the camera coordinate system. The radius $r$ represents the distance of a point from the image center and is defined as:
 
 \begin{align}
 r^2 = x^2 + y^2
 \label{eq:tangential_r}
 \end{align}
 
-The coefficients $p_1$ and $p_2$ describe how strong the tangential lens distortion is.
-This type of distortion is caused by mechanical misalignment of the lens elements relative
-to the image sensor, resulting in a displacement of image points.
-Although tangential distortion is typically less pronounced than radial distortion,
-it can still negatively affect the camera calibration accuracy if not properly modeled.
+The coefficients $p_1$ and $p_2$ describe how strong the tangential lens distortion is. This type of distortion is caused by mechanical misalignment of the lens elements relative to the image sensor, resulting in a displacement of image points. Although tangential distortion is typically less pronounced than radial distortion, it can still negatively affect the camera calibration accuracy if not properly modeled.
 
 % 2.3 Camera Calibration
 \subsection{Camera Calibration}
@@ -307,11 +289,10 @@ In practice, cameras are often calibrated using targets with known geometric pro
 
 There are various approaches for target-based camera calibration. One of the most common methods uses a checkerboard pattern, as mentioned before. The checkerboard consists of a regular grid of black and white squares with known dimensions, as shown in \autoref{fig:checkerboard}.
 
-\vspace{0.2cm}
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.35\textwidth]{figures/checkerboard.png}
-    \caption{Example of a checkerboard and detected corner points. Source: \cite{OpenCV_Calibration}.}
+    \includegraphics[width=0.26\textwidth]{figures/checkerboard.png}
+    \caption{Example of a checkerboard and detected corner points. Source: \cite{HedleyJonesCalibrationCheckerboards}.}
     \label{fig:checkerboard}
 \end{figure}
 
@@ -388,6 +369,7 @@ There are mainly two different types of light field camera systems: multi-camera
 
 Multi-camera arrays are one way to capture light fields. This type of system is structured by arranging multiple individual cameras in a geometric configuration \cite{multi_camera_calibration}. Each camera captures a different viewpoint of the scene, enabling the system to record a 4D light field. In practice, there are different approaches to arranging the cameras. For example, in \cite{StanfordArrayProject}, an array of 128 cameras in a square grid is used, while in other works cross-shaped structures with fewer cameras are employed \cite{multi_camera_calibration}, as shown in \autoref{fig:multi_camera_array}.
 
+\vspace{0.3cm}
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.7\textwidth]{figures/multi_camera_array.png}
@@ -404,16 +386,41 @@ It is also essential to keep the cameras properly aligned and synchronized. Even
 \subsubsection{Micro-Lens-Array-Based Light Field Cameras}
 % MLA-based systems as used in LiFCal
 
-How does a micro-lens array capture a light field?
+The second type of light field camera is based on a micro-lens array (MLA). In this case instead of having different cameras, the system uses only one sensor combined with an array of small lensen placed between the main lens and the image sensor \cite{LiFCal}. The MLA allows the camera to capture also the 4D light field information. 
 
-How is spatial and angular information encoded?
+\vspace{0.2cm}
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures/MLA.png}
+    \caption{Structure of a micro-lens-array-based light field camera. Source: \cite{LiFCal}.}
+    \label{fig:mla}
+\end{figure}
 
-What are the main advantages of MLA-based cameras?
+As illustrated in \autoref{fig:mla}, each lens in the MLA focuses light from different directions onto different regions of the sensor. This way, the camera is also able to cpature the same information as a multi-camera array, but with a more compact design. Because of the smaller size and lower cost, MLA-based light field camera are mostly used in consumer applications \cite{LeeJi2017LightfieldReconstruction}. However, microlens-array cameras have to compromise between spatial and angular resolution, while multi-camera systems capture full-resolution images with sharper results and more accurate depth information. 
+\newline
 
-What are the main limitations compared to camera arrays?
+For MLA-based light field cameras, the pattern-based calibration method provides satisfactory results in terms of reprojection error. In practice, the overall calibration quality strongly depends on the calibration target, particularly its flatness \cite{anisimov2021calibration_auto_refinement}.
 
 % 2.5 State of the Art in Light Field Camera Calibration
 \subsection{State of the Art in Light Field Camera Calibration}
+
+Accurate calibration is a central requirement for light field camera systems, as even small geometric errors directly affect depth estimation and view consistency. In camera arrays, where many individual views must agree, calibration errors accumulate and lead to visible artifacts in depth maps and reconstructed images.
+\newline
+
+Early work on light field calibration mainly relies on pattern-based approaches. Dima et al.\ systematically evaluate several multi-camera calibration methods using ground truth data and show that calibration accuracy strongly depends on the array geometry and the physical setup of the calibration target \cite{7548887}. In particular, small deviations such as bending or uneven surfaces of the calibration board already lead to increased reprojection errors across the array. Yang et al.\ demonstrate that using a simple checkerboard target can still yield stable calibration results for camera arrays while reducing setup complexity \cite{9172948}. However, the accuracy of these methods remains closely tied to target quality and careful placement.
+\newline
+
+To overcome the limitations of target-based calibration, several self-calibration approaches have been proposed. Zhang et al.\ introduce a fixed relative pose prior to stabilize self-calibration in camera arrays \cite{10649654}. By constraining relative camera poses, their method reduces pose drift in situations where image features are sparse or unevenly distributed. Zhou et al.\ address low-texture sports scenes and use temporal fusion across multiple frames to estimate calibration parameters \cite{9998530}. These approaches reduce the need for calibration targets, but still depend on sufficient scene structure and a reasonable initial alignment.
+\newline
+
+Some methods focus on specific system layouts or downstream tasks. Ge et al.\ study a ring-shaped multi-camera system and use a transparent calibration target to support panoramic measurements \cite{9923591}. Xie et al.\ show that accurate camera array calibration is essential for reliable depth map fusion, as calibration errors propagate directly into depth artifacts, especially near object boundaries \cite{10456113}.
+\newline
+
+The approach most relevant to this thesis is LiFCal by Fleith et al.\ \cite{LiFCal}. Instead of using a physical calibration target, LiFCal moves the MLA-based camera through the scene and estimates calibration parameters via bundle adjustment driven by depth maps from multiple viewpoints. This shifts the calibration problem from controlled target acquisition to scene structure and camera motion, making the method particularly suitable for scenarios where calibration targets are impractical or unavailable.
+\newline
+
+Overall, existing work shows that calibration accuracy in light field systems remains sensitive to setup quality, motion, and scene structure. Larger camera arrays amplify small errors, and target-free methods require reliable depth estimates and sufficient camera motion to properly constrain the geometry.
+
 
 \clearpage
 

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.12.24)  25 JAN 2026 18:44
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.12.24)  26 JAN 2026 04:01
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -717,7 +717,7 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.47 ...mberline {6.2}Outlook}{13}{subsection.6.2}
+l.47 ...mberline {6.2}Outlook}{14}{subsection.6.2}
                                                   % [2
 
 
@@ -753,107 +753,146 @@ l.127 \clearpage
                  [1
 
 {C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ts1.enc}]
-<figures/Pinhole-Camera.png, id=158, 412.54124pt x 226.8475pt>
+<figures/Pinhole-Camera.png, id=162, 412.54124pt x 226.8475pt>
 File: figures/Pinhole-Camera.png Graphic file (type png)
 <use figures/Pinhole-Camera.png>
-Package pdftex.def Info: figures/Pinhole-Camera.png  used on input line 144.
+Package pdftex.def Info: figures/Pinhole-Camera.png  used on input line 143.
 (pdftex.def)             Requested size: 362.37569pt x 199.26642pt.
  [2
 
-{C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathit.enc}{C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-rm.enc}{C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathex.enc}{C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathsy.enc} <./figures/Pinhole-Camera.png>]
+{C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathit.enc}{C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-rm.enc}{C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathex.enc} <./figures/Pinhole-Camera.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 190--193
+
+ []
+
+
 Underfull \hbox (badness 10000) in paragraph at lines 194--197
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 198--201
-
- []
-
-<figures/Radial-Distortion.png, id=182, 950.3505pt x 363.15675pt>
+<figures/Radial-Distortion.png, id=184, 950.3505pt x 363.15675pt>
 File: figures/Radial-Distortion.png Graphic file (type png)
 <use figures/Radial-Distortion.png>
-Package pdftex.def Info: figures/Radial-Distortion.png  used on input line 218.
-(pdftex.def)             Requested size: 362.37569pt x 138.472pt.
-[3 <./figures/Radial-Distortion.png>]
-<figures/Tangential-Distortion.png, id=199, 362.35374pt x 193.72375pt>
+Package pdftex.def Info: figures/Radial-Distortion.png  used on input line 213.
+(pdftex.def)             Requested size: 339.72592pt x 129.81647pt.
+[3{C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathsy.enc} <./figures/Radial-Distortion.png>]
+<figures/Tangential-Distortion.png, id=202, 362.35374pt x 193.72375pt>
 File: figures/Tangential-Distortion.png Graphic file (type png)
 <use figures/Tangential-Distortion.png>
-Package pdftex.def Info: figures/Tangential-Distortion.png  used on input line 260.
+Package pdftex.def Info: figures/Tangential-Distortion.png  used on input line 247.
 (pdftex.def)             Requested size: 271.7835pt x 145.30426pt.
-<figures/Tangential-Distortion2.png, id=200, 237.88875pt x 211.992pt>
+<figures/Tangential-Distortion2.png, id=203, 237.88875pt x 211.992pt>
 File: figures/Tangential-Distortion2.png Graphic file (type png)
 <use figures/Tangential-Distortion2.png>
-Package pdftex.def Info: figures/Tangential-Distortion2.png  used on input line 262.
+Package pdftex.def Info: figures/Tangential-Distortion2.png  used on input line 249.
 (pdftex.def)             Requested size: 135.89174pt x 121.10193pt.
  [4 <./figures/Tangential-Distortion.png> <./figures/Tangential-Distortion2.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 297--299
+Underfull \hbox (badness 10000) in paragraph at lines 279--281
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 300--302
+Underfull \hbox (badness 10000) in paragraph at lines 282--284
 
  []
 
-<figures/checkerboard.png, id=222, 340.27126pt x 363.15675pt>
+<figures/checkerboard.png, id=225, 259.97125pt x 194.7275pt>
 File: figures/checkerboard.png Graphic file (type png)
 <use figures/checkerboard.png>
-Package pdftex.def Info: figures/checkerboard.png  used on input line 313.
-(pdftex.def)             Requested size: 158.54152pt x 169.20415pt.
+Package pdftex.def Info: figures/checkerboard.png  used on input line 294.
+(pdftex.def)             Requested size: 117.76915pt x 88.2119pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 318--320
+Underfull \hbox (badness 10000) in paragraph at lines 299--301
 
  []
 
 [5 <./figures/checkerboard.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 321--324
+Underfull \hbox (badness 10000) in paragraph at lines 302--305
 
  []
 
-<figures/reprojection_error.png, id=238, 1023.825pt x 850.17625pt>
+<figures/reprojection_error.png, id=242, 1023.825pt x 850.17625pt>
 File: figures/reprojection_error.png Graphic file (type png)
 <use figures/reprojection_error.png>
-Package pdftex.def Info: figures/reprojection_error.png  used on input line 335.
+Package pdftex.def Info: figures/reprojection_error.png  used on input line 316.
 (pdftex.def)             Requested size: 226.48395pt x 188.0642pt.
 [6 <./figures/reprojection_error.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 347--349
+Underfull \hbox (badness 10000) in paragraph at lines 328--330
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 359--361
+Underfull \hbox (badness 10000) in paragraph at lines 340--342
 
  []
 
-<figures/bundle_adjustement.png, id=253, 752.8125pt x 421.575pt>
+<figures/bundle_adjustement.png, id=258, 752.8125pt x 421.575pt>
 File: figures/bundle_adjustement.png Graphic file (type png)
 <use figures/bundle_adjustement.png>
-Package pdftex.def Info: figures/bundle_adjustement.png  used on input line 367.
+Package pdftex.def Info: figures/bundle_adjustement.png  used on input line 348.
 (pdftex.def)             Requested size: 249.13371pt x 139.51257pt.
 [7 <./figures/bundle_adjustement.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 377--379
+Underfull \hbox (badness 10000) in paragraph at lines 358--360
 
  []
 
+
+Underfull \hbox (badness 10000) in paragraph at lines 361--363
+
+ []
+
+<figures/multi_camera_array.png, id=282, 428.802pt x 242.1045pt>
+File: figures/multi_camera_array.png Graphic file (type png)
+<use figures/multi_camera_array.png>
+Package pdftex.def Info: figures/multi_camera_array.png  used on input line 375.
+(pdftex.def)             Requested size: 317.07614pt x 179.02892pt.
 
 Underfull \hbox (badness 10000) in paragraph at lines 380--382
 
  []
 
-<figures/multi_camera_array.png, id=277, 428.802pt x 242.1045pt>
-File: figures/multi_camera_array.png Graphic file (type png)
-<use figures/multi_camera_array.png>
-Package pdftex.def Info: figures/multi_camera_array.png  used on input line 393.
-(pdftex.def)             Requested size: 317.07614pt x 179.02892pt.
+[8 <./figures/multi_camera_array.png>]
+<figures/MLA.png, id=295, 602.25pt x 320.397pt>
+File: figures/MLA.png Graphic file (type png)
+<use figures/MLA.png>
+Package pdftex.def Info: figures/MLA.png  used on input line 394.
+(pdftex.def)             Requested size: 271.7835pt x 144.59286pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 398--400
+Underfull \hbox (badness 10000) in paragraph at lines 399--401
 
  []
 
-[8 <./figures/multi_camera_array.png>] [9] [10
 
-] [11
+Underfull \hbox (badness 10000) in paragraph at lines 407--409
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 410--412
+
+ []
+
+[9 <./figures/MLA.png>]
+Overfull \hbox (0.31989pt too wide) in paragraph at lines 413--415
+[]\T1/lmr/m/n/12 To over-come the lim-i-ta-tions of target-based cal-i-bra-tion, sev-eral self-calibration ap-proaches
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 413--415
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 416--418
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 419--421
+
+ []
+
+[10] [11
 
 ] [12
 
@@ -861,32 +900,34 @@ Underfull \hbox (badness 10000) in paragraph at lines 398--400
 
 ] [14
 
+] [15
+
 
 ] (thesis.bbl
-LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 11.
+LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 17.
  (C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmtt.fd
 File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-) [15
+) [16
 
 
-]) [16] (thesis.aux)
+] [17]) [18] (thesis.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2025-11-06>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 20149 strings out of 467871
- 363836 string characters out of 5417407
- 944030 words of memory out of 5000000
- 48581 multiletter control sequences out of 15000+600000
+ 20196 strings out of 467871
+ 364885 string characters out of 5417407
+ 945030 words of memory out of 5000000
+ 48616 multiletter control sequences out of 15000+600000
  689901 words of font info for 76 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  108i,13n,107p,11323b,665s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmex10.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi12.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi8.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr8.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri12.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmssbx10.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy8.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt12.pfb>
-Output written on thesis.pdf (21 pages, 1231686 bytes).
+Output written on thesis.pdf (23 pages, 862127 bytes).
 PDF statistics:
- 591 PDF objects out of 1000 (max. 8388607)
- 105 named destinations out of 1000 (max. 500000)
- 429 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 649 PDF objects out of 1000 (max. 8388607)
+ 117 named destinations out of 1000 (max. 500000)
+ 434 words of extra memory for PDF output out of 10000 (max. 10000000)
 

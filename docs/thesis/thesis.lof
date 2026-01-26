@@ -2,8 +2,9 @@
 \contentsline {figure}{\numberline {1}{\ignorespaces Illustration of the pinhole camera model. Source: \cite {MathWorksCameraCalibration}.}}{2}{figure.1}%
 \contentsline {figure}{\numberline {2}{\ignorespaces Comparison of different types of radial distortion. Source: \cite {opencv_calib3d_docs}.}}{3}{figure.2}%
 \contentsline {figure}{\numberline {3}{\ignorespaces Visualization of tangential distortion. Source: \cite {MathWorksCameraCalibration}, \cite {Lin2024Stereo}.}}{4}{figure.3}%
-\contentsline {figure}{\numberline {4}{\ignorespaces Example of a checkerboard and detected corner points. Source: \cite {OpenCV_Calibration}.}}{5}{figure.4}%
+\contentsline {figure}{\numberline {4}{\ignorespaces Example of a checkerboard and detected corner points. Source: \cite {HedleyJonesCalibrationCheckerboards}.}}{5}{figure.4}%
 \contentsline {figure}{\numberline {5}{\ignorespaces Visualization of reprojection error. Source: \cite {CamCalibReprojectionError}.}}{6}{figure.5}%
 \contentsline {figure}{\numberline {6}{\ignorespaces Visual representation of bundle adjustment. Source: \cite {Baeldung2024BundleAdjustment}.}}{7}{figure.6}%
 \contentsline {figure}{\numberline {7}{\ignorespaces Representation of a multi-camera system. Source: \cite {multi_camera_calibration}.}}{8}{figure.7}%
+\contentsline {figure}{\numberline {8}{\ignorespaces Structure of a micro-lens-array-based light field camera. Source: \cite {LiFCal}.}}{9}{figure.8}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 
