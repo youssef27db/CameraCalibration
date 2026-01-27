@@ -5,11 +5,6 @@
   \providecommand{\doi}[1]{doi: #1}\else
   \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
 
-\bibitem[720(1998)]{720574}
-Ieee recommended practice for software requirements specifications.
-\newblock \emph{IEEE Std 830-1998}, pages 1--40, 1998.
-\newblock \doi{10.1109/IEEESTD.1998.88286}.
-
 \bibitem[Anisimov et~al.(2021)Anisimov, Reis, and
   Stricker]{anisimov2021calibration_auto_refinement}
 Yuriy Anisimov, Gerd Reis, and Didier Stricker.
@@ -98,6 +93,12 @@ Jiachun Huang, Shaoli Liu, Jianhua Liu, and Zehua Jian.
 \newblock URL
   \url{https://www.researchgate.net/figure/Camera-calibration-results-a-Reprojection-error-and-b-relative-positions-of-the_fig9_301715405}.
 \newblock In Fig. 5.
+
+\bibitem[IEEE(1998)]{720574}
+IEEE.
+\newblock Ieee recommended practice for software requirements specifications.
+\newblock \emph{IEEE Std 830-1998}, pages 1--40, 1998.
+\newblock \doi{10.1109/IEEESTD.1998.88286}.
 
 \bibitem[Jones(2025)]{HedleyJonesCalibrationCheckerboards}
 Mark~Hedley Jones.

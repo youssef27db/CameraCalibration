@@ -601,8 +601,30 @@ These requirements form the basis for the system design and implementation prese
 The requirements specification is intentionally kept compact and focused. It is not intended to represent a complete industrial requirements document, but rather a research-oriented specification that is appropriate for the scope and objectives of this bachelor thesis.
 
 \subsubsection{UML Class Diagram}
-% Main software components
-% Responsibilities and relationships
+
+Based on the requirements analysis and the defined use case, a UML class diagram was designed to structure and illustrate the main components of the project. The diagram in \autoref{fig:uml_class_diagram} shows the key classes, their attributes, methods, and relationships.
+\clearpage
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[scale=0.75, trim=0 20cm 0 0]{figures/UML.pdf}
+    \caption{UML Class Diagram}
+    \label{fig:uml_class_diagram}
+\end{figure}
+
+The software architecture is based on a modular design, so that individual components can be developed, tested, and maintained independently. If future extensions or modifications are needed, the structure allows the easy integration of new features without major changes to the existing codebase.
+\newline 
+
+The core class is the \texttt{controller}, which manages the overall calibration workflow. It coordinates the initial calibration, periodic recalibration attempts, health monitoring, and logging. The controller interacts with several classes that contain the specific functionalities.
+\newline
+
+The initial calibration and periodic recalibration are implemented in the \texttt{InitialCalibra-\allowbreak tion} and \texttt{run\_LiFCal\_calibration} classes, respectively. To run these classes correctly, the \texttt{run\_initial\_calibration}, \texttt{run\_periodic\_lifcal}, and \texttt{run\_imageset\_creation} classes are responsible for preparing the required data and executing the calibration processes. In addition, the \texttt{depthmap} class creates, based on the image set, a depth map for each image, which is used for the LiFCal calibration. For health monitoring and decision-making, the \texttt{HealthMonitoring} class computes the health scores and applies the acceptance rules based on the defined criteria. These criteria will be discussed in the next section.
+\newline
+
+The \texttt{LiFCal} class implements the target-free calibration method proposed by Fleith et al.~\cite{LiFCal}. This class encapsulates the core logic of LiFCal, including the bundle adjustment optimization. It provides methods to run the calibration process and retrieve the estimated camera parameters.
+\newline
+
+Finally, for results and traceability, the \texttt{ResultLogger}, \texttt{lifcal\_to\_json}, and \texttt{Calibra-\allowbreak tionState} classes handle the logging of calibration runs, health evaluations, and decisions. This ensures that all relevant information is recorded in a structured format for later analysis.
 
 \subsubsection{Health Monitoring and Decision Metrics}
 % Health score computation
