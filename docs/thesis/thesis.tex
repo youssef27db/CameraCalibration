@@ -434,6 +434,8 @@ Overall, existing work shows that calibration accuracy in light field systems re
 % ---------------------------------------------------------
 \subsection{Methods}
 
+In this section, the design and implementation of the calibration software are described. It describes the overall workflow, the use case scenario, and the specific requirements that guided the development process. The UML class diagram and state diagram illustrate the software architecture and behavior.
+
 \subsubsection{Overall approach}
 
 The goal of this thesis is to develop and evaluate an automatic calibration framework for multi-camera light field systems based on the target-free calibration method proposed by Fleith et al.~\cite{LiFCal}. As discussed in the state of the art, classical target-based calibration approaches require manual intervention and careful placement of calibration targets, which limits their applicability in long-term deployments or scenarios with restricted human access.
@@ -522,7 +524,6 @@ This structure allows the system to maintain accurate calibration parameters ove
 \newline
 
 This use case serves as the conceptual basis for the requirements analysis and system design presented in the following sections.
-\clearpage
 
 \subsubsection{Requirements Analysis}
 
@@ -603,7 +604,6 @@ The requirements specification is intentionally kept compact and focused. It is 
 \subsubsection{UML Class Diagram}
 
 Based on the requirements analysis and the defined use case, a UML class diagram was designed to structure and illustrate the main components of the project. The diagram in \autoref{fig:uml_class_diagram} shows the key classes, their attributes, methods, and relationships.
-\clearpage
 
 \begin{figure}[htbp]
     \centering
@@ -708,9 +708,15 @@ This formulation is applied to LiFCal-based recalibration results. It evaluates 
 
 
 \subsubsection{State Diagram}
-% System states
-% Transitions between calibration phases
-% Periodic execution and decision flow
+
+In order to illustrate the workflow and interactions between the different calibration phases and components, a state diagram is presented in \autoref{fig:state_diagram}. This diagram visualizes the transitions between the initial calibration, periodic recalibration attempts, and health evaluation steps.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[scale=0.36]{figures/Zustandsdiagramm.png}
+    \caption{State Diagram}
+    \label{fig:state_diagram}
+\end{figure}
 
 
 % ---------------------------------------------------------
