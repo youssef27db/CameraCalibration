@@ -627,10 +627,85 @@ The \texttt{LiFCal} class implements the target-free calibration method proposed
 Finally, for results and traceability, the \texttt{ResultLogger}, \texttt{lifcal\_to\_json}, and \texttt{Calibra-\allowbreak tionState} classes handle the logging of calibration runs, health evaluations, and decisions. This ensures that all relevant information is recorded in a structured format for later analysis.
 
 \subsubsection{Health Monitoring and Decision Metrics}
-% Health score computation
-% Initial calibration health
-% LiFCal-based health
-% Acceptance and rollback logic
+
+As mentioned in the use case description, a key component of the proposed calibration framework is the health monitoring mechanism. This mechanism evaluates the quality of each recalibration attempt and decides whether to accept or reject the new calibration based on defined metrics. To define these metrics, the followeing formulas are used:
+
+\begin{equation}
+\text{HealthScore} = 100 \cdot \left( 1 - \left( 0.6 \cdot E_{\text{reproj}}^{2}
++ 0.4 \cdot E_{\text{rms}}^{2} \right) \right)
+\end{equation}
+\vspace{0.1cm}
+
+
+\begin{equation}
+E_{\text{reproj}} =
+\mathrm{clamp}\!\left(
+\frac{e_{\text{reproj}} - R_{\text{BEST}}}
+{R_{\text{WORST}} - R_{\text{BEST}}},\; 0,\; 1
+\right)
+\end{equation}
+\vspace{0.1cm}
+
+
+\begin{equation}
+E_{\text{rms}} =
+\mathrm{clamp}\!\left(
+\frac{e_{\text{rms}} - S_{\text{BEST}}}
+{S_{\text{WORST}} - S_{\text{BEST}}},\; 0,\; 1
+\right)
+\end{equation}
+\vspace{0.2cm}
+
+
+This health score formulation is used for the initial target-based calibration. It combines normalized reprojection error and RMS error into a single scalar score in the range [0,100], where higher values indicate better calibration quality. Clamp functions ensure that the error terms are bounded between 0 and 1 based on predefined best and worst-case thresholds. The weights are chosen to give slightly higher priority to the reprojection error than to the RMS error. This choice follows common practice in the literature, where reprojection error is treated as a primary indicator of calibration correctness and overall geometric accuracy.
+\newline
+
+For the LiFCal-based recalibration, a similar health score is computed using LiFCal-specific metrics:
+
+\begin{equation}
+\text{HealthScore}_{\text{LiFCal}} =
+100 \cdot \left[ 1 -
+\left( 0.6 \cdot E_{\text{std}}^{2}
++ 0.4 \cdot E_{\text{mae}}^{2} \right) \right]
+\end{equation}
+\vspace{0.1cm}
+
+
+\begin{equation}
+E_{\text{std}} =
+\mathrm{clamp}\!\left(
+\frac{
+\sqrt{x_{\text{std}}^{2} + y_{\text{std}}^{2}} - S_{\text{BEST}}
+}
+{S_{\text{WORST}} - S_{\text{BEST}}},\; 0,\; 1
+\right)
+\end{equation}
+\vspace{0.1cm}
+
+
+\begin{equation}
+E_{\text{mae}} =
+\mathrm{clamp}\!\left(
+\frac{
+\sqrt{x_{\text{mae}}^{2} + y_{\text{mae}}^{2}} - R_{\text{BEST}}
+}
+{R_{\text{WORST}} - R_{\text{BEST}}},\; 0,\; 1
+\right)
+\end{equation}
+\vspace{0.1cm}
+
+
+with
+\[
+R_{\text{BEST}} = 0.03,\quad
+R_{\text{WORST}} = 1.0,\quad
+S_{\text{BEST}} = 0.0,\quad
+S_{\text{WORST}} = 50.0
+\]
+\vspace{0.05cm}
+
+This formulation is applied to LiFCal-based recalibration results. It evaluates the stability and consistency of the estimated camera parameters using standard deviation and mean absolute error metrics. The resulting health score enables a direct comparison with the baseline calibration to support automated acceptance or rejection decisions. The initial and recalibration health scores are computed differently due to the different result metrics provided by the respective calibration methods. The specific best and worst-case values are defined also based on calibration performance which we discussed in Calibration Parameters and Error Metrics section.
+
 
 \subsubsection{State Diagram}
 % System states

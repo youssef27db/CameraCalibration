@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.12.24)  27 JAN 2026 15:26
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.12.24)  27 JAN 2026 15:50
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -717,7 +717,7 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.51 ... {6}Conclusion and Outlook}{19}{section.6}
+l.51 ... {6}Conclusion and Outlook}{20}{section.6}
                                                   % [2
 
 
@@ -965,36 +965,41 @@ Underfull \hbox (badness 10000) in paragraph at lines 624--626
 
 [15
 
- <./figures/UML.pdf>] [16] [17
+ <./figures/UML.pdf>]
+Underfull \hbox (badness 10000) in paragraph at lines 660--662
 
-] [18
+ []
+
+[16] [17] [18
 
 ] [19
 
 ] [20
 
+] [21
 
-] (thesis.bbl [21
+
+] (thesis.bbl [22
 
 
-] [22]) [23] (thesis.aux)
+] [23]) [24] (thesis.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2025-11-06>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 20236 strings out of 467871
- 365714 string characters out of 5417407
+ 20245 strings out of 467871
+ 365846 string characters out of 5417407
  946030 words of memory out of 5000000
- 48638 multiletter control sequences out of 15000+600000
+ 48640 multiletter control sequences out of 15000+600000
  689901 words of font info for 76 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  108i,13n,107p,11323b,665s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmex10.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi12.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi8.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr8.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri12.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmssbx10.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy8.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt12.pfb>
-Output written on thesis.pdf (28 pages, 1410172 bytes).
+Output written on thesis.pdf (29 pages, 1419872 bytes).
 PDF statistics:
- 710 PDF objects out of 1000 (max. 8388607)
- 135 named destinations out of 1000 (max. 500000)
+ 721 PDF objects out of 1000 (max. 8388607)
+ 142 named destinations out of 1000 (max. 500000)
  447 words of extra memory for PDF output out of 10000 (max. 10000000)
 
