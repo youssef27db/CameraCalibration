@@ -429,12 +429,11 @@ Overall, existing work shows that calibration accuracy in light field systems re
 % =========================================================
 \section{Methods and Materials}
 
-% ---------------------------------------------------------
-% 3.1 Method
-% ---------------------------------------------------------
+This chapter introduces the methods and materials used in this thesis, covering both the design of the calibration framework and the technical setup used for its implementation and evaluation.
+
 \subsection{Methods}
 
-In this section, the design and implementation of the calibration software are described. It describes the overall workflow, the use case scenario, and the specific requirements that guided the development process. The UML class diagram and state diagram illustrate the software architecture and behavior.
+In this first section, the design and implementation of the calibration software are described. It describes the overall workflow, the use case scenario, and the specific requirements that guided the development process. The UML class diagram and state diagram illustrate the software architecture and behavior.
 
 \subsubsection{Overall approach}
 
@@ -765,10 +764,11 @@ For the LiFCal-based recalibration, a different scene was created without a cali
 Therefore, another scene from the Blender community was used
 \cite{Free3DLivingRoom997877}, which represents a modern living room with furniture and decorations. The same camera setup was used, and the scene was rendered from different viewpoints to create the required image sets. An example of the scene used for LiFCal recalibration is shown in \autoref{fig:blender_lifcal_scene}.
 
-\vspace{0.3cm}
+\vspace{0.5cm}
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.6\textwidth]{figures/pose015_Up3.png}
+    \vspace{0.2cm}
     \caption{Example of a Blender scene for LiFCal recalibration without a calibration target.}
     \label{fig:blender_lifcal_scene}
 \end{figure}

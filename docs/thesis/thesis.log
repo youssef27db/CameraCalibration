@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.12.24)  28 JAN 2026 14:12
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.12.24)  28 JAN 2026 14:47
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -893,38 +893,38 @@ Underfull \hbox (badness 10000) in paragraph at lines 419--421
  []
 
 [10]
-Underfull \hbox (badness 10000) in paragraph at lines 441--443
+Underfull \hbox (badness 10000) in paragraph at lines 440--442
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 444--446
+Underfull \hbox (badness 10000) in paragraph at lines 443--445
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 447--449
+Underfull \hbox (badness 10000) in paragraph at lines 446--448
 
  []
 
 [11
 
 ]
-LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 470.
+LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 469.
  (C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmtt.fd
 File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-Overfull \hbox (14.5723pt too wide) in paragraph at lines 496--499
+Overfull \hbox (14.5723pt too wide) in paragraph at lines 495--498
 \T1/lmr/m/n/12 tamped JSON file and all rel-e-vant ex-e-cu-tion de-tails are ap-pended to \T1/lmtt/m/n/12 calibration.log\T1/lmr/m/n/12 . 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 523--525
+Underfull \hbox (badness 10000) in paragraph at lines 522--524
 
  []
 
 [12] [13]
-Underfull \hbox (badness 10000) in paragraph at lines 599--601
+Underfull \hbox (badness 10000) in paragraph at lines 598--600
 
  []
 
@@ -934,35 +934,35 @@ pdfTeX warning: pdflatex (file ./figures/UML.pdf): PDF inclusion: found PDF vers
 <figures/UML.pdf, id=370, 597.19106pt x 845.07718pt>
 File: figures/UML.pdf Graphic file (type pdf)
 <use figures/UML.pdf>
-Package pdftex.def Info: figures/UML.pdf  used on input line 610.
+Package pdftex.def Info: figures/UML.pdf  used on input line 609.
 (pdftex.def)             Requested size: 447.8922pt x 207.01604pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 615--617
+Underfull \hbox (badness 10000) in paragraph at lines 614--616
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 618--620
+Underfull \hbox (badness 10000) in paragraph at lines 617--619
 
  []
 
 
-Overfull \hbox (2.9289pt too wide) in paragraph at lines 621--623
+Overfull \hbox (2.9289pt too wide) in paragraph at lines 620--622
 []\T1/lmr/m/n/12 The ini-tial cal-i-bra-tion and pe-ri-odic re-cal-i-bra-tion are im-ple-mented in the \T1/lmtt/m/n/12 InitialCalibra-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 621--623
+Underfull \hbox (badness 10000) in paragraph at lines 620--622
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 624--626
+Underfull \hbox (badness 10000) in paragraph at lines 623--625
 
  []
 
 [15 <./figures/UML.pdf>]
-Underfull \hbox (badness 10000) in paragraph at lines 660--662
+Underfull \hbox (badness 10000) in paragraph at lines 659--661
 
  []
 
@@ -970,28 +970,28 @@ Underfull \hbox (badness 10000) in paragraph at lines 660--662
 <figures/Zustandsdiagramm.png, id=401, 436.63126pt x 1158.57843pt>
 File: figures/Zustandsdiagramm.png Graphic file (type png)
 <use figures/Zustandsdiagramm.png>
-Package pdftex.def Info: figures/Zustandsdiagramm.png  used on input line 716.
+Package pdftex.def Info: figures/Zustandsdiagramm.png  used on input line 715.
 (pdftex.def)             Requested size: 157.18713pt x 417.08792pt.
  [17 <./figures/Zustandsdiagramm.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 731--733
+Underfull \hbox (badness 10000) in paragraph at lines 730--732
 
  []
 
 <figures/LFC.png, id=410, 447.47176pt x 322.20375pt>
 File: figures/LFC.png Graphic file (type png)
 <use figures/LFC.png>
-Package pdftex.def Info: figures/LFC.png  used on input line 747.
+Package pdftex.def Info: figures/LFC.png  used on input line 746.
 (pdftex.def)             Requested size: 221.95676pt x 159.81828pt.
 [18 <./figures/LFC.png>]
 <figures/pose_015_Up3.png, id=419, 1284.8pt x 722.7pt>
 File: figures/pose_015_Up3.png Graphic file (type png)
 <use figures/pose_015_Up3.png>
-Package pdftex.def Info: figures/pose_015_Up3.png  used on input line 758.
+Package pdftex.def Info: figures/pose_015_Up3.png  used on input line 757.
 (pdftex.def)             Requested size: 271.7835pt x 152.87422pt.
 <figures/pose015_Up3.png, id=422, 1284.8pt x 722.7pt>
 File: figures/pose015_Up3.png Graphic file (type png)
 <use figures/pose015_Up3.png>
-Package pdftex.def Info: figures/pose015_Up3.png  used on input line 771.
+Package pdftex.def Info: figures/pose015_Up3.png  used on input line 770.
 (pdftex.def)             Requested size: 271.7835pt x 152.87422pt.
  [19 <./figures/pose_015_Up3.png> <./figures/pose015_Up3.png>]
 Underfull \hbox (badness 10000) in paragraph at lines 783--785
@@ -1032,7 +1032,7 @@ Here is how much of TeX's memory you used:
  1141 hyphenation exceptions out of 8191
  108i,13n,107p,11323b,665s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmex10.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi12.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi8.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr8.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri12.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmssbx10.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy8.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt12.pfb>
-Output written on thesis.pdf (32 pages, 2562624 bytes).
+Output written on thesis.pdf (32 pages, 2562778 bytes).
 PDF statistics:
  765 PDF objects out of 1000 (max. 8388607)
  152 named destinations out of 1000 (max. 500000)
