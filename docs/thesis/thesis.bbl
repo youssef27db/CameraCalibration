@@ -1,4 +1,4 @@
-\begin{thebibliography}{30}
+\begin{thebibliography}{33}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -22,6 +22,12 @@ Yuriy Anisimov, Gerd Reis, and Didier Stricker.
 \newblock \url{https://www.camcalib.io/post/what-is-the-reprojection-error},
   2022.
 \newblock CamCalib blog, accessed 2026-01-21.
+
+\bibitem[Community(2018)]{Blender}
+Blender~Online Community.
+\newblock \emph{Blender - a 3D modelling and rendering package}.
+\newblock Blender Foundation, Stichting Blender Foundation, Amsterdam, 2018.
+\newblock URL \url{http://www.blender.org}.
 
 \bibitem[Cremers(2019)]{cremers2019bundleadjustment}
 Daniel Cremers.
@@ -158,6 +164,14 @@ Shih-Hao Lin, En-Tze Chen, Jia-Jun Xiao, and Ching-Yuan Chang.
 \newblock OpenCV 4.x Documentation, calib3d module, 2025.
 \newblock URL \url{https://docs.opencv.org/4.x/d9/d0c/group__calib3d.html}.
 
+\bibitem[rahadianrayhan(2021)]{Free3DLivingRoom997877}
+rahadianrayhan.
+\newblock Living room 3d model.
+\newblock Free3D online 3D model, 2021.
+\newblock URL \url{https://free3d.com/3d-model/living-room-997877.html}.
+\newblock Blender, FBX, and OBJ formats, 20 035 vertices, 18 735 faces, 38 514
+  triangles.
+
 \bibitem[Ricolfe‐Viala and S{\'a}nchez‐Salmer{\'o}n(2010)]{ricolfe2010lens}
 Carlos Ricolfe‐Viala and Antonio‐Jos{\'e} S{\'a}nchez‐Salmer{\'o}n.
 \newblock Lens distortion models evaluation.
@@ -165,6 +179,13 @@ Carlos Ricolfe‐Viala and Antonio‐Jos{\'e} S{\'a}nchez‐Salmer{\'o}n.
 \newblock \doi{10.1364/AO.49.005914}.
 \newblock URL
   \url{https://www.researchgate.net/publication/47510646_Lens_distortion_models_evaluation}.
+
+\bibitem[satriacaster(2021)]{Free3DIsometricRoom2021}
+satriacaster.
+\newblock Isometric room 3d model.
+\newblock Free3D online 3D model, 2021.
+\newblock URL \url{https://free3d.com/3d-model/isometric-room-525234.html}.
+\newblock Blender (.blend), textures and materials included.
 
 \bibitem[Song et~al.(2025)Song, Lee, Lim, and Kim]{song2025camera}
 Chaehyeon Song, Dongjae Lee, Jongwoo Lim, and Ayoung Kim.

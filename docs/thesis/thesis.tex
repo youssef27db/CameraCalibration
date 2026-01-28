@@ -724,23 +724,70 @@ In order to illustrate the workflow and interactions between the different calib
 % ---------------------------------------------------------
 \subsection{Materials}
 
+In this chapter, the materials and tools used for the implementation and testing of the calibration software are described and presented. Due to the lack of a physical multi-camera light field system, synthetic data generation with Blender was used to create realistic test scenarios. The structure of the image sets, ground truth definitions, and the runtime environment are also discussed.
+
+\subsubsection{Runtime Environment and Toolchain} 
+
+Most parts of the implementation are based on established open-source libraries and tools. The primary programming language used is Python, chosen for its extensive ecosystem supporting computer vision, numerical computation, and scientific prototyping. Core libraries include OpenCV for calibration and image processing, NumPy for numerical operations, and Matplotlib for visualization. The LiFCal implementation provided by Fleith et al.~\cite{LiFCal} was integrated into the workflow to perform target-free recalibration. 
+\newline 
+
+The development and evaluation were conducted on a system running Ubuntu~20.04.6 LTS. A complete list of software dependencies and library versions is documented in the project repository README files to support reproducibility. It should be noted that the LiFCal implementation relies on GPU acceleration and requires a compatible NVIDIA GPU to execute the optimization efficiently. Consequently, LiFCal-based recalibration cannot be performed on systems without suitable GPU support.
+
 \subsubsection{Synthetic Data Generation with Blender}
-% Blender-based scene setup
-% Camera array geometry
-% Pose variation
-% Motivation for synthetic data and reproducibility
 
-\subsubsection{Image Sets and Ground Truth Definition}
-% Image set structure
-% Naming conventions
-% Pose sampling
-% Ground truth availability
+To evaluate and test the proposed system, a world scene was simulated using open-source software. This software is Blender \cite{Blender}, which also considers physical properties of light, materials, and camera optics to generate
+realistic images.
+\vspace{0.2cm}
 
-\subsubsection{Runtime Environment and Toolchain}
-% Operating system
-% Programming language and libraries
-% External tools (OpenCV, LiFCal)
-% Custom scripts and execution workflow
+The first step was to create the multi-camera array geometry. As described in the use case, a cross-shaped arrangement with one central camera and twelve surrounding cameras was constructed. Each camera was configured with the same sensor size and a focal length of 50\,mm to make the image sets as realistic as possible. The cameras were placed at equal distances from their neighboring cameras, forming a cross shape. Each camera was positioned on a grid to simulate the main structure of the array, as shown in \autoref{fig:blender_camera_array}.
+
+%\vspace{0.3cm}
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.49\textwidth]{figures/LFC.png}
+    \caption{Multi-camera array setup in Blender.}
+    \label{fig:blender_camera_array}
+\end{figure}
+
+The first scene that needed to be created included a calibration target for the initial calibration. Therefore, a checkerboard pattern was modeled and placed in front of a scene obtained from the Blender community \cite{Free3DIsometricRoom2021}. The checkerboard was positioned in different locations and orientations to simulate a realistic calibration scenario. Due to the multi-camera setup, rendering the images took several minutes per pose, because each camera view had to be rendered individually. After rendering, the images were organized into folders according to the naming conventions required by the calibration scripts. The scene created for the initial calibration was
+modeled as a simple room, as shown in \autoref{fig:blender_checkerboard_scene}.
+
+\vspace{0.3cm}
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures/pose_015_Up3.png}
+    \caption{Example of a Blender scene for the initial calibration with a checkerboard.}
+    \label{fig:blender_checkerboard_scene}
+\end{figure}
+
+\vspace{0.3cm}
+For the LiFCal-based recalibration, a different scene was created without a calibration target. Since LiFCal relies on feature detection and depth maps, the scene had to be more complex and include a variety of objects and textures.
+Therefore, another scene from the Blender community was used
+\cite{Free3DLivingRoom997877}, which represents a modern living room with furniture and decorations. The same camera setup was used, and the scene was rendered from different viewpoints to create the required image sets. An example of the scene used for LiFCal recalibration is shown in \autoref{fig:blender_lifcal_scene}.
+
+\vspace{0.3cm}
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures/pose015_Up3.png}
+    \caption{Example of a Blender scene for LiFCal recalibration without a calibration target.}
+    \label{fig:blender_lifcal_scene}
+\end{figure}
+\clearpage
+
+The motivation behind using synthetic data was to maintain full control over the scene configuration and to simulate different calibration scenarios without the need for physical hardware. Another major advantage is the availability of ground truth camera parameters, which is essential for comparing the estimated calibration results with the actual values. This enables a more objective evaluation of calibration accuracy and the effectiveness of the implemented
+software.
+
+
+\subsubsection{Image Sets and Ground Truth Definition} 
+
+To evaluate the calibration methods effectively, multiple image sets were created with different numbers of poses and camera views. In addition, for each image set, the multi-camera system was deliberately decalibrated to simulate real-world scenarios in which calibration quality may degrade over time due to mechanical or environmental influences. 
+\newline 
+
+The naming conventions for the image sets followed a structured and consistent format to ensure maintainability and usability. Each image set was organized into folders according to the calibration phase (initial calibration or LiFCal-based recalibration). File names encoded both the pose number and the camera identifier, for example \texttt{pose\_001\_Up1.png}. 
+\newline 
+
+The ground truth camera parameters were directly extracted from Blender. Since camera positions, orientations, and intrinsic parameters were explicitly defined within the 3D scene, the exact intrinsic and extrinsic parameters were known internally. The ground truth data was stored in JSON format, following the same structure as the calibration results, to enable direct and systematic comparison during evaluation. For each camera, both intrinsic parameters and extrinsic poses were included. 
+
 
 \clearpage
 
