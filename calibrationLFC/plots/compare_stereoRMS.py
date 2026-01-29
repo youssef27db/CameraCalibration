@@ -23,7 +23,7 @@ def load_stereo_rms(path):
     with open(path, "r") as f:
         data = json.load(f)
 
-    # Kamerareihenfolge wie im Meta-Block
+    # Camera order as in meta block
     cam_ids = data["meta"]["cameraIds"]
     extrinsics = data["state"]["extrinsics"]
 
@@ -32,7 +32,7 @@ def load_stereo_rms(path):
 
     for cam in cam_ids:
         if cam not in extrinsics:
-            # Falls für eine Kamera keine Stereo-Kalibrierung existiert, überspringen
+            # Skip if no stereo calibration exists for this camera
             continue
         cams.append(cam)
         rms = float(extrinsics[cam].get("stereoRms", 0.0))
@@ -54,14 +54,14 @@ def main():
         marker="o",
         linestyle="-",
         linewidth=2,
-        color="#9467bd",  # leicht violett
+        color="#9467bd",  # slightly purple
         label="Stereo RMS"
     )
 
     ax.set_xticks(x)
     ax.set_xticklabels(cams, rotation=45)
     ax.set_ylabel("Stereo-Reprojection Error (Pixel)")
-    ax.set_title("StereoRMS pro Kamera (OpenCV stereoCalibrate)")
+    ax.set_title("StereoRMS per Camera (OpenCV stereoCalibrate)")
     ax.grid(alpha=0.3)
     ax.legend()
 

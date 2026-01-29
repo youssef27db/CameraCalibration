@@ -12,5 +12,9 @@
 \contentsline {figure}{\numberline {11}{\ignorespaces Multi-camera array setup in Blender.}}{18}{figure.11}%
 \contentsline {figure}{\numberline {12}{\ignorespaces Example of a Blender scene for the initial calibration with a checkerboard.}}{19}{figure.12}%
 \contentsline {figure}{\numberline {13}{\ignorespaces Example of a Blender scene for LiFCal recalibration without a calibration target.}}{19}{figure.13}%
-\contentsline {figure}{\numberline {14}{\ignorespaces Intrinsic parameter deviations from ground truth for the initial calibration.}}{21}{figure.14}%
+\contentsline {figure}{\numberline {14}{\ignorespaces Intrinsic parameter deviations from ground truth and the initial calibration.}}{21}{figure.14}%
+\contentsline {figure}{\numberline {15}{\ignorespaces Translation parameter deviations from ground truth and the initial calibration.}}{22}{figure.15}%
+\contentsline {figure}{\numberline {16}{\ignorespaces Extrinsic parameter errors of the initial calibration.}}{22}{figure.16}%
+\contentsline {figure}{\numberline {17}{\ignorespaces Reprojection error per camera of the initial calibration.}}{23}{figure.17}%
+\contentsline {figure}{\numberline {18}{\ignorespaces Stereo RMS error of the initial calibration.}}{23}{figure.18}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

@@ -1,13 +1,13 @@
 # Fdb version 4
-["bibtex thesis"] 1769688514.87876 "thesis.aux" "thesis.bbl" "thesis" 1769688522.04758 0
+["bibtex thesis"] 1769693479.97584 "thesis.aux" "thesis.bbl" "thesis" 1769693491.19991 0
   "./references.bib" 1769601427 18207 2d06e948e2e4967d867142a1ebaf575a ""
   "C:/Users/Youssef/AppData/Local/Programs/MiKTeX/bibtex/bst/natbib/plainnat.bst" 1284455456 26816 ffe5423d2019860bad9f54bc402fac15 ""
-  "thesis.aux" 1769688521 34846 24658d95a7239ae852c4e644ee01b0b6 "pdflatex"
+  "thesis.aux" 1769693489 36734 32411de4fa9b8648681b271cd890c4f0 "pdflatex"
   (generated)
   "thesis.bbl"
   "thesis.blg"
   (rewritten before read)
-["pdflatex"] 1769688515.36676 "c:/Users/Youssef/Desktop/UNI/S7/Bachelorarbeit/Data-Driven-Camera-Calibration/docs/thesis/thesis.tex" "thesis.pdf" "thesis" 1769688522.04813 0
+["pdflatex"] 1769693480.55188 "c:/Users/Youssef/Desktop/UNI/S7/Bachelorarbeit/Data-Driven-Camera-Calibration/docs/thesis/thesis.tex" "thesis.pdf" "thesis" 1769693491.20073 0
   "C:/Users/Youssef/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1769359089 80909 eab91d9745dd2edfd62a31d53cd5fe15 ""
   "C:/Users/Youssef/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1766607759 13334480 b92fcb493ecc752ef4c30cc4c325b5bb ""
   "C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ec.enc" 1256929440 2375 baa924870cfb487815765f9094cf3728 ""
@@ -171,7 +171,7 @@
   "C:/Users/Youssef/AppData/Local/Programs/MiKTeX/tex/latex/url/url.sty" 1388490452 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
   "C:/Users/Youssef/AppData/Local/Programs/MiKTeX/tex/latex/xcolor/xcolor.sty" 1729265222 55384 b454dec21c2d9f45ec0b793f0995b992 ""
   "C:/Users/Youssef/AppData/Local/Programs/MiKTeX/tex/latex/xurl/xurl.sty" 1641733940 4675 e4b8c405820368c2dfb03526e16d725a ""
-  "c:/Users/Youssef/Desktop/UNI/S7/Bachelorarbeit/Data-Driven-Camera-Calibration/docs/thesis/thesis.tex" 1769688515 55784 c0b487343e85c131ef0539bcfeebb010 ""
+  "c:/Users/Youssef/Desktop/UNI/S7/Bachelorarbeit/Data-Driven-Camera-Calibration/docs/thesis/thesis.tex" 1769693465 59639 d366583fa2a295e2ec2eab19fa3b0d5e ""
   "figures/LFC.png" 1769600162 113176 88c5bd7cf6cd959d38b1fcc39be4103c ""
   "figures/MLA.png" 1769363893 106880 21bfbcea5077cd37415b959554859f6c ""
   "figures/Pinhole-Camera.png" 1769093567 15984 36a3698864eadca0397b3f9a23806a6d ""
@@ -182,16 +182,20 @@
   "figures/Zustandsdiagramm.png" 1769526592 90433 69700c5f713b1e69078817f7074ac768 ""
   "figures/bundle_adjustement.png" 1769264676 12609 e1c5d6eea5af3aa78de97a87540db65e ""
   "figures/checkerboard.png" 1769371369 4828 f68199f54538a8243ea5980a71d15a81 ""
+  "figures/compare_extrinsics.png" 1769690590 119802 e875b8c9363d0dddf26cccc484f8c567 ""
   "figures/compare_intrinsic.png" 1769687626 179062 c85a5965f3205fbf4b96a9967be09a5c ""
+  "figures/compare_reprojectionError.png" 1769691906 84121 334b8830ec37b9044363999442cd115a ""
+  "figures/compare_stereoRMS.png" 1769691439 116326 6224c64005c359d0775402f062dbe767 ""
+  "figures/compare_translation.png" 1769690172 414081 0ce463fac2b4380e12b57954bf1c75f9 ""
   "figures/multi_camera_array.png" 1769360306 138691 d5bb1baafdb6582a1ed78d459cf3f308 ""
   "figures/pose015_Up3.png" 1769009969 887610 d4601e5813d8aff4b0786b260d5b9ddc ""
   "figures/pose_015_Up3.png" 1767958643 837803 72eaab973016a82131df74629b9b1b8e ""
   "figures/reprojection_error.png" 1769258359 100222 75d86df95b5f80c8d9096bd60c390668 ""
-  "thesis.aux" 1769688521 34846 24658d95a7239ae852c4e644ee01b0b6 "pdflatex"
-  "thesis.bbl" 1769688515 12275 c8d1ff39d4e5a930802bbbac54b4aa46 "bibtex thesis"
-  "thesis.lof" 1769688521 2106 0726878efcefdd6fde4793fb54d77503 "pdflatex"
-  "thesis.tex" 1769688515 55784 c0b487343e85c131ef0539bcfeebb010 ""
-  "thesis.toc" 1769688521 5152 2b5ff88e375b65390678ca53b1539f93 "pdflatex"
+  "thesis.aux" 1769693489 36734 32411de4fa9b8648681b271cd890c4f0 "pdflatex"
+  "thesis.bbl" 1769693480 12275 c8d1ff39d4e5a930802bbbac54b4aa46 "bibtex thesis"
+  "thesis.lof" 1769693489 2632 1f4512f1fa359eef154486d070b75904 "pdflatex"
+  "thesis.tex" 1769693465 59639 d366583fa2a295e2ec2eab19fa3b0d5e ""
+  "thesis.toc" 1769693489 5273 875f6d8e2800ab31f2c2f622ad4b9db4 "pdflatex"
   (generated)
   "thesis.aux"
   "thesis.lof"
