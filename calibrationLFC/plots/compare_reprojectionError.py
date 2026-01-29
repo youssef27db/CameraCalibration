@@ -55,7 +55,7 @@ def main():
 
     plt.xticks(x, cams, rotation=45)
     plt.ylabel("Reprojection Error (RMS)")
-    plt.title("Reprojection Error pro Kamera")
+    plt.title("Reprojection Error per Camera")
     plt.grid(alpha=0.3)
     plt.legend()
 

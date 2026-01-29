@@ -12,4 +12,5 @@
 \contentsline {figure}{\numberline {11}{\ignorespaces Multi-camera array setup in Blender.}}{18}{figure.11}%
 \contentsline {figure}{\numberline {12}{\ignorespaces Example of a Blender scene for the initial calibration with a checkerboard.}}{19}{figure.12}%
 \contentsline {figure}{\numberline {13}{\ignorespaces Example of a Blender scene for LiFCal recalibration without a calibration target.}}{19}{figure.13}%
+\contentsline {figure}{\numberline {14}{\ignorespaces Intrinsic parameter deviations from ground truth for the initial calibration.}}{21}{figure.14}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

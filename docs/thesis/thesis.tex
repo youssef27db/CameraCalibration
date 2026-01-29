@@ -796,11 +796,24 @@ The ground truth camera parameters were directly extracted from Blender. Since c
 % =========================================================
 \section{Results and Evaluation}
 
+In this chapter, the results, plots, and tables obtained from the implementation and the comparison with the available ground truth data are presented. The evaluation focuses on the accuracy of the initial target-based calibration as well as on the performance of the LiFCal-based recalibration. The results are reported in terms of intrinsic and extrinsic parameter accuracy, reprojection errors, and the evolution of health scores.
+
 \subsection{Results of Initial Calibration}
 
+The results of the initial calibration are categorized into intrinsic accuracy, extrinsic accuracy, and reprojection and RMS error. Each category is discussed in the following subsections.
+
 \subsubsection{Intrinsic Accuracy}
-% fx, fy deviation
-% cx, cy deviation
+
+The accuracy of the intrinsic parameters is evaluated by comparing the estimated focal lengths and principal points with the ground truth values obtained from Blender. The deviations in $f_x$, $f_y$, $c_x$, and $c_y$ are shown in \autoref{fig:intrinsic_accuracy}.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1\textwidth]{figures/compare_intrinsic.png}
+    \caption{Intrinsic parameter deviations from ground truth for the initial calibration.}
+    \label{fig:intrinsic_accuracy}
+\end{figure}
+
+The left plot shows the deviations of $f_x$ and $f_y$ for each camera, measured in pixels. The blue graph corresponds to the $f_x$ deviation, while the orange graph corresponds to the $f_y$ deviation. The right plot shows the deviations of $c_x$ and $c_y$ for each camera, also measured in pixels. Here, the blue graph corresponds to the $c_x$ deviation and the orange graph corresponds to the $c_y$ deviation.
 
 \subsubsection{Extrinsic Accuracy}
 % 3D camera positions

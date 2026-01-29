@@ -52,11 +52,11 @@ def main():
 
     plt.style.use("seaborn-v0_8-whitegrid")
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 5))
-    fig.suptitle("Vergleich stereoRMS (mit vs. ohne Bundle Adjustment)")
+    fig.suptitle("Comparison of stereoRMS (with vs. without Bundle Adjustment)")
 
-    # ----------------- Plot 1: stereoRMS pro Kamera -----------------
-    ax1.bar(x - w/2, rms_no_ba, width=w, label=f"ohne BA (Ø {mean_no_ba:.2f}px)")
-    ax1.bar(x + w/2, rms_ba,    width=w, label=f"mit BA (Ø {mean_ba:.2f}px)")
+    # ----------------- Plot 1: stereoRMS per camera -----------------
+    ax1.bar(x - w/2, rms_no_ba, width=w, label=f"without BA (Ø {mean_no_ba:.2f}px)")
+    ax1.bar(x + w/2, rms_ba,    width=w, label=f"with BA (Ø {mean_ba:.2f}px)")
 
     # Draw mean values as horizontal lines
     ax1.axhline(mean_no_ba, color="C0", linestyle="--", alpha=0.7)
@@ -65,18 +65,18 @@ def main():
     ax1.set_xticks(x)
     ax1.set_xticklabels(cams, rotation=45)
     ax1.set_ylabel("stereoRMS (px)")
-    ax1.set_title("stereoRMS je Kamera")
+    ax1.set_title("stereoRMS per Camera")
     ax1.legend()
     ax1.grid(alpha=0.3)
 
     # Plot 2: mean values only
-    ax2.bar([0], [mean_no_ba], width=0.5, label="ohne BA")
-    ax2.bar([1], [mean_ba],    width=0.5, label="mit BA")
+    ax2.bar([0], [mean_no_ba], width=0.5, label="without BA")
+    ax2.bar([1], [mean_ba],    width=0.5, label="with BA")
 
     ax2.set_xticks([0, 1])
-    ax2.set_xticklabels(["ohne BA", "mit BA"])
-    ax2.set_ylabel("Durchschnitt stereoRMS (px)")
-    ax2.set_title("Durchschnittlicher stereoRMS")
+    ax2.set_xticklabels(["without BA", "with BA"])
+    ax2.set_ylabel("Average stereoRMS (px)")
+    ax2.set_title("Average stereoRMS")
 
     # Display values above bars
     ax2.text(0, mean_no_ba + 0.5, f"{mean_no_ba:.2f}px", ha="center", va="bottom")
@@ -96,9 +96,9 @@ def main():
     plt.savefig(out_path, dpi=200, bbox_inches="tight")
     plt.close(fig)
 
-    print("Durchschnitt stereoRMS ohne BA:", mean_no_ba)
-    print("Durchschnitt stereoRMS mit BA:", mean_ba)
-    print("Differenz (mit - ohne):", diff)
+    print("Average stereoRMS without BA:", mean_no_ba)
+    print("Average stereoRMS with BA:", mean_ba)
+    print("Difference (with - without):", diff)
 
 
 if __name__ == "__main__":

@@ -85,8 +85,8 @@ def main():
     ax1.axhline(0, color="black", linewidth=1)
     ax1.set_xticks(x)
     ax1.set_xticklabels(cams, rotation=45)
-    ax1.set_ylabel("Differenz (Pixel)")
-    ax1.set_title("Abweichung Brennweiten (fx, fy)")
+    ax1.set_ylabel("Difference (Pixels)")
+    ax1.set_title("Focal Length Deviation (fx, fy)")
     ax1.legend()
     ax1.grid(alpha=0.3)
 
@@ -100,12 +100,12 @@ def main():
     ax2.axhline(0, color="black", linewidth=1)
     ax2.set_xticks(x)
     ax2.set_xticklabels(cams, rotation=45)
-    ax2.set_ylabel("Differenz (Pixel)")
-    ax2.set_title("Abweichung Hauptpunkt (cx, cy)")
+    ax2.set_ylabel("Difference (Pixels)")
+    ax2.set_title("Principal Point Deviation (cx, cy)")
     ax2.legend()
     ax2.grid(alpha=0.3)
 
-    fig.suptitle("Abweichung der geschätzten Intrinsics gegenüber Ground-Truth", fontsize=14)
+    fig.suptitle("Estimated Intrinsics Deviation from Ground-Truth", fontsize=14)
     plt.tight_layout()
 
     # Save plot

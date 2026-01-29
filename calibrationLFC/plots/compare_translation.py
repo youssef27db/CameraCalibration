@@ -92,13 +92,13 @@ def main():
 
     fig = plt.figure(figsize=(14, 6))
     fig.suptitle(
-        "Kamerapositionen im Raum: Groundtruth vs. kalibrierte Extrinsics",
+        "Camera Positions in Space: Ground-Truth vs. Calibrated Extrinsics",
         fontsize=14,
     )
 
     # Plot 1: Groundtruth only
     ax1 = fig.add_subplot(1, 2, 1, projection="3d")
-    ax1.scatter(X_gt, Y_gt, Z_gt, c="black", s=40, label="Groundtruth")
+    ax1.scatter(X_gt, Y_gt, Z_gt, c="black", s=40, label="Ground-Truth")
 
     for x, y, z, name in zip(X_gt, Y_gt, Z_gt, CAM_IDS):
         ax1.text(x, y, z, name, fontsize=8)
@@ -106,15 +106,15 @@ def main():
     ax1.set_xlabel("X (m)")
     ax1.set_ylabel("Y (m)")
     ax1.set_zlabel("Z (m)")
-    ax1.set_title("Groundtruth-Kamerapositionen (3D)")
+    ax1.set_title("Ground-Truth Camera Positions (3D)")
     set_equal_3d(ax1)
     ax1.legend()
 
     # Plot 2: Comparison
     ax2 = fig.add_subplot(1, 2, 2, projection="3d")
 
-    ax2.scatter(X_gt, Y_gt, Z_gt, c="black", s=40, label="Groundtruth")
-    ax2.scatter(X_est, Y_est, Z_est, c="#ff3ccf", s=40, label="Kalibrierung")
+    ax2.scatter(X_gt, Y_gt, Z_gt, c="black", s=40, label="Ground-Truth")
+    ax2.scatter(X_est, Y_est, Z_est, c="#ff3ccf", s=40, label="Calibration")
 
     for xg, yg, zg, xe, ye, ze in zip(
         X_gt, Y_gt, Z_gt, X_est, Y_est, Z_est
@@ -127,7 +127,7 @@ def main():
     ax2.set_xlabel("X (m)")
     ax2.set_ylabel("Y (m)")
     ax2.set_zlabel("Z (m)")
-    ax2.set_title("Groundtruth vs. kalibrierte Positionen (3D)")
+    ax2.set_title("Ground-Truth vs. Calibrated Positions (3D)")
     set_equal_3d(ax2)
     ax2.legend()
 

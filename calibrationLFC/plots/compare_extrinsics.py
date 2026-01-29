@@ -101,8 +101,8 @@ def main():
     ax1.bar(x, rot_err_deg, color="#7f3cff")
     ax1.set_xticks(x)
     ax1.set_xticklabels(CAM_IDS, rotation=45)
-    ax1.set_ylabel("Rotationsfehler (°)")
-    ax1.set_title("Rotationsfehler pro Kamera")
+    ax1.set_ylabel("Rotation Error (°)")
+    ax1.set_title("Rotation Error per Camera")
 
     mean_rot = rot_err_deg.mean()
     ax1.axhline(mean_rot, color="black", linestyle="--", linewidth=1)
@@ -116,8 +116,8 @@ def main():
     ax2.bar(x, trans_err_abs, color="#ff3ccf")
     ax2.set_xticks(x)
     ax2.set_xticklabels(CAM_IDS, rotation=45)
-    ax2.set_ylabel("Translationsfehler (m)")
-    ax2.set_title("Translationsfehler pro Kamera (absolut)")
+    ax2.set_ylabel("Translation Error (m)")
+    ax2.set_title("Translation Error per Camera (absolute)")
 
     mean_abs = trans_err_abs.mean()
     ax2.axhline(mean_abs, color="black", linestyle="--", linewidth=1)
@@ -126,7 +126,7 @@ def main():
              transform=ax2.transAxes,
              va="top", ha="left")
 
-    fig.suptitle("Qualität der Extrinsics: Groundtruth vs. Kalibrierung", fontsize=14)
+    fig.suptitle("Extrinsics Quality: Ground-Truth vs. Calibration", fontsize=14)
     plt.tight_layout()
 
     # Save plot
