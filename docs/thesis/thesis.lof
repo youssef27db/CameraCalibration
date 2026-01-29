@@ -17,4 +17,7 @@
 \contentsline {figure}{\numberline {16}{\ignorespaces Extrinsic parameter errors of the initial calibration.}}{22}{figure.16}%
 \contentsline {figure}{\numberline {17}{\ignorespaces Reprojection error per camera of the initial calibration.}}{23}{figure.17}%
 \contentsline {figure}{\numberline {18}{\ignorespaces Stereo RMS error of the initial calibration.}}{23}{figure.18}%
+\contentsline {figure}{\numberline {19}{\ignorespaces Reprojection error per camera for a single LiFCal-based recalibration run.}}{25}{figure.19}%
+\contentsline {figure}{\numberline {20}{\ignorespaces Reprojection error per camera across three LiFCal-based recalibration runs.}}{25}{figure.20}%
+\contentsline {figure}{\numberline {21}{\ignorespaces Comparison of mean reprojection error per camera between initial calibration and LiFCal-based recalibration.}}{26}{figure.21}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

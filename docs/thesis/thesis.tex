@@ -91,6 +91,7 @@ Submission date: 28 February 2026
 % figures
 % =========================================================
 \listoffigures
+\listoftables
 \clearpage
 
 \pagenumbering{arabic}
@@ -861,17 +862,94 @@ The RMS error for the multi-camera array is shown in \autoref{fig:rms_error_plot
 \end{figure}
 
 Both the reprojection error and the RMS error are measured in pixels. The two plots were generated using the calibration results of the initial target-based calibration.
+%\clearpage
 
 \subsubsection{Comparison of Mean Results Across Image Sets}
 
-\subsection{Results of LiFCal-Based Recalibration}
+To provide a consolidated overview of the initial calibration results, the mean values across different image sets are summarized in \autoref{tab:imageset_results}. The table reports the number of poses used for each image set, whether bundle adjustment (BA) was applied, as well as the mean translation error, mean rotation error, and mean reprojection error.
+\vspace{0.2cm}
 
-In this section, the results of the LiFCal-based recalibration are presented and visualized using plots. Due to the fundamentally different nature of the LiFCal calibration results compared to the available ground truth data, the evaluation focuses on reprojection error and the resulting health score only.
+\begin{table}[htbp]
+\centering
+\begin{tabular}{lcccccc}
+\hline
+Name & \#Poses & BA & Mean $\Delta T$ [m] & Mean $\Delta R$ [$^\circ$] & Mean Reproj. [px] \\
+\hline
+imageset1 & 41 & yes & 0.07576 & 0.17447 & 0.33859 \\
+imageset2 & 33 & yes & 0.04710 & 0.16089 & 0.03274 \\
+imageset3 & 41 & yes & 0.09500 & 0.18225 & 0.40989 \\
+imageset4 & 17 & yes & 0.05414 & 0.23255 & 0.03103 \\
+\hline
+imageset5 & 28 & yes & 0.02798 & 0.10531 & 0.03100 \\
+imageset6 & 36 & yes & 0.06228 & 0.20084 & 0.03070 \\
+imageset7 & 20 & yes & 0.04716 & 0.21424 & 0.03166 \\
+\hline
+\end{tabular}
+\caption{Mean calibration results for different image sets}
+\label{tab:imageset_results}
+\end{table}
+
+\vspace{0.2cm}
+
+To analyze the calibration performance under different conditions, the image sets were generated with varying numbers of poses. The first four image sets (imageset1 to imageset4) are grouped into Scenario~A\_Robustness. In this scenario, the same multi-camera decalibration was applied in order to evaluate how robust the calibration results are with respect to different checkerboard poses. 
 \newline
 
-A direct comparison of extrinsic parameters is not meaningful in this case. LiFCal requires multiple poses of the scene, and each pose leads to a separate parameter estimation. Consequently, extrinsic parameters vary across poses and cannot be compared directly to a single ground truth configuration. In addition, LiFCal calibrates each camera independently, resulting in camera parameters defined in individual local coordinate systems rather than in a shared global reference frame. For this reason, intrinsic and extrinsic parameters across cameras are not directly comparable in the same way as in the target-based calibration. But these limitations are discussed in more detail in the Discussion of the Results section.
+The remaining image sets (imageset5 to imageset7) belong to Scenario~B\_Generalisation. In this case, different multi-camera decalibrations were applied to assess how well the calibration generalizes to different camera configurations with varying numbers of poses. A summary of both scenarios is provided in \autoref{tab:scenario_summary}.
+\vspace{0.2cm}
+
+\begin{table}[htbp]
+\centering
+\small
+\begin{tabular}{lccccc}
+\hline
+Scenario & \#Runs & Avg. \#Poses & Mean $\Delta T$ [m] & Mean $\Delta R$ [$^\circ$] & Mean Reproj. [px] \\
+\hline
+A\_Robustness & 4 & 33.0 & 0.06800 & 0.18754 & 0.20306 \\
+B\_Generalisation & 3 & 28.0 & 0.04581 & 0.17346 & 0.03112 \\
+\hline
+\end{tabular}
+\caption{Scenario-based summary of calibration results}
+\label{tab:scenario_summary}
+\end{table}
+
+
+\subsection{Results of LiFCal-Based Recalibration}
+
+In this section, the results of the LiFCal-based recalibration are presented and visualized using plots. Due to the fundamentally different nature of the LiFCal calibration results compared to the available ground truth data, the evaluation focuses exclusively on reprojection error and the resulting health score.
+\newline
+
+A direct comparison of extrinsic parameters is not meaningful in this case. LiFCal requires multiple poses of the scene, with each pose resulting in a separate parameter estimation. Consequently, extrinsic parameters vary across poses and cannot be compared directly to a single ground truth configuration. In addition, LiFCal calibrates each camera independently, leading to camera parameters defined in individual local coordinate systems rather than in a shared global reference frame. For these reasons, intrinsic and extrinsic parameters across cameras are not directly comparable in the same way as in the target-based calibration. These limitations are discussed in more detail in the Discussion of the Results section.
 
 \subsubsection{Reprojection Error after LiFCal}
+
+For the evaluation of the LiFCal-based recalibration, three independent recalibration runs using different image sets are considered. As a representative example, the reprojection error per camera for one selected run is shown in \autoref{fig:lifcal_reprojection_error_1}. This visualization follows the same structure as the reprojection error plot for the initial target-based calibration shown in \autoref{fig:reprojection_error_plot}. However, due to the output format of LiFCal, the reprojection error is reported separately for the $x$ and $y$ image directions.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.9\textwidth]{figures/reprojection_std_per_camera.png}
+    \caption{Reprojection error per camera for a single LiFCal-based recalibration run.}
+    \label{fig:lifcal_reprojection_error_1}
+\end{figure}
+
+To assess the consistency of the reprojection error across multiple recalibration runs, \autoref{fig:lifcal_reprojection_error_2} shows the reprojection errors for all three runs. The upper part of the figure visualizes the $x$ reprojection errors for each camera, while the lower part shows the corresponding $y$ reprojection errors. This representation allows for a direct comparison of the reprojection error distributions across different runs and camera indices.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.9\textwidth]{figures/reprojection_std_compare_3runs.png}
+    \caption{Reprojection error per camera across three LiFCal-based recalibration runs.}
+    \label{fig:lifcal_reprojection_error_2}
+\end{figure}
+
+In addition, a direct comparison between the LiFCal-based recalibration and the initial target-based calibration is provided in \autoref{fig:lifcal_reprojection_error_comparison}. The figure compares the mean reprojection errors in $x$ and $y$ for the best-performing LiFCal run with the reprojection error obtained from the initial calibration.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.9\textwidth]{figures/compare_initial_vs_lifcal_reprojection.png}
+    \caption{Comparison of mean reprojection error per camera between initial calibration and LiFCal-based recalibration.}
+    \label{fig:lifcal_reprojection_error_comparison}
+\end{figure}
+
+The reprojection error of the initial target-based calibration appears almost constant at zero for all cameras, as the values are below $0.03\,\text{px}$. In contrast, the reprojection error after LiFCal-based recalibration is noticeably higher for all cameras, reflecting the different calibration assumptions and the absence of a calibration target in the LiFCal approach.
 
 \subsubsection{Health Score Evolution}
 % Health score before/after LiFCal
