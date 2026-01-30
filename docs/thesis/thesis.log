@@ -994,4 +994,140 @@ Underfull \hbox (badness 10000) in paragraph at lines 661--663
 File: figures/Zustandsdiagramm.png Graphic file (type png)
 <use figures/Zustandsdiagramm.png>
 Package pdftex.def Info: figures/Zustandsdiagramm.png  used on input line 717.
-(pdftex.def)             Requested size:
+(pdftex.def)             Requested size: 157.18713pt x 417.08792pt.
+ [17 <./figures/Zustandsdiagramm.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 732--734
+
+ []
+
+<figures/LFC.png, id=438, 447.47176pt x 322.20375pt>
+File: figures/LFC.png Graphic file (type png)
+<use figures/LFC.png>
+Package pdftex.def Info: figures/LFC.png  used on input line 748.
+(pdftex.def)             Requested size: 221.95676pt x 159.81828pt.
+[18 <./figures/LFC.png>]
+<figures/pose_015_Up3.png, id=447, 1284.8pt x 722.7pt>
+File: figures/pose_015_Up3.png Graphic file (type png)
+<use figures/pose_015_Up3.png>
+Package pdftex.def Info: figures/pose_015_Up3.png  used on input line 759.
+(pdftex.def)             Requested size: 271.7835pt x 152.87422pt.
+<figures/pose015_Up3.png, id=450, 1284.8pt x 722.7pt>
+File: figures/pose015_Up3.png Graphic file (type png)
+<use figures/pose015_Up3.png>
+Package pdftex.def Info: figures/pose015_Up3.png  used on input line 772.
+(pdftex.def)             Requested size: 271.7835pt x 152.87422pt.
+ [19 <./figures/pose_015_Up3.png> <./figures/pose015_Up3.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 785--787
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 788--790
+
+ []
+
+[20
+
+]
+<figures/compare_intrinsic.png, id=465, 931.19894pt x 357.0138pt>
+File: figures/compare_intrinsic.png Graphic file (type png)
+<use figures/compare_intrinsic.png>
+Package pdftex.def Info: figures/compare_intrinsic.png  used on input line 813.
+(pdftex.def)             Requested size: 452.9679pt x 173.66354pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 818--820
+
+ []
+
+[21
+
+ <./figures/compare_intrinsic.png>]
+<figures/compare_translation.png, id=472, 885.66885pt x 437.59485pt>
+File: figures/compare_translation.png Graphic file (type png)
+<use figures/compare_translation.png>
+Package pdftex.def Info: figures/compare_translation.png  used on input line 829.
+(pdftex.def)             Requested size: 452.9679pt x 223.80475pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 834--836
+
+ []
+
+<figures/compare_extrinsics.png, id=474, 1003.8303pt x 427.8384pt>
+File: figures/compare_extrinsics.png Graphic file (type png)
+<use figures/compare_extrinsics.png>
+Package pdftex.def Info: figures/compare_extrinsics.png  used on input line 841.
+(pdftex.def)             Requested size: 452.9679pt x 193.05428pt.
+[22 <./figures/compare_translation.png> <./figures/compare_extrinsics.png>]
+<figures/compare_reprojectionError.png, id=482, 858.92896pt x 353.4003pt>
+File: figures/compare_reprojectionError.png Graphic file (type png)
+<use figures/compare_reprojectionError.png>
+Package pdftex.def Info: figures/compare_reprojectionError.png  used on input line 854.
+(pdftex.def)             Requested size: 452.9679pt x 186.37375pt.
+<figures/compare_stereoRMS.png, id=484, 714.7503pt x 281.1303pt>
+File: figures/compare_stereoRMS.png Graphic file (type png)
+<use figures/compare_stereoRMS.png>
+Package pdftex.def Info: figures/compare_stereoRMS.png  used on input line 863.
+(pdftex.def)             Requested size: 452.9679pt x 178.16829pt.
+ [23 <./figures/compare_reprojectionError.png> <./figures/compare_stereoRMS.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 897--899
+
+ []
+
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <10.95> on input line 906.
+
+Overfull \hbox (14.90828pt too wide) in paragraph at lines 906--914
+ [][] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 921--923
+
+ []
+
+[24]
+<figures/reprojection_std_per_camera.png, id=504, 859.2903pt x 353.4003pt>
+File: figures/reprojection_std_per_camera.png Graphic file (type png)
+<use figures/reprojection_std_per_camera.png>
+Package pdftex.def Info: figures/reprojection_std_per_camera.png  used on input line 932.
+(pdftex.def)             Requested size: 317.07614pt x 130.40015pt.
+<figures/reprojection_std_compare_3runs.png, id=506, 931.19894pt x 570.2103pt>
+File: figures/reprojection_std_compare_3runs.png Graphic file (type png)
+<use figures/reprojection_std_compare_3runs.png>
+Package pdftex.def Info: figures/reprojection_std_compare_3runs.png  used on input line 941.
+(pdftex.def)             Requested size: 339.72592pt x 208.02496pt.
+ [25 <./figures/reprojection_std_per_camera.png> <./figures/reprojection_std_compare_3runs.png>]
+<figures/compare_initial_vs_lifcal_reprojection.png, id=514, 931.5603pt x 353.4003pt>
+File: figures/compare_initial_vs_lifcal_reprojection.png Graphic file (type png)
+<use figures/compare_initial_vs_lifcal_reprojection.png>
+Package pdftex.def Info: figures/compare_initial_vs_lifcal_reprojection.png  used on input line 950.
+(pdftex.def)             Requested size: 407.66833pt x 154.65538pt.
+ [26 <./figures/compare_initial_vs_lifcal_reprojection.png>] [27] [28
+
+] [29
+
+
+] (thesis.bbl [30
+
+
+] [31]) [32] (thesis.aux)
+ ***********
+LaTeX2e <2025-11-01>
+L3 programming layer <2025-11-06>
+ ***********
+ ) 
+Here is how much of TeX's memory you used:
+ 20483 strings out of 467871
+ 371774 string characters out of 5417407
+ 946938 words of memory out of 5000000
+ 48839 multiletter control sequences out of 15000+600000
+ 699850 words of font info for 83 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 108i,13n,107p,11323b,665s stack positions out of 10000i,1000n,20000p,200000b,200000s
+<C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmex10.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi10.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi12.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi8.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr10.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr8.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri12.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmssbx10.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy8.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt12.pfb>
+Output written on thesis.pdf (37 pages, 3802276 bytes).
+PDF statistics:
+ 865 PDF objects out of 1000 (max. 8388607)
+ 170 named destinations out of 1000 (max. 500000)
+ 515 words of extra memory for PDF output out of 10000 (max. 10000000)
+
