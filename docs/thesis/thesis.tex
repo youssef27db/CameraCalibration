@@ -4,6 +4,7 @@
 \usepackage[english]{babel}
 \usepackage{lmodern}
 \usepackage{geometry}
+\usepackage{booktabs}
 \geometry{a4paper, margin=1in}
 \setlength\parindent{0pt}
 \usepackage{amsmath,amssymb}
@@ -387,7 +388,7 @@ It is also essential to keep the cameras properly aligned and synchronized. Even
 \subsubsection{Micro-Lens-Array-Based Light Field Cameras}
 % MLA-based systems as used in LiFCal
 
-The second type of light field camera is based on a micro-lens array (MLA). In this case instead of having different cameras, the system uses only one sensor combined with an array of small lensen placed between the main lens and the image sensor \cite{LiFCal}. The MLA allows the camera to capture also the 4D light field information. 
+The second type of light field camera is based on a micro-lens array (MLA). In this case instead of having different cameras, the system uses only one sensor combined with an array of small lenses placed between the main lens and the image sensor \cite{LiFCal}. The MLA allows the camera to capture also the 4D light field information. 
 
 \vspace{0.2cm}
 \begin{figure}[htbp]
@@ -397,7 +398,7 @@ The second type of light field camera is based on a micro-lens array (MLA). In t
     \label{fig:mla}
 \end{figure}
 
-As illustrated in \autoref{fig:mla}, each lens in the MLA focuses light from different directions onto different regions of the sensor. This way, the camera is also able to cpature the same information as a multi-camera array, but with a more compact design. Because of the smaller size and lower cost, MLA-based light field camera are mostly used in consumer applications \cite{LeeJi2017LightfieldReconstruction}. However, microlens-array cameras have to compromise between spatial and angular resolution, while multi-camera systems capture full-resolution images with sharper results and more accurate depth information. 
+As illustrated in \autoref{fig:mla}, each lens in the MLA focuses light from different directions onto different regions of the sensor. This way, the camera is also able to capture the same information as a multi-camera array, but with a more compact design. Because of the smaller size and lower cost, MLA-based light field cameras are mostly used in consumer applications \cite{LeeJi2017LightfieldReconstruction}. However, microlens-array cameras have to compromise between spatial and angular resolution, while multi-camera systems capture full-resolution images with sharper results and more accurate depth information. 
 \newline
 
 For MLA-based light field cameras, the pattern-based calibration method provides satisfactory results in terms of reprojection error. In practice, the overall calibration quality strongly depends on the calibration target, particularly its flatness \cite{anisimov2021calibration_auto_refinement}.
@@ -628,7 +629,7 @@ Finally, for results and traceability, the \texttt{ResultLogger}, \texttt{lifcal
 
 \subsubsection{Health Monitoring and Decision Metrics}
 
-As mentioned in the use case description, a key component of the proposed calibration framework is the health monitoring mechanism. This mechanism evaluates the quality of each recalibration attempt and decides whether to accept or reject the new calibration based on defined metrics. To define these metrics, the followeing formulas are used:
+As mentioned in the use case description, a key component of the proposed calibration framework is the health monitoring mechanism. This mechanism evaluates the quality of each recalibration attempt and decides whether to accept or reject the new calibration based on defined metrics. To define these metrics, the following formulas are used:
 
 \begin{equation}
 \text{HealthScore} = 100 \cdot \left( 1 - \left( 0.6 \cdot E_{\text{reproj}}^{2}
@@ -810,11 +811,14 @@ The accuracy of the intrinsic parameters is evaluated by comparing the estimated
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=1\textwidth]{figures/compare_intrinsic.png}
-    \caption{Intrinsic parameter deviations from ground truth and the initial calibration.}
+    \caption{Deviations of intrinsic parameters from ground truth for the initial calibration.}
     \label{fig:intrinsic_accuracy}
 \end{figure}
 
-The left plot shows the deviations of $f_x$ and $f_y$ for each camera, measured in pixels. The blue graph corresponds to the $f_x$ deviation, while the orange graph corresponds to the $f_y$ deviation. The right plot shows the deviations of $c_x$ and $c_y$ for each camera, also measured in pixels. Here, the blue graph corresponds to the $c_x$ deviation and the orange graph corresponds to the $c_y$ deviation.
+The left plot shows the deviations of $f_x$ and $f_y$ for each camera in pixels. The blue curve represents the $f_x$ deviation and the orange curve represents the $f_y$ deviation. The estimated $f_x$ values stay close to zero across all cameras, while the $f_y$ values show a nearly constant offset of about 275 pixels.
+\newline
+
+The right plot presents the deviations of $c_x$ and $c_y$, also in pixels. Here, the blue curve corresponds to $c_x$ and the orange curve to $c_y$. Both parameters have small offsets from the ground truth, with most values remaining close to zero.
 
 \subsubsection{Extrinsic Accuracy}
 
@@ -827,7 +831,7 @@ For the evaluation of the extrinsic parameters, the estimated camera poses are c
     \label{fig:translation_error}
 \end{figure}
 
-In the left plot, the 3D positions of the multi-camera array from the ground truth are shown, while the right plot illustrates the estimated camera positions after the initial calibration. The mean translation error is shown in the lower part of the figure. The overall structure size is larger than that of a typical multi-camera array due to the synthetic setup in Blender.
+In the left plot, the 3D positions of the multi-camera array from the ground truth are shown, while the right plot illustrates the estimated camera positions after the initial calibration. The mean translation error is shown in the lower part of the figure. The overall structure size is larger than that of a typical multi-camera array due to the synthetic setup in Blender. In both plots the main structure of the cross-shaped camera array is clearly visible.
 \newline
 
 The translation error per camera and the rotation error per camera are further evaluated in the plot shown in \autoref{fig:extrinsic_errors}.
@@ -839,7 +843,7 @@ The translation error per camera and the rotation error per camera are further e
     \label{fig:extrinsic_errors}
 \end{figure}
 
-The left plot shows the rotation error in degrees for each camera, while the right plot shows the translation error in meters for each camera. The central camera was used as the reference camera in the calibration process; therefore, its errors are zero.
+The left plot shows the rotation error in degrees for each camera, while the right plot shows the translation error in meters for each camera. The central camera was used as the reference camera in the calibration process, therefore, its errors are zero.
 
 \subsubsection{Reprojection and RMS Error}
 
@@ -861,8 +865,7 @@ The RMS error for the multi-camera array is shown in \autoref{fig:rms_error_plot
     \label{fig:rms_error_plot}
 \end{figure}
 
-Both the reprojection error and the RMS error are measured in pixels. The two plots were generated using the calibration results of the initial target-based calibration.
-%\clearpage
+Both the reprojection error and the RMS error are measured in pixels. The two plots were generated using the calibration results of the initial target-based calibration. In \autoref{fig:reprojection_error_plot} the error values are almost constant across all cameras with a reprojection error of about 0.3 pixels. In \autoref{fig:rms_error_plot} the RMS error values vary between 35 and 15 pixels for the different camera.
 
 \subsubsection{Comparison of Mean Results Across Image Sets}
 
@@ -926,7 +929,7 @@ For the evaluation of the LiFCal-based recalibration, three independent recalibr
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.9\textwidth]{figures/reprojection_std_per_camera.png}
+    \includegraphics[width=0.7\textwidth]{figures/reprojection_std_per_camera.png}
     \caption{Reprojection error per camera for a single LiFCal-based recalibration run.}
     \label{fig:lifcal_reprojection_error_1}
 \end{figure}
@@ -935,7 +938,7 @@ To assess the consistency of the reprojection error across multiple recalibratio
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.9\textwidth]{figures/reprojection_std_compare_3runs.png}
+    \includegraphics[width=0.75\textwidth]{figures/reprojection_std_compare_3runs.png}
     \caption{Reprojection error per camera across three LiFCal-based recalibration runs.}
     \label{fig:lifcal_reprojection_error_2}
 \end{figure}
@@ -949,17 +952,44 @@ In addition, a direct comparison between the LiFCal-based recalibration and the 
     \label{fig:lifcal_reprojection_error_comparison}
 \end{figure}
 
-The reprojection error of the initial target-based calibration appears almost constant at zero for all cameras, as the values are below $0.03\,\text{px}$. In contrast, the reprojection error after LiFCal-based recalibration is noticeably higher for all cameras, reflecting the different calibration assumptions and the absence of a calibration target in the LiFCal approach.
+The reprojection error of the initial target-based calibration remains close to zero for all cameras, with all values around $0.03\text{px}$. After LiFCal-based recalibration, the reprojection error is higher for every camera. The values show a clear separation between the two calibration stages.
 
-\subsubsection{Health Score Evolution}
-% Health score before/after LiFCal
-% Comparison to baseline
-\clearpage
+\subsubsection{Health Score Comparison}
+
+The health scores are calculated using the formulas presented in the Health Monitoring and Decision Metrics section. All health scores for both the LiFCal-based recalibration runs and the initial target-based calibration image sets are summarized in \autoref{tab:calibration_health}. Note that the score range is $[0,100]$, with higher values indicating better calibration quality.
+
+\begin{table}[htbp]
+\centering
+\small
+\begin{tabular}{l l c c c}
+\toprule
+Name & Calibration Type & \#Poses & BA & Health Score \\
+\midrule
+Run 1 & LiFCal & 4  & true & 52.0538 \\
+Run 2 & LiFCal & 10 & true & 59.4736 \\
+Run 3 & LiFCal & 20 & true & 58.7394 \\
+\midrule
+Imageset1 & Initial & 41 & true & 91.6138 \\
+Imageset2 & Initial & 33 & true & 97.8905 \\
+Imageset3 & Initial & 41 & true & 87.0450 \\
+Imageset4 & Initial & 17 & true & 97.1769 \\
+Imageset5 & Initial & 28 & true & 92.9879 \\
+Imageset6 & Initial & 36 & true & 88.6221 \\
+Imageset7 & Initial & 17 & true & 97.1303 \\
+\bottomrule
+\end{tabular}
+\caption{Overview of calibration runs and corresponding health scores}
+\label{tab:calibration_health}
+\end{table}
+
+The first block of the table summarizes the health scores obtained from the three LiFCal-based recalibration runs, while the second block presents the health scores from the initial target-based calibration image sets. The health scores for the LiFCal runs are significantly lower than those of the initial calibration. The highest health score among the LiFCal runs is approximately 59.47, while the highest health score from the initial calibration is around 97.89. The lowest health score from the initial calibration is 87.05, and the lowest from the LiFCal runs is 52.05.
 
 % =========================================================
 % Chapter 5: Discussion of the Results
 % =========================================================
 \section{Discussion of the Results}
+
+In this part of the thesis, the obtained results are analyzed and discussed in detail. The focus is on interpreting the findings from both the initial target-based calibration and the LiFCal-based recalibration. The limitations of the LiFCal method in the given setup are examined, and a comparison between the two calibration approaches is provided. The research questions outlined in the Introduction are also answered based on the results. Finally, potential extensions and improvements for future work are suggested.
 
 \subsection{Interpretation of Initial Calibration Results}
 % Why errors are low
@@ -1018,4 +1048,4 @@ The reprojection error of the initial target-based calibration appears almost co
 \end{document}
 
 
-#https://www.overleaf.com/project/6971f82ea675b11bb6a8e62c
+%https://www.overleaf.com/project/6971f82ea675b11bb6a8e62c

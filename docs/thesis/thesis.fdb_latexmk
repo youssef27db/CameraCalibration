@@ -1,13 +1,13 @@
 # Fdb version 4
-["bibtex thesis"] 1769718335.12979 "thesis.aux" "thesis.bbl" "thesis" 1769718343.85418 0
+["bibtex thesis"] 1769783886.98076 "thesis.aux" "thesis.bbl" "thesis" 1769783925.62804 0
   "./references.bib" 1769601427 18207 2d06e948e2e4967d867142a1ebaf575a ""
   "C:/Users/Youssef/AppData/Local/Programs/MiKTeX/bibtex/bst/natbib/plainnat.bst" 1284455456 26816 ffe5423d2019860bad9f54bc402fac15 ""
-  "thesis.aux" 1769718342 38458 33b1222bdef10c88d19e817297bcb600 "pdflatex"
+  "thesis.aux" 1769783923 38761 4511f6389531aa3bd06eb53d1569c8b4 "pdflatex"
   (generated)
   "thesis.bbl"
   "thesis.blg"
   (rewritten before read)
-["pdflatex"] 1769718335.6022 "c:/Users/Youssef/Desktop/UNI/S7/Bachelorarbeit/Data-Driven-Camera-Calibration/docs/thesis/thesis.tex" "thesis.pdf" "thesis" 1769718343.85476 0
+["pdflatex"] 1769783911.91936 "c:/Users/Youssef/Desktop/UNI/S7/Bachelorarbeit/Data-Driven-Camera-Calibration/docs/thesis/thesis.tex" "thesis.pdf" "thesis" 1769783925.62884 0
   "C:/Users/Youssef/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1769715219 80909 eab91d9745dd2edfd62a31d53cd5fe15 ""
   "C:/Users/Youssef/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1766607759 13334480 b92fcb493ecc752ef4c30cc4c325b5bb ""
   "C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ec.enc" 1256929440 2375 baa924870cfb487815765f9094cf3728 ""
@@ -110,6 +110,7 @@
   "C:/Users/Youssef/AppData/Local/Programs/MiKTeX/tex/latex/base/inputenc.sty" 1761900684 5048 0270515b828149155424600fd2d58ac5 ""
   "C:/Users/Youssef/AppData/Local/Programs/MiKTeX/tex/latex/bookmark/bkm-pdftex.def" 1702988341 8818 aa5157b46368efebf023abff55611467 ""
   "C:/Users/Youssef/AppData/Local/Programs/MiKTeX/tex/latex/bookmark/bookmark.sty" 1702988341 18245 97e6be180cf07bb6f7008cfdaaecfce5 ""
+  "C:/Users/Youssef/AppData/Local/Programs/MiKTeX/tex/latex/booktabs/booktabs.sty" 1579093635 6253 f1cb470c9199e7110a27851508ed7a5c ""
   "C:/Users/Youssef/AppData/Local/Programs/MiKTeX/tex/latex/caption/caption.sty" 1696169587 56128 c2ccf1a29d78c33bc553880402e4fb9a ""
   "C:/Users/Youssef/AppData/Local/Programs/MiKTeX/tex/latex/epstopdf-pkg/epstopdf-base.sty" 1623003186 13886 d1306dcf79a944f6988e688c1785f9ce ""
   "C:/Users/Youssef/AppData/Local/Programs/MiKTeX/tex/latex/eso-pic/eso-pic.sty" 1683737457 11876 6ef493863ae0d7a984706973240c2237 ""
@@ -177,7 +178,7 @@
   "C:/Users/Youssef/AppData/Local/Programs/MiKTeX/tex/latex/url/url.sty" 1388490452 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
   "C:/Users/Youssef/AppData/Local/Programs/MiKTeX/tex/latex/xcolor/xcolor.sty" 1729265222 55384 b454dec21c2d9f45ec0b793f0995b992 ""
   "C:/Users/Youssef/AppData/Local/Programs/MiKTeX/tex/latex/xurl/xurl.sty" 1641733940 4675 e4b8c405820368c2dfb03526e16d725a ""
-  "c:/Users/Youssef/Desktop/UNI/S7/Bachelorarbeit/Data-Driven-Camera-Calibration/docs/thesis/thesis.tex" 1769718326 64616 122c845d70c8c0555c349e5ef9a847cb ""
+  "c:/Users/Youssef/Desktop/UNI/S7/Bachelorarbeit/Data-Driven-Camera-Calibration/docs/thesis/thesis.tex" 1769783910 67224 e509ce93162676d8efc436da93475e1e ""
   "figures/LFC.png" 1769600162 113176 88c5bd7cf6cd959d38b1fcc39be4103c ""
   "figures/MLA.png" 1769363893 106880 21bfbcea5077cd37415b959554859f6c ""
   "figures/Pinhole-Camera.png" 1769093567 15984 36a3698864eadca0397b3f9a23806a6d ""
@@ -200,12 +201,12 @@
   "figures/reprojection_error.png" 1769258359 100222 75d86df95b5f80c8d9096bd60c390668 ""
   "figures/reprojection_std_compare_3runs.png" 1769010077 252405 7cd45d721aec4cd1b7f01b47f875420c ""
   "figures/reprojection_std_per_camera.png" 1769010107 174086 5a031ea3ed2a0b37a895667614dff95d ""
-  "thesis.aux" 1769718342 38458 33b1222bdef10c88d19e817297bcb600 "pdflatex"
-  "thesis.bbl" 1769718335 12275 c8d1ff39d4e5a930802bbbac54b4aa46 "bibtex thesis"
-  "thesis.lof" 1769718342 3108 ae8df1373b65da9d485066405bfe0109 "pdflatex"
-  "thesis.lot" 1769718342 327 68162112ae909b007cc7c4303fadb555 "pdflatex"
-  "thesis.tex" 1769718326 64616 122c845d70c8c0555c349e5ef9a847cb ""
-  "thesis.toc" 1769718342 5274 a74fed0aaae5f6625e819ae8cbc2bfec "pdflatex"
+  "thesis.aux" 1769783923 38761 4511f6389531aa3bd06eb53d1569c8b4 "pdflatex"
+  "thesis.bbl" 1769783887 12275 c8d1ff39d4e5a930802bbbac54b4aa46 "bibtex thesis"
+  "thesis.lof" 1769783923 3108 b5d2f2b714ba00eafccb5e81e45c5425 "pdflatex"
+  "thesis.lot" 1769783923 456 5b248318405f23b2e1a8030130131025 "pdflatex"
+  "thesis.tex" 1769783910 67224 e509ce93162676d8efc436da93475e1e ""
+  "thesis.toc" 1769783923 5275 3483c79ddb4a9d634ccfa76e77fac936 "pdflatex"
   (generated)
   "thesis.aux"
   "thesis.lof"
