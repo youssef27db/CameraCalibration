@@ -1007,7 +1007,7 @@ In \autoref{tab:scenario_summary} it can be observed that the robustness and gen
 
 \subsection{Limitations of LiFCal in the Given Setup}
 
-The LiFCal-based recalibration results revealed several limitations when applied to the synthetic multi-camera light field setup. The visualization in \autoref{fig:lifcal_reprojection_error_2} clearly shows that the reprojection errors after LiFCal-based recalibration are significantly higher than those obtained from the initial target-based calibration. 
+The LiFCal-based recalibration results revealed several limitations when applied to the synthetic multi-camera light field setup. The visualization in \autoref{fig:lifcal_reprojection_error_comparison} clearly shows that the reprojection errors after LiFCal-based recalibration are significantly higher than those obtained from the initial target-based calibration. 
 \newline
 
 However, it is important to note that LiFCal is designed as a target-free calibration method that relies on feature detection and depth maps. The synthetic data generated in Blender may not fully capture the complexity and variability of real-world scenes, which can negatively affect the performance of LiFCal. In addition, the depth maps used in the LiFCal process are derived from the synthetic scenes and may not accurately represent the depth information that would be obtained from real images.
@@ -1023,11 +1023,29 @@ With regard to the first research question (RQ1) formulated in the Introduction�
 
 
 \subsection{Comparison between Initial Calibration and LiFCal}
-% What improves
-% What degrades
-% What cannot be compared fairly
 
-\subsection{Comparison to state of the Art}
+The comparison between the initial target-based calibration and the LiFCal-based recalibration highlights several key differences in terms of accuracy and limitations. As shown in \autoref{fig:lifcal_reprojection_error_2}, the reprojection errors after LiFCal recalibration are inconsistent across the different runs, while the initial calibration produced stable and low reprojection errors across all cameras and image sets, as illustrated in \autoref{tab:imageset_results}. For the multi-camera array system used in this thesis and the synthetic data generated in Blender, the initial calibration method clearly outperformed LiFCal in terms of accuracy. The health scores summarized in \autoref{tab:calibration_health} further emphasize this discrepancy, with the initial calibration achieving scores above 87, while the highest score obtained with LiFCal was only around 59. This substantial difference indicates that the initial calibration method is more effective at accurately modeling the camera system under the given conditions.
+\newline
+
+As mentioned earlier, the extrinsic parameters estimated by LiFCal cannot be directly compared to the ground truth data due to the independent calibration of each camera and the absence of a shared global reference frame. This limitation restricts the evaluation of the overall geometric consistency of the LiFCal results in the same way as for the initial calibration. Consequently, the comparison focuses primarily on reprojection errors and health scores, which provide a more indirect assessment of calibration quality.
+\newline
+
+With respect to the second research question (RQ2) posed in the Introduction—\textit{``How well does LiFCal perform when calibrating a multi-camera light field system, and can it replace a classical checkerboard-based calibration?''}—the findings show that LiFCal, in the current setup and within the design of the proposed software, does not perform well enough to replace a classical checkerboard-based calibration. The significantly higher reprojection errors and lower health scores indicate that LiFCal is currently unable to achieve the same level of accuracy as the initial calibration method. In addition, the observed outliers and inconsistencies in the LiFCal results suggest that further refinements and adaptations are necessary to improve its performance for multi-camera light field systems. Therefore, while LiFCal represents a promising approach, it cannot currently serve as a complete replacement for traditional calibration methods in this context.
+
+
+\subsection{Comparison to the State of the Art}
+
+The state of the art in multi-camera light field calibration is still dominated by target-based approaches that use physical calibration patterns (e.g., checkerboards) to estimate intrinsic and extrinsic parameters reliably. The initial calibration implemented in this thesis follows this classical line of work and achieved consistently low reprojection errors (around $0.03$\,px across cameras) as well as high health scores (roughly in the range of $87$ to $98$ across the evaluated image sets). Overall, these results are in line with what is typically reported for well-controlled target-based calibration in multi-camera systems.
+\newline
+
+Target-free approaches such as LiFCal are attractive because they avoid physical targets and, in principle, allow calibration updates with less manual setup. In the setup used in this thesis, LiFCal did not reach the same level of accuracy, as the reprojection errors were clearly higher across cameras, and the resulting health scores stayed far below those of the initial calibration (around $52$ to $59$ in the three runs). This suggests that, at least in the current form and for the considered multi-camera array scenario, LiFCal cannot replace the checkerboard-based baseline.
+\newline
+
+A practical contribution of this thesis to the state of the art is the automated calibration pipeline. It combines an initial reference calibration with periodic target-free recalibration attempts and a decision mechanism based on a health score. This directly addresses the real-world problem of calibration drift over time, where repeated manual target-based calibration can become impractical. Using Blender-based synthetic scenes also made it possible to run controlled experiments with access to ground truth parameters, which are difficult to obtain in physical multi-camera setups. This innovative approach provides a useful method for evaluating and comparing calibration techniques in a reproducible manner.
+\newline
+
+In summary, the initial target-based calibration matches established practice and produces strong results in this environment, while the LiFCal-based recalibration mainly shows potential but requires further adaptation before it can be considered a robust alternative for multi-camera light field systems. 
+
 
 \subsection{Potential Extensions and Improvements}
 \clearpage
