@@ -865,7 +865,7 @@ The RMS error for the multi-camera array is shown in \autoref{fig:rms_error_plot
     \label{fig:rms_error_plot}
 \end{figure}
 
-Both the reprojection error and the RMS error are measured in pixels. The two plots were generated using the calibration results of the initial target-based calibration. In \autoref{fig:reprojection_error_plot} the error values are almost constant across all cameras with a reprojection error of about 0.3 pixels. In \autoref{fig:rms_error_plot} the RMS error values vary between 35 and 15 pixels for the different camera.
+Both the reprojection error and the RMS error are measured in pixels. The two plots were generated using the calibration results of the initial target-based calibration. In \autoref{fig:reprojection_error_plot} the error values are almost constant across all cameras with a reprojection error of about 0.3 pixels. In \autoref{fig:rms_error_plot} the RMS error values vary between 35 and 15 pixels for the different cameras.
 
 \subsubsection{Comparison of Mean Results Across Image Sets}
 
@@ -992,14 +992,35 @@ The first block of the table summarizes the health scores obtained from the thre
 In this part of the thesis, the obtained results are analyzed and discussed in detail. The focus is on interpreting the findings from both the initial target-based calibration and the LiFCal-based recalibration. The limitations of the LiFCal method in the given setup are examined, and a comparison between the two calibration approaches is provided. The research questions outlined in the Introduction are also answered based on the results. Finally, potential extensions and improvements for future work are suggested.
 
 \subsection{Interpretation of Initial Calibration Results}
-% Why errors are low
-% Role of checkerboard + ground truth
-% Stability across cameras
+
+The initial target-based calibration method provided very accurate results in terms of intrinsic and extrinsic parameter estimation. As shown in \autoref{fig:reprojection_error_plot}, the reprojection error remained consistent across all cameras with a value of about 0.03 pixels. This indicates that the calibration process was able to accurately model the camera geometry and lens distortions. The intrinsic parameters, particularly the focal lengths and principal points, also showed small deviations from the ground truth values, as illustrated in \autoref{fig:intrinsic_accuracy}. In this case, the $f_x$ values were very close to the ground truth, while the $f_y$ values exhibited a nearly constant offset of approximately 275 pixels. This systematic deviation is due to the synthetic nature of the data and the specific configuration of the Blender camera model, because the sensor width and height were automatically set. Either the width or the height could have been adjusted and the other parameter would have been calculated accordingly to maintain the aspect ratio. This led to a consistent offset in one of the focal length parameters. 
+\newline 
+
+The RMS error values, shown in \autoref{fig:rms_error_plot}, were not as low as expected, ranging from 15 to 35 pixels across the cameras. However, these values are not directly comparable to the per-camera reprojection errors, as the RMS returned by OpenCV's \texttt{stereoCalibrate} represents a joint error over both camera views and also reflects the consistency of the estimated relative camera poses. Small inaccuracies in corner detection or checkerboard poses can therefore result in higher RMS values, especially before applying bundle adjustment.
+\newline
+
+The extrinsic parameters also demonstrated good accuracy, with mean translation errors around 0.068 meters and mean rotation errors approximately 0.187 degrees across different image sets, as summarized in \autoref{tab:scenario_summary}. Almost all image sets achieved reprojection errors below 0.04 pixels, indicating a high level of geometric consistency in the estimated camera poses. However, in imageset1 and imageset3, the reprojection errors were slightly higher, around 0.34 pixels and 0.41 pixels, respectively. These two anomalies are caused by the quality of the taken images during the rendering process in Blender. In these two image sets, the checkerboard distance to the camera was larger than in the other image sets, which made it more difficult to detect the corners accurately. This led to less precise calibration results and consequently higher reprojection errors. More poses with closer checkerboard positions would likely have improved the calibration accuracy in these cases. That shows the importance of the variety and quality of the calibration images for achieving optimal results. A higher number of poses does not necessarily guarantee better calibration if the image quality is compromised.
+\newline
+
+In \autoref{tab:scenario_summary} it can be observed that the robustness and generalization capabilities of the initial calibration method are stable across different decalibration scenarios. Scenario~A\_Robustness, which tested the same decalibration with varying checkerboard poses, yielded consistent results with low mean translation and rotation errors. Scenario~B\_Generalisation, which involved different decalibrations, also produced reliable calibration outcomes, demonstrating the method's ability to adapt to various camera configurations. This indicates that the initial target-based calibration is effective in maintaining accuracy under different conditions, provided that the calibration images are of sufficient quality. 
+
 
 \subsection{Limitations of LiFCal in the Given Setup}
-% Camera type mismatch
-% Dependence on depth maps
-% Synthetic vs real assumptions
+
+The LiFCal-based recalibration results revealed several limitations when applied to the synthetic multi-camera light field setup. The visualization in \autoref{fig:lifcal_reprojection_error_2} clearly shows that the reprojection errors after LiFCal-based recalibration are significantly higher than those obtained from the initial target-based calibration. 
+\newline
+
+However, it is important to note that LiFCal is designed as a target-free calibration method that relies on feature detection and depth maps. The synthetic data generated in Blender may not fully capture the complexity and variability of real-world scenes, which can negatively affect the performance of LiFCal. In addition, the depth maps used in the LiFCal process are derived from the synthetic scenes and may not accurately represent the depth information that would be obtained from real images.
+\newline
+
+A major reason for the high reprojection errors is that LiFCal was primarily developed for micro-lens-array (MLA) light field cameras rather than for multi-camera array systems. The assumptions made by LiFCal regarding the camera model and the image formation process do not fully hold for the multi-camera array setup used in this thesis. This mismatch can lead to inaccuracies in the estimated camera parameters and consequently to higher reprojection errors. Nevertheless, LiFCal provides a systematic target-free recalibration approach, which is a significant advantage in scenarios where the use of physical calibration targets is impractical.
+\newline
+
+Furthermore, as discussed in the use case description, the main purpose of the automatic recalibration software is to maintain calibration quality over time without manual intervention. Although LiFCal does not require a calibration target, it still depends on multiple images of the scene captured from different viewpoints. This implies that the camera system must be able to move within the scene in order to generate the required input data for LiFCal. In practical applications, this requirement may not always be feasible, particularly in static environments where the camera system cannot be repositioned easily. Therefore, while LiFCal enables a target-free calibration process, it still relies on a certain degree of controlled motion or data acquisition, which can limit its applicability in fully automated and static scenarios.
+\newline
+
+With regard to the first research question (RQ1) formulated in the Introduction—\textit{``Can the target-free calibration method LiFCal be used to automatically calibrate a multi-camera light field system without human interaction or the use of a checkerboard?''}—the results presented in this chapter indicate that LiFCal can be applied in a target-free manner, but its effectiveness in the given multi-camera light field setup is limited. The observed high reprojection errors suggest that LiFCal, in its current form, is not sufficient to achieve accurate calibration for this specific system without further adaptations. Nevertheless, the method provides a valuable foundation for an automated recalibration pipeline that can be improved and extended in future work.
+
 
 \subsection{Comparison between Initial Calibration and LiFCal}
 % What improves
