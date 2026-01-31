@@ -439,7 +439,7 @@ In this first section, the design and implementation of the calibration software
 
 \subsubsection{Overall approach}
 
-The goal of this thesis is to develop and evaluate an automatic calibration framework for multi-camera light field systems based on the target-free calibration method proposed by Fleith et al.~\cite{LiFCal}. As discussed in the state of the art, classical target-based calibration approaches require manual intervention and careful placement of calibration targets, which limits their applicability in long-term deployments or scenarios with restricted human access.
+The goal of this thesis is to develop and evaluate an automatic data-driven calibration framework for multi-camera light field systems based on the target-free calibration method proposed by Fleith et al.~\cite{LiFCal}. As discussed in the state of the art, classical target-based calibration approaches require manual intervention and careful placement of calibration targets, which limits their applicability in long-term deployments or scenarios with restricted human access.
 \newline
 
 The proposed approach uses a reliable target-based calibration as an initial reference and ground truth. This initial calibration is performed using a checkerboard pattern and serves as a baseline for evaluating subsequent target-free recalibration steps. After this initial setup, the system captures a small set of images from the scene and applies LiFCal to automatically recalibrate the multi-camera system. To assess whether the target-free recalibration is acceptable, a health monitoring mechanism is introduced. This mechanism compares the calibration results obtained from LiFCal with the baseline calibration using defined decision metrics. If the recalibration achieves a calibration quality comparable to or better than the initial calibration, it is accepted and replaces the previous baseline. Otherwise, the system retains the existing calibration parameters.
@@ -1048,6 +1048,30 @@ In summary, the initial target-based calibration matches established practice an
 
 
 \subsection{Potential Extensions and Improvements}
+
+The current state of the implemented calibration software provides a solid foundation. However, there are several potential extensions and improvements that could be explored in future work to fulfill the goal of fully automated and reliable multi-camera light field calibration. One promising direction is to adapt and enhance the LiFCal method specifically for multi-camera array systems. This could involve modifying the underlying camera model assumptions and optimization strategies to better suit the geometry and characteristics of multi-camera setups.
+\newline
+
+An optional improvement would be to implement the software in a more performance-oriented programming language, such as C++ or Rust. This would allow faster execution of the calibration pipeline, which is particularly important for real-time applications or scenarios where frequent recalibration is necessary. Additionally, integrating parallel processing techniques could further speed up the calibration process, especially when dealing with large image sets or high-resolution images.
+\newline
+
+The evaluation of the calibration framework using a real multi-camera light field system would be a crucial next step. This would provide a more realistic assessment of the calibration methods and their performance in practical scenarios. Testing the LiFCal method on real-world data would also help to identify additional challenges or limitations that may not be apparent in synthetic environments.
+\newline
+
+In order to explicitly answer the last research question (RQ3) from the Introduction—\textit{``Under which conditions and requirements can an automatic, target-free recalibration of a multi-camera light field system be successfully performed?''}—the following conditions and requirements can be identified based on the findings of this thesis:
+
+\begin{itemize}
+    \item \textbf{LiFCal Adaptation:} The LiFCal method needs to be specifically adapted for multi-camera array systems to account for their unique geometry and characteristics.
+    \item \textbf{Scene Complexity:} The scenes used for target-free recalibration should contain sufficient texture and depth variation to enable robust feature detection and depth estimation.
+    \item \textbf{Camera Movement:} The camera system must be capable of capturing multiple viewpoints of the scene to provide the necessary data for LiFCal.
+    \item \textbf{Quality of Input Data:} High-quality images with minimal noise and distortion are essential for accurate calibration results.
+    \item \textbf{Computational Efficiency:} The calibration software should be optimized for performance to allow timely recalibration in practical applications.
+    \item \textbf{Evaluation with Real Data:} Testing and validating the calibration methods using real multi-camera light field systems is crucial to ensure their effectiveness in practical scenarios.
+    \item \textbf{Health Monitoring:} Implementing a robust health monitoring mechanism to assess calibration quality and decide when recalibration is necessary.
+\end{itemize}
+
+In conclusion, the requirements outlined in the Methods and Materials section and the potential improvements discussed here provide a guideline for future research and development in the field of data-driven automatic multi-camera light field calibration. Addressing these aspects will be key to achieving reliable and efficient target-free recalibration in practical applications.
+
 \clearpage
 
 % =========================================================
