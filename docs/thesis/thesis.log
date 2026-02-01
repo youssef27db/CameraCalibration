@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.12.24)  1 FEB 2026 18:11
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.12.24)  1 FEB 2026 18:21
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1204,20 +1204,16 @@ Underfull \hbox (badness 10000) in paragraph at lines 1099--1101
 
 [32
 
-] [33]
-Overfull \hbox (7.33316pt too wide) in paragraph at lines 1141--1142
-[]\T1/lmr/m/n/12 A target-based cal-i-bra-tion ap-proach that uses de-tected checker-
- []
-
-[34
+] [33] [34
 
 ]
-Overfull \hbox (1.48636pt too wide) in paragraph at lines 1180--1181
-[]\T1/lmr/m/n/12 Distortion caused by lens-sensor mis-align-ment, of-ten mod-eled with
+LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <12> not available
+(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 1176.
+
+Overfull \hbox (2.0219pt too wide) in paragraph at lines 1177--1178
+[]\T1/lmr/m/n/12 OpenCV rou-tine that es-ti-mates the rel-a-tive pose
  []
 
-LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <12> not available
-(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 1191.
 [35] (thesis.bbl [36
 
 
@@ -1233,13 +1229,13 @@ L3 programming layer <2025-11-06>
 Here is how much of TeX's memory you used:
  20497 strings out of 467871
  371944 string characters out of 5417407
- 947938 words of memory out of 5000000
+ 946938 words of memory out of 5000000
  48844 multiletter control sequences out of 15000+600000
  700168 words of font info for 84 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  108i,13n,107p,11323b,665s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmex10.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi10.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi12.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi8.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr10.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr8.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri12.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmssbx10.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy8.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtk10.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt12.pfb>
-Output written on thesis.pdf (44 pages, 3854476 bytes).
+Output written on thesis.pdf (44 pages, 3853904 bytes).
 PDF statistics:
  914 PDF objects out of 1000 (max. 8388607)
  178 named destinations out of 1000 (max. 500000)
