@@ -1102,24 +1102,113 @@ Another potential improvement concerns the implementation itself. Rewriting the 
 A further step would be the evaluation of the framework on a real multi-camera light field system. Testing on real hardware would allow a more realistic assessment of calibration accuracy and robustness. It would also expose practical issues which do not appear in synthetic experiments, such as noise, mechanical inaccuracies, or synchronization effects. Overall, the project presented in this thesis provides a solid foundation for further research and development in the field of multi-camera light field calibration.
 
 
-% =========================================================
-% Appendix
-% =========================================================
+
+
 \appendix
 \section{Appendix}
 
-% =========================================================
-% Acknowledgment
-% =========================================================
-\cleardoublepage
-\section*{Acknowledgment}
+\clearpage
+\section*{Glossary}
+\addcontentsline{toc}{section}{Glossary}
 
-% =========================================================
-% Bibliography
-% =========================================================
+\begin{description}
+
+\item[Baseline calibration]
+The reference calibration stored after the initial checkerboard-based procedure. It serves as the comparison point for later recalibration attempts.
+
+\item[Bundle adjustment (BA)]
+A global non-linear optimization that refines camera parameters (and optionally 3D structure) by minimizing reprojection error across many observations.
+
+\item[Calibration drift]
+A gradual degradation of calibration quality over time, for example due to mechanical shifts, temperature changes, or vibrations.
+
+\item[Calibration target]
+A physical pattern with known geometry (e.g., a checkerboard) used to establish point correspondences for target-based calibration.
+
+\item[Camera array]
+A system consisting of multiple cameras arranged in a fixed geometry to capture different viewpoints of the same scene.
+
+\item[Intrinsic parameters]
+Camera-internal parameters such as focal lengths $(f_x, f_y)$ and principal point $(c_x, c_y)$, usually expressed in pixel units.
+
+\item[Extrinsic parameters]
+Parameters describing the pose of a camera in space, typically represented by a rotation matrix $R$ and translation vector $t$.
+
+\item[Camera matrix ($K$)]
+A matrix that encodes intrinsic parameters, typically focal lengths, principal point, and (optionally) skew.
+
+\item[Checkerboard calibration]
+A target-based calibration approach that uses detected checkerboard corners from multiple poses to estimate intrinsics, extrinsics, and distortion parameters.
+
+\item[Depth map]
+A per-pixel representation of distance from the camera to the scene.
+
+\item[Feature detection]
+A process to find image points (e.g., corners or keypoints) that can be matched across views and used for geometric estimation.
+
+\item[Ground truth]
+Known reference parameters used for evaluation. Here, camera parameters extracted directly from Blender act as ground truth.
+
+\item[Health score]
+A scalar metric in the range $[0,100]$ used to summarize calibration quality. Higher values indicate better calibration quality and are used for acceptance decisions.
+
+\item[LiFCal]
+A target-free calibration method originally designed for micro-lens-array light field cameras. It estimates parameters using scene structure, feature information, and optimization.
+
+\item[Light field]
+A representation that captures both light intensity and direction. This enables effects such as refocusing and improved depth estimation.
+
+\item[Micro-lens array (MLA)]
+A grid of small lenses placed in front of an image sensor to capture angular information in a compact single-camera light field system.
+
+\item[Multi-camera light field system]
+A light field setup that records multiple viewpoints using a camera array (e.g., cross-shaped arrangement) to approximate a 4D light field.
+
+\item[Optimization (calibration)]
+The numerical estimation step where camera parameters are adjusted to best fit observed data (e.g., by minimizing reprojection error).
+
+\item[Pinhole camera model]
+An idealized camera model that maps 3D points to a 2D image plane through a projection centered at the camera’s focal point.
+
+\item[Principal point $(c_x, c_y)$]
+The image location where the optical axis intersects the sensor, typically expressed in pixel coordinates.
+
+\item[Radial distortion]
+Lens distortion that increases with distance from the image center, often causing barrel or pincushion effects.
+
+\item[Tangential distortion]
+Distortion caused by lens-sensor misalignment, often modeled with parameters $p_1$ and $p_2$.
+
+\item[Recalibration]
+A repeated calibration step performed after the initial setup, intended to update camera parameters when the system has changed.
+
+\item[Reprojection error]
+The pixel distance between observed image points and the projected points computed from the estimated camera model. Lower values usually indicate better calibration.
+
+\item[Root mean square (RMS) error]
+An aggregated error measure that summarizes reprojection residuals over many points. In OpenCV stereo calibration, it reflects a joint error across views.
+
+\item[Stereo calibration (\texttt{stereoCalibrate})]
+An OpenCV procedure that estimates the relative pose between two cameras and returns an RMS value summarizing the joint reprojection consistency.
+
+\item[Synchronization]
+The degree to which cameras capture images at the same time. Timing offsets can degrade multi-camera consistency and downstream results.
+
+\item[Target-free calibration]
+A calibration approach that does not rely on a physical calibration pattern. Instead, it typically uses natural scene structure, features, and motion.
+
+\item[Texture]
+Image detail (e.g., edges, patterns) that enables robust feature detection and matching. Low-texture scenes can weaken target-free calibration methods.
+
+\end{description}
+
+
 \cleardoublepage
 \bibliographystyle{plainnat}
 \bibliography{references}
+
+\cleardoublepage
+\section*{Acknowledgment}
 
 \end{document}
 

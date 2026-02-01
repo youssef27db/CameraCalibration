@@ -477,6 +477,7 @@ INPUT .\figures\compare_initial_vs_lifcal_reprojection.png
 INPUT .\figures\compare_initial_vs_lifcal_reprojection.png
 INPUT .\figures\compare_initial_vs_lifcal_reprojection.png
 INPUT C:\Users\Youssef\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\ec-lmri12.tfm
+INPUT C:\Users\Youssef\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\ec-lmtk10.tfm
 INPUT .\thesis.bbl
 INPUT .\thesis.bbl
 INPUT thesis.bbl
@@ -505,5 +506,7 @@ INPUT C:\Users\Youssef\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmsy1
 INPUT C:\Users\Youssef\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmsy10.pfb
 INPUT C:\Users\Youssef\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmsy8.pfb
 INPUT C:\Users\Youssef\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmsy8.pfb
+INPUT C:\Users\Youssef\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmtk10.pfb
+INPUT C:\Users\Youssef\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmtk10.pfb
 INPUT C:\Users\Youssef\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmtt12.pfb
 INPUT C:\Users\Youssef\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmtt12.pfb
