@@ -740,7 +740,7 @@ To evaluate and test the proposed system, a world scene was simulated using open
 realistic images.
 \vspace{0.2cm}
 
-The first step was to create the multi-camera array geometry. As described in the use case, a cross-shaped arrangement with one central camera and twelve surrounding cameras was constructed. Each camera was configured with the same sensor size and a focal length of 50\,mm to make the image sets as realistic as possible. The cameras were placed at equal distances from their neighboring cameras, forming a cross shape. Each camera was positioned on a grid to simulate the main structure of the array, as shown in \autoref{fig:blender_camera_array}.
+The first step was to create the multi-camera array geometry. As described in the use case, a cross-shaped arrangement with one central camera and twelve surrounding cameras was constructed. Each camera was configured with the same sensor size and a focal length of 50mm to make the image sets as realistic as possible. The cameras were placed at equal distances from their neighboring cameras, forming a cross shape. Each camera was positioned on a grid to simulate the main structure of the array, as shown in \autoref{fig:blender_camera_array}.
 
 %\vspace{0.3cm}
 \begin{figure}[htbp]
@@ -1035,7 +1035,7 @@ With respect to the second research question (RQ2) posed in the Introduction—\
 
 \subsection{Comparison to the State of the Art}
 
-The state of the art in multi-camera light field calibration is still dominated by target-based approaches that use physical calibration patterns (e.g., checkerboards) to estimate intrinsic and extrinsic parameters reliably. The initial calibration implemented in this thesis follows this classical line of work and achieved consistently low reprojection errors (around $0.03$\,px across cameras) as well as high health scores (roughly in the range of $87$ to $98$ across the evaluated image sets). Overall, these results are in line with what is typically reported for well-controlled target-based calibration in multi-camera systems.
+The state of the art in multi-camera light field calibration is still dominated by target-based approaches that use physical calibration patterns (e.g., checkerboards) to estimate intrinsic and extrinsic parameters reliably. The initial calibration implemented in this thesis follows this classical line of work and achieved consistently low reprojection errors (around $0.03$px across cameras) as well as high health scores (roughly in the range of $87$ to $98$ across the evaluated image sets). Overall, these results are in line with what is typically reported for well-controlled target-based calibration in multi-camera systems.
 \newline
 
 Target-free approaches such as LiFCal are attractive because they avoid physical targets and, in principle, allow calibration updates with less manual setup. In the setup used in this thesis, LiFCal did not reach the same level of accuracy, as the reprojection errors were clearly higher across cameras, and the resulting health scores stayed far below those of the initial calibration (around $52$ to $59$ in the three runs). This suggests that, at least in the current form and for the considered multi-camera array scenario, LiFCal cannot replace the checkerboard-based baseline.
@@ -1079,15 +1079,28 @@ In conclusion, the requirements outlined in the Methods and Materials section an
 % =========================================================
 \section{Conclusion and Outlook}
 
+The final chapter summarizes the key aspects of the thesis. On one hand, the main achievements and findings are recapped in the Conclusion subsection. On the other hand, in the Outlook subsection, potential future directions and improvements for the calibration software and methods are discussed.
+
 \subsection{Conclusion}
-% What was implemented
-% What worked well
-% What was learned
+
+In this thesis, a data-driven automatic calibration software for multi-camera light field systems was implemented and evaluated. It combines an initial target-based calibration using a checkerboard, which is used to estimate the calibration parameters as a reference, with a target-free recalibration approach based on the LiFCal method. In addition, a health score monitoring mechanism is used to decide whether a new calibration result improves the overall calibration quality. The health score ranges from 0 to 100, where higher values correspond to better calibration quality. The system is designed to perform recalibration automatically, without requiring manual intervention, in order to counteract calibration drift over time. The software was implemented in Python, and synthetic image data generated with Blender was used to evaluate the calibration results against known ground truth parameters.
+\newline
+
+The results showed that the initial target-based calibration achieved high accuracy, with reprojection errors of approximately $0.03$px per camera and health scores ranging between about $87$ and $98$ across the evaluated image sets. In contrast, the LiFCal-based recalibration resulted in significantly higher reprojection errors for all cameras and lower health scores, which ranged between approximately $52$ and $59$ in the performed recalibration runs. These results indicate that, in the given multi-camera light field setup, LiFCal is currently not suitable to replace a classical checkerboard-based calibration. The main limitations of LiFCal in this context were analyzed, and possible reasons for its reduced performance were discussed.
+\newline
+
+In conclusion, the implemented software provides a useful framework for automatic multi-camera light field calibration and systematic evaluation of calibration quality. However, further adaptations and improvements are required before the target-free recalibration approach can achieve a calibration accuracy comparable to that of the initial target-based method.
 
 \subsection{Outlook}
-% Real hardware LF camera
-% Better depth estimation
-% Alternative target-free methods
+
+For future work, several extensions of the calibration software were identified. One possible direction is to adapt the LiFCal method more explicitly to multi-camera array systems. This would require changes to the underlying camera model and the optimization process so they match the geometry and constraints of camera arrays more closely. Such adaptations may lead to more stable results when the method is applied to multi-camera configurations. 
+\newline
+
+Another potential improvement concerns the implementation itself. Rewriting the software in a faster programming language, such as C++, would reduce runtime and make repeated recalibration more practical. This becomes relevant in real-world scenarios where recalibration is performed frequently or where time constraints play a role. 
+\newline
+
+A further step would be the evaluation of the framework on a real multi-camera light field system. Testing on real hardware would allow a more realistic assessment of calibration accuracy and robustness. It would also expose practical issues which do not appear in synthetic experiments, such as noise, mechanical inaccuracies, or synchronization effects. Overall, the project presented in this thesis provides a solid foundation for further research and development in the field of multi-camera light field calibration.
+
 
 % =========================================================
 % Appendix
