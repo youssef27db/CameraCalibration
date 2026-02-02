@@ -79,7 +79,7 @@ Submission date: 28 February 2026
 % Abstract
 % =========================================================
 \section*{Abstract}
-% Write later
+
 \cleardoublepage
 
 % =========================================================
@@ -102,18 +102,18 @@ Submission date: 28 February 2026
 % =========================================================
 \section{Introduction}
 
-\subsection{Motivation}
-% General relevance of camera calibration
-% Importance for computer vision and light field systems
+In recent years, light field cameras have gained significance in many applications, such as robotics, augmented reality, and 3D reconstruction. In these application areas, the accuracy of the camera system plays a crucial role for overall performance. Camera calibration is therefore an essential step, as it enables an accurate geometric description of the imaging process and ensures reliable results.
+\newline
 
-\subsection{Challenges and Problem Statement}
-% Existing challenges and open issues
-% Limitations of classical calibration
-% Practical problems in long-term and real-world setups
+There are various types of light field camera systems; however, this thesis focuses on multi-camera light field systems. These systems consist of multiple individual cameras arranged in a specific geometric configuration in order to capture different viewpoints of a scene. Compared to single-camera setups, the calibration of such systems is considerably more complex. The standard approach relies on target-based calibration using physical patterns such as checkerboards. In contrast, a more recent target-free calibration approach has been proposed by Fleith et al.\cite{LiFCal}. The motivation of this thesis is to develop a calibration software that combines both approaches within a data-driven recalibration framework, enabling automatic calibration of a multi-camera array without human intervention.
+\newline
+
+Despite its potential, the proposed software approach also introduces limitations and challenges that must be carefully examined. For this reason, this thesis investigates the feasibility and performance of the target-free calibration method in the context of multi-camera light field systems. The research questions guiding this work are presented in the following section.
+
 
 \subsection{Research Questions}
 
-The following research questions guide this thesis:
+In order to systematically investigate the feasibility and performance of the target-free calibration method LiFCal for multi-camera light field systems, the following research questions are formulated. These questions aim to explore the applicability, accuracy, and conditions under which LiFCal can effectively replace traditional target-based calibration methods.
 
 \begin{itemize}
   \item \textbf{RQ1:} Can the target-free calibration method LiFCal be used to automatically calibrate a multi-camera light field system without human interaction or the use of a checkerboard?
@@ -123,8 +123,11 @@ The following research questions guide this thesis:
   \item \textbf{RQ3:} Under which conditions and requirements can an automatic, target-free recalibration of a multi-camera light field system be successfully performed?
 \end{itemize}
 
+The first research question examines whether the LiFCal approach is suitable for the intended multi-camera light field system. The second research question investigates whether LiFCal can achieve a calibration quality comparable to a classical target-based approach and thus potentially replace it in the context of a multi-camera system. The third research question focuses on identifying the conditions and requirements necessary to enable a reliable and practical target-free recalibration within an automated software framework.
+
 \subsection{Structure of the Thesis}
-% Brief overview of all chapters
+
+To provide the necessary background and context, the thesis begins with the theoretical foundations in Chapter 2. This chapter introduces the basic knowledge of camera models, lens distortion, camera calibration, and the different types of light field cameras. Chapter 3 describes the methods and materials used to implement the calibration framework. This includes the main idea of the project, the use case description, and the software architecture. The results of the implementation and evaluation are presented in Chapter 4. It contains the visualization of the results and their accuracy. Finally, Chapter 5 discusses the findings, answers the research questions, and provides an outlook on future work. A final conclusion completes the thesis.
 
 \clearpage
 
@@ -135,7 +138,6 @@ The following research questions guide this thesis:
 
 This chapter introduced the theoretical foundations required for this thesis. It covered the pinhole camera model, including intrinsic and extrinsic parameters as well as lens distortion, as the basis for geometric camera modeling. Building on this, common camera calibration methods and error metrics were presented, including target-based calibration and bundle adjustment. The chapter also introduced light field camera systems, their main system types, and the state of the art in their calibration. Together, these concepts provide the necessary background for the calibration approach and experiments presented in the following chapters.
 
-% Chapter 2.1 Pinhole Camera Model
 \subsection{Pinhole Camera Model}
 
 Cameras are the primary devices used to capture visual information from the real world into an image. To process and analyze this information computationally, it is necessary to describe the imaging process using a  camera model \cite{StanfordCS231ACameraModels}.
@@ -186,7 +188,6 @@ the model is mathematically described using two types of parameters \cite{MathWo
 
 These parameters form the basis of camera calibration, which aims to estimate them accurately. However in practice, cameras use lenses to focus light onto the image sensor, which introduces distortions not accounted for in the idealized pinhole model.
 
-% Chapter 2.2 Lens Distortion
 \subsection{Lens Distortion}
 
 The camera matrix alone is not sufficient to model real imaging systems, as the
@@ -202,7 +203,6 @@ set of parametric functions. The two most common types of distortion considered
 in practice are radial distortion and tangential distortion.
 
 
-% Chapter 2.2.1 Radial Distortion
 \subsubsection{Radial Distortion}
 
 Radial distortion is caused by the spherical shape of camera lenses, which leads
@@ -237,7 +237,6 @@ r^2 = x^2 + y^2 \label{eq:3}
 The coefficients $k_1$, $k_2$, and $k_3$ in \eqref{eq:1} and \eqref{eq:2} control the strength of radial lens distortion. In practice, the first coefficient $k_1$ has the dominant influence on the distortion type: negative values of $k_1$ typically result in barrel distortion, while positive values lead to pincushion distortion.
 
 
-% Chapter 2.2.2 Tangential Distortion
 \subsubsection{Tangential Distortion}
 
 Tangential distortion occurs when the image sensor and the camera lens
@@ -275,7 +274,6 @@ r^2 = x^2 + y^2
 
 The coefficients $p_1$ and $p_2$ describe how strong the tangential lens distortion is. This type of distortion is caused by mechanical misalignment of the lens elements relative to the image sensor, resulting in a displacement of image points. Although tangential distortion is typically less pronounced than radial distortion, it can still negatively affect the camera calibration accuracy if not properly modeled.
 
-% 2.3 Camera Calibration
 \subsection{Camera Calibration}
 
 The goal of camera calibration, also known as camera resectioning, is to estimate the parameters of a camera model. These parameters include the intrinsic parameters, the extrinsic parameters, and the lens distortion coefficients \cite{MathWorksCameraCalibration}. Knowing these parameters makes it possible to correct distortions in the recorded images and to perform metric measurements in the scene, for example to estimate object sizes or distances from image data.
@@ -286,7 +284,6 @@ Camera calibration is required for many tasks in 3D computer vision and photomet
 
 In practice, cameras are often calibrated using targets with known geometric properties. Planar targets, such as checkerboard patterns, are widely used because they are easy to handle and lead to reliable results \cite{888718}. Several images of the target are captured from different viewpoints and orientations. Based on these images, the camera parameters can be estimated with relatively small calibration errors. For this reason, target-based calibration methods are commonly used in many computer vision applications.
 
-% 2.3.1 Target-Based Camera Calibration
 \subsubsection{Target-Based Camera Calibration}
 
 There are various approaches for target-based camera calibration. One of the most common methods uses a checkerboard pattern, as mentioned before. The checkerboard consists of a regular grid of black and white squares with known dimensions, as shown in \autoref{fig:checkerboard}.
@@ -307,7 +304,6 @@ single-camera setups and multi-camera systems. Besides checkerboards, other type
 
 The main limitations of target-based calibration methods are the required manual placement of the target and the need to capture images with different poses. In addition, the calibration accuracy depends on factors such as the quality of the corner detection, the number of images used, and the diversity of viewpoints during data acquisition \cite{888718}. Despite these limitations, target-based calibration remains a standard method in many computer vision applications due to its simplicity and reliable performance.
 
-% 2.3.2 Calibration Parameters and Error Metrics
 \subsubsection{Calibration Parameters and Error Metrics}
 
 To evaluate the quality of a camera calibration, different error metrics are used. These metrics describe how well the estimated camera parameters fit the observed image data. In practice, this is done by comparing detected image points with points that are projected using the calibrated camera model. The most common metric is the reprojection error \cite{MathWorksCameraCalibration}.
@@ -336,7 +332,6 @@ Another commonly used measure is the root mean square (RMS) error \cite{Hartley2
 
 The RMS error provides a single value that describes the overall calibration accuracy and is often used to compare different calibration results.
 
-% 2.3.3 Bundle Adjustment
 \subsubsection{Bundle Adjustment}
 
 Bundle adjustment is a method for improving a 3D reconstruction by refining both the positions of 3D points and the camera parameters at the same time \cite{Triggs2000BundleAdjustment}. The name comes from the “bundles” of light rays from the 3D points to the cameras, which are adjusted together to make the reconstruction more accurate. The parameters that are optimized together usually include the 3D coordinates of the points, the extrinsic parameters, and sometimes the intrinsic parameters \cite{cremers2019bundleadjustment}.
@@ -354,7 +349,6 @@ This joint optimization improves calibration accuracy because it ensures that al
 
 Mathematically, bundle adjustment is formulated as an optimization problem that minimizes the reprojection error. This optimization is usually solved using nonlinear least squares methods and takes advantage of the fact that the problem structure is largely sparse \cite{cremers2019bundleadjustment}.
 
-% 2.4 Light Field Cameras Systems
 \subsection{Light Field Camera Systems}
 
 A standard camera captures a 2D projection of the 3D world. Light field cameras, on the other hand, have the ability to capture more information. They record not only the intensity of light rays but also their direction \cite{DLR2026LightFieldCameras}. This property allows the creation of accurate depth maps and refocus the image after it has been taken \cite{LiFCal}. Therefore light field cameras are growing in importance for applications in computer vision, robotics, augmented reality, and other applications.
@@ -365,9 +359,7 @@ The four-dimensional nature of light fields means that their processing currentl
 
 There are mainly two different types of light field camera systems: multi-camera arrays and micro-lens-array-based cameras. Each type has its own advantages and disadvantages, which will be discussed in the following sections.
 
-% 2.4.1 Multi-Camera Light Field Systems
 \subsubsection{Multi-Camera Light Field Systems}
-% Camera arrays (e.g. cross-shaped setup with 13 cameras)
 
 Multi-camera arrays are one way to capture light fields. This type of system is structured by arranging multiple individual cameras in a geometric configuration \cite{multi_camera_calibration}. Each camera captures a different viewpoint of the scene, enabling the system to record a 4D light field. In practice, there are different approaches to arranging the cameras. For example, in \cite{StanfordArrayProject}, an array of 128 cameras in a square grid is used, while in other works cross-shaped structures with fewer cameras are employed \cite{multi_camera_calibration}, as shown in \autoref{fig:multi_camera_array}.
 
@@ -384,9 +376,7 @@ Besides the advantages of a multi-camera setup, such as improved depth accuracy 
 
 It is also essential to keep the cameras properly aligned and synchronized. Even small errors in alignment or timing can cause artifacts or undesired results in the final image. Therefore, multi-camera light field systems require a very precise setup and calibration to work as intended.
 
-% 2.4.2 Micro-Lens-Array-Based Light Field Cameras
 \subsubsection{Micro-Lens-Array-Based Light Field Cameras}
-% MLA-based systems as used in LiFCal
 
 The second type of light field camera is based on a micro-lens array (MLA). In this case instead of having different cameras, the system uses only one sensor combined with an array of small lenses placed between the main lens and the image sensor \cite{LiFCal}. The MLA allows the camera to capture also the 4D light field information. 
 
@@ -403,7 +393,6 @@ As illustrated in \autoref{fig:mla}, each lens in the MLA focuses light from dif
 
 For MLA-based light field cameras, the pattern-based calibration method provides satisfactory results in terms of reprojection error. In practice, the overall calibration quality strongly depends on the calibration target, particularly its flatness \cite{anisimov2021calibration_auto_refinement}.
 
-% 2.5 State of the Art in Light Field Camera Calibration
 \subsection{State of the Art in Light Field Camera Calibration}
 
 Accurate calibration is a central requirement for light field camera systems, as even small geometric errors directly affect depth estimation and view consistency. In camera arrays, where many individual views must agree, calibration errors accumulate and lead to visible artifacts in depth maps and reconstructed images.
@@ -427,7 +416,7 @@ Overall, existing work shows that calibration accuracy in light field systems re
 \clearpage
 
 % =========================================================
-% Chapter Three: Method and Material
+% Chapter 3: Method and Material
 % =========================================================
 \section{Methods and Materials}
 
@@ -719,10 +708,6 @@ In order to illustrate the workflow and interactions between the different calib
     \label{fig:state_diagram}
 \end{figure}
 
-
-% ---------------------------------------------------------
-% 3.2 Material
-% ---------------------------------------------------------
 \subsection{Materials}
 
 In this chapter, the materials and tools used for the implementation and testing of the calibration software are described and presented. Due to the lack of a physical multi-camera light field system, synthetic data generation with Blender was used to create realistic test scenarios. The structure of the image sets, ground truth definitions, and the runtime environment are also discussed.
@@ -1100,8 +1085,6 @@ Another potential improvement concerns the implementation itself. Rewriting the 
 \newline
 
 A further step would be the evaluation of the framework on a real multi-camera light field system. Testing on real hardware would allow a more realistic assessment of calibration accuracy and robustness. It would also expose practical issues which do not appear in synthetic experiments, such as noise, mechanical inaccuracies, or synchronization effects. Overall, the project presented in this thesis provides a solid foundation for further research and development in the field of multi-camera light field calibration.
-
-
 
 
 \appendix
