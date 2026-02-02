@@ -127,7 +127,7 @@ The first research question examines whether the LiFCal approach is suitable for
 
 \subsection{Structure of the Thesis}
 
-To provide the necessary background and context, the thesis begins with the theoretical foundations in Chapter 2. This chapter introduces the basic knowledge of camera models, lens distortion, camera calibration, and the different types of light field cameras. Chapter 3 describes the methods and materials used to implement the calibration framework. This includes the main idea of the project, the use case description, and the software architecture. The results of the implementation and evaluation are presented in Chapter 4. It contains the visualization of the results and their accuracy. Finally, Chapter 5 discusses the findings, answers the research questions, and provides an outlook on future work. A final conclusion completes the thesis.
+To provide the necessary background and context, the thesis begins with the theoretical foundations in Chapter 2. This chapter introduces the basic knowledge of camera models, lens distortion, camera calibration, and the different types of light field cameras. Chapter 3 describes the methods and materials used to implement the calibration framework. This includes the main idea of the project, the use case description, and the software architecture. The results of the implementation and evaluation are presented in Chapter 4. It contains the visualization of the results and their accuracy. Finally, Chapter 5 discusses the findings, answers the research questions, and provides an outlook on future work. A final conclusion completes the thesis in the last chapter.
 
 \clearpage
 
@@ -787,7 +787,7 @@ In this chapter, the results, plots, and tables obtained from the implementation
 
 \subsection{Results of Initial Calibration}
 
-The results of the initial calibration are categorized into intrinsic accuracy, extrinsic accuracy, and reprojection and RMS error. Each category is discussed in the following subsections. To visualize the results effectively, the plots are taken from one specific image set in which the camera system was deliberately decalibrated by a certain degree to simulate real-world conditions.
+The results of the initial calibration are categorized into intrinsic accuracy, extrinsic accuracy, and reprojection and RMS error. Each category is discussed in the following subsections. To visualize the results effectively, the plots are taken from one specific image set in which the camera system was deliberately decalibrated by a certain degree to simulate real-world conditions. Additional plots for all recalibration runs are provided in \autoref{app:additional_plots}.
 
 \subsubsection{Intrinsic Accuracy}
 
@@ -811,7 +811,7 @@ For the evaluation of the extrinsic parameters, the estimated camera poses are c
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=1\textwidth]{figures/compare_translation.png}
+    \includegraphics[width=0.85\textwidth]{figures/compare_translation.png}
     \caption{Translation parameter deviations from ground truth and the initial calibration.}
     \label{fig:translation_error}
 \end{figure}
@@ -1085,10 +1085,254 @@ Another potential improvement concerns the implementation itself. Rewriting the 
 \newline
 
 A further step would be the evaluation of the framework on a real multi-camera light field system. Testing on real hardware would allow a more realistic assessment of calibration accuracy and robustness. It would also expose practical issues which do not appear in synthetic experiments, such as noise, mechanical inaccuracies, or synchronization effects. Overall, the project presented in this thesis provides a solid foundation for further research and development in the field of multi-camera light field calibration.
-
+\clearpage
 
 \appendix
 \section{Appendix}
+\subsection{Additional Results}
+\label{app:additional_plots}
+
+
+\subsubsection{Imageset1}
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/appendix/imageset1/compare_intrinsic.png}
+    \caption{Deviations of intrinsic parameters from ground truth for the initial calibration (Imageset1).}
+    \label{fig:intrinsic_accuracy1}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/appendix/imageset1/compare_extrinsics.png}
+    \caption{Extrinsic parameter errors of the initial calibration (Imageset1).}
+    \label{fig:extrinsic_errors1}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/appendix/imageset1/compare_translation.png}
+    \caption{Translation parameter deviations from ground truth and the initial calibration (Imageset1).}
+    \label{fig:translation_error1}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/appendix/imageset1/compare_stereoRMS.png}
+    \caption{Stereo RMS error of the initial calibration (Imageset1).}
+    \label{fig:rms_error_plot1}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/appendix/imageset1/compare_reprojectionError.png}
+    \caption{Reprojection error per camera of the initial calibration (Imageset1).}
+    \label{fig:reprojection_error_plot1}
+\end{figure}
+\clearpage
+
+\subsubsection{Imageset2}
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/appendix/imageset2/compare_intrinsic.png}
+    \caption{Deviations of intrinsic parameters from ground truth for the initial calibration (Imageset2).}
+    \label{fig:intrinsic_accuracy2}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/appendix/imageset2/compare_extrinsics.png}
+    \caption{Extrinsic parameter errors of the initial calibration (Imageset2).}
+    \label{fig:extrinsic_errors2}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/appendix/imageset2/compare_translation.png}
+    \caption{Translation parameter deviations from ground truth and the initial calibration (Imageset2).}
+    \label{fig:translation_error2}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/appendix/imageset2/compare_stereoRMS.png}
+    \caption{Stereo RMS error of the initial calibration (Imageset2).}
+    \label{fig:rms_error_plot2}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/appendix/imageset2/compare_reprojectionError.png}
+    \caption{Reprojection error per camera of the initial calibration (Imageset2).}
+    \label{fig:reprojection_error_plot2}
+\end{figure}
+\clearpage
+
+\subsubsection{Imageset3}
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/appendix/imageset3/compare_intrinsic.png}
+    \caption{Deviations of intrinsic parameters from ground truth for the initial calibration (Imageset3).}
+    \label{fig:intrinsic_accuracy3}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/appendix/imageset3/compare_extrinsics.png}
+    \caption{Extrinsic parameter errors of the initial calibration (Imageset3).}
+    \label{fig:extrinsic_errors3}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/appendix/imageset3/compare_translation.png}
+    \caption{Translation parameter deviations from ground truth and the initial calibration (imageset3).}
+    \label{fig:translation_error3}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/appendix/imageset3/compare_stereoRMS.png}
+    \caption{Stereo RMS error of the initial calibration (Imageset3).}
+    \label{fig:rms_error_plot3}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/appendix/imageset3/compare_reprojectionError.png}
+    \caption{Reprojection error per camera of the initial calibration (Imageset3).}
+    \label{fig:reprojection_error_plot3}
+\end{figure}
+\clearpage
+
+\subsubsection{Imageset4}
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/appendix/imageset4/compare_intrinsic.png}
+    \caption{Deviations of intrinsic parameters from ground truth for the initial calibration (Imageset4).}
+    \label{fig:intrinsic_accuracy4}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/appendix/imageset4/compare_extrinsics.png}
+    \caption{Extrinsic parameter errors of the initial calibration (Imageset4).}
+    \label{fig:extrinsic_errors4}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/appendix/imageset4/compare_translation.png}
+    \caption{Translation parameter deviations from ground truth and the initial calibration (Imageset4).}
+    \label{fig:translation_error4}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/appendix/imageset4/compare_stereoRMS.png}
+    \caption{Stereo RMS error of the initial calibration (Imageset4).}
+    \label{fig:rms_error_plot4}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/appendix/imageset4/compare_reprojectionError.png}
+    \caption{Reprojection error per camera of the initial calibration (Imageset4).}
+    \label{fig:reprojection_error_plot4}
+\end{figure}
+\clearpage
+
+\subsubsection{Imageset6}
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/appendix/imageset6/compare_intrinsic.png}
+    \caption{Deviations of intrinsic parameters from ground truth for the initial calibration (Imageset6).}
+    \label{fig:intrinsic_accuracy6}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/appendix/imageset6/compare_extrinsics.png}
+    \caption{Extrinsic parameter errors of the initial calibration (Imageset6).}
+    \label{fig:extrinsic_errors6}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/appendix/imageset6/compare_translation.png}
+    \caption{Translation parameter deviations from ground truth and the initial calibration (Imageset6).}
+    \label{fig:translation_error6}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/appendix/imageset6/compare_stereoRMS.png}
+    \caption{Stereo RMS error of the initial calibration (Imageset6).}
+    \label{fig:rms_error_plot6}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/appendix/imageset6/compare_reprojectionError.png}
+    \caption{Reprojection error per camera of the initial calibration (Imageset6).}
+    \label{fig:reprojection_error_plot6}
+\end{figure}
+\clearpage
+
+\subsubsection{Imageset7}
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/appendix/imageset7/compare_intrinsic.png}
+    \caption{Deviations of intrinsic parameters from ground truth for the initial calibration (Imageset7).}
+    \label{fig:intrinsic_accuracy7}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/appendix/imageset7/compare_extrinsics.png}
+    \caption{Extrinsic parameter errors of the initial calibration (Imageset7).}
+    \label{fig:extrinsic_errors7}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/appendix/imageset7/compare_translation.png}
+    \caption{Translation parameter deviations from ground truth and the initial calibration (Imageset7).}
+    \label{fig:translation_error7}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/appendix/imageset7/compare_stereoRMS.png}
+    \caption{Stereo RMS error of the initial calibration (Imageset7).}
+    \label{fig:rms_error_plot7}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/appendix/imageset7/compare_reprojectionError.png}
+    \caption{Reprojection error per camera of the initial calibration (Imageset7).}
+    \label{fig:reprojection_error_plot7}
+\end{figure}
+\clearpage
+
+\subsection{Blender Scenes}
+
+The Blender scenes used to generate the synthetic image data for the evaluations. The first plot shows the scene used for the initial target-based calibration, while the second plot illustrates the scene employed for the LiFCal-based recalibration.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.75\textwidth]{figures/appendix/InitialCalibrationScene.png}
+    \caption{Blender scene for initial target-based calibration with checkerboard.}
+    \label{fig:scene_initial_calibration}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/appendix/LiFCalCalibrationScene.png}
+    \caption{Blender scene for LiFCal-based recalibration without checkerboard.}
+    \label{fig:scene_lifcal_recalibration}
+\end{figure}
+
 
 \clearpage
 \section*{Glossary}
@@ -1140,6 +1384,9 @@ A common target-based calibration where checkerboard corners are detected in man
 
 \item[Target-free calibration]
 Calibration without a physical pattern, based on scene structure, features, and usually camera motion.
+
+\item[Data-driven calibration] 
+It refers to an approach in which decisions and evaluations are based on measured data rather than predefined assumptions. In the context of this thesis, data-driven means that calibration quality is assessed using observed image data and error metrics, which then guide automatic decisions within the system.
 
 \item[LiFCal]
 A target-free calibration method (originally for MLA light field cameras) used here as a baseline idea for automatic recalibration.

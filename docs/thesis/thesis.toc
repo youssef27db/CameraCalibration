@@ -35,7 +35,7 @@
 \contentsline {section}{\numberline {4}Results and Evaluation}{22}{section.4}%
 \contentsline {subsection}{\numberline {4.1}Results of Initial Calibration}{22}{subsection.4.1}%
 \contentsline {subsubsection}{\numberline {4.1.1}Intrinsic Accuracy}{22}{subsubsection.4.1.1}%
-\contentsline {subsubsection}{\numberline {4.1.2}Extrinsic Accuracy}{22}{subsubsection.4.1.2}%
+\contentsline {subsubsection}{\numberline {4.1.2}Extrinsic Accuracy}{23}{subsubsection.4.1.2}%
 \contentsline {subsubsection}{\numberline {4.1.3}Reprojection and RMS Error}{24}{subsubsection.4.1.3}%
 \contentsline {subsubsection}{\numberline {4.1.4}Comparison of Mean Results Across Image Sets}{25}{subsubsection.4.1.4}%
 \contentsline {subsection}{\numberline {4.2}Results of LiFCal-Based Recalibration}{25}{subsection.4.2}%
@@ -50,6 +50,14 @@
 \contentsline {section}{\numberline {6}Conclusion and Outlook}{33}{section.6}%
 \contentsline {subsection}{\numberline {6.1}Conclusion}{33}{subsection.6.1}%
 \contentsline {subsection}{\numberline {6.2}Outlook}{33}{subsection.6.2}%
-\contentsline {section}{\numberline {A}Appendix}{34}{appendix.A}%
-\contentsline {section}{Glossary}{35}{section*.15}%
+\contentsline {section}{\numberline {A}Appendix}{35}{appendix.A}%
+\contentsline {subsection}{\numberline {A.1}Additional Results}{35}{subsection.A.1}%
+\contentsline {subsubsection}{\numberline {A.1.1}Imageset1}{35}{subsubsection.A.1.1}%
+\contentsline {subsubsection}{\numberline {A.1.2}Imageset2}{37}{subsubsection.A.1.2}%
+\contentsline {subsubsection}{\numberline {A.1.3}Imageset3}{39}{subsubsection.A.1.3}%
+\contentsline {subsubsection}{\numberline {A.1.4}Imageset4}{41}{subsubsection.A.1.4}%
+\contentsline {subsubsection}{\numberline {A.1.5}Imageset6}{43}{subsubsection.A.1.5}%
+\contentsline {subsubsection}{\numberline {A.1.6}Imageset7}{45}{subsubsection.A.1.6}%
+\contentsline {subsection}{\numberline {A.2}Blender Scenes}{47}{subsection.A.2}%
+\contentsline {section}{Glossary}{48}{section*.15}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 
