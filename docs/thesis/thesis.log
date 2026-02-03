@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.12.24)  2 FEB 2026 17:48
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.12.24)  3 FEB 2026 16:12
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -702,42 +702,54 @@ Package tocbasic Info: setting babel extension for `lol' on input line 36.
 LaTeX Font Info:    Trying to load font information for T1+lmss on input line 81.
  (C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmss.fd
 File: t1lmss.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-) [1] (thesis.toc
-LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 3.
+)
+LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 83.
  (C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/lm\ot1lmr.fd
 File: ot1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OML+lmm on input line 3.
+LaTeX Font Info:    Trying to load font information for OML+lmm on input line 83.
  (C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/lm\omllmm.fd
 File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 3.
+LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 83.
  (C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/lm\omslmsy.fd
 File: omslmsy.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 3.
+LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 83.
  (C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/lm\omxlmex.fd
 File: omxlmex.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 3.
+(Font)              <12> on input line 83.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 3.
+(Font)              <8> on input line 83.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 3.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 3.
+(Font)              <6> on input line 83.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 83.
  (C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 3.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 83.
  (C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
+Underfull \hbox (badness 10000) in paragraph at lines 83--85
+
+ []
+
+[1{C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-rm.enc}{C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathit.enc}]
+pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.94 \cleardoublepage
+                      [2
+
+] (thesis.toc
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
 l.52 ...mberline {6.2}Outlook}{33}{subsection.6.2}
-                                                  % [2
+                                                  % [3
 
 
 ])
@@ -748,13 +760,13 @@ l.52 ...mberline {6.2}Outlook}{33}{subsection.6.2}
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.89 \clearpage
-                [3] (thesis.lof
+l.100 \clearpage
+                 [4] (thesis.lof
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
 l.39 ... calibration (Imageset4).}}{41}{figure.38}
-                                                  % [4
+                                                  % [5
 
 ])
 \tf@lof=\write5
@@ -768,370 +780,360 @@ l.39 ... calibration (Imageset4).}}{41}{figure.38}
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.96 \clearpage
-                [5]
-Underfull \hbox (badness 10000) in paragraph at lines 105--107
+l.107 \clearpage
+                 [6]
+Underfull \hbox (badness 10000) in paragraph at lines 116--118
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 108--110
+Underfull \hbox (badness 10000) in paragraph at lines 119--121
 
  []
 
-LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 119.
+LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 130.
 (C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/lm\ts1lmr.fd
 File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.131 
+l.142 
        [1
 
 {C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ts1.enc}] [2]
-<figures/Pinhole-Camera.png, id=302, 412.54124pt x 226.8475pt>
+<figures/Pinhole-Camera.png, id=308, 412.54124pt x 226.8475pt>
 File: figures/Pinhole-Camera.png Graphic file (type png)
 <use figures/Pinhole-Camera.png>
-Package pdftex.def Info: figures/Pinhole-Camera.png  used on input line 147.
+Package pdftex.def Info: figures/Pinhole-Camera.png  used on input line 158.
 (pdftex.def)             Requested size: 362.37569pt x 199.26642pt.
  [3
 
-{C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathit.enc}{C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-rm.enc}{C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathex.enc} <./figures/Pinhole-Camera.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 193--196
+{C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathex.enc} <./figures/Pinhole-Camera.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 204--207
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 197--200
+Underfull \hbox (badness 10000) in paragraph at lines 208--211
 
  []
 
-<figures/Radial-Distortion.png, id=323, 950.3505pt x 363.15675pt>
+<figures/Radial-Distortion.png, id=327, 950.3505pt x 363.15675pt>
 File: figures/Radial-Distortion.png Graphic file (type png)
 <use figures/Radial-Distortion.png>
-Package pdftex.def Info: figures/Radial-Distortion.png  used on input line 215.
+Package pdftex.def Info: figures/Radial-Distortion.png  used on input line 226.
 (pdftex.def)             Requested size: 339.72592pt x 129.81647pt.
 [4{C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathsy.enc} <./figures/Radial-Distortion.png>]
-<figures/Tangential-Distortion.png, id=341, 362.35374pt x 193.72375pt>
+<figures/Tangential-Distortion.png, id=345, 362.35374pt x 193.72375pt>
 File: figures/Tangential-Distortion.png Graphic file (type png)
 <use figures/Tangential-Distortion.png>
-Package pdftex.def Info: figures/Tangential-Distortion.png  used on input line 248.
+Package pdftex.def Info: figures/Tangential-Distortion.png  used on input line 259.
 (pdftex.def)             Requested size: 271.7835pt x 145.30426pt.
-<figures/Tangential-Distortion2.png, id=342, 237.88875pt x 211.992pt>
+<figures/Tangential-Distortion2.png, id=346, 237.88875pt x 211.992pt>
 File: figures/Tangential-Distortion2.png Graphic file (type png)
 <use figures/Tangential-Distortion2.png>
-Package pdftex.def Info: figures/Tangential-Distortion2.png  used on input line 250.
+Package pdftex.def Info: figures/Tangential-Distortion2.png  used on input line 261.
 (pdftex.def)             Requested size: 135.89174pt x 121.10193pt.
  [5 <./figures/Tangential-Distortion.png> <./figures/Tangential-Distortion2.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 279--281
+Underfull \hbox (badness 10000) in paragraph at lines 290--292
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 282--284
+Underfull \hbox (badness 10000) in paragraph at lines 293--295
 
  []
 
-<figures/checkerboard.png, id=364, 259.97125pt x 194.7275pt>
+<figures/checkerboard.png, id=368, 259.97125pt x 194.7275pt>
 File: figures/checkerboard.png Graphic file (type png)
 <use figures/checkerboard.png>
-Package pdftex.def Info: figures/checkerboard.png  used on input line 293.
+Package pdftex.def Info: figures/checkerboard.png  used on input line 304.
 (pdftex.def)             Requested size: 117.76915pt x 88.2119pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 298--300
+Underfull \hbox (badness 10000) in paragraph at lines 309--311
 
  []
 
 [6 <./figures/checkerboard.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 301--304
+Underfull \hbox (badness 10000) in paragraph at lines 312--315
 
  []
 
-<figures/reprojection_error.png, id=381, 1023.825pt x 850.17625pt>
+<figures/reprojection_error.png, id=386, 1023.825pt x 850.17625pt>
 File: figures/reprojection_error.png Graphic file (type png)
 <use figures/reprojection_error.png>
-Package pdftex.def Info: figures/reprojection_error.png  used on input line 314.
+Package pdftex.def Info: figures/reprojection_error.png  used on input line 325.
 (pdftex.def)             Requested size: 226.48395pt x 188.0642pt.
 [7 <./figures/reprojection_error.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 326--328
-
- []
-
-
 Underfull \hbox (badness 10000) in paragraph at lines 337--339
 
  []
 
-<figures/bundle_adjustement.png, id=398, 752.8125pt x 421.575pt>
+
+Underfull \hbox (badness 10000) in paragraph at lines 348--350
+
+ []
+
+<figures/bundle_adjustement.png, id=402, 752.8125pt x 421.575pt>
 File: figures/bundle_adjustement.png Graphic file (type png)
 <use figures/bundle_adjustement.png>
-Package pdftex.def Info: figures/bundle_adjustement.png  used on input line 345.
+Package pdftex.def Info: figures/bundle_adjustement.png  used on input line 356.
 (pdftex.def)             Requested size: 249.13371pt x 139.51257pt.
 [8 <./figures/bundle_adjustement.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 354--356
+Underfull \hbox (badness 10000) in paragraph at lines 365--367
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 357--359
+Underfull \hbox (badness 10000) in paragraph at lines 368--370
 
  []
 
-<figures/multi_camera_array.png, id=422, 428.802pt x 242.1045pt>
+<figures/multi_camera_array.png, id=426, 428.802pt x 242.1045pt>
 File: figures/multi_camera_array.png Graphic file (type png)
 <use figures/multi_camera_array.png>
-Package pdftex.def Info: figures/multi_camera_array.png  used on input line 369.
+Package pdftex.def Info: figures/multi_camera_array.png  used on input line 380.
 (pdftex.def)             Requested size: 317.07614pt x 179.02892pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 374--376
+Underfull \hbox (badness 10000) in paragraph at lines 385--387
 
  []
 
 [9 <./figures/multi_camera_array.png>]
-<figures/MLA.png, id=434, 602.25pt x 320.397pt>
+<figures/MLA.png, id=438, 602.25pt x 320.397pt>
 File: figures/MLA.png Graphic file (type png)
 <use figures/MLA.png>
-Package pdftex.def Info: figures/MLA.png  used on input line 386.
+Package pdftex.def Info: figures/MLA.png  used on input line 397.
 (pdftex.def)             Requested size: 271.7835pt x 144.59286pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 391--393
+Underfull \hbox (badness 10000) in paragraph at lines 402--404
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 398--400
+Underfull \hbox (badness 10000) in paragraph at lines 409--411
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 401--403
+Underfull \hbox (badness 10000) in paragraph at lines 412--414
 
  []
 
 [10 <./figures/MLA.png>]
-Overfull \hbox (0.31989pt too wide) in paragraph at lines 404--406
+Overfull \hbox (0.31989pt too wide) in paragraph at lines 415--417
 []\T1/lmr/m/n/12 To over-come the lim-i-ta-tions of target-based cal-i-bra-tion, sev-eral self-calibration ap-proaches
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 404--406
+Underfull \hbox (badness 10000) in paragraph at lines 415--417
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 407--409
+Underfull \hbox (badness 10000) in paragraph at lines 418--420
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 410--412
+Underfull \hbox (badness 10000) in paragraph at lines 421--423
 
  []
 
 [11]
-Underfull \hbox (badness 10000) in paragraph at lines 431--433
+Underfull \hbox (badness 10000) in paragraph at lines 442--444
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 434--436
+Underfull \hbox (badness 10000) in paragraph at lines 445--447
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 437--439
+Underfull \hbox (badness 10000) in paragraph at lines 448--450
 
  []
 
 [12
 
 ]
-LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 460.
+LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 471.
  (C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmtt.fd
 File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-Overfull \hbox (14.5723pt too wide) in paragraph at lines 486--489
+Overfull \hbox (14.5723pt too wide) in paragraph at lines 497--500
 \T1/lmr/m/n/12 tamped JSON file and all rel-e-vant ex-e-cu-tion de-tails are ap-pended to \T1/lmtt/m/n/12 calibration.log\T1/lmr/m/n/12 . 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 513--515
+Underfull \hbox (badness 10000) in paragraph at lines 524--526
 
  []
 
 [13] [14]
-Underfull \hbox (badness 10000) in paragraph at lines 589--591
+Underfull \hbox (badness 10000) in paragraph at lines 600--602
 
  []
 
 [15]
 
 pdfTeX warning: pdflatex (file ./figures/UML.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<figures/UML.pdf, id=496, 597.19106pt x 845.07718pt>
+<figures/UML.pdf, id=500, 597.19106pt x 845.07718pt>
 File: figures/UML.pdf Graphic file (type pdf)
 <use figures/UML.pdf>
-Package pdftex.def Info: figures/UML.pdf  used on input line 600.
+Package pdftex.def Info: figures/UML.pdf  used on input line 611.
 (pdftex.def)             Requested size: 447.8922pt x 207.01604pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 605--607
+Underfull \hbox (badness 10000) in paragraph at lines 616--618
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 608--610
+Underfull \hbox (badness 10000) in paragraph at lines 619--621
 
  []
 
 
-Overfull \hbox (2.9289pt too wide) in paragraph at lines 611--613
+Overfull \hbox (2.9289pt too wide) in paragraph at lines 622--624
 []\T1/lmr/m/n/12 The ini-tial cal-i-bra-tion and pe-ri-odic re-cal-i-bra-tion are im-ple-mented in the \T1/lmtt/m/n/12 InitialCalibra-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 611--613
+Underfull \hbox (badness 10000) in paragraph at lines 622--624
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 614--616
+Underfull \hbox (badness 10000) in paragraph at lines 625--627
 
  []
 
 [16 <./figures/UML.pdf>]
-Underfull \hbox (badness 10000) in paragraph at lines 650--652
+Underfull \hbox (badness 10000) in paragraph at lines 661--663
 
  []
 
 [17]
-<figures/Zustandsdiagramm.png, id=527, 436.63126pt x 1158.57843pt>
+<figures/Zustandsdiagramm.png, id=531, 436.63126pt x 1158.57843pt>
 File: figures/Zustandsdiagramm.png Graphic file (type png)
 <use figures/Zustandsdiagramm.png>
-Package pdftex.def Info: figures/Zustandsdiagramm.png  used on input line 706.
+Package pdftex.def Info: figures/Zustandsdiagramm.png  used on input line 717.
 (pdftex.def)             Requested size: 157.18713pt x 417.08792pt.
  [18 <./figures/Zustandsdiagramm.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 717--719
+Underfull \hbox (badness 10000) in paragraph at lines 728--730
 
  []
 
-<figures/LFC.png, id=536, 447.47176pt x 322.20375pt>
+<figures/LFC.png, id=541, 447.47176pt x 322.20375pt>
 File: figures/LFC.png Graphic file (type png)
 <use figures/LFC.png>
-Package pdftex.def Info: figures/LFC.png  used on input line 733.
+Package pdftex.def Info: figures/LFC.png  used on input line 744.
 (pdftex.def)             Requested size: 221.95676pt x 159.81828pt.
 [19 <./figures/LFC.png>]
-<figures/pose_015_Up3.png, id=546, 1284.8pt x 722.7pt>
+<figures/pose_015_Up3.png, id=550, 1284.8pt x 722.7pt>
 File: figures/pose_015_Up3.png Graphic file (type png)
 <use figures/pose_015_Up3.png>
-Package pdftex.def Info: figures/pose_015_Up3.png  used on input line 744.
+Package pdftex.def Info: figures/pose_015_Up3.png  used on input line 755.
 (pdftex.def)             Requested size: 271.7835pt x 152.87422pt.
-<figures/pose015_Up3.png, id=549, 1284.8pt x 722.7pt>
+<figures/pose015_Up3.png, id=553, 1284.8pt x 722.7pt>
 File: figures/pose015_Up3.png Graphic file (type png)
 <use figures/pose015_Up3.png>
-Package pdftex.def Info: figures/pose015_Up3.png  used on input line 757.
+Package pdftex.def Info: figures/pose015_Up3.png  used on input line 768.
 (pdftex.def)             Requested size: 271.7835pt x 152.87422pt.
  [20 <./figures/pose_015_Up3.png> <./figures/pose015_Up3.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 770--772
+Underfull \hbox (badness 10000) in paragraph at lines 781--783
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 773--775
+Underfull \hbox (badness 10000) in paragraph at lines 784--786
 
  []
 
 [21
 
 ]
-<figures/compare_intrinsic.png, id=564, 931.19894pt x 357.0138pt>
+<figures/compare_intrinsic.png, id=568, 931.19894pt x 357.0138pt>
 File: figures/compare_intrinsic.png Graphic file (type png)
 <use figures/compare_intrinsic.png>
-Package pdftex.def Info: figures/compare_intrinsic.png  used on input line 798.
+Package pdftex.def Info: figures/compare_intrinsic.png  used on input line 809.
 (pdftex.def)             Requested size: 452.9679pt x 173.66354pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 803--805
+Underfull \hbox (badness 10000) in paragraph at lines 814--816
 
  []
 
 [22
 
  <./figures/compare_intrinsic.png>]
-<figures/compare_translation.png, id=571, 885.66885pt x 437.59485pt>
+<figures/compare_translation.png, id=575, 885.66885pt x 437.59485pt>
 File: figures/compare_translation.png Graphic file (type png)
 <use figures/compare_translation.png>
-Package pdftex.def Info: figures/compare_translation.png  used on input line 814.
+Package pdftex.def Info: figures/compare_translation.png  used on input line 825.
 (pdftex.def)             Requested size: 385.02547pt x 190.23203pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 819--821
+Underfull \hbox (badness 10000) in paragraph at lines 830--832
 
  []
 
-<figures/compare_extrinsics.png, id=573, 1003.8303pt x 427.8384pt>
+<figures/compare_extrinsics.png, id=577, 1003.8303pt x 427.8384pt>
 File: figures/compare_extrinsics.png Graphic file (type png)
 <use figures/compare_extrinsics.png>
-Package pdftex.def Info: figures/compare_extrinsics.png  used on input line 826.
+Package pdftex.def Info: figures/compare_extrinsics.png  used on input line 837.
 (pdftex.def)             Requested size: 452.9679pt x 193.05428pt.
 [23 <./figures/compare_translation.png> <./figures/compare_extrinsics.png>]
-<figures/compare_reprojectionError.png, id=581, 858.92896pt x 353.4003pt>
+<figures/compare_reprojectionError.png, id=585, 858.92896pt x 353.4003pt>
 File: figures/compare_reprojectionError.png Graphic file (type png)
 <use figures/compare_reprojectionError.png>
-Package pdftex.def Info: figures/compare_reprojectionError.png  used on input line 839.
+Package pdftex.def Info: figures/compare_reprojectionError.png  used on input line 850.
 (pdftex.def)             Requested size: 452.9679pt x 186.37375pt.
-<figures/compare_stereoRMS.png, id=583, 714.7503pt x 281.1303pt>
+<figures/compare_stereoRMS.png, id=587, 714.7503pt x 281.1303pt>
 File: figures/compare_stereoRMS.png Graphic file (type png)
 <use figures/compare_stereoRMS.png>
-Package pdftex.def Info: figures/compare_stereoRMS.png  used on input line 848.
+Package pdftex.def Info: figures/compare_stereoRMS.png  used on input line 859.
 (pdftex.def)             Requested size: 452.9679pt x 178.16829pt.
  [24 <./figures/compare_reprojectionError.png> <./figures/compare_stereoRMS.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 882--884
+Underfull \hbox (badness 10000) in paragraph at lines 893--895
 
  []
 
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10.95> on input line 891.
+(Font)              <10.95> on input line 902.
 
-Overfull \hbox (14.90828pt too wide) in paragraph at lines 891--899
+Overfull \hbox (14.90828pt too wide) in paragraph at lines 902--910
  [][] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 906--908
+Underfull \hbox (badness 10000) in paragraph at lines 917--919
 
  []
 
 [25]
-<figures/reprojection_std_per_camera.png, id=604, 859.2903pt x 353.4003pt>
+<figures/reprojection_std_per_camera.png, id=608, 859.2903pt x 353.4003pt>
 File: figures/reprojection_std_per_camera.png Graphic file (type png)
 <use figures/reprojection_std_per_camera.png>
-Package pdftex.def Info: figures/reprojection_std_per_camera.png  used on input line 917.
+Package pdftex.def Info: figures/reprojection_std_per_camera.png  used on input line 928.
 (pdftex.def)             Requested size: 317.07614pt x 130.40015pt.
-<figures/reprojection_std_compare_3runs.png, id=606, 931.19894pt x 570.2103pt>
+<figures/reprojection_std_compare_3runs.png, id=610, 931.19894pt x 570.2103pt>
 File: figures/reprojection_std_compare_3runs.png Graphic file (type png)
 <use figures/reprojection_std_compare_3runs.png>
-Package pdftex.def Info: figures/reprojection_std_compare_3runs.png  used on input line 926.
+Package pdftex.def Info: figures/reprojection_std_compare_3runs.png  used on input line 937.
 (pdftex.def)             Requested size: 339.72592pt x 208.02496pt.
  [26 <./figures/reprojection_std_per_camera.png> <./figures/reprojection_std_compare_3runs.png>]
-<figures/compare_initial_vs_lifcal_reprojection.png, id=614, 931.5603pt x 353.4003pt>
+<figures/compare_initial_vs_lifcal_reprojection.png, id=618, 931.5603pt x 353.4003pt>
 File: figures/compare_initial_vs_lifcal_reprojection.png Graphic file (type png)
 <use figures/compare_initial_vs_lifcal_reprojection.png>
-Package pdftex.def Info: figures/compare_initial_vs_lifcal_reprojection.png  used on input line 935.
+Package pdftex.def Info: figures/compare_initial_vs_lifcal_reprojection.png  used on input line 946.
 (pdftex.def)             Requested size: 407.66833pt x 154.65538pt.
  [27 <./figures/compare_initial_vs_lifcal_reprojection.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 981--983
+Underfull \hbox (badness 10000) in paragraph at lines 992--994
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 984--986
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 987--989
-
- []
-
-[28]
 Underfull \hbox (badness 10000) in paragraph at lines 995--997
 
  []
@@ -1141,17 +1143,17 @@ Underfull \hbox (badness 10000) in paragraph at lines 998--1000
 
  []
 
+[28]
+Underfull \hbox (badness 10000) in paragraph at lines 1006--1008
 
-Underfull \hbox (badness 10000) in paragraph at lines 1001--1003
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1009--1011
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1004--1006
-
- []
-
-[29]
 Underfull \hbox (badness 10000) in paragraph at lines 1012--1014
 
  []
@@ -1161,22 +1163,22 @@ Underfull \hbox (badness 10000) in paragraph at lines 1015--1017
 
  []
 
-
+[29]
 Underfull \hbox (badness 10000) in paragraph at lines 1023--1025
 
  []
 
-[30]
+
 Underfull \hbox (badness 10000) in paragraph at lines 1026--1028
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1029--1031
+Underfull \hbox (badness 10000) in paragraph at lines 1034--1036
 
  []
 
-
+[30]
 Underfull \hbox (badness 10000) in paragraph at lines 1037--1039
 
  []
@@ -1187,215 +1189,225 @@ Underfull \hbox (badness 10000) in paragraph at lines 1040--1042
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1043--1045
+Underfull \hbox (badness 10000) in paragraph at lines 1048--1050
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1051--1053
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1054--1056
 
  []
 
 [31]
-Overfull \hbox (13.36723pt too wide) in paragraph at lines 1046--1047
+Overfull \hbox (13.36723pt too wide) in paragraph at lines 1057--1058
 []\T1/lmr/m/n/12 In or-der to ex-plic-itly an-swer the last re-search ques-tion (RQ3) from the In-tro-duc-tion^^V\T1/lmr/m/it/12 ``Under
  []
 
 [32]
-Underfull \hbox (badness 10000) in paragraph at lines 1071--1073
+Underfull \hbox (badness 10000) in paragraph at lines 1082--1084
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1074--1076
+Underfull \hbox (badness 10000) in paragraph at lines 1085--1087
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1081--1083
+Underfull \hbox (badness 10000) in paragraph at lines 1092--1094
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1084--1086
+Underfull \hbox (badness 10000) in paragraph at lines 1095--1097
 
  []
 
 [33
 
 ] [34]
-<figures/appendix/imageset1/compare_intrinsic.png, id=660, 931.19894pt x 357.0138pt>
+<figures/appendix/imageset1/compare_intrinsic.png, id=664, 931.19894pt x 357.0138pt>
 File: figures/appendix/imageset1/compare_intrinsic.png Graphic file (type png)
 <use figures/appendix/imageset1/compare_intrinsic.png>
-Package pdftex.def Info: figures/appendix/imageset1/compare_intrinsic.png  used on input line 1099.
+Package pdftex.def Info: figures/appendix/imageset1/compare_intrinsic.png  used on input line 1110.
 (pdftex.def)             Requested size: 362.37569pt x 138.92975pt.
-<figures/appendix/imageset1/compare_extrinsics.png, id=661, 1003.8303pt x 427.8384pt>
+<figures/appendix/imageset1/compare_extrinsics.png, id=665, 1003.8303pt x 427.8384pt>
 File: figures/appendix/imageset1/compare_extrinsics.png Graphic file (type png)
 <use figures/appendix/imageset1/compare_extrinsics.png>
-Package pdftex.def Info: figures/appendix/imageset1/compare_extrinsics.png  used on input line 1106.
+Package pdftex.def Info: figures/appendix/imageset1/compare_extrinsics.png  used on input line 1117.
 (pdftex.def)             Requested size: 362.37569pt x 154.44603pt.
-<figures/appendix/imageset1/compare_translation.png, id=662, 886.0302pt x 437.59485pt>
+<figures/appendix/imageset1/compare_translation.png, id=666, 886.0302pt x 437.59485pt>
 File: figures/appendix/imageset1/compare_translation.png Graphic file (type png)
 <use figures/appendix/imageset1/compare_translation.png>
-Package pdftex.def Info: figures/appendix/imageset1/compare_translation.png  used on input line 1113.
+Package pdftex.def Info: figures/appendix/imageset1/compare_translation.png  used on input line 1124.
 (pdftex.def)             Requested size: 362.37569pt x 178.97435pt.
-<figures/appendix/imageset1/compare_stereoRMS.png, id=663, 714.7503pt x 281.1303pt>
+<figures/appendix/imageset1/compare_stereoRMS.png, id=667, 714.7503pt x 281.1303pt>
 File: figures/appendix/imageset1/compare_stereoRMS.png Graphic file (type png)
 <use figures/appendix/imageset1/compare_stereoRMS.png>
-Package pdftex.def Info: figures/appendix/imageset1/compare_stereoRMS.png  used on input line 1120.
+Package pdftex.def Info: figures/appendix/imageset1/compare_stereoRMS.png  used on input line 1131.
 (pdftex.def)             Requested size: 362.37569pt x 142.53377pt.
-<figures/appendix/imageset1/compare_reprojectionError.png, id=664, 858.92896pt x 353.4003pt>
+<figures/appendix/imageset1/compare_reprojectionError.png, id=668, 858.92896pt x 353.4003pt>
 File: figures/appendix/imageset1/compare_reprojectionError.png Graphic file (type png)
 <use figures/appendix/imageset1/compare_reprojectionError.png>
-Package pdftex.def Info: figures/appendix/imageset1/compare_reprojectionError.png  used on input line 1127.
+Package pdftex.def Info: figures/appendix/imageset1/compare_reprojectionError.png  used on input line 1138.
 (pdftex.def)             Requested size: 362.37569pt x 149.09576pt.
  [35
 
  <./figures/appendix/imageset1/compare_intrinsic.png> <./figures/appendix/imageset1/compare_extrinsics.png>] [36 <./figures/appendix/imageset1/compare_translation.png> <./figures/appendix/imageset1/compare_stereoRMS.png> <./figures/appendix/imageset1/compare_reprojectionError.png>]
-<figures/appendix/imageset2/compare_intrinsic.png, id=678, 931.19894pt x 357.0138pt>
+<figures/appendix/imageset2/compare_intrinsic.png, id=683, 931.19894pt x 357.0138pt>
 File: figures/appendix/imageset2/compare_intrinsic.png Graphic file (type png)
 <use figures/appendix/imageset2/compare_intrinsic.png>
-Package pdftex.def Info: figures/appendix/imageset2/compare_intrinsic.png  used on input line 1136.
+Package pdftex.def Info: figures/appendix/imageset2/compare_intrinsic.png  used on input line 1147.
 (pdftex.def)             Requested size: 362.37569pt x 138.92975pt.
-<figures/appendix/imageset2/compare_extrinsics.png, id=679, 1003.8303pt x 427.8384pt>
+<figures/appendix/imageset2/compare_extrinsics.png, id=684, 1003.8303pt x 427.8384pt>
 File: figures/appendix/imageset2/compare_extrinsics.png Graphic file (type png)
 <use figures/appendix/imageset2/compare_extrinsics.png>
-Package pdftex.def Info: figures/appendix/imageset2/compare_extrinsics.png  used on input line 1143.
+Package pdftex.def Info: figures/appendix/imageset2/compare_extrinsics.png  used on input line 1154.
 (pdftex.def)             Requested size: 362.37569pt x 154.44603pt.
-<figures/appendix/imageset2/compare_translation.png, id=680, 886.0302pt x 437.59485pt>
+<figures/appendix/imageset2/compare_translation.png, id=685, 886.0302pt x 437.59485pt>
 File: figures/appendix/imageset2/compare_translation.png Graphic file (type png)
 <use figures/appendix/imageset2/compare_translation.png>
-Package pdftex.def Info: figures/appendix/imageset2/compare_translation.png  used on input line 1150.
+Package pdftex.def Info: figures/appendix/imageset2/compare_translation.png  used on input line 1161.
 (pdftex.def)             Requested size: 362.37569pt x 178.97435pt.
-<figures/appendix/imageset2/compare_stereoRMS.png, id=681, 714.7503pt x 281.1303pt>
+<figures/appendix/imageset2/compare_stereoRMS.png, id=686, 714.7503pt x 281.1303pt>
 File: figures/appendix/imageset2/compare_stereoRMS.png Graphic file (type png)
 <use figures/appendix/imageset2/compare_stereoRMS.png>
-Package pdftex.def Info: figures/appendix/imageset2/compare_stereoRMS.png  used on input line 1157.
+Package pdftex.def Info: figures/appendix/imageset2/compare_stereoRMS.png  used on input line 1168.
 (pdftex.def)             Requested size: 362.37569pt x 142.53377pt.
-<figures/appendix/imageset2/compare_reprojectionError.png, id=682, 858.92896pt x 353.4003pt>
+<figures/appendix/imageset2/compare_reprojectionError.png, id=687, 858.92896pt x 353.4003pt>
 File: figures/appendix/imageset2/compare_reprojectionError.png Graphic file (type png)
 <use figures/appendix/imageset2/compare_reprojectionError.png>
-Package pdftex.def Info: figures/appendix/imageset2/compare_reprojectionError.png  used on input line 1164.
+Package pdftex.def Info: figures/appendix/imageset2/compare_reprojectionError.png  used on input line 1175.
 (pdftex.def)             Requested size: 362.37569pt x 149.09576pt.
  [37
 
  <./figures/appendix/imageset2/compare_intrinsic.png> <./figures/appendix/imageset2/compare_extrinsics.png>] [38 <./figures/appendix/imageset2/compare_translation.png> <./figures/appendix/imageset2/compare_stereoRMS.png> <./figures/appendix/imageset2/compare_reprojectionError.png>]
-<figures/appendix/imageset3/compare_intrinsic.png, id=697, 931.5603pt x 357.0138pt>
+<figures/appendix/imageset3/compare_intrinsic.png, id=701, 931.5603pt x 357.0138pt>
 File: figures/appendix/imageset3/compare_intrinsic.png Graphic file (type png)
 <use figures/appendix/imageset3/compare_intrinsic.png>
-Package pdftex.def Info: figures/appendix/imageset3/compare_intrinsic.png  used on input line 1173.
+Package pdftex.def Info: figures/appendix/imageset3/compare_intrinsic.png  used on input line 1184.
 (pdftex.def)             Requested size: 362.37569pt x 138.88072pt.
-<figures/appendix/imageset3/compare_extrinsics.png, id=698, 1003.8303pt x 427.8384pt>
+<figures/appendix/imageset3/compare_extrinsics.png, id=702, 1003.8303pt x 427.8384pt>
 File: figures/appendix/imageset3/compare_extrinsics.png Graphic file (type png)
 <use figures/appendix/imageset3/compare_extrinsics.png>
-Package pdftex.def Info: figures/appendix/imageset3/compare_extrinsics.png  used on input line 1180.
+Package pdftex.def Info: figures/appendix/imageset3/compare_extrinsics.png  used on input line 1191.
 (pdftex.def)             Requested size: 362.37569pt x 154.44603pt.
-<figures/appendix/imageset3/compare_translation.png, id=699, 884.5848pt x 437.59485pt>
+<figures/appendix/imageset3/compare_translation.png, id=703, 884.5848pt x 437.59485pt>
 File: figures/appendix/imageset3/compare_translation.png Graphic file (type png)
 <use figures/appendix/imageset3/compare_translation.png>
-Package pdftex.def Info: figures/appendix/imageset3/compare_translation.png  used on input line 1187.
+Package pdftex.def Info: figures/appendix/imageset3/compare_translation.png  used on input line 1198.
 (pdftex.def)             Requested size: 362.37569pt x 179.26147pt.
-<figures/appendix/imageset3/compare_stereoRMS.png, id=700, 714.7503pt x 281.1303pt>
+<figures/appendix/imageset3/compare_stereoRMS.png, id=704, 714.7503pt x 281.1303pt>
 File: figures/appendix/imageset3/compare_stereoRMS.png Graphic file (type png)
 <use figures/appendix/imageset3/compare_stereoRMS.png>
-Package pdftex.def Info: figures/appendix/imageset3/compare_stereoRMS.png  used on input line 1194.
+Package pdftex.def Info: figures/appendix/imageset3/compare_stereoRMS.png  used on input line 1205.
 (pdftex.def)             Requested size: 362.37569pt x 142.53377pt.
-<figures/appendix/imageset3/compare_reprojectionError.png, id=701, 858.92896pt x 353.4003pt>
+<figures/appendix/imageset3/compare_reprojectionError.png, id=705, 858.92896pt x 353.4003pt>
 File: figures/appendix/imageset3/compare_reprojectionError.png Graphic file (type png)
 <use figures/appendix/imageset3/compare_reprojectionError.png>
-Package pdftex.def Info: figures/appendix/imageset3/compare_reprojectionError.png  used on input line 1201.
+Package pdftex.def Info: figures/appendix/imageset3/compare_reprojectionError.png  used on input line 1212.
 (pdftex.def)             Requested size: 362.37569pt x 149.09576pt.
  [39
 
  <./figures/appendix/imageset3/compare_intrinsic.png> <./figures/appendix/imageset3/compare_extrinsics.png>] [40 <./figures/appendix/imageset3/compare_translation.png> <./figures/appendix/imageset3/compare_stereoRMS.png> <./figures/appendix/imageset3/compare_reprojectionError.png>]
-<figures/appendix/imageset4/compare_intrinsic.png, id=715, 931.19894pt x 357.0138pt>
+<figures/appendix/imageset4/compare_intrinsic.png, id=719, 931.19894pt x 357.0138pt>
 File: figures/appendix/imageset4/compare_intrinsic.png Graphic file (type png)
 <use figures/appendix/imageset4/compare_intrinsic.png>
-Package pdftex.def Info: figures/appendix/imageset4/compare_intrinsic.png  used on input line 1210.
+Package pdftex.def Info: figures/appendix/imageset4/compare_intrinsic.png  used on input line 1221.
 (pdftex.def)             Requested size: 362.37569pt x 138.92975pt.
-<figures/appendix/imageset4/compare_extrinsics.png, id=716, 1003.8303pt x 427.8384pt>
+<figures/appendix/imageset4/compare_extrinsics.png, id=720, 1003.8303pt x 427.8384pt>
 File: figures/appendix/imageset4/compare_extrinsics.png Graphic file (type png)
 <use figures/appendix/imageset4/compare_extrinsics.png>
-Package pdftex.def Info: figures/appendix/imageset4/compare_extrinsics.png  used on input line 1217.
+Package pdftex.def Info: figures/appendix/imageset4/compare_extrinsics.png  used on input line 1228.
 (pdftex.def)             Requested size: 362.37569pt x 154.44603pt.
-<figures/appendix/imageset4/compare_translation.png, id=717, 884.5848pt x 437.59485pt>
+<figures/appendix/imageset4/compare_translation.png, id=721, 884.5848pt x 437.59485pt>
 File: figures/appendix/imageset4/compare_translation.png Graphic file (type png)
 <use figures/appendix/imageset4/compare_translation.png>
-Package pdftex.def Info: figures/appendix/imageset4/compare_translation.png  used on input line 1224.
+Package pdftex.def Info: figures/appendix/imageset4/compare_translation.png  used on input line 1235.
 (pdftex.def)             Requested size: 362.37569pt x 179.26147pt.
-<figures/appendix/imageset4/compare_stereoRMS.png, id=718, 714.7503pt x 281.1303pt>
+<figures/appendix/imageset4/compare_stereoRMS.png, id=722, 714.7503pt x 281.1303pt>
 File: figures/appendix/imageset4/compare_stereoRMS.png Graphic file (type png)
 <use figures/appendix/imageset4/compare_stereoRMS.png>
-Package pdftex.def Info: figures/appendix/imageset4/compare_stereoRMS.png  used on input line 1231.
+Package pdftex.def Info: figures/appendix/imageset4/compare_stereoRMS.png  used on input line 1242.
 (pdftex.def)             Requested size: 362.37569pt x 142.53377pt.
-<figures/appendix/imageset4/compare_reprojectionError.png, id=719, 858.92896pt x 353.4003pt>
+<figures/appendix/imageset4/compare_reprojectionError.png, id=723, 858.92896pt x 353.4003pt>
 File: figures/appendix/imageset4/compare_reprojectionError.png Graphic file (type png)
 <use figures/appendix/imageset4/compare_reprojectionError.png>
-Package pdftex.def Info: figures/appendix/imageset4/compare_reprojectionError.png  used on input line 1238.
+Package pdftex.def Info: figures/appendix/imageset4/compare_reprojectionError.png  used on input line 1249.
 (pdftex.def)             Requested size: 362.37569pt x 149.09576pt.
  [41
 
  <./figures/appendix/imageset4/compare_intrinsic.png> <./figures/appendix/imageset4/compare_extrinsics.png>] [42 <./figures/appendix/imageset4/compare_translation.png> <./figures/appendix/imageset4/compare_stereoRMS.png> <./figures/appendix/imageset4/compare_reprojectionError.png>]
-<figures/appendix/imageset6/compare_intrinsic.png, id=733, 931.19894pt x 357.0138pt>
+<figures/appendix/imageset6/compare_intrinsic.png, id=738, 931.19894pt x 357.0138pt>
 File: figures/appendix/imageset6/compare_intrinsic.png Graphic file (type png)
 <use figures/appendix/imageset6/compare_intrinsic.png>
-Package pdftex.def Info: figures/appendix/imageset6/compare_intrinsic.png  used on input line 1247.
+Package pdftex.def Info: figures/appendix/imageset6/compare_intrinsic.png  used on input line 1258.
 (pdftex.def)             Requested size: 362.37569pt x 138.92975pt.
-<figures/appendix/imageset6/compare_extrinsics.png, id=734, 1003.8303pt x 427.8384pt>
+<figures/appendix/imageset6/compare_extrinsics.png, id=739, 1003.8303pt x 427.8384pt>
 File: figures/appendix/imageset6/compare_extrinsics.png Graphic file (type png)
 <use figures/appendix/imageset6/compare_extrinsics.png>
-Package pdftex.def Info: figures/appendix/imageset6/compare_extrinsics.png  used on input line 1254.
+Package pdftex.def Info: figures/appendix/imageset6/compare_extrinsics.png  used on input line 1265.
 (pdftex.def)             Requested size: 362.37569pt x 154.44603pt.
-<figures/appendix/imageset6/compare_translation.png, id=735, 885.3075pt x 437.59485pt>
+<figures/appendix/imageset6/compare_translation.png, id=740, 885.3075pt x 437.59485pt>
 File: figures/appendix/imageset6/compare_translation.png Graphic file (type png)
 <use figures/appendix/imageset6/compare_translation.png>
-Package pdftex.def Info: figures/appendix/imageset6/compare_translation.png  used on input line 1261.
+Package pdftex.def Info: figures/appendix/imageset6/compare_translation.png  used on input line 1272.
 (pdftex.def)             Requested size: 362.37569pt x 179.12125pt.
-<figures/appendix/imageset6/compare_stereoRMS.png, id=736, 714.7503pt x 281.1303pt>
+<figures/appendix/imageset6/compare_stereoRMS.png, id=741, 714.7503pt x 281.1303pt>
 File: figures/appendix/imageset6/compare_stereoRMS.png Graphic file (type png)
 <use figures/appendix/imageset6/compare_stereoRMS.png>
-Package pdftex.def Info: figures/appendix/imageset6/compare_stereoRMS.png  used on input line 1268.
+Package pdftex.def Info: figures/appendix/imageset6/compare_stereoRMS.png  used on input line 1279.
 (pdftex.def)             Requested size: 362.37569pt x 142.53377pt.
-<figures/appendix/imageset6/compare_reprojectionError.png, id=737, 858.92896pt x 353.4003pt>
+<figures/appendix/imageset6/compare_reprojectionError.png, id=742, 858.92896pt x 353.4003pt>
 File: figures/appendix/imageset6/compare_reprojectionError.png Graphic file (type png)
 <use figures/appendix/imageset6/compare_reprojectionError.png>
-Package pdftex.def Info: figures/appendix/imageset6/compare_reprojectionError.png  used on input line 1275.
+Package pdftex.def Info: figures/appendix/imageset6/compare_reprojectionError.png  used on input line 1286.
 (pdftex.def)             Requested size: 362.37569pt x 149.09576pt.
  [43
 
  <./figures/appendix/imageset6/compare_intrinsic.png> <./figures/appendix/imageset6/compare_extrinsics.png>] [44 <./figures/appendix/imageset6/compare_translation.png> <./figures/appendix/imageset6/compare_stereoRMS.png> <./figures/appendix/imageset6/compare_reprojectionError.png>]
-<figures/appendix/imageset7/compare_intrinsic.png, id=752, 931.19894pt x 357.0138pt>
+<figures/appendix/imageset7/compare_intrinsic.png, id=756, 931.19894pt x 357.0138pt>
 File: figures/appendix/imageset7/compare_intrinsic.png Graphic file (type png)
 <use figures/appendix/imageset7/compare_intrinsic.png>
-Package pdftex.def Info: figures/appendix/imageset7/compare_intrinsic.png  used on input line 1284.
+Package pdftex.def Info: figures/appendix/imageset7/compare_intrinsic.png  used on input line 1295.
 (pdftex.def)             Requested size: 362.37569pt x 138.92975pt.
-<figures/appendix/imageset7/compare_extrinsics.png, id=753, 1003.8303pt x 427.8384pt>
+<figures/appendix/imageset7/compare_extrinsics.png, id=757, 1003.8303pt x 427.8384pt>
 File: figures/appendix/imageset7/compare_extrinsics.png Graphic file (type png)
 <use figures/appendix/imageset7/compare_extrinsics.png>
-Package pdftex.def Info: figures/appendix/imageset7/compare_extrinsics.png  used on input line 1291.
+Package pdftex.def Info: figures/appendix/imageset7/compare_extrinsics.png  used on input line 1302.
 (pdftex.def)             Requested size: 362.37569pt x 154.44603pt.
-<figures/appendix/imageset7/compare_translation.png, id=754, 884.5848pt x 437.59485pt>
+<figures/appendix/imageset7/compare_translation.png, id=758, 884.5848pt x 437.59485pt>
 File: figures/appendix/imageset7/compare_translation.png Graphic file (type png)
 <use figures/appendix/imageset7/compare_translation.png>
-Package pdftex.def Info: figures/appendix/imageset7/compare_translation.png  used on input line 1298.
+Package pdftex.def Info: figures/appendix/imageset7/compare_translation.png  used on input line 1309.
 (pdftex.def)             Requested size: 362.37569pt x 179.26147pt.
-<figures/appendix/imageset7/compare_stereoRMS.png, id=755, 714.7503pt x 281.1303pt>
+<figures/appendix/imageset7/compare_stereoRMS.png, id=759, 714.7503pt x 281.1303pt>
 File: figures/appendix/imageset7/compare_stereoRMS.png Graphic file (type png)
 <use figures/appendix/imageset7/compare_stereoRMS.png>
-Package pdftex.def Info: figures/appendix/imageset7/compare_stereoRMS.png  used on input line 1305.
+Package pdftex.def Info: figures/appendix/imageset7/compare_stereoRMS.png  used on input line 1316.
 (pdftex.def)             Requested size: 362.37569pt x 142.53377pt.
-<figures/appendix/imageset7/compare_reprojectionError.png, id=756, 858.92896pt x 353.4003pt>
+<figures/appendix/imageset7/compare_reprojectionError.png, id=760, 858.92896pt x 353.4003pt>
 File: figures/appendix/imageset7/compare_reprojectionError.png Graphic file (type png)
 <use figures/appendix/imageset7/compare_reprojectionError.png>
-Package pdftex.def Info: figures/appendix/imageset7/compare_reprojectionError.png  used on input line 1312.
+Package pdftex.def Info: figures/appendix/imageset7/compare_reprojectionError.png  used on input line 1323.
 (pdftex.def)             Requested size: 362.37569pt x 149.09576pt.
  [45
 
  <./figures/appendix/imageset7/compare_intrinsic.png> <./figures/appendix/imageset7/compare_extrinsics.png>] [46 <./figures/appendix/imageset7/compare_translation.png> <./figures/appendix/imageset7/compare_stereoRMS.png> <./figures/appendix/imageset7/compare_reprojectionError.png>]
-<figures/appendix/InitialCalibrationScene.png, id=770, 511.9125pt x 349.305pt>
+<figures/appendix/InitialCalibrationScene.png, id=774, 511.9125pt x 349.305pt>
 File: figures/appendix/InitialCalibrationScene.png Graphic file (type png)
 <use figures/appendix/InitialCalibrationScene.png>
-Package pdftex.def Info: figures/appendix/InitialCalibrationScene.png  used on input line 1324.
+Package pdftex.def Info: figures/appendix/InitialCalibrationScene.png  used on input line 1335.
 (pdftex.def)             Requested size: 339.72592pt x 231.81053pt.
-<figures/appendix/LiFCalCalibrationScene.png, id=771, 924.45375pt x 560.69475pt>
+<figures/appendix/LiFCalCalibrationScene.png, id=775, 924.45375pt x 560.69475pt>
 File: figures/appendix/LiFCalCalibrationScene.png Graphic file (type png)
 <use figures/appendix/LiFCalCalibrationScene.png>
-Package pdftex.def Info: figures/appendix/LiFCalCalibrationScene.png  used on input line 1331.
+Package pdftex.def Info: figures/appendix/LiFCalCalibrationScene.png  used on input line 1342.
 (pdftex.def)             Requested size: 362.37569pt x 219.78229pt.
  [47
 
@@ -1403,16 +1415,26 @@ Package pdftex.def Info: figures/appendix/LiFCalCalibrationScene.png  used on in
 
 ]
 LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <12> not available
-(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 1406.
+(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 1417.
 
-Overfull \hbox (2.0219pt too wide) in paragraph at lines 1407--1408
+Overfull \hbox (2.0219pt too wide) in paragraph at lines 1418--1419
 []\T1/lmr/m/n/12 OpenCV rou-tine that es-ti-mates the rel-a-tive pose
  []
 
 [49] (thesis.bbl [50
 
 
-] [51]) [52] [53
+] [51]) [52]
+Underfull \hbox (badness 10000) in paragraph at lines 1454--1456
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1457--1459
+
+ []
+
+[53
 
 
 ] (thesis.aux)
@@ -1422,17 +1444,17 @@ L3 programming layer <2025-11-06>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 20812 strings out of 467871
- 385990 string characters out of 5417407
+ 20813 strings out of 467871
+ 386001 string characters out of 5417407
  947938 words of memory out of 5000000
  49107 multiletter control sequences out of 15000+600000
  700168 words of font info for 84 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  108i,13n,107p,11323b,665s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmex10.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi10.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi12.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi8.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr10.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr8.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri12.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmssbx10.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy8.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtk10.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt12.pfb>
-Output written on thesis.pdf (59 pages, 9957136 bytes).
+Output written on thesis.pdf (60 pages, 9960629 bytes).
 PDF statistics:
- 1160 PDF objects out of 1200 (max. 8388607)
- 230 named destinations out of 1000 (max. 500000)
+ 1164 PDF objects out of 1200 (max. 8388607)
+ 231 named destinations out of 1000 (max. 500000)
  731 words of extra memory for PDF output out of 10000 (max. 10000000)
 

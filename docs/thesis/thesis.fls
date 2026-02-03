@@ -250,9 +250,6 @@ INPUT C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex\latex\lm\t1lmss.fd
 INPUT C:\Users\Youssef\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\ec-lmss12.tfm
 INPUT C:\Users\Youssef\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\ec-lmssbx10.tfm
 INPUT C:\Users\Youssef\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\ec-lmssbx10.tfm
-INPUT .\thesis.toc
-INPUT .\thesis.toc
-INPUT thesis.toc
 INPUT C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex\latex\lm\ot1lmr.fd
 INPUT C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex\latex\lm\ot1lmr.fd
 INPUT C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex\latex\lm\ot1lmr.fd
@@ -287,6 +284,11 @@ INPUT C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex\latex\amsfonts\umsb.fd
 INPUT C:\Users\Youssef\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\symbols\msbm10.tfm
 INPUT C:\Users\Youssef\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\symbols\msbm10.tfm
 INPUT C:\Users\Youssef\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\symbols\msbm7.tfm
+INPUT C:\Users\Youssef\AppData\Local\Programs\MiKTeX\fonts\enc\dvips\lm\lm-rm.enc
+INPUT C:\Users\Youssef\AppData\Local\Programs\MiKTeX\fonts\enc\dvips\lm\lm-mathit.enc
+INPUT .\thesis.toc
+INPUT .\thesis.toc
+INPUT thesis.toc
 OUTPUT thesis.toc
 INPUT .\thesis.lof
 INPUT .\thesis.lof
@@ -310,8 +312,6 @@ INPUT .\figures\Pinhole-Camera.png
 INPUT .\figures\Pinhole-Camera.png
 INPUT .\figures\Pinhole-Camera.png
 INPUT .\figures\Pinhole-Camera.png
-INPUT C:\Users\Youssef\AppData\Local\Programs\MiKTeX\fonts\enc\dvips\lm\lm-mathit.enc
-INPUT C:\Users\Youssef\AppData\Local\Programs\MiKTeX\fonts\enc\dvips\lm\lm-rm.enc
 INPUT C:\Users\Youssef\AppData\Local\Programs\MiKTeX\fonts\enc\dvips\lm\lm-mathex.enc
 INPUT .\figures\Radial-Distortion.png
 INPUT .\figures\Radial-Distortion.png
