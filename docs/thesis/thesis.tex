@@ -74,6 +74,9 @@ Submission date: 28 February 2026
 \end{titlepage}
 \pagenumbering{gobble}
 
+\includepdf[pages={1}]{figures/Bsc-Erklaerung_leer.pdf}
+
+%\includepdf[pages={1}]{figures/Bsc-Erklaerung.pdf}
 
 % =========================================================
 % Abstract
@@ -83,11 +86,17 @@ Submission date: 28 February 2026
 This thesis presents the development and evaluation of a data-driven calibration software for multi-camera light field systems. The applications of this type of camera are gaining more importance, such as in robotics, autonomous driving, and 3D reconstruction. Therefore, an accurate calibration is essential for the use of light field cameras. The standard method to calibrate a camera is by using a target, e.g., a checkerboard. The need for constant human intervention or the inaccessibility of cameras is the motivation behind this project to solve these limitations. The proposed software uses a method presented in the LiFCal paper that uses geometric properties of depth maps and scenes to calibrate a camera without the need for a target, as well as an initial calibration using a target to create a reference to decide whether the calibration improves or not. The decision is also supported by a health monitoring system that determines the quality of a calibration based on the reprojection error and categorizes it into a score between $0$ and $100$. This approach allows a target-free recalibration system to ensure the accuracy of a light field camera over a long-term period, avoiding decalibration over time.
 \newline
 
-The software was evaluated on synthetically generated image data created in Blender, representing a cross-shaped camera arrangement consisting of thirteen individual cameras. The initial calibration achieved high accuracy with reprojection errors around $0.03$ pixels and health scores exceeding $87$ out of $98$. In contrast, the reprojection errors in the LiFCal method were higher and very inconsistent across different calibration runs. The errors ranged between $0.4$ and $10$ pixels, with health scores between $52$ and $59$. However, the results demonstrate that while the framework successfully integrates both calibration methods, LiFCal faces fundamental limitations when applied to multi-camera arrays, as it was originally designed for micro-lens-array cameras. This thesis identifies the specific conditions and requirements necessary for target-free recalibration in multi-camera light field systems.
+The software was evaluated on synthetically generated image data created in Blender, representing a cross-shaped camera arrangement consisting of thirteen individual cameras. The initial calibration achieved high accuracy with reprojection errors around $0.03$ pixels and health scores exceeding $87$ out of $98$. In contrast, the reprojection errors in the LiFCal method were higher and very inconsistent across different calibration runs. The errors ranged between $0.4$ and $10$ pixels, with health scores between $52$ and $59$. However, the results demonstrate that while the framework successfully integrates both calibration methods, LiFCal faces fundamental limitations when applied to multi-camera arrays, as it was originally designed for micro-lens-array cameras. In addition, this thesis identifies the specific conditions and requirements necessary for target-free recalibration in multi-camera light field systems.
 
 \clearpage
 
 \section*{Zusammenfassung}
+
+Diese Arbeit präsentiert die Entwicklung und Evaluation einer datengetriebenen Kalibriersoftware für Multikamera-Lichtfeldsysteme. Die Anwendungen dieser Art von Kamera gewinnen zunehmend an Bedeutung, beispielsweise in der Robotik, im autonomen Fahren und in der 3D-Rekonstruktion. Daher ist eine präzise Kalibrierung für den Einsatz von Lichtfeldkameras essenziell. Die Standardmethode zur Kalibrierung einer Kamera erfolgt mithilfe eines Targets, z.\,B.\ eines Schachbretts. Der Bedarf an ständiger menschlicher Intervention oder die Unzugänglichkeit von Kameras stellen die Motivation für dieses Projekt dar, diese Einschränkungen zu überwinden. Die vorgeschlagene Software nutzt eine im LiFCal-Paper vorgestellte Methode, die geometrische Eigenschaften von Tiefenkarten und Szenen verwendet, um eine Kamera ohne die Notwendigkeit eines Targets zu kalibrieren, sowie eine initiale Kalibrierung mit einem Target, um eine Referenz zu erzeugen, anhand derer entschieden werden kann, ob sich die Kalibrierung verbessert oder nicht. Die Entscheidung wird zusätzlich durch ein Health-Monitoring-System unterstützt, das die Qualität einer Kalibrierung anhand des Reprojektionsfehlers bestimmt und diese in einen Score zwischen $0$ und $100$ einordnet. Dieser Ansatz ermöglicht ein targetfreies Rekalibrierungssystem, das die Genauigkeit einer Lichtfeldkamera über einen langfristigen Zeitraum sicherstellt und eine Dekalibrierung im Laufe der Zeit vermeidet.
+\newline
+
+Die Software wurde anhand synthetisch erzeugter Bilddaten evaluiert, die in Blender erstellt wurden und eine kreuzförmige Kameraanordnung bestehend aus dreizehn einzelnen Kameras repräsentieren. Die initiale Kalibrierung erreichte eine hohe Genauigkeit mit Reprojektionsfehlern von etwa $0.03$ Pixeln und Health-Scores von über $87$ von $98$. Im Gegensatz dazu waren die Reprojektionsfehler der LiFCal-Methode höher und über verschiedene Kalibrierläufe hinweg sehr inkonsistent. Die Fehler lagen zwischen $0.4$ und $10$ Pixeln, mit Health-Scores zwischen $52$ und $59$. Die Ergebnisse zeigen jedoch, dass das Framework zwar beide Kalibrierungsmethoden erfolgreich integriert, LiFCal jedoch grundlegenden Einschränkungen unterliegt, wenn es auf Multikamera-Arrays angewendet wird, da es ursprünglich für Mikro-Linsen-Array-Kameras entwickelt wurde. Zusätzlich identifiziert diese Arbeit die spezifischen Bedingungen und Anforderungen, die für eine targetfreie Rekalibrierung in Multikamera-Lichtfeldsystemen notwendig sind.
+
 
 
 
@@ -1398,6 +1407,9 @@ Calibration without a physical pattern, based on scene structure, features, and 
 
 \item[Data-driven calibration] 
 It refers to an approach in which decisions and evaluations are based on measured data rather than predefined assumptions. In the context of this thesis, data-driven means that calibration quality is assessed using observed image data and error metrics, which then guide automatic decisions within the system.
+
+\item[Baseline]
+The initial calibration result (from checkerboard) used as a reference for later recalibration attempts.
 
 \item[LiFCal]
 A target-free calibration method (originally for MLA light field cameras) used here as a baseline idea for automatic recalibration.
