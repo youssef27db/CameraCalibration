@@ -1,0 +1,57 @@
+@startuml
+title State Diagram: Data-Driven Calibration of an LFC System
+
+[*] --> Uncalibrated
+
+state "Initial Reference Calibration" as InitCalib {
+  [*] --> CapturingTargets
+
+  CapturingTargets : Capture checkerboard images
+  CapturingTargets --> EstimatingParameters : Images complete
+
+  EstimatingParameters : Estimate intrinsics & extrinsics\n(OpenCV, optional BA)
+  EstimatingParameters --> BaselineCreated
+
+  BaselineCreated : Compute Health Score\nCreate baseline.json
+}
+
+Uncalibrated --> InitCalib : runInitialCalibration()
+InitCalib --> Operational : Baseline available
+
+state Operational {
+
+  [*] --> SchedulerIdle
+
+  SchedulerIdle : Periodic scheduler\n(e.g., every 5 minutes)
+  SchedulerIdle --> PrepareImageset : cycleStart()
+
+  PrepareImageset : Check LiFCal data\n(focus/depth)
+  PrepareImageset --> RunLiFCal : Data available
+  PrepareImageset --> RunImageSetCreation : Data missing
+
+  RunImageSetCreation : run_imageset_creation.py
+  RunImageSetCreation --> RunLiFCal
+
+  RunLiFCal : LiFCal recalibration\n(per camera)
+  RunLiFCal --> CombineResults
+
+  CombineResults : parameters.json → combined.json
+  CombineResults --> EvaluateHealth
+
+  EvaluateHealth : Compute LiFCal Health Score
+
+  ' Improvement → new baseline
+  EvaluateHealth --> UpdateBaseline : [Score_new > Score_baseline]
+
+  ' No improvement → keep baseline
+  EvaluateHealth --> KeepBaseline : [Score_new ≤ Score_baseline]
+
+  UpdateBaseline : Update baseline.json
+  UpdateBaseline --> SchedulerIdle
+
+  KeepBaseline : Baseline unchanged
+  KeepBaseline --> SchedulerIdle
+}
+
+Operational --> [*]
+@enduml

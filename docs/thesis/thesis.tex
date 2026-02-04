@@ -83,19 +83,19 @@ Submission date: 28 February 2026
 % =========================================================
 \section*{Abstract}
 
-This thesis presents the development and evaluation of a data-driven calibration software for multi-camera light field systems. The applications of this type of camera are gaining more importance, such as in robotics, autonomous driving, and 3D reconstruction. Therefore, an accurate calibration is essential for the use of light field cameras. The standard method to calibrate a camera is by using a target, e.g., a checkerboard. The need for constant human intervention or the inaccessibility of cameras is the motivation behind this project to solve these limitations. The proposed software uses a method presented in the LiFCal paper that uses geometric properties of depth maps and scenes to calibrate a camera without the need for a target, as well as an initial calibration using a target to create a reference to decide whether the calibration improves or not. The decision is also supported by a health monitoring system that determines the quality of a calibration based on the reprojection error and categorizes it into a score between $0$ and $100$. This approach allows a target-free recalibration system to ensure the accuracy of a light field camera over a long-term period, avoiding decalibration over time.
+This thesis presents the development and evaluation of a data-driven calibration software for multi-camera light field systems. The applications of this type of camera are gaining more importance, such as in robotics, autonomous driving, and 3D reconstruction. Therefore, an accurate calibration is essential for the use of light field cameras. The standard method to calibrate a camera is by using a target (e.g. a checkerboard), but for multi-camera systems the complexity increases. Additionally, the need for constant human intervention or the inaccessibility of cameras motivates this project to overcome these limitations. The proposed software uses a method presented in the LiFCal paper that uses geometric properties of depth maps and scenes to periodically calibrate a camera without the need for a target. In addition, an initial calibration using a checkerboard is performed to create a reference for deciding whether the calibration improves or not. The decision is also supported by a health monitoring system that determines the quality of a calibration based on the reprojection error and categorizes it into a score between $0$ and $100$. This approach allows a target-free recalibration system to ensure the accuracy of a light field camera over a long-term period, avoiding decalibration over time.
 \newline
 
-The software was evaluated on synthetically generated image data created in Blender, representing a cross-shaped camera arrangement consisting of thirteen individual cameras. The initial calibration achieved high accuracy with reprojection errors around $0.03$ pixels and health scores exceeding $87$ out of $98$. In contrast, the reprojection errors in the LiFCal method were higher and very inconsistent across different calibration runs. The errors ranged between $0.4$ and $10$ pixels, with health scores between $52$ and $59$. However, the results demonstrate that while the framework successfully integrates both calibration methods, LiFCal faces fundamental limitations when applied to multi-camera arrays, as it was originally designed for micro-lens-array cameras. In addition, this thesis identifies the specific conditions and requirements necessary for target-free recalibration in multi-camera light field systems.
+The software was evaluated on synthetically generated image data created in Blender. The system was represented by a cross-shaped camera arrangement consisting of thirteen individual cameras. The initial calibration achieved high accuracy with reprojection errors around $0.03$ pixels and health scores between $87$ and $98$. In contrast, the reprojection errors in the LiFCal method were higher and very inconsistent across different calibration runs. The errors ranged between $0.4$ and $10$ pixels, with health scores between $52$ and $59$. However, the results demonstrate that while the framework successfully integrates both calibration methods, LiFCal faces fundamental limitations when applied to multi-camera arrays, as it was originally designed for micro-lens-array cameras. In addition, this thesis identifies the specific conditions and requirements necessary for target-free recalibration in multi-camera light field systems.
 
 \clearpage
 
 \section*{Zusammenfassung}
 
-Diese Arbeit präsentiert die Entwicklung und Evaluation einer datengetriebenen Kalibriersoftware für Multikamera-Lichtfeldsysteme. Die Anwendungen dieser Art von Kamera gewinnen zunehmend an Bedeutung, beispielsweise in der Robotik, im autonomen Fahren und in der 3D-Rekonstruktion. Daher ist eine präzise Kalibrierung für den Einsatz von Lichtfeldkameras essenziell. Die Standardmethode zur Kalibrierung einer Kamera erfolgt mithilfe eines Targets, z.\,B.\ eines Schachbretts. Der Bedarf an ständiger menschlicher Intervention oder die Unzugänglichkeit von Kameras stellen die Motivation für dieses Projekt dar, diese Einschränkungen zu überwinden. Die vorgeschlagene Software nutzt eine im LiFCal-Paper vorgestellte Methode, die geometrische Eigenschaften von Tiefenkarten und Szenen verwendet, um eine Kamera ohne die Notwendigkeit eines Targets zu kalibrieren, sowie eine initiale Kalibrierung mit einem Target, um eine Referenz zu erzeugen, anhand derer entschieden werden kann, ob sich die Kalibrierung verbessert oder nicht. Die Entscheidung wird zusätzlich durch ein Health-Monitoring-System unterstützt, das die Qualität einer Kalibrierung anhand des Reprojektionsfehlers bestimmt und diese in einen Score zwischen $0$ und $100$ einordnet. Dieser Ansatz ermöglicht ein targetfreies Rekalibrierungssystem, das die Genauigkeit einer Lichtfeldkamera über einen langfristigen Zeitraum sicherstellt und eine Dekalibrierung im Laufe der Zeit vermeidet.
+Diese Arbeit präsentiert die Entwicklung und Evaluation einer datengetriebenen Kalibriersoftware für Multikamera-Lichtfeldsysteme. Die Anwendungen dieser Art von Kamera gewinnen zunehmend an Bedeutung, beispielsweise in der Robotik, im autonomen Fahren und in der 3D-Rekonstruktion. Daher ist eine präzise Kalibrierung für den Einsatz von Lichtfeldkameras essenziell. Die Standardmethode zur Kalibrierung einer Kamera erfolgt mithilfe eines Targets (z.\,B.\ eines Schachbretts), jedoch steigt die Komplexität bei Multikamera-Systemen. Zusätzlich motivieren der Bedarf an ständiger menschlicher Intervention oder die eingeschränkte Zugänglichkeit von Kameras dieses Projekt, diese Einschränkungen zu überwinden. Die vorgeschlagene Software verwendet eine im LiFCal-Paper vorgestellte Methode, die geometrische Eigenschaften von Tiefenkarten und Szenen nutzt, um eine Kamera periodisch ohne die Notwendigkeit eines Targets zu kalibrieren. Zusätzlich wird eine initiale Kalibrierung mithilfe eines Schachbretts durchgeführt, um eine Referenz zu schaffen, anhand derer entschieden werden kann, ob sich die Kalibrierung verbessert oder nicht. Die Entscheidung wird zusätzlich durch ein Health-Monitoring-System unterstützt, das die Qualität einer Kalibrierung anhand des Reprojektionsfehlers bestimmt und diese in einen Score zwischen $0$ und $100$ einordnet. Dieser Ansatz ermöglicht ein targetfreies Rekalibrierungssystem, das die Genauigkeit einer Lichtfeldkamera über einen langfristigen Zeitraum sicherstellt und eine Dekalibrierung im Laufe der Zeit vermeidet.
 \newline
 
-Die Software wurde anhand synthetisch erzeugter Bilddaten evaluiert, die in Blender erstellt wurden und eine kreuzförmige Kameraanordnung bestehend aus dreizehn einzelnen Kameras repräsentieren. Die initiale Kalibrierung erreichte eine hohe Genauigkeit mit Reprojektionsfehlern von etwa $0.03$ Pixeln und Health-Scores von über $87$ von $98$. Im Gegensatz dazu waren die Reprojektionsfehler der LiFCal-Methode höher und über verschiedene Kalibrierläufe hinweg sehr inkonsistent. Die Fehler lagen zwischen $0.4$ und $10$ Pixeln, mit Health-Scores zwischen $52$ und $59$. Die Ergebnisse zeigen jedoch, dass das Framework zwar beide Kalibrierungsmethoden erfolgreich integriert, LiFCal jedoch grundlegenden Einschränkungen unterliegt, wenn es auf Multikamera-Arrays angewendet wird, da es ursprünglich für Mikro-Linsen-Array-Kameras entwickelt wurde. Zusätzlich identifiziert diese Arbeit die spezifischen Bedingungen und Anforderungen, die für eine targetfreie Rekalibrierung in Multikamera-Lichtfeldsystemen notwendig sind.
+Die Software wurde anhand synthetisch erzeugter Bilddaten evaluiert, die in Blender erstellt wurden. Das System wurde durch eine kreuzförmige Kameraanordnung bestehend aus dreizehn einzelnen Kameras repräsentiert. Die initiale Kalibrierung erreichte eine hohe Genauigkeit mit Reprojektionsfehlern von etwa $0.03$ Pixeln und Health-Scores von über $87$ bis $98$. Im Gegensatz dazu waren die Reprojektionsfehler der LiFCal-Methode höher und über verschiedene Kalibrierläufe hinweg sehr inkonsistent. Die Fehler lagen zwischen $0.4$ und $10$ Pixeln, mit Health-Scores zwischen $52$ und $59$. Die Ergebnisse zeigen jedoch, dass das Framework zwar beide Kalibrierungsmethoden erfolgreich integriert, LiFCal jedoch grundlegenden Einschränkungen unterliegt, wenn es auf Multikamera-Arrays angewendet wird, da es ursprünglich für Mikro-Linsen-Array-Kameras entwickelt wurde. Zusätzlich identifiziert diese Arbeit die spezifischen Bedingungen und Anforderungen, die für eine targetfreie Rekalibrierung in Multikamera-Lichtfeldsystemen notwendig sind.
 
 
 
@@ -318,8 +318,7 @@ There are various approaches for target-based camera calibration. One of the mos
 During the calibration process, control points are extracted from the images. In the case of a checkerboard, these control points correspond to the corner points of the squares \cite{song2025camera}. The positions of these corners are known in the coordinate system of the calibration target. By capturing multiple images of the checkerboard from different angles and distances, a set of 2D image points can be obtained that correspond to the known 3D points of the target. Based on these point correspondences, an optimization problem can be formulated to estimate the intrinsic and extrinsic camera parameters as well as the lens distortion coefficients \cite{888718}.
 \newline
 
-This calibration approach is implemented in widely used computer vision libraries such as OpenCV \cite{OpenCV_Calibration}. It can be applied to
-single-camera setups and multi-camera systems. Besides checkerboards, other types of calibration targets exist, for example circular dot patterns \cite{song2025camera}. In some cases, these patterns can achieve higher accuracy, especially when the image quality is low. However, they also require physical targets and a manual calibration setup.
+This calibration approach is implemented in widely used computer vision libraries such as OpenCV \cite{OpenCV_Calibration}. It can be applied to single-camera setups and multi-camera systems. Besides checkerboards, other types of calibration targets exist, for example circular dot patterns \cite{song2025camera}. In some cases, these patterns can achieve higher accuracy, especially when the image quality is low. However, they also require physical targets and a manual calibration setup.
 \newline
 
 The main limitations of target-based calibration methods are the required manual placement of the target and the need to capture images with different poses. In addition, the calibration accuracy depends on factors such as the quality of the corner detection, the number of images used, and the diversity of viewpoints during data acquisition \cite{888718}. Despite these limitations, target-based calibration remains a standard method in many computer vision applications due to its simplicity and reliable performance.
@@ -343,7 +342,7 @@ e = \frac{1}{N} \sum_{i=0}^{N-1} \| \mathbf{p}_i - \mathbf{q}_i \|_2 .
 \label{eq:7}
 \end{align}
 
-Here, $\mathbf{p}_i$ represents the observed feature points in the image, while $\mathbf{q}_i$ denotes the projected points obtained from the calibrated camera model. In general, a smaller reprojection error indicates a better calibration. What is considered a good value depends on the application, but for accurate calibrations the reprojection error is often between 0.1 and 0.5 pixels \cite{Huang2016Camera}.
+Here, $p_i$ represents the observed feature points in the image, while $q_i$ denotes the projected points obtained from the calibrated camera model. In general, a smaller reprojection error indicates a better calibration. What is considered a good value depends on the application, but for accurate calibrations the reprojection error is often between 0.1 and 0.5 pixels \cite{Huang2016Camera}.
 \newline
 
 Another commonly used measure is the root mean square (RMS) error \cite{Hartley2003}. It summarizes the reprojection error over all calibration points and is computed as:
@@ -451,7 +450,7 @@ In this first section, the design and implementation of the calibration software
 The goal of this thesis is to develop and evaluate an automatic data-driven calibration framework for multi-camera light field systems based on the target-free calibration method proposed by Fleith et al.~\cite{LiFCal}. As discussed in the state of the art, classical target-based calibration approaches require manual intervention and careful placement of calibration targets, which limits their applicability in long-term deployments or scenarios with restricted human access.
 \newline
 
-The proposed approach uses a reliable target-based calibration as an initial reference and ground truth. This initial calibration is performed using a checkerboard pattern and serves as a baseline for evaluating subsequent target-free recalibration steps. After this initial setup, the system captures a small set of images from the scene and applies LiFCal to automatically recalibrate the multi-camera system. To assess whether the target-free recalibration is acceptable, a health monitoring mechanism is introduced. This mechanism compares the calibration results obtained from LiFCal with the baseline calibration using defined decision metrics. If the recalibration achieves a calibration quality comparable to or better than the initial calibration, it is accepted and replaces the previous baseline. Otherwise, the system retains the existing calibration parameters.
+The proposed approach uses a reliable target-based calibration as an initial reference and ground truth. This initial calibration is performed using a checkerboard pattern and serves as a baseline for evaluating subsequent target-free recalibration steps. After this initial setup, the system uses a small set of images from the scene and applies LiFCal to automatically recalibrate the multi-camera system. To assess whether the target-free recalibration is acceptable, a health monitoring mechanism is introduced. This mechanism compares the calibration results obtained from LiFCal with the baseline calibration using defined decision metrics. If the recalibration achieves a calibration quality comparable to or better than the initial calibration, it is accepted and replaces the previous baseline. Otherwise, the system retains the existing calibration parameters.
 \newline
 
 This workflow is designed to enable periodic self-recalibration without manual intervention. A potential application scenario is a robotic system deployed in a remote or inaccessible environment, where mechanical shifts or environmental changes may degrade calibration quality over time. By regularly capturing image sets and applying the proposed recalibration process, the system can maintain accurate camera parameters throughout its operation.
@@ -723,7 +722,7 @@ In order to illustrate the workflow and interactions between the different calib
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[scale=0.36]{figures/Zustandsdiagramm.png}
+    \includegraphics[scale=0.36]{figures/Zustandsdiagramm_Eng.png}
     \caption{State Diagram}
     \label{fig:state_diagram}
 \end{figure}
@@ -823,7 +822,7 @@ The accuracy of the intrinsic parameters is evaluated by comparing the estimated
 The left plot shows the deviations of $f_x$ and $f_y$ for each camera in pixels. The blue curve represents the $f_x$ deviation and the orange curve represents the $f_y$ deviation. The estimated $f_x$ values stay close to zero across all cameras, while the $f_y$ values show a nearly constant offset of about 275 pixels.
 \newline
 
-The right plot presents the deviations of $c_x$ and $c_y$, also in pixels. Here, the blue curve corresponds to $c_x$ and the orange curve to $c_y$. Both parameters have small offsets from the ground truth, with most values remaining close to zero.
+The right plot presents the deviations of $c_x$ and $c_y$, also in pixels. Here, the green curve corresponds to $c_x$ and the red curve to $c_y$. Both parameters have small offsets from the ground truth, with most values remaining close to zero.
 
 \subsubsection{Extrinsic Accuracy}
 
@@ -902,7 +901,7 @@ imageset7 & 20 & yes & 0.04716 & 0.21424 & 0.03166 \\
 To analyze the calibration performance under different conditions, the image sets were generated with varying numbers of poses. The first four image sets (imageset1 to imageset4) are grouped into Scenario~A\_Robustness. In this scenario, the same multi-camera decalibration was applied in order to evaluate how robust the calibration results are with respect to different checkerboard poses. 
 \newline
 
-The remaining image sets (imageset5 to imageset7) belong to Scenario~B\_Generalisation. In this case, different multi-camera decalibrations were applied to assess how well the calibration generalizes to different camera configurations with varying numbers of poses. A summary of both scenarios is provided in \autoref{tab:scenario_summary}.
+The remaining image sets (imageset5 to imageset7) belong to Scenario~B\_Generalization. In this case, different multi-camera decalibrations were applied to assess how well the calibration generalizes to different camera configurations with varying numbers of poses. A summary of both scenarios is provided in \autoref{tab:scenario_summary}.
 \vspace{0.2cm}
 
 \begin{table}[htbp]
@@ -913,7 +912,7 @@ The remaining image sets (imageset5 to imageset7) belong to Scenario~B\_Generali
 Scenario & \#Runs & Avg. \#Poses & Mean $\Delta T$ [m] & Mean $\Delta R$ [$^\circ$] & Mean Reproj. [px] \\
 \hline
 A\_Robustness & 4 & 33.0 & 0.06800 & 0.18754 & 0.20306 \\
-B\_Generalisation & 3 & 28.0 & 0.04581 & 0.17346 & 0.03112 \\
+B\_Generalization & 3 & 28.0 & 0.04581 & 0.17346 & 0.03112 \\
 \hline
 \end{tabular}
 \caption{Scenario-based summary of calibration results}
@@ -1007,7 +1006,7 @@ The RMS error values, shown in \autoref{fig:rms_error_plot}, were not as low as 
 The extrinsic parameters also demonstrated good accuracy, with mean translation errors around 0.068 meters and mean rotation errors approximately 0.187 degrees across different image sets, as summarized in \autoref{tab:scenario_summary}. Almost all image sets achieved reprojection errors below 0.04 pixels, indicating a high level of geometric consistency in the estimated camera poses. However, in imageset1 and imageset3, the reprojection errors were slightly higher, around 0.34 pixels and 0.41 pixels, respectively. These two anomalies are caused by the quality of the taken images during the rendering process in Blender. In these two image sets, the checkerboard distance to the camera was larger than in the other image sets, which made it more difficult to detect the corners accurately. This led to less precise calibration results and consequently higher reprojection errors. More poses with closer checkerboard positions would likely have improved the calibration accuracy in these cases. That shows the importance of the variety and quality of the calibration images for achieving optimal results. A higher number of poses does not necessarily guarantee better calibration if the image quality is compromised.
 \newline
 
-In \autoref{tab:scenario_summary} it can be observed that the robustness and generalization capabilities of the initial calibration method are stable across different decalibration scenarios. Scenario~A\_Robustness, which tested the same decalibration with varying checkerboard poses, yielded consistent results with low mean translation and rotation errors. Scenario~B\_Generalisation, which involved different decalibrations, also produced reliable calibration outcomes, demonstrating the method's ability to adapt to various camera configurations. This indicates that the initial target-based calibration is effective in maintaining accuracy under different conditions, provided that the calibration images are of sufficient quality. 
+In \autoref{tab:scenario_summary} it can be observed that the robustness and generalization capabilities of the initial calibration method are stable across different decalibration scenarios. Scenario~A\_Robustness, which tested the same decalibration with varying checkerboard poses, yielded consistent results with low mean translation and rotation errors. Scenario~B\_Generalization, which involved different decalibrations, also produced reliable calibration outcomes, demonstrating the method's ability to adapt to various camera configurations. This indicates that the initial target-based calibration is effective in maintaining accuracy under different conditions, provided that the calibration images are of sufficient quality. 
 
 
 \subsection{Limitations of LiFCal in the Given Setup}
@@ -1390,6 +1389,9 @@ Matrix that bundles the intrinsic parameters.
 \item[Principal point $(c_x,c_y)$]
 Where the optical axis hits the image sensor (in pixel coordinates).
 
+\item[Skew coefficient ($s$)]
+An intrinsic camera parameter that represents the degree of non-orthogonality between the camera's x and y pixel axes; in ideal cameras the axes are perpendicular and the skew is zero.
+
 \item[Radial distortion]
 Lens distortion that bends straight lines, stronger toward the image borders (barrel/pincushion effect).
 
@@ -1411,8 +1413,8 @@ It refers to an approach in which decisions and evaluations are based on measure
 \item[Baseline]
 The initial calibration result (from checkerboard) used as a reference for later recalibration attempts.
 
-\item[LiFCal]
-A target-free calibration method (originally for MLA light field cameras) used here as a baseline idea for automatic recalibration.
+\item[LiFCal (Online Light Field Camera Calibration via Bundle Adjustment)]
+A target-free calibration method (originally for MLA light field cameras) used here as a method for an automatic recalibration.
 
 \item[Feature detection]
 Finding distinctive points in an image that can be matched across views (needed for many target-free methods).
