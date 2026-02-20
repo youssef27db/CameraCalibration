@@ -7,49 +7,53 @@
 \contentsline {figure}{\numberline {6}{\ignorespaces Visual representation of bundle adjustment. Source: \cite {Baeldung2024BundleAdjustment}.}}{8}{figure.6}%
 \contentsline {figure}{\numberline {7}{\ignorespaces Representation of a multi-camera system. Source: \cite {multi_camera_calibration}.}}{9}{figure.7}%
 \contentsline {figure}{\numberline {8}{\ignorespaces Structure of a micro-lens-array-based light field camera. Source: \cite {LiFCal}.}}{10}{figure.8}%
-\contentsline {figure}{\numberline {9}{\ignorespaces UML Class Diagram}}{16}{figure.9}%
-\contentsline {figure}{\numberline {10}{\ignorespaces State Diagram}}{18}{figure.10}%
-\contentsline {figure}{\numberline {11}{\ignorespaces Multi-camera array setup in Blender.}}{19}{figure.11}%
-\contentsline {figure}{\numberline {12}{\ignorespaces Example of a Blender scene for the initial calibration with a checkerboard.}}{20}{figure.12}%
-\contentsline {figure}{\numberline {13}{\ignorespaces Example of a Blender scene for LiFCal recalibration without a calibration target.}}{20}{figure.13}%
-\contentsline {figure}{\numberline {14}{\ignorespaces Deviations of intrinsic parameters from ground truth for the initial calibration.}}{22}{figure.14}%
-\contentsline {figure}{\numberline {15}{\ignorespaces Translation parameter deviations from ground truth and the initial calibration.}}{23}{figure.15}%
-\contentsline {figure}{\numberline {16}{\ignorespaces Extrinsic parameter errors of the initial calibration.}}{23}{figure.16}%
-\contentsline {figure}{\numberline {17}{\ignorespaces Reprojection error per camera of the initial calibration.}}{24}{figure.17}%
-\contentsline {figure}{\numberline {18}{\ignorespaces Stereo RMS error of the initial calibration.}}{24}{figure.18}%
-\contentsline {figure}{\numberline {19}{\ignorespaces Reprojection error per camera for a single LiFCal-based recalibration run.}}{26}{figure.19}%
-\contentsline {figure}{\numberline {20}{\ignorespaces Reprojection error per camera across three LiFCal-based recalibration runs.}}{26}{figure.20}%
-\contentsline {figure}{\numberline {21}{\ignorespaces Comparison of mean reprojection error per camera between initial calibration and LiFCal-based recalibration.}}{27}{figure.21}%
-\contentsline {figure}{\numberline {22}{\ignorespaces Deviations of intrinsic parameters from ground truth for the initial calibration (Imageset1).}}{35}{figure.22}%
-\contentsline {figure}{\numberline {23}{\ignorespaces Extrinsic parameter errors of the initial calibration (Imageset1).}}{35}{figure.23}%
-\contentsline {figure}{\numberline {24}{\ignorespaces Translation parameter deviations from ground truth and the initial calibration (Imageset1).}}{36}{figure.24}%
-\contentsline {figure}{\numberline {25}{\ignorespaces Stereo RMS error of the initial calibration (Imageset1).}}{36}{figure.25}%
-\contentsline {figure}{\numberline {26}{\ignorespaces Reprojection error per camera of the initial calibration (Imageset1).}}{36}{figure.26}%
-\contentsline {figure}{\numberline {27}{\ignorespaces Deviations of intrinsic parameters from ground truth for the initial calibration (Imageset2).}}{37}{figure.27}%
-\contentsline {figure}{\numberline {28}{\ignorespaces Extrinsic parameter errors of the initial calibration (Imageset2).}}{37}{figure.28}%
-\contentsline {figure}{\numberline {29}{\ignorespaces Translation parameter deviations from ground truth and the initial calibration (Imageset2).}}{38}{figure.29}%
-\contentsline {figure}{\numberline {30}{\ignorespaces Stereo RMS error of the initial calibration (Imageset2).}}{38}{figure.30}%
-\contentsline {figure}{\numberline {31}{\ignorespaces Reprojection error per camera of the initial calibration (Imageset2).}}{38}{figure.31}%
-\contentsline {figure}{\numberline {32}{\ignorespaces Deviations of intrinsic parameters from ground truth for the initial calibration (Imageset3).}}{39}{figure.32}%
-\contentsline {figure}{\numberline {33}{\ignorespaces Extrinsic parameter errors of the initial calibration (Imageset3).}}{39}{figure.33}%
-\contentsline {figure}{\numberline {34}{\ignorespaces Translation parameter deviations from ground truth and the initial calibration (imageset3).}}{40}{figure.34}%
-\contentsline {figure}{\numberline {35}{\ignorespaces Stereo RMS error of the initial calibration (Imageset3).}}{40}{figure.35}%
-\contentsline {figure}{\numberline {36}{\ignorespaces Reprojection error per camera of the initial calibration (Imageset3).}}{40}{figure.36}%
-\contentsline {figure}{\numberline {37}{\ignorespaces Deviations of intrinsic parameters from ground truth for the initial calibration (Imageset4).}}{41}{figure.37}%
-\contentsline {figure}{\numberline {38}{\ignorespaces Extrinsic parameter errors of the initial calibration (Imageset4).}}{41}{figure.38}%
-\contentsline {figure}{\numberline {39}{\ignorespaces Translation parameter deviations from ground truth and the initial calibration (Imageset4).}}{42}{figure.39}%
-\contentsline {figure}{\numberline {40}{\ignorespaces Stereo RMS error of the initial calibration (Imageset4).}}{42}{figure.40}%
-\contentsline {figure}{\numberline {41}{\ignorespaces Reprojection error per camera of the initial calibration (Imageset4).}}{42}{figure.41}%
-\contentsline {figure}{\numberline {42}{\ignorespaces Deviations of intrinsic parameters from ground truth for the initial calibration (Imageset6).}}{43}{figure.42}%
-\contentsline {figure}{\numberline {43}{\ignorespaces Extrinsic parameter errors of the initial calibration (Imageset6).}}{43}{figure.43}%
-\contentsline {figure}{\numberline {44}{\ignorespaces Translation parameter deviations from ground truth and the initial calibration (Imageset6).}}{44}{figure.44}%
-\contentsline {figure}{\numberline {45}{\ignorespaces Stereo RMS error of the initial calibration (Imageset6).}}{44}{figure.45}%
-\contentsline {figure}{\numberline {46}{\ignorespaces Reprojection error per camera of the initial calibration (Imageset6).}}{44}{figure.46}%
-\contentsline {figure}{\numberline {47}{\ignorespaces Deviations of intrinsic parameters from ground truth for the initial calibration (Imageset7).}}{45}{figure.47}%
-\contentsline {figure}{\numberline {48}{\ignorespaces Extrinsic parameter errors of the initial calibration (Imageset7).}}{45}{figure.48}%
-\contentsline {figure}{\numberline {49}{\ignorespaces Translation parameter deviations from ground truth and the initial calibration (Imageset7).}}{46}{figure.49}%
-\contentsline {figure}{\numberline {50}{\ignorespaces Stereo RMS error of the initial calibration (Imageset7).}}{46}{figure.50}%
-\contentsline {figure}{\numberline {51}{\ignorespaces Reprojection error per camera of the initial calibration (Imageset7).}}{46}{figure.51}%
-\contentsline {figure}{\numberline {52}{\ignorespaces Blender scene for initial target-based calibration with checkerboard.}}{47}{figure.52}%
-\contentsline {figure}{\numberline {53}{\ignorespaces Blender scene for LiFCal-based recalibration without checkerboard.}}{47}{figure.53}%
+\contentsline {figure}{\numberline {9}{\ignorespaces UML Class Diagram}}{17}{figure.9}%
+\contentsline {figure}{\numberline {10}{\ignorespaces State Diagram}}{19}{figure.10}%
+\contentsline {figure}{\numberline {11}{\ignorespaces Blender visualization of the synthetic 13-camera light field array. It consists of one central reference camera and twelve surrounding cameras arranged in a cross-shaped configuration with equal spacing.}}{20}{figure.11}%
+\contentsline {figure}{\numberline {12}{\ignorespaces Blender scene used for the initial target-based calibration. The checkerboard pattern, placed at varying positions and orientations in front of the camera array, serves as the calibration target for estimating intrinsic and extrinsic parameters.}}{21}{figure.12}%
+\contentsline {figure}{\numberline {13}{\ignorespaces Blender scene used for LiFCal-based recalibration without a calibration target. The scene contains multiple objects with diverse colors, textures, and lighting conditions to provide rich visual features and depth variation, enabling robust feature detection.}}{21}{figure.13}%
+\contentsline {figure}{\numberline {14}{\ignorespaces Absolute deviation of the estimated focal lengths from ground truth for all cameras in the initial calibration. The blue curve represents the deviation of $f_x$, while the orange curve represents the deviation of $f_y$, both measured in pixels. A horizontal zero line indicates perfect agreement with the ground-truth parameters.}}{24}{figure.14}%
+\contentsline {figure}{\numberline {15}{\ignorespaces Relative focal length error of $f_x$ for all cameras in the initial calibration, computed as $\frac {f_{\mathrm {est}} - f_{\mathrm {gt}}}{f_{\mathrm {gt}}} \cdot 100\%$. The plot shows the normalized percentage deviation with respect to the ground-truth focal length, allowing a scale-independent interpretation of the estimation accuracy.}}{24}{figure.15}%
+\contentsline {figure}{\numberline {16}{\ignorespaces Absolute deviation of the estimated principal point coordinates from ground truth for all cameras in the initial calibration. The green curve represents the deviation of $c_x$, while the red dashed curve represents the deviation of $c_y$, both measured in pixels. The horizontal zero line indicates perfect agreement with the ground-truth values.}}{25}{figure.16}%
+\contentsline {figure}{\numberline {17}{\ignorespaces Ground-truth 3D positions of all cameras in the synthetic multi-camera array. The plot shows the spatial arrangement of the cameras in the $(X, Y, Z)$ coordinate system, illustrating the cross-shaped configuration used for the simulation.}}{26}{figure.17}%
+\contentsline {figure}{\numberline {18}{\ignorespaces Comparison of ground-truth and estimated camera positions after the initial calibration. Black markers represent the ground-truth positions, while magenta markers indicate the calibrated positions. The spatial overlap illustrates the translation estimation accuracy, with a reported mean position error of 0.028m.}}{26}{figure.18}%
+\contentsline {figure}{\numberline {19}{\ignorespaces Rotation error per camera after the initial calibration. The bars represent the angular deviation between the estimated and ground-truth extrinsic rotations, measured in degrees. The dashed horizontal line indicates the mean rotation error across all cameras ($\emptyset = 0.11^\circ $).}}{27}{figure.19}%
+\contentsline {figure}{\numberline {20}{\ignorespaces Absolute translation error per camera after the initial calibration. The bars represent the Euclidean distance between the estimated and ground-truth camera positions, measured in meters. The dashed horizontal line indicates the mean translation error across all cameras ($\emptyset = 0.028\,\text {m}$).}}{27}{figure.20}%
+\contentsline {figure}{\numberline {21}{\ignorespaces Reprojection error per camera of the initial calibration.}}{28}{figure.21}%
+\contentsline {figure}{\numberline {22}{\ignorespaces Stereo RMS error of the initial calibration.}}{28}{figure.22}%
+\contentsline {figure}{\numberline {23}{\ignorespaces Reprojection error per camera for a single LiFCal-based recalibration run.}}{30}{figure.23}%
+\contentsline {figure}{\numberline {24}{\ignorespaces Reprojection error per camera across three LiFCal-based recalibration runs.}}{30}{figure.24}%
+\contentsline {figure}{\numberline {25}{\ignorespaces Comparison of mean reprojection error per camera between initial calibration and LiFCal-based recalibration.}}{31}{figure.25}%
+\contentsline {figure}{\numberline {26}{\ignorespaces Deviations of intrinsic parameters from ground truth for the initial calibration (Imageset1).}}{39}{figure.26}%
+\contentsline {figure}{\numberline {27}{\ignorespaces Extrinsic parameter errors of the initial calibration (Imageset1).}}{39}{figure.27}%
+\contentsline {figure}{\numberline {28}{\ignorespaces Translation parameter deviations from ground truth and the initial calibration (Imageset1).}}{40}{figure.28}%
+\contentsline {figure}{\numberline {29}{\ignorespaces Stereo RMS error of the initial calibration (Imageset1).}}{40}{figure.29}%
+\contentsline {figure}{\numberline {30}{\ignorespaces Reprojection error per camera of the initial calibration (Imageset1).}}{40}{figure.30}%
+\contentsline {figure}{\numberline {31}{\ignorespaces Deviations of intrinsic parameters from ground truth for the initial calibration (Imageset2).}}{41}{figure.31}%
+\contentsline {figure}{\numberline {32}{\ignorespaces Extrinsic parameter errors of the initial calibration (Imageset2).}}{41}{figure.32}%
+\contentsline {figure}{\numberline {33}{\ignorespaces Translation parameter deviations from ground truth and the initial calibration (Imageset2).}}{42}{figure.33}%
+\contentsline {figure}{\numberline {34}{\ignorespaces Stereo RMS error of the initial calibration (Imageset2).}}{42}{figure.34}%
+\contentsline {figure}{\numberline {35}{\ignorespaces Reprojection error per camera of the initial calibration (Imageset2).}}{42}{figure.35}%
+\contentsline {figure}{\numberline {36}{\ignorespaces Deviations of intrinsic parameters from ground truth for the initial calibration (Imageset3).}}{43}{figure.36}%
+\contentsline {figure}{\numberline {37}{\ignorespaces Extrinsic parameter errors of the initial calibration (Imageset3).}}{43}{figure.37}%
+\contentsline {figure}{\numberline {38}{\ignorespaces Translation parameter deviations from ground truth and the initial calibration (imageset3).}}{44}{figure.38}%
+\contentsline {figure}{\numberline {39}{\ignorespaces Stereo RMS error of the initial calibration (Imageset3).}}{44}{figure.39}%
+\contentsline {figure}{\numberline {40}{\ignorespaces Reprojection error per camera of the initial calibration (Imageset3).}}{44}{figure.40}%
+\contentsline {figure}{\numberline {41}{\ignorespaces Deviations of intrinsic parameters from ground truth for the initial calibration (Imageset4).}}{45}{figure.41}%
+\contentsline {figure}{\numberline {42}{\ignorespaces Extrinsic parameter errors of the initial calibration (Imageset4).}}{45}{figure.42}%
+\contentsline {figure}{\numberline {43}{\ignorespaces Translation parameter deviations from ground truth and the initial calibration (Imageset4).}}{46}{figure.43}%
+\contentsline {figure}{\numberline {44}{\ignorespaces Stereo RMS error of the initial calibration (Imageset4).}}{46}{figure.44}%
+\contentsline {figure}{\numberline {45}{\ignorespaces Reprojection error per camera of the initial calibration (Imageset4).}}{46}{figure.45}%
+\contentsline {figure}{\numberline {46}{\ignorespaces Deviations of intrinsic parameters from ground truth for the initial calibration (Imageset6).}}{47}{figure.46}%
+\contentsline {figure}{\numberline {47}{\ignorespaces Extrinsic parameter errors of the initial calibration (Imageset6).}}{47}{figure.47}%
+\contentsline {figure}{\numberline {48}{\ignorespaces Translation parameter deviations from ground truth and the initial calibration (Imageset6).}}{48}{figure.48}%
+\contentsline {figure}{\numberline {49}{\ignorespaces Stereo RMS error of the initial calibration (Imageset6).}}{48}{figure.49}%
+\contentsline {figure}{\numberline {50}{\ignorespaces Reprojection error per camera of the initial calibration (Imageset6).}}{48}{figure.50}%
+\contentsline {figure}{\numberline {51}{\ignorespaces Deviations of intrinsic parameters from ground truth for the initial calibration (Imageset7).}}{49}{figure.51}%
+\contentsline {figure}{\numberline {52}{\ignorespaces Extrinsic parameter errors of the initial calibration (Imageset7).}}{49}{figure.52}%
+\contentsline {figure}{\numberline {53}{\ignorespaces Translation parameter deviations from ground truth and the initial calibration (Imageset7).}}{50}{figure.53}%
+\contentsline {figure}{\numberline {54}{\ignorespaces Stereo RMS error of the initial calibration (Imageset7).}}{50}{figure.54}%
+\contentsline {figure}{\numberline {55}{\ignorespaces Reprojection error per camera of the initial calibration (Imageset7).}}{50}{figure.55}%
+\contentsline {figure}{\numberline {56}{\ignorespaces Blender scene for initial target-based calibration with checkerboard.}}{51}{figure.56}%
+\contentsline {figure}{\numberline {57}{\ignorespaces Blender scene for LiFCal-based recalibration without checkerboard.}}{51}{figure.57}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

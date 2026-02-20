@@ -122,7 +122,7 @@ Die Software wurde anhand synthetisch erzeugter Bilddaten evaluiert, die in Blen
 % =========================================================
 \section{Introduction}
 
-In recent years, light field cameras have gained significance in many applications, such as robotics, augmented reality, and 3D reconstruction. In these application areas, the accuracy of the camera system plays a crucial role for overall performance. Camera calibration is therefore an essential step, as it enables an accurate geometric description of the imaging process and ensures reliable results.
+In recent years, light field cameras have gained significance in many applications, such as robotics, augmented reality, and 3D reconstruction. In these application areas, the accuracy of the camera system plays a crucial role in overall performance. Camera calibration is therefore an essential step, as it enables an accurate geometric description of the imaging process and ensures reliable results.
 \newline
 
 There are various types of light field camera systems; however, this thesis focuses on multi-camera light field systems. These systems consist of multiple individual cameras arranged in a specific geometric configuration in order to capture different viewpoints of a scene. Compared to single-camera setups, the calibration of such systems is considerably more complex. The standard approach relies on target-based calibration using physical patterns such as checkerboards. In contrast, a more recent target-free calibration approach has been proposed by Fleith et al.\cite{LiFCal}. The motivation of this thesis is to develop a calibration software that combines both approaches within a data-driven recalibration framework, enabling automatic calibration of a multi-camera array without human intervention.
@@ -147,14 +147,14 @@ The first research question examines whether the LiFCal approach is suitable for
 
 \subsection{Structure of the Thesis}
 
-To provide the necessary background and context, the thesis begins with the theoretical foundations in Chapter 2. This chapter introduces the basic knowledge of camera models, lens distortion, camera calibration, and the different types of light field cameras. Chapter 3 describes the methods and materials used to implement the calibration framework. This includes the main idea of the project, the use case description, and the software architecture. The results of the implementation and evaluation are presented in Chapter 4. It contains the visualization of the results and their accuracy. Finally, Chapter 5 discusses the findings, answers the research questions, and provides an outlook on future work. A final conclusion completes the thesis in the last chapter.
+To provide the necessary background and context, the thesis begins with the theoretical foundations in \hyperref[Chapter 2]{Chapter 2}. This chapter introduces the basic knowledge of camera models, lens distortion, camera calibration, and the different types of light field cameras. \hyperref[Chapter 3]{Chapter 3} describes the methods and materials used to implement the calibration framework. This includes the main idea of the project, the use case description, and the software architecture. The results of the implementation and evaluation are presented in \hyperref[Chapter 4]{Chapter 4}. It contains the visualization of the results and their accuracy. Finally, \hyperref[Chapter 5]{Chapter 5} discusses the findings, answers the research questions, and provides an outlook on future work. A final conclusion completes the thesis in the last \hyperref[Chapter 6]{chapter}.
 
 \clearpage
 
 % =========================================================
 % Chapter 2: Theoretical Background
 % =========================================================
-\section{Theoretical Background}
+\section{Theoretical Background} \label{Chapter 2}
 
 This chapter introduced the theoretical foundations required for this thesis. It covered the pinhole camera model, including intrinsic and extrinsic parameters as well as lens distortion, as the basis for geometric camera modeling. Building on this, common camera calibration methods and error metrics were presented, including target-based calibration and bundle adjustment. The chapter also introduced light field camera systems, their main system types, and the state of the art in their calibration. Together, these concepts provide the necessary background for the calibration approach and experiments presented in the following chapters.
 
@@ -437,7 +437,7 @@ Overall, existing work shows that calibration accuracy in light field systems re
 % =========================================================
 % Chapter 3: Method and Material
 % =========================================================
-\section{Methods and Materials}
+\section{Methods and Materials} \label{Chapter 3}
 
 This chapter introduces the methods and materials used in this thesis, covering both the design of the calibration framework and the technical setup used for its implementation and evaluation.
 
@@ -612,16 +612,7 @@ The requirements specification is intentionally kept compact and focused. It is 
 
 \subsubsection{UML Class Diagram}
 
-Based on the requirements analysis and the defined use case, a UML class diagram was designed to structure and illustrate the main components of the project. The diagram in \autoref{fig:uml_class_diagram} shows the key classes, their attributes, methods, and relationships.
-
-\begin{figure}[htbp]
-    \centering
-    \includegraphics[scale=0.75, trim=0 20cm 0 0]{figures/UML.pdf}
-    \caption{UML Class Diagram}
-    \label{fig:uml_class_diagram}
-\end{figure}
-
-The software architecture is based on a modular design, so that individual components can be developed, tested, and maintained independently. If future extensions or modifications are needed, the structure allows the easy integration of new features without major changes to the existing codebase.
+Based on the requirements analysis and the defined use case, a UML class diagram was designed to structure and illustrate the main components of the project. The diagram in \autoref{fig:uml_class_diagram} shows the key classes, their attributes, methods, and relationships. The software architecture is based on a modular design, so that individual components can be developed, tested, and maintained independently. If future extensions or modifications are needed, the structure allows the easy integration of new features without major changes to the existing codebase.
 \newline 
 
 The core class is the \texttt{controller}, which manages the overall calibration workflow. It coordinates the initial calibration, periodic recalibration attempts, health monitoring, and logging. The controller interacts with several classes that contain the specific functionalities.
@@ -634,7 +625,16 @@ The \texttt{LiFCal} class implements the target-free calibration method proposed
 \newline
 
 Finally, for results and traceability, the \texttt{ResultLogger}, \texttt{lifcal\_to\_json}, and \texttt{Calibra-\allowbreak tionState} classes handle the logging of calibration runs, health evaluations, and decisions. This ensures that all relevant information is recorded in a structured format for later analysis.
+\clearpage
 
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[scale=1.2, trim=1cm 20cm 0 1cm, angle=270]{figures/UML.pdf}
+    \caption{UML Class Diagram}
+    \label{fig:uml_class_diagram}
+\end{figure}
+
+\clearpage
 \subsubsection{Health Monitoring and Decision Metrics}
 
 As mentioned in the use case description, a key component of the proposed calibration framework is the health monitoring mechanism. This mechanism evaluates the quality of each recalibration attempt and decides whether to accept or reject the new calibration based on defined metrics. To define these metrics, the following formulas are used:
@@ -722,7 +722,7 @@ In order to illustrate the workflow and interactions between the different calib
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[scale=0.36]{figures/Zustandsdiagramm_Eng.png}
+    \includegraphics[scale=0.43]{figures/Zustandsdiagramm_Eng.png}
     \caption{State Diagram}
     \label{fig:state_diagram}
 \end{figure}
@@ -731,54 +731,42 @@ In order to illustrate the workflow and interactions between the different calib
 
 In this chapter, the materials and tools used for the implementation and testing of the calibration software are described and presented. Due to the lack of a physical multi-camera light field system, synthetic data generation with Blender was used to create realistic test scenarios. The structure of the image sets, ground truth definitions, and the runtime environment are also discussed.
 
-\subsubsection{Runtime Environment and Toolchain} 
-
-Most parts of the implementation are based on established open-source libraries and tools. The primary programming language used is Python, chosen for its extensive ecosystem supporting computer vision, numerical computation, and scientific prototyping. Core libraries include OpenCV for calibration and image processing, NumPy for numerical operations, and Matplotlib for visualization. The LiFCal implementation provided by Fleith et al.~\cite{LiFCal} was integrated into the workflow to perform target-free recalibration. 
-\newline 
-
-The development and evaluation were conducted on a system running Ubuntu~20.04.6 LTS. A complete list of software dependencies and library versions is documented in the project repository README files to support reproducibility. It should be noted that the LiFCal implementation relies on GPU acceleration and requires a compatible NVIDIA GPU to execute the optimization efficiently. Consequently, LiFCal-based recalibration cannot be performed on systems without suitable GPU support.
 
 \subsubsection{Synthetic Data Generation with Blender}
 
-To evaluate and test the proposed system, a world scene was simulated using open-source software. This software is Blender \cite{Blender}, which also considers physical properties of light, materials, and camera optics to generate
-realistic images.
+To evaluate and test the proposed system, a world scene was simulated using open-source software. This software is Blender \cite{Blender}, which also considers physical properties of light, materials, and camera optics to generate realistic images.
 \vspace{0.2cm}
 
-The first step was to create the multi-camera array geometry. As described in the use case, a cross-shaped arrangement with one central camera and twelve surrounding cameras was constructed. Each camera was configured with the same sensor size and a focal length of 50mm to make the image sets as realistic as possible. The cameras were placed at equal distances from their neighboring cameras, forming a cross shape. Each camera was positioned on a grid to simulate the main structure of the array, as shown in \autoref{fig:blender_camera_array}.
+The first step was to create the multi-camera array geometry. As described in the use case, a cross-shaped arrangement with one central camera and twelve surrounding cameras was constructed. Each camera was configured with the same sensor size and a focal length of 50mm and a sensor size of 36mm to make the image sets as realistic as possible. The cameras were placed at equal distances from their neighboring cameras, forming a cross shape. Each camera was positioned on a grid to simulate the main structure of the array, as shown in \autoref{fig:blender_camera_array}.
+
+%\vspace{0.2cm}
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.7\textwidth]{figures/LFC.png}
+    \caption{Blender visualization of the synthetic 13-camera light field array. It consists of one central reference camera and twelve surrounding cameras arranged in a cross-shaped configuration with equal spacing.}    
+    \label{fig:blender_camera_array}
+\end{figure}
+
+The first scene that needed to be created included a calibration target for the initial calibration. Therefore, a checkerboard pattern was modeled and placed in front of a scene obtained from the Blender community \cite{Free3DIsometricRoom2021}. The checkerboard was positioned in different locations and orientations to simulate a realistic calibration scenario. Due to the multi-camera setup, rendering the images took several minutes per pose, because each camera view had to be rendered individually. After rendering, the images were organized into folders according to the naming conventions required by the calibration scripts. The scene created for the initial calibration was modeled as a simple room, as shown in \autoref{fig:blender_checkerboard_scene}.
 
 %\vspace{0.3cm}
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.49\textwidth]{figures/LFC.png}
-    \caption{Multi-camera array setup in Blender.}
-    \label{fig:blender_camera_array}
+    \includegraphics[width=0.75\textwidth]{figures/pose_015_Up3.png}
+    \caption{Blender scene used for the initial target-based calibration. The checkerboard pattern, placed at varying positions and orientations in front of the camera array, serves as the calibration target for estimating intrinsic and extrinsic parameters.} \label{fig:blender_checkerboard_scene}
 \end{figure}
 
-The first scene that needed to be created included a calibration target for the initial calibration. Therefore, a checkerboard pattern was modeled and placed in front of a scene obtained from the Blender community \cite{Free3DIsometricRoom2021}. The checkerboard was positioned in different locations and orientations to simulate a realistic calibration scenario. Due to the multi-camera setup, rendering the images took several minutes per pose, because each camera view had to be rendered individually. After rendering, the images were organized into folders according to the naming conventions required by the calibration scripts. The scene created for the initial calibration was
-modeled as a simple room, as shown in \autoref{fig:blender_checkerboard_scene}.
-
-\vspace{0.3cm}
-\begin{figure}[htbp]
-    \centering
-    \includegraphics[width=0.6\textwidth]{figures/pose_015_Up3.png}
-    \caption{Example of a Blender scene for the initial calibration with a checkerboard.}
-    \label{fig:blender_checkerboard_scene}
-\end{figure}
-
-\vspace{0.3cm}
 For the LiFCal-based recalibration, a different scene was created without a calibration target. Since LiFCal relies on feature detection and depth maps, the scene had to be more complex and include a variety of objects and textures.
 Therefore, another scene from the Blender community was used
 \cite{Free3DLivingRoom997877}, which represents a modern living room with furniture and decorations. The same camera setup was used, and the scene was rendered from different viewpoints to create the required image sets. An example of the scene used for LiFCal recalibration is shown in \autoref{fig:blender_lifcal_scene}.
 
-\vspace{0.5cm}
+\vspace{0.2cm}
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.6\textwidth]{figures/pose015_Up3.png}
-    \vspace{0.2cm}
-    \caption{Example of a Blender scene for LiFCal recalibration without a calibration target.}
+    \includegraphics[width=0.73\textwidth]{figures/pose015_Up3.png}
+    \caption{Blender scene used for LiFCal-based recalibration without a calibration target. The scene contains multiple objects with diverse colors, textures, and lighting conditions to provide rich visual features and depth variation, enabling robust feature detection.}   
     \label{fig:blender_lifcal_scene}
 \end{figure}
-\clearpage
 
 The motivation behind using synthetic data was to maintain full control over the scene configuration and to simulate different calibration scenarios without the need for physical hardware. Another major advantage is the availability of ground truth camera parameters, which is essential for comparing the estimated calibration results with the actual values. This enables a more objective evaluation of calibration accuracy and the effectiveness of the implemented
 software.
@@ -800,9 +788,16 @@ The ground truth camera parameters were directly extracted from Blender. Since c
 % =======================================================
 % Chapter 4: Results and Evaluation
 % =======================================================
-\section{Results and Evaluation}
+\section{Results and Evaluation} \label{Chapter 4}
 
-In this chapter, the results, plots, and tables obtained from the implementation and from the comparison with the available ground truth data are presented. The evaluation focuses on the accuracy of the initial target-based calibration as well as on the performance of the LiFCal-based recalibration. The results are reported in terms of intrinsic and extrinsic parameter accuracy, reprojection errors, and the evolution of health scores.
+In this chapter, the results, plots, and tables obtained from the implementation and from the comparison with the available ground truth data are presented. In addition, the runtime environment and toolchain used for the evaluation are described to ensure reproducibility of the experimental setup. The evaluation focuses on the accuracy of the initial target-based calibration as well as on the performance of the LiFCal-based recalibration. The results are reported in terms of intrinsic and extrinsic parameter accuracy, reprojection errors, and the evolution of health scores.
+
+\subsection{Runtime Environment and Toolchain} 
+
+Most parts of the implementation are based on established open-source libraries and tools. The primary programming language used is Python, chosen for its extensive ecosystem supporting computer vision, numerical computation, and scientific prototyping. Core libraries include OpenCV for calibration and image processing, NumPy for numerical operations, and Matplotlib for visualization. The LiFCal implementation provided by Fleith et al.~\cite{LiFCal} was integrated into the workflow to perform target-free recalibration. 
+\newline 
+
+The development and evaluation were conducted on a system running Ubuntu~20.04.6 LTS. A complete list of software dependencies and library versions is documented in the project repository README files to support reproducibility. It should be noted that the LiFCal implementation relies on GPU acceleration and requires a compatible NVIDIA GPU to execute the optimization efficiently. Consequently, LiFCal-based recalibration cannot be performed on systems without suitable GPU support.
 
 \subsection{Results of Initial Calibration}
 
@@ -810,45 +805,79 @@ The results of the initial calibration are categorized into intrinsic accuracy, 
 
 \subsubsection{Intrinsic Accuracy}
 
-The accuracy of the intrinsic parameters is evaluated by comparing the estimated focal lengths and principal points with the ground truth values obtained from Blender. The deviations in $f_x$, $f_y$, $c_x$, and $c_y$ are shown in \autoref{fig:intrinsic_accuracy}.
+The accuracy of the intrinsic parameters is evaluated by comparing the estimated focal lengths and principal points with the ground truth values obtained from Blender. The deviations in $f_x$, $f_y$, $c_x$, and $c_y$ are shown in \autoref{fig:intrinsic_accuracy_1} and \autoref{fig:intrinsic_accuracy_2}.
+\newline 
+
+\autoref{fig:intrinsic_accuracy_1} shows the deviations of $f_x$ and $f_y$ from the ground truth for each camera in pixels. The blue curve represents the deviation of $f_x$, while the orange curve represents the deviation of $f_y$. The estimated $f_x$ values remain close to zero across all cameras, whereas the $f_y$ values exhibit a nearly constant offset of approximately 275 pixels. This systematic offset originates from the Blender camera model, where the sensor fit can only be configured as either horizontal or vertical. As a consequence, one focal length component ($f_x$ or $f_y$) is scaled accordingly, resulting in a constant deviation. In \autoref{fig:intrinsic_accuracy_2}, the normalized relative error of $f_x$ is shown to improve the visualization of the deviations, with the maximum error reaching approximately 0.1\%. A normalized representation for $f_y$ is not included due to the systematic scaling offset described above.
+\newline
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=1\textwidth]{figures/compare_intrinsic.png}
-    \caption{Deviations of intrinsic parameters from ground truth for the initial calibration.}
-    \label{fig:intrinsic_accuracy}
+    \includegraphics[width=0.7\textwidth]{figures/compare_intrinsic1.png}
+    \caption{Absolute deviation of the estimated focal lengths from ground truth for all cameras in the initial calibration. The blue curve represents the deviation of $f_x$, while the orange curve represents the deviation of $f_y$, both measured in pixels. A horizontal zero line indicates perfect agreement with the ground-truth parameters.}    \label{fig:intrinsic_accuracy_1}
 \end{figure}
 
-The left plot shows the deviations of $f_x$ and $f_y$ for each camera in pixels. The blue curve represents the $f_x$ deviation and the orange curve represents the $f_y$ deviation. The estimated $f_x$ values stay close to zero across all cameras, while the $f_y$ values show a nearly constant offset of about 275 pixels.
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.78\textwidth]{figures/compare_fx_percent.png}
+    \caption{Relative focal length error of $f_x$ for all cameras in the initial calibration, computed as $\frac{f_{\mathrm{est}} - f_{\mathrm{gt}}}{f_{\mathrm{gt}}} \cdot 100\%$. The plot shows the normalized percentage deviation with respect to the ground-truth focal length, allowing a scale-independent interpretation of the estimation accuracy.}    
+    \label{fig:intrinsic_accuracy_2}
+\end{figure}
+
+The ground-truth intrinsic parameters were computed from the Blender camera configuration using a focal length of 50mm, a sensor size of 36mm and an image resolution of 1280 $\times$ 720 pixels. This results in ground-truth values of $f_x = 1777.78$ and $f_y = 1500.0$, with principal point coordinates $c_x = 640$ and $c_y = 360$. In comparison, the calibration process estimates values of approximately $f_x \approx 1776.78$ and $f_y \approx 1776.86$, and principal point coordinates of approximately $c_x \approx 639.12$ and $c_y \approx 358.92$ for the central camera. While the estimated $f_x$ and principal point coordinates are close to the ground-truth values, the estimated $f_y$ differs significantly from the ground-truth value of 1500.0, which shows the nearly constant offset observed in the deviation plots.
 \newline
 
-The right plot presents the deviations of $c_x$ and $c_y$, also in pixels. Here, the green curve corresponds to $c_x$ and the red curve to $c_y$. Both parameters have small offsets from the ground truth, with most values remaining close to zero.
+The deviations of $c_x$ and $c_y$ are illustrated in \autoref{fig:intrinsic_accuracy_3}. The principal point coordinates show small deviations from the ground-truth values across all cameras. The deviations remain within a narrow pixel range and are distributed around zero, indicating only minor differences between the estimated and reference values.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.7\textwidth]{figures/compare_intrinsic2.png}
+    \caption{Absolute deviation of the estimated principal point coordinates from ground truth for all cameras in the initial calibration. The green curve represents the deviation of $c_x$, while the red dashed curve represents the deviation of $c_y$, both measured in pixels. The horizontal zero line indicates perfect agreement with the ground-truth values.}
+    \label{fig:intrinsic_accuracy_3}
+\end{figure}
 
 \subsubsection{Extrinsic Accuracy}
 
-For the evaluation of the extrinsic parameters, the estimated camera poses are compared with the corresponding ground truth poses. In this case, rotation and translation errors are evaluated using two separate plots to clearly visualize the results, as shown in \autoref{fig:translation_error}.
-
-\begin{figure}[htbp]
-    \centering
-    \includegraphics[width=0.85\textwidth]{figures/compare_translation.png}
-    \caption{Translation parameter deviations from ground truth and the initial calibration.}
-    \label{fig:translation_error}
-\end{figure}
-
-In the left plot, the 3D positions of the multi-camera array from the ground truth are shown, while the right plot illustrates the estimated camera positions after the initial calibration. The mean translation error is shown in the lower part of the figure. The overall structure size is larger than that of a typical multi-camera array due to the synthetic setup in Blender. In both plots the main structure of the cross-shaped camera array is clearly visible.
+For the evaluation of the extrinsic parameters, the estimated camera poses are compared with the corresponding ground truth poses. In this case, rotation and translation errors are evaluated using two separate plots to clearly visualize the results, as shown in \autoref{fig:translation_error_1} and \autoref{fig:translation_error_2}.
 \newline
 
-The translation error per camera and the rotation error per camera are further evaluated in the plot shown in \autoref{fig:extrinsic_errors}.
+In the first plot (\autoref{fig:translation_error_1}), the 3D positions of the multi-camera array from the ground truth are shown, while the second plot (\autoref{fig:translation_error_2}) illustrates the estimated camera positions after the initial calibration. The mean translation error is shown in the lower part of the figure. The overall structure size is larger than that of a typical multi-camera array due to the synthetic setup in Blender. In both plots the main structure of the cross-shaped camera array is clearly visible.
+\newline
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=1\textwidth]{figures/compare_extrinsics.png}
-    \caption{Extrinsic parameter errors of the initial calibration.}
-    \label{fig:extrinsic_errors}
+    \includegraphics[width=0.6\textwidth]{figures/compare_translation1.png}
+    \caption{Ground-truth 3D positions of all cameras in the synthetic multi-camera array. The plot shows the spatial arrangement of the cameras in the $(X, Y, Z)$ coordinate system, illustrating the cross-shaped configuration used for the simulation.}
+    \label{fig:translation_error_1}
 \end{figure}
 
-The left plot shows the rotation error in degrees for each camera, while the right plot shows the translation error in meters for each camera. The central camera was used as the reference camera in the calibration process, therefore, its errors are zero.
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.53\textwidth]{figures/compare_translation2.png}
+    \caption{Comparison of ground-truth and estimated camera positions after the initial calibration. Black markers represent the ground-truth positions, while magenta markers indicate the calibrated positions. The spatial overlap illustrates the translation estimation accuracy, with a reported mean position error of 0.028m.}
+    \label{fig:translation_error_2}
+\end{figure}
+\clearpage
 
+The translation error per camera and the rotation error per camera are further evaluated in the plots shown in \autoref{fig:extrinsic_errors_1} and \autoref{fig:extrinsic_errors_2}.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.54\textwidth]{figures/compare_extrinsics1.png}
+    \caption{Rotation error per camera after the initial calibration. The bars represent the angular deviation between the estimated and ground-truth extrinsic rotations, measured in degrees. The dashed horizontal line indicates the mean rotation error across all cameras ($\emptyset = 0.11^\circ$).}
+    \label{fig:extrinsic_errors_1}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.5\textwidth]{figures/compare_extrinsics2.png}
+    \caption{Absolute translation error per camera after the initial calibration. The bars represent the Euclidean distance between the estimated and ground-truth camera positions, measured in meters. The dashed horizontal line indicates the mean translation error across all cameras ($\emptyset = 0.028\,\text{m}$).}
+    \label{fig:extrinsic_errors_2}
+\end{figure}
+
+The first figure presents the angular deviation for each camera, while the second figure illustrates the corresponding positional error. Since the central camera was defined as the reference frame during the calibration process, its extrinsic parameters serve as the origin of the coordinate system. Consequently, its rotation and translation errors are zero by definition.
+
+\clearpage
 \subsubsection{Reprojection and RMS Error}
 
 As discussed in the Calibration Parameters and Error Metrics section, reprojection error and RMS error are important indicators of calibration quality. The plot shown in \autoref{fig:reprojection_error_plot} presents the reprojection error per camera of the initial calibration.
@@ -869,7 +898,7 @@ The RMS error for the multi-camera array is shown in \autoref{fig:rms_error_plot
     \label{fig:rms_error_plot}
 \end{figure}
 
-Both the reprojection error and the RMS error are measured in pixels. The two plots were generated using the calibration results of the initial target-based calibration. In \autoref{fig:reprojection_error_plot} the error values are almost constant across all cameras with a reprojection error of about 0.3 pixels. In \autoref{fig:rms_error_plot} the RMS error values vary between 35 and 15 pixels for the different cameras.
+Both the reprojection error and the RMS error are measured in pixels. The two plots were generated using the calibration results of the initial target-based calibration. In \autoref{fig:reprojection_error_plot} the error values are almost constant across all cameras with a reprojection error of about 0.3 pixels. In \autoref{fig:rms_error_plot} the RMS error values vary between 15 and 35 pixels for the different cameras.
 
 \subsubsection{Comparison of Mean Results Across Image Sets}
 
@@ -991,13 +1020,14 @@ The first block of the table summarizes the health scores obtained from the thre
 % =========================================================
 % Chapter 5: Discussion of the Results
 % =========================================================
-\section{Discussion of the Results}
+\newpage 
+\section{Discussion of the Results} \label{Chapter 5}
 
 In this part of the thesis, the obtained results are analyzed and discussed in detail. The focus is on interpreting the findings from both the initial target-based calibration and the LiFCal-based recalibration. The limitations of the LiFCal method in the given setup are examined, and a comparison between the two calibration approaches is provided. The research questions outlined in the Introduction are also answered based on the results. Finally, potential extensions and improvements for future work are suggested.
 
 \subsection{Interpretation of Initial Calibration Results}
 
-The initial target-based calibration method provided very accurate results in terms of intrinsic and extrinsic parameter estimation. As shown in \autoref{fig:reprojection_error_plot}, the reprojection error remained consistent across all cameras with a value of about 0.03 pixels. This indicates that the calibration process was able to accurately model the camera geometry and lens distortions. The intrinsic parameters, particularly the focal lengths and principal points, also showed small deviations from the ground truth values, as illustrated in \autoref{fig:intrinsic_accuracy}. In this case, the $f_x$ values were very close to the ground truth, while the $f_y$ values exhibited a nearly constant offset of approximately 275 pixels. This systematic deviation is due to the synthetic nature of the data and the specific configuration of the Blender camera model, because the sensor width and height were automatically set. Either the width or the height could have been adjusted and the other parameter would have been calculated accordingly to maintain the aspect ratio. This led to a consistent offset in one of the focal length parameters. 
+The initial target-based calibration method provided very accurate results in terms of intrinsic and extrinsic parameter estimation. As shown in \autoref{fig:reprojection_error_plot}, the reprojection error remained consistent across all cameras with a value of about 0.03 pixels. This indicates that the calibration process was able to accurately model the camera geometry and lens distortions. The intrinsic parameters, particularly the focal lengths and principal points, also showed small deviations from the ground truth values, as illustrated in \autoref{fig:intrinsic_accuracy_2} and \autoref{fig:intrinsic_accuracy_3}. In this case, the $f_x$ values were very close to the ground truth, while the $f_y$ values exhibited a nearly constant offset of approximately 275 pixels. This systematic deviation is due to the synthetic nature of the data and the specific configuration of the Blender camera model, because the sensor width and height were automatically set. Either the width or the height could have been adjusted and the other parameter would have been calculated accordingly to maintain the aspect ratio. This led to a consistent offset in one of the focal length parameters. 
 \newline 
 
 The RMS error values, shown in \autoref{fig:rms_error_plot}, were not as low as expected, ranging from 15 to 35 pixels across the cameras. However, these values are not directly comparable to the per-camera reprojection errors, as the RMS returned by OpenCV's \texttt{stereoCalibrate} represents a joint error over both camera views and also reflects the consistency of the estimated relative camera poses. Small inaccuracies in corner detection or checkerboard poses can therefore result in higher RMS values, especially before applying bundle adjustment.
@@ -1081,7 +1111,7 @@ In conclusion, the requirements outlined in the Methods and Materials section an
 % =========================================================
 % Chapter 6: Conclusion and Outlook
 % =========================================================
-\section{Conclusion and Outlook}
+\section{Conclusion and Outlook} \label{Chapter 6}
 
 The final chapter summarizes the key aspects of the thesis. On one hand, the main achievements and findings are recapped in the Conclusion subsection. On the other hand, in the Outlook subsection, potential future directions and improvements for the calibration software and methods are discussed.
 

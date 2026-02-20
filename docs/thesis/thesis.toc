@@ -26,38 +26,38 @@
 \contentsline {paragraph}{\nonumberline Functional Requirements}{14}{paragraph*.13}%
 \contentsline {paragraph}{\nonumberline Non-Functional Requirements}{15}{paragraph*.15}%
 \contentsline {subsubsection}{\numberline {3.1.4}UML Class Diagram}{16}{subsubsection.3.1.4}%
-\contentsline {subsubsection}{\numberline {3.1.5}Health Monitoring and Decision Metrics}{17}{subsubsection.3.1.5}%
-\contentsline {subsubsection}{\numberline {3.1.6}State Diagram}{18}{subsubsection.3.1.6}%
-\contentsline {subsection}{\numberline {3.2}Materials}{19}{subsection.3.2}%
-\contentsline {subsubsection}{\numberline {3.2.1}Runtime Environment and Toolchain}{19}{subsubsection.3.2.1}%
-\contentsline {subsubsection}{\numberline {3.2.2}Synthetic Data Generation with Blender}{19}{subsubsection.3.2.2}%
-\contentsline {subsubsection}{\numberline {3.2.3}Image Sets and Ground Truth Definition}{21}{subsubsection.3.2.3}%
-\contentsline {section}{\numberline {4}Results and Evaluation}{22}{section.4}%
-\contentsline {subsection}{\numberline {4.1}Results of Initial Calibration}{22}{subsection.4.1}%
-\contentsline {subsubsection}{\numberline {4.1.1}Intrinsic Accuracy}{22}{subsubsection.4.1.1}%
-\contentsline {subsubsection}{\numberline {4.1.2}Extrinsic Accuracy}{23}{subsubsection.4.1.2}%
-\contentsline {subsubsection}{\numberline {4.1.3}Reprojection and RMS Error}{24}{subsubsection.4.1.3}%
-\contentsline {subsubsection}{\numberline {4.1.4}Comparison of Mean Results Across Image Sets}{25}{subsubsection.4.1.4}%
-\contentsline {subsection}{\numberline {4.2}Results of LiFCal-Based Recalibration}{25}{subsection.4.2}%
-\contentsline {subsubsection}{\numberline {4.2.1}Reprojection Error after LiFCal}{26}{subsubsection.4.2.1}%
-\contentsline {subsubsection}{\numberline {4.2.2}Health Score Comparison}{27}{subsubsection.4.2.2}%
-\contentsline {section}{\numberline {5}Discussion of the Results}{28}{section.5}%
-\contentsline {subsection}{\numberline {5.1}Interpretation of Initial Calibration Results}{28}{subsection.5.1}%
-\contentsline {subsection}{\numberline {5.2}Limitations of LiFCal in the Given Setup}{29}{subsection.5.2}%
-\contentsline {subsection}{\numberline {5.3}Comparison between Initial Calibration and LiFCal}{30}{subsection.5.3}%
-\contentsline {subsection}{\numberline {5.4}Comparison to the State of the Art}{30}{subsection.5.4}%
-\contentsline {subsection}{\numberline {5.5}Potential Extensions and Improvements}{31}{subsection.5.5}%
-\contentsline {section}{\numberline {6}Conclusion and Outlook}{33}{section.6}%
-\contentsline {subsection}{\numberline {6.1}Conclusion}{33}{subsection.6.1}%
-\contentsline {subsection}{\numberline {6.2}Outlook}{33}{subsection.6.2}%
-\contentsline {section}{\numberline {A}Appendix}{35}{appendix.A}%
-\contentsline {subsection}{\numberline {A.1}Additional Results}{35}{subsection.A.1}%
-\contentsline {subsubsection}{\numberline {A.1.1}Imageset1}{35}{subsubsection.A.1.1}%
-\contentsline {subsubsection}{\numberline {A.1.2}Imageset2}{37}{subsubsection.A.1.2}%
-\contentsline {subsubsection}{\numberline {A.1.3}Imageset3}{39}{subsubsection.A.1.3}%
-\contentsline {subsubsection}{\numberline {A.1.4}Imageset4}{41}{subsubsection.A.1.4}%
-\contentsline {subsubsection}{\numberline {A.1.5}Imageset6}{43}{subsubsection.A.1.5}%
-\contentsline {subsubsection}{\numberline {A.1.6}Imageset7}{45}{subsubsection.A.1.6}%
-\contentsline {subsection}{\numberline {A.2}Blender Scenes}{47}{subsection.A.2}%
-\contentsline {section}{Glossary}{48}{section*.16}%
+\contentsline {subsubsection}{\numberline {3.1.5}Health Monitoring and Decision Metrics}{18}{subsubsection.3.1.5}%
+\contentsline {subsubsection}{\numberline {3.1.6}State Diagram}{19}{subsubsection.3.1.6}%
+\contentsline {subsection}{\numberline {3.2}Materials}{20}{subsection.3.2}%
+\contentsline {subsubsection}{\numberline {3.2.1}Synthetic Data Generation with Blender}{20}{subsubsection.3.2.1}%
+\contentsline {subsubsection}{\numberline {3.2.2}Image Sets and Ground Truth Definition}{22}{subsubsection.3.2.2}%
+\contentsline {section}{\numberline {4}Results and Evaluation}{23}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Runtime Environment and Toolchain}{23}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Results of Initial Calibration}{23}{subsection.4.2}%
+\contentsline {subsubsection}{\numberline {4.2.1}Intrinsic Accuracy}{23}{subsubsection.4.2.1}%
+\contentsline {subsubsection}{\numberline {4.2.2}Extrinsic Accuracy}{25}{subsubsection.4.2.2}%
+\contentsline {subsubsection}{\numberline {4.2.3}Reprojection and RMS Error}{28}{subsubsection.4.2.3}%
+\contentsline {subsubsection}{\numberline {4.2.4}Comparison of Mean Results Across Image Sets}{28}{subsubsection.4.2.4}%
+\contentsline {subsection}{\numberline {4.3}Results of LiFCal-Based Recalibration}{29}{subsection.4.3}%
+\contentsline {subsubsection}{\numberline {4.3.1}Reprojection Error after LiFCal}{30}{subsubsection.4.3.1}%
+\contentsline {subsubsection}{\numberline {4.3.2}Health Score Comparison}{31}{subsubsection.4.3.2}%
+\contentsline {section}{\numberline {5}Discussion of the Results}{32}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Interpretation of Initial Calibration Results}{32}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Limitations of LiFCal in the Given Setup}{33}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.3}Comparison between Initial Calibration and LiFCal}{34}{subsection.5.3}%
+\contentsline {subsection}{\numberline {5.4}Comparison to the State of the Art}{34}{subsection.5.4}%
+\contentsline {subsection}{\numberline {5.5}Potential Extensions and Improvements}{35}{subsection.5.5}%
+\contentsline {section}{\numberline {6}Conclusion and Outlook}{37}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Conclusion}{37}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}Outlook}{37}{subsection.6.2}%
+\contentsline {section}{\numberline {A}Appendix}{39}{appendix.A}%
+\contentsline {subsection}{\numberline {A.1}Additional Results}{39}{subsection.A.1}%
+\contentsline {subsubsection}{\numberline {A.1.1}Imageset1}{39}{subsubsection.A.1.1}%
+\contentsline {subsubsection}{\numberline {A.1.2}Imageset2}{41}{subsubsection.A.1.2}%
+\contentsline {subsubsection}{\numberline {A.1.3}Imageset3}{43}{subsubsection.A.1.3}%
+\contentsline {subsubsection}{\numberline {A.1.4}Imageset4}{45}{subsubsection.A.1.4}%
+\contentsline {subsubsection}{\numberline {A.1.5}Imageset6}{47}{subsubsection.A.1.5}%
+\contentsline {subsubsection}{\numberline {A.1.6}Imageset7}{49}{subsubsection.A.1.6}%
+\contentsline {subsection}{\numberline {A.2}Blender Scenes}{51}{subsection.A.2}%
+\contentsline {section}{Glossary}{52}{section*.16}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 
