@@ -1,0 +1,310 @@
+\doxysection{run\+\_\+periodic\+\_\+lifcal.\+py}
+\hypertarget{run__periodic__lifcal_8py_source}{}\label{run__periodic__lifcal_8py_source}\index{calibrationLFC/run\_periodic\_lifcal.py@{calibrationLFC/run\_periodic\_lifcal.py}}
+\mbox{\hyperlink{run__periodic__lifcal_8py}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00001}\mbox{\hyperlink{namespacerun__periodic__lifcal}{00001}}\ \textcolor{keyword}{import}\ os}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00002}00002\ \textcolor{keyword}{import}\ sys}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00003}00003\ \textcolor{keyword}{import}\ time}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00004}00004\ \textcolor{keyword}{import}\ json}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00005}00005\ \textcolor{keyword}{import}\ logging}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00006}00006\ \textcolor{keyword}{import}\ subprocess}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00007}00007\ \textcolor{keyword}{from}\ datetime\ \textcolor{keyword}{import}\ datetime}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00008}00008\ }
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00009}00009\ \textcolor{stringliteral}{"{}"{}"{}\ }}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00010}00010\ \textcolor{stringliteral}{@brief\ Periodic\ LiFCal\ scheduler\ that\ prepares\ imagesets,\ runs\ calibration,\ and\ logs\ health.}}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00011}00011\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00012}00012\ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00014}\mbox{\hyperlink{namespacerun__periodic__lifcal_a5c967bb9bea14fe67a260313bef6d13d}{00014}}\ INTERVAL\_SECONDS\ =\ 5\ *\ 60\ \ \textcolor{comment}{\#\ 5\ Minutes\ interval}}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00016}\mbox{\hyperlink{namespacerun__periodic__lifcal_a8233dad01fa72f57854848b6f44429ab}{00016}}\ RUN\_IMAGESET\_CREATION\ =\ \textcolor{stringliteral}{"{}/data/external/LiFCal/LiFCal\_Data/run\_imageset\_creation.py"{}}}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00017}\mbox{\hyperlink{namespacerun__periodic__lifcal_a01ff388d15c25bc1e61c5aeeb0d2245e}{00017}}\ RUN\_LIFCAL\_CALIB\ \ \ \ \ \ =\ \textcolor{stringliteral}{"{}/data/external/LiFCal/LiFCal\_Data/run\_LiFCal\_calibration.py"{}}}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00019}\mbox{\hyperlink{namespacerun__periodic__lifcal_ad19c09c6061d3cb345b45e130b24a415}{00019}}\ LIFCAL\_OUT\_ROOT\ =\ \textcolor{stringliteral}{"{}/data/external/LiFCal/LiFCal\_Data/Recalibration/CalibrationByCamera"{}}}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00020}\mbox{\hyperlink{namespacerun__periodic__lifcal_adba89cb02cef5617c2dc7f54c63632e2}{00020}}\ BASELINE\_DIR\ \ \ \ =\ \textcolor{stringliteral}{"{}/data/baseline"{}}}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00021}\mbox{\hyperlink{namespacerun__periodic__lifcal_a4848a88d75c664fd19b0bdc2ea35ea0a}{00021}}\ LOG\_PATH\ \ \ \ \ \ \ \ =\ os.path.join(BASELINE\_DIR,\ \textcolor{stringliteral}{"{}calibration.log"{}})}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00022}00022\ }
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00023}\mbox{\hyperlink{namespacerun__periodic__lifcal_af0bc8fb7ff85133636ebf134946c120f}{00023}}\ LOCK\_PATH\ =\ \textcolor{stringliteral}{"{}/tmp/lifcal\_periodic.lock"{}}}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00024}00024\ }
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00025}00025\ \textcolor{comment}{\#\ Prepared\ images}}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00026}\mbox{\hyperlink{namespacerun__periodic__lifcal_acf6353f300d882599e6e12e7962f4e60}{00026}}\ ROOT\_IMAGESET\ =\ \textcolor{stringliteral}{"{}/data/external/LiFCal/LiFCal\_Data/Recalibration/LiFCal\_Imageset"{}}}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00027}\mbox{\hyperlink{namespacerun__periodic__lifcal_af73cb66145bccccfa622492e6c4ec468}{00027}}\ FOCUS\_ROOT\ \ \ \ =\ os.path.join(ROOT\_IMAGESET,\ \textcolor{stringliteral}{"{}focus"{}})\ \ \ \textcolor{comment}{\#\ focus/<CamId>/*.png}}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00028}\mbox{\hyperlink{namespacerun__periodic__lifcal_ac1443b61c996787119099d7f460217a2}{00028}}\ DEPTH\_ROOT\ \ \ \ =\ os.path.join(ROOT\_IMAGESET,\ \textcolor{stringliteral}{"{}depth"{}})\ \ \ \textcolor{comment}{\#\ depth/<CamId>/*\_depth.png}}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00029}00029\ }
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00030}\mbox{\hyperlink{namespacerun__periodic__lifcal_abcef051d13db75eda49bf293a3b137c0}{00030}}\ CAMERA\_IDS\ =\ [}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00031}00031\ \ \ \ \ \textcolor{stringliteral}{"{}Center"{}},\ \textcolor{stringliteral}{"{}Up1"{}},\ \textcolor{stringliteral}{"{}Up2"{}},\ \textcolor{stringliteral}{"{}Up3"{}},}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00032}00032\ \ \ \ \ \textcolor{stringliteral}{"{}Down1"{}},\ \textcolor{stringliteral}{"{}Down2"{}},\ \textcolor{stringliteral}{"{}Down3"{}},}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00033}00033\ \ \ \ \ \textcolor{stringliteral}{"{}Left1"{}},\ \textcolor{stringliteral}{"{}Left2"{}},\ \textcolor{stringliteral}{"{}Left3"{}},}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00034}00034\ \ \ \ \ \textcolor{stringliteral}{"{}Right1"{}},\ \textcolor{stringliteral}{"{}Right2"{}},\ \textcolor{stringliteral}{"{}Right3"{}}}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00035}00035\ ]}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00036}00036\ }
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00037}00037\ \textcolor{comment}{\#\ Minimum\ number\ of\ poses\ required\ per\ camera}}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00038}\mbox{\hyperlink{namespacerun__periodic__lifcal_a564255de7cf6dbda4357a8b479ae24cc}{00038}}\ MIN\_POSES\_PER\_CAM\ =\ 1}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00039}00039\ }
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00040}00040\ }
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00041}\mbox{\hyperlink{namespacerun__periodic__lifcal_a7d46ab8b912f4f4ab552b4eefb73e615}{00041}}\ \textcolor{keyword}{def\ }\mbox{\hyperlink{namespacerun__periodic__lifcal_a7d46ab8b912f4f4ab552b4eefb73e615}{setup\_logger}}():}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00042}00042\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00043}00043\ \textcolor{stringliteral}{\ \ \ \ @brief\ Create\ logger\ that\ writes\ to\ file\ and\ stdout.}}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00044}00044\ \textcolor{stringliteral}{\ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00045}00045\ \textcolor{stringliteral}{\ \ \ \ @return\ Logger\ instance\ configured\ for\ calibration\ logging}}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00046}00046\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00047}00047\ \ \ \ \ os.makedirs(BASELINE\_DIR,\ exist\_ok=\textcolor{keyword}{True})}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00048}00048\ \ \ \ \ logger\ =\ logging.getLogger(\textcolor{stringliteral}{"{}lifcal\_periodic"{}})}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00049}00049\ \ \ \ \ logger.setLevel(logging.INFO)}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00050}00050\ }
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00051}00051\ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ logger.handlers:}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00052}00052\ \ \ \ \ \ \ \ \ fh\ =\ logging.FileHandler(LOG\_PATH,\ encoding=\textcolor{stringliteral}{"{}utf-\/8"{}})}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00053}00053\ \ \ \ \ \ \ \ \ fh.setFormatter(logging.Formatter(\textcolor{stringliteral}{"{}\%(asctime)s\ [\%(levelname)s]\ \%(message)s"{}}))}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00054}00054\ \ \ \ \ \ \ \ \ logger.addHandler(fh)}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00055}00055\ }
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00056}00056\ \ \ \ \ \ \ \ \ sh\ =\ logging.StreamHandler(sys.stdout)}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00057}00057\ \ \ \ \ \ \ \ \ sh.setFormatter(logging.Formatter(\textcolor{stringliteral}{"{}\%(asctime)s\ [\%(levelname)s]\ \%(message)s"{}}))}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00058}00058\ \ \ \ \ \ \ \ \ logger.addHandler(sh)}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00059}00059\ }
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00060}00060\ \ \ \ \ \textcolor{keywordflow}{return}\ logger}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00061}00061\ }
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00062}00062\ }
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00063}\mbox{\hyperlink{namespacerun__periodic__lifcal_a704cef81d87d95c20ed90b9e860bf801}{00063}}\ \textcolor{keyword}{def\ }\mbox{\hyperlink{namespacerun__periodic__lifcal_a704cef81d87d95c20ed90b9e860bf801}{acquire\_lock}}(logger)\ -\/>\ bool:}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00064}00064\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00065}00065\ \textcolor{stringliteral}{\ \ \ \ @brief\ Create\ lock\ file\ to\ prevent\ overlapping\ scheduler\ cycles.}}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00066}00066\ \textcolor{stringliteral}{\ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00067}00067\ \textcolor{stringliteral}{\ \ \ \ @param\ logger\ Logger\ instance\ for\ status\ messages}}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00068}00068\ \textcolor{stringliteral}{\ \ \ \ @return\ True\ if\ lock\ was\ acquired,\ False\ otherwise}}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00069}00069\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00070}00070\ \ \ \ \ \textcolor{keywordflow}{if}\ os.path.exists(LOCK\_PATH):}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00071}00071\ \ \ \ \ \ \ \ \ logger.warning(f\textcolor{stringliteral}{"{}Lock\ exists,\ skipping\ this\ cycle:\ \{LOCK\_PATH\}"{}})}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00072}00072\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{False}}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00073}00073\ \ \ \ \ \textcolor{keywordflow}{try}:}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00074}00074\ \ \ \ \ \ \ \ \ \textcolor{keyword}{with}\ open(LOCK\_PATH,\ \textcolor{stringliteral}{"{}w"{}})\ \textcolor{keyword}{as}\ f:}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00075}00075\ \ \ \ \ \ \ \ \ \ \ \ \ f.write(str(os.getpid()))}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00076}00076\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{True}}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00077}00077\ \ \ \ \ \textcolor{keywordflow}{except}\ Exception\ \textcolor{keyword}{as}\ e:}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00078}00078\ \ \ \ \ \ \ \ \ logger.error(f\textcolor{stringliteral}{"{}Could\ not\ create\ lock:\ \{e\}"{}})}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00079}00079\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{False}}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00080}00080\ }
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00081}00081\ }
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00082}\mbox{\hyperlink{namespacerun__periodic__lifcal_aea185d32733af6bd40d88144a4f2fe74}{00082}}\ \textcolor{keyword}{def\ }\mbox{\hyperlink{namespacerun__periodic__lifcal_aea185d32733af6bd40d88144a4f2fe74}{release\_lock}}(logger):}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00083}00083\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00084}00084\ \textcolor{stringliteral}{\ \ \ \ @brief\ Remove\ lock\ file\ after\ a\ cycle\ completes.}}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00085}00085\ \textcolor{stringliteral}{\ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00086}00086\ \textcolor{stringliteral}{\ \ \ \ @param\ logger\ Logger\ instance\ for\ error\ messages}}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00087}00087\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00088}00088\ \ \ \ \ \textcolor{keywordflow}{try}:}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00089}00089\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ os.path.exists(LOCK\_PATH):}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00090}00090\ \ \ \ \ \ \ \ \ \ \ \ \ os.remove(LOCK\_PATH)}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00091}00091\ \ \ \ \ \textcolor{keywordflow}{except}\ Exception\ \textcolor{keyword}{as}\ e:}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00092}00092\ \ \ \ \ \ \ \ \ logger.error(f\textcolor{stringliteral}{"{}Could\ not\ remove\ lock:\ \{e\}"{}})}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00093}00093\ }
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00094}00094\ }
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00095}\mbox{\hyperlink{namespacerun__periodic__lifcal_a23f848cfb828f5c5814ee24c06b5c7c0}{00095}}\ \textcolor{keyword}{def\ }\mbox{\hyperlink{namespacerun__periodic__lifcal_a23f848cfb828f5c5814ee24c06b5c7c0}{run\_cmd}}(logger,\ cmd,\ cwd=None)\ -\/>\ int:}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00096}00096\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00097}00097\ \textcolor{stringliteral}{\ \ \ \ @brief\ Run\ a\ subprocess,\ log\ combined\ stdout/stderr,\ and\ return\ exit\ code.}}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00098}00098\ \textcolor{stringliteral}{\ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00099}00099\ \textcolor{stringliteral}{\ \ \ \ @param\ logger\ Logger\ instance\ for\ command\ output}}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00100}00100\ \textcolor{stringliteral}{\ \ \ \ @param\ cmd\ Command\ as\ list\ of\ strings}}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00101}00101\ \textcolor{stringliteral}{\ \ \ \ @param\ cwd\ Working\ directory\ for\ the\ command\ (default:\ None)}}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00102}00102\ \textcolor{stringliteral}{\ \ \ \ @return\ Exit\ code\ of\ the\ subprocess}}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00103}00103\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00104}00104\ \ \ \ \ logger.info(f\textcolor{stringliteral}{"{}RUN:\ \{'\ '.join(cmd)\}"{}})}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00105}00105\ \ \ \ \ \textcolor{keywordflow}{try}:}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00106}00106\ \ \ \ \ \ \ \ \ p\ =\ subprocess.run(}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00107}00107\ \ \ \ \ \ \ \ \ \ \ \ \ cmd,}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00108}00108\ \ \ \ \ \ \ \ \ \ \ \ \ cwd=cwd,}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00109}00109\ \ \ \ \ \ \ \ \ \ \ \ \ stdout=subprocess.PIPE,}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00110}00110\ \ \ \ \ \ \ \ \ \ \ \ \ stderr=subprocess.STDOUT,}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00111}00111\ \ \ \ \ \ \ \ \ \ \ \ \ text=\textcolor{keyword}{True}}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00112}00112\ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00113}00113\ \ \ \ \ \ \ \ \ out\ =\ p.stdout\ \textcolor{keywordflow}{or}\ \textcolor{stringliteral}{"{}"{}}}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00114}00114\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ len(out)\ >\ 5000:}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00115}00115\ \ \ \ \ \ \ \ \ \ \ \ \ logger.info(out[:5000]\ +\ \textcolor{stringliteral}{"{}\(\backslash\)n...\ (truncated)\ ..."{}})}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00116}00116\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00117}00117\ \ \ \ \ \ \ \ \ \ \ \ \ logger.info(out)}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00118}00118\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ int(p.returncode)}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00119}00119\ \ \ \ \ \textcolor{keywordflow}{except}\ Exception\ \textcolor{keyword}{as}\ e:}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00120}00120\ \ \ \ \ \ \ \ \ logger.error(f\textcolor{stringliteral}{"{}Command\ failed:\ \{e\}"{}},\ exc\_info=\textcolor{keyword}{True})}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00121}00121\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 1}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00122}00122\ }
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00123}00123\ }
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00124}\mbox{\hyperlink{namespacerun__periodic__lifcal_a9cdfed1accb18d03b82c556990a01373}{00124}}\ \textcolor{keyword}{def\ }\mbox{\hyperlink{namespacerun__periodic__lifcal_a9cdfed1accb18d03b82c556990a01373}{count\_images\_in\_dir}}(d:\ str,\ exts=(\textcolor{stringliteral}{"{}.png"{}},\ \textcolor{stringliteral}{"{}.jpg"{}},\ \textcolor{stringliteral}{"{}.jpeg"{}}))\ -\/>\ int:}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00125}00125\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00126}00126\ \textcolor{stringliteral}{\ \ \ \ @brief\ Count\ images\ in\ directory\ matching\ expected\ extensions.}}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00127}00127\ \textcolor{stringliteral}{\ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00128}00128\ \textcolor{stringliteral}{\ \ \ \ @param\ d\ Directory\ path\ to\ scan}}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00129}00129\ \textcolor{stringliteral}{\ \ \ \ @param\ exts\ Tuple\ of\ file\ extensions\ to\ match\ (default:\ ("{}.png"{},\ "{}.jpg"{},\ "{}.jpeg"{}))}}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00130}00130\ \textcolor{stringliteral}{\ \ \ \ @return\ Number\ of\ matching\ image\ files}}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00131}00131\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00132}00132\ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ os.path.isdir(d):}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00133}00133\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00134}00134\ \ \ \ \ cnt\ =\ 0}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00135}00135\ \ \ \ \ \textcolor{keywordflow}{for}\ fn\ \textcolor{keywordflow}{in}\ os.listdir(d):}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00136}00136\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ fn.lower().endswith(exts):}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00137}00137\ \ \ \ \ \ \ \ \ \ \ \ \ cnt\ +=\ 1}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00138}00138\ \ \ \ \ \textcolor{keywordflow}{return}\ cnt}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00139}00139\ }
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00140}00140\ }
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00141}\mbox{\hyperlink{namespacerun__periodic__lifcal_a5d8d962c9ecbd44bacfa6c28c93abbb5}{00141}}\ \textcolor{keyword}{def\ }\mbox{\hyperlink{namespacerun__periodic__lifcal_a5d8d962c9ecbd44bacfa6c28c93abbb5}{needs\_imageset\_creation}}(logger)\ -\/>\ bool:}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00142}00142\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00143}00143\ \textcolor{stringliteral}{\ \ \ \ @brief\ Check\ if\ imageset\ exists\ and\ has\ enough\ images\ per\ camera;\ trigger\ creation\ if\ not.}}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00144}00144\ \textcolor{stringliteral}{\ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00145}00145\ \textcolor{stringliteral}{\ \ \ \ @param\ logger\ Logger\ instance\ for\ status\ messages}}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00146}00146\ \textcolor{stringliteral}{\ \ \ \ @return\ True\ if\ imageset\ needs\ to\ be\ created,\ False\ if\ it\ already\ exists}}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00147}00147\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00148}00148\ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ os.path.isdir(ROOT\_IMAGESET):}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00149}00149\ \ \ \ \ \ \ \ \ logger.info(\textcolor{stringliteral}{"{}Imageset\ missing:\ ROOT\_IMAGESET\ not\ found."{}})}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00150}00150\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{True}}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00151}00151\ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ os.path.isdir(FOCUS\_ROOT)\ \textcolor{keywordflow}{or}\ \textcolor{keywordflow}{not}\ os.path.isdir(DEPTH\_ROOT):}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00152}00152\ \ \ \ \ \ \ \ \ logger.info(\textcolor{stringliteral}{"{}Imageset\ missing:\ focus/depth\ folders\ not\ found."{}})}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00153}00153\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{True}}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00154}00154\ }
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00155}00155\ \ \ \ \ \textcolor{keywordflow}{for}\ cam\ \textcolor{keywordflow}{in}\ CAMERA\_IDS:}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00156}00156\ \ \ \ \ \ \ \ \ fdir\ =\ os.path.join(FOCUS\_ROOT,\ cam)}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00157}00157\ \ \ \ \ \ \ \ \ ddir\ =\ os.path.join(DEPTH\_ROOT,\ cam)}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00158}00158\ }
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00159}00159\ \ \ \ \ \ \ \ \ fcnt\ =\ \mbox{\hyperlink{namespacerun__periodic__lifcal_a9cdfed1accb18d03b82c556990a01373}{count\_images\_in\_dir}}(fdir,\ exts=(\textcolor{stringliteral}{"{}.png"{}},\ \textcolor{stringliteral}{"{}.jpg"{}},\ \textcolor{stringliteral}{"{}.jpeg"{}}))}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00160}00160\ \ \ \ \ \ \ \ \ dcnt\ =\ \mbox{\hyperlink{namespacerun__periodic__lifcal_a9cdfed1accb18d03b82c556990a01373}{count\_images\_in\_dir}}(ddir,\ exts=(\textcolor{stringliteral}{"{}.png"{}},\ \textcolor{stringliteral}{"{}.jpg"{}},\ \textcolor{stringliteral}{"{}.jpeg"{}}))}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00161}00161\ }
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00162}00162\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ fcnt\ <\ MIN\_POSES\_PER\_CAM:}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00163}00163\ \ \ \ \ \ \ \ \ \ \ \ \ logger.info(f\textcolor{stringliteral}{"{}Imageset\ not\ ready:\ focus/\{cam\}\ has\ \{fcnt\}\ images\ (<\{MIN\_POSES\_PER\_CAM\})."{}})}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00164}00164\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{True}}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00165}00165\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ dcnt\ <\ MIN\_POSES\_PER\_CAM:}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00166}00166\ \ \ \ \ \ \ \ \ \ \ \ \ logger.info(f\textcolor{stringliteral}{"{}Imageset\ not\ ready:\ depth/\{cam\}\ has\ \{dcnt\}\ images\ (<\{MIN\_POSES\_PER\_CAM\})."{}})}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00167}00167\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{True}}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00168}00168\ \ \ \ \ logger.info(\textcolor{stringliteral}{"{}Imageset\ looks\ ready.\ Skipping\ run\_imageset\_creation.py."{}})}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00169}00169\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{False}}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00170}00170\ }
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00171}00171\ }
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00172}\mbox{\hyperlink{namespacerun__periodic__lifcal_aaa5a01f58e6545366d98420a4ce1ed21}{00172}}\ \textcolor{keyword}{def\ }\mbox{\hyperlink{namespacerun__periodic__lifcal_aaa5a01f58e6545366d98420a4ce1ed21}{find\_latest\_run\_dir}}(out\_root:\ str)\ -\/>\ str:}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00173}00173\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00174}00174\ \textcolor{stringliteral}{\ \ \ \ @brief\ Return\ latest\ run\_*\ directory\ inside\ output\ root,\ or\ empty\ string\ if\ none.}}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00175}00175\ \textcolor{stringliteral}{\ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00176}00176\ \textcolor{stringliteral}{\ \ \ \ @param\ out\_root\ Root\ directory\ containing\ run\_*\ folders}}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00177}00177\ \textcolor{stringliteral}{\ \ \ \ @return\ Path\ to\ the\ latest\ run\ directory,\ or\ empty\ string}}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00178}00178\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00179}00179\ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ os.path.isdir(out\_root):}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00180}00180\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}"{}}}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00181}00181\ \ \ \ \ runs\ =\ []}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00182}00182\ \ \ \ \ \textcolor{keywordflow}{for}\ name\ \textcolor{keywordflow}{in}\ os.listdir(out\_root):}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00183}00183\ \ \ \ \ \ \ \ \ p\ =\ os.path.join(out\_root,\ name)}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00184}00184\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ os.path.isdir(p)\ \textcolor{keywordflow}{and}\ name.startswith(\textcolor{stringliteral}{"{}run\_"{}}):}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00185}00185\ \ \ \ \ \ \ \ \ \ \ \ \ runs.append(p)}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00186}00186\ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ runs:}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00187}00187\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}"{}}}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00188}00188\ \ \ \ \ runs.sort(key=\textcolor{keyword}{lambda}\ p:\ os.path.getmtime(p))}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00189}00189\ \ \ \ \ \textcolor{keywordflow}{return}\ runs[-\/1]}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00190}00190\ }
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00191}00191\ }
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00192}\mbox{\hyperlink{namespacerun__periodic__lifcal_ae09f1c6749f08fea2e255d08fc5dcafc}{00192}}\ \textcolor{keyword}{def\ }\mbox{\hyperlink{namespacerun__periodic__lifcal_ae09f1c6749f08fea2e255d08fc5dcafc}{combined\_json\_path}}(run\_dir:\ str)\ -\/>\ str:}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00193}00193\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00194}00194\ \textcolor{stringliteral}{\ \ \ \ @brief\ Return\ path\ to\ combined.json\ inside\ run\ directory\ if\ present.}}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00195}00195\ \textcolor{stringliteral}{\ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00196}00196\ \textcolor{stringliteral}{\ \ \ \ @param\ run\_dir\ Path\ to\ run\ directory}}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00197}00197\ \textcolor{stringliteral}{\ \ \ \ @return\ Path\ to\ combined.json\ file,\ or\ empty\ string\ if\ not\ found}}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00198}00198\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00199}00199\ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ run\_dir:}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00200}00200\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}"{}}}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00201}00201\ \ \ \ \ p\ =\ os.path.join(run\_dir,\ \textcolor{stringliteral}{"{}combined.json"{}})}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00202}00202\ \ \ \ \ \textcolor{keywordflow}{return}\ p\ \textcolor{keywordflow}{if}\ os.path.isfile(p)\ \textcolor{keywordflow}{else}\ \textcolor{stringliteral}{"{}"{}}}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00203}00203\ }
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00204}00204\ }
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00205}\mbox{\hyperlink{namespacerun__periodic__lifcal_ae2efc72d1ae0ad2ff7def20aace6ce1f}{00205}}\ \textcolor{keyword}{def\ }\mbox{\hyperlink{namespacerun__periodic__lifcal_ae2efc72d1ae0ad2ff7def20aace6ce1f}{try\_log\_lifcal\_with\_resultlogger}}(logger,\ combined\_path:\ str):}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00206}00206\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00207}00207\ \textcolor{stringliteral}{\ \ \ \ @brief\ Use\ ResultLogger\ to\ record\ LiFCal\ health\ score\ and\ update\ baseline.}}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00208}00208\ \textcolor{stringliteral}{\ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00209}00209\ \textcolor{stringliteral}{\ \ \ \ @param\ logger\ Logger\ instance\ for\ status\ messages}}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00210}00210\ \textcolor{stringliteral}{\ \ \ \ @param\ combined\_path\ Path\ to\ combined.json\ from\ LiFCal}}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00211}00211\ \textcolor{stringliteral}{\ \ \ \ @return\ True\ if\ logging\ succeeded,\ False\ otherwise}}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00212}00212\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00213}00213\ \ \ \ \ \textcolor{keywordflow}{try}:}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00214}00214\ \ \ \ \ \ \ \ \ repo\_dir\ =\ \textcolor{stringliteral}{"{}/data/calibrationLFC"{}}}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00215}00215\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ repo\_dir\ \textcolor{keywordflow}{not}\ \textcolor{keywordflow}{in}\ sys.path:}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00216}00216\ \ \ \ \ \ \ \ \ \ \ \ \ sys.path.insert(0,\ repo\_dir)}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00217}00217\ }
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00218}00218\ \ \ \ \ \ \ \ \ \textcolor{keyword}{from}\ ResultLogger\ \textcolor{keyword}{import}\ ResultLogger}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00219}00219\ \ \ \ \ \ \ \ \ rl\ =\ \mbox{\hyperlink{namespace_result_logger}{ResultLogger}}(baseDir=BASELINE\_DIR)}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00220}00220\ }
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00221}00221\ \ \ \ \ \ \ \ \ meta\ =\ \{}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00222}00222\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}runType"{}}:\ \textcolor{stringliteral}{"{}recalib"{}},}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00223}00223\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}source"{}}:\ \textcolor{stringliteral}{"{}periodic\_scheduler"{}},}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00224}00224\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}timestamp"{}}:\ datetime.now().isoformat(timespec=\textcolor{stringliteral}{"{}seconds"{}}),}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00225}00225\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00226}00226\ \ \ \ \ \ \ \ \ score\ =\ rl.logRecalibration(combined\_path,\ meta=meta)}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00227}00227\ \ \ \ \ \ \ \ \ logger.info(f\textcolor{stringliteral}{"{}LiFCal\ HealthScore\ logged\ via\ ResultLogger:\ \{score:.2f\}"{}})}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00228}00228\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{True}}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00229}00229\ \ \ \ \ \textcolor{keywordflow}{except}\ Exception\ \textcolor{keyword}{as}\ e:}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00230}00230\ \ \ \ \ \ \ \ \ logger.warning(f\textcolor{stringliteral}{"{}Could\ not\ use\ ResultLogger\ for\ LiFCal\ logging:\ \{e\}"{}})}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00231}00231\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{False}}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00232}00232\ }
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00233}00233\ }
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00234}\mbox{\hyperlink{namespacerun__periodic__lifcal_a158845c08aab27eddc3e568ef5d588f3}{00234}}\ \textcolor{keyword}{def\ }\mbox{\hyperlink{namespacerun__periodic__lifcal_a158845c08aab27eddc3e568ef5d588f3}{run\_cycle}}(logger):}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00235}00235\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00236}00236\ \textcolor{stringliteral}{\ \ \ \ @brief\ Execute\ one\ scheduler\ cycle:\ prepare\ imageset,\ run\ LiFCal,\ log\ health.}}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00237}00237\ \textcolor{stringliteral}{\ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00238}00238\ \textcolor{stringliteral}{\ \ \ \ @param\ logger\ Logger\ instance\ for\ cycle\ logging}}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00239}00239\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00240}00240\ \ \ \ \ \textcolor{comment}{\#\ 1)\ Only\ prepare\ imageset\ if\ needed}}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00241}00241\ \ \ \ \ \textcolor{keywordflow}{if}\ \mbox{\hyperlink{namespacerun__periodic__lifcal_a5d8d962c9ecbd44bacfa6c28c93abbb5}{needs\_imageset\_creation}}(logger):}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00242}00242\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ os.path.isfile(RUN\_IMAGESET\_CREATION):}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00243}00243\ \ \ \ \ \ \ \ \ \ \ \ \ logger.error(f\textcolor{stringliteral}{"{}Missing:\ \{RUN\_IMAGESET\_CREATION\}"{}})}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00244}00244\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00245}00245\ }
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00246}00246\ \ \ \ \ \ \ \ \ rc\ =\ \mbox{\hyperlink{namespacerun__periodic__lifcal_a23f848cfb828f5c5814ee24c06b5c7c0}{run\_cmd}}(logger,\ [sys.executable,\ RUN\_IMAGESET\_CREATION])}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00247}00247\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ rc\ !=\ 0:}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00248}00248\ \ \ \ \ \ \ \ \ \ \ \ \ logger.error(f\textcolor{stringliteral}{"{}run\_imageset\_creation\ failed\ (rc=\{rc\}).\ Skipping\ LiFCal."{}})}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00249}00249\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00250}00250\ }
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00251}00251\ \ \ \ \ \textcolor{comment}{\#\ 2)\ LiFCal\ calibration}}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00252}00252\ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ os.path.isfile(RUN\_LIFCAL\_CALIB):}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00253}00253\ \ \ \ \ \ \ \ \ logger.error(f\textcolor{stringliteral}{"{}Missing:\ \{RUN\_LIFCAL\_CALIB\}"{}})}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00254}00254\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00255}00255\ }
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00256}00256\ \ \ \ \ rc\ =\ \mbox{\hyperlink{namespacerun__periodic__lifcal_a23f848cfb828f5c5814ee24c06b5c7c0}{run\_cmd}}(logger,\ [sys.executable,\ RUN\_LIFCAL\_CALIB])}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00257}00257\ \ \ \ \ \textcolor{keywordflow}{if}\ rc\ !=\ 0:}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00258}00258\ \ \ \ \ \ \ \ \ logger.error(f\textcolor{stringliteral}{"{}run\_LiFCal\_calibration\ failed\ (rc=\{rc\})."{}})}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00259}00259\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00260}00260\ }
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00261}00261\ \ \ \ \ \textcolor{comment}{\#\ 3)\ locate\ combined.json\ (latest\ run)}}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00262}00262\ \ \ \ \ latest\ =\ \mbox{\hyperlink{namespacerun__periodic__lifcal_aaa5a01f58e6545366d98420a4ce1ed21}{find\_latest\_run\_dir}}(LIFCAL\_OUT\_ROOT)}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00263}00263\ \ \ \ \ cpath\ =\ \mbox{\hyperlink{namespacerun__periodic__lifcal_ae09f1c6749f08fea2e255d08fc5dcafc}{combined\_json\_path}}(latest)}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00264}00264\ }
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00265}00265\ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ cpath:}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00266}00266\ \ \ \ \ \ \ \ \ logger.warning(\textcolor{stringliteral}{"{}No\ combined.json\ found\ after\ LiFCal\ run."{}})}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00267}00267\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00268}00268\ }
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00269}00269\ \ \ \ \ logger.info(f\textcolor{stringliteral}{"{}Latest\ combined.json:\ \{cpath\}"{}})}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00270}00270\ }
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00271}00271\ \ \ \ \ \textcolor{comment}{\#\ 4)\ log\ health\ +\ baseline\ update\ using\ your\ ResultLogger}}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00272}00272\ \ \ \ \ ok\ =\ \mbox{\hyperlink{namespacerun__periodic__lifcal_ae2efc72d1ae0ad2ff7def20aace6ce1f}{try\_log\_lifcal\_with\_resultlogger}}(logger,\ cpath)}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00273}00273\ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ ok:}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00274}00274\ \ \ \ \ \ \ \ \ logger.info(\textcolor{stringliteral}{"{}LiFCal\ finished,\ but\ no\ baseline/health\ logging\ was\ executed."{}})}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00275}00275\ }
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00276}00276\ }
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00277}\mbox{\hyperlink{namespacerun__periodic__lifcal_a5852f1389d109f64903df06bcea36292}{00277}}\ \textcolor{keyword}{def\ }\mbox{\hyperlink{namespacerun__periodic__lifcal_a5852f1389d109f64903df06bcea36292}{main}}():}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00278}00278\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00279}00279\ \textcolor{stringliteral}{\ \ \ \ @brief\ Periodic\ loop\ that\ runs\ LiFCal\ recalibration\ on\ a\ schedule.}}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00280}00280\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00281}00281\ \ \ \ \ logger\ =\ \mbox{\hyperlink{namespacerun__periodic__lifcal_a7d46ab8b912f4f4ab552b4eefb73e615}{setup\_logger}}()}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00282}00282\ \ \ \ \ logger.info(\textcolor{stringliteral}{"{}Starting\ periodic\ LiFCal\ scheduler."{}})}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00283}00283\ \ \ \ \ logger.info(f\textcolor{stringliteral}{"{}Interval:\ \{INTERVAL\_SECONDS\}s"{}})}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00284}00284\ \ \ \ \ logger.info(f\textcolor{stringliteral}{"{}Lock:\ \{LOCK\_PATH\}"{}})}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00285}00285\ }
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00286}00286\ \ \ \ \ \textcolor{keywordflow}{while}\ \textcolor{keyword}{True}:}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00287}00287\ \ \ \ \ \ \ \ \ start\ =\ time.time()}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00288}00288\ }
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00289}00289\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \mbox{\hyperlink{namespacerun__periodic__lifcal_a704cef81d87d95c20ed90b9e860bf801}{acquire\_lock}}(logger):}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00290}00290\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}:}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00291}00291\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ logger.info(\textcolor{stringliteral}{"{}===\ CYCLE\ START\ ==="{}})}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00292}00292\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacerun__periodic__lifcal_a158845c08aab27eddc3e568ef5d588f3}{run\_cycle}}(logger)}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00293}00293\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ logger.info(\textcolor{stringliteral}{"{}===\ CYCLE\ END\ ==="{}})}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00294}00294\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{finally}:}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00295}00295\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacerun__periodic__lifcal_aea185d32733af6bd40d88144a4f2fe74}{release\_lock}}(logger)}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00296}00296\ }
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00297}00297\ \ \ \ \ \ \ \ \ elapsed\ =\ time.time()\ -\/\ start}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00298}00298\ \ \ \ \ \ \ \ \ sleep\_s\ =\ max(1.0,\ INTERVAL\_SECONDS\ -\/\ elapsed)}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00299}00299\ \ \ \ \ \ \ \ \ logger.info(f\textcolor{stringliteral}{"{}Sleeping\ \{sleep\_s:.1f\}s\(\backslash\)n"{}})}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00300}00300\ \ \ \ \ \ \ \ \ time.sleep(sleep\_s)}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00301}00301\ }
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00302}00302\ }
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00303}00303\ \textcolor{keywordflow}{if}\ \_\_name\_\_\ ==\ \textcolor{stringliteral}{"{}\_\_main\_\_"{}}:}
+\DoxyCodeLine{\Hypertarget{run__periodic__lifcal_8py_source_l00304}00304\ \ \ \ \ \mbox{\hyperlink{namespacerun__periodic__lifcal_a5852f1389d109f64903df06bcea36292}{main}}()}
+
+\end{DoxyCode}

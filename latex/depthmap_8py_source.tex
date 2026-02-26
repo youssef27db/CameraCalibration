@@ -1,0 +1,208 @@
+\doxysection{depthmap.\+py}
+\hypertarget{depthmap_8py_source}{}\label{depthmap_8py_source}\index{external/LiFCal/LiFCal\_Data/depthmap.py@{external/LiFCal/LiFCal\_Data/depthmap.py}}
+\mbox{\hyperlink{depthmap_8py}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00001}\mbox{\hyperlink{namespacedepthmap}{00001}}\ \textcolor{keyword}{import}\ os}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00002}00002\ \textcolor{keyword}{import}\ cv2}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00003}00003\ \textcolor{keyword}{import}\ numpy\ \textcolor{keyword}{as}\ np}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00004}00004\ \textcolor{keyword}{from}\ typing\ \textcolor{keyword}{import}\ Optional,\ Dict}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00005}00005\ }
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00006}00006\ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00007}00007\ \textcolor{stringliteral}{@brief\ Depth\ map\ generation\ for\ LiFCal\ calibration\ using\ stereo\ matching\ and\ fusion.}}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00008}00008\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00009}00009\ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00011}\mbox{\hyperlink{namespacedepthmap_ac63a7271da36c070991dce9a06debc12}{00011}}\ \textcolor{keyword}{def\ }\mbox{\hyperlink{namespacedepthmap_ac63a7271da36c070991dce9a06debc12}{build\_matchers}}():}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00012}00012\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00013}00013\ \textcolor{stringliteral}{\ \ \ \ @brief\ Build\ stereo\ matchers\ with\ SGBM\ and\ optional\ Weighted\ Least\ Squares\ (WLS)\ filtering.}}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00014}00014\ \textcolor{stringliteral}{\ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00015}00015\ \textcolor{stringliteral}{\ \ \ \ @return\ Tuple\ (left\_matcher,\ right\_matcher,\ wls\_filter)}}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00016}00016\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00017}00017\ \ \ \ \ left\_matcher\ =\ cv2.StereoSGBM\_create(}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00018}00018\ \ \ \ \ \ \ \ \ minDisparity=0,}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00019}00019\ \ \ \ \ \ \ \ \ numDisparities=128,\ \ \textcolor{comment}{\#\ must\ be\ divisible\ by\ 16}}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00020}00020\ \ \ \ \ \ \ \ \ blockSize=7,}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00021}00021\ \ \ \ \ \ \ \ \ P1=8\ *\ 7\ *\ 7,}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00022}00022\ \ \ \ \ \ \ \ \ P2=32\ *\ 7\ *\ 7,}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00023}00023\ \ \ \ \ \ \ \ \ uniquenessRatio=5,}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00024}00024\ \ \ \ \ \ \ \ \ speckleWindowSize=100,}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00025}00025\ \ \ \ \ \ \ \ \ speckleRange=2,}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00026}00026\ \ \ \ \ \ \ \ \ disp12MaxDiff=1,}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00027}00027\ \ \ \ \ \ \ \ \ preFilterCap=31,}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00028}00028\ \ \ \ \ \ \ \ \ mode=cv2.STEREO\_SGBM\_MODE\_SGBM\_3WAY}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00029}00029\ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00031}00031\ \ \ \ \ right\_matcher\ =\ \textcolor{keywordtype}{None}}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00032}00032\ \ \ \ \ wls\ =\ \textcolor{keywordtype}{None}}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00034}00034\ \ \ \ \ \textcolor{keywordflow}{try}:}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00035}00035\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ hasattr(cv2,\ \textcolor{stringliteral}{"{}ximgproc"{}}):}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00036}00036\ \ \ \ \ \ \ \ \ \ \ \ \ right\_matcher\ =\ cv2.ximgproc.createRightMatcher(left\_matcher)}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00037}00037\ \ \ \ \ \ \ \ \ \ \ \ \ wls\ =\ cv2.ximgproc.createDisparityWLSFilter(left\_matcher)}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00038}00038\ \ \ \ \ \ \ \ \ \ \ \ \ wls.setLambda(6000)}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00039}00039\ \ \ \ \ \ \ \ \ \ \ \ \ wls.setSigmaColor(1.0)}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00040}00040\ \ \ \ \ \textcolor{keywordflow}{except}\ Exception:}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00041}00041\ \ \ \ \ \ \ \ \ right\_matcher\ =\ \textcolor{keywordtype}{None}}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00042}00042\ \ \ \ \ \ \ \ \ wls\ =\ \textcolor{keywordtype}{None}}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00043}00043\ }
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00044}00044\ \ \ \ \ \textcolor{keywordflow}{return}\ left\_matcher,\ right\_matcher,\ wls}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00045}00045\ }
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00046}00046\ }
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00047}\mbox{\hyperlink{namespacedepthmap_a24d39cb841a75cdd270e4d1f5a313dc5}{00047}}\ \_LEFT\_MATCHER,\ \_RIGHT\_MATCHER,\ \_WLS\ =\ \mbox{\hyperlink{namespacedepthmap_ac63a7271da36c070991dce9a06debc12}{build\_matchers}}()}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00048}00048\ }
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00049}00049\ }
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00050}\mbox{\hyperlink{namespacedepthmap_a4cfab791bc6b43425d0d6daddde9dbd5}{00050}}\ \textcolor{keyword}{def\ }\mbox{\hyperlink{namespacedepthmap_a4cfab791bc6b43425d0d6daddde9dbd5}{imwrite\_u16}}(path:\ str,\ img\_u16:\ np.ndarray)\ -\/>\ bool:}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00051}00051\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00052}00052\ \textcolor{stringliteral}{\ \ \ \ @brief\ Write\ uint16\ png,\ create\ dirs\ automatically.}}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00053}00053\ \textcolor{stringliteral}{\ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00054}00054\ \textcolor{stringliteral}{\ \ \ \ @param\ path\ Output\ file\ path}}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00055}00055\ \textcolor{stringliteral}{\ \ \ \ @param\ img\_u16\ Image\ array\ in\ uint16\ format}}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00056}00056\ \textcolor{stringliteral}{\ \ \ \ @return\ True\ if\ write\ succeeded,\ False\ otherwise}}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00057}00057\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00058}00058\ \ \ \ \ os.makedirs(os.path.dirname(path),\ exist\_ok=\textcolor{keyword}{True})}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00059}00059\ \ \ \ \ \textcolor{keywordflow}{if}\ img\_u16.dtype\ !=\ np.uint16:}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00060}00060\ \ \ \ \ \ \ \ \ img\_u16\ =\ img\_u16.astype(np.uint16)}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00061}00061\ \ \ \ \ \textcolor{keywordflow}{return}\ bool(cv2.imwrite(path,\ img\_u16))}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00062}00062\ }
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00063}00063\ }
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00064}\mbox{\hyperlink{namespacedepthmap_af92f086ee3f3b61f1e5cbac8655b42cf}{00064}}\ \textcolor{keyword}{def\ }\mbox{\hyperlink{namespacedepthmap_af92f086ee3f3b61f1e5cbac8655b42cf}{disparity}}(left\_gray:\ np.ndarray,\ right\_gray:\ np.ndarray)\ -\/>\ np.ndarray:}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00065}00065\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00066}00066\ \textcolor{stringliteral}{\ \ \ \ @brief\ Compute\ stereo\ disparity\ map\ with\ optional\ WLS\ filtering.}}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00067}00067\ \textcolor{stringliteral}{\ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00068}00068\ \textcolor{stringliteral}{\ \ \ \ @param\ left\_gray\ Left\ grayscale\ image}}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00069}00069\ \textcolor{stringliteral}{\ \ \ \ @param\ right\_gray\ Right\ grayscale\ image}}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00070}00070\ \textcolor{stringliteral}{\ \ \ \ @return\ Float32\ disparity\ map\ with\ NaNs\ for\ invalid\ pixels\ (<=0)}}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00071}00071\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00072}00072\ \ \ \ \ dl\ =\ \_LEFT\_MATCHER.compute(left\_gray,\ right\_gray)\ \ \textcolor{comment}{\#\ int16\ scaled\ by\ 16}}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00073}00073\ }
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00074}00074\ \ \ \ \ \textcolor{keywordflow}{if}\ \_RIGHT\_MATCHER\ \textcolor{keywordflow}{is}\ \textcolor{keywordflow}{not}\ \textcolor{keywordtype}{None}\ \textcolor{keywordflow}{and}\ \_WLS\ \textcolor{keywordflow}{is}\ \textcolor{keywordflow}{not}\ \textcolor{keywordtype}{None}:}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00075}00075\ \ \ \ \ \ \ \ \ dr\ =\ \_RIGHT\_MATCHER.compute(right\_gray,\ left\_gray)}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00076}00076\ \ \ \ \ \ \ \ \ d\ =\ \_WLS.filter(dl,\ left\_gray,\ \textcolor{keywordtype}{None},\ dr)}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00077}00077\ \ \ \ \ \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00078}00078\ \ \ \ \ \ \ \ \ d\ =\ dl}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00079}00079\ }
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00080}00080\ \ \ \ \ d\ =\ d.astype(np.float32)\ /\ 16.0}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00081}00081\ \ \ \ \ d[d\ <=\ 0]\ =\ np.nan}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00082}00082\ \ \ \ \ \textcolor{keywordflow}{return}\ d}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00083}00083\ }
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00084}00084\ }
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00085}\mbox{\hyperlink{namespacedepthmap_ab4900bbd4fb2c17775febac47f52b009}{00085}}\ \textcolor{keyword}{def\ }\mbox{\hyperlink{namespacedepthmap_ab4900bbd4fb2c17775febac47f52b009}{to\_u16\_from\_disp}}(disp:\ np.ndarray)\ -\/>\ np.ndarray:}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00086}00086\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00087}00087\ \textcolor{stringliteral}{\ \ \ \ @brief\ Convert\ disparity\ to\ uint16\ depth\ map\ to\ be\ compatible\ with\ LiFCal.}}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00088}00088\ \textcolor{stringliteral}{\ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00089}00089\ \textcolor{stringliteral}{\ \ \ \ @param\ disp\ Float32\ disparity\ map}}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00090}00090\ \textcolor{stringliteral}{\ \ \ \ @return\ Uint16\ depth\ map}}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00091}00091\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00092}00092\ \ \ \ \ disp\ =\ np.nan\_to\_num(disp,\ nan=0.0,\ posinf=0.0,\ neginf=0.0)}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00093}00093\ }
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00094}00094\ \ \ \ \ mx\ =\ float(np.percentile(disp,\ 99))}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00095}00095\ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ np.isfinite(mx)\ \textcolor{keywordflow}{or}\ mx\ <=\ 1e-\/6:}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00096}00096\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ np.zeros(disp.shape,\ dtype=np.uint16)}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00097}00097\ }
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00098}00098\ \ \ \ \ disp\ =\ np.clip(disp,\ 0.0,\ mx)}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00099}00099\ \ \ \ \ depth16\ =\ (disp\ /\ mx\ *\ 65535.0).astype(np.uint16)}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00100}00100\ \ \ \ \ \textcolor{keywordflow}{return}\ depth16}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00101}00101\ }
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00102}00102\ }
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00103}\mbox{\hyperlink{namespacedepthmap_a78031c56dd99c1eb9c2db907d9f8ccf9}{00103}}\ \textcolor{keyword}{def\ }\mbox{\hyperlink{namespacedepthmap_a78031c56dd99c1eb9c2db907d9f8ccf9}{fuse\_disparities\_median}}(disp\_list:\ list)\ -\/>\ np.ndarray:}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00104}00104\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00105}00105\ \textcolor{stringliteral}{\ \ \ \ @brief\ Fuse\ multiple\ disparity\ maps\ robustly\ using\ median.}}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00106}00106\ \textcolor{stringliteral}{\ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00107}00107\ \textcolor{stringliteral}{\ \ \ \ @param\ disp\_list\ List\ of\ float32\ disparity\ maps\ to\ fuse}}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00108}00108\ \textcolor{stringliteral}{\ \ \ \ @return\ Float32\ fused\ disparity\ map\ with\ 0\ where\ no\ valid\ data\ exists}}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00109}00109\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00110}00110\ \ \ \ \ stack\ =\ np.stack(disp\_list,\ axis=0)\ \ \textcolor{comment}{\#\ (K,H,W)}}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00111}00111\ }
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00112}00112\ \ \ \ \ \textcolor{comment}{\#\ Locations\ where\ at\ least\ one\ value\ is\ valid}}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00113}00113\ \ \ \ \ valid\_any\ =\ np.any(\string~np.isnan(stack),\ axis=0)}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00114}00114\ }
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00115}00115\ \ \ \ \ \textcolor{comment}{\#\ Initialize\ result\ with\ zeros}}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00116}00116\ \ \ \ \ disp\_final\ =\ np.zeros(stack.shape[1:],\ dtype=np.float32)}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00117}00117\ }
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00118}00118\ \ \ \ \ \textcolor{comment}{\#\ Compute\ median\ only\ where\ we\ have\ valid\ data}}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00119}00119\ \ \ \ \ \textcolor{keywordflow}{if}\ np.any(valid\_any):}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00120}00120\ \ \ \ \ \ \ \ \ disp\_final[valid\_any]\ =\ np.nanmedian(stack[:,\ valid\_any],\ axis=0)}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00121}00121\ }
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00122}00122\ \ \ \ \ \textcolor{comment}{\#\ Remove\ non-\/positive\ disparities}}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00123}00123\ \ \ \ \ disp\_final[disp\_final\ <=\ 0]\ =\ 0.0}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00124}00124\ \ \ \ \ \textcolor{keywordflow}{return}\ disp\_final}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00125}00125\ }
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00126}00126\ }
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00127}\mbox{\hyperlink{namespacedepthmap_a5e95b42c1c2c9b2ed81d37ca32f09530}{00127}}\ \textcolor{keyword}{def\ }\mbox{\hyperlink{namespacedepthmap_a5e95b42c1c2c9b2ed81d37ca32f09530}{generate\_depthmaps\_for\_pose}}(cam\_to\_focus\_path:\ Dict[str,\ str])\ -\/>\ Dict[str,\ np.ndarray]:}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00128}00128\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00129}00129\ \textcolor{stringliteral}{\ \ \ \ @brief\ Generate\ depth\ maps\ for\ all\ cameras\ in\ a\ multi-\/camera\ pose.}}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00130}00130\ \textcolor{stringliteral}{\ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00131}00131\ \textcolor{stringliteral}{\ \ \ \ @param\ cam\_to\_focus\_path\ Dictionary\ mapping\ camera\ IDs\ to\ image\ file\ paths}}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00132}00132\ \textcolor{stringliteral}{\ \ \ \ @return\ Dictionary\ mapping\ camera\ IDs\ to\ uint16\ depth\ maps}}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00133}00133\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00134}00134\ }
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00135}00135\ \ \ \ \ \textcolor{comment}{\#\ 1)\ Load\ images}}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00136}00136\ \ \ \ \ imgs\ =\ \{\}}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00137}00137\ \ \ \ \ \textcolor{keywordflow}{for}\ cam,\ path\ \textcolor{keywordflow}{in}\ cam\_to\_focus\_path.items():}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00138}00138\ \ \ \ \ \ \ \ \ im\ =\ cv2.imread(path,\ cv2.IMREAD\_GRAYSCALE)}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00139}00139\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ im\ \textcolor{keywordflow}{is}\ \textcolor{keywordtype}{None}:}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00140}00140\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue}}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00141}00141\ \ \ \ \ \ \ \ \ imgs[cam]\ =\ im}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00142}00142\ }
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00143}00143\ \ \ \ \ \textcolor{keywordflow}{if}\ len(imgs)\ <\ 2:}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00144}00144\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \{\}}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00145}00145\ }
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00146}00146\ \ \ \ \ \textcolor{comment}{\#\ helper}}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00147}00147\ \ \ \ \ \textcolor{keyword}{def\ }opposite\_name(name:\ str)\ -\/>\ Optional[str]:}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00148}00148\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ name.startswith(\textcolor{stringliteral}{"{}Left"{}}):}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00149}00149\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ name.replace(\textcolor{stringliteral}{"{}Left"{}},\ \textcolor{stringliteral}{"{}Right"{}},\ 1)}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00150}00150\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ name.startswith(\textcolor{stringliteral}{"{}Right"{}}):}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00151}00151\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ name.replace(\textcolor{stringliteral}{"{}Right"{}},\ \textcolor{stringliteral}{"{}Left"{}},\ 1)}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00152}00152\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ name.startswith(\textcolor{stringliteral}{"{}Up"{}}):}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00153}00153\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ name.replace(\textcolor{stringliteral}{"{}Up"{}},\ \textcolor{stringliteral}{"{}Down"{}},\ 1)}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00154}00154\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ name.startswith(\textcolor{stringliteral}{"{}Down"{}}):}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00155}00155\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ name.replace(\textcolor{stringliteral}{"{}Down"{}},\ \textcolor{stringliteral}{"{}Up"{}},\ 1)}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00156}00156\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keywordtype}{None}}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00157}00157\ }
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00158}00158\ \ \ \ \ depthmaps\ =\ \{\}}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00159}00159\ }
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00160}00160\ \ \ \ \ \textcolor{keywordflow}{for}\ cam,\ img\ \textcolor{keywordflow}{in}\ imgs.items():}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00161}00161\ \ \ \ \ \ \ \ \ disp\_list\ =\ []}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00162}00162\ }
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00163}00163\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ cam\ ==\ \textcolor{stringliteral}{"{}Center"{}}:}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00164}00164\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Center\ uses\ all\ other\ views}}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00165}00165\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ other\_cam,\ other\_img\ \textcolor{keywordflow}{in}\ imgs.items():}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00166}00166\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ other\_cam\ ==\ \textcolor{stringliteral}{"{}Center"{}}:}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00167}00167\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue}}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00168}00168\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ d\ =\ \mbox{\hyperlink{namespacedepthmap_af92f086ee3f3b61f1e5cbac8655b42cf}{disparity}}(img,\ other\_img)}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00169}00169\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Keep\ only\ if\ there\ is\ any\ valid\ disparity}}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00170}00170\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ np.any(\string~np.isnan(d)):}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00171}00171\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ disp\_list.append(d)}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00172}00172\ }
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00173}00173\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00174}00174\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Opposite\ direction\ if\ available}}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00175}00175\ \ \ \ \ \ \ \ \ \ \ \ \ opp\ =\ opposite\_name(cam)}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00176}00176\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ opp\ \textcolor{keywordflow}{is}\ \textcolor{keywordflow}{not}\ \textcolor{keywordtype}{None}\ \textcolor{keywordflow}{and}\ opp\ \textcolor{keywordflow}{in}\ imgs:}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00177}00177\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ cam.startswith(\textcolor{stringliteral}{"{}Right"{}})\ \textcolor{keywordflow}{or}\ cam.startswith(\textcolor{stringliteral}{"{}Down"{}}):}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00178}00178\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ d\ =\ \mbox{\hyperlink{namespacedepthmap_af92f086ee3f3b61f1e5cbac8655b42cf}{disparity}}(imgs[opp],\ img)}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00179}00179\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00180}00180\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ d\ =\ \mbox{\hyperlink{namespacedepthmap_af92f086ee3f3b61f1e5cbac8655b42cf}{disparity}}(img,\ imgs[opp])}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00181}00181\ }
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00182}00182\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ np.any(\string~np.isnan(d)):}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00183}00183\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ disp\_list.append(d)}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00184}00184\ }
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00185}00185\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Add\ Center\ view}}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00186}00186\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{stringliteral}{"{}Center"{}}\ \textcolor{keywordflow}{in}\ imgs:}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00187}00187\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ d\ =\ \mbox{\hyperlink{namespacedepthmap_af92f086ee3f3b61f1e5cbac8655b42cf}{disparity}}(img,\ imgs[\textcolor{stringliteral}{"{}Center"{}}])}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00188}00188\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ np.any(\string~np.isnan(d)):}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00189}00189\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ disp\_list.append(d)}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00190}00190\ }
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00191}00191\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ disp\_list:}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00192}00192\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ No\ valid\ disparity\ found;\ skip}}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00193}00193\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue}}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00194}00194\ }
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00195}00195\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Robust\ fusion}}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00196}00196\ \ \ \ \ \ \ \ \ disp\_final\ =\ \mbox{\hyperlink{namespacedepthmap_a78031c56dd99c1eb9c2db907d9f8ccf9}{fuse\_disparities\_median}}(disp\_list)}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00197}00197\ }
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00198}00198\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Convert\ to\ uint16\ depth\ map}}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00199}00199\ \ \ \ \ \ \ \ \ depth16\ =\ \mbox{\hyperlink{namespacedepthmap_ab4900bbd4fb2c17775febac47f52b009}{to\_u16\_from\_disp}}(disp\_final)}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00200}00200\ \ \ \ \ \ \ \ \ depthmaps[cam]\ =\ depth16}
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00201}00201\ }
+\DoxyCodeLine{\Hypertarget{depthmap_8py_source_l00202}00202\ \ \ \ \ \textcolor{keywordflow}{return}\ depthmaps}
+
+\end{DoxyCode}

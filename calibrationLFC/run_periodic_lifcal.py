@@ -1,5 +1,3 @@
-"""Periodic LiFCal scheduler that prepares imagesets, runs calibration, and logs health."""
-
 import os
 import sys
 import time
@@ -7,6 +5,11 @@ import json
 import logging
 import subprocess
 from datetime import datetime
+
+""" 
+@brief Periodic LiFCal scheduler that prepares imagesets, runs calibration, and logs health.
+
+"""
 
 INTERVAL_SECONDS = 5 * 60  # 5 Minutes interval
 
@@ -36,7 +39,11 @@ MIN_POSES_PER_CAM = 1
 
 
 def setup_logger():
-    """Create logger that writes to file and stdout."""
+    """
+    @brief Create logger that writes to file and stdout.
+    
+    @return Logger instance configured for calibration logging
+    """
     os.makedirs(BASELINE_DIR, exist_ok=True)
     logger = logging.getLogger("lifcal_periodic")
     logger.setLevel(logging.INFO)
@@ -54,7 +61,12 @@ def setup_logger():
 
 
 def acquire_lock(logger) -> bool:
-    """Create lock file to prevent overlapping scheduler cycles."""
+    """
+    @brief Create lock file to prevent overlapping scheduler cycles.
+    
+    @param logger Logger instance for status messages
+    @return True if lock was acquired, False otherwise
+    """
     if os.path.exists(LOCK_PATH):
         logger.warning(f"Lock exists, skipping this cycle: {LOCK_PATH}")
         return False
@@ -68,7 +80,11 @@ def acquire_lock(logger) -> bool:
 
 
 def release_lock(logger):
-    """Remove lock file after a cycle completes."""
+    """
+    @brief Remove lock file after a cycle completes.
+    
+    @param logger Logger instance for error messages
+    """
     try:
         if os.path.exists(LOCK_PATH):
             os.remove(LOCK_PATH)
@@ -77,7 +93,14 @@ def release_lock(logger):
 
 
 def run_cmd(logger, cmd, cwd=None) -> int:
-    """Run a subprocess, log combined stdout/stderr, and return exit code."""
+    """
+    @brief Run a subprocess, log combined stdout/stderr, and return exit code.
+    
+    @param logger Logger instance for command output
+    @param cmd Command as list of strings
+    @param cwd Working directory for the command (default: None)
+    @return Exit code of the subprocess
+    """
     logger.info(f"RUN: {' '.join(cmd)}")
     try:
         p = subprocess.run(
@@ -99,7 +122,13 @@ def run_cmd(logger, cmd, cwd=None) -> int:
 
 
 def count_images_in_dir(d: str, exts=(".png", ".jpg", ".jpeg")) -> int:
-    """Count images in directory matching expected extensions."""
+    """
+    @brief Count images in directory matching expected extensions.
+    
+    @param d Directory path to scan
+    @param exts Tuple of file extensions to match (default: (".png", ".jpg", ".jpeg"))
+    @return Number of matching image files
+    """
     if not os.path.isdir(d):
         return 0
     cnt = 0
@@ -110,7 +139,12 @@ def count_images_in_dir(d: str, exts=(".png", ".jpg", ".jpeg")) -> int:
 
 
 def needs_imageset_creation(logger) -> bool:
-    """Check if imageset exists and has enough images per camera; trigger creation if not."""
+    """
+    @brief Check if imageset exists and has enough images per camera; trigger creation if not.
+    
+    @param logger Logger instance for status messages
+    @return True if imageset needs to be created, False if it already exists
+    """
     if not os.path.isdir(ROOT_IMAGESET):
         logger.info("Imageset missing: ROOT_IMAGESET not found.")
         return True
@@ -136,7 +170,12 @@ def needs_imageset_creation(logger) -> bool:
 
 
 def find_latest_run_dir(out_root: str) -> str:
-    """Return latest run_* directory inside output root, or empty string if none."""
+    """
+    @brief Return latest run_* directory inside output root, or empty string if none.
+    
+    @param out_root Root directory containing run_* folders
+    @return Path to the latest run directory, or empty string
+    """
     if not os.path.isdir(out_root):
         return ""
     runs = []
@@ -151,7 +190,12 @@ def find_latest_run_dir(out_root: str) -> str:
 
 
 def combined_json_path(run_dir: str) -> str:
-    """Return path to combined.json inside run directory if present."""
+    """
+    @brief Return path to combined.json inside run directory if present.
+    
+    @param run_dir Path to run directory
+    @return Path to combined.json file, or empty string if not found
+    """
     if not run_dir:
         return ""
     p = os.path.join(run_dir, "combined.json")
@@ -159,7 +203,13 @@ def combined_json_path(run_dir: str) -> str:
 
 
 def try_log_lifcal_with_resultlogger(logger, combined_path: str):
-    """Use ResultLogger to record LiFCal health score and update baseline."""
+    """
+    @brief Use ResultLogger to record LiFCal health score and update baseline.
+    
+    @param logger Logger instance for status messages
+    @param combined_path Path to combined.json from LiFCal
+    @return True if logging succeeded, False otherwise
+    """
     try:
         repo_dir = "/data/calibrationLFC"
         if repo_dir not in sys.path:
@@ -182,7 +232,11 @@ def try_log_lifcal_with_resultlogger(logger, combined_path: str):
 
 
 def run_cycle(logger):
-    """Execute one scheduler cycle: prepare imageset, run LiFCal, log health."""
+    """
+    @brief Execute one scheduler cycle: prepare imageset, run LiFCal, log health.
+    
+    @param logger Logger instance for cycle logging
+    """
     # 1) Only prepare imageset if needed
     if needs_imageset_creation(logger):
         if not os.path.isfile(RUN_IMAGESET_CREATION):
@@ -221,7 +275,9 @@ def run_cycle(logger):
 
 
 def main():
-    """Periodic loop that runs LiFCal recalibration on a schedule."""
+    """
+    @brief Periodic loop that runs LiFCal recalibration on a schedule.
+    """
     logger = setup_logger()
     logger.info("Starting periodic LiFCal scheduler.")
     logger.info(f"Interval: {INTERVAL_SECONDS}s")

@@ -1,0 +1,224 @@
+\doxysection{Controller.\+Controller Class Reference}
+\hypertarget{class_controller_1_1_controller}{}\label{class_controller_1_1_controller}\index{Controller.Controller@{Controller.Controller}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_controller_1_1_controller_abc5a183610184bf85f61cf10eb93fd5e}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, \mbox{\hyperlink{class_controller_1_1_controller_a49aee28ca109c069b89c53d671d33049}{bundle\+Adjust}})
+\item 
+\mbox{\hyperlink{class_controller_1_1_controller_a7e2a2a5262172840a4c94063d10b48b6}{run\+Initial\+Calibration}} (self, image\+Set)
+\item 
+float \mbox{\hyperlink{class_controller_1_1_controller_a2af1675dc5a4ed0a768a2de5dcb14ce3}{self\+Health\+Check}} (self, calibration\+State)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_controller_1_1_controller_a927f688c93bd2616f29394f26f2589e1}{initial\+Calibration}} = \mbox{\hyperlink{class_initial_calibration_1_1_initial_calibration}{Initial\+Calibration}}()
+\item 
+list \mbox{\hyperlink{class_controller_1_1_controller_adac013a71fc3d28fb6b4c0d143f4f3b1}{score\+History}} = \mbox{[}$\,$\mbox{]}
+\item 
+\mbox{\hyperlink{class_controller_1_1_controller_ae61b8e8908a52a337c17b1457e39f2eb}{current\+State}} = None
+\item 
+\mbox{\hyperlink{class_controller_1_1_controller_a6fa99ab27d25f8a1adc64203054a78d0}{result\+Logger}} = \mbox{\hyperlink{class_result_logger_1_1_result_logger}{Result\+Logger}}()
+\item 
+\mbox{\hyperlink{class_controller_1_1_controller_a49aee28ca109c069b89c53d671d33049}{bundle\+Adjust}} = bundle\+Adjust
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}@brief Main controller for managing calibration workflow.
+
+@details Orchestrates the complete calibration process including initial calibration,
+health monitoring, and result logging. Manages the calibration state and maintains
+a history of health scores.
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{_controller_8py_source_l00006}{6}} of file \mbox{\hyperlink{_controller_8py_source}{Controller.\+py}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_controller_1_1_controller_abc5a183610184bf85f61cf10eb93fd5e}\index{Controller.Controller@{Controller.Controller}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!Controller.Controller@{Controller.Controller}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily \label{class_controller_1_1_controller_abc5a183610184bf85f61cf10eb93fd5e} 
+Controller.\+Controller.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{bundle\+Adjust}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Constructor for Controller.
+
+@param bundleAdjust Boolean flag indicating whether to apply bundle adjustment
+
+@details Initializes the controller with an InitialCalibration instance,
+empty score history, result logger, and bundle adjustment setting.
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{_controller_8py_source_l00015}{15}} of file \mbox{\hyperlink{_controller_8py_source}{Controller.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keyword}{def\ }\_\_init\_\_(self,\ bundleAdjust): }
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{} }}
+\DoxyCodeLine{00017\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @brief\ Constructor\ for\ Controller. }}
+\DoxyCodeLine{00018\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \  }}
+\DoxyCodeLine{00019\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ bundleAdjust\ Boolean\ flag\ indicating\ whether\ to\ apply\ bundle\ adjustment }}
+\DoxyCodeLine{00020\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \  }}
+\DoxyCodeLine{00021\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @details\ Initializes\ the\ controller\ with\ an\ InitialCalibration\ instance, }}
+\DoxyCodeLine{00022\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ empty\ score\ history,\ result\ logger,\ and\ bundle\ adjustment\ setting. }}
+\DoxyCodeLine{00023\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ self.initialCalibration\ =\ \mbox{\hyperlink{namespace_initial_calibration}{InitialCalibration}}() }
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ self.scoreHistory\ =\ []\  }
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ self.currentState\ =\ \textcolor{keywordtype}{None}\  }
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ self.resultLogger\ =\ \mbox{\hyperlink{namespace_result_logger}{ResultLogger}}() }
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ self.bundleAdjust\ =\ bundleAdjust\  }
+\DoxyCodeLine{00029\  }
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_controller_1_1_controller_a7e2a2a5262172840a4c94063d10b48b6}\index{Controller.Controller@{Controller.Controller}!runInitialCalibration@{runInitialCalibration}}
+\index{runInitialCalibration@{runInitialCalibration}!Controller.Controller@{Controller.Controller}}
+\doxysubsubsection{\texorpdfstring{runInitialCalibration()}{runInitialCalibration()}}
+{\footnotesize\ttfamily \label{class_controller_1_1_controller_a7e2a2a5262172840a4c94063d10b48b6} 
+Controller.\+Controller.\+run\+Initial\+Calibration (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{image\+Set}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Execute initial calibration for all cameras in the image set.
+
+@param imageSet ImageSet object containing calibration images and camera information
+@return CalibrationState object with computed intrinsic and extrinsic parameters\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{_controller_8py_source_l00030}{30}} of file \mbox{\hyperlink{_controller_8py_source}{Controller.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keyword}{def\ }runInitialCalibration(self,\ imageSet): }
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{} }}
+\DoxyCodeLine{00032\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @brief\ Execute\ initial\ calibration\ for\ all\ cameras\ in\ the\ image\ set. }}
+\DoxyCodeLine{00033\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \  }}
+\DoxyCodeLine{00034\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ imageSet\ ImageSet\ object\ containing\ calibration\ images\ and\ camera\ information }}
+\DoxyCodeLine{00035\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @return\ CalibrationState\ object\ with\ computed\ intrinsic\ and\ extrinsic\ parameters }}
+\DoxyCodeLine{00036\ \textcolor{stringliteral}{\ \ \ \  }}
+\DoxyCodeLine{00037\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}Controller:\ starting\ initial\ calibration..."{}}) }
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ calibrationState\ =\ self.initialCalibration.run(imageSet,\ self.bundleAdjust) }
+\DoxyCodeLine{00040\  }
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Prepare\ metadata\ for\ logging }}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ meta\ =\ \{ }
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}runType"{}}:\ \textcolor{stringliteral}{"{}initial"{}}, }
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}numPoses"{}}:\ imageSet.numPoses, }
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}imageDir"{}}:\ imageSet.baseDir, }
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}cameraIds"{}}:\ imageSet.cameraIds, }
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}bundleAdjust"{}}:\ self.bundleAdjust, }
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \} }
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ self.resultLogger.logInitialCalibration(calibrationState,\ meta=meta) }
+\DoxyCodeLine{00050\  }
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ calibrationState }
+\DoxyCodeLine{00052\  }
+
+\end{DoxyCode}
+\Hypertarget{class_controller_1_1_controller_a2af1675dc5a4ed0a768a2de5dcb14ce3}\index{Controller.Controller@{Controller.Controller}!selfHealthCheck@{selfHealthCheck}}
+\index{selfHealthCheck@{selfHealthCheck}!Controller.Controller@{Controller.Controller}}
+\doxysubsubsection{\texorpdfstring{selfHealthCheck()}{selfHealthCheck()}}
+{\footnotesize\ttfamily \label{class_controller_1_1_controller_a2af1675dc5a4ed0a768a2de5dcb14ce3} 
+ float Controller.\+Controller.\+self\+Health\+Check (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{calibration\+State}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Computes a global health score for the calibration quality.
+
+@param calibrationState CalibrationState object to evaluate
+@return Health score as float between 0 and 100, or 0.0 if evaluation fails\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{_controller_8py_source_l00053}{53}} of file \mbox{\hyperlink{_controller_8py_source}{Controller.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keyword}{def\ }selfHealthCheck(self,\ calibrationState)\ -\/>\ float: }
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{} }}
+\DoxyCodeLine{00055\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @brief\ Computes\ a\ global\ health\ score\ for\ the\ calibration\ quality. }}
+\DoxyCodeLine{00056\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \  }}
+\DoxyCodeLine{00057\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ calibrationState\ CalibrationState\ object\ to\ evaluate }}
+\DoxyCodeLine{00058\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @return\ Health\ score\ as\ float\ between\ 0\ and\ 100,\ or\ 0.0\ if\ evaluation\ fails }}
+\DoxyCodeLine{00059\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \  }}
+\DoxyCodeLine{00060\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Extract\ state\ dictionary }}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}: }
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \ \ \ \ state\_dict\ =\ calibrationState.\_\_getState\_\_() }
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{except}\ Exception\ \textcolor{keyword}{as}\ e: }
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \ \ \ \ self.resultLogger.logger.error( }
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ f\textcolor{stringliteral}{"{}HealthCheck:\ could\ not\ extract\ state\ dict:\ \{e\}"{}},\ exc\_info=\textcolor{keyword}{True} }
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \ \ \ \ ) }
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0.0 }
+\DoxyCodeLine{00069\  }
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Compute\ health\ score\ from\ calibration\ metrics }}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}: }
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \ \ \ \ report\ =\ compute\_initial\_health\_from\_state(state\_dict) }
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \ \ \ \ score\ =\ float(report[\textcolor{stringliteral}{"{}health"{}}]) }
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \ \ \ \ self.resultLogger.logger.info( }
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ f\textcolor{stringliteral}{"{}HealthScore\ =\ \{score:.2f\}\ (method=\{report.get('method')\})"{}} }
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \ \ \ \ ) }
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ score }
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{except}\ Exception\ \textcolor{keyword}{as}\ e: }
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \ \ \ \ self.resultLogger.logger.error(f\textcolor{stringliteral}{"{}HealthCheck\ failed:\ \{e\}"{}},\ exc\_info=\textcolor{keyword}{True}) }
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0.0 }
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_controller_1_1_controller_a49aee28ca109c069b89c53d671d33049}\index{Controller.Controller@{Controller.Controller}!bundleAdjust@{bundleAdjust}}
+\index{bundleAdjust@{bundleAdjust}!Controller.Controller@{Controller.Controller}}
+\doxysubsubsection{\texorpdfstring{bundleAdjust}{bundleAdjust}}
+{\footnotesize\ttfamily \label{class_controller_1_1_controller_a49aee28ca109c069b89c53d671d33049} 
+Controller.\+Controller.\+bundle\+Adjust = bundle\+Adjust}
+
+
+
+Definition at line \mbox{\hyperlink{_controller_8py_source_l00028}{28}} of file \mbox{\hyperlink{_controller_8py_source}{Controller.\+py}}.
+
+\Hypertarget{class_controller_1_1_controller_ae61b8e8908a52a337c17b1457e39f2eb}\index{Controller.Controller@{Controller.Controller}!currentState@{currentState}}
+\index{currentState@{currentState}!Controller.Controller@{Controller.Controller}}
+\doxysubsubsection{\texorpdfstring{currentState}{currentState}}
+{\footnotesize\ttfamily \label{class_controller_1_1_controller_ae61b8e8908a52a337c17b1457e39f2eb} 
+Controller.\+Controller.\+current\+State = None}
+
+
+
+Definition at line \mbox{\hyperlink{_controller_8py_source_l00026}{26}} of file \mbox{\hyperlink{_controller_8py_source}{Controller.\+py}}.
+
+\Hypertarget{class_controller_1_1_controller_a927f688c93bd2616f29394f26f2589e1}\index{Controller.Controller@{Controller.Controller}!initialCalibration@{initialCalibration}}
+\index{initialCalibration@{initialCalibration}!Controller.Controller@{Controller.Controller}}
+\doxysubsubsection{\texorpdfstring{initialCalibration}{initialCalibration}}
+{\footnotesize\ttfamily \label{class_controller_1_1_controller_a927f688c93bd2616f29394f26f2589e1} 
+Controller.\+Controller.\+initial\+Calibration = \mbox{\hyperlink{class_initial_calibration_1_1_initial_calibration}{Initial\+Calibration}}()}
+
+
+
+Definition at line \mbox{\hyperlink{_controller_8py_source_l00024}{24}} of file \mbox{\hyperlink{_controller_8py_source}{Controller.\+py}}.
+
+\Hypertarget{class_controller_1_1_controller_a6fa99ab27d25f8a1adc64203054a78d0}\index{Controller.Controller@{Controller.Controller}!resultLogger@{resultLogger}}
+\index{resultLogger@{resultLogger}!Controller.Controller@{Controller.Controller}}
+\doxysubsubsection{\texorpdfstring{resultLogger}{resultLogger}}
+{\footnotesize\ttfamily \label{class_controller_1_1_controller_a6fa99ab27d25f8a1adc64203054a78d0} 
+Controller.\+Controller.\+result\+Logger = \mbox{\hyperlink{class_result_logger_1_1_result_logger}{Result\+Logger}}()}
+
+
+
+Definition at line \mbox{\hyperlink{_controller_8py_source_l00027}{27}} of file \mbox{\hyperlink{_controller_8py_source}{Controller.\+py}}.
+
+\Hypertarget{class_controller_1_1_controller_adac013a71fc3d28fb6b4c0d143f4f3b1}\index{Controller.Controller@{Controller.Controller}!scoreHistory@{scoreHistory}}
+\index{scoreHistory@{scoreHistory}!Controller.Controller@{Controller.Controller}}
+\doxysubsubsection{\texorpdfstring{scoreHistory}{scoreHistory}}
+{\footnotesize\ttfamily \label{class_controller_1_1_controller_adac013a71fc3d28fb6b4c0d143f4f3b1} 
+list Controller.\+Controller.\+score\+History = \mbox{[}$\,$\mbox{]}}
+
+
+
+Definition at line \mbox{\hyperlink{_controller_8py_source_l00025}{25}} of file \mbox{\hyperlink{_controller_8py_source}{Controller.\+py}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+calibration\+LFC/\mbox{\hyperlink{_controller_8py}{Controller.\+py}}\end{DoxyCompactItemize}

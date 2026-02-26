@@ -29,6 +29,10 @@ import json
 import math
 from typing import Dict, Any, Optional
 
+"""
+@brief HealthMonitor module for computing calibration health scores.
+
+"""
 
 # Shared thresholds
 R_BEST = 0.03
@@ -38,7 +42,14 @@ S_WORST = 50.0
 
 
 def clamp(x: float, lo: float = 0.0, hi: float = 1.0) -> float:
-    """Clamp value between lower and upper bounds."""
+    """
+    @brief Clamp value between lower and upper bounds.
+    
+    @param x Value to clamp
+    @param lo Lower bound (default: 0.0)
+    @param hi Upper bound (default: 1.0)
+    @return Clamped value
+    """
     if x < lo:
         return lo
     if x > hi:
@@ -47,7 +58,13 @@ def clamp(x: float, lo: float = 0.0, hi: float = 1.0) -> float:
 
 
 def safe_float(v, default=None):
-    """Convert value to float safely, return default on error."""
+    """
+    @brief Convert value to float safely, return default on error.
+    
+    @param v Value to convert
+    @param default Default value to return on conversion error
+    @return Converted float value or default
+    """
     try:
         if v is None:
             return default
@@ -57,7 +74,15 @@ def safe_float(v, default=None):
 
 
 def score_from_errors(E_a: float, E_b: float, w_a: float = 0.6, w_b: float = 0.4) -> float:
-    """Compute health score from two normalized error metrics."""
+    """
+    @brief Compute health score from two normalized error metrics.
+    
+    @param E_a First normalized error metric (0..1)
+    @param E_b Second normalized error metric (0..1)
+    @param w_a Weight for first error metric (default: 0.6)
+    @param w_b Weight for second error metric (default: 0.4)
+    @return Health score between 0 and 100
+    """
     val = 100.0 * (1.0 - (w_a * (E_a ** 2) + w_b * (E_b ** 2)))
     return clamp(val / 100.0, 0.0, 1.0) * 100.0
 
@@ -70,14 +95,14 @@ def compute_initial_health_from_state(
     s_worst: float = S_WORST,
 ) -> Dict[str, Any]:
     """
-    Compute health score from initial calibration state.
+    @brief Compute health score from initial calibration state.
 
-    Reads from state_dict:
-      state.intrinsics[cam].reprojectionError
-      state.extrinsics[cam].stereoRms
-
-    Returns:
-      {"health": float, "method": "initial", "details": {...}}
+    @param state_dict Dictionary containing calibration state with intrinsics and extrinsics
+    @param r_best Best reprojection error threshold (default: R_BEST)
+    @param r_worst Worst reprojection error threshold (default: R_WORST)
+    @param s_best Best stereo RMS threshold (default: S_BEST)
+    @param s_worst Worst stereo RMS threshold (default: S_WORST)
+    @return Dictionary with health score, method name, and detailed metrics
     """
     st = state_dict.get("state", state_dict)
     intr = st.get("intrinsics", {}) or {}
@@ -130,7 +155,12 @@ def compute_initial_health_from_state(
 
 
 def parse_lifcal_protocol(protocol_path: str) -> Dict[str, Optional[float]]:
-    """Parse LiFCal calibration protocol text file for error metrics."""
+    """
+    @brief Parse LiFCal calibration protocol text file for error metrics.
+    
+    @param protocol_path Path to the calibration protocol text file
+    @return Dictionary with x_std, y_std, x_mae, y_mae values or None if not found
+    """
     txt = open(protocol_path, "r", encoding="utf-8", errors="ignore").read()
 
     def find_float(pattern: str) -> Optional[float]:
@@ -157,7 +187,19 @@ def compute_lifcal_health_from_xy(
     s_best: float = S_BEST,
     s_worst: float = S_WORST,
 ) -> Dict[str, Any]:
-    """Compute LiFCal health score from x/y standard deviation and MAE values."""
+    """
+    @brief Compute LiFCal health score from x/y standard deviation and MAE values.
+    
+    @param x_std Standard deviation in x direction
+    @param y_std Standard deviation in y direction
+    @param x_mae Mean absolute error in x direction
+    @param y_mae Mean absolute error in y direction
+    @param r_best Best reprojection error threshold (default: R_BEST)
+    @param r_worst Worst reprojection error threshold (default: R_WORST)
+    @param s_best Best stereo RMS threshold (default: S_BEST)
+    @param s_worst Worst stereo RMS threshold (default: S_WORST)
+    @return Dictionary with health score, method name, and detailed metrics
+    """
     std_norm = (x_std * x_std + y_std * y_std) ** 0.5
     mae_norm = (x_mae * x_mae + y_mae * y_mae) ** 0.5
 
@@ -185,13 +227,10 @@ def compute_lifcal_health_from_xy(
 
 def compute_lifcal_health_from_combined_dict(combined: Dict[str, Any]) -> Dict[str, Any]:
     """
-    Compute LiFCal health from combined.json structure.
+    @brief Compute LiFCal health from combined.json structure.
 
-    Structure:
-      combined["state"]["parameters"][cam]["reprojection"]["x_std" ... "y_mae"]
-
-    Returns:
-      {"health": float, "method": "lifcal", "perCam": {...}}
+    @param combined Dictionary from combined.json with parameters for all cameras
+    @return Dictionary with global health score, method name, and per-camera metrics
     """
     params_all = combined.get("state", {}).get("parameters", {})
     if not isinstance(params_all, dict) or len(params_all) == 0:
@@ -241,7 +280,12 @@ def compute_lifcal_health_from_combined_dict(combined: Dict[str, Any]) -> Dict[s
 
 
 def compute_lifcal_health_from_combined_path(combined_json_path: str) -> Dict[str, Any]:
-    """Load combined.json from file and compute LiFCal health."""
+    """
+    @brief Load combined.json from file and compute LiFCal health.
+    
+    @param combined_json_path Path to the combined.json file
+    @return Dictionary with global health score, method name, and per-camera metrics
+    """
     with open(combined_json_path, "r", encoding="utf-8") as f:
         combined = json.load(f)
     return compute_lifcal_health_from_combined_dict(combined)

@@ -3,8 +3,17 @@ import cv2
 import numpy as np
 from typing import Optional, Dict
 
+"""
+@brief Depth map generation for LiFCal calibration using stereo matching and fusion.
+
+"""
 
 def build_matchers():
+    """
+    @brief Build stereo matchers with SGBM and optional Weighted Least Squares (WLS) filtering.
+    
+    @return Tuple (left_matcher, right_matcher, wls_filter)
+    """
     left_matcher = cv2.StereoSGBM_create(
         minDisparity=0,
         numDisparities=128,  # must be divisible by 16
@@ -39,7 +48,13 @@ _LEFT_MATCHER, _RIGHT_MATCHER, _WLS = build_matchers()
 
 
 def imwrite_u16(path: str, img_u16: np.ndarray) -> bool:
-    """Write uint16 png, create dirs automatically."""
+    """
+    @brief Write uint16 png, create dirs automatically.
+    
+    @param path Output file path
+    @param img_u16 Image array in uint16 format
+    @return True if write succeeded, False otherwise
+    """
     os.makedirs(os.path.dirname(path), exist_ok=True)
     if img_u16.dtype != np.uint16:
         img_u16 = img_u16.astype(np.uint16)
@@ -48,7 +63,11 @@ def imwrite_u16(path: str, img_u16: np.ndarray) -> bool:
 
 def disparity(left_gray: np.ndarray, right_gray: np.ndarray) -> np.ndarray:
     """
-    Returns disparity as float32 with NaNs for invalid (<=0).
+    @brief Compute stereo disparity map with optional WLS filtering.
+    
+    @param left_gray Left grayscale image
+    @param right_gray Right grayscale image
+    @return Float32 disparity map with NaNs for invalid pixels (<=0)
     """
     dl = _LEFT_MATCHER.compute(left_gray, right_gray)  # int16 scaled by 16
 
@@ -65,7 +84,10 @@ def disparity(left_gray: np.ndarray, right_gray: np.ndarray) -> np.ndarray:
 
 def to_u16_from_disp(disp: np.ndarray) -> np.ndarray:
     """
-    Disp -> uint16 scaling robust via percentile.
+    @brief Convert disparity to uint16 depth map to be compatible with LiFCal.
+    
+    @param disp Float32 disparity map
+    @return Uint16 depth map
     """
     disp = np.nan_to_num(disp, nan=0.0, posinf=0.0, neginf=0.0)
 
@@ -80,8 +102,10 @@ def to_u16_from_disp(disp: np.ndarray) -> np.ndarray:
 
 def fuse_disparities_median(disp_list: list) -> np.ndarray:
     """
-    Fuses disparities robustly without 'All-NaN slice' warnings.
-    Returns float32 disparity with 0 where nothing is valid.
+    @brief Fuse multiple disparity maps robustly using median.
+    
+    @param disp_list List of float32 disparity maps to fuse
+    @return Float32 fused disparity map with 0 where no valid data exists
     """
     stack = np.stack(disp_list, axis=0)  # (K,H,W)
 
@@ -102,8 +126,10 @@ def fuse_disparities_median(disp_list: list) -> np.ndarray:
 
 def generate_depthmaps_for_pose(cam_to_focus_path: Dict[str, str]) -> Dict[str, np.ndarray]:
     """
-    cam_to_focus_path: {"Center": "/.../pose000_Center.png", "Up1": "...", ...}
-    returns: {"Center": depth_u16, "Up1": depth_u16, ...}
+    @brief Generate depth maps for all cameras in a multi-camera pose.
+    
+    @param cam_to_focus_path Dictionary mapping camera IDs to image file paths
+    @return Dictionary mapping camera IDs to uint16 depth maps
     """
 
     # 1) Load images

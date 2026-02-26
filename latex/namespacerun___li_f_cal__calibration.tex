@@ -1,0 +1,536 @@
+\doxysection{run\+\_\+\+Li\+FCal\+\_\+calibration Namespace Reference}
+\hypertarget{namespacerun___li_f_cal__calibration}{}\label{namespacerun___li_f_cal__calibration}\index{run\_LiFCal\_calibration@{run\_LiFCal\_calibration}}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+str \mbox{\hyperlink{namespacerun___li_f_cal__calibration_a6d124db2a4d2f2457fa1129369a2f9f8}{read\+\_\+text}} (str path)
+\item 
+None \mbox{\hyperlink{namespacerun___li_f_cal__calibration_a6d7995ecbf1d0d763cd16ae0de4c86ac}{write\+\_\+text}} (str path, str s)
+\item 
+str \mbox{\hyperlink{namespacerun___li_f_cal__calibration_a4672c6508e86211045777cc2939e74a0}{replace\+\_\+yaml\+\_\+key\+\_\+line}} (str text, str key, str new\+\_\+val)
+\item 
+str \mbox{\hyperlink{namespacerun___li_f_cal__calibration_af45d94b0f58ed1e665453d0027d997b1}{patch\+\_\+settings\+\_\+yaml}} (str template\+\_\+text, str focus\+\_\+dir, str depth\+\_\+dir, str mla\+\_\+xml)
+\item 
+int \mbox{\hyperlink{namespacerun___li_f_cal__calibration_a90bc8c88d2526408fa680240a2009269}{run\+\_\+lifcal\+\_\+recalib}} (str settings\+\_\+path, str fixed\+\_\+params\+\_\+path, str store\+\_\+dir)
+\item 
+str \mbox{\hyperlink{namespacerun___li_f_cal__calibration_ab157f06b04b573f9e75af1b332dd3c87}{find\+\_\+results\+\_\+folder}} (str store\+\_\+dir)
+\item 
+None \mbox{\hyperlink{namespacerun___li_f_cal__calibration_ab4dcca20f4468407097cbcaffb1c2b68}{copy\+\_\+essentials}} (str result\+\_\+dir, str out\+\_\+cam\+\_\+dir)
+\item 
+\mbox{\hyperlink{namespacerun___li_f_cal__calibration_a5f6e9e748bbcc6327bc0af91452ccb91}{main}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+str \mbox{\hyperlink{namespacerun___li_f_cal__calibration_a0b24a7f7155ec9f71a329e94d081cf6f}{LIFCAL\+\_\+\+BIN}} = "{}/data/external/Li\+FCal/build/bin/Li\+FCal"{}
+\item 
+str \mbox{\hyperlink{namespacerun___li_f_cal__calibration_a91e52ec8b942d1ac25f152884d423c4a}{SETTINGS}} = "{}/data/external/Li\+FCal/Li\+FCal\+\_\+\+Data/Recalibration/Settings.\+yaml"{}
+\item 
+str \mbox{\hyperlink{namespacerun___li_f_cal__calibration_a05be5c96814bd26d5de1ea1ce2bd4f2b}{FIXED\+\_\+\+PARAMS}} = "{}/data/external/Li\+FCal/Li\+FCal\+\_\+\+Data/Recalibration/Fixed\+\_\+\+Paramerters.\+txt"{}
+\item 
+str \mbox{\hyperlink{namespacerun___li_f_cal__calibration_aca3ead8cb393ce360243734eb1a9e78b}{MLA\+\_\+\+CALIB\+\_\+\+XML}} = "{}/data/external/Li\+FCal/Li\+FCal\+\_\+\+Data/Recalibration/MLA\+\_\+\+Calibration.\+xml"{}
+\item 
+str \mbox{\hyperlink{namespacerun___li_f_cal__calibration_a9a5c2e8a9babebb5ed0491685428004e}{ROOT\+\_\+\+IMAGESET}} = "{}/data/external/Li\+FCal/Li\+FCal\+\_\+\+Data/Recalibration/Li\+FCal\+\_\+\+Imageset"{}
+\item 
+\mbox{\hyperlink{namespacerun___li_f_cal__calibration_a2ed849dd1ea9baff8aeb0ac768bb8624}{FOCUS\+\_\+\+ROOT}} = os.\+path.\+join(\mbox{\hyperlink{namespacerun___li_f_cal__calibration_a9a5c2e8a9babebb5ed0491685428004e}{ROOT\+\_\+\+IMAGESET}}, "{}focus"{})
+\item 
+\mbox{\hyperlink{namespacerun___li_f_cal__calibration_a135e0d9366892c2142d49b13582e675b}{DEPTH\+\_\+\+ROOT}} = os.\+path.\+join(\mbox{\hyperlink{namespacerun___li_f_cal__calibration_a9a5c2e8a9babebb5ed0491685428004e}{ROOT\+\_\+\+IMAGESET}}, "{}depth"{})
+\item 
+str \mbox{\hyperlink{namespacerun___li_f_cal__calibration_ae6c139579f30df07d55ff678e6a460d7}{OUT\+\_\+\+ROOT}} = "{}/data/external/Li\+FCal/Li\+FCal\+\_\+\+Data/Recalibration/Calibration\+By\+Camera"{}
+\item 
+list \mbox{\hyperlink{namespacerun___li_f_cal__calibration_ad7a9b5189525830b9ce579eced873fad}{CAMERA\+\_\+\+IDS}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{namespacerun___li_f_cal__calibration_ab4dcca20f4468407097cbcaffb1c2b68}\index{run\_LiFCal\_calibration@{run\_LiFCal\_calibration}!copy\_essentials@{copy\_essentials}}
+\index{copy\_essentials@{copy\_essentials}!run\_LiFCal\_calibration@{run\_LiFCal\_calibration}}
+\doxysubsubsection{\texorpdfstring{copy\_essentials()}{copy\_essentials()}}
+{\footnotesize\ttfamily \label{namespacerun___li_f_cal__calibration_ab4dcca20f4468407097cbcaffb1c2b68} 
+ None run\+\_\+\+Li\+FCal\+\_\+calibration.\+copy\+\_\+essentials (\begin{DoxyParamCaption}\item[{str}]{result\+\_\+dir}{, }\item[{str}]{out\+\_\+cam\+\_\+dir}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Copy calibrationProtocol.txt and extrinsicOrientations.xml to output directory.
+
+@param result_dir Source directory containing LiFCal results
+@param out_cam_dir Destination directory for essential files
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{run___li_f_cal__calibration_8py_source_l00137}{137}} of file \mbox{\hyperlink{run___li_f_cal__calibration_8py_source}{run\+\_\+\+Li\+FCal\+\_\+calibration.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00137\ \textcolor{keyword}{def\ }copy\_essentials(result\_dir:\ str,\ out\_cam\_dir:\ str)\ -\/>\ \textcolor{keywordtype}{None}: }
+\DoxyCodeLine{00138\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{} }}
+\DoxyCodeLine{00139\ \textcolor{stringliteral}{\ \ \ \ @brief\ Copy\ calibrationProtocol.txt\ and\ extrinsicOrientations.xml\ to\ output\ directory. }}
+\DoxyCodeLine{00140\ \textcolor{stringliteral}{\ \ \ \  }}
+\DoxyCodeLine{00141\ \textcolor{stringliteral}{\ \ \ \ @param\ result\_dir\ Source\ directory\ containing\ LiFCal\ results }}
+\DoxyCodeLine{00142\ \textcolor{stringliteral}{\ \ \ \ @param\ out\_cam\_dir\ Destination\ directory\ for\ essential\ files }}
+\DoxyCodeLine{00143\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00144\ \ \ \ \ proto\ =\ os.path.join(result\_dir,\ \textcolor{stringliteral}{"{}calibrationProtocol.txt"{}}) }
+\DoxyCodeLine{00145\ \ \ \ \ extr\ =\ os.path.join(result\_dir,\ \textcolor{stringliteral}{"{}extrinsicOrientations.xml"{}}) }
+\DoxyCodeLine{00146\  }
+\DoxyCodeLine{00147\ \ \ \ \ missing\ =\ [] }
+\DoxyCodeLine{00148\ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ os.path.isfile(proto): }
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ missing.append(\textcolor{stringliteral}{"{}calibrationProtocol.txt"{}}) }
+\DoxyCodeLine{00150\ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ os.path.isfile(extr): }
+\DoxyCodeLine{00151\ \ \ \ \ \ \ \ \ missing.append(\textcolor{stringliteral}{"{}extrinsicOrientations.xml"{}}) }
+\DoxyCodeLine{00152\ \ \ \ \ \textcolor{keywordflow}{if}\ missing: }
+\DoxyCodeLine{00153\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{raise}\ RuntimeError(f\textcolor{stringliteral}{"{}Missing\ files\ in\ \{result\_dir\}:\ \{missing\}"{}}) }
+\DoxyCodeLine{00154\  }
+\DoxyCodeLine{00155\ \ \ \ \ shutil.copy2(proto,\ os.path.join(out\_cam\_dir,\ \textcolor{stringliteral}{"{}calibrationProtocol.txt"{}})) }
+\DoxyCodeLine{00156\ \ \ \ \ shutil.copy2(extr,\ os.path.join(out\_cam\_dir,\ \textcolor{stringliteral}{"{}extrinsicOrientations.xml"{}})) }
+\DoxyCodeLine{00157\  }
+\DoxyCodeLine{00158\  }
+
+\end{DoxyCode}
+\Hypertarget{namespacerun___li_f_cal__calibration_ab157f06b04b573f9e75af1b332dd3c87}\index{run\_LiFCal\_calibration@{run\_LiFCal\_calibration}!find\_results\_folder@{find\_results\_folder}}
+\index{find\_results\_folder@{find\_results\_folder}!run\_LiFCal\_calibration@{run\_LiFCal\_calibration}}
+\doxysubsubsection{\texorpdfstring{find\_results\_folder()}{find\_results\_folder()}}
+{\footnotesize\ttfamily \label{namespacerun___li_f_cal__calibration_ab157f06b04b573f9e75af1b332dd3c87} 
+ str run\+\_\+\+Li\+FCal\+\_\+calibration.\+find\+\_\+results\+\_\+folder (\begin{DoxyParamCaption}\item[{str}]{store\+\_\+dir}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Find LiFCal results folder.
+
+@param store_dir LiFCal output directory
+@return Path to results folder (typically Calibration_Results_... subdirectory)
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{run___li_f_cal__calibration_8py_source_l00114}{114}} of file \mbox{\hyperlink{run___li_f_cal__calibration_8py_source}{run\+\_\+\+Li\+FCal\+\_\+calibration.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00114\ \textcolor{keyword}{def\ }find\_results\_folder(store\_dir:\ str)\ -\/>\ str: }
+\DoxyCodeLine{00115\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{} }}
+\DoxyCodeLine{00116\ \textcolor{stringliteral}{\ \ \ \ @brief\ Find\ LiFCal\ results\ folder. }}
+\DoxyCodeLine{00117\ \textcolor{stringliteral}{\ \ \ \  }}
+\DoxyCodeLine{00118\ \textcolor{stringliteral}{\ \ \ \ @param\ store\_dir\ LiFCal\ output\ directory }}
+\DoxyCodeLine{00119\ \textcolor{stringliteral}{\ \ \ \ @return\ Path\ to\ results\ folder\ (typically\ Calibration\_Results\_...\ subdirectory) }}
+\DoxyCodeLine{00120\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00121\ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ os.path.isdir(store\_dir): }
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{raise}\ RuntimeError(f\textcolor{stringliteral}{"{}store\_dir\ does\ not\ exist:\ \{store\_dir\}"{}}) }
+\DoxyCodeLine{00123\  }
+\DoxyCodeLine{00124\ \ \ \ \ subdirs\ =\ [] }
+\DoxyCodeLine{00125\ \ \ \ \ \textcolor{keywordflow}{for}\ name\ \textcolor{keywordflow}{in}\ os.listdir(store\_dir): }
+\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ p\ =\ os.path.join(store\_dir,\ name) }
+\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ os.path.isdir(p): }
+\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ \ \ \ \ subdirs.append(p) }
+\DoxyCodeLine{00129\  }
+\DoxyCodeLine{00130\ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ subdirs: }
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ store\_dir }
+\DoxyCodeLine{00132\  }
+\DoxyCodeLine{00133\ \ \ \ \ subdirs.sort(key=\textcolor{keyword}{lambda}\ p:\ os.path.getmtime(p)) }
+\DoxyCodeLine{00134\ \ \ \ \ \textcolor{keywordflow}{return}\ subdirs[-\/1] }
+\DoxyCodeLine{00135\  }
+\DoxyCodeLine{00136\  }
+
+\end{DoxyCode}
+\Hypertarget{namespacerun___li_f_cal__calibration_a5f6e9e748bbcc6327bc0af91452ccb91}\index{run\_LiFCal\_calibration@{run\_LiFCal\_calibration}!main@{main}}
+\index{main@{main}!run\_LiFCal\_calibration@{run\_LiFCal\_calibration}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily \label{namespacerun___li_f_cal__calibration_a5f6e9e748bbcc6327bc0af91452ccb91} 
+run\+\_\+\+Li\+FCal\+\_\+calibration.\+main (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Main pipeline: run LiFCal for each camera, export JSON, and log health.
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{run___li_f_cal__calibration_8py_source_l00159}{159}} of file \mbox{\hyperlink{run___li_f_cal__calibration_8py_source}{run\+\_\+\+Li\+FCal\+\_\+calibration.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00159\ \textcolor{keyword}{def\ }main(): }
+\DoxyCodeLine{00160\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{} }}
+\DoxyCodeLine{00161\ \textcolor{stringliteral}{\ \ \ \ @brief\ Main\ pipeline:\ run\ LiFCal\ for\ each\ camera,\ export\ JSON,\ and\ log\ health. }}
+\DoxyCodeLine{00162\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00163\ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ os.path.isfile(LIFCAL\_BIN): }
+\DoxyCodeLine{00164\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{raise}\ SystemExit(f\textcolor{stringliteral}{"{}LiFCal\ binary\ not\ found:\ \{LIFCAL\_BIN\}"{}}) }
+\DoxyCodeLine{00165\ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ os.path.isfile(SETTINGS): }
+\DoxyCodeLine{00166\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{raise}\ SystemExit(f\textcolor{stringliteral}{"{}Settings\ template\ not\ found:\ \{SETTINGS\}"{}}) }
+\DoxyCodeLine{00167\ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ os.path.isfile(FIXED\_PARAMS): }
+\DoxyCodeLine{00168\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{raise}\ SystemExit(f\textcolor{stringliteral}{"{}Fixed\ parameters\ file\ not\ found:\ \{FIXED\_PARAMS\}"{}}) }
+\DoxyCodeLine{00169\ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ os.path.isfile(MLA\_CALIB\_XML): }
+\DoxyCodeLine{00170\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{raise}\ SystemExit(f\textcolor{stringliteral}{"{}MLA\_Calibration.xml\ not\ found:\ \{MLA\_CALIB\_XML\}"{}}) }
+\DoxyCodeLine{00171\  }
+\DoxyCodeLine{00172\ \ \ \ \ templ\ =\ read\_text(SETTINGS) }
+\DoxyCodeLine{00173\  }
+\DoxyCodeLine{00174\ \ \ \ \ timestamp\ =\ datetime.now().strftime(\textcolor{stringliteral}{"{}\%Y\_\%m\_\%d\_\%H\%M\%S"{}}) }
+\DoxyCodeLine{00175\ \ \ \ \ session\_out\ =\ os.path.join(OUT\_ROOT,\ f\textcolor{stringliteral}{"{}run\_\{timestamp\}"{}}) }
+\DoxyCodeLine{00176\ \ \ \ \ os.makedirs(session\_out,\ exist\_ok=\textcolor{keyword}{True}) }
+\DoxyCodeLine{00177\  }
+\DoxyCodeLine{00178\ \ \ \ \ print(\textcolor{stringliteral}{"{}Output:"{}},\ session\_out) }
+\DoxyCodeLine{00179\ \ \ \ \  }
+\DoxyCodeLine{00180\ \ \ \ \ \textcolor{keywordflow}{for}\ cam\ \textcolor{keywordflow}{in}\ CAMERA\_IDS: }
+\DoxyCodeLine{00181\ \ \ \ \ \ \ \ \ focus\_dir\ =\ os.path.join(FOCUS\_ROOT,\ cam) }
+\DoxyCodeLine{00182\ \ \ \ \ \ \ \ \ depth\_dir\ =\ os.path.join(DEPTH\_ROOT,\ cam) }
+\DoxyCodeLine{00183\  }
+\DoxyCodeLine{00184\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ os.path.isdir(focus\_dir): }
+\DoxyCodeLine{00185\ \ \ \ \ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}[SKIP]\ \{cam\}:\ focus\ dir\ missing:\ \{focus\_dir\}"{}}) }
+\DoxyCodeLine{00186\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue} }
+\DoxyCodeLine{00187\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ os.path.isdir(depth\_dir): }
+\DoxyCodeLine{00188\ \ \ \ \ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}[SKIP]\ \{cam\}:\ depth\ dir\ missing:\ \{depth\_dir\}"{}}) }
+\DoxyCodeLine{00189\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue} }
+\DoxyCodeLine{00190\  }
+\DoxyCodeLine{00191\ \ \ \ \ \ \ \ \ cam\_out\ =\ os.path.join(session\_out,\ cam) }
+\DoxyCodeLine{00192\ \ \ \ \ \ \ \ \ os.makedirs(cam\_out,\ exist\_ok=\textcolor{keyword}{True}) }
+\DoxyCodeLine{00193\  }
+\DoxyCodeLine{00194\ \ \ \ \ \ \ \ \ settings\_cam\ =\ os.path.join(cam\_out,\ \textcolor{stringliteral}{"{}Settings.yaml"{}}) }
+\DoxyCodeLine{00195\ \ \ \ \ \ \ \ \ patched\ =\ patch\_settings\_yaml(templ,\ focus\_dir,\ depth\_dir,\ MLA\_CALIB\_XML) }
+\DoxyCodeLine{00196\ \ \ \ \ \ \ \ \ write\_text(settings\_cam,\ patched) }
+\DoxyCodeLine{00197\  }
+\DoxyCodeLine{00198\ \ \ \ \ \ \ \ \ store\_dir\ =\ os.path.join(cam\_out,\ \textcolor{stringliteral}{"{}lifcal\_store"{}}) }
+\DoxyCodeLine{00199\ \ \ \ \ \ \ \ \ rc\ =\ run\_lifcal\_recalib(settings\_cam,\ FIXED\_PARAMS,\ store\_dir) }
+\DoxyCodeLine{00200\  }
+\DoxyCodeLine{00201\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ rc\ !=\ 0: }
+\DoxyCodeLine{00202\ \ \ \ \ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}[FAIL]\ \{cam\}:\ LiFCal\ returncode=\{rc\}\ (siehe\ \{store\_dir\}/lifcal\_stdout.log)"{}}) }
+\DoxyCodeLine{00203\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue} }
+\DoxyCodeLine{00204\  }
+\DoxyCodeLine{00205\ \ \ \ \ \ \ \ \ result\_dir\ =\ find\_results\_folder(store\_dir) }
+\DoxyCodeLine{00206\  }
+\DoxyCodeLine{00207\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}: }
+\DoxyCodeLine{00208\ \ \ \ \ \ \ \ \ \ \ \ \ copy\_essentials(result\_dir,\ cam\_out)\ \ \ \textcolor{comment}{\#\ ???iert\ protocol\ +\ xml\ nach\ cam\_out }}
+\DoxyCodeLine{00209\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{except}\ Exception\ \textcolor{keyword}{as}\ e: }
+\DoxyCodeLine{00210\ \ \ \ \ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}[FAIL]\ \{cam\}:\ \{e\}"{}}) }
+\DoxyCodeLine{00211\ \ \ \ \ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}\ \ \ \ \ \ \ \ check\ log:\ \{store\_dir\}/lifcal\_stdout.log"{}}) }
+\DoxyCodeLine{00212\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue} }
+\DoxyCodeLine{00213\  }
+\DoxyCodeLine{00214\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ store\ dir\ wegräumen }}
+\DoxyCodeLine{00215\ \ \ \ \ \ \ \ \ shutil.rmtree(store\_dir,\ ignore\_errors=\textcolor{keyword}{True}) }
+\DoxyCodeLine{00216\  }
+\DoxyCodeLine{00217\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ ?\ JSON\ EXPORT:\ result\_dir\ muss\ cam\_out\ sein,\ weil\ DA\ liegen\ jetzt\ die\ 2\ Dateien }}
+\DoxyCodeLine{00218\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}: }
+\DoxyCodeLine{00219\ \ \ \ \ \ \ \ \ \ \ \ \ json\_path\ =\ \mbox{\hyperlink{namespacelifcal__to__json_a998de3d267c4bbc1ce7432ff29917a1e}{lifcal\_to\_json.export\_lifcal\_parameters\_json\_in\_place}}( }
+\DoxyCodeLine{00220\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ result\_dir=cam\_out, }
+\DoxyCodeLine{00221\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cam\_id=cam, }
+\DoxyCodeLine{00222\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ image\_dir=\textcolor{stringliteral}{"{}LiFCal\_Imageset"{}}, }
+\DoxyCodeLine{00223\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ run\_type=\textcolor{stringliteral}{"{}recalib"{}}, }
+\DoxyCodeLine{00224\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pixel\_size\_mm=0.0055, }
+\DoxyCodeLine{00225\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fallback\_cx=640.0,\ \ \textcolor{comment}{\#\ compatibility\ only }}
+\DoxyCodeLine{00226\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fallback\_cy=360.0,\ \ \textcolor{comment}{\#\ compatibility\ only }}
+\DoxyCodeLine{00227\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ out\_name=\textcolor{stringliteral}{"{}parameters.json"{}} }
+\DoxyCodeLine{00228\ \ \ \ \ \ \ \ \ \ \ \ \ ) }
+\DoxyCodeLine{00229\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{except}\ Exception\ \textcolor{keyword}{as}\ e: }
+\DoxyCodeLine{00230\ \ \ \ \ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}[WARN]\ \{cam\}:\ JSON\ export\ failed:\ \{e\}"{}}) }
+\DoxyCodeLine{00231\  }
+\DoxyCodeLine{00232\ \ \ \ \ \textcolor{comment}{\#\ Build\ combined\ JSON\ from\ all\ cameras }}
+\DoxyCodeLine{00233\ \ \ \ \ \textcolor{keywordflow}{try}: }
+\DoxyCodeLine{00234\ \ \ \ \ \ \ \ \ combined\_path\ =\ \mbox{\hyperlink{namespacelifcal__to__json_ae5a187a34ee3685f049d0d1afb34029d}{lifcal\_to\_json.build\_combined\_parameters\_json}}( }
+\DoxyCodeLine{00235\ \ \ \ \ \ \ \ \ \ \ \ \ run\_root=session\_out, }
+\DoxyCodeLine{00236\ \ \ \ \ \ \ \ \ \ \ \ \ camera\_ids=CAMERA\_IDS, }
+\DoxyCodeLine{00237\ \ \ \ \ \ \ \ \ \ \ \ \ out\_name=\textcolor{stringliteral}{"{}combined.json"{}} }
+\DoxyCodeLine{00238\ \ \ \ \ \ \ \ \ ) }
+\DoxyCodeLine{00239\ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}[OK]\ COMBINED:"{}},\ combined\_path) }
+\DoxyCodeLine{00240\ \ \ \ \ \textcolor{keywordflow}{except}\ Exception\ \textcolor{keyword}{as}\ e: }
+\DoxyCodeLine{00241\ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}[WARN]\ combined.json\ not\ created:"{}},\ e) }
+\DoxyCodeLine{00242\ \ \ \ \  }
+\DoxyCodeLine{00243\ \ \ \ \ \textcolor{comment}{\#\ Log\ health\ score\ and\ update\ baseline }}
+\DoxyCodeLine{00244\ \ \ \ \ \textcolor{keywordflow}{try}: }
+\DoxyCodeLine{00245\ \ \ \ \ \ \ \ \ \textcolor{keyword}{import}\ sys }
+\DoxyCodeLine{00246\ \ \ \ \ \ \ \ \ CALIB\_ROOT\ =\ \textcolor{stringliteral}{"{}/data/calibrationLFC"{}} }
+\DoxyCodeLine{00247\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ CALIB\_ROOT\ \textcolor{keywordflow}{not}\ \textcolor{keywordflow}{in}\ sys.path: }
+\DoxyCodeLine{00248\ \ \ \ \ \ \ \ \ \ \ \ \ sys.path.insert(0,\ CALIB\_ROOT) }
+\DoxyCodeLine{00249\  }
+\DoxyCodeLine{00250\ \ \ \ \ \ \ \ \ \textcolor{keyword}{from}\ ResultLogger\ \textcolor{keyword}{import}\ ResultLogger }
+\DoxyCodeLine{00251\ \ \ \ \ \ \ \ \ logger\ =\ \mbox{\hyperlink{namespace_result_logger}{ResultLogger}}(baseDir=\textcolor{stringliteral}{"{}/data/baseline"{}}) }
+\DoxyCodeLine{00252\ \ \ \ \ \ \ \ \ score\ =\ logger.logRecalibration( }
+\DoxyCodeLine{00253\ \ \ \ \ \ \ \ \ \ \ \ \ combined\_json\_path=combined\_path, }
+\DoxyCodeLine{00254\ \ \ \ \ \ \ \ \ \ \ \ \ meta=\{ }
+\DoxyCodeLine{00255\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}runType"{}}:\ \textcolor{stringliteral}{"{}recalib"{}}, }
+\DoxyCodeLine{00256\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}imageDir"{}}:\ \textcolor{stringliteral}{"{}LiFCal\_Imageset"{}}, }
+\DoxyCodeLine{00257\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}bundleAdjust"{}}:\ \textcolor{keyword}{True} }
+\DoxyCodeLine{00258\ \ \ \ \ \ \ \ \ \ \ \ \ \} }
+\DoxyCodeLine{00259\ \ \ \ \ \ \ \ \ ) }
+\DoxyCodeLine{00260\ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}[OK]\ HealthScore\ (lifcal)\ =\ \{score:.2f\}"{}}) }
+\DoxyCodeLine{00261\ \ \ \ \ \textcolor{keywordflow}{except}\ Exception\ \textcolor{keyword}{as}\ e: }
+\DoxyCodeLine{00262\ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}[WARN]\ LiFCal\ logging/health\ failed:"{}},\ e) }
+\DoxyCodeLine{00263\  }
+\DoxyCodeLine{00264\  }
+
+\end{DoxyCode}
+\Hypertarget{namespacerun___li_f_cal__calibration_af45d94b0f58ed1e665453d0027d997b1}\index{run\_LiFCal\_calibration@{run\_LiFCal\_calibration}!patch\_settings\_yaml@{patch\_settings\_yaml}}
+\index{patch\_settings\_yaml@{patch\_settings\_yaml}!run\_LiFCal\_calibration@{run\_LiFCal\_calibration}}
+\doxysubsubsection{\texorpdfstring{patch\_settings\_yaml()}{patch\_settings\_yaml()}}
+{\footnotesize\ttfamily \label{namespacerun___li_f_cal__calibration_af45d94b0f58ed1e665453d0027d997b1} 
+ str run\+\_\+\+Li\+FCal\+\_\+calibration.\+patch\+\_\+settings\+\_\+yaml (\begin{DoxyParamCaption}\item[{str}]{template\+\_\+text}{, }\item[{str}]{focus\+\_\+dir}{, }\item[{str}]{depth\+\_\+dir}{, }\item[{str}]{mla\+\_\+xml}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Update YAML settings with camera-specific paths.
+
+@param template_text Original YAML template content
+@param focus_dir Path to focus images directory
+@param depth_dir Path to depth maps directory
+@param mla_xml Path to MLA calibration XML file
+@return Modified YAML text with updated paths
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{run___li_f_cal__calibration_8py_source_l00069}{69}} of file \mbox{\hyperlink{run___li_f_cal__calibration_8py_source}{run\+\_\+\+Li\+FCal\+\_\+calibration.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00069\ \textcolor{keyword}{def\ }patch\_settings\_yaml(template\_text:\ str,\ focus\_dir:\ str,\ depth\_dir:\ str,\ mla\_xml:\ str)\ -\/>\ str: }
+\DoxyCodeLine{00070\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{} }}
+\DoxyCodeLine{00071\ \textcolor{stringliteral}{\ \ \ \ @brief\ Update\ YAML\ settings\ with\ camera-\/specific\ paths. }}
+\DoxyCodeLine{00072\ \textcolor{stringliteral}{\ \ \ \  }}
+\DoxyCodeLine{00073\ \textcolor{stringliteral}{\ \ \ \ @param\ template\_text\ Original\ YAML\ template\ content }}
+\DoxyCodeLine{00074\ \textcolor{stringliteral}{\ \ \ \ @param\ focus\_dir\ Path\ to\ focus\ images\ directory }}
+\DoxyCodeLine{00075\ \textcolor{stringliteral}{\ \ \ \ @param\ depth\_dir\ Path\ to\ depth\ maps\ directory }}
+\DoxyCodeLine{00076\ \textcolor{stringliteral}{\ \ \ \ @param\ mla\_xml\ Path\ to\ MLA\ calibration\ XML\ file }}
+\DoxyCodeLine{00077\ \textcolor{stringliteral}{\ \ \ \ @return\ Modified\ YAML\ text\ with\ updated\ paths }}
+\DoxyCodeLine{00078\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00079\ \ \ \ \ out\ =\ template\_text }
+\DoxyCodeLine{00080\ \ \ \ \ out\ =\ replace\_yaml\_key\_line(out,\ \textcolor{stringliteral}{"{}Path.totalFocusImages"{}},\ focus\_dir) }
+\DoxyCodeLine{00081\ \ \ \ \ out\ =\ replace\_yaml\_key\_line(out,\ \textcolor{stringliteral}{"{}Path.virtualDepthData"{}},\ depth\_dir) }
+\DoxyCodeLine{00082\ \ \ \ \ out\ =\ replace\_yaml\_key\_line(out,\ \textcolor{stringliteral}{"{}Path.microLensCalibration"{}},\ mla\_xml) }
+\DoxyCodeLine{00083\ \ \ \ \ \textcolor{keywordflow}{return}\ out }
+\DoxyCodeLine{00084\  }
+\DoxyCodeLine{00085\  }
+
+\end{DoxyCode}
+\Hypertarget{namespacerun___li_f_cal__calibration_a6d124db2a4d2f2457fa1129369a2f9f8}\index{run\_LiFCal\_calibration@{run\_LiFCal\_calibration}!read\_text@{read\_text}}
+\index{read\_text@{read\_text}!run\_LiFCal\_calibration@{run\_LiFCal\_calibration}}
+\doxysubsubsection{\texorpdfstring{read\_text()}{read\_text()}}
+{\footnotesize\ttfamily \label{namespacerun___li_f_cal__calibration_a6d124db2a4d2f2457fa1129369a2f9f8} 
+ str run\+\_\+\+Li\+FCal\+\_\+calibration.\+read\+\_\+text (\begin{DoxyParamCaption}\item[{str}]{path}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Read text file with UTF-8 encoding.
+
+@param path Path to the text file
+@return File content as string
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{run___li_f_cal__calibration_8py_source_l00033}{33}} of file \mbox{\hyperlink{run___li_f_cal__calibration_8py_source}{run\+\_\+\+Li\+FCal\+\_\+calibration.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00033\ \textcolor{keyword}{def\ }read\_text(path:\ str)\ -\/>\ str: }
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{} }}
+\DoxyCodeLine{00035\ \textcolor{stringliteral}{\ \ \ \ @brief\ Read\ text\ file\ with\ UTF-\/8\ encoding. }}
+\DoxyCodeLine{00036\ \textcolor{stringliteral}{\ \ \ \  }}
+\DoxyCodeLine{00037\ \textcolor{stringliteral}{\ \ \ \ @param\ path\ Path\ to\ the\ text\ file }}
+\DoxyCodeLine{00038\ \textcolor{stringliteral}{\ \ \ \ @return\ File\ content\ as\ string }}
+\DoxyCodeLine{00039\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keyword}{with}\ open(path,\ \textcolor{stringliteral}{"{}r"{}},\ encoding=\textcolor{stringliteral}{"{}utf-\/8"{}},\ errors=\textcolor{stringliteral}{"{}replace"{}})\ \textcolor{keyword}{as}\ f: }
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ f.read() }
+\DoxyCodeLine{00042\  }
+\DoxyCodeLine{00043\  }
+
+\end{DoxyCode}
+\Hypertarget{namespacerun___li_f_cal__calibration_a4672c6508e86211045777cc2939e74a0}\index{run\_LiFCal\_calibration@{run\_LiFCal\_calibration}!replace\_yaml\_key\_line@{replace\_yaml\_key\_line}}
+\index{replace\_yaml\_key\_line@{replace\_yaml\_key\_line}!run\_LiFCal\_calibration@{run\_LiFCal\_calibration}}
+\doxysubsubsection{\texorpdfstring{replace\_yaml\_key\_line()}{replace\_yaml\_key\_line()}}
+{\footnotesize\ttfamily \label{namespacerun___li_f_cal__calibration_a4672c6508e86211045777cc2939e74a0} 
+ str run\+\_\+\+Li\+FCal\+\_\+calibration.\+replace\+\_\+yaml\+\_\+key\+\_\+line (\begin{DoxyParamCaption}\item[{str}]{text}{, }\item[{str}]{key}{, }\item[{str}]{new\+\_\+val}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Replace YAML key-value lines.
+
+@param text YAML text content
+@param key YAML key to find and replace
+@param new_val New value to set (will be quoted)
+@return Modified YAML text
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{run___li_f_cal__calibration_8py_source_l00056}{56}} of file \mbox{\hyperlink{run___li_f_cal__calibration_8py_source}{run\+\_\+\+Li\+FCal\+\_\+calibration.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00056\ \textcolor{keyword}{def\ }replace\_yaml\_key\_line(text:\ str,\ key:\ str,\ new\_val:\ str)\ -\/>\ str: }
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{} }}
+\DoxyCodeLine{00058\ \textcolor{stringliteral}{\ \ \ \ @brief\ Replace\ YAML\ key-\/value\ lines. }}
+\DoxyCodeLine{00059\ \textcolor{stringliteral}{\ \ \ \  }}
+\DoxyCodeLine{00060\ \textcolor{stringliteral}{\ \ \ \ @param\ text\ YAML\ text\ content }}
+\DoxyCodeLine{00061\ \textcolor{stringliteral}{\ \ \ \ @param\ key\ YAML\ key\ to\ find\ and\ replace }}
+\DoxyCodeLine{00062\ \textcolor{stringliteral}{\ \ \ \ @param\ new\_val\ New\ value\ to\ set\ (will\ be\ quoted) }}
+\DoxyCodeLine{00063\ \textcolor{stringliteral}{\ \ \ \ @return\ Modified\ YAML\ text }}
+\DoxyCodeLine{00064\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00065\ \ \ \ \ pattern\ =\ re.compile(rf\textcolor{stringliteral}{"{}\string^(\{re.escape(key)\}\(\backslash\)s*:\(\backslash\)s*)(.*)\$"{}},\ re.MULTILINE) }
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keywordflow}{return}\ pattern.sub(rf\textcolor{stringliteral}{'\(\backslash\)1"{}\{new\_val\}"{}'},\ text) }
+\DoxyCodeLine{00067\  }
+\DoxyCodeLine{00068\  }
+
+\end{DoxyCode}
+\Hypertarget{namespacerun___li_f_cal__calibration_a90bc8c88d2526408fa680240a2009269}\index{run\_LiFCal\_calibration@{run\_LiFCal\_calibration}!run\_lifcal\_recalib@{run\_lifcal\_recalib}}
+\index{run\_lifcal\_recalib@{run\_lifcal\_recalib}!run\_LiFCal\_calibration@{run\_LiFCal\_calibration}}
+\doxysubsubsection{\texorpdfstring{run\_lifcal\_recalib()}{run\_lifcal\_recalib()}}
+{\footnotesize\ttfamily \label{namespacerun___li_f_cal__calibration_a90bc8c88d2526408fa680240a2009269} 
+ int run\+\_\+\+Li\+FCal\+\_\+calibration.\+run\+\_\+lifcal\+\_\+recalib (\begin{DoxyParamCaption}\item[{str}]{settings\+\_\+path}{, }\item[{str}]{fixed\+\_\+params\+\_\+path}{, }\item[{str}]{store\+\_\+dir}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Run LiFCal recalibration and return exit code.
+
+@param settings_path Path to Settings.yaml file
+@param fixed_params_path Path to fixed parameters file
+@param store_dir Directory where LiFCal will store results
+@return Exit code from LiFCal process
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{run___li_f_cal__calibration_8py_source_l00086}{86}} of file \mbox{\hyperlink{run___li_f_cal__calibration_8py_source}{run\+\_\+\+Li\+FCal\+\_\+calibration.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00086\ \textcolor{keyword}{def\ }run\_lifcal\_recalib(settings\_path:\ str,\ fixed\_params\_path:\ str,\ store\_dir:\ str)\ -\/>\ int: }
+\DoxyCodeLine{00087\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{} }}
+\DoxyCodeLine{00088\ \textcolor{stringliteral}{\ \ \ \ @brief\ Run\ LiFCal\ recalibration\ and\ return\ exit\ code. }}
+\DoxyCodeLine{00089\ \textcolor{stringliteral}{\ \ \ \  }}
+\DoxyCodeLine{00090\ \textcolor{stringliteral}{\ \ \ \ @param\ settings\_path\ Path\ to\ Settings.yaml\ file }}
+\DoxyCodeLine{00091\ \textcolor{stringliteral}{\ \ \ \ @param\ fixed\_params\_path\ Path\ to\ fixed\ parameters\ file }}
+\DoxyCodeLine{00092\ \textcolor{stringliteral}{\ \ \ \ @param\ store\_dir\ Directory\ where\ LiFCal\ will\ store\ results }}
+\DoxyCodeLine{00093\ \textcolor{stringliteral}{\ \ \ \ @return\ Exit\ code\ from\ LiFCal\ process }}
+\DoxyCodeLine{00094\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00095\ \ \ \ \ os.makedirs(store\_dir,\ exist\_ok=\textcolor{keyword}{True}) }
+\DoxyCodeLine{00096\  }
+\DoxyCodeLine{00097\ \ \ \ \ cmd\ =\ [LIFCAL\_BIN,\ \textcolor{stringliteral}{"{}recalib"{}},\ settings\_path,\ fixed\_params\_path] }
+\DoxyCodeLine{00098\  }
+\DoxyCodeLine{00099\ \ \ \ \ proc\ =\ subprocess.Popen( }
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ cmd, }
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ stdin=subprocess.PIPE, }
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ stdout=subprocess.PIPE, }
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ stderr=subprocess.STDOUT, }
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ text=\textcolor{keyword}{True}, }
+\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ cwd=os.path.dirname(LIFCAL\_BIN), }
+\DoxyCodeLine{00106\ \ \ \ \ ) }
+\DoxyCodeLine{00107\  }
+\DoxyCodeLine{00108\ \ \ \ \ out,\ \_\ =\ proc.communicate(input=f\textcolor{stringliteral}{"{}y\(\backslash\)n\{store\_dir\}\(\backslash\)n"{}}) }
+\DoxyCodeLine{00109\ \ \ \ \ write\_text(os.path.join(store\_dir,\ \textcolor{stringliteral}{"{}lifcal\_stdout.log"{}}),\ out) }
+\DoxyCodeLine{00110\  }
+\DoxyCodeLine{00111\ \ \ \ \ \textcolor{keywordflow}{return}\ proc.returncode }
+\DoxyCodeLine{00112\  }
+\DoxyCodeLine{00113\  }
+
+\end{DoxyCode}
+\Hypertarget{namespacerun___li_f_cal__calibration_a6d7995ecbf1d0d763cd16ae0de4c86ac}\index{run\_LiFCal\_calibration@{run\_LiFCal\_calibration}!write\_text@{write\_text}}
+\index{write\_text@{write\_text}!run\_LiFCal\_calibration@{run\_LiFCal\_calibration}}
+\doxysubsubsection{\texorpdfstring{write\_text()}{write\_text()}}
+{\footnotesize\ttfamily \label{namespacerun___li_f_cal__calibration_a6d7995ecbf1d0d763cd16ae0de4c86ac} 
+ None run\+\_\+\+Li\+FCal\+\_\+calibration.\+write\+\_\+text (\begin{DoxyParamCaption}\item[{str}]{path}{, }\item[{str}]{s}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Write text to file, creating directories if needed.
+
+@param path Output file path
+@param s Text content to write
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{run___li_f_cal__calibration_8py_source_l00044}{44}} of file \mbox{\hyperlink{run___li_f_cal__calibration_8py_source}{run\+\_\+\+Li\+FCal\+\_\+calibration.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00044\ \textcolor{keyword}{def\ }write\_text(path:\ str,\ s:\ str)\ -\/>\ \textcolor{keywordtype}{None}: }
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{} }}
+\DoxyCodeLine{00046\ \textcolor{stringliteral}{\ \ \ \ @brief\ Write\ text\ to\ file,\ creating\ directories\ if\ needed. }}
+\DoxyCodeLine{00047\ \textcolor{stringliteral}{\ \ \ \  }}
+\DoxyCodeLine{00048\ \textcolor{stringliteral}{\ \ \ \ @param\ path\ Output\ file\ path }}
+\DoxyCodeLine{00049\ \textcolor{stringliteral}{\ \ \ \ @param\ s\ Text\ content\ to\ write }}
+\DoxyCodeLine{00050\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00051\ \ \ \ \ os.makedirs(os.path.dirname(path),\ exist\_ok=\textcolor{keyword}{True}) }
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keyword}{with}\ open(path,\ \textcolor{stringliteral}{"{}w"{}},\ encoding=\textcolor{stringliteral}{"{}utf-\/8"{}})\ \textcolor{keyword}{as}\ f: }
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ f.write(s) }
+\DoxyCodeLine{00054\  }
+\DoxyCodeLine{00055\  }
+
+\end{DoxyCode}
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{namespacerun___li_f_cal__calibration_ad7a9b5189525830b9ce579eced873fad}\index{run\_LiFCal\_calibration@{run\_LiFCal\_calibration}!CAMERA\_IDS@{CAMERA\_IDS}}
+\index{CAMERA\_IDS@{CAMERA\_IDS}!run\_LiFCal\_calibration@{run\_LiFCal\_calibration}}
+\doxysubsubsection{\texorpdfstring{CAMERA\_IDS}{CAMERA\_IDS}}
+{\footnotesize\ttfamily \label{namespacerun___li_f_cal__calibration_ad7a9b5189525830b9ce579eced873fad} 
+list run\+\_\+\+Li\+FCal\+\_\+calibration.\+CAMERA\+\_\+\+IDS}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ =\ \ [}
+\DoxyCodeLine{00002\ \ \ \ \ \textcolor{stringliteral}{"{}Center"{}},\ \textcolor{stringliteral}{"{}Up1"{}},\ \textcolor{stringliteral}{"{}Up2"{}},\ \textcolor{stringliteral}{"{}Up3"{}},}
+\DoxyCodeLine{00003\ \ \ \ \ \textcolor{stringliteral}{"{}Down1"{}},\ \textcolor{stringliteral}{"{}Down2"{}},\ \textcolor{stringliteral}{"{}Down3"{}},}
+\DoxyCodeLine{00004\ \ \ \ \ \textcolor{stringliteral}{"{}Left1"{}},\ \textcolor{stringliteral}{"{}Left2"{}},\ \textcolor{stringliteral}{"{}Left3"{}},}
+\DoxyCodeLine{00005\ \ \ \ \ \textcolor{stringliteral}{"{}Right1"{}},\ \textcolor{stringliteral}{"{}Right2"{}},\ \textcolor{stringliteral}{"{}Right3"{}}}
+\DoxyCodeLine{00006\ ]}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{run___li_f_cal__calibration_8py_source_l00025}{25}} of file \mbox{\hyperlink{run___li_f_cal__calibration_8py_source}{run\+\_\+\+Li\+FCal\+\_\+calibration.\+py}}.
+
+\Hypertarget{namespacerun___li_f_cal__calibration_a135e0d9366892c2142d49b13582e675b}\index{run\_LiFCal\_calibration@{run\_LiFCal\_calibration}!DEPTH\_ROOT@{DEPTH\_ROOT}}
+\index{DEPTH\_ROOT@{DEPTH\_ROOT}!run\_LiFCal\_calibration@{run\_LiFCal\_calibration}}
+\doxysubsubsection{\texorpdfstring{DEPTH\_ROOT}{DEPTH\_ROOT}}
+{\footnotesize\ttfamily \label{namespacerun___li_f_cal__calibration_a135e0d9366892c2142d49b13582e675b} 
+run\+\_\+\+Li\+FCal\+\_\+calibration.\+DEPTH\+\_\+\+ROOT = os.\+path.\+join(\mbox{\hyperlink{namespacerun___li_f_cal__calibration_a9a5c2e8a9babebb5ed0491685428004e}{ROOT\+\_\+\+IMAGESET}}, "{}depth"{})}
+
+
+
+Definition at line \mbox{\hyperlink{run___li_f_cal__calibration_8py_source_l00021}{21}} of file \mbox{\hyperlink{run___li_f_cal__calibration_8py_source}{run\+\_\+\+Li\+FCal\+\_\+calibration.\+py}}.
+
+\Hypertarget{namespacerun___li_f_cal__calibration_a05be5c96814bd26d5de1ea1ce2bd4f2b}\index{run\_LiFCal\_calibration@{run\_LiFCal\_calibration}!FIXED\_PARAMS@{FIXED\_PARAMS}}
+\index{FIXED\_PARAMS@{FIXED\_PARAMS}!run\_LiFCal\_calibration@{run\_LiFCal\_calibration}}
+\doxysubsubsection{\texorpdfstring{FIXED\_PARAMS}{FIXED\_PARAMS}}
+{\footnotesize\ttfamily \label{namespacerun___li_f_cal__calibration_a05be5c96814bd26d5de1ea1ce2bd4f2b} 
+str run\+\_\+\+Li\+FCal\+\_\+calibration.\+FIXED\+\_\+\+PARAMS = "{}/data/external/Li\+FCal/Li\+FCal\+\_\+\+Data/Recalibration/Fixed\+\_\+\+Paramerters.\+txt"{}}
+
+
+
+Definition at line \mbox{\hyperlink{run___li_f_cal__calibration_8py_source_l00016}{16}} of file \mbox{\hyperlink{run___li_f_cal__calibration_8py_source}{run\+\_\+\+Li\+FCal\+\_\+calibration.\+py}}.
+
+\Hypertarget{namespacerun___li_f_cal__calibration_a2ed849dd1ea9baff8aeb0ac768bb8624}\index{run\_LiFCal\_calibration@{run\_LiFCal\_calibration}!FOCUS\_ROOT@{FOCUS\_ROOT}}
+\index{FOCUS\_ROOT@{FOCUS\_ROOT}!run\_LiFCal\_calibration@{run\_LiFCal\_calibration}}
+\doxysubsubsection{\texorpdfstring{FOCUS\_ROOT}{FOCUS\_ROOT}}
+{\footnotesize\ttfamily \label{namespacerun___li_f_cal__calibration_a2ed849dd1ea9baff8aeb0ac768bb8624} 
+run\+\_\+\+Li\+FCal\+\_\+calibration.\+FOCUS\+\_\+\+ROOT = os.\+path.\+join(\mbox{\hyperlink{namespacerun___li_f_cal__calibration_a9a5c2e8a9babebb5ed0491685428004e}{ROOT\+\_\+\+IMAGESET}}, "{}focus"{})}
+
+
+
+Definition at line \mbox{\hyperlink{run___li_f_cal__calibration_8py_source_l00020}{20}} of file \mbox{\hyperlink{run___li_f_cal__calibration_8py_source}{run\+\_\+\+Li\+FCal\+\_\+calibration.\+py}}.
+
+\Hypertarget{namespacerun___li_f_cal__calibration_a0b24a7f7155ec9f71a329e94d081cf6f}\index{run\_LiFCal\_calibration@{run\_LiFCal\_calibration}!LIFCAL\_BIN@{LIFCAL\_BIN}}
+\index{LIFCAL\_BIN@{LIFCAL\_BIN}!run\_LiFCal\_calibration@{run\_LiFCal\_calibration}}
+\doxysubsubsection{\texorpdfstring{LIFCAL\_BIN}{LIFCAL\_BIN}}
+{\footnotesize\ttfamily \label{namespacerun___li_f_cal__calibration_a0b24a7f7155ec9f71a329e94d081cf6f} 
+str run\+\_\+\+Li\+FCal\+\_\+calibration.\+LIFCAL\+\_\+\+BIN = "{}/data/external/Li\+FCal/build/bin/Li\+FCal"{}}
+
+
+
+Definition at line \mbox{\hyperlink{run___li_f_cal__calibration_8py_source_l00013}{13}} of file \mbox{\hyperlink{run___li_f_cal__calibration_8py_source}{run\+\_\+\+Li\+FCal\+\_\+calibration.\+py}}.
+
+\Hypertarget{namespacerun___li_f_cal__calibration_aca3ead8cb393ce360243734eb1a9e78b}\index{run\_LiFCal\_calibration@{run\_LiFCal\_calibration}!MLA\_CALIB\_XML@{MLA\_CALIB\_XML}}
+\index{MLA\_CALIB\_XML@{MLA\_CALIB\_XML}!run\_LiFCal\_calibration@{run\_LiFCal\_calibration}}
+\doxysubsubsection{\texorpdfstring{MLA\_CALIB\_XML}{MLA\_CALIB\_XML}}
+{\footnotesize\ttfamily \label{namespacerun___li_f_cal__calibration_aca3ead8cb393ce360243734eb1a9e78b} 
+str run\+\_\+\+Li\+FCal\+\_\+calibration.\+MLA\+\_\+\+CALIB\+\_\+\+XML = "{}/data/external/Li\+FCal/Li\+FCal\+\_\+\+Data/Recalibration/MLA\+\_\+\+Calibration.\+xml"{}}
+
+
+
+Definition at line \mbox{\hyperlink{run___li_f_cal__calibration_8py_source_l00017}{17}} of file \mbox{\hyperlink{run___li_f_cal__calibration_8py_source}{run\+\_\+\+Li\+FCal\+\_\+calibration.\+py}}.
+
+\Hypertarget{namespacerun___li_f_cal__calibration_ae6c139579f30df07d55ff678e6a460d7}\index{run\_LiFCal\_calibration@{run\_LiFCal\_calibration}!OUT\_ROOT@{OUT\_ROOT}}
+\index{OUT\_ROOT@{OUT\_ROOT}!run\_LiFCal\_calibration@{run\_LiFCal\_calibration}}
+\doxysubsubsection{\texorpdfstring{OUT\_ROOT}{OUT\_ROOT}}
+{\footnotesize\ttfamily \label{namespacerun___li_f_cal__calibration_ae6c139579f30df07d55ff678e6a460d7} 
+str run\+\_\+\+Li\+FCal\+\_\+calibration.\+OUT\+\_\+\+ROOT = "{}/data/external/Li\+FCal/Li\+FCal\+\_\+\+Data/Recalibration/Calibration\+By\+Camera"{}}
+
+
+
+Definition at line \mbox{\hyperlink{run___li_f_cal__calibration_8py_source_l00023}{23}} of file \mbox{\hyperlink{run___li_f_cal__calibration_8py_source}{run\+\_\+\+Li\+FCal\+\_\+calibration.\+py}}.
+
+\Hypertarget{namespacerun___li_f_cal__calibration_a9a5c2e8a9babebb5ed0491685428004e}\index{run\_LiFCal\_calibration@{run\_LiFCal\_calibration}!ROOT\_IMAGESET@{ROOT\_IMAGESET}}
+\index{ROOT\_IMAGESET@{ROOT\_IMAGESET}!run\_LiFCal\_calibration@{run\_LiFCal\_calibration}}
+\doxysubsubsection{\texorpdfstring{ROOT\_IMAGESET}{ROOT\_IMAGESET}}
+{\footnotesize\ttfamily \label{namespacerun___li_f_cal__calibration_a9a5c2e8a9babebb5ed0491685428004e} 
+str run\+\_\+\+Li\+FCal\+\_\+calibration.\+ROOT\+\_\+\+IMAGESET = "{}/data/external/Li\+FCal/Li\+FCal\+\_\+\+Data/Recalibration/Li\+FCal\+\_\+\+Imageset"{}}
+
+
+
+Definition at line \mbox{\hyperlink{run___li_f_cal__calibration_8py_source_l00019}{19}} of file \mbox{\hyperlink{run___li_f_cal__calibration_8py_source}{run\+\_\+\+Li\+FCal\+\_\+calibration.\+py}}.
+
+\Hypertarget{namespacerun___li_f_cal__calibration_a91e52ec8b942d1ac25f152884d423c4a}\index{run\_LiFCal\_calibration@{run\_LiFCal\_calibration}!SETTINGS@{SETTINGS}}
+\index{SETTINGS@{SETTINGS}!run\_LiFCal\_calibration@{run\_LiFCal\_calibration}}
+\doxysubsubsection{\texorpdfstring{SETTINGS}{SETTINGS}}
+{\footnotesize\ttfamily \label{namespacerun___li_f_cal__calibration_a91e52ec8b942d1ac25f152884d423c4a} 
+str run\+\_\+\+Li\+FCal\+\_\+calibration.\+SETTINGS = "{}/data/external/Li\+FCal/Li\+FCal\+\_\+\+Data/Recalibration/Settings.\+yaml"{}}
+
+
+
+Definition at line \mbox{\hyperlink{run___li_f_cal__calibration_8py_source_l00015}{15}} of file \mbox{\hyperlink{run___li_f_cal__calibration_8py_source}{run\+\_\+\+Li\+FCal\+\_\+calibration.\+py}}.
+

@@ -1,0 +1,75 @@
+\doxysection{Calibration\+State.\+py}
+\hypertarget{_calibration_state_8py_source}{}\label{_calibration_state_8py_source}\index{calibrationLFC/CalibrationState.py@{calibrationLFC/CalibrationState.py}}
+\mbox{\hyperlink{_calibration_state_8py}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_calibration_state_8py_source_l00001}\mbox{\hyperlink{class_calibration_state_1_1_calibration_state}{00001}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_calibration_state_1_1_calibration_state}{CalibrationState}}:}
+\DoxyCodeLine{\Hypertarget{_calibration_state_8py_source_l00002}00002\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_calibration_state_8py_source_l00003}00003\ \textcolor{stringliteral}{\ \ \ \ @brief\ Stores\ the\ complete\ calibration\ state\ for\ a\ multi-\/camera\ system.}}
+\DoxyCodeLine{\Hypertarget{_calibration_state_8py_source_l00004}00004\ \textcolor{stringliteral}{\ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{_calibration_state_8py_source_l00005}00005\ \textcolor{stringliteral}{\ \ \ \ @details\ This\ class\ manages\ intrinsic\ and\ extrinsic\ parameters\ for\ all\ cameras}}
+\DoxyCodeLine{\Hypertarget{_calibration_state_8py_source_l00006}00006\ \textcolor{stringliteral}{\ \ \ \ in\ the\ system.\ It\ provides\ methods\ to\ set\ and\ retrieve\ calibration\ data\ including}}
+\DoxyCodeLine{\Hypertarget{_calibration_state_8py_source_l00007}00007\ \textcolor{stringliteral}{\ \ \ \ camera\ matrices,\ distortion\ coefficients,\ rotation\ matrices,\ and\ translation\ vectors.}}
+\DoxyCodeLine{\Hypertarget{_calibration_state_8py_source_l00008}00008\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_calibration_state_8py_source_l00009}00009\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_calibration_state_8py_source_l00010}\mbox{\hyperlink{class_calibration_state_1_1_calibration_state_a110b71bae3359f0ebb77b99ddb0bbb88}{00010}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{class_calibration_state_1_1_calibration_state_a110b71bae3359f0ebb77b99ddb0bbb88}{\_\_init\_\_}}(self):}
+\DoxyCodeLine{\Hypertarget{_calibration_state_8py_source_l00011}00011\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_calibration_state_8py_source_l00012}00012\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @brief\ Constructor\ for\ CalibrationState.}}
+\DoxyCodeLine{\Hypertarget{_calibration_state_8py_source_l00013}00013\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{_calibration_state_8py_source_l00014}00014\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @details\ Initializes\ empty\ dictionaries\ for\ intrinsic\ and\ extrinsic\ parameters}}
+\DoxyCodeLine{\Hypertarget{_calibration_state_8py_source_l00015}00015\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ and\ sets\ the\ timestamp\ to\ None.}}
+\DoxyCodeLine{\Hypertarget{_calibration_state_8py_source_l00016}00016\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_calibration_state_8py_source_l00017}00017\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{class_calibration_state_1_1_calibration_state_a89ef7d095777c18fce1d28e36bc8cb58}{intrinsics}}\ =\ \{\}\ }
+\DoxyCodeLine{\Hypertarget{_calibration_state_8py_source_l00018}00018\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{class_calibration_state_1_1_calibration_state_ab11e331fb6069c606fa08b957b26ada8}{extrinsics}}\ =\ \{\}\ }
+\DoxyCodeLine{\Hypertarget{_calibration_state_8py_source_l00019}00019\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{class_calibration_state_1_1_calibration_state_a6b05e51ababa4fe1d1c374435f7ddf39}{timeStamp}}\ =\ \textcolor{keywordtype}{None}\ }
+\DoxyCodeLine{\Hypertarget{_calibration_state_8py_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{_calibration_state_8py_source_l00021}\mbox{\hyperlink{class_calibration_state_1_1_calibration_state_abd3c76b035ff61ba83ebf29e6e63aa5b}{00021}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{class_calibration_state_1_1_calibration_state_abd3c76b035ff61ba83ebf29e6e63aa5b}{setIntrinsics}}(self,\ camId,\ cameraMatrix,\ distortionCoeffs,\ repError):}
+\DoxyCodeLine{\Hypertarget{_calibration_state_8py_source_l00022}00022\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_calibration_state_8py_source_l00023}00023\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @brief\ Store\ intrinsic\ calibration\ parameters\ for\ a\ camera.}}
+\DoxyCodeLine{\Hypertarget{_calibration_state_8py_source_l00024}00024\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{_calibration_state_8py_source_l00025}00025\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ camId\ Camera\ identifier}}
+\DoxyCodeLine{\Hypertarget{_calibration_state_8py_source_l00026}00026\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ cameraMatrix\ 3x3\ camera\ matrix\ containing\ focal\ lengths\ and\ principal\ point}}
+\DoxyCodeLine{\Hypertarget{_calibration_state_8py_source_l00027}00027\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ distortionCoeffs\ Distortion\ coefficients\ vector}}
+\DoxyCodeLine{\Hypertarget{_calibration_state_8py_source_l00028}00028\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ repError\ Reprojection\ error\ of\ the\ calibration}}
+\DoxyCodeLine{\Hypertarget{_calibration_state_8py_source_l00029}00029\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_calibration_state_8py_source_l00030}00030\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{class_calibration_state_1_1_calibration_state_a89ef7d095777c18fce1d28e36bc8cb58}{intrinsics}}[camId]\ =\ \{}
+\DoxyCodeLine{\Hypertarget{_calibration_state_8py_source_l00031}00031\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}cameraMatrix"{}}:\ cameraMatrix,}
+\DoxyCodeLine{\Hypertarget{_calibration_state_8py_source_l00032}00032\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}distortionCoeffs"{}}:\ distortionCoeffs,}
+\DoxyCodeLine{\Hypertarget{_calibration_state_8py_source_l00033}00033\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}reprojectionError"{}}:\ repError}
+\DoxyCodeLine{\Hypertarget{_calibration_state_8py_source_l00034}00034\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_calibration_state_8py_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{_calibration_state_8py_source_l00036}\mbox{\hyperlink{class_calibration_state_1_1_calibration_state_ae9ad32ad446fdef893abde990f8d1f45}{00036}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{class_calibration_state_1_1_calibration_state_ae9ad32ad446fdef893abde990f8d1f45}{setExtrinsics}}(self,\ camId,\ rotationMatrix,\ translationVector,\ stereoRMS):}
+\DoxyCodeLine{\Hypertarget{_calibration_state_8py_source_l00037}00037\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_calibration_state_8py_source_l00038}00038\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @brief\ Store\ extrinsic\ calibration\ parameters\ for\ a\ camera.}}
+\DoxyCodeLine{\Hypertarget{_calibration_state_8py_source_l00039}00039\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{_calibration_state_8py_source_l00040}00040\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ camId\ Camera\ identifier}}
+\DoxyCodeLine{\Hypertarget{_calibration_state_8py_source_l00041}00041\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ rotationMatrix\ 3x3\ rotation\ matrix\ representing\ camera\ orientation}}
+\DoxyCodeLine{\Hypertarget{_calibration_state_8py_source_l00042}00042\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ translationVector\ 3x1\ translation\ vector\ representing\ camera\ position}}
+\DoxyCodeLine{\Hypertarget{_calibration_state_8py_source_l00043}00043\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ stereoRMS\ Root\ mean\ square\ error\ of\ the\ stereo\ calibration}}
+\DoxyCodeLine{\Hypertarget{_calibration_state_8py_source_l00044}00044\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_calibration_state_8py_source_l00045}00045\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{class_calibration_state_1_1_calibration_state_ab11e331fb6069c606fa08b957b26ada8}{extrinsics}}[camId]\ =\ \{}
+\DoxyCodeLine{\Hypertarget{_calibration_state_8py_source_l00046}00046\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}rotationMatrix"{}}:\ rotationMatrix,}
+\DoxyCodeLine{\Hypertarget{_calibration_state_8py_source_l00047}00047\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}translationVector"{}}:\ translationVector,}
+\DoxyCodeLine{\Hypertarget{_calibration_state_8py_source_l00048}00048\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}stereoRms"{}}:\ stereoRMS}
+\DoxyCodeLine{\Hypertarget{_calibration_state_8py_source_l00049}00049\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_calibration_state_8py_source_l00050}00050\ }
+\DoxyCodeLine{\Hypertarget{_calibration_state_8py_source_l00051}\mbox{\hyperlink{class_calibration_state_1_1_calibration_state_ade63271926d314d90e0be19b755cba5e}{00051}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{class_calibration_state_1_1_calibration_state_ade63271926d314d90e0be19b755cba5e}{setTimeStamp}}(self,\ timestamp):}
+\DoxyCodeLine{\Hypertarget{_calibration_state_8py_source_l00052}00052\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_calibration_state_8py_source_l00053}00053\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @brief\ Set\ the\ calibration\ timestamp.}}
+\DoxyCodeLine{\Hypertarget{_calibration_state_8py_source_l00054}00054\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{_calibration_state_8py_source_l00055}00055\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ timestamp\ Timestamp\ indicating\ when\ the\ calibration\ was\ performed}}
+\DoxyCodeLine{\Hypertarget{_calibration_state_8py_source_l00056}00056\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_calibration_state_8py_source_l00057}\mbox{\hyperlink{class_calibration_state_1_1_calibration_state_a6b05e51ababa4fe1d1c374435f7ddf39}{00057}}\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{class_calibration_state_1_1_calibration_state_a6b05e51ababa4fe1d1c374435f7ddf39}{timeStamp}}\ =\ timestamp}
+\DoxyCodeLine{\Hypertarget{_calibration_state_8py_source_l00058}00058\ }
+\DoxyCodeLine{\Hypertarget{_calibration_state_8py_source_l00059}\mbox{\hyperlink{class_calibration_state_1_1_calibration_state_af055446551223e6d513808f3cfc1d199}{00059}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{class_calibration_state_1_1_calibration_state_af055446551223e6d513808f3cfc1d199}{\_\_getState\_\_}}(self):}
+\DoxyCodeLine{\Hypertarget{_calibration_state_8py_source_l00060}00060\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_calibration_state_8py_source_l00061}00061\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @brief\ Return\ the\ complete\ calibration\ state\ as\ dictionary.}}
+\DoxyCodeLine{\Hypertarget{_calibration_state_8py_source_l00062}00062\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{_calibration_state_8py_source_l00063}00063\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @return\ Dictionary\ containing\ intrinsics,\ extrinsics,\ and\ timestamp}}
+\DoxyCodeLine{\Hypertarget{_calibration_state_8py_source_l00064}00064\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_calibration_state_8py_source_l00065}00065\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \{}
+\DoxyCodeLine{\Hypertarget{_calibration_state_8py_source_l00066}\mbox{\hyperlink{class_calibration_state_1_1_calibration_state_a89ef7d095777c18fce1d28e36bc8cb58}{00066}}\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}intrinsics"{}}:\ self.\mbox{\hyperlink{class_calibration_state_1_1_calibration_state_a89ef7d095777c18fce1d28e36bc8cb58}{intrinsics}},}
+\DoxyCodeLine{\Hypertarget{_calibration_state_8py_source_l00067}\mbox{\hyperlink{class_calibration_state_1_1_calibration_state_ab11e331fb6069c606fa08b957b26ada8}{00067}}\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}extrinsics"{}}:\ self.\mbox{\hyperlink{class_calibration_state_1_1_calibration_state_ab11e331fb6069c606fa08b957b26ada8}{extrinsics}},}
+\DoxyCodeLine{\Hypertarget{_calibration_state_8py_source_l00068}00068\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}timeStamp"{}}:\ self.\mbox{\hyperlink{class_calibration_state_1_1_calibration_state_a6b05e51ababa4fe1d1c374435f7ddf39}{timeStamp}}}
+\DoxyCodeLine{\Hypertarget{_calibration_state_8py_source_l00069}00069\ \ \ \ \ \ \ \ \ \}}
+
+\end{DoxyCode}

@@ -1,0 +1,47 @@
+\doxysection{external/\+Li\+FCal/\+Li\+FCal\+\_\+\+Data/run\+\_\+\+Li\+FCal\+\_\+calibration.py File Reference}
+\hypertarget{run___li_f_cal__calibration_8py}{}\label{run___li_f_cal__calibration_8py}\index{external/LiFCal/LiFCal\_Data/run\_LiFCal\_calibration.py@{external/LiFCal/LiFCal\_Data/run\_LiFCal\_calibration.py}}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespacerun___li_f_cal__calibration}{run\+\_\+\+Li\+FCal\+\_\+calibration}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+str \mbox{\hyperlink{namespacerun___li_f_cal__calibration_a6d124db2a4d2f2457fa1129369a2f9f8}{run\+\_\+\+Li\+FCal\+\_\+calibration.\+read\+\_\+text}} (str path)
+\item 
+None \mbox{\hyperlink{namespacerun___li_f_cal__calibration_a6d7995ecbf1d0d763cd16ae0de4c86ac}{run\+\_\+\+Li\+FCal\+\_\+calibration.\+write\+\_\+text}} (str path, str s)
+\item 
+str \mbox{\hyperlink{namespacerun___li_f_cal__calibration_a4672c6508e86211045777cc2939e74a0}{run\+\_\+\+Li\+FCal\+\_\+calibration.\+replace\+\_\+yaml\+\_\+key\+\_\+line}} (str text, str key, str new\+\_\+val)
+\item 
+str \mbox{\hyperlink{namespacerun___li_f_cal__calibration_af45d94b0f58ed1e665453d0027d997b1}{run\+\_\+\+Li\+FCal\+\_\+calibration.\+patch\+\_\+settings\+\_\+yaml}} (str template\+\_\+text, str focus\+\_\+dir, str depth\+\_\+dir, str mla\+\_\+xml)
+\item 
+int \mbox{\hyperlink{namespacerun___li_f_cal__calibration_a90bc8c88d2526408fa680240a2009269}{run\+\_\+\+Li\+FCal\+\_\+calibration.\+run\+\_\+lifcal\+\_\+recalib}} (str settings\+\_\+path, str fixed\+\_\+params\+\_\+path, str store\+\_\+dir)
+\item 
+str \mbox{\hyperlink{namespacerun___li_f_cal__calibration_ab157f06b04b573f9e75af1b332dd3c87}{run\+\_\+\+Li\+FCal\+\_\+calibration.\+find\+\_\+results\+\_\+folder}} (str store\+\_\+dir)
+\item 
+None \mbox{\hyperlink{namespacerun___li_f_cal__calibration_ab4dcca20f4468407097cbcaffb1c2b68}{run\+\_\+\+Li\+FCal\+\_\+calibration.\+copy\+\_\+essentials}} (str result\+\_\+dir, str out\+\_\+cam\+\_\+dir)
+\item 
+\mbox{\hyperlink{namespacerun___li_f_cal__calibration_a5f6e9e748bbcc6327bc0af91452ccb91}{run\+\_\+\+Li\+FCal\+\_\+calibration.\+main}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+str \mbox{\hyperlink{namespacerun___li_f_cal__calibration_a0b24a7f7155ec9f71a329e94d081cf6f}{run\+\_\+\+Li\+FCal\+\_\+calibration.\+LIFCAL\+\_\+\+BIN}} = "{}/data/external/Li\+FCal/build/bin/Li\+FCal"{}
+\item 
+str \mbox{\hyperlink{namespacerun___li_f_cal__calibration_a91e52ec8b942d1ac25f152884d423c4a}{run\+\_\+\+Li\+FCal\+\_\+calibration.\+SETTINGS}} = "{}/data/external/Li\+FCal/Li\+FCal\+\_\+\+Data/Recalibration/Settings.\+yaml"{}
+\item 
+str \mbox{\hyperlink{namespacerun___li_f_cal__calibration_a05be5c96814bd26d5de1ea1ce2bd4f2b}{run\+\_\+\+Li\+FCal\+\_\+calibration.\+FIXED\+\_\+\+PARAMS}} = "{}/data/external/Li\+FCal/Li\+FCal\+\_\+\+Data/Recalibration/Fixed\+\_\+\+Paramerters.\+txt"{}
+\item 
+str \mbox{\hyperlink{namespacerun___li_f_cal__calibration_aca3ead8cb393ce360243734eb1a9e78b}{run\+\_\+\+Li\+FCal\+\_\+calibration.\+MLA\+\_\+\+CALIB\+\_\+\+XML}} = "{}/data/external/Li\+FCal/Li\+FCal\+\_\+\+Data/Recalibration/MLA\+\_\+\+Calibration.\+xml"{}
+\item 
+str \mbox{\hyperlink{namespacerun___li_f_cal__calibration_a9a5c2e8a9babebb5ed0491685428004e}{run\+\_\+\+Li\+FCal\+\_\+calibration.\+ROOT\+\_\+\+IMAGESET}} = "{}/data/external/Li\+FCal/Li\+FCal\+\_\+\+Data/Recalibration/Li\+FCal\+\_\+\+Imageset"{}
+\item 
+\mbox{\hyperlink{namespacerun___li_f_cal__calibration_a2ed849dd1ea9baff8aeb0ac768bb8624}{run\+\_\+\+Li\+FCal\+\_\+calibration.\+FOCUS\+\_\+\+ROOT}} = os.\+path.\+join(\mbox{\hyperlink{namespacerun___li_f_cal__calibration_a9a5c2e8a9babebb5ed0491685428004e}{ROOT\+\_\+\+IMAGESET}}, "{}focus"{})
+\item 
+\mbox{\hyperlink{namespacerun___li_f_cal__calibration_a135e0d9366892c2142d49b13582e675b}{run\+\_\+\+Li\+FCal\+\_\+calibration.\+DEPTH\+\_\+\+ROOT}} = os.\+path.\+join(\mbox{\hyperlink{namespacerun___li_f_cal__calibration_a9a5c2e8a9babebb5ed0491685428004e}{ROOT\+\_\+\+IMAGESET}}, "{}depth"{})
+\item 
+str \mbox{\hyperlink{namespacerun___li_f_cal__calibration_ae6c139579f30df07d55ff678e6a460d7}{run\+\_\+\+Li\+FCal\+\_\+calibration.\+OUT\+\_\+\+ROOT}} = "{}/data/external/Li\+FCal/Li\+FCal\+\_\+\+Data/Recalibration/Calibration\+By\+Camera"{}
+\item 
+list \mbox{\hyperlink{namespacerun___li_f_cal__calibration_ad7a9b5189525830b9ce579eced873fad}{run\+\_\+\+Li\+FCal\+\_\+calibration.\+CAMERA\+\_\+\+IDS}}
+\end{DoxyCompactItemize}

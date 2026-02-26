@@ -1,0 +1,142 @@
+\doxysection{Image\+Set.\+Image\+Set Class Reference}
+\hypertarget{class_image_set_1_1_image_set}{}\label{class_image_set_1_1_image_set}\index{ImageSet.ImageSet@{ImageSet.ImageSet}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_image_set_1_1_image_set_a32a1541e0205f40193cb43e072007088}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, str \mbox{\hyperlink{class_image_set_1_1_image_set_a8014d0f2450027a84191aebb4726a881}{base\+Dir}}, int \mbox{\hyperlink{class_image_set_1_1_image_set_a6ca95edef63b4a04097517da9992d8b9}{num\+Poses}}, List\mbox{[}str\mbox{]} \mbox{\hyperlink{class_image_set_1_1_image_set_a410735b7e1121e585c910d363cb17b05}{camera\+Ids}})
+\item 
+str \mbox{\hyperlink{class_image_set_1_1_image_set_ac4818d9d9651a434242df64d8067a7c4}{get\+Image\+Path}} (self, int pose\+Index, str camera\+Id)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_image_set_1_1_image_set_a8014d0f2450027a84191aebb4726a881}{base\+Dir}} = base\+Dir
+\item 
+\mbox{\hyperlink{class_image_set_1_1_image_set_a6ca95edef63b4a04097517da9992d8b9}{num\+Poses}} = num\+Poses
+\item 
+\mbox{\hyperlink{class_image_set_1_1_image_set_a410735b7e1121e585c910d363cb17b05}{camera\+Ids}} = camera\+Ids
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}@brief Represents a set of calibration images organized by pose and camera.
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{_image_set_8py_source_l00003}{3}} of file \mbox{\hyperlink{_image_set_8py_source}{Image\+Set.\+py}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_image_set_1_1_image_set_a32a1541e0205f40193cb43e072007088}\index{ImageSet.ImageSet@{ImageSet.ImageSet}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!ImageSet.ImageSet@{ImageSet.ImageSet}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily \label{class_image_set_1_1_image_set_a32a1541e0205f40193cb43e072007088} 
+Image\+Set.\+Image\+Set.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{base\+Dir}{, }\item[{int}]{num\+Poses}{, }\item[{List\mbox{[}str\mbox{]}}]{camera\+Ids}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Constructor for ImageSet.
+
+@param baseDir Base directory containing calibration images
+@param numPoses Total number of poses in the calibration set
+@param cameraIds List of camera identifiers
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{_image_set_8py_source_l00008}{8}} of file \mbox{\hyperlink{_image_set_8py_source}{Image\+Set.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00008\ \ \ \ \ \textcolor{keyword}{def\ }\_\_init\_\_(self,\ baseDir:\ str,\ numPoses:\ int,\ cameraIds:\ List[str]): }
+\DoxyCodeLine{00009\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{} }}
+\DoxyCodeLine{00010\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @brief\ Constructor\ for\ ImageSet. }}
+\DoxyCodeLine{00011\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \  }}
+\DoxyCodeLine{00012\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ baseDir\ Base\ directory\ containing\ calibration\ images }}
+\DoxyCodeLine{00013\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ numPoses\ Total\ number\ of\ poses\ in\ the\ calibration\ set }}
+\DoxyCodeLine{00014\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ cameraIds\ List\ of\ camera\ identifiers }}
+\DoxyCodeLine{00015\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ self.baseDir\ =\ baseDir }
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ self.numPoses\ =\ numPoses }
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ self.cameraIds\ =\ cameraIds }
+\DoxyCodeLine{00019\  }
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_image_set_1_1_image_set_ac4818d9d9651a434242df64d8067a7c4}\index{ImageSet.ImageSet@{ImageSet.ImageSet}!getImagePath@{getImagePath}}
+\index{getImagePath@{getImagePath}!ImageSet.ImageSet@{ImageSet.ImageSet}}
+\doxysubsubsection{\texorpdfstring{getImagePath()}{getImagePath()}}
+{\footnotesize\ttfamily \label{class_image_set_1_1_image_set_ac4818d9d9651a434242df64d8067a7c4} 
+ str Image\+Set.\+Image\+Set.\+get\+Image\+Path (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{int}]{pose\+Index}{, }\item[{str}]{camera\+Id}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Construct the file path for a specific pose and camera.
+
+@param poseIndex Zero-based pose index
+@param cameraId Camera identifier string
+@return String path in format: baseDir/pose_XXX_cameraId.png
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{_image_set_8py_source_l00020}{20}} of file \mbox{\hyperlink{_image_set_8py_source}{Image\+Set.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keyword}{def\ }getImagePath(self,\ poseIndex:\ int,\ cameraId:\ str)\ -\/>\ str: }
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{} }}
+\DoxyCodeLine{00022\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @brief\ Construct\ the\ file\ path\ for\ a\ specific\ pose\ and\ camera. }}
+\DoxyCodeLine{00023\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \  }}
+\DoxyCodeLine{00024\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ poseIndex\ Zero-\/based\ pose\ index }}
+\DoxyCodeLine{00025\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ cameraId\ Camera\ identifier\ string }}
+\DoxyCodeLine{00026\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @return\ String\ path\ in\ format:\ baseDir/pose\_XXX\_cameraId.png }}
+\DoxyCodeLine{00027\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ poseStr\ =\ f\textcolor{stringliteral}{"{}pose\_\{poseIndex:03d\}"{}} }
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ f\textcolor{stringliteral}{"{}\{self.baseDir\}/\{poseStr\}\_\{cameraId\}.png"{}} }
+\DoxyCodeLine{00030\ \ \ \ \  }
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}\  }}
+\DoxyCodeLine{00032\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ Beispiel: }}
+\DoxyCodeLine{00033\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ baseDir\ =\ "{}/data/images"{} }}
+\DoxyCodeLine{00034\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ poseIndex\ =\ 5\ \ →\ poseStr\ =\ "{}pose\_005"{} }}
+\DoxyCodeLine{00035\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ cameraId\ =\ "{}center"{} }}
+\DoxyCodeLine{00036\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \  }}
+\DoxyCodeLine{00037\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ Ergebnis:\ "{}/data/images/pose\_005\_center.png"{}\  }}
+\DoxyCodeLine{00038\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}} }
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_image_set_1_1_image_set_a8014d0f2450027a84191aebb4726a881}\index{ImageSet.ImageSet@{ImageSet.ImageSet}!baseDir@{baseDir}}
+\index{baseDir@{baseDir}!ImageSet.ImageSet@{ImageSet.ImageSet}}
+\doxysubsubsection{\texorpdfstring{baseDir}{baseDir}}
+{\footnotesize\ttfamily \label{class_image_set_1_1_image_set_a8014d0f2450027a84191aebb4726a881} 
+Image\+Set.\+Image\+Set.\+base\+Dir = base\+Dir}
+
+
+
+Definition at line \mbox{\hyperlink{_image_set_8py_source_l00016}{16}} of file \mbox{\hyperlink{_image_set_8py_source}{Image\+Set.\+py}}.
+
+\Hypertarget{class_image_set_1_1_image_set_a410735b7e1121e585c910d363cb17b05}\index{ImageSet.ImageSet@{ImageSet.ImageSet}!cameraIds@{cameraIds}}
+\index{cameraIds@{cameraIds}!ImageSet.ImageSet@{ImageSet.ImageSet}}
+\doxysubsubsection{\texorpdfstring{cameraIds}{cameraIds}}
+{\footnotesize\ttfamily \label{class_image_set_1_1_image_set_a410735b7e1121e585c910d363cb17b05} 
+Image\+Set.\+Image\+Set.\+camera\+Ids = camera\+Ids}
+
+
+
+Definition at line \mbox{\hyperlink{_image_set_8py_source_l00018}{18}} of file \mbox{\hyperlink{_image_set_8py_source}{Image\+Set.\+py}}.
+
+\Hypertarget{class_image_set_1_1_image_set_a6ca95edef63b4a04097517da9992d8b9}\index{ImageSet.ImageSet@{ImageSet.ImageSet}!numPoses@{numPoses}}
+\index{numPoses@{numPoses}!ImageSet.ImageSet@{ImageSet.ImageSet}}
+\doxysubsubsection{\texorpdfstring{numPoses}{numPoses}}
+{\footnotesize\ttfamily \label{class_image_set_1_1_image_set_a6ca95edef63b4a04097517da9992d8b9} 
+Image\+Set.\+Image\+Set.\+num\+Poses = num\+Poses}
+
+
+
+Definition at line \mbox{\hyperlink{_image_set_8py_source_l00017}{17}} of file \mbox{\hyperlink{_image_set_8py_source}{Image\+Set.\+py}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+calibration\+LFC/\mbox{\hyperlink{_image_set_8py}{Image\+Set.\+py}}\end{DoxyCompactItemize}

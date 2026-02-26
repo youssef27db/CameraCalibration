@@ -1,10 +1,13 @@
-"""Organizes focus images by camera and generates depth maps for LiFCal recalibration."""
-
 import os
 import re
 import shutil
 from collections import defaultdict
 import depthmap
+
+"""
+@brief Organizes focus images by camera and generates depth maps for LiFCal recalibration.
+
+"""
 
 ROOT = "/data/external/LiFCal/LiFCal_Data/Recalibration/LiFCal_Imageset"
 FOCUS_DIR = os.path.join(ROOT, "focus")
@@ -27,13 +30,21 @@ PATTERN = re.compile(
 )
 
 def ensure_camera_subfolders(base_dir: str):
-    """Create subdirectory for each camera ID under base_dir."""
+    """
+    @brief Create subdirectory for each camera ID under base_dir.
+    
+    @param base_dir Base directory path
+    """
     os.makedirs(base_dir, exist_ok=True)
     for cid in CAMERA_IDS:
         os.makedirs(os.path.join(base_dir, cid), exist_ok=True)
 
 def group_focus_images_by_pose():
-    """Group focus images by pose ID from flat directory structure."""
+    """
+    @brief Group focus images by pose ID from flat directory structure.
+    
+    @return Dictionary mapping pose IDs to camera-path dictionaries
+    """
     pose_to_cam = defaultdict(dict)
     for fn in sorted(os.listdir(FOCUS_DIR)):
         m = PATTERN.match(fn)
@@ -44,7 +55,12 @@ def group_focus_images_by_pose():
     return pose_to_cam
 
 def copy_focus_into_camera_folders(pose: str, cam_to_path: dict):
-    """Copy focus images into camera-specific subdirectories (focus/<CamId>/<pose>_<CamId>.png)."""
+    """
+    @brief Copy focus images into camera-specific subdirectories.
+    
+    @param pose Pose identifier string (e.g., "pose000")
+    @param cam_to_path Dictionary mapping camera IDs to source image paths
+    """
     for cam, src in cam_to_path.items():
         ext = os.path.splitext(src)[1].lower()
         dst = os.path.join(FOCUS_DIR, cam, f"{pose}_{cam}{ext}")
@@ -52,14 +68,18 @@ def copy_focus_into_camera_folders(pose: str, cam_to_path: dict):
             shutil.copy2(src, dst)
 
 def cleanup_focus_root():
-    """Delete only loose files directly in focus/ (not in subdirectories)."""
+    """
+    @brief Delete only loose files directly in focus/ (not in subdirectories).
+    """
     for fn in os.listdir(FOCUS_DIR):
         p = os.path.join(FOCUS_DIR, fn)
         if os.path.isfile(p) and PATTERN.match(fn):
             os.remove(p)
 
 def main():
-    """Main pipeline: organize focus images and generate depth maps."""
+    """
+    @brief Main pipeline: organize focus images and generate depth maps.
+    """
     if not os.path.isdir(FOCUS_DIR):
         raise SystemExit(f"focus folder not found: {FOCUS_DIR}")
 

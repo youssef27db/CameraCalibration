@@ -1,0 +1,163 @@
+\doxysection{run\+\_\+initial\+\_\+calibration.\+py}
+\hypertarget{run__initial__calibration_8py_source}{}\label{run__initial__calibration_8py_source}\index{calibrationLFC/run\_initial\_calibration.py@{calibrationLFC/run\_initial\_calibration.py}}
+\mbox{\hyperlink{run__initial__calibration_8py}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00001}\mbox{\hyperlink{namespacerun__initial__calibration}{00001}}\ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00002}00002\ \textcolor{stringliteral}{Test\ runner\ for\ initial\ calibration.}}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00003}00003\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00004}00004\ \textcolor{stringliteral}{Usage:}}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00005}00005\ \textcolor{stringliteral}{\ \ cd\ calibrationLFC}}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00006}00006\ \textcolor{stringliteral}{\ \ python3\ run\_initial\_calibration.py\ -\/-\/base\_dir\ /path/to/imageset\ -\/-\/num\_poses\ 28\ -\/-\/bundle-\/adjust}}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00007}00007\ \textcolor{stringliteral}{\ \ python3\ run\_initial\_calibration.py\ -\/-\/base\_dir\ /path/to/imageset\ -\/-\/num\_poses\ 28\ -\/-\/no-\/bundle-\/adjust}}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00008}00008\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00009}00009\ \textcolor{stringliteral}{Performs\ validation\ checks\ (file\ existence,\ corner\ detection\ on\ pose\ 0)}}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00010}00010\ \textcolor{stringliteral}{then\ runs\ the\ complete\ initial\ calibration\ pipeline.\ Outputs\ summary\ statistics}}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00011}00011\ \textcolor{stringliteral}{for\ intrinsics,\ extrinsics,\ and\ health\ score.}}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00012}00012\ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00014}00014\ \textcolor{keyword}{import}\ argparse}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00015}00015\ \textcolor{keyword}{import}\ os}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00016}00016\ \textcolor{keyword}{import}\ sys}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00017}00017\ }
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00018}00018\ \textcolor{keyword}{from}\ ImageSet\ \textcolor{keyword}{import}\ ImageSet}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00019}00019\ \textcolor{keyword}{from}\ Controller\ \textcolor{keyword}{import}\ Controller}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00021}00021\ }
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00022}00022\ \textcolor{comment}{\#\ Default\ configuration\ parameters}}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00023}\mbox{\hyperlink{namespacerun__initial__calibration_af6a877ffd6b195a4dbb2158784363b56}{00023}}\ DEFAULT\_BASE\_DIR\ =\ \textcolor{stringliteral}{"{}/data/calibrationLFC/sets/imageset5"{}}}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00024}\mbox{\hyperlink{namespacerun__initial__calibration_ab111c2c3d4bcbbe62ce31767ff98e28f}{00024}}\ DEFAULT\_NUM\_POSES\ =\ 28}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00025}\mbox{\hyperlink{namespacerun__initial__calibration_ab8100c90bf96b63231a8edb40a511f04}{00025}}\ CAM\_IDS\ =\ [}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00026}00026\ \ \ \ \ \textcolor{stringliteral}{"{}Center"{}},}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00027}00027\ \ \ \ \ \textcolor{stringliteral}{"{}Up1"{}},\ \textcolor{stringliteral}{"{}Up2"{}},\ \textcolor{stringliteral}{"{}Up3"{}},}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00028}00028\ \ \ \ \ \textcolor{stringliteral}{"{}Down1"{}},\ \textcolor{stringliteral}{"{}Down2"{}},\ \textcolor{stringliteral}{"{}Down3"{}},}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00029}00029\ \ \ \ \ \textcolor{stringliteral}{"{}Left1"{}},\ \textcolor{stringliteral}{"{}Left2"{}},\ \textcolor{stringliteral}{"{}Left3"{}},}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00030}00030\ \ \ \ \ \textcolor{stringliteral}{"{}Right1"{}},\ \textcolor{stringliteral}{"{}Right2"{}},\ \textcolor{stringliteral}{"{}Right3"{}},}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00031}00031\ ]}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00032}00032\ }
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00034}\mbox{\hyperlink{namespacerun__initial__calibration_ad5d1109ec07b76e00c683010944c19da}{00034}}\ \textcolor{keyword}{def\ }\mbox{\hyperlink{namespacerun__initial__calibration_ad5d1109ec07b76e00c683010944c19da}{parse\_args}}():}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00035}00035\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00036}00036\ \textcolor{stringliteral}{\ \ \ \ @brief\ Parse\ command\ line\ arguments\ for\ calibration\ configuration.}}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00037}00037\ \textcolor{stringliteral}{\ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00038}00038\ \textcolor{stringliteral}{\ \ \ \ @return\ Parsed\ arguments\ with\ base\_dir,\ num\_poses,\ and\ bundle\_adjust\ settings}}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00039}00039\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00040}00040\ \ \ \ \ parser\ =\ argparse.ArgumentParser(description=\textcolor{stringliteral}{"{}Run\ initial\ camera\ calibration"{}})}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00041}00041\ \ \ \ \ parser.add\_argument(\textcolor{stringliteral}{"{}-\/-\/base\_dir"{}},\ default=DEFAULT\_BASE\_DIR,\ help=\textcolor{stringliteral}{"{}Path\ to\ imageset\ directory"{}})}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00042}00042\ \ \ \ \ parser.add\_argument(\textcolor{stringliteral}{"{}-\/-\/num\_poses"{}},\ type=int,\ default=DEFAULT\_NUM\_POSES,\ help=\textcolor{stringliteral}{"{}Number\ of\ poses\ in\ the\ imageset"{}})}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00043}00043\ \ \ \ \ parser.add\_argument(}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00044}00044\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}-\/-\/bundle-\/adjust"{}},}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00045}00045\ \ \ \ \ \ \ \ \ dest=\textcolor{stringliteral}{"{}bundle\_adjust"{}},}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00046}00046\ \ \ \ \ \ \ \ \ action=\textcolor{stringliteral}{"{}store\_true"{}},}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00047}00047\ \ \ \ \ \ \ \ \ help=\textcolor{stringliteral}{"{}Enable\ bundle\ adjustment\ (default)"{}},}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00048}00048\ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00049}00049\ \ \ \ \ parser.add\_argument(}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00050}00050\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}-\/-\/no-\/bundle-\/adjust"{}},}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00051}00051\ \ \ \ \ \ \ \ \ dest=\textcolor{stringliteral}{"{}bundle\_adjust"{}},}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00052}00052\ \ \ \ \ \ \ \ \ action=\textcolor{stringliteral}{"{}store\_false"{}},}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00053}00053\ \ \ \ \ \ \ \ \ help=\textcolor{stringliteral}{"{}Disable\ bundle\ adjustment"{}},}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00054}00054\ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00055}00055\ \ \ \ \ parser.set\_defaults(bundle\_adjust=\textcolor{keyword}{True})}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00056}00056\ \ \ \ \ \textcolor{keywordflow}{return}\ parser.parse\_args()}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00057}00057\ }
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00058}00058\ }
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00059}\mbox{\hyperlink{namespacerun__initial__calibration_a09cdc144574ca7f6703a09c05cd962d2}{00059}}\ \textcolor{keyword}{def\ }\mbox{\hyperlink{namespacerun__initial__calibration_a09cdc144574ca7f6703a09c05cd962d2}{main}}(args):}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00060}00060\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00061}00061\ \textcolor{stringliteral}{\ \ \ \ @brief\ Run\ complete\ initial\ calibration\ pipeline\ with\ validation\ and\ summary\ output.}}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00062}00062\ \textcolor{stringliteral}{\ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00063}00063\ \textcolor{stringliteral}{\ \ \ \ @param\ args}}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00064}00064\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00065}00065\ \ \ \ \ print(\textcolor{stringliteral}{"{}Creating\ ImageSet..."{}})}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00066}00066\ \ \ \ \ imageSet\ =\ \mbox{\hyperlink{class_image_set_1_1_image_set}{ImageSet}}(args.base\_dir,\ args.num\_poses,\ CAM\_IDS)}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00067}00067\ }
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00068}00068\ \ \ \ \ print(\textcolor{stringliteral}{"{}Instantiating\ Controller\ and\ InitialCalibration..."{}})}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00069}00069\ \ \ \ \ controller\ =\ \mbox{\hyperlink{class_controller_1_1_controller}{Controller}}(bundleAdjust=args.bundle\_adjust)}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00070}00070\ \ \ \ \ logger\ =\ controller.resultLogger}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00071}00071\ }
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00072}00072\ \ \ \ \ print(\textcolor{stringliteral}{"{}\(\backslash\)nQuick\ checks\ (pose\ 0):\ file\ exists\ /\ corners\ detected"{}})}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00073}00073\ \ \ \ \ \textcolor{keywordflow}{for}\ cam\ \textcolor{keywordflow}{in}\ CAM\_IDS:}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00074}00074\ \ \ \ \ \ \ \ \ path\ =\ imageSet.getImagePath(0,\ cam)}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00075}00075\ \ \ \ \ \ \ \ \ exists\ =\ os.path.exists(path)}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00076}00076\ \ \ \ \ \ \ \ \ cornersFound\ =\ \textcolor{keywordtype}{None}}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00077}00077\ }
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00078}00078\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}:}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00079}00079\ \ \ \ \ \ \ \ \ \ \ \ \ cornersFound,\ \_,\ \_\ =\ controller.initialCalibration.detectCorners(path)}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00080}00080\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{except}\ Exception\ \textcolor{keyword}{as}\ e:}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00081}00081\ \ \ \ \ \ \ \ \ \ \ \ \ cornersFound\ =\ f\textcolor{stringliteral}{"{}error:\ \{e.\_\_class\_\_.\_\_name\_\_\}"{}}}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00082}00082\ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}\ \{cam\}:\ \{path\}\ -\/\ exists=\{exists\}\ -\/\ corners=\{cornersFound\}"{}})}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00083}00083\ }
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00084}00084\ \ \ \ \ print(\textcolor{stringliteral}{"{}\(\backslash\)nRunning\ initial\ calibration\ (this\ may\ take\ time\ depending\ on\ data)..."{}})}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00085}00085\ \ \ \ \ \textcolor{keywordflow}{try}:}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00086}00086\ \ \ \ \ \ \ \ \ calibrationState\ =\ controller.runInitialCalibration(imageSet)}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00087}00087\ \ \ \ \ \textcolor{keywordflow}{except}\ Exception\ \textcolor{keyword}{as}\ e:}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00088}00088\ \ \ \ \ \ \ \ \ logger.logger.error(f\textcolor{stringliteral}{"{}Calibration\ failed\ with\ exception:\ \{e\}"{}},\ exc\_info=\textcolor{keyword}{True})}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00089}00089\ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}Calibration\ failed,\ see\ calibration.log\ for\ details."{}})}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00090}00090\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{raise}}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00091}00091\ }
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00092}00092\ \ \ \ \ print(\textcolor{stringliteral}{"{}\(\backslash\)nCalibration\ finished.\ Attempting\ to\ print\ summary..."{}})}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00093}00093\ \ \ \ \ \textcolor{keywordflow}{try}:}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00094}00094\ \ \ \ \ \ \ \ \ stateDict\ =\ calibrationState.\_\_getState\_\_()}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00095}00095\ \ \ \ \ \textcolor{keywordflow}{except}\ Exception:}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00096}00096\ \ \ \ \ \ \ \ \ stateDict\ =\ \textcolor{keywordtype}{None}}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00097}00097\ }
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00098}00098\ \ \ \ \ \textcolor{keywordflow}{if}\ stateDict\ \textcolor{keywordflow}{is}\ \textcolor{keywordtype}{None}:}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00099}00099\ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}Could\ not\ extract\ a\ state\ dictionary."{}})}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00100}00100\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00101}00101\ }
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00102}00102\ \ \ \ \ intr\ =\ stateDict.get(\textcolor{stringliteral}{"{}intrinsics"{}},\ \{\})}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00103}00103\ \ \ \ \ extr\ =\ stateDict.get(\textcolor{stringliteral}{"{}extrinsics"{}},\ \{\})}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00104}00104\ }
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00105}00105\ \ \ \ \ \textcolor{comment}{\#\ Print\ calibration\ results\ per\ camera}}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00106}00106\ \ \ \ \ print(\textcolor{stringliteral}{"{}\(\backslash\)nCalibration\ Results\ by\ Camera"{}})}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00107}00107\ \ \ \ \ print(\textcolor{stringliteral}{"{}="{}}\ *\ 50)}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00108}00108\ }
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00109}00109\ \ \ \ \ \textcolor{keywordflow}{for}\ cam\ \textcolor{keywordflow}{in}\ CAM\_IDS:}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00110}00110\ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}\(\backslash\)n-\/-\/-\/\ \{cam\}\ -\/-\/-\/"{}})}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00111}00111\ }
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00112}00112\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Intrinsic\ parameters}}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00113}00113\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ cam\ \textcolor{keywordflow}{in}\ intr:}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00114}00114\ \ \ \ \ \ \ \ \ \ \ \ \ data\ =\ intr[cam]}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00115}00115\ \ \ \ \ \ \ \ \ \ \ \ \ K\ =\ data[\textcolor{stringliteral}{"{}cameraMatrix"{}}]}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00116}00116\ \ \ \ \ \ \ \ \ \ \ \ \ dist\ =\ data[\textcolor{stringliteral}{"{}distortionCoeffs"{}}].ravel()}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00117}00117\ \ \ \ \ \ \ \ \ \ \ \ \ err\ =\ data[\textcolor{stringliteral}{"{}reprojectionError"{}}]}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00118}00118\ }
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00119}00119\ \ \ \ \ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}Intrinsics:"{}})}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00120}00120\ \ \ \ \ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}\ K\ ="{}})}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00121}00121\ \ \ \ \ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}\ \ \{K[0][0]:.3f\}\ \{K[0][1]:.3f\}\ \{K[0][2]:.3f\}"{}})}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00122}00122\ \ \ \ \ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}\ \ \{K[1][0]:.3f\}\ \{K[1][1]:.3f\}\ \{K[1][2]:.3f\}"{}})}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00123}00123\ \ \ \ \ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}\ \ \{K[2][0]:.3f\}\ \{K[2][1]:.3f\}\ \{K[2][2]:.3f\}"{}})}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00124}00124\ \ \ \ \ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}\ distCoeffs\ ="{}},\ dist)}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00125}00125\ \ \ \ \ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}\ reprojectionError\ =\ \{err:.6f\}"{}})}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00126}00126\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00127}00127\ \ \ \ \ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}Intrinsics:\ (no\ data)"{}})}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00128}00128\ }
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00129}00129\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Extrinsic\ parameters}}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00130}00130\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ cam\ \textcolor{keywordflow}{in}\ extr:}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00131}00131\ \ \ \ \ \ \ \ \ \ \ \ \ data\ =\ extr[cam]}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00132}00132\ \ \ \ \ \ \ \ \ \ \ \ \ R\ =\ data[\textcolor{stringliteral}{"{}rotationMatrix"{}}]}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00133}00133\ \ \ \ \ \ \ \ \ \ \ \ \ T\ =\ data[\textcolor{stringliteral}{"{}translationVector"{}}].ravel()}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00134}00134\ \ \ \ \ \ \ \ \ \ \ \ \ rms\ =\ data[\textcolor{stringliteral}{"{}stereoRms"{}}]}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00135}00135\ }
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00136}00136\ \ \ \ \ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}Extrinsics:"{}})}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00137}00137\ \ \ \ \ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}\ R\ ="{}})}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00138}00138\ \ \ \ \ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}\ \ \{R[0][0]:.5f\}\ \{R[0][1]:.5f\}\ \{R[0][2]:.5f\}"{}})}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00139}00139\ \ \ \ \ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}\ \ \{R[1][0]:.5f\}\ \{R[1][1]:.5f\}\ \{R[1][2]:.5f\}"{}})}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00140}00140\ \ \ \ \ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}\ \ \{R[2][0]:.5f\}\ \{R[2][1]:.5f\}\ \{R[2][2]:.5f\}"{}})}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00141}00141\ \ \ \ \ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}\ T\ ="{}},\ T)}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00142}00142\ \ \ \ \ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}\ stereoRMS\ =\ \{rms:.6f\}"{}})}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00143}00143\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00144}00144\ \ \ \ \ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}\ \ Extrinsics:\ (no\ data)"{}})}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00145}00145\ }
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00146}00146\ \ \ \ \ \textcolor{comment}{\#\ Print\ health\ score}}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00147}00147\ \ \ \ \ print(\textcolor{stringliteral}{"{}\(\backslash\)nOverall\ Health\ Score"{}})}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00148}00148\ \ \ \ \ print(\textcolor{stringliteral}{"{}="{}}\ *\ 50)}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00149}00149\ \ \ \ \ score\ =\ controller.selfHealthCheck(calibrationState)}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00150}00150\ \ \ \ \ print(f\textcolor{stringliteral}{"{}Global\ HealthScore\ =\ \{score:.2f\}\ /\ 100"{}})}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00151}00151\ }
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00152}00152\ \textcolor{keywordflow}{if}\ \_\_name\_\_\ ==\ \textcolor{stringliteral}{"{}\_\_main\_\_"{}}:}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00153}00153\ \ \ \ \ \textcolor{comment}{\#\ Set\ up\ Python\ path\ to\ find\ calibrationLFC\ modules}}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00154}\mbox{\hyperlink{namespacerun__initial__calibration_ab86aa06d4bbe88abce338adfd56cb44f}{00154}}\ \ \ \ \ repoRoot\ =\ os.path.dirname(os.path.dirname(os.path.abspath(\_\_file\_\_)))}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00155}00155\ \ \ \ \ \textcolor{keywordflow}{if}\ repoRoot\ \textcolor{keywordflow}{not}\ \textcolor{keywordflow}{in}\ sys.path:}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00156}00156\ \ \ \ \ \ \ \ \ sys.path.insert(0,\ repoRoot)}
+\DoxyCodeLine{\Hypertarget{run__initial__calibration_8py_source_l00157}00157\ \ \ \ \ \mbox{\hyperlink{namespacerun__initial__calibration_a09cdc144574ca7f6703a09c05cd962d2}{main}}(\mbox{\hyperlink{namespacerun__initial__calibration_ad5d1109ec07b76e00c683010944c19da}{parse\_args}}())}
+
+\end{DoxyCode}

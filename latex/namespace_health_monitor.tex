@@ -1,0 +1,507 @@
+\doxysection{Health\+Monitor Namespace Reference}
+\hypertarget{namespace_health_monitor}{}\label{namespace_health_monitor}\index{HealthMonitor@{HealthMonitor}}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+float \mbox{\hyperlink{namespace_health_monitor_a4cc981a82351b124fe66429bc1b20f16}{clamp}} (float x, float lo=0.\+0, float hi=1.\+0)
+\item 
+\mbox{\hyperlink{namespace_health_monitor_afa30e56be01511c5e2fd7aad7730055a}{safe\+\_\+float}} (v, default=None)
+\item 
+float \mbox{\hyperlink{namespace_health_monitor_afaf436975b71f59fa17ded66fa3e62de}{score\+\_\+from\+\_\+errors}} (float E\+\_\+a, float E\+\_\+b, float w\+\_\+a=0.\+6, float w\+\_\+b=0.\+4)
+\item 
+Dict\mbox{[}str, Any\mbox{]} \mbox{\hyperlink{namespace_health_monitor_a68292483868771d14cb240554d2406aa}{compute\+\_\+initial\+\_\+health\+\_\+from\+\_\+state}} (Dict\mbox{[}str, Any\mbox{]} state\+\_\+dict, float r\+\_\+best=\mbox{\hyperlink{namespace_health_monitor_afaf986f238234c66f66bdfe5688f786c}{R\+\_\+\+BEST}}, float r\+\_\+worst=\mbox{\hyperlink{namespace_health_monitor_a31f29544855dfc65d157c2e2278ac866}{R\+\_\+\+WORST}}, float s\+\_\+best=\mbox{\hyperlink{namespace_health_monitor_ac31a13688956ec7e37301566ae7af87e}{S\+\_\+\+BEST}}, float s\+\_\+worst=\mbox{\hyperlink{namespace_health_monitor_a103c572c4b23101ea513e9e084a6af51}{S\+\_\+\+WORST}})
+\item 
+Dict\mbox{[}str, Optional\mbox{[}float\mbox{]}\mbox{]} \mbox{\hyperlink{namespace_health_monitor_a79511a86b0813f0b4a955c5da76d8ebc}{parse\+\_\+lifcal\+\_\+protocol}} (str protocol\+\_\+path)
+\item 
+Dict\mbox{[}str, Any\mbox{]} \mbox{\hyperlink{namespace_health_monitor_a56aef51f9aa11eb7f3662b403d365545}{compute\+\_\+lifcal\+\_\+health\+\_\+from\+\_\+xy}} (float x\+\_\+std, float y\+\_\+std, float x\+\_\+mae, float y\+\_\+mae, float r\+\_\+best=\mbox{\hyperlink{namespace_health_monitor_afaf986f238234c66f66bdfe5688f786c}{R\+\_\+\+BEST}}, float r\+\_\+worst=\mbox{\hyperlink{namespace_health_monitor_a31f29544855dfc65d157c2e2278ac866}{R\+\_\+\+WORST}}, float s\+\_\+best=\mbox{\hyperlink{namespace_health_monitor_ac31a13688956ec7e37301566ae7af87e}{S\+\_\+\+BEST}}, float s\+\_\+worst=\mbox{\hyperlink{namespace_health_monitor_a103c572c4b23101ea513e9e084a6af51}{S\+\_\+\+WORST}})
+\item 
+Dict\mbox{[}str, Any\mbox{]} \mbox{\hyperlink{namespace_health_monitor_a1163a29e9f18e79dd4c47ae9717aa55b}{compute\+\_\+lifcal\+\_\+health\+\_\+from\+\_\+combined\+\_\+dict}} (Dict\mbox{[}str, Any\mbox{]} combined)
+\item 
+Dict\mbox{[}str, Any\mbox{]} \mbox{\hyperlink{namespace_health_monitor_a795ce112d3003ba5d0173689c109391c}{compute\+\_\+lifcal\+\_\+health\+\_\+from\+\_\+combined\+\_\+path}} (str combined\+\_\+json\+\_\+path)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+float \mbox{\hyperlink{namespace_health_monitor_afaf986f238234c66f66bdfe5688f786c}{R\+\_\+\+BEST}} = 0.\+03
+\item 
+float \mbox{\hyperlink{namespace_health_monitor_a31f29544855dfc65d157c2e2278ac866}{R\+\_\+\+WORST}} = 1.\+0
+\item 
+float \mbox{\hyperlink{namespace_health_monitor_ac31a13688956ec7e37301566ae7af87e}{S\+\_\+\+BEST}} = 0.\+0
+\item 
+float \mbox{\hyperlink{namespace_health_monitor_a103c572c4b23101ea513e9e084a6af51}{S\+\_\+\+WORST}} = 50.\+0
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}HealthScore Formulas (0..100)
+
+(A) INITIAL Calibration (OpenCV/Controller JSON)
+    HealthScore_initial = 100 * [ 1 - (0.6 * E_reproj^2 + 0.4 * E_rms^2) ]
+
+    E_reproj = clamp( (reproj_mean - R_BEST) / (R_WORST - R_BEST), 0, 1 )
+    E_rms    = clamp( (rms_mean    - S_BEST) / (S_WORST - S_BEST), 0, 1 )
+
+    Uses:
+      - intrinsics[*].reprojectionError  (per camera)
+      - extrinsics[*].stereoRms          (per camera)
+
+(B) LiFCal Calibration (protocol-based)
+    HealthScore_lifcal = 100 * [ 1 - (0.6 * E_std^2 + 0.4 * E_mae^2) ]
+
+    E_std = clamp( ( sqrt(x_std^2 + y_std^2) - S_BEST ) / (S_WORST - S_BEST), 0, 1 )
+    E_mae = clamp( ( sqrt(x_mae^2 + y_mae^2) - R_BEST ) / (R_WORST - R_BEST), 0, 1 )
+
+    Uses:
+      - std.Dev. x/y  and mae x/y from LiFCal calibrationProtocol.txt
+
+Shared thresholds (for BOTH methods):
+  R_BEST = 0.03, R_WORST = 1.0, S_BEST = 0.0, S_WORST = 50.0
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Function Documentation}
+\Hypertarget{namespace_health_monitor_a4cc981a82351b124fe66429bc1b20f16}\index{HealthMonitor@{HealthMonitor}!clamp@{clamp}}
+\index{clamp@{clamp}!HealthMonitor@{HealthMonitor}}
+\doxysubsubsection{\texorpdfstring{clamp()}{clamp()}}
+{\footnotesize\ttfamily \label{namespace_health_monitor_a4cc981a82351b124fe66429bc1b20f16} 
+ float Health\+Monitor.\+clamp (\begin{DoxyParamCaption}\item[{float}]{x}{, }\item[{float }]{lo}{ = {\ttfamily 0.0}, }\item[{float }]{hi}{ = {\ttfamily 1.0}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Clamp value between lower and upper bounds.
+
+@param x Value to clamp
+@param lo Lower bound (default: 0.0)
+@param hi Upper bound (default: 1.0)
+@return Clamped value
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{_health_monitor_8py_source_l00044}{44}} of file \mbox{\hyperlink{_health_monitor_8py_source}{Health\+Monitor.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00044\ \textcolor{keyword}{def\ }clamp(x:\ float,\ lo:\ float\ =\ 0.0,\ hi:\ float\ =\ 1.0)\ -\/>\ float: }
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{} }}
+\DoxyCodeLine{00046\ \textcolor{stringliteral}{\ \ \ \ @brief\ Clamp\ value\ between\ lower\ and\ upper\ bounds. }}
+\DoxyCodeLine{00047\ \textcolor{stringliteral}{\ \ \ \  }}
+\DoxyCodeLine{00048\ \textcolor{stringliteral}{\ \ \ \ @param\ x\ Value\ to\ clamp }}
+\DoxyCodeLine{00049\ \textcolor{stringliteral}{\ \ \ \ @param\ lo\ Lower\ bound\ (default:\ 0.0) }}
+\DoxyCodeLine{00050\ \textcolor{stringliteral}{\ \ \ \ @param\ hi\ Upper\ bound\ (default:\ 1.0) }}
+\DoxyCodeLine{00051\ \textcolor{stringliteral}{\ \ \ \ @return\ Clamped\ value }}
+\DoxyCodeLine{00052\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keywordflow}{if}\ x\ <\ lo: }
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ lo }
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keywordflow}{if}\ x\ >\ hi: }
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ hi }
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keywordflow}{return}\ x }
+\DoxyCodeLine{00058\  }
+\DoxyCodeLine{00059\  }
+
+\end{DoxyCode}
+\Hypertarget{namespace_health_monitor_a68292483868771d14cb240554d2406aa}\index{HealthMonitor@{HealthMonitor}!compute\_initial\_health\_from\_state@{compute\_initial\_health\_from\_state}}
+\index{compute\_initial\_health\_from\_state@{compute\_initial\_health\_from\_state}!HealthMonitor@{HealthMonitor}}
+\doxysubsubsection{\texorpdfstring{compute\_initial\_health\_from\_state()}{compute\_initial\_health\_from\_state()}}
+{\footnotesize\ttfamily \label{namespace_health_monitor_a68292483868771d14cb240554d2406aa} 
+ Dict\mbox{[}str, Any\mbox{]} Health\+Monitor.\+compute\+\_\+initial\+\_\+health\+\_\+from\+\_\+state (\begin{DoxyParamCaption}\item[{Dict\mbox{[}str, Any\mbox{]}}]{state\+\_\+dict}{, }\item[{float }]{r\+\_\+best}{ = {\ttfamily \mbox{\hyperlink{namespace_health_monitor_afaf986f238234c66f66bdfe5688f786c}{R\+\_\+\+BEST}}}, }\item[{float }]{r\+\_\+worst}{ = {\ttfamily \mbox{\hyperlink{namespace_health_monitor_a31f29544855dfc65d157c2e2278ac866}{R\+\_\+\+WORST}}}, }\item[{float }]{s\+\_\+best}{ = {\ttfamily \mbox{\hyperlink{namespace_health_monitor_ac31a13688956ec7e37301566ae7af87e}{S\+\_\+\+BEST}}}, }\item[{float }]{s\+\_\+worst}{ = {\ttfamily \mbox{\hyperlink{namespace_health_monitor_a103c572c4b23101ea513e9e084a6af51}{S\+\_\+\+WORST}}}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Compute health score from initial calibration state.
+
+@param state_dict Dictionary containing calibration state with intrinsics and extrinsics
+@param r_best Best reprojection error threshold (default: R_BEST)
+@param r_worst Worst reprojection error threshold (default: R_WORST)
+@param s_best Best stereo RMS threshold (default: S_BEST)
+@param s_worst Worst stereo RMS threshold (default: S_WORST)
+@return Dictionary with health score, method name, and detailed metrics
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{_health_monitor_8py_source_l00090}{90}} of file \mbox{\hyperlink{_health_monitor_8py_source}{Health\+Monitor.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00096\ )\ -\/>\ Dict[str,\ Any]: }
+\DoxyCodeLine{00097\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{} }}
+\DoxyCodeLine{00098\ \textcolor{stringliteral}{\ \ \ \ @brief\ Compute\ health\ score\ from\ initial\ calibration\ state. }}
+\DoxyCodeLine{00099\ \textcolor{stringliteral}{ }}
+\DoxyCodeLine{00100\ \textcolor{stringliteral}{\ \ \ \ @param\ state\_dict\ Dictionary\ containing\ calibration\ state\ with\ intrinsics\ and\ extrinsics }}
+\DoxyCodeLine{00101\ \textcolor{stringliteral}{\ \ \ \ @param\ r\_best\ Best\ reprojection\ error\ threshold\ (default:\ R\_BEST) }}
+\DoxyCodeLine{00102\ \textcolor{stringliteral}{\ \ \ \ @param\ r\_worst\ Worst\ reprojection\ error\ threshold\ (default:\ R\_WORST) }}
+\DoxyCodeLine{00103\ \textcolor{stringliteral}{\ \ \ \ @param\ s\_best\ Best\ stereo\ RMS\ threshold\ (default:\ S\_BEST) }}
+\DoxyCodeLine{00104\ \textcolor{stringliteral}{\ \ \ \ @param\ s\_worst\ Worst\ stereo\ RMS\ threshold\ (default:\ S\_WORST) }}
+\DoxyCodeLine{00105\ \textcolor{stringliteral}{\ \ \ \ @return\ Dictionary\ with\ health\ score,\ method\ name,\ and\ detailed\ metrics }}
+\DoxyCodeLine{00106\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00107\ \ \ \ \ st\ =\ state\_dict.get(\textcolor{stringliteral}{"{}state"{}},\ state\_dict) }
+\DoxyCodeLine{00108\ \ \ \ \ intr\ =\ st.get(\textcolor{stringliteral}{"{}intrinsics"{}},\ \{\})\ \textcolor{keywordflow}{or}\ \{\} }
+\DoxyCodeLine{00109\ \ \ \ \ extr\ =\ st.get(\textcolor{stringliteral}{"{}extrinsics"{}},\ \{\})\ \textcolor{keywordflow}{or}\ \{\} }
+\DoxyCodeLine{00110\  }
+\DoxyCodeLine{00111\ \ \ \ \ reproj\_vals\ =\ [] }
+\DoxyCodeLine{00112\ \ \ \ \ rms\_vals\ =\ [] }
+\DoxyCodeLine{00113\  }
+\DoxyCodeLine{00114\ \ \ \ \ \textcolor{keywordflow}{for}\ cam,\ intr\_data\ \textcolor{keywordflow}{in}\ intr.items(): }
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ reproj\ =\ safe\_float(intr\_data.get(\textcolor{stringliteral}{"{}reprojectionError"{}}),\ \textcolor{keywordtype}{None}) }
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ reproj\ \textcolor{keywordflow}{is}\ \textcolor{keywordflow}{not}\ \textcolor{keywordtype}{None}: }
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \ \ \ \ reproj\_vals.append(reproj) }
+\DoxyCodeLine{00118\  }
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ ex\ =\ extr.get(cam,\ \{\}) }
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ rms\ =\ safe\_float(ex.get(\textcolor{stringliteral}{"{}stereoRms"{}}),\ \textcolor{keywordtype}{None}) }
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ rms\ \textcolor{keywordflow}{is}\ \textcolor{keywordflow}{not}\ \textcolor{keywordtype}{None}: }
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \ \ \ \ rms\_vals.append(rms) }
+\DoxyCodeLine{00123\  }
+\DoxyCodeLine{00124\ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ reproj\_vals\ \textcolor{keywordflow}{and}\ \textcolor{keywordflow}{not}\ rms\_vals: }
+\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \{ }
+\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}health"{}}:\ 0.0, }
+\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}method"{}}:\ \textcolor{stringliteral}{"{}initial"{}}, }
+\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}details"{}}:\ \{\textcolor{stringliteral}{"{}reason"{}}:\ \textcolor{stringliteral}{"{}no\ reprojectionError\ and\ no\ stereoRms\ found"{}}\}, }
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ \} }
+\DoxyCodeLine{00130\  }
+\DoxyCodeLine{00131\ \ \ \ \ reproj\_mean\ =\ (sum(reproj\_vals)\ /\ len(reproj\_vals))\ \textcolor{keywordflow}{if}\ reproj\_vals\ \textcolor{keywordflow}{else}\ r\_worst }
+\DoxyCodeLine{00132\ \ \ \ \ rms\_mean\ =\ (sum(rms\_vals)\ /\ len(rms\_vals))\ \textcolor{keywordflow}{if}\ rms\_vals\ \textcolor{keywordflow}{else}\ s\_worst }
+\DoxyCodeLine{00133\  }
+\DoxyCodeLine{00134\ \ \ \ \ E\_reproj\ =\ clamp((reproj\_mean\ -\/\ r\_best)\ /\ (r\_worst\ -\/\ r\_best),\ 0.0,\ 1.0) }
+\DoxyCodeLine{00135\ \ \ \ \ E\_rms\ =\ clamp((rms\_mean\ -\/\ s\_best)\ /\ (s\_worst\ -\/\ s\_best),\ 0.0,\ 1.0) }
+\DoxyCodeLine{00136\  }
+\DoxyCodeLine{00137\ \ \ \ \ score\ =\ score\_from\_errors(E\_reproj,\ E\_rms) }
+\DoxyCodeLine{00138\  }
+\DoxyCodeLine{00139\ \ \ \ \ \textcolor{keywordflow}{return}\ \{ }
+\DoxyCodeLine{00140\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}health"{}}:\ float(score), }
+\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}method"{}}:\ \textcolor{stringliteral}{"{}initial"{}}, }
+\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}details"{}}:\ \{ }
+\DoxyCodeLine{00143\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}reproj\_mean"{}}:\ float(reproj\_mean), }
+\DoxyCodeLine{00144\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}rms\_mean"{}}:\ float(rms\_mean), }
+\DoxyCodeLine{00145\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}E\_reproj"{}}:\ float(E\_reproj), }
+\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}E\_rms"{}}:\ float(E\_rms), }
+\DoxyCodeLine{00147\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}thresholds"{}}:\ \{ }
+\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}R\_BEST"{}}:\ float(r\_best), }
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}R\_WORST"{}}:\ float(r\_worst), }
+\DoxyCodeLine{00150\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}S\_BEST"{}}:\ float(s\_best), }
+\DoxyCodeLine{00151\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}S\_WORST"{}}:\ float(s\_worst), }
+\DoxyCodeLine{00152\ \ \ \ \ \ \ \ \ \ \ \ \ \}, }
+\DoxyCodeLine{00153\ \ \ \ \ \ \ \ \ \}, }
+\DoxyCodeLine{00154\ \ \ \ \ \} }
+\DoxyCodeLine{00155\  }
+\DoxyCodeLine{00156\  }
+
+\end{DoxyCode}
+\Hypertarget{namespace_health_monitor_a1163a29e9f18e79dd4c47ae9717aa55b}\index{HealthMonitor@{HealthMonitor}!compute\_lifcal\_health\_from\_combined\_dict@{compute\_lifcal\_health\_from\_combined\_dict}}
+\index{compute\_lifcal\_health\_from\_combined\_dict@{compute\_lifcal\_health\_from\_combined\_dict}!HealthMonitor@{HealthMonitor}}
+\doxysubsubsection{\texorpdfstring{compute\_lifcal\_health\_from\_combined\_dict()}{compute\_lifcal\_health\_from\_combined\_dict()}}
+{\footnotesize\ttfamily \label{namespace_health_monitor_a1163a29e9f18e79dd4c47ae9717aa55b} 
+ Dict\mbox{[}str, Any\mbox{]} Health\+Monitor.\+compute\+\_\+lifcal\+\_\+health\+\_\+from\+\_\+combined\+\_\+dict (\begin{DoxyParamCaption}\item[{Dict\mbox{[}str, Any\mbox{]}}]{combined}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Compute LiFCal health from combined.json structure.
+
+@param combined Dictionary from combined.json with parameters for all cameras
+@return Dictionary with global health score, method name, and per-camera metrics
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{_health_monitor_8py_source_l00228}{228}} of file \mbox{\hyperlink{_health_monitor_8py_source}{Health\+Monitor.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00228\ \textcolor{keyword}{def\ }compute\_lifcal\_health\_from\_combined\_dict(combined:\ Dict[str,\ Any])\ -\/>\ Dict[str,\ Any]: }
+\DoxyCodeLine{00229\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{} }}
+\DoxyCodeLine{00230\ \textcolor{stringliteral}{\ \ \ \ @brief\ Compute\ LiFCal\ health\ from\ combined.json\ structure. }}
+\DoxyCodeLine{00231\ \textcolor{stringliteral}{ }}
+\DoxyCodeLine{00232\ \textcolor{stringliteral}{\ \ \ \ @param\ combined\ Dictionary\ from\ combined.json\ with\ parameters\ for\ all\ cameras }}
+\DoxyCodeLine{00233\ \textcolor{stringliteral}{\ \ \ \ @return\ Dictionary\ with\ global\ health\ score,\ method\ name,\ and\ per-\/camera\ metrics }}
+\DoxyCodeLine{00234\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00235\ \ \ \ \ params\_all\ =\ combined.get(\textcolor{stringliteral}{"{}state"{}},\ \{\}).get(\textcolor{stringliteral}{"{}parameters"{}},\ \{\}) }
+\DoxyCodeLine{00236\ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ isinstance(params\_all,\ dict)\ \textcolor{keywordflow}{or}\ len(params\_all)\ ==\ 0: }
+\DoxyCodeLine{00237\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \{\textcolor{stringliteral}{"{}health"{}}:\ 0.0,\ \textcolor{stringliteral}{"{}method"{}}:\ \textcolor{stringliteral}{"{}lifcal"{}},\ \textcolor{stringliteral}{"{}perCam"{}}:\ \{\}\} }
+\DoxyCodeLine{00238\  }
+\DoxyCodeLine{00239\ \ \ \ \ per\_cam\ =\ \{\} }
+\DoxyCodeLine{00240\ \ \ \ \ scores\ =\ [] }
+\DoxyCodeLine{00241\  }
+\DoxyCodeLine{00242\ \ \ \ \ \textcolor{keywordflow}{for}\ cam,\ p\ \textcolor{keywordflow}{in}\ params\_all.items(): }
+\DoxyCodeLine{00243\ \ \ \ \ \ \ \ \ rep\ =\ (p\ \textcolor{keywordflow}{or}\ \{\}).get(\textcolor{stringliteral}{"{}reprojection"{}},\ \{\})\ \textcolor{keywordflow}{or}\ \{\} }
+\DoxyCodeLine{00244\  }
+\DoxyCodeLine{00245\ \ \ \ \ \ \ \ \ x\_std\ =\ rep.get(\textcolor{stringliteral}{"{}x\_std"{}},\ \textcolor{keywordtype}{None}) }
+\DoxyCodeLine{00246\ \ \ \ \ \ \ \ \ y\_std\ =\ rep.get(\textcolor{stringliteral}{"{}y\_std"{}},\ \textcolor{keywordtype}{None}) }
+\DoxyCodeLine{00247\ \ \ \ \ \ \ \ \ x\_mae\ =\ rep.get(\textcolor{stringliteral}{"{}x\_mae"{}},\ \textcolor{keywordtype}{None}) }
+\DoxyCodeLine{00248\ \ \ \ \ \ \ \ \ y\_mae\ =\ rep.get(\textcolor{stringliteral}{"{}y\_mae"{}},\ \textcolor{keywordtype}{None}) }
+\DoxyCodeLine{00249\  }
+\DoxyCodeLine{00250\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Skip\ camera\ if\ any\ field\ is\ missing }}
+\DoxyCodeLine{00251\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ any(v\ \textcolor{keywordflow}{is}\ \textcolor{keywordtype}{None}\ \textcolor{keywordflow}{for}\ v\ \textcolor{keywordflow}{in}\ [x\_std,\ y\_std,\ x\_mae,\ y\_mae]): }
+\DoxyCodeLine{00252\ \ \ \ \ \ \ \ \ \ \ \ \ per\_cam[cam]\ =\ \{\textcolor{stringliteral}{"{}health"{}}:\ 0.0,\ \textcolor{stringliteral}{"{}reason"{}}:\ \textcolor{stringliteral}{"{}missing\ reprojection\ fields"{}}\} }
+\DoxyCodeLine{00253\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue} }
+\DoxyCodeLine{00254\  }
+\DoxyCodeLine{00255\ \ \ \ \ \ \ \ \ std\_mag\ =\ math.sqrt(float(x\_std)\ **\ 2\ +\ float(y\_std)\ **\ 2) }
+\DoxyCodeLine{00256\ \ \ \ \ \ \ \ \ mae\_mag\ =\ math.sqrt(float(x\_mae)\ **\ 2\ +\ float(y\_mae)\ **\ 2) }
+\DoxyCodeLine{00257\  }
+\DoxyCodeLine{00258\ \ \ \ \ \ \ \ \ E\_std\ =\ clamp((std\_mag\ -\/\ S\_BEST)\ /\ (S\_WORST\ -\/\ S\_BEST),\ 0.0,\ 1.0) }
+\DoxyCodeLine{00259\ \ \ \ \ \ \ \ \ E\_mae\ =\ clamp((mae\_mag\ -\/\ R\_BEST)\ /\ (R\_WORST\ -\/\ R\_BEST),\ 0.0,\ 1.0) }
+\DoxyCodeLine{00260\  }
+\DoxyCodeLine{00261\ \ \ \ \ \ \ \ \ health\ =\ 100.0\ *\ (1.0\ -\/\ (0.6\ *\ (E\_std\ **\ 2)\ +\ 0.4\ *\ (E\_mae\ **\ 2))) }
+\DoxyCodeLine{00262\ \ \ \ \ \ \ \ \ health\ =\ clamp(health,\ 0.0,\ 100.0) }
+\DoxyCodeLine{00263\  }
+\DoxyCodeLine{00264\ \ \ \ \ \ \ \ \ per\_cam[cam]\ =\ \{ }
+\DoxyCodeLine{00265\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}health"{}}:\ float(health), }
+\DoxyCodeLine{00266\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}std\_mag"{}}:\ float(std\_mag), }
+\DoxyCodeLine{00267\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}mae\_mag"{}}:\ float(mae\_mag), }
+\DoxyCodeLine{00268\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}E\_std"{}}:\ float(E\_std), }
+\DoxyCodeLine{00269\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}E\_mae"{}}:\ float(E\_mae), }
+\DoxyCodeLine{00270\ \ \ \ \ \ \ \ \ \} }
+\DoxyCodeLine{00271\ \ \ \ \ \ \ \ \ scores.append(float(health)) }
+\DoxyCodeLine{00272\  }
+\DoxyCodeLine{00273\ \ \ \ \ \textcolor{keywordflow}{if}\ len(scores)\ ==\ 0: }
+\DoxyCodeLine{00274\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \{\textcolor{stringliteral}{"{}health"{}}:\ 0.0,\ \textcolor{stringliteral}{"{}method"{}}:\ \textcolor{stringliteral}{"{}lifcal"{}},\ \textcolor{stringliteral}{"{}perCam"{}}:\ per\_cam\} }
+\DoxyCodeLine{00275\  }
+\DoxyCodeLine{00276\ \ \ \ \ \textcolor{comment}{\#\ Global\ health:\ average\ across\ all\ cameras }}
+\DoxyCodeLine{00277\ \ \ \ \ global\_health\ =\ sum(scores)\ /\ len(scores) }
+\DoxyCodeLine{00278\  }
+\DoxyCodeLine{00279\ \ \ \ \ \textcolor{keywordflow}{return}\ \{\textcolor{stringliteral}{"{}health"{}}:\ float(global\_health),\ \textcolor{stringliteral}{"{}method"{}}:\ \textcolor{stringliteral}{"{}lifcal"{}},\ \textcolor{stringliteral}{"{}perCam"{}}:\ per\_cam\} }
+\DoxyCodeLine{00280\  }
+\DoxyCodeLine{00281\  }
+
+\end{DoxyCode}
+\Hypertarget{namespace_health_monitor_a795ce112d3003ba5d0173689c109391c}\index{HealthMonitor@{HealthMonitor}!compute\_lifcal\_health\_from\_combined\_path@{compute\_lifcal\_health\_from\_combined\_path}}
+\index{compute\_lifcal\_health\_from\_combined\_path@{compute\_lifcal\_health\_from\_combined\_path}!HealthMonitor@{HealthMonitor}}
+\doxysubsubsection{\texorpdfstring{compute\_lifcal\_health\_from\_combined\_path()}{compute\_lifcal\_health\_from\_combined\_path()}}
+{\footnotesize\ttfamily \label{namespace_health_monitor_a795ce112d3003ba5d0173689c109391c} 
+ Dict\mbox{[}str, Any\mbox{]} Health\+Monitor.\+compute\+\_\+lifcal\+\_\+health\+\_\+from\+\_\+combined\+\_\+path (\begin{DoxyParamCaption}\item[{str}]{combined\+\_\+json\+\_\+path}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Load combined.json from file and compute LiFCal health.
+
+@param combined_json_path Path to the combined.json file
+@return Dictionary with global health score, method name, and per-camera metrics
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{_health_monitor_8py_source_l00282}{282}} of file \mbox{\hyperlink{_health_monitor_8py_source}{Health\+Monitor.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00282\ \textcolor{keyword}{def\ }compute\_lifcal\_health\_from\_combined\_path(combined\_json\_path:\ str)\ -\/>\ Dict[str,\ Any]: }
+\DoxyCodeLine{00283\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{} }}
+\DoxyCodeLine{00284\ \textcolor{stringliteral}{\ \ \ \ @brief\ Load\ combined.json\ from\ file\ and\ compute\ LiFCal\ health. }}
+\DoxyCodeLine{00285\ \textcolor{stringliteral}{\ \ \ \  }}
+\DoxyCodeLine{00286\ \textcolor{stringliteral}{\ \ \ \ @param\ combined\_json\_path\ Path\ to\ the\ combined.json\ file }}
+\DoxyCodeLine{00287\ \textcolor{stringliteral}{\ \ \ \ @return\ Dictionary\ with\ global\ health\ score,\ method\ name,\ and\ per-\/camera\ metrics }}
+\DoxyCodeLine{00288\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00289\ \ \ \ \ \textcolor{keyword}{with}\ open(combined\_json\_path,\ \textcolor{stringliteral}{"{}r"{}},\ encoding=\textcolor{stringliteral}{"{}utf-\/8"{}})\ \textcolor{keyword}{as}\ f: }
+\DoxyCodeLine{00290\ \ \ \ \ \ \ \ \ combined\ =\ json.load(f) }
+\DoxyCodeLine{00291\ \ \ \ \ \textcolor{keywordflow}{return}\ compute\_lifcal\_health\_from\_combined\_dict(combined)}
+
+\end{DoxyCode}
+\Hypertarget{namespace_health_monitor_a56aef51f9aa11eb7f3662b403d365545}\index{HealthMonitor@{HealthMonitor}!compute\_lifcal\_health\_from\_xy@{compute\_lifcal\_health\_from\_xy}}
+\index{compute\_lifcal\_health\_from\_xy@{compute\_lifcal\_health\_from\_xy}!HealthMonitor@{HealthMonitor}}
+\doxysubsubsection{\texorpdfstring{compute\_lifcal\_health\_from\_xy()}{compute\_lifcal\_health\_from\_xy()}}
+{\footnotesize\ttfamily \label{namespace_health_monitor_a56aef51f9aa11eb7f3662b403d365545} 
+ Dict\mbox{[}str, Any\mbox{]} Health\+Monitor.\+compute\+\_\+lifcal\+\_\+health\+\_\+from\+\_\+xy (\begin{DoxyParamCaption}\item[{float}]{x\+\_\+std}{, }\item[{float}]{y\+\_\+std}{, }\item[{float}]{x\+\_\+mae}{, }\item[{float}]{y\+\_\+mae}{, }\item[{float }]{r\+\_\+best}{ = {\ttfamily \mbox{\hyperlink{namespace_health_monitor_afaf986f238234c66f66bdfe5688f786c}{R\+\_\+\+BEST}}}, }\item[{float }]{r\+\_\+worst}{ = {\ttfamily \mbox{\hyperlink{namespace_health_monitor_a31f29544855dfc65d157c2e2278ac866}{R\+\_\+\+WORST}}}, }\item[{float }]{s\+\_\+best}{ = {\ttfamily \mbox{\hyperlink{namespace_health_monitor_ac31a13688956ec7e37301566ae7af87e}{S\+\_\+\+BEST}}}, }\item[{float }]{s\+\_\+worst}{ = {\ttfamily \mbox{\hyperlink{namespace_health_monitor_a103c572c4b23101ea513e9e084a6af51}{S\+\_\+\+WORST}}}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Compute LiFCal health score from x/y standard deviation and MAE values.
+
+@param x_std Standard deviation in x direction
+@param y_std Standard deviation in y direction
+@param x_mae Mean absolute error in x direction
+@param y_mae Mean absolute error in y direction
+@param r_best Best reprojection error threshold (default: R_BEST)
+@param r_worst Worst reprojection error threshold (default: R_WORST)
+@param s_best Best stereo RMS threshold (default: S_BEST)
+@param s_worst Worst stereo RMS threshold (default: S_WORST)
+@return Dictionary with health score, method name, and detailed metrics
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{_health_monitor_8py_source_l00180}{180}} of file \mbox{\hyperlink{_health_monitor_8py_source}{Health\+Monitor.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00189\ )\ -\/>\ Dict[str,\ Any]: }
+\DoxyCodeLine{00190\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{} }}
+\DoxyCodeLine{00191\ \textcolor{stringliteral}{\ \ \ \ @brief\ Compute\ LiFCal\ health\ score\ from\ x/y\ standard\ deviation\ and\ MAE\ values. }}
+\DoxyCodeLine{00192\ \textcolor{stringliteral}{\ \ \ \  }}
+\DoxyCodeLine{00193\ \textcolor{stringliteral}{\ \ \ \ @param\ x\_std\ Standard\ deviation\ in\ x\ direction }}
+\DoxyCodeLine{00194\ \textcolor{stringliteral}{\ \ \ \ @param\ y\_std\ Standard\ deviation\ in\ y\ direction }}
+\DoxyCodeLine{00195\ \textcolor{stringliteral}{\ \ \ \ @param\ x\_mae\ Mean\ absolute\ error\ in\ x\ direction }}
+\DoxyCodeLine{00196\ \textcolor{stringliteral}{\ \ \ \ @param\ y\_mae\ Mean\ absolute\ error\ in\ y\ direction }}
+\DoxyCodeLine{00197\ \textcolor{stringliteral}{\ \ \ \ @param\ r\_best\ Best\ reprojection\ error\ threshold\ (default:\ R\_BEST) }}
+\DoxyCodeLine{00198\ \textcolor{stringliteral}{\ \ \ \ @param\ r\_worst\ Worst\ reprojection\ error\ threshold\ (default:\ R\_WORST) }}
+\DoxyCodeLine{00199\ \textcolor{stringliteral}{\ \ \ \ @param\ s\_best\ Best\ stereo\ RMS\ threshold\ (default:\ S\_BEST) }}
+\DoxyCodeLine{00200\ \textcolor{stringliteral}{\ \ \ \ @param\ s\_worst\ Worst\ stereo\ RMS\ threshold\ (default:\ S\_WORST) }}
+\DoxyCodeLine{00201\ \textcolor{stringliteral}{\ \ \ \ @return\ Dictionary\ with\ health\ score,\ method\ name,\ and\ detailed\ metrics }}
+\DoxyCodeLine{00202\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00203\ \ \ \ \ std\_norm\ =\ (x\_std\ *\ x\_std\ +\ y\_std\ *\ y\_std)\ **\ 0.5 }
+\DoxyCodeLine{00204\ \ \ \ \ mae\_norm\ =\ (x\_mae\ *\ x\_mae\ +\ y\_mae\ *\ y\_mae)\ **\ 0.5 }
+\DoxyCodeLine{00205\  }
+\DoxyCodeLine{00206\ \ \ \ \ E\_std\ =\ clamp((std\_norm\ -\/\ s\_best)\ /\ (s\_worst\ -\/\ s\_best),\ 0.0,\ 1.0) }
+\DoxyCodeLine{00207\ \ \ \ \ E\_mae\ =\ clamp((mae\_norm\ -\/\ r\_best)\ /\ (r\_worst\ -\/\ r\_best),\ 0.0,\ 1.0) }
+\DoxyCodeLine{00208\  }
+\DoxyCodeLine{00209\ \ \ \ \ score\ =\ score\_from\_errors(E\_std,\ E\_mae) }
+\DoxyCodeLine{00210\  }
+\DoxyCodeLine{00211\ \ \ \ \ \textcolor{keywordflow}{return}\ \{ }
+\DoxyCodeLine{00212\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}health"{}}:\ float(score), }
+\DoxyCodeLine{00213\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}method"{}}:\ \textcolor{stringliteral}{"{}lifcal"{}}, }
+\DoxyCodeLine{00214\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}details"{}}:\ \{ }
+\DoxyCodeLine{00215\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}std\_norm"{}}:\ float(std\_norm), }
+\DoxyCodeLine{00216\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}mae\_norm"{}}:\ float(mae\_norm), }
+\DoxyCodeLine{00217\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}E\_std"{}}:\ float(E\_std), }
+\DoxyCodeLine{00218\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}E\_mae"{}}:\ float(E\_mae), }
+\DoxyCodeLine{00219\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}thresholds"{}}:\ \{ }
+\DoxyCodeLine{00220\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}R\_BEST"{}}:\ float(r\_best), }
+\DoxyCodeLine{00221\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}R\_WORST"{}}:\ float(r\_worst), }
+\DoxyCodeLine{00222\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}S\_BEST"{}}:\ float(s\_best), }
+\DoxyCodeLine{00223\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}S\_WORST"{}}:\ float(s\_worst), }
+\DoxyCodeLine{00224\ \ \ \ \ \ \ \ \ \ \ \ \ \}, }
+\DoxyCodeLine{00225\ \ \ \ \ \ \ \ \ \}, }
+\DoxyCodeLine{00226\ \ \ \ \ \} }
+\DoxyCodeLine{00227\  }
+
+\end{DoxyCode}
+\Hypertarget{namespace_health_monitor_a79511a86b0813f0b4a955c5da76d8ebc}\index{HealthMonitor@{HealthMonitor}!parse\_lifcal\_protocol@{parse\_lifcal\_protocol}}
+\index{parse\_lifcal\_protocol@{parse\_lifcal\_protocol}!HealthMonitor@{HealthMonitor}}
+\doxysubsubsection{\texorpdfstring{parse\_lifcal\_protocol()}{parse\_lifcal\_protocol()}}
+{\footnotesize\ttfamily \label{namespace_health_monitor_a79511a86b0813f0b4a955c5da76d8ebc} 
+ Dict\mbox{[}str, Optional\mbox{[}float\mbox{]}\mbox{]} Health\+Monitor.\+parse\+\_\+lifcal\+\_\+protocol (\begin{DoxyParamCaption}\item[{str}]{protocol\+\_\+path}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Parse LiFCal calibration protocol text file for error metrics.
+
+@param protocol_path Path to the calibration protocol text file
+@return Dictionary with x_std, y_std, x_mae, y_mae values or None if not found
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{_health_monitor_8py_source_l00157}{157}} of file \mbox{\hyperlink{_health_monitor_8py_source}{Health\+Monitor.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00157\ \textcolor{keyword}{def\ }parse\_lifcal\_protocol(protocol\_path:\ str)\ -\/>\ Dict[str,\ Optional[float]]: }
+\DoxyCodeLine{00158\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{} }}
+\DoxyCodeLine{00159\ \textcolor{stringliteral}{\ \ \ \ @brief\ Parse\ LiFCal\ calibration\ protocol\ text\ file\ for\ error\ metrics. }}
+\DoxyCodeLine{00160\ \textcolor{stringliteral}{\ \ \ \  }}
+\DoxyCodeLine{00161\ \textcolor{stringliteral}{\ \ \ \ @param\ protocol\_path\ Path\ to\ the\ calibration\ protocol\ text\ file }}
+\DoxyCodeLine{00162\ \textcolor{stringliteral}{\ \ \ \ @return\ Dictionary\ with\ x\_std,\ y\_std,\ x\_mae,\ y\_mae\ values\ or\ None\ if\ not\ found }}
+\DoxyCodeLine{00163\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00164\ \ \ \ \ txt\ =\ open(protocol\_path,\ \textcolor{stringliteral}{"{}r"{}},\ encoding=\textcolor{stringliteral}{"{}utf-\/8"{}},\ errors=\textcolor{stringliteral}{"{}ignore"{}}).read() }
+\DoxyCodeLine{00165\  }
+\DoxyCodeLine{00166\ \ \ \ \ \textcolor{keyword}{def\ }find\_float(pattern:\ str)\ -\/>\ Optional[float]: }
+\DoxyCodeLine{00167\ \ \ \ \ \ \ \ \ m\ =\ re.search(pattern,\ txt,\ re.MULTILINE) }
+\DoxyCodeLine{00168\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ m: }
+\DoxyCodeLine{00169\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keywordtype}{None} }
+\DoxyCodeLine{00170\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ safe\_float(m.group(1),\ \textcolor{keywordtype}{None}) }
+\DoxyCodeLine{00171\  }
+\DoxyCodeLine{00172\ \ \ \ \ x\_std\ =\ find\_float(\textcolor{stringliteral}{r"{}std\(\backslash\).\(\backslash\)s*Dev\(\backslash\).\(\backslash\)s*x:\(\backslash\)s*([0-\/9.+-\/eE]+)"{}}) }
+\DoxyCodeLine{00173\ \ \ \ \ y\_std\ =\ find\_float(\textcolor{stringliteral}{r"{}std\(\backslash\).\(\backslash\)s*Dev\(\backslash\).\(\backslash\)s*y:\(\backslash\)s*([0-\/9.+-\/eE]+)"{}}) }
+\DoxyCodeLine{00174\ \ \ \ \ x\_mae\ =\ find\_float(\textcolor{stringliteral}{r"{}mae\(\backslash\)s*x:\(\backslash\)s*([0-\/9.+-\/eE]+)"{}}) }
+\DoxyCodeLine{00175\ \ \ \ \ y\_mae\ =\ find\_float(\textcolor{stringliteral}{r"{}mae\(\backslash\)s*y:\(\backslash\)s*([0-\/9.+-\/eE]+)"{}}) }
+\DoxyCodeLine{00176\  }
+\DoxyCodeLine{00177\ \ \ \ \ \textcolor{keywordflow}{return}\ \{\textcolor{stringliteral}{"{}x\_std"{}}:\ x\_std,\ \textcolor{stringliteral}{"{}y\_std"{}}:\ y\_std,\ \textcolor{stringliteral}{"{}x\_mae"{}}:\ x\_mae,\ \textcolor{stringliteral}{"{}y\_mae"{}}:\ y\_mae\} }
+\DoxyCodeLine{00178\  }
+\DoxyCodeLine{00179\  }
+
+\end{DoxyCode}
+\Hypertarget{namespace_health_monitor_afa30e56be01511c5e2fd7aad7730055a}\index{HealthMonitor@{HealthMonitor}!safe\_float@{safe\_float}}
+\index{safe\_float@{safe\_float}!HealthMonitor@{HealthMonitor}}
+\doxysubsubsection{\texorpdfstring{safe\_float()}{safe\_float()}}
+{\footnotesize\ttfamily \label{namespace_health_monitor_afa30e56be01511c5e2fd7aad7730055a} 
+Health\+Monitor.\+safe\+\_\+float (\begin{DoxyParamCaption}\item[{}]{v}{, }\item[{}]{default}{ = {\ttfamily None}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Convert value to float safely, return default on error.
+
+@param v Value to convert
+@param default Default value to return on conversion error
+@return Converted float value or default
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{_health_monitor_8py_source_l00060}{60}} of file \mbox{\hyperlink{_health_monitor_8py_source}{Health\+Monitor.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00060\ \textcolor{keyword}{def\ }safe\_float(v,\ default=None): }
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{} }}
+\DoxyCodeLine{00062\ \textcolor{stringliteral}{\ \ \ \ @brief\ Convert\ value\ to\ float\ safely,\ return\ default\ on\ error. }}
+\DoxyCodeLine{00063\ \textcolor{stringliteral}{\ \ \ \  }}
+\DoxyCodeLine{00064\ \textcolor{stringliteral}{\ \ \ \ @param\ v\ Value\ to\ convert }}
+\DoxyCodeLine{00065\ \textcolor{stringliteral}{\ \ \ \ @param\ default\ Default\ value\ to\ return\ on\ conversion\ error }}
+\DoxyCodeLine{00066\ \textcolor{stringliteral}{\ \ \ \ @return\ Converted\ float\ value\ or\ default }}
+\DoxyCodeLine{00067\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{keywordflow}{try}: }
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ v\ \textcolor{keywordflow}{is}\ \textcolor{keywordtype}{None}: }
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ default }
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ float(v) }
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keywordflow}{except}\ Exception: }
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ default }
+\DoxyCodeLine{00074\  }
+\DoxyCodeLine{00075\  }
+
+\end{DoxyCode}
+\Hypertarget{namespace_health_monitor_afaf436975b71f59fa17ded66fa3e62de}\index{HealthMonitor@{HealthMonitor}!score\_from\_errors@{score\_from\_errors}}
+\index{score\_from\_errors@{score\_from\_errors}!HealthMonitor@{HealthMonitor}}
+\doxysubsubsection{\texorpdfstring{score\_from\_errors()}{score\_from\_errors()}}
+{\footnotesize\ttfamily \label{namespace_health_monitor_afaf436975b71f59fa17ded66fa3e62de} 
+ float Health\+Monitor.\+score\+\_\+from\+\_\+errors (\begin{DoxyParamCaption}\item[{float}]{E\+\_\+a}{, }\item[{float}]{E\+\_\+b}{, }\item[{float }]{w\+\_\+a}{ = {\ttfamily 0.6}, }\item[{float }]{w\+\_\+b}{ = {\ttfamily 0.4}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Compute health score from two normalized error metrics.
+
+@param E_a First normalized error metric (0..1)
+@param E_b Second normalized error metric (0..1)
+@param w_a Weight for first error metric (default: 0.6)
+@param w_b Weight for second error metric (default: 0.4)
+@return Health score between 0 and 100
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{_health_monitor_8py_source_l00076}{76}} of file \mbox{\hyperlink{_health_monitor_8py_source}{Health\+Monitor.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00076\ \textcolor{keyword}{def\ }score\_from\_errors(E\_a:\ float,\ E\_b:\ float,\ w\_a:\ float\ =\ 0.6,\ w\_b:\ float\ =\ 0.4)\ -\/>\ float: }
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{} }}
+\DoxyCodeLine{00078\ \textcolor{stringliteral}{\ \ \ \ @brief\ Compute\ health\ score\ from\ two\ normalized\ error\ metrics. }}
+\DoxyCodeLine{00079\ \textcolor{stringliteral}{\ \ \ \  }}
+\DoxyCodeLine{00080\ \textcolor{stringliteral}{\ \ \ \ @param\ E\_a\ First\ normalized\ error\ metric\ (0..1) }}
+\DoxyCodeLine{00081\ \textcolor{stringliteral}{\ \ \ \ @param\ E\_b\ Second\ normalized\ error\ metric\ (0..1) }}
+\DoxyCodeLine{00082\ \textcolor{stringliteral}{\ \ \ \ @param\ w\_a\ Weight\ for\ first\ error\ metric\ (default:\ 0.6) }}
+\DoxyCodeLine{00083\ \textcolor{stringliteral}{\ \ \ \ @param\ w\_b\ Weight\ for\ second\ error\ metric\ (default:\ 0.4) }}
+\DoxyCodeLine{00084\ \textcolor{stringliteral}{\ \ \ \ @return\ Health\ score\ between\ 0\ and\ 100 }}
+\DoxyCodeLine{00085\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00086\ \ \ \ \ val\ =\ 100.0\ *\ (1.0\ -\/\ (w\_a\ *\ (E\_a\ **\ 2)\ +\ w\_b\ *\ (E\_b\ **\ 2))) }
+\DoxyCodeLine{00087\ \ \ \ \ \textcolor{keywordflow}{return}\ clamp(val\ /\ 100.0,\ 0.0,\ 1.0)\ *\ 100.0 }
+\DoxyCodeLine{00088\  }
+\DoxyCodeLine{00089\  }
+
+\end{DoxyCode}
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{namespace_health_monitor_afaf986f238234c66f66bdfe5688f786c}\index{HealthMonitor@{HealthMonitor}!R\_BEST@{R\_BEST}}
+\index{R\_BEST@{R\_BEST}!HealthMonitor@{HealthMonitor}}
+\doxysubsubsection{\texorpdfstring{R\_BEST}{R\_BEST}}
+{\footnotesize\ttfamily \label{namespace_health_monitor_afaf986f238234c66f66bdfe5688f786c} 
+float Health\+Monitor.\+R\+\_\+\+BEST = 0.\+03}
+
+
+
+Definition at line \mbox{\hyperlink{_health_monitor_8py_source_l00038}{38}} of file \mbox{\hyperlink{_health_monitor_8py_source}{Health\+Monitor.\+py}}.
+
+\Hypertarget{namespace_health_monitor_a31f29544855dfc65d157c2e2278ac866}\index{HealthMonitor@{HealthMonitor}!R\_WORST@{R\_WORST}}
+\index{R\_WORST@{R\_WORST}!HealthMonitor@{HealthMonitor}}
+\doxysubsubsection{\texorpdfstring{R\_WORST}{R\_WORST}}
+{\footnotesize\ttfamily \label{namespace_health_monitor_a31f29544855dfc65d157c2e2278ac866} 
+float Health\+Monitor.\+R\+\_\+\+WORST = 1.\+0}
+
+
+
+Definition at line \mbox{\hyperlink{_health_monitor_8py_source_l00039}{39}} of file \mbox{\hyperlink{_health_monitor_8py_source}{Health\+Monitor.\+py}}.
+
+\Hypertarget{namespace_health_monitor_ac31a13688956ec7e37301566ae7af87e}\index{HealthMonitor@{HealthMonitor}!S\_BEST@{S\_BEST}}
+\index{S\_BEST@{S\_BEST}!HealthMonitor@{HealthMonitor}}
+\doxysubsubsection{\texorpdfstring{S\_BEST}{S\_BEST}}
+{\footnotesize\ttfamily \label{namespace_health_monitor_ac31a13688956ec7e37301566ae7af87e} 
+float Health\+Monitor.\+S\+\_\+\+BEST = 0.\+0}
+
+
+
+Definition at line \mbox{\hyperlink{_health_monitor_8py_source_l00040}{40}} of file \mbox{\hyperlink{_health_monitor_8py_source}{Health\+Monitor.\+py}}.
+
+\Hypertarget{namespace_health_monitor_a103c572c4b23101ea513e9e084a6af51}\index{HealthMonitor@{HealthMonitor}!S\_WORST@{S\_WORST}}
+\index{S\_WORST@{S\_WORST}!HealthMonitor@{HealthMonitor}}
+\doxysubsubsection{\texorpdfstring{S\_WORST}{S\_WORST}}
+{\footnotesize\ttfamily \label{namespace_health_monitor_a103c572c4b23101ea513e9e084a6af51} 
+float Health\+Monitor.\+S\+\_\+\+WORST = 50.\+0}
+
+
+
+Definition at line \mbox{\hyperlink{_health_monitor_8py_source_l00041}{41}} of file \mbox{\hyperlink{_health_monitor_8py_source}{Health\+Monitor.\+py}}.
+

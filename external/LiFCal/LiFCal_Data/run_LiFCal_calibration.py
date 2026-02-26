@@ -1,11 +1,13 @@
-"""Runs LiFCal recalibration for all cameras and exports results to JSON."""
-
 import os
 import re
 import shutil
 import subprocess
 from datetime import datetime
 import lifcal_to_json
+
+"""
+@brief Runs LiFCal recalibration for all cameras and exports results to JSON.
+"""
 
 # Configuration paths
 LIFCAL_BIN = "/data/external/LiFCal/build/bin/LiFCal"
@@ -29,13 +31,23 @@ CAMERA_IDS = [
 
 
 def read_text(path: str) -> str:
-    """Read text file with UTF-8 encoding."""
+    """
+    @brief Read text file with UTF-8 encoding.
+    
+    @param path Path to the text file
+    @return File content as string
+    """
     with open(path, "r", encoding="utf-8", errors="replace") as f:
         return f.read()
 
 
 def write_text(path: str, s: str) -> None:
-    """Write text to file, creating directories if needed."""
+    """
+    @brief Write text to file, creating directories if needed.
+    
+    @param path Output file path
+    @param s Text content to write
+    """
     os.makedirs(os.path.dirname(path), exist_ok=True)
     with open(path, "w", encoding="utf-8") as f:
         f.write(s)
@@ -43,20 +55,27 @@ def write_text(path: str, s: str) -> None:
 
 def replace_yaml_key_line(text: str, key: str, new_val: str) -> str:
     """
-    Replace YAML key-value lines.
+    @brief Replace YAML key-value lines.
     
-    Replaces lines like:
-      Key: something
-      Key: "something"
-    with:
-      Key: "new_val"
+    @param text YAML text content
+    @param key YAML key to find and replace
+    @param new_val New value to set (will be quoted)
+    @return Modified YAML text
     """
     pattern = re.compile(rf"^({re.escape(key)}\s*:\s*)(.*)$", re.MULTILINE)
     return pattern.sub(rf'\1"{new_val}"', text)
 
 
 def patch_settings_yaml(template_text: str, focus_dir: str, depth_dir: str, mla_xml: str) -> str:
-    """Update YAML settings with camera-specific paths."""
+    """
+    @brief Update YAML settings with camera-specific paths.
+    
+    @param template_text Original YAML template content
+    @param focus_dir Path to focus images directory
+    @param depth_dir Path to depth maps directory
+    @param mla_xml Path to MLA calibration XML file
+    @return Modified YAML text with updated paths
+    """
     out = template_text
     out = replace_yaml_key_line(out, "Path.totalFocusImages", focus_dir)
     out = replace_yaml_key_line(out, "Path.virtualDepthData", depth_dir)
@@ -65,7 +84,14 @@ def patch_settings_yaml(template_text: str, focus_dir: str, depth_dir: str, mla_
 
 
 def run_lifcal_recalib(settings_path: str, fixed_params_path: str, store_dir: str) -> int:
-    """Run LiFCal recalibration and return exit code."""
+    """
+    @brief Run LiFCal recalibration and return exit code.
+    
+    @param settings_path Path to Settings.yaml file
+    @param fixed_params_path Path to fixed parameters file
+    @param store_dir Directory where LiFCal will store results
+    @return Exit code from LiFCal process
+    """
     os.makedirs(store_dir, exist_ok=True)
 
     cmd = [LIFCAL_BIN, "recalib", settings_path, fixed_params_path]
@@ -87,10 +113,10 @@ def run_lifcal_recalib(settings_path: str, fixed_params_path: str, store_dir: st
 
 def find_results_folder(store_dir: str) -> str:
     """
-    Find LiFCal results folder.
+    @brief Find LiFCal results folder.
     
-    LiFCal typically creates a Calibration_Results_... subdirectory.
-    If not found, returns store_dir itself.
+    @param store_dir LiFCal output directory
+    @return Path to results folder (typically Calibration_Results_... subdirectory)
     """
     if not os.path.isdir(store_dir):
         raise RuntimeError(f"store_dir does not exist: {store_dir}")
@@ -109,7 +135,12 @@ def find_results_folder(store_dir: str) -> str:
 
 
 def copy_essentials(result_dir: str, out_cam_dir: str) -> None:
-    """Copy calibrationProtocol.txt and extrinsicOrientations.xml to output directory."""
+    """
+    @brief Copy calibrationProtocol.txt and extrinsicOrientations.xml to output directory.
+    
+    @param result_dir Source directory containing LiFCal results
+    @param out_cam_dir Destination directory for essential files
+    """
     proto = os.path.join(result_dir, "calibrationProtocol.txt")
     extr = os.path.join(result_dir, "extrinsicOrientations.xml")
 
@@ -126,7 +157,9 @@ def copy_essentials(result_dir: str, out_cam_dir: str) -> None:
 
 
 def main():
-    """Main pipeline: run LiFCal for each camera, export JSON, and log health."""
+    """
+    @brief Main pipeline: run LiFCal for each camera, export JSON, and log health.
+    """
     if not os.path.isfile(LIFCAL_BIN):
         raise SystemExit(f"LiFCal binary not found: {LIFCAL_BIN}")
     if not os.path.isfile(SETTINGS):

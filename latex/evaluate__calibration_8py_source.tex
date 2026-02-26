@@ -1,0 +1,253 @@
+\doxysection{evaluate\+\_\+calibration.\+py}
+\hypertarget{evaluate__calibration_8py_source}{}\label{evaluate__calibration_8py_source}\index{calibrationLFC/results/evaluate\_calibration.py@{calibrationLFC/results/evaluate\_calibration.py}}
+\mbox{\hyperlink{evaluate__calibration_8py}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00001}\mbox{\hyperlink{namespaceevaluate__calibration}{00001}}\ \textcolor{keyword}{import}\ json}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00002}00002\ \textcolor{keyword}{import}\ numpy\ \textcolor{keyword}{as}\ np}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00003}00003\ \textcolor{keyword}{from}\ pathlib\ \textcolor{keyword}{import}\ Path}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00004}00004\ }
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00005}00005\ \textcolor{comment}{\#\ Paths}}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00006}\mbox{\hyperlink{namespaceevaluate__calibration_a3630af97b6012ca108cd0fdda47435af}{00006}}\ THIS\_DIR\ =\ Path(\_\_file\_\_).resolve().parent}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00007}\mbox{\hyperlink{namespaceevaluate__calibration_a5ffb7363e3e7bf2b7c5c12583cf9d00f}{00007}}\ CALIB\_LFC\_DIR\ =\ THIS\_DIR.parent\ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ calibrationLFC/}}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00008}\mbox{\hyperlink{namespaceevaluate__calibration_ac12cc9147a88ddfb0304199c03ad9487}{00008}}\ PROJECT\_ROOT\ =\ CALIB\_LFC\_DIR.parent\ \ \ \ \ \ \textcolor{comment}{\#\ CameraCalibration/}}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00009}\mbox{\hyperlink{namespaceevaluate__calibration_a046db975fb67e89b002e206d81032b81}{00009}}\ RESULTS\_DIR\ =\ CALIB\_LFC\_DIR\ /\ \textcolor{stringliteral}{"{}results"{}}}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00011}00011\ \textcolor{comment}{\#\ Groundtruth\ base\ directory}}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00012}\mbox{\hyperlink{namespaceevaluate__calibration_aef50d8b1ec05ef0f7726ded4a0351679}{00012}}\ GT\_DIR\ =\ PROJECT\_ROOT\ /\ \textcolor{stringliteral}{"{}TestEnvironment"{}}\ /\ \textcolor{stringliteral}{"{}params"{}}}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00014}00014\ \textcolor{comment}{\#\ Camera\ order}}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00015}\mbox{\hyperlink{namespaceevaluate__calibration_a3d3baf1b3ef6ba4c8f00733add80074d}{00015}}\ CAM\_IDS\ =\ [}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00016}00016\ \ \ \ \ \textcolor{stringliteral}{"{}Center"{}},}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00017}00017\ \ \ \ \ \textcolor{stringliteral}{"{}Up1"{}},\ \textcolor{stringliteral}{"{}Up2"{}},\ \textcolor{stringliteral}{"{}Up3"{}},}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00018}00018\ \ \ \ \ \textcolor{stringliteral}{"{}Down1"{}},\ \textcolor{stringliteral}{"{}Down2"{}},\ \textcolor{stringliteral}{"{}Down3"{}},}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00019}00019\ \ \ \ \ \textcolor{stringliteral}{"{}Left1"{}},\ \textcolor{stringliteral}{"{}Left2"{}},\ \textcolor{stringliteral}{"{}Left3"{}},}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00020}00020\ \ \ \ \ \textcolor{stringliteral}{"{}Right1"{}},\ \textcolor{stringliteral}{"{}Right2"{}},\ \textcolor{stringliteral}{"{}Right3"{}},}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00021}00021\ ]}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00022}00022\ }
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00023}00023\ \textcolor{comment}{\#\ Calibration\ JSONs}}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00024}\mbox{\hyperlink{namespaceevaluate__calibration_af3b18615c253a1155c38970524e8cc39}{00024}}\ CALIB\_FILES\ =\ \{}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00025}00025\ \ \ \ \ \textcolor{stringliteral}{"{}imageset1"{}}:\ RESULTS\_DIR\ /\ \textcolor{stringliteral}{"{}calibration\_initial\_imageset1\_20251215\_173701.json"{}},}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00026}00026\ \ \ \ \ \textcolor{stringliteral}{"{}imageset2"{}}:\ RESULTS\_DIR\ /\ \textcolor{stringliteral}{"{}calibration\_initial\_imageset2\_20251215\_181903.json"{}},}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00027}00027\ \ \ \ \ \textcolor{stringliteral}{"{}imageset3"{}}:\ RESULTS\_DIR\ /\ \textcolor{stringliteral}{"{}calibration\_initial\_imageset3\_20251215\_185041.json"{}},}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00028}00028\ \ \ \ \ \textcolor{stringliteral}{"{}imageset4"{}}:\ RESULTS\_DIR\ /\ \textcolor{stringliteral}{"{}calibration\_initial\_imageset4\_20251215\_165644.json"{}},}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00029}00029\ \ \ \ \ \textcolor{stringliteral}{"{}imageset5"{}}:\ RESULTS\_DIR\ /\ \textcolor{stringliteral}{"{}calibration\_initial\_imageset5\_20251217\_011656.json"{}},}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00030}00030\ \ \ \ \ \textcolor{stringliteral}{"{}imageset6"{}}:\ RESULTS\_DIR\ /\ \textcolor{stringliteral}{"{}calibration\_initial\_imageset6\_20251215\_201527.json"{}},}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00031}00031\ \ \ \ \ \textcolor{stringliteral}{"{}imageset7"{}}:\ RESULTS\_DIR\ /\ \textcolor{stringliteral}{"{}calibration\_initial\_imageset7\_20251215\_203849.json"{}},}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00032}00032\ \}}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00034}00034\ \textcolor{comment}{\#\ Groundtruth\ per\ calibration}}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00035}\mbox{\hyperlink{namespaceevaluate__calibration_a0bf5048c8665f4b6f801ff70a3c04cdf}{00035}}\ GT\_FILES\ =\ \{}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00036}00036\ \ \ \ \ \textcolor{comment}{\#\ Rig0\ for\ imageset1–4}}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00037}00037\ \ \ \ \ \textcolor{stringliteral}{"{}imageset1"{}}:\ GT\_DIR\ /\ \textcolor{stringliteral}{"{}groundtruth\_extrinsics\_Rig0.json"{}},}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00038}00038\ \ \ \ \ \textcolor{stringliteral}{"{}imageset2"{}}:\ GT\_DIR\ /\ \textcolor{stringliteral}{"{}groundtruth\_extrinsics\_Rig0.json"{}},}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00039}00039\ \ \ \ \ \textcolor{stringliteral}{"{}imageset3"{}}:\ GT\_DIR\ /\ \textcolor{stringliteral}{"{}groundtruth\_extrinsics\_Rig0.json"{}},}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00040}00040\ \ \ \ \ \textcolor{stringliteral}{"{}imageset4"{}}:\ GT\_DIR\ /\ \textcolor{stringliteral}{"{}groundtruth\_extrinsics\_Rig0.json"{}},}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00042}00042\ \ \ \ \ \textcolor{comment}{\#\ Different\ rigs/sets:}}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00043}00043\ \ \ \ \ \textcolor{stringliteral}{"{}imageset5"{}}:\ GT\_DIR\ /\ \textcolor{stringliteral}{"{}groundtruth\_extrinsics\_Rig1\_set5.json"{}},}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00044}00044\ \ \ \ \ \textcolor{stringliteral}{"{}imageset6"{}}:\ GT\_DIR\ /\ \textcolor{stringliteral}{"{}groundtruth\_extrinsics\_Rig2\_set6.json"{}},}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00045}00045\ \ \ \ \ \textcolor{stringliteral}{"{}imageset7"{}}:\ GT\_DIR\ /\ \textcolor{stringliteral}{"{}groundtruth\_extrinsics\_Rig3\_set7.json"{}},\ \ }
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00046}00046\ \}}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00047}00047\ }
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00048}00048\ \textcolor{comment}{\#\ Scenario\ grouping\ for\ thesis\ table}}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00049}\mbox{\hyperlink{namespaceevaluate__calibration_a55099ed68da2b877a4d626c0c7893854}{00049}}\ SCENARIOS\ =\ \{}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00050}00050\ \ \ \ \ \textcolor{stringliteral}{"{}A\_Robustheit"{}}:\ [\textcolor{stringliteral}{"{}imageset1"{}},\ \textcolor{stringliteral}{"{}imageset2"{}},\ \textcolor{stringliteral}{"{}imageset3"{}},\ \textcolor{stringliteral}{"{}imageset4"{}}],}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00051}00051\ \ \ \ \ \textcolor{stringliteral}{"{}B\_Generalisation"{}}:\ \ \ \ [\textcolor{stringliteral}{"{}imageset5"{}},\ \textcolor{stringliteral}{"{}imageset6"{}},\ \textcolor{stringliteral}{"{}imageset7"{}}],}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00052}00052\ \}}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00053}00053\ }
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00054}00054\ \textcolor{comment}{\#\ Helper\ functions}}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00055}\mbox{\hyperlink{namespaceevaluate__calibration_aa4327f87956b975a0632bfde09f6024a}{00055}}\ \textcolor{keyword}{def\ }\mbox{\hyperlink{namespaceevaluate__calibration_aa4327f87956b975a0632bfde09f6024a}{rot\_angle\_deg}}(R):}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00056}00056\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}Extract\ rotation\ angle\ (degrees)\ from\ 3x3\ rotation\ matrix."{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00057}00057\ \ \ \ \ tr\ =\ np.trace(R)}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00058}00058\ \ \ \ \ c\ =\ (tr\ -\/\ 1.0)\ /\ 2.0}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00059}00059\ \ \ \ \ c\ =\ np.clip(c,\ -\/1.0,\ 1.0)}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00060}00060\ \ \ \ \ \textcolor{keywordflow}{return}\ float(np.degrees(np.arccos(c)))}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00061}00061\ }
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00062}\mbox{\hyperlink{namespaceevaluate__calibration_adc1c95da503bda878de783f323cfc109}{00062}}\ \textcolor{keyword}{def\ }\mbox{\hyperlink{namespaceevaluate__calibration_adc1c95da503bda878de783f323cfc109}{as\_vec3}}(v):}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00063}00063\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}Convert\ any\ translation\ vector\ to\ robust\ 3-\/element\ vector."{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00064}00064\ \ \ \ \ arr\ =\ np.array(v,\ dtype=float).reshape(-\/1)}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00065}00065\ \ \ \ \ \textcolor{keywordflow}{if}\ arr.size\ !=\ 3:}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00066}00066\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{raise}\ ValueError(f\textcolor{stringliteral}{"{}Expected\ 3\ entries\ for\ translation,\ got\ \{arr.size\}"{}})}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00067}00067\ \ \ \ \ \textcolor{keywordflow}{return}\ arr}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00068}00068\ }
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00069}00069\ }
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00070}\mbox{\hyperlink{namespaceevaluate__calibration_a29820495239395c4fbcd184f3429dbff}{00070}}\ \textcolor{keyword}{def\ }\mbox{\hyperlink{namespaceevaluate__calibration_a29820495239395c4fbcd184f3429dbff}{compute\_metrics\_for\_file}}(calib\_path:\ Path,\ gt\_path:\ Path):}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00071}00071\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00072}00072\ \textcolor{stringliteral}{\ \ \ \ Loads\ a\ calibration\ JSON\ and\ groundtruth\ JSON\ and\ computes:}}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00073}00073\ \textcolor{stringliteral}{\ \ \ \ \ \ -\/\ numPoses}}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00074}00074\ \textcolor{stringliteral}{\ \ \ \ \ \ -\/\ mean\ ΔT\ (m)}}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00075}00075\ \textcolor{stringliteral}{\ \ \ \ \ \ -\/\ mean\ ΔR\ (°)}}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00076}00076\ \textcolor{stringliteral}{\ \ \ \ \ \ -\/\ mean\ reprojection\ error\ (px,\ from\ intrinsics)}}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00077}00077\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00078}00078\ \textcolor{stringliteral}{\ \ \ \ Definitions\ as\ in\ your\ extrinsic\ plot:}}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00079}00079\ \textcolor{stringliteral}{\ \ \ \ \ \ ΔR\_cam\ =\ angle(R\_est\ *\ R\_gt\string^T)}}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00080}00080\ \textcolor{stringliteral}{\ \ \ \ \ \ ΔT\_cam\ =\ ||\ T\_est\ -\/\ T\_gt\ ||\_2}}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00081}00081\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00082}00082\ \ \ \ \ \textcolor{keyword}{with}\ open(gt\_path,\ \textcolor{stringliteral}{"{}r"{}},\ encoding=\textcolor{stringliteral}{"{}utf-\/8"{}})\ \textcolor{keyword}{as}\ f:}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00083}00083\ \ \ \ \ \ \ \ \ gt\ =\ json.load(f)}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00084}00084\ }
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00085}00085\ \ \ \ \ \textcolor{keyword}{with}\ open(calib\_path,\ \textcolor{stringliteral}{"{}r"{}},\ encoding=\textcolor{stringliteral}{"{}utf-\/8"{}})\ \textcolor{keyword}{as}\ f:}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00086}00086\ \ \ \ \ \ \ \ \ calib\ =\ json.load(f)}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00087}00087\ }
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00088}00088\ \ \ \ \ meta\ =\ calib.get(\textcolor{stringliteral}{"{}meta"{}},\ \{\})}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00089}00089\ \ \ \ \ extr\_est\ =\ calib[\textcolor{stringliteral}{"{}state"{}}][\textcolor{stringliteral}{"{}extrinsics"{}}]}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00090}00090\ \ \ \ \ intr\_est\ =\ calib[\textcolor{stringliteral}{"{}state"{}}][\textcolor{stringliteral}{"{}intrinsics"{}}]}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00091}00091\ }
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00092}00092\ \ \ \ \ bundle\_adjust\ =\ bool(meta.get(\textcolor{stringliteral}{"{}bundleAdjust"{}},\ \textcolor{keyword}{False}))}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00093}00093\ \ \ \ \ num\_poses\ =\ int(meta.get(\textcolor{stringliteral}{"{}numPoses"{}},\ -\/1))}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00094}00094\ }
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00095}00095\ \ \ \ \ rot\_err\ =\ []}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00096}00096\ \ \ \ \ trans\_err\ =\ []}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00097}00097\ \ \ \ \ reproj\_err\ =\ []}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00098}00098\ }
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00099}00099\ \ \ \ \ \textcolor{keywordflow}{for}\ cam\ \textcolor{keywordflow}{in}\ CAM\_IDS:}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00100}00100\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ cam\ \textcolor{keywordflow}{not}\ \textcolor{keywordflow}{in}\ extr\_est\ \textcolor{keywordflow}{or}\ cam\ \textcolor{keywordflow}{not}\ \textcolor{keywordflow}{in}\ gt:}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00101}00101\ \ \ \ \ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}[WARN]\ Camera\ '\{cam\}'\ not\ in\ both\ files\ for\ \{calib\_path.name\},\ skipping\ this\ cam."{}})}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00102}00102\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue}}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00103}00103\ }
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00104}00104\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Extrinsics}}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00105}00105\ \ \ \ \ \ \ \ \ R\_est\ =\ np.array(extr\_est[cam][\textcolor{stringliteral}{"{}rotationMatrix"{}}],\ dtype=float)}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00106}00106\ \ \ \ \ \ \ \ \ R\_gt\ \ =\ np.array(gt[cam][\textcolor{stringliteral}{"{}rotationMatrix"{}}],\ dtype=float)}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00107}00107\ }
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00108}00108\ \ \ \ \ \ \ \ \ T\_est\ =\ \mbox{\hyperlink{namespaceevaluate__calibration_adc1c95da503bda878de783f323cfc109}{as\_vec3}}(extr\_est[cam][\textcolor{stringliteral}{"{}translationVector"{}}])}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00109}00109\ \ \ \ \ \ \ \ \ T\_gt\ \ =\ \mbox{\hyperlink{namespaceevaluate__calibration_adc1c95da503bda878de783f323cfc109}{as\_vec3}}(gt[cam][\textcolor{stringliteral}{"{}translationVector"{}}])}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00110}00110\ }
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00111}00111\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Rotation\ error\ as\ in\ plot}}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00112}00112\ \ \ \ \ \ \ \ \ R\_err\ =\ R\_est\ @\ R\_gt.T}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00113}00113\ \ \ \ \ \ \ \ \ ang\ =\ \mbox{\hyperlink{namespaceevaluate__calibration_aa4327f87956b975a0632bfde09f6024a}{rot\_angle\_deg}}(R\_err)}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00114}00114\ }
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00115}00115\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Translation\ error\ (absolute,\ m)}}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00116}00116\ \ \ \ \ \ \ \ \ d\_abs\ =\ float(np.linalg.norm(T\_est\ -\/\ T\_gt))}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00117}00117\ }
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00118}00118\ \ \ \ \ \ \ \ \ rot\_err.append(ang)}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00119}00119\ \ \ \ \ \ \ \ \ trans\_err.append(d\_abs)}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00120}00120\ }
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00121}00121\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Intrinsic\ reprojection\ error}}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00122}00122\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ cam\ \textcolor{keywordflow}{in}\ intr\_est:}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00123}00123\ \ \ \ \ \ \ \ \ \ \ \ \ reproj\_err.append(float(intr\_est[cam][\textcolor{stringliteral}{"{}reprojectionError"{}}]))}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00124}00124\ }
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00125}00125\ \ \ \ \ \textcolor{comment}{\#\ Mean\ values}}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00126}00126\ \ \ \ \ mean\_dT\ =\ float(np.mean(trans\_err))\ \ \ \ \ \textcolor{keywordflow}{if}\ trans\_err\ \textcolor{keywordflow}{else}\ float(\textcolor{stringliteral}{"{}nan"{}})}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00127}00127\ \ \ \ \ mean\_dR\ =\ float(np.mean(rot\_err))\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ rot\_err\ \textcolor{keywordflow}{else}\ float(\textcolor{stringliteral}{"{}nan"{}})}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00128}00128\ \ \ \ \ mean\_reproj\ =\ float(np.mean(reproj\_err))\ \textcolor{keywordflow}{if}\ reproj\_err\ \textcolor{keywordflow}{else}\ float(\textcolor{stringliteral}{"{}nan"{}})}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00129}00129\ }
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00130}00130\ \ \ \ \ \textcolor{keywordflow}{return}\ \{}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00131}00131\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}bundleAdjust"{}}:\ bundle\_adjust,}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00132}00132\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}numPoses"{}}:\ num\_poses,}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00133}00133\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}mean\_dT"{}}:\ mean\_dT,}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00134}00134\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}mean\_dR"{}}:\ mean\_dR,}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00135}00135\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}mean\_reproj"{}}:\ mean\_reproj,}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00136}00136\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00137}00137\ }
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00138}00138\ \textcolor{comment}{\#\ Table\ output\ (console)}}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00139}\mbox{\hyperlink{namespaceevaluate__calibration_a52427f1f56ef8923ed4b2777c6ce4cca}{00139}}\ \textcolor{keyword}{def\ }\mbox{\hyperlink{namespaceevaluate__calibration_a52427f1f56ef8923ed4b2777c6ce4cca}{print\_per\_file\_table}}(results\_by\_name):}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00140}00140\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00141}00141\ \textcolor{stringliteral}{\ \ \ \ Prints\ one\ line\ per\ calibration\ JSON.}}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00142}00142\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00143}00143\ \ \ \ \ header\ =\ (}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00144}00144\ \ \ \ \ \ \ \ \ f\textcolor{stringliteral}{"{}\{'Name':<12\}\ "{}}}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00145}00145\ \ \ \ \ \ \ \ \ f\textcolor{stringliteral}{"{}\{'\#Poses':>6\}\ "{}}}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00146}00146\ \ \ \ \ \ \ \ \ f\textcolor{stringliteral}{"{}\{'BA':<4\}\ "{}}}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00147}00147\ \ \ \ \ \ \ \ \ f\textcolor{stringliteral}{"{}\{'mean\ dT\ [m]':>12\}\ "{}}}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00148}00148\ \ \ \ \ \ \ \ \ f\textcolor{stringliteral}{"{}\{'mean\ dR\ [deg]':>13\}\ "{}}}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00149}00149\ \ \ \ \ \ \ \ \ f\textcolor{stringliteral}{"{}\{'mean\ reproj\ [px]':>16\}"{}}}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00150}00150\ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00151}00151\ \ \ \ \ print(header)}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00152}00152\ \ \ \ \ print(\textcolor{stringliteral}{"{}-\/"{}}\ *\ len(header))}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00153}00153\ }
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00154}00154\ \ \ \ \ \textcolor{keywordflow}{for}\ name,\ res\ \textcolor{keywordflow}{in}\ sorted(results\_by\_name.items()):}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00155}00155\ \ \ \ \ \ \ \ \ ba\_flag\ =\ \textcolor{stringliteral}{"{}yes"{}}\ \textcolor{keywordflow}{if}\ res[\textcolor{stringliteral}{"{}bundleAdjust"{}}]\ \textcolor{keywordflow}{else}\ \textcolor{stringliteral}{"{}no"{}}}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00156}00156\ \ \ \ \ \ \ \ \ print(}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00157}00157\ \ \ \ \ \ \ \ \ \ \ \ \ f\textcolor{stringliteral}{"{}\{name:<12\}\ "{}}}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00158}00158\ \ \ \ \ \ \ \ \ \ \ \ \ f\textcolor{stringliteral}{"{}\{res['numPoses']:6d\}\ "{}}}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00159}00159\ \ \ \ \ \ \ \ \ \ \ \ \ f\textcolor{stringliteral}{"{}\{ba\_flag:<4\}\ "{}}}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00160}00160\ \ \ \ \ \ \ \ \ \ \ \ \ f\textcolor{stringliteral}{"{}\{res['mean\_dT']:12.5f\}\ "{}}}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00161}00161\ \ \ \ \ \ \ \ \ \ \ \ \ f\textcolor{stringliteral}{"{}\{res['mean\_dR']:12.5f\}\ "{}}}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00162}00162\ \ \ \ \ \ \ \ \ \ \ \ \ f\textcolor{stringliteral}{"{}\{res['mean\_reproj']:16.5f\}"{}}}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00163}00163\ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00164}00164\ }
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00165}\mbox{\hyperlink{namespaceevaluate__calibration_a82fd2281c6b3f39c532924a3cafe3613}{00165}}\ \textcolor{keyword}{def\ }\mbox{\hyperlink{namespaceevaluate__calibration_a82fd2281c6b3f39c532924a3cafe3613}{print\_scenario\_table}}(results\_by\_name):}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00166}00166\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00167}00167\ \textcolor{stringliteral}{\ \ \ \ Aggregates\ over\ scenarios\ (Robustness\ /\ Generalization)}}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00168}00168\ \textcolor{stringliteral}{\ \ \ \ and\ prints\ a\ compact\ table.}}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00169}00169\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00170}00170\ \ \ \ \ print(\textcolor{stringliteral}{"{}\(\backslash\)n\(\backslash\)nScenario\ Summary:\(\backslash\)n"{}})}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00171}00171\ }
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00172}00172\ \ \ \ \ header\ =\ (}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00173}00173\ \ \ \ \ \ \ \ \ f\textcolor{stringliteral}{"{}\{'Szenario':<22\}\ "{}}}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00174}00174\ \ \ \ \ \ \ \ \ f\textcolor{stringliteral}{"{}\{'\#Runs':>6\}\ "{}}}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00175}00175\ \ \ \ \ \ \ \ \ f\textcolor{stringliteral}{"{}\{'Avg\#Poses':>9\}\ "{}}}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00176}00176\ \ \ \ \ \ \ \ \ f\textcolor{stringliteral}{"{}\{'mean\ dT\ [m]':>12\}\ "{}}}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00177}00177\ \ \ \ \ \ \ \ \ f\textcolor{stringliteral}{"{}\{'mean\ dR\ [deg]':>13\}\ "{}}}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00178}00178\ \ \ \ \ \ \ \ \ f\textcolor{stringliteral}{"{}\{'mean\ reproj\ [px]':>16\}"{}}}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00179}00179\ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00180}00180\ \ \ \ \ print(header)}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00181}00181\ \ \ \ \ print(\textcolor{stringliteral}{"{}-\/"{}}\ *\ len(header))}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00182}00182\ }
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00183}00183\ \ \ \ \ \textcolor{keywordflow}{for}\ scen\_name,\ calib\_names\ \textcolor{keywordflow}{in}\ SCENARIOS.items():}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00184}00184\ \ \ \ \ \ \ \ \ dT\_vals\ =\ []}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00185}00185\ \ \ \ \ \ \ \ \ dR\_vals\ =\ []}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00186}00186\ \ \ \ \ \ \ \ \ reproj\_vals\ =\ []}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00187}00187\ \ \ \ \ \ \ \ \ pose\_counts\ =\ []}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00188}00188\ }
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00189}00189\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ cname\ \textcolor{keywordflow}{in}\ calib\_names:}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00190}00190\ \ \ \ \ \ \ \ \ \ \ \ \ res\ =\ results\_by\_name.get(cname)}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00191}00191\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ res\ \textcolor{keywordflow}{is}\ \textcolor{keywordtype}{None}:}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00192}00192\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue}}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00193}00193\ }
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00194}00194\ \ \ \ \ \ \ \ \ \ \ \ \ dT\_vals.append(res[\textcolor{stringliteral}{"{}mean\_dT"{}}])}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00195}00195\ \ \ \ \ \ \ \ \ \ \ \ \ dR\_vals.append(res[\textcolor{stringliteral}{"{}mean\_dR"{}}])}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00196}00196\ \ \ \ \ \ \ \ \ \ \ \ \ reproj\_vals.append(res[\textcolor{stringliteral}{"{}mean\_reproj"{}}])}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00197}00197\ \ \ \ \ \ \ \ \ \ \ \ \ pose\_counts.append(res[\textcolor{stringliteral}{"{}numPoses"{}}])}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00198}00198\ }
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00199}00199\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ dT\_vals:}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00200}00200\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue}}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00201}00201\ }
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00202}00202\ \ \ \ \ \ \ \ \ mean\_dT\ =\ float(np.mean(dT\_vals))}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00203}00203\ \ \ \ \ \ \ \ \ mean\_dR\ =\ float(np.mean(dR\_vals))}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00204}00204\ \ \ \ \ \ \ \ \ mean\_reproj\ =\ float(np.mean(reproj\_vals))}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00205}00205\ \ \ \ \ \ \ \ \ mean\_poses\ =\ float(np.mean(pose\_counts))}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00206}00206\ \ \ \ \ \ \ \ \ num\_runs\ =\ len(dT\_vals)}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00207}00207\ }
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00208}00208\ \ \ \ \ \ \ \ \ print(}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00209}00209\ \ \ \ \ \ \ \ \ \ \ \ \ f\textcolor{stringliteral}{"{}\{scen\_name:<22\}\ "{}}}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00210}00210\ \ \ \ \ \ \ \ \ \ \ \ \ f\textcolor{stringliteral}{"{}\{num\_runs:6d\}\ "{}}}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00211}00211\ \ \ \ \ \ \ \ \ \ \ \ \ f\textcolor{stringliteral}{"{}\{mean\_poses:9.1f\}\ "{}}}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00212}00212\ \ \ \ \ \ \ \ \ \ \ \ \ f\textcolor{stringliteral}{"{}\{mean\_dT:12.5f\}\ "{}}}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00213}00213\ \ \ \ \ \ \ \ \ \ \ \ \ f\textcolor{stringliteral}{"{}\{mean\_dR:13.5f\}\ "{}}}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00214}00214\ \ \ \ \ \ \ \ \ \ \ \ \ f\textcolor{stringliteral}{"{}\{mean\_reproj:16.5f\}"{}}}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00215}00215\ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00216}00216\ }
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00217}\mbox{\hyperlink{namespaceevaluate__calibration_a3fd9ab6dfc21298d70a4ce42329b6c56}{00217}}\ \textcolor{keyword}{def\ }\mbox{\hyperlink{namespaceevaluate__calibration_a3fd9ab6dfc21298d70a4ce42329b6c56}{main}}():}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00218}00218\ \ \ \ \ results\_by\_name\ =\ \{\}}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00219}00219\ }
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00220}00220\ \ \ \ \ \textcolor{keywordflow}{for}\ name,\ calib\_path\ \textcolor{keywordflow}{in}\ CALIB\_FILES.items():}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00221}00221\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ calib\_path.exists():}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00222}00222\ \ \ \ \ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}[WARN]\ File\ not\ found:\ \{calib\_path\}"{}})}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00223}00223\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue}}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00224}00224\ }
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00225}00225\ \ \ \ \ \ \ \ \ gt\_path\ =\ GT\_FILES.get(name)}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00226}00226\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ gt\_path\ \textcolor{keywordflow}{is}\ \textcolor{keywordtype}{None}:}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00227}00227\ \ \ \ \ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}[WARN]\ No\ GT\ file\ mapped\ for\ \{name\},\ skipping."{}})}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00228}00228\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue}}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00229}00229\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ gt\_path.exists():}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00230}00230\ \ \ \ \ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}[WARN]\ GT\ file\ not\ found\ for\ \{name\}:\ \{gt\_path\}"{}})}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00231}00231\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue}}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00232}00232\ }
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00233}00233\ \ \ \ \ \ \ \ \ metrics\ =\ \mbox{\hyperlink{namespaceevaluate__calibration_a29820495239395c4fbcd184f3429dbff}{compute\_metrics\_for\_file}}(calib\_path,\ gt\_path)}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00234}00234\ \ \ \ \ \ \ \ \ results\_by\_name[name]\ =\ metrics}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00235}00235\ }
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00236}00236\ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ results\_by\_name:}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00237}00237\ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}[ERROR]\ No\ valid\ results\ computed.\ Check\ file\ paths."{}})}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00238}00238\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00239}00239\ }
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00240}00240\ \ \ \ \ print(\textcolor{stringliteral}{"{}Detailed\ results\ per\ calibration:\(\backslash\)n"{}})}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00241}00241\ \ \ \ \ \mbox{\hyperlink{namespaceevaluate__calibration_a52427f1f56ef8923ed4b2777c6ce4cca}{print\_per\_file\_table}}(results\_by\_name)}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00242}00242\ }
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00243}00243\ \ \ \ \ \mbox{\hyperlink{namespaceevaluate__calibration_a82fd2281c6b3f39c532924a3cafe3613}{print\_scenario\_table}}(results\_by\_name)}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00244}00244\ }
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00245}00245\ }
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00246}00246\ \textcolor{keywordflow}{if}\ \_\_name\_\_\ ==\ \textcolor{stringliteral}{"{}\_\_main\_\_"{}}:}
+\DoxyCodeLine{\Hypertarget{evaluate__calibration_8py_source_l00247}00247\ \ \ \ \ \mbox{\hyperlink{namespaceevaluate__calibration_a3fd9ab6dfc21298d70a4ce42329b6c56}{main}}()}
+
+\end{DoxyCode}

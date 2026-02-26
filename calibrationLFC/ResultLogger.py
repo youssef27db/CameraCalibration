@@ -7,17 +7,15 @@ from datetime import datetime
 
 class ResultLogger:
     """
-    Manages calibration result logging and baseline versioning.
-
-    Features:
-    - Writes JSON snapshots with timestamps
-    - Maintains line-based log file (calibration.log)
-    - Manages baseline.json:
-        * Created on first run (initial calibration)
-        * Updated only if new health score improves
+    @brief Manages calibration result logging and baseline versioning.
     """
 
     def __init__(self, baseDir="/data/baseline"):
+        """
+        @brief Constructor for ResultLogger.
+        
+        @param baseDir Directory for storing calibration results and baseline (default: "/data/baseline")
+        """
         self.baseDir = baseDir
         os.makedirs(baseDir, exist_ok=True)
 
@@ -31,7 +29,12 @@ class ResultLogger:
             self.logger.addHandler(file_handler)
 
     def to_serializable(self, obj):
-        """Convert numpy arrays and types to JSON-serializable format."""
+        """
+        @brief Convert numpy arrays and types to JSON-serializable format.
+        
+        @param obj Object to convert (numpy array, dict, list, or primitive type)
+        @return JSON-serializable version of the object
+        """
         if isinstance(obj, np.ndarray):
             return obj.tolist()
         if isinstance(obj, (np.floating, np.float32, np.float64)):
@@ -46,10 +49,10 @@ class ResultLogger:
 
     def read_baseline_health(self, baseline_path: str) -> float:
         """
-        Extract health score from baseline.json.
+        @brief Extract health score from baseline.json.
         
-        Tries meta.health first, then computes via HealthMonitor if missing.
-        Returns -1.0 if file not found or health cannot be determined.
+        @param baseline_path Path to the baseline.json file
+        @return Health score as float, or -1.0 if not found or cannot be determined
         """
         if not os.path.isfile(baseline_path):
             return -1.0
@@ -93,11 +96,11 @@ class ResultLogger:
 
     def update_baseline(self, candidate_obj: dict, candidate_score: float, method: str) -> None:
         """
-        Update baseline.json with new calibration if health improved.
+        @brief Update baseline.json with new calibration if health improved.
         
-        Policy:
-        - Create baseline.json if it doesn't exist
-        - Otherwise update only if candidate_score > old_score
+        @param candidate_obj Dictionary containing calibration data
+        @param candidate_score Health score of the candidate calibration
+        @param method Calibration method identifier ("initial" or "lifcal")
         """
         baseline_path = os.path.join(self.baseDir, "baseline.json")
         old_score = self.read_baseline_health(baseline_path)
@@ -121,13 +124,11 @@ class ResultLogger:
 
     def logInitialCalibration(self, calibrationState, meta=None):
         """
-        Store initial calibration result with health score.
+        @brief Store initial calibration result with health score.
         
-        Process:
-        1. Extract and serialize calibration state
-        2. Compute health score from metrics
-        3. Save timestamped JSON result
-        4. Update baseline.json if this is the first run or if health improved
+        @param calibrationState CalibrationState object with intrinsic and extrinsic parameters
+        @param meta Optional dictionary with metadata about the calibration run
+        @return Health score as float
         """
         if meta is None:
             meta = {}
@@ -195,13 +196,11 @@ class ResultLogger:
 
     def logRecalibration(self, combined_json_path: str, meta=None):
         """
-        Store LiFCal recalibration result with health score.
+        @brief Store LiFCal recalibration result with health score.
         
-        Process:
-        1. Read combined.json from LiFCal
-        2. Compute LiFCal health score
-        3. Save timestamped copy to results folder
-        4. Update baseline.json if health improved
+        @param combined_json_path Path to the combined.json file from LiFCal
+        @param meta Optional dictionary with metadata about the recalibration run
+        @return Health score as float
         """
         if meta is None:
             meta = {}

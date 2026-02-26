@@ -1,0 +1,334 @@
+\doxysection{lifcal\+\_\+to\+\_\+json Namespace Reference}
+\hypertarget{namespacelifcal__to__json}{}\label{namespacelifcal__to__json}\index{lifcal\_to\_json@{lifcal\_to\_json}}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+dict \mbox{\hyperlink{namespacelifcal__to__json_acdcd90a9dcf7973df598351b3fab282c}{parse\+\_\+protocol}} (str protocol\+\_\+path)
+\item 
+Dict\mbox{[}str, Any\mbox{]} \mbox{\hyperlink{namespacelifcal__to__json_a3811ae95ac1c5188748cc3ee3370d889}{parse\+\_\+extrinsics\+\_\+xml}} (str xml\+\_\+path)
+\item 
+str \mbox{\hyperlink{namespacelifcal__to__json_a998de3d267c4bbc1ce7432ff29917a1e}{export\+\_\+lifcal\+\_\+parameters\+\_\+json\+\_\+in\+\_\+place}} (str result\+\_\+dir, str cam\+\_\+id, str image\+\_\+dir, str run\+\_\+type="{}recalib"{}, float pixel\+\_\+size\+\_\+mm\+\_\+fallback=0.\+0055, str protocol\+\_\+name="{}calibration\+Protocol.\+txt"{}, str extr\+\_\+name="{}extrinsic\+Orientations.\+xml"{}, str out\+\_\+name="{}parameters.\+json"{}, Optional\mbox{[}float\mbox{]} pixel\+\_\+size\+\_\+mm=None, Optional\mbox{[}float\mbox{]} fallback\+\_\+cx=None, Optional\mbox{[}float\mbox{]} fallback\+\_\+cy=None)
+\item 
+str \mbox{\hyperlink{namespacelifcal__to__json_ae5a187a34ee3685f049d0d1afb34029d}{build\+\_\+combined\+\_\+parameters\+\_\+json}} (str run\+\_\+root, list camera\+\_\+ids, str out\+\_\+name="{}combined.\+json"{})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{namespacelifcal__to__json_ae5a187a34ee3685f049d0d1afb34029d}\index{lifcal\_to\_json@{lifcal\_to\_json}!build\_combined\_parameters\_json@{build\_combined\_parameters\_json}}
+\index{build\_combined\_parameters\_json@{build\_combined\_parameters\_json}!lifcal\_to\_json@{lifcal\_to\_json}}
+\doxysubsubsection{\texorpdfstring{build\_combined\_parameters\_json()}{build\_combined\_parameters\_json()}}
+{\footnotesize\ttfamily \label{namespacelifcal__to__json_ae5a187a34ee3685f049d0d1afb34029d} 
+ str lifcal\+\_\+to\+\_\+json.\+build\+\_\+combined\+\_\+parameters\+\_\+json (\begin{DoxyParamCaption}\item[{str}]{run\+\_\+root}{, }\item[{list}]{camera\+\_\+ids}{, }\item[{str }]{out\+\_\+name}{ = {\ttfamily "{}combined.json"{}}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Combine per-camera parameters.json files into a single combined.json.
+
+@param run_root Root directory containing per-camera subdirectories
+@param camera_ids List of camera identifiers
+@param out_name Output filename (default: "combined.json")
+@return Path to written combined.json file
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{lifcal__to__json_8py_source_l00206}{206}} of file \mbox{\hyperlink{lifcal__to__json_8py_source}{lifcal\+\_\+to\+\_\+json.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00206\ \textcolor{keyword}{def\ }build\_combined\_parameters\_json(run\_root:\ str,\ camera\_ids:\ list,\ out\_name:\ str\ =\ \textcolor{stringliteral}{"{}combined.json"{}})\ -\/>\ str: }
+\DoxyCodeLine{00207\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{} }}
+\DoxyCodeLine{00208\ \textcolor{stringliteral}{\ \ \ \ @brief\ Combine\ per-\/camera\ parameters.json\ files\ into\ a\ single\ combined.json. }}
+\DoxyCodeLine{00209\ \textcolor{stringliteral}{\ \ \ \  }}
+\DoxyCodeLine{00210\ \textcolor{stringliteral}{\ \ \ \ @param\ run\_root\ Root\ directory\ containing\ per-\/camera\ subdirectories }}
+\DoxyCodeLine{00211\ \textcolor{stringliteral}{\ \ \ \ @param\ camera\_ids\ List\ of\ camera\ identifiers }}
+\DoxyCodeLine{00212\ \textcolor{stringliteral}{\ \ \ \ @param\ out\_name\ Output\ filename\ (default:\ "{}combined.json"{}) }}
+\DoxyCodeLine{00213\ \textcolor{stringliteral}{\ \ \ \ @return\ Path\ to\ written\ combined.json\ file }}
+\DoxyCodeLine{00214\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00215\ \ \ \ \ combined\ =\ \{ }
+\DoxyCodeLine{00216\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}meta"{}}:\ \{ }
+\DoxyCodeLine{00217\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}runType"{}}:\ \textcolor{stringliteral}{"{}combined"{}}, }
+\DoxyCodeLine{00218\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}cameraIds"{}}:\ camera\_ids, }
+\DoxyCodeLine{00219\ \ \ \ \ \ \ \ \ \}, }
+\DoxyCodeLine{00220\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}state"{}}:\ \{ }
+\DoxyCodeLine{00221\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}parameters"{}}:\ \{\}, }
+\DoxyCodeLine{00222\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}extrinsicsByPose"{}}:\ \{\}, }
+\DoxyCodeLine{00223\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}timeStamp"{}}:\ \textcolor{keywordtype}{None} }
+\DoxyCodeLine{00224\ \ \ \ \ \ \ \ \ \} }
+\DoxyCodeLine{00225\ \ \ \ \ \} }
+\DoxyCodeLine{00226\  }
+\DoxyCodeLine{00227\ \ \ \ \ found\_any\ =\ \textcolor{keyword}{False} }
+\DoxyCodeLine{00228\  }
+\DoxyCodeLine{00229\ \ \ \ \ \textcolor{keywordflow}{for}\ cam\ \textcolor{keywordflow}{in}\ camera\_ids: }
+\DoxyCodeLine{00230\ \ \ \ \ \ \ \ \ cam\_dir\ =\ os.path.join(run\_root,\ cam) }
+\DoxyCodeLine{00231\ \ \ \ \ \ \ \ \ jpath\ =\ os.path.join(cam\_dir,\ \textcolor{stringliteral}{"{}parameters.json"{}}) }
+\DoxyCodeLine{00232\  }
+\DoxyCodeLine{00233\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ os.path.isfile(jpath): }
+\DoxyCodeLine{00234\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue} }
+\DoxyCodeLine{00235\  }
+\DoxyCodeLine{00236\ \ \ \ \ \ \ \ \ \textcolor{keyword}{with}\ open(jpath,\ \textcolor{stringliteral}{"{}r"{}},\ encoding=\textcolor{stringliteral}{"{}utf-\/8"{}})\ \textcolor{keyword}{as}\ f: }
+\DoxyCodeLine{00237\ \ \ \ \ \ \ \ \ \ \ \ \ data\ =\ json.load(f) }
+\DoxyCodeLine{00238\  }
+\DoxyCodeLine{00239\ \ \ \ \ \ \ \ \ st\ =\ data.get(\textcolor{stringliteral}{"{}state"{}},\ \{\}) }
+\DoxyCodeLine{00240\ \ \ \ \ \ \ \ \ params\ =\ st.get(\textcolor{stringliteral}{"{}parameters"{}},\ \{\}) }
+\DoxyCodeLine{00241\ \ \ \ \ \ \ \ \ extr\_pose\ =\ st.get(\textcolor{stringliteral}{"{}extrinsicsByPose"{}},\ \{\}) }
+\DoxyCodeLine{00242\  }
+\DoxyCodeLine{00243\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ cam\ \textcolor{keywordflow}{in}\ params: }
+\DoxyCodeLine{00244\ \ \ \ \ \ \ \ \ \ \ \ \ combined[\textcolor{stringliteral}{"{}state"{}}][\textcolor{stringliteral}{"{}parameters"{}}][cam]\ =\ params[cam] }
+\DoxyCodeLine{00245\ \ \ \ \ \ \ \ \ \ \ \ \ found\_any\ =\ \textcolor{keyword}{True} }
+\DoxyCodeLine{00246\  }
+\DoxyCodeLine{00247\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ cam\ \textcolor{keywordflow}{in}\ extr\_pose: }
+\DoxyCodeLine{00248\ \ \ \ \ \ \ \ \ \ \ \ \ combined[\textcolor{stringliteral}{"{}state"{}}][\textcolor{stringliteral}{"{}extrinsicsByPose"{}}][cam]\ =\ extr\_pose[cam] }
+\DoxyCodeLine{00249\ \ \ \ \ \ \ \ \ \ \ \ \ found\_any\ =\ \textcolor{keyword}{True} }
+\DoxyCodeLine{00250\  }
+\DoxyCodeLine{00251\ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ found\_any: }
+\DoxyCodeLine{00252\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{raise}\ RuntimeError(\textcolor{stringliteral}{"{}No\ parameters.json\ found\ to\ combine."{}}) }
+\DoxyCodeLine{00253\  }
+\DoxyCodeLine{00254\ \ \ \ \ out\_path\ =\ os.path.join(run\_root,\ out\_name) }
+\DoxyCodeLine{00255\ \ \ \ \ \textcolor{keyword}{with}\ open(out\_path,\ \textcolor{stringliteral}{"{}w"{}},\ encoding=\textcolor{stringliteral}{"{}utf-\/8"{}})\ \textcolor{keyword}{as}\ f: }
+\DoxyCodeLine{00256\ \ \ \ \ \ \ \ \ json.dump(combined,\ f,\ indent=2) }
+\DoxyCodeLine{00257\  }
+\DoxyCodeLine{00258\ \ \ \ \ \textcolor{keywordflow}{return}\ out\_path }
+
+\end{DoxyCode}
+\Hypertarget{namespacelifcal__to__json_a998de3d267c4bbc1ce7432ff29917a1e}\index{lifcal\_to\_json@{lifcal\_to\_json}!export\_lifcal\_parameters\_json\_in\_place@{export\_lifcal\_parameters\_json\_in\_place}}
+\index{export\_lifcal\_parameters\_json\_in\_place@{export\_lifcal\_parameters\_json\_in\_place}!lifcal\_to\_json@{lifcal\_to\_json}}
+\doxysubsubsection{\texorpdfstring{export\_lifcal\_parameters\_json\_in\_place()}{export\_lifcal\_parameters\_json\_in\_place()}}
+{\footnotesize\ttfamily \label{namespacelifcal__to__json_a998de3d267c4bbc1ce7432ff29917a1e} 
+ str lifcal\+\_\+to\+\_\+json.\+export\+\_\+lifcal\+\_\+parameters\+\_\+json\+\_\+in\+\_\+place (\begin{DoxyParamCaption}\item[{str}]{result\+\_\+dir}{, }\item[{str}]{cam\+\_\+id}{, }\item[{str}]{image\+\_\+dir}{, }\item[{str }]{run\+\_\+type}{ = {\ttfamily "{}recalib"{}}, }\item[{float }]{pixel\+\_\+size\+\_\+mm\+\_\+fallback}{ = {\ttfamily 0.0055}, }\item[{str }]{protocol\+\_\+name}{ = {\ttfamily "{}calibrationProtocol.txt"{}}, }\item[{str }]{extr\+\_\+name}{ = {\ttfamily "{}extrinsicOrientations.xml"{}}, }\item[{str }]{out\+\_\+name}{ = {\ttfamily "{}parameters.json"{}}, }\item[{Optional\mbox{[}float\mbox{]} }]{pixel\+\_\+size\+\_\+mm}{ = {\ttfamily None}, }\item[{Optional\mbox{[}float\mbox{]} }]{fallback\+\_\+cx}{ = {\ttfamily None}, }\item[{Optional\mbox{[}float\mbox{]} }]{fallback\+\_\+cy}{ = {\ttfamily None}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Write LiFCal parameters.json for a single camera.
+
+@param result_dir Directory containing LiFCal output files
+@param cam_id Camera identifier
+@param image_dir Directory containing input images
+@param run_type Type of calibration run (default: "recalib")
+@param pixel_size_mm_fallback Fallback pixel size in mm (default: 0.0055)
+@param protocol_name Protocol filename (default: "calibrationProtocol.txt")
+@param extr_name Extrinsics filename (default: "extrinsicOrientations.xml")
+@param out_name Output JSON filename (default: "parameters.json")
+@param pixel_size_mm Optional pixel size override
+@param fallback_cx Optional fallback cx (compatibility only, not used)
+@param fallback_cy Optional fallback cy (compatibility only, not used)
+@return Path to written parameters.json file
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{lifcal__to__json_8py_source_l00112}{112}} of file \mbox{\hyperlink{lifcal__to__json_8py_source}{lifcal\+\_\+to\+\_\+json.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00125\ )\ -\/>\ str: }
+\DoxyCodeLine{00126\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{} }}
+\DoxyCodeLine{00127\ \textcolor{stringliteral}{\ \ \ \ @brief\ Write\ LiFCal\ parameters.json\ for\ a\ single\ camera. }}
+\DoxyCodeLine{00128\ \textcolor{stringliteral}{\ \ \ \  }}
+\DoxyCodeLine{00129\ \textcolor{stringliteral}{\ \ \ \ @param\ result\_dir\ Directory\ containing\ LiFCal\ output\ files }}
+\DoxyCodeLine{00130\ \textcolor{stringliteral}{\ \ \ \ @param\ cam\_id\ Camera\ identifier }}
+\DoxyCodeLine{00131\ \textcolor{stringliteral}{\ \ \ \ @param\ image\_dir\ Directory\ containing\ input\ images }}
+\DoxyCodeLine{00132\ \textcolor{stringliteral}{\ \ \ \ @param\ run\_type\ Type\ of\ calibration\ run\ (default:\ "{}recalib"{}) }}
+\DoxyCodeLine{00133\ \textcolor{stringliteral}{\ \ \ \ @param\ pixel\_size\_mm\_fallback\ Fallback\ pixel\ size\ in\ mm\ (default:\ 0.0055) }}
+\DoxyCodeLine{00134\ \textcolor{stringliteral}{\ \ \ \ @param\ protocol\_name\ Protocol\ filename\ (default:\ "{}calibrationProtocol.txt"{}) }}
+\DoxyCodeLine{00135\ \textcolor{stringliteral}{\ \ \ \ @param\ extr\_name\ Extrinsics\ filename\ (default:\ "{}extrinsicOrientations.xml"{}) }}
+\DoxyCodeLine{00136\ \textcolor{stringliteral}{\ \ \ \ @param\ out\_name\ Output\ JSON\ filename\ (default:\ "{}parameters.json"{}) }}
+\DoxyCodeLine{00137\ \textcolor{stringliteral}{\ \ \ \ @param\ pixel\_size\_mm\ Optional\ pixel\ size\ override }}
+\DoxyCodeLine{00138\ \textcolor{stringliteral}{\ \ \ \ @param\ fallback\_cx\ Optional\ fallback\ cx\ (compatibility\ only,\ not\ used) }}
+\DoxyCodeLine{00139\ \textcolor{stringliteral}{\ \ \ \ @param\ fallback\_cy\ Optional\ fallback\ cy\ (compatibility\ only,\ not\ used) }}
+\DoxyCodeLine{00140\ \textcolor{stringliteral}{\ \ \ \ @return\ Path\ to\ written\ parameters.json\ file }}
+\DoxyCodeLine{00141\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00142\ \ \ \ \ \textcolor{keywordflow}{if}\ pixel\_size\_mm\ \textcolor{keywordflow}{is}\ \textcolor{keywordflow}{not}\ \textcolor{keywordtype}{None}: }
+\DoxyCodeLine{00143\ \ \ \ \ \ \ \ \ pixel\_size\_mm\_fallback\ =\ float(pixel\_size\_mm) }
+\DoxyCodeLine{00144\  }
+\DoxyCodeLine{00145\ \ \ \ \ protocol\_path\ =\ os.path.join(result\_dir,\ protocol\_name) }
+\DoxyCodeLine{00146\ \ \ \ \ extr\_path\ =\ os.path.join(result\_dir,\ extr\_name) }
+\DoxyCodeLine{00147\  }
+\DoxyCodeLine{00148\ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ os.path.isfile(protocol\_path): }
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{raise}\ FileNotFoundError(protocol\_path) }
+\DoxyCodeLine{00150\ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ os.path.isfile(extr\_path): }
+\DoxyCodeLine{00151\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{raise}\ FileNotFoundError(extr\_path) }
+\DoxyCodeLine{00152\  }
+\DoxyCodeLine{00153\ \ \ \ \ protocol\ =\ parse\_protocol(protocol\_path) }
+\DoxyCodeLine{00154\ \ \ \ \ extr\_by\_pose\ =\ parse\_extrinsics\_xml(extr\_path) }
+\DoxyCodeLine{00155\  }
+\DoxyCodeLine{00156\ \ \ \ \ \textcolor{comment}{\#\ Ensure\ pixel\ size\ is\ available }}
+\DoxyCodeLine{00157\ \ \ \ \ px\ =\ protocol.get(\textcolor{stringliteral}{"{}pixelSizeMm"{}},\ \textcolor{keywordtype}{None}) }
+\DoxyCodeLine{00158\ \ \ \ \ \textcolor{keywordflow}{if}\ px\ \textcolor{keywordflow}{is}\ \textcolor{keywordtype}{None}\ \textcolor{keywordflow}{or}\ (\textcolor{keywordflow}{not}\ np.isfinite(px))\ \textcolor{keywordflow}{or}\ px\ <=\ 0: }
+\DoxyCodeLine{00159\ \ \ \ \ \ \ \ \ protocol[\textcolor{stringliteral}{"{}pixelSizeMm"{}}]\ =\ float(pixel\_size\_mm\_fallback) }
+\DoxyCodeLine{00160\  }
+\DoxyCodeLine{00161\ \ \ \ \ \textcolor{comment}{\#\ Compact\ reprojection\ error\ (average\ MAE) }}
+\DoxyCodeLine{00162\ \ \ \ \ rep\ =\ protocol.get(\textcolor{stringliteral}{"{}reprojection"{}},\ \{\}) }
+\DoxyCodeLine{00163\ \ \ \ \ x\_mae\ =\ rep.get(\textcolor{stringliteral}{"{}x\_mae"{}},\ \textcolor{keywordtype}{None}) }
+\DoxyCodeLine{00164\ \ \ \ \ y\_mae\ =\ rep.get(\textcolor{stringliteral}{"{}y\_mae"{}},\ \textcolor{keywordtype}{None}) }
+\DoxyCodeLine{00165\ \ \ \ \ avg\_mae\ =\ \textcolor{keywordtype}{None} }
+\DoxyCodeLine{00166\ \ \ \ \ \textcolor{keywordflow}{if}\ x\_mae\ \textcolor{keywordflow}{is}\ \textcolor{keywordflow}{not}\ \textcolor{keywordtype}{None}\ \textcolor{keywordflow}{and}\ y\_mae\ \textcolor{keywordflow}{is}\ \textcolor{keywordflow}{not}\ \textcolor{keywordtype}{None}\ \textcolor{keywordflow}{and}\ np.isfinite(x\_mae)\ \textcolor{keywordflow}{and}\ np.isfinite(y\_mae): }
+\DoxyCodeLine{00167\ \ \ \ \ \ \ \ \ avg\_mae\ =\ float((x\_mae\ +\ y\_mae)\ /\ 2.0) }
+\DoxyCodeLine{00168\  }
+\DoxyCodeLine{00169\ \ \ \ \ data\ =\ \{ }
+\DoxyCodeLine{00170\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}meta"{}}:\ \{ }
+\DoxyCodeLine{00171\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}runType"{}}:\ run\_type, }
+\DoxyCodeLine{00172\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}numPoses"{}}:\ int(len(extr\_by\_pose)), }
+\DoxyCodeLine{00173\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}imageDir"{}}:\ image\_dir, }
+\DoxyCodeLine{00174\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}cameraIds"{}}:\ [cam\_id], }
+\DoxyCodeLine{00175\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}bundleAdjust"{}}:\ \textcolor{keyword}{True}, }
+\DoxyCodeLine{00176\ \ \ \ \ \ \ \ \ \}, }
+\DoxyCodeLine{00177\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}state"{}}:\ \{ }
+\DoxyCodeLine{00178\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}parameters"{}}:\ \{ }
+\DoxyCodeLine{00179\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cam\_id:\ \{ }
+\DoxyCodeLine{00180\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}pixelSizeMm"{}}:\ protocol.get(\textcolor{stringliteral}{"{}pixelSizeMm"{}}), }
+\DoxyCodeLine{00181\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}fL\_mm"{}}:\ protocol.get(\textcolor{stringliteral}{"{}fL\_mm"{}}), }
+\DoxyCodeLine{00182\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}bL0\_mm"{}}:\ protocol.get(\textcolor{stringliteral}{"{}bL0\_mm"{}}), }
+\DoxyCodeLine{00183\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}B\_mm"{}}:\ protocol.get(\textcolor{stringliteral}{"{}B\_mm"{}}), }
+\DoxyCodeLine{00184\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}cx\_px"{}}:\ protocol.get(\textcolor{stringliteral}{"{}cx\_px"{}}), }
+\DoxyCodeLine{00185\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}cy\_px"{}}:\ protocol.get(\textcolor{stringliteral}{"{}cy\_px"{}}), }
+\DoxyCodeLine{00186\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}a0"{}}:\ protocol.get(\textcolor{stringliteral}{"{}a0"{}}), }
+\DoxyCodeLine{00187\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}a1"{}}:\ protocol.get(\textcolor{stringliteral}{"{}a1"{}}), }
+\DoxyCodeLine{00188\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}b0"{}}:\ protocol.get(\textcolor{stringliteral}{"{}b0"{}}), }
+\DoxyCodeLine{00189\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}b1"{}}:\ protocol.get(\textcolor{stringliteral}{"{}b1"{}}), }
+\DoxyCodeLine{00190\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}reprojection"{}}:\ rep, }
+\DoxyCodeLine{00191\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}reprojectionAvgMae"{}}:\ avg\_mae, }
+\DoxyCodeLine{00192\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \} }
+\DoxyCodeLine{00193\ \ \ \ \ \ \ \ \ \ \ \ \ \}, }
+\DoxyCodeLine{00194\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}extrinsicsByPose"{}}:\ \{cam\_id:\ extr\_by\_pose\}, }
+\DoxyCodeLine{00195\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}timeStamp"{}}:\ \textcolor{keywordtype}{None} }
+\DoxyCodeLine{00196\ \ \ \ \ \ \ \ \ \} }
+\DoxyCodeLine{00197\ \ \ \ \ \} }
+\DoxyCodeLine{00198\  }
+\DoxyCodeLine{00199\ \ \ \ \ out\_path\ =\ os.path.join(result\_dir,\ out\_name) }
+\DoxyCodeLine{00200\ \ \ \ \ \textcolor{keyword}{with}\ open(out\_path,\ \textcolor{stringliteral}{"{}w"{}},\ encoding=\textcolor{stringliteral}{"{}utf-\/8"{}})\ \textcolor{keyword}{as}\ f: }
+\DoxyCodeLine{00201\ \ \ \ \ \ \ \ \ json.dump(data,\ f,\ indent=2) }
+\DoxyCodeLine{00202\  }
+\DoxyCodeLine{00203\ \ \ \ \ \textcolor{keywordflow}{return}\ out\_path }
+\DoxyCodeLine{00204\  }
+\DoxyCodeLine{00205\  }
+
+\end{DoxyCode}
+\Hypertarget{namespacelifcal__to__json_a3811ae95ac1c5188748cc3ee3370d889}\index{lifcal\_to\_json@{lifcal\_to\_json}!parse\_extrinsics\_xml@{parse\_extrinsics\_xml}}
+\index{parse\_extrinsics\_xml@{parse\_extrinsics\_xml}!lifcal\_to\_json@{lifcal\_to\_json}}
+\doxysubsubsection{\texorpdfstring{parse\_extrinsics\_xml()}{parse\_extrinsics\_xml()}}
+{\footnotesize\ttfamily \label{namespacelifcal__to__json_a3811ae95ac1c5188748cc3ee3370d889} 
+ Dict\mbox{[}str, Any\mbox{]} lifcal\+\_\+to\+\_\+json.\+parse\+\_\+extrinsics\+\_\+xml (\begin{DoxyParamCaption}\item[{str}]{xml\+\_\+path}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Parse LiFCal extrinsic orientations XML file.
+
+@param xml_path Path to extrinsicOrientations.xml file
+@return Dictionary mapping pose keys to rotation and translation data
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{lifcal__to__json_8py_source_l00070}{70}} of file \mbox{\hyperlink{lifcal__to__json_8py_source}{lifcal\+\_\+to\+\_\+json.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00070\ \textcolor{keyword}{def\ }parse\_extrinsics\_xml(xml\_path:\ str)\ -\/>\ Dict[str,\ Any]: }
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{} }}
+\DoxyCodeLine{00072\ \textcolor{stringliteral}{\ \ \ \ @brief\ Parse\ LiFCal\ extrinsic\ orientations\ XML\ file. }}
+\DoxyCodeLine{00073\ \textcolor{stringliteral}{\ \ \ \  }}
+\DoxyCodeLine{00074\ \textcolor{stringliteral}{\ \ \ \ @param\ xml\_path\ Path\ to\ extrinsicOrientations.xml\ file }}
+\DoxyCodeLine{00075\ \textcolor{stringliteral}{\ \ \ \ @return\ Dictionary\ mapping\ pose\ keys\ to\ rotation\ and\ translation\ data }}
+\DoxyCodeLine{00076\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00077\ \ \ \ \ root\ =\ ET.parse(xml\_path).getroot() }
+\DoxyCodeLine{00078\ \ \ \ \ out:\ Dict[str,\ Any]\ =\ \{\} }
+\DoxyCodeLine{00079\  }
+\DoxyCodeLine{00080\ \ \ \ \ \textcolor{keywordflow}{for}\ frame\ \textcolor{keywordflow}{in}\ root.findall(\textcolor{stringliteral}{"{}Frame"{}}): }
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ fid\ =\ int(frame.attrib.get(\textcolor{stringliteral}{"{}id"{}})) }
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ pose\_key\ =\ \textcolor{stringliteral}{"{}pose\%03d"{}}\ \%\ fid }
+\DoxyCodeLine{00083\  }
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ rot\ =\ frame.find(\textcolor{stringliteral}{"{}Rotation"{}}) }
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ tra\ =\ frame.find(\textcolor{stringliteral}{"{}Translation"{}}) }
+\DoxyCodeLine{00086\  }
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ rvec\ =\ [0.0,\ 0.0,\ 0.0] }
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ tvec\ =\ [0.0,\ 0.0,\ 0.0] }
+\DoxyCodeLine{00089\  }
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ rot\ \textcolor{keywordflow}{is}\ \textcolor{keywordflow}{not}\ \textcolor{keywordtype}{None}: }
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ c\ \textcolor{keywordflow}{in}\ rot.findall(\textcolor{stringliteral}{"{}Coeff"{}}): }
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ i\ =\ int(c.attrib[\textcolor{stringliteral}{"{}i"{}}]) }
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ rvec[i]\ =\ float(c.text.strip()) }
+\DoxyCodeLine{00094\  }
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ tra\ \textcolor{keywordflow}{is}\ \textcolor{keywordflow}{not}\ \textcolor{keywordtype}{None}: }
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ c\ \textcolor{keywordflow}{in}\ tra.findall(\textcolor{stringliteral}{"{}Coeff"{}}): }
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ i\ =\ int(c.attrib[\textcolor{stringliteral}{"{}i"{}}]) }
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ tvec[i]\ =\ float(c.text.strip()) }
+\DoxyCodeLine{00099\  }
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ rvec\_np\ =\ np.array(rvec,\ dtype=np.float64).reshape(3,\ 1) }
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ R,\ \_\ =\ cv2.Rodrigues(rvec\_np) }
+\DoxyCodeLine{00102\  }
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ out[pose\_key]\ =\ \{ }
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}rotationMatrix"{}}:\ R.astype(float).tolist(), }
+\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}rotationVector"{}}:\ [[float(rvec[0])],\ [float(rvec[1])],\ [float(rvec[2])]], }
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}translationVector"{}}:\ [[float(tvec[0])],\ [float(tvec[1])],\ [float(tvec[2])]], }
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \} }
+\DoxyCodeLine{00108\  }
+\DoxyCodeLine{00109\ \ \ \ \ \textcolor{keywordflow}{return}\ out }
+\DoxyCodeLine{00110\  }
+\DoxyCodeLine{00111\  }
+
+\end{DoxyCode}
+\Hypertarget{namespacelifcal__to__json_acdcd90a9dcf7973df598351b3fab282c}\index{lifcal\_to\_json@{lifcal\_to\_json}!parse\_protocol@{parse\_protocol}}
+\index{parse\_protocol@{parse\_protocol}!lifcal\_to\_json@{lifcal\_to\_json}}
+\doxysubsubsection{\texorpdfstring{parse\_protocol()}{parse\_protocol()}}
+{\footnotesize\ttfamily \label{namespacelifcal__to__json_acdcd90a9dcf7973df598351b3fab282c} 
+ dict lifcal\+\_\+to\+\_\+json.\+parse\+\_\+protocol (\begin{DoxyParamCaption}\item[{str}]{protocol\+\_\+path}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Parse LiFCal calibration protocol text file.
+
+@return Dictionary containing parsed calibration parameters and reprojection errors
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{lifcal__to__json_8py_source_l00015}{15}} of file \mbox{\hyperlink{lifcal__to__json_8py_source}{lifcal\+\_\+to\+\_\+json.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00015\ \textcolor{keyword}{def\ }parse\_protocol(protocol\_path:\ str)\ -\/>\ dict: }
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{} }}
+\DoxyCodeLine{00017\ \textcolor{stringliteral}{\ \ \ \ @brief\ Parse\ LiFCal\ calibration\ protocol\ text\ file. }}
+\DoxyCodeLine{00018\ \textcolor{stringliteral}{\ \ \ \  }}
+\DoxyCodeLine{00019\ \textcolor{stringliteral}{\ \ \ \ @return\ Dictionary\ containing\ parsed\ calibration\ parameters\ and\ reprojection\ errors }}
+\DoxyCodeLine{00020\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00021\ \ \ \ \ txt\ =\ open(protocol\_path,\ \textcolor{stringliteral}{"{}r"{}},\ encoding=\textcolor{stringliteral}{"{}utf-\/8"{}},\ errors=\textcolor{stringliteral}{"{}ignore"{}}).read() }
+\DoxyCodeLine{00022\  }
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keyword}{def\ }find\_float(pattern:\ str,\ default=\textcolor{keywordtype}{None})\ -\/>\ Optional[float]: }
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ m\ =\ re.search(pattern,\ txt,\ re.MULTILINE) }
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ m: }
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ default }
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}: }
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ float(m.group(1)) }
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{except}\ Exception: }
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ default }
+\DoxyCodeLine{00031\  }
+\DoxyCodeLine{00032\ \ \ \ \ pixel\_size\ =\ find\_float(\textcolor{stringliteral}{r"{}Pixel\ Size:\(\backslash\)s*([0-\/9.+-\/eE]+)\(\backslash\)s*mm"{}},\ \textcolor{keywordtype}{None}) }
+\DoxyCodeLine{00033\  }
+\DoxyCodeLine{00034\ \ \ \ \ fL\ \ =\ find\_float(\textcolor{stringliteral}{r"{}\string^\(\backslash\)s*fL\(\backslash\)s*:\(\backslash\)s*([0-\/9.+-\/eE]+)\(\backslash\)s*\$"{}},\ \textcolor{keywordtype}{None}) }
+\DoxyCodeLine{00035\ \ \ \ \ bL0\ =\ find\_float(\textcolor{stringliteral}{r"{}\string^\(\backslash\)s*bL0\(\backslash\)s*:\(\backslash\)s*([0-\/9.+-\/eE]+)\(\backslash\)s*\$"{}},\ \textcolor{keywordtype}{None}) }
+\DoxyCodeLine{00036\ \ \ \ \ B\ \ \ =\ find\_float(\textcolor{stringliteral}{r"{}\string^\(\backslash\)s*B\(\backslash\)s*:\(\backslash\)s*([0-\/9.+-\/eE]+)\(\backslash\)s*\$"{}},\ \textcolor{keywordtype}{None}) }
+\DoxyCodeLine{00037\ \ \ \ \ cx\ \ =\ find\_float(\textcolor{stringliteral}{r"{}\string^\(\backslash\)s*cx\(\backslash\)s*:\(\backslash\)s*([0-\/9.+-\/eE]+)\(\backslash\)s*\$"{}},\ \textcolor{keywordtype}{None}) }
+\DoxyCodeLine{00038\ \ \ \ \ cy\ \ =\ find\_float(\textcolor{stringliteral}{r"{}\string^\(\backslash\)s*cy\(\backslash\)s*:\(\backslash\)s*([0-\/9.+-\/eE]+)\(\backslash\)s*\$"{}},\ \textcolor{keywordtype}{None}) }
+\DoxyCodeLine{00039\  }
+\DoxyCodeLine{00040\ \ \ \ \ a0\ =\ find\_float(\textcolor{stringliteral}{r"{}\string^\(\backslash\)s*a0\(\backslash\)s*:\(\backslash\)s*([0-\/9.+-\/eE]+)\(\backslash\)s*\$"{}},\ 0.0) }
+\DoxyCodeLine{00041\ \ \ \ \ a1\ =\ find\_float(\textcolor{stringliteral}{r"{}\string^\(\backslash\)s*a1\(\backslash\)s*:\(\backslash\)s*([0-\/9.+-\/eE]+)\(\backslash\)s*\$"{}},\ 0.0) }
+\DoxyCodeLine{00042\ \ \ \ \ b0\ =\ find\_float(\textcolor{stringliteral}{r"{}\string^\(\backslash\)s*b0\(\backslash\)s*:\(\backslash\)s*([0-\/9.+-\/eE]+)\(\backslash\)s*\$"{}},\ 0.0) }
+\DoxyCodeLine{00043\ \ \ \ \ b1\ =\ find\_float(\textcolor{stringliteral}{r"{}\string^\(\backslash\)s*b1\(\backslash\)s*:\(\backslash\)s*([0-\/9.+-\/eE]+)\(\backslash\)s*\$"{}},\ 0.0) }
+\DoxyCodeLine{00044\  }
+\DoxyCodeLine{00045\ \ \ \ \ x\_std\ =\ find\_float(\textcolor{stringliteral}{r"{}std\(\backslash\).\(\backslash\)s*Dev\(\backslash\).\(\backslash\)s*x:\(\backslash\)s*([0-\/9.+-\/eE]+)"{}},\ \textcolor{keywordtype}{None}) }
+\DoxyCodeLine{00046\ \ \ \ \ y\_std\ =\ find\_float(\textcolor{stringliteral}{r"{}std\(\backslash\).\(\backslash\)s*Dev\(\backslash\).\(\backslash\)s*y:\(\backslash\)s*([0-\/9.+-\/eE]+)"{}},\ \textcolor{keywordtype}{None}) }
+\DoxyCodeLine{00047\ \ \ \ \ x\_mae\ =\ find\_float(\textcolor{stringliteral}{r"{}mae\(\backslash\)s*x:\(\backslash\)s*([0-\/9.+-\/eE]+)"{}},\ \textcolor{keywordtype}{None}) }
+\DoxyCodeLine{00048\ \ \ \ \ y\_mae\ =\ find\_float(\textcolor{stringliteral}{r"{}mae\(\backslash\)s*y:\(\backslash\)s*([0-\/9.+-\/eE]+)"{}},\ \textcolor{keywordtype}{None}) }
+\DoxyCodeLine{00049\  }
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordflow}{return}\ \{ }
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}pixelSizeMm"{}}:\ pixel\_size, }
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}fL\_mm"{}}:\ fL, }
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}bL0\_mm"{}}:\ bL0, }
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}B\_mm"{}}:\ B, }
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}cx\_px"{}}:\ cx, }
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}cy\_px"{}}:\ cy, }
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}a0"{}}:\ a0, }
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}a1"{}}:\ a1, }
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}b0"{}}:\ b0, }
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}b1"{}}:\ b1, }
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}reprojection"{}}:\ \{ }
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}x\_std"{}}:\ x\_std, }
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}y\_std"{}}:\ y\_std, }
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}x\_mae"{}}:\ x\_mae, }
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}y\_mae"{}}:\ y\_mae }
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \} }
+\DoxyCodeLine{00067\ \ \ \ \ \} }
+\DoxyCodeLine{00068\  }
+\DoxyCodeLine{00069\  }
+
+\end{DoxyCode}

@@ -5,15 +5,27 @@ from scipy.optimize import least_squares
 
 
 class InitialCalibration:
-    """Multi-camera calibration using chessboard patterns and bundle adjustment."""
+    """
+    @brief Multi-camera calibration using chessboard patterns and bundle adjustment.
+    """
 
     def __init__(self, chessboardSize=(8,8), squareSize=2/9):
+        """
+        @brief Constructor for InitialCalibration.
+        
+        @param chessboardSize Tuple (cols, rows) defining chessboard dimensions (default: (8,8))
+        @param squareSize Physical size of one chessboard square in meters (default: 2/9)
+        """
         self.chessboardSize = chessboardSize
-        self.squareSize = squareSize
-        self.criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 30, 0.001)
+        self.squareSize = squareSize 
+        self.criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 30, 0.001) 
 
     def createObjectPoints(self):
-        """Generate 3D coordinates of chessboard corners."""
+        """
+        @brief Generate 3D coordinates of chessboard corners.
+        
+        @return Numpy array of shape (N, 3) with 3D corner coordinates
+        """
         cols, rows = self.chessboardSize
         objp = np.zeros((cols * rows, 3), np.float32)
         objp[:, :2] = np.mgrid[0:cols, 0:rows].T.reshape(-1, 2)
@@ -21,7 +33,12 @@ class InitialCalibration:
         return objp
 
     def detectCorners(self, imagePath):
-        """Detect and refine chessboard corner positions in image."""
+        """
+        @brief Detect and refine chessboard corner positions in image.
+        
+        @param imagePath Path to the image file
+        @return Tuple (success, corners, imageSize) where success is bool, corners are refined 2D points, and imageSize is (width, height)
+        """
         img = cv2.imread(imagePath)
         if img is None:
             return False, None, None
@@ -35,7 +52,12 @@ class InitialCalibration:
         return True, refined, gray.shape[::-1]
 
     def calibrateIntrinsics(self, imageSet):
-        """Calibrate intrinsic parameters independently for each camera."""
+        """
+        @brief Calibrate intrinsic parameters independently for each camera.
+        
+        @param imageSet ImageSet object containing calibration images
+        @return CalibrationState with populated intrinsics for all cameras
+        """
         state = CalibrationState()
         objp = self.createObjectPoints()
 
@@ -67,7 +89,14 @@ class InitialCalibration:
         return state
 
     def calibrateExtrinsics(self, imageSet, state, refCamId):
-        """Compute pairwise stereo calibration between reference and each other camera."""
+        """
+        @brief Compute pairwise stereo calibration between reference and each other camera.
+        
+        @param imageSet ImageSet object containing calibration images
+        @param state CalibrationState with intrinsics already computed
+        @param refCamId Camera ID to use as reference coordinate system
+        @return Updated CalibrationState with extrinsics for all cameras
+        """
         objectPoints = self.createObjectPoints()
         K_ref = state.intrinsics[refCamId]["cameraMatrix"]
         dist_ref = state.intrinsics[refCamId]["distortionCoeffs"]
@@ -125,12 +154,12 @@ class InitialCalibration:
     
     def bundleAdjustExtrinsics(self, imageSet, state, refCamId):
         """
-        Global bundle adjustment optimizing extrinsics and board poses.
+        @brief Global bundle adjustment optimizing extrinsics and board poses.
         
-        Intrinsics remain fixed (from state.intrinsics).
-        Optimizes:
-          * Extrinsics of non-reference cameras (R_cam, t_cam)
-          * Board pose per image (R_board, t_board) in reference camera frame
+        @param imageSet ImageSet object containing calibration images
+        @param state CalibrationState with initial intrinsics and extrinsics
+        @param refCamId Camera ID to use as reference coordinate system
+        @return Updated CalibrationState with refined extrinsics after bundle adjustment
         """
         objp = self.createObjectPoints()
         cameraIds = list(imageSet.cameraIds)
@@ -388,7 +417,13 @@ class InitialCalibration:
         return state
 
     def run(self, imageSet, bundleAdjust=True):
-        """Main entry point for calibration pipeline."""
+        """
+        @brief Main entry point for calibration pipeline.
+        
+        @param imageSet ImageSet object containing calibration images
+        @param bundleAdjust Whether to apply bundle adjustment (default: True)
+        @return CalibrationState with complete intrinsic and extrinsic calibration
+        """
         print("Running intrinsic calibration...")
         state = self.calibrateIntrinsics(imageSet)
 

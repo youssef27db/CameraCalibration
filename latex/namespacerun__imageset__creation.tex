@@ -1,0 +1,290 @@
+\doxysection{run\+\_\+imageset\+\_\+creation Namespace Reference}
+\hypertarget{namespacerun__imageset__creation}{}\label{namespacerun__imageset__creation}\index{run\_imageset\_creation@{run\_imageset\_creation}}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespacerun__imageset__creation_af234e2dfbd9b72b2a7a394a2273eea58}{ensure\+\_\+camera\+\_\+subfolders}} (str base\+\_\+dir)
+\item 
+\mbox{\hyperlink{namespacerun__imageset__creation_a66f27e20b2da2e0abd88f4de6aebe582}{group\+\_\+focus\+\_\+images\+\_\+by\+\_\+pose}} ()
+\item 
+\mbox{\hyperlink{namespacerun__imageset__creation_a6764abf2d8c93d56d6c7807471becb22}{copy\+\_\+focus\+\_\+into\+\_\+camera\+\_\+folders}} (str pose, dict cam\+\_\+to\+\_\+path)
+\item 
+\mbox{\hyperlink{namespacerun__imageset__creation_a3aa87987b55f2ed7d71232f981178402}{cleanup\+\_\+focus\+\_\+root}} ()
+\item 
+\mbox{\hyperlink{namespacerun__imageset__creation_a7fb855fdc6d584df5499b73c31c2ed35}{main}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+str \mbox{\hyperlink{namespacerun__imageset__creation_ad9cfaf894ce7f8e9f742aa0f7473eaeb}{ROOT}} = "{}/data/external/Li\+FCal/Li\+FCal\+\_\+\+Data/Recalibration/Li\+FCal\+\_\+\+Imageset"{}
+\item 
+\mbox{\hyperlink{namespacerun__imageset__creation_afa2f587b34c6210120c63dd47cc0be0a}{FOCUS\+\_\+\+DIR}} = os.\+path.\+join(\mbox{\hyperlink{namespacerun__imageset__creation_ad9cfaf894ce7f8e9f742aa0f7473eaeb}{ROOT}}, "{}focus"{})
+\item 
+\mbox{\hyperlink{namespacerun__imageset__creation_a321ec7e2b7950352a40a69da74c70e33}{DEPTH\+\_\+\+DIR}} = os.\+path.\+join(\mbox{\hyperlink{namespacerun__imageset__creation_ad9cfaf894ce7f8e9f742aa0f7473eaeb}{ROOT}}, "{}depth"{})
+\item 
+bool \mbox{\hyperlink{namespacerun__imageset__creation_a8686652a61daad1a25d67544feb89753}{CLEAN\+\_\+\+FOCUS\+\_\+\+ROOT\+\_\+\+AFTER}} = True
+\item 
+list \mbox{\hyperlink{namespacerun__imageset__creation_a6cd93497dfea9f25e924ae249e93f577}{CAMERA\+\_\+\+IDS}}
+\item 
+\mbox{\hyperlink{namespacerun__imageset__creation_a2c4520cf580e508c21cee543b1bdee67}{PATTERN}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{namespacerun__imageset__creation_a3aa87987b55f2ed7d71232f981178402}\index{run\_imageset\_creation@{run\_imageset\_creation}!cleanup\_focus\_root@{cleanup\_focus\_root}}
+\index{cleanup\_focus\_root@{cleanup\_focus\_root}!run\_imageset\_creation@{run\_imageset\_creation}}
+\doxysubsubsection{\texorpdfstring{cleanup\_focus\_root()}{cleanup\_focus\_root()}}
+{\footnotesize\ttfamily \label{namespacerun__imageset__creation_a3aa87987b55f2ed7d71232f981178402} 
+run\+\_\+imageset\+\_\+creation.\+cleanup\+\_\+focus\+\_\+root (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Delete only loose files directly in focus/ (not in subdirectories).
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{run__imageset__creation_8py_source_l00070}{70}} of file \mbox{\hyperlink{run__imageset__creation_8py_source}{run\+\_\+imageset\+\_\+creation.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00070\ \textcolor{keyword}{def\ }cleanup\_focus\_root(): }
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{} }}
+\DoxyCodeLine{00072\ \textcolor{stringliteral}{\ \ \ \ @brief\ Delete\ only\ loose\ files\ directly\ in\ focus/\ (not\ in\ subdirectories). }}
+\DoxyCodeLine{00073\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00074\ \ \ \ \ \textcolor{keywordflow}{for}\ fn\ \textcolor{keywordflow}{in}\ os.listdir(FOCUS\_DIR): }
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ p\ =\ os.path.join(FOCUS\_DIR,\ fn) }
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ os.path.isfile(p)\ \textcolor{keywordflow}{and}\ PATTERN.match(fn): }
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \ \ \ \ os.remove(p) }
+\DoxyCodeLine{00078\  }
+
+\end{DoxyCode}
+\Hypertarget{namespacerun__imageset__creation_a6764abf2d8c93d56d6c7807471becb22}\index{run\_imageset\_creation@{run\_imageset\_creation}!copy\_focus\_into\_camera\_folders@{copy\_focus\_into\_camera\_folders}}
+\index{copy\_focus\_into\_camera\_folders@{copy\_focus\_into\_camera\_folders}!run\_imageset\_creation@{run\_imageset\_creation}}
+\doxysubsubsection{\texorpdfstring{copy\_focus\_into\_camera\_folders()}{copy\_focus\_into\_camera\_folders()}}
+{\footnotesize\ttfamily \label{namespacerun__imageset__creation_a6764abf2d8c93d56d6c7807471becb22} 
+run\+\_\+imageset\+\_\+creation.\+copy\+\_\+focus\+\_\+into\+\_\+camera\+\_\+folders (\begin{DoxyParamCaption}\item[{str}]{pose}{, }\item[{dict}]{cam\+\_\+to\+\_\+path}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Copy focus images into camera-specific subdirectories.
+
+@param pose Pose identifier string (e.g., "pose000")
+@param cam_to_path Dictionary mapping camera IDs to source image paths
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{run__imageset__creation_8py_source_l00057}{57}} of file \mbox{\hyperlink{run__imageset__creation_8py_source}{run\+\_\+imageset\+\_\+creation.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00057\ \textcolor{keyword}{def\ }copy\_focus\_into\_camera\_folders(pose:\ str,\ cam\_to\_path:\ dict): }
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{} }}
+\DoxyCodeLine{00059\ \textcolor{stringliteral}{\ \ \ \ @brief\ Copy\ focus\ images\ into\ camera-\/specific\ subdirectories. }}
+\DoxyCodeLine{00060\ \textcolor{stringliteral}{\ \ \ \  }}
+\DoxyCodeLine{00061\ \textcolor{stringliteral}{\ \ \ \ @param\ pose\ Pose\ identifier\ string\ (e.g.,\ "{}pose000"{}) }}
+\DoxyCodeLine{00062\ \textcolor{stringliteral}{\ \ \ \ @param\ cam\_to\_path\ Dictionary\ mapping\ camera\ IDs\ to\ source\ image\ paths }}
+\DoxyCodeLine{00063\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00064\ \ \ \ \ \textcolor{keywordflow}{for}\ cam,\ src\ \textcolor{keywordflow}{in}\ cam\_to\_path.items(): }
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ ext\ =\ os.path.splitext(src)[1].lower() }
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ dst\ =\ os.path.join(FOCUS\_DIR,\ cam,\ f\textcolor{stringliteral}{"{}\{pose\}\_\{cam\}\{ext\}"{}}) }
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ os.path.abspath(src)\ !=\ os.path.abspath(dst): }
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \ \ \ \ shutil.copy2(src,\ dst) }
+\DoxyCodeLine{00069\  }
+
+\end{DoxyCode}
+\Hypertarget{namespacerun__imageset__creation_af234e2dfbd9b72b2a7a394a2273eea58}\index{run\_imageset\_creation@{run\_imageset\_creation}!ensure\_camera\_subfolders@{ensure\_camera\_subfolders}}
+\index{ensure\_camera\_subfolders@{ensure\_camera\_subfolders}!run\_imageset\_creation@{run\_imageset\_creation}}
+\doxysubsubsection{\texorpdfstring{ensure\_camera\_subfolders()}{ensure\_camera\_subfolders()}}
+{\footnotesize\ttfamily \label{namespacerun__imageset__creation_af234e2dfbd9b72b2a7a394a2273eea58} 
+run\+\_\+imageset\+\_\+creation.\+ensure\+\_\+camera\+\_\+subfolders (\begin{DoxyParamCaption}\item[{str}]{base\+\_\+dir}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Create subdirectory for each camera ID under base_dir.
+
+@param base_dir Base directory path
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{run__imageset__creation_8py_source_l00032}{32}} of file \mbox{\hyperlink{run__imageset__creation_8py_source}{run\+\_\+imageset\+\_\+creation.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00032\ \textcolor{keyword}{def\ }ensure\_camera\_subfolders(base\_dir:\ str): }
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{} }}
+\DoxyCodeLine{00034\ \textcolor{stringliteral}{\ \ \ \ @brief\ Create\ subdirectory\ for\ each\ camera\ ID\ under\ base\_dir. }}
+\DoxyCodeLine{00035\ \textcolor{stringliteral}{\ \ \ \  }}
+\DoxyCodeLine{00036\ \textcolor{stringliteral}{\ \ \ \ @param\ base\_dir\ Base\ directory\ path }}
+\DoxyCodeLine{00037\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00038\ \ \ \ \ os.makedirs(base\_dir,\ exist\_ok=\textcolor{keyword}{True}) }
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keywordflow}{for}\ cid\ \textcolor{keywordflow}{in}\ CAMERA\_IDS: }
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ os.makedirs(os.path.join(base\_dir,\ cid),\ exist\_ok=\textcolor{keyword}{True}) }
+\DoxyCodeLine{00041\  }
+
+\end{DoxyCode}
+\Hypertarget{namespacerun__imageset__creation_a66f27e20b2da2e0abd88f4de6aebe582}\index{run\_imageset\_creation@{run\_imageset\_creation}!group\_focus\_images\_by\_pose@{group\_focus\_images\_by\_pose}}
+\index{group\_focus\_images\_by\_pose@{group\_focus\_images\_by\_pose}!run\_imageset\_creation@{run\_imageset\_creation}}
+\doxysubsubsection{\texorpdfstring{group\_focus\_images\_by\_pose()}{group\_focus\_images\_by\_pose()}}
+{\footnotesize\ttfamily \label{namespacerun__imageset__creation_a66f27e20b2da2e0abd88f4de6aebe582} 
+run\+\_\+imageset\+\_\+creation.\+group\+\_\+focus\+\_\+images\+\_\+by\+\_\+pose (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Group focus images by pose ID from flat directory structure.
+
+@return Dictionary mapping pose IDs to camera-path dictionaries
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{run__imageset__creation_8py_source_l00042}{42}} of file \mbox{\hyperlink{run__imageset__creation_8py_source}{run\+\_\+imageset\+\_\+creation.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00042\ \textcolor{keyword}{def\ }group\_focus\_images\_by\_pose(): }
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{} }}
+\DoxyCodeLine{00044\ \textcolor{stringliteral}{\ \ \ \ @brief\ Group\ focus\ images\ by\ pose\ ID\ from\ flat\ directory\ structure. }}
+\DoxyCodeLine{00045\ \textcolor{stringliteral}{\ \ \ \  }}
+\DoxyCodeLine{00046\ \textcolor{stringliteral}{\ \ \ \ @return\ Dictionary\ mapping\ pose\ IDs\ to\ camera-\/path\ dictionaries }}
+\DoxyCodeLine{00047\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00048\ \ \ \ \ pose\_to\_cam\ =\ defaultdict(dict) }
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keywordflow}{for}\ fn\ \textcolor{keywordflow}{in}\ sorted(os.listdir(FOCUS\_DIR)): }
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ m\ =\ PATTERN.match(fn) }
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ m: }
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue} }
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ pose,\ cam,\ ext\ =\ m.group(1),\ m.group(2),\ m.group(3) }
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ pose\_to\_cam[pose][cam]\ =\ os.path.join(FOCUS\_DIR,\ fn) }
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keywordflow}{return}\ pose\_to\_cam }
+\DoxyCodeLine{00056\  }
+
+\end{DoxyCode}
+\Hypertarget{namespacerun__imageset__creation_a7fb855fdc6d584df5499b73c31c2ed35}\index{run\_imageset\_creation@{run\_imageset\_creation}!main@{main}}
+\index{main@{main}!run\_imageset\_creation@{run\_imageset\_creation}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily \label{namespacerun__imageset__creation_a7fb855fdc6d584df5499b73c31c2ed35} 
+run\+\_\+imageset\+\_\+creation.\+main (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Main pipeline: organize focus images and generate depth maps.
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{run__imageset__creation_8py_source_l00079}{79}} of file \mbox{\hyperlink{run__imageset__creation_8py_source}{run\+\_\+imageset\+\_\+creation.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00079\ \textcolor{keyword}{def\ }main(): }
+\DoxyCodeLine{00080\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{} }}
+\DoxyCodeLine{00081\ \textcolor{stringliteral}{\ \ \ \ @brief\ Main\ pipeline:\ organize\ focus\ images\ and\ generate\ depth\ maps. }}
+\DoxyCodeLine{00082\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00083\ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ os.path.isdir(FOCUS\_DIR): }
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{raise}\ SystemExit(f\textcolor{stringliteral}{"{}focus\ folder\ not\ found:\ \{FOCUS\_DIR\}"{}}) }
+\DoxyCodeLine{00085\  }
+\DoxyCodeLine{00086\ \ \ \ \ ensure\_camera\_subfolders(FOCUS\_DIR) }
+\DoxyCodeLine{00087\ \ \ \ \ ensure\_camera\_subfolders(DEPTH\_DIR) }
+\DoxyCodeLine{00088\  }
+\DoxyCodeLine{00089\ \ \ \ \ pose\_to\_cam\ =\ group\_focus\_images\_by\_pose() }
+\DoxyCodeLine{00090\ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ pose\_to\_cam: }
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{raise}\ SystemExit(\textcolor{stringliteral}{"{}No\ focus\ images\ found.\ Expected:\ pose000\_Center.png\ etc."{}}) }
+\DoxyCodeLine{00092\  }
+\DoxyCodeLine{00093\ \ \ \ \ poses\ =\ sorted(pose\_to\_cam.keys()) }
+\DoxyCodeLine{00094\ \ \ \ \ print(\textcolor{stringliteral}{"{}Found\ poses:"{}},\ len(poses)) }
+\DoxyCodeLine{00095\  }
+\DoxyCodeLine{00096\ \ \ \ \ \textcolor{keywordflow}{for}\ i,\ pose\ \textcolor{keywordflow}{in}\ enumerate(poses,\ start=1): }
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ cam\_to\_focus\_path\ =\ pose\_to\_cam[pose] }
+\DoxyCodeLine{00098\  }
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Sort\ focus\ images\ into\ camera\ folders }}
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ copy\_focus\_into\_camera\_folders(pose,\ cam\_to\_focus\_path) }
+\DoxyCodeLine{00101\  }
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Generate\ depth\ maps\ for\ this\ pose }}
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ depthmaps\ =\ \mbox{\hyperlink{namespacedepthmap_a5e95b42c1c2c9b2ed81d37ca32f09530}{depthmap.generate\_depthmaps\_for\_pose}}(cam\_to\_focus\_path) }
+\DoxyCodeLine{00104\  }
+\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Save\ depth\ maps:\ depth/<CamId>/<pose>\_<CamId>\_depth.png }}
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ cam,\ depth\_u16\ \textcolor{keywordflow}{in}\ depthmaps.items(): }
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \ \ \ \ out\_path\ =\ os.path.join(DEPTH\_DIR,\ cam,\ f\textcolor{stringliteral}{"{}\{pose\}\_\{cam\}\_depth.png"{}}) }
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \ \ \ \ ok\ =\ \mbox{\hyperlink{namespacedepthmap_a4cfab791bc6b43425d0d6daddde9dbd5}{depthmap.imwrite\_u16}}(out\_path,\ depth\_u16) }
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ ok: }
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}FAILED\ write:"{}},\ out\_path) }
+\DoxyCodeLine{00111\  }
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}[\{i\}/\{len(poses)\}]\ \{pose\}:\ views=\{len(cam\_to\_focus\_path)\}\ depthmaps=\{len(depthmaps)\}"{}}) }
+\DoxyCodeLine{00113\  }
+\DoxyCodeLine{00114\ \ \ \ \ \textcolor{keywordflow}{if}\ CLEAN\_FOCUS\_ROOT\_AFTER: }
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ cleanup\_focus\_root() }
+\DoxyCodeLine{00116\  }
+\DoxyCodeLine{00117\ \ \ \ \ print(\textcolor{stringliteral}{"{}DONE."{}}) }
+\DoxyCodeLine{00118\ \ \ \ \ print(\textcolor{stringliteral}{"{}Focus\ by\ camera:"{}},\ FOCUS\_DIR) }
+\DoxyCodeLine{00119\ \ \ \ \ print(\textcolor{stringliteral}{"{}Depth\ by\ camera:"{}},\ DEPTH\_DIR) }
+\DoxyCodeLine{00120\  }
+
+\end{DoxyCode}
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{namespacerun__imageset__creation_a6cd93497dfea9f25e924ae249e93f577}\index{run\_imageset\_creation@{run\_imageset\_creation}!CAMERA\_IDS@{CAMERA\_IDS}}
+\index{CAMERA\_IDS@{CAMERA\_IDS}!run\_imageset\_creation@{run\_imageset\_creation}}
+\doxysubsubsection{\texorpdfstring{CAMERA\_IDS}{CAMERA\_IDS}}
+{\footnotesize\ttfamily \label{namespacerun__imageset__creation_a6cd93497dfea9f25e924ae249e93f577} 
+list run\+\_\+imageset\+\_\+creation.\+CAMERA\+\_\+\+IDS}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ =\ \ [}
+\DoxyCodeLine{00002\ \ \ \ \ \textcolor{stringliteral}{"{}Center"{}},\ \textcolor{stringliteral}{"{}Up1"{}},\ \textcolor{stringliteral}{"{}Up2"{}},\ \textcolor{stringliteral}{"{}Up3"{}},}
+\DoxyCodeLine{00003\ \ \ \ \ \textcolor{stringliteral}{"{}Down1"{}},\ \textcolor{stringliteral}{"{}Down2"{}},\ \textcolor{stringliteral}{"{}Down3"{}},}
+\DoxyCodeLine{00004\ \ \ \ \ \textcolor{stringliteral}{"{}Left1"{}},\ \textcolor{stringliteral}{"{}Left2"{}},\ \textcolor{stringliteral}{"{}Left3"{}},}
+\DoxyCodeLine{00005\ \ \ \ \ \textcolor{stringliteral}{"{}Right1"{}},\ \textcolor{stringliteral}{"{}Right2"{}},\ \textcolor{stringliteral}{"{}Right3"{}}}
+\DoxyCodeLine{00006\ ]}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{run__imageset__creation_8py_source_l00019}{19}} of file \mbox{\hyperlink{run__imageset__creation_8py_source}{run\+\_\+imageset\+\_\+creation.\+py}}.
+
+\Hypertarget{namespacerun__imageset__creation_a8686652a61daad1a25d67544feb89753}\index{run\_imageset\_creation@{run\_imageset\_creation}!CLEAN\_FOCUS\_ROOT\_AFTER@{CLEAN\_FOCUS\_ROOT\_AFTER}}
+\index{CLEAN\_FOCUS\_ROOT\_AFTER@{CLEAN\_FOCUS\_ROOT\_AFTER}!run\_imageset\_creation@{run\_imageset\_creation}}
+\doxysubsubsection{\texorpdfstring{CLEAN\_FOCUS\_ROOT\_AFTER}{CLEAN\_FOCUS\_ROOT\_AFTER}}
+{\footnotesize\ttfamily \label{namespacerun__imageset__creation_a8686652a61daad1a25d67544feb89753} 
+bool run\+\_\+imageset\+\_\+creation.\+CLEAN\+\_\+\+FOCUS\+\_\+\+ROOT\+\_\+\+AFTER = True}
+
+
+
+Definition at line \mbox{\hyperlink{run__imageset__creation_8py_source_l00017}{17}} of file \mbox{\hyperlink{run__imageset__creation_8py_source}{run\+\_\+imageset\+\_\+creation.\+py}}.
+
+\Hypertarget{namespacerun__imageset__creation_a321ec7e2b7950352a40a69da74c70e33}\index{run\_imageset\_creation@{run\_imageset\_creation}!DEPTH\_DIR@{DEPTH\_DIR}}
+\index{DEPTH\_DIR@{DEPTH\_DIR}!run\_imageset\_creation@{run\_imageset\_creation}}
+\doxysubsubsection{\texorpdfstring{DEPTH\_DIR}{DEPTH\_DIR}}
+{\footnotesize\ttfamily \label{namespacerun__imageset__creation_a321ec7e2b7950352a40a69da74c70e33} 
+run\+\_\+imageset\+\_\+creation.\+DEPTH\+\_\+\+DIR = os.\+path.\+join(\mbox{\hyperlink{namespacerun__imageset__creation_ad9cfaf894ce7f8e9f742aa0f7473eaeb}{ROOT}}, "{}depth"{})}
+
+
+
+Definition at line \mbox{\hyperlink{run__imageset__creation_8py_source_l00014}{14}} of file \mbox{\hyperlink{run__imageset__creation_8py_source}{run\+\_\+imageset\+\_\+creation.\+py}}.
+
+\Hypertarget{namespacerun__imageset__creation_afa2f587b34c6210120c63dd47cc0be0a}\index{run\_imageset\_creation@{run\_imageset\_creation}!FOCUS\_DIR@{FOCUS\_DIR}}
+\index{FOCUS\_DIR@{FOCUS\_DIR}!run\_imageset\_creation@{run\_imageset\_creation}}
+\doxysubsubsection{\texorpdfstring{FOCUS\_DIR}{FOCUS\_DIR}}
+{\footnotesize\ttfamily \label{namespacerun__imageset__creation_afa2f587b34c6210120c63dd47cc0be0a} 
+run\+\_\+imageset\+\_\+creation.\+FOCUS\+\_\+\+DIR = os.\+path.\+join(\mbox{\hyperlink{namespacerun__imageset__creation_ad9cfaf894ce7f8e9f742aa0f7473eaeb}{ROOT}}, "{}focus"{})}
+
+
+
+Definition at line \mbox{\hyperlink{run__imageset__creation_8py_source_l00013}{13}} of file \mbox{\hyperlink{run__imageset__creation_8py_source}{run\+\_\+imageset\+\_\+creation.\+py}}.
+
+\Hypertarget{namespacerun__imageset__creation_a2c4520cf580e508c21cee543b1bdee67}\index{run\_imageset\_creation@{run\_imageset\_creation}!PATTERN@{PATTERN}}
+\index{PATTERN@{PATTERN}!run\_imageset\_creation@{run\_imageset\_creation}}
+\doxysubsubsection{\texorpdfstring{PATTERN}{PATTERN}}
+{\footnotesize\ttfamily \label{namespacerun__imageset__creation_a2c4520cf580e508c21cee543b1bdee67} 
+run\+\_\+imageset\+\_\+creation.\+PATTERN}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ =\ \ re.compile(}
+\DoxyCodeLine{00002\ \ \ \ \ \textcolor{stringliteral}{r"{}\string^(pose\(\backslash\)d+)\_(Center|Up[123]|Down[123]|Left[123]|Right[123])\(\backslash\).(png|jpg|jpeg)\$"{}},}
+\DoxyCodeLine{00003\ \ \ \ \ re.IGNORECASE}
+\DoxyCodeLine{00004\ )}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{run__imageset__creation_8py_source_l00027}{27}} of file \mbox{\hyperlink{run__imageset__creation_8py_source}{run\+\_\+imageset\+\_\+creation.\+py}}.
+
+\Hypertarget{namespacerun__imageset__creation_ad9cfaf894ce7f8e9f742aa0f7473eaeb}\index{run\_imageset\_creation@{run\_imageset\_creation}!ROOT@{ROOT}}
+\index{ROOT@{ROOT}!run\_imageset\_creation@{run\_imageset\_creation}}
+\doxysubsubsection{\texorpdfstring{ROOT}{ROOT}}
+{\footnotesize\ttfamily \label{namespacerun__imageset__creation_ad9cfaf894ce7f8e9f742aa0f7473eaeb} 
+str run\+\_\+imageset\+\_\+creation.\+ROOT = "{}/data/external/Li\+FCal/Li\+FCal\+\_\+\+Data/Recalibration/Li\+FCal\+\_\+\+Imageset"{}}
+
+
+
+Definition at line \mbox{\hyperlink{run__imageset__creation_8py_source_l00012}{12}} of file \mbox{\hyperlink{run__imageset__creation_8py_source}{run\+\_\+imageset\+\_\+creation.\+py}}.
+

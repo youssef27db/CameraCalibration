@@ -1,0 +1,474 @@
+\doxysection{evaluate\+\_\+calibration Namespace Reference}
+\hypertarget{namespaceevaluate__calibration}{}\label{namespaceevaluate__calibration}\index{evaluate\_calibration@{evaluate\_calibration}}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespaceevaluate__calibration_aa4327f87956b975a0632bfde09f6024a}{rot\+\_\+angle\+\_\+deg}} (R)
+\item 
+\mbox{\hyperlink{namespaceevaluate__calibration_adc1c95da503bda878de783f323cfc109}{as\+\_\+vec3}} (v)
+\item 
+\mbox{\hyperlink{namespaceevaluate__calibration_a29820495239395c4fbcd184f3429dbff}{compute\+\_\+metrics\+\_\+for\+\_\+file}} (Path calib\+\_\+path, Path gt\+\_\+path)
+\item 
+\mbox{\hyperlink{namespaceevaluate__calibration_a52427f1f56ef8923ed4b2777c6ce4cca}{print\+\_\+per\+\_\+file\+\_\+table}} (results\+\_\+by\+\_\+name)
+\item 
+\mbox{\hyperlink{namespaceevaluate__calibration_a82fd2281c6b3f39c532924a3cafe3613}{print\+\_\+scenario\+\_\+table}} (results\+\_\+by\+\_\+name)
+\item 
+\mbox{\hyperlink{namespaceevaluate__calibration_a3fd9ab6dfc21298d70a4ce42329b6c56}{main}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespaceevaluate__calibration_a3630af97b6012ca108cd0fdda47435af}{THIS\+\_\+\+DIR}} = Path(\+\_\+\+\_\+file\+\_\+\+\_\+).resolve().parent
+\item 
+\mbox{\hyperlink{namespaceevaluate__calibration_a5ffb7363e3e7bf2b7c5c12583cf9d00f}{CALIB\+\_\+\+LFC\+\_\+\+DIR}} = THIS\+\_\+\+DIR.\+parent
+\item 
+\mbox{\hyperlink{namespaceevaluate__calibration_ac12cc9147a88ddfb0304199c03ad9487}{PROJECT\+\_\+\+ROOT}} = CALIB\+\_\+\+LFC\+\_\+\+DIR.\+parent
+\item 
+str \mbox{\hyperlink{namespaceevaluate__calibration_a046db975fb67e89b002e206d81032b81}{RESULTS\+\_\+\+DIR}} = \mbox{\hyperlink{namespaceevaluate__calibration_a5ffb7363e3e7bf2b7c5c12583cf9d00f}{CALIB\+\_\+\+LFC\+\_\+\+DIR}} / "{}results"{}
+\item 
+str \mbox{\hyperlink{namespaceevaluate__calibration_aef50d8b1ec05ef0f7726ded4a0351679}{GT\+\_\+\+DIR}} = \mbox{\hyperlink{namespaceevaluate__calibration_ac12cc9147a88ddfb0304199c03ad9487}{PROJECT\+\_\+\+ROOT}} / "{}Test\+Environment"{} / "{}params"{}
+\item 
+list \mbox{\hyperlink{namespaceevaluate__calibration_a3d3baf1b3ef6ba4c8f00733add80074d}{CAM\+\_\+\+IDS}}
+\item 
+dict \mbox{\hyperlink{namespaceevaluate__calibration_af3b18615c253a1155c38970524e8cc39}{CALIB\+\_\+\+FILES}}
+\item 
+dict \mbox{\hyperlink{namespaceevaluate__calibration_a0bf5048c8665f4b6f801ff70a3c04cdf}{GT\+\_\+\+FILES}}
+\item 
+dict \mbox{\hyperlink{namespaceevaluate__calibration_a55099ed68da2b877a4d626c0c7893854}{SCENARIOS}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{namespaceevaluate__calibration_adc1c95da503bda878de783f323cfc109}\index{evaluate\_calibration@{evaluate\_calibration}!as\_vec3@{as\_vec3}}
+\index{as\_vec3@{as\_vec3}!evaluate\_calibration@{evaluate\_calibration}}
+\doxysubsubsection{\texorpdfstring{as\_vec3()}{as\_vec3()}}
+{\footnotesize\ttfamily \label{namespaceevaluate__calibration_adc1c95da503bda878de783f323cfc109} 
+evaluate\+\_\+calibration.\+as\+\_\+vec3 (\begin{DoxyParamCaption}\item[{}]{v}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Convert any translation vector to robust 3-element vector.\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{evaluate__calibration_8py_source_l00062}{62}} of file \mbox{\hyperlink{evaluate__calibration_8py_source}{evaluate\+\_\+calibration.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00062\ \textcolor{keyword}{def\ }as\_vec3(v): }
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}Convert\ any\ translation\ vector\ to\ robust\ 3-\/element\ vector."{}"{}"{}} }
+\DoxyCodeLine{00064\ \ \ \ \ arr\ =\ np.array(v,\ dtype=float).reshape(-\/1) }
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keywordflow}{if}\ arr.size\ !=\ 3: }
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{raise}\ ValueError(f\textcolor{stringliteral}{"{}Expected\ 3\ entries\ for\ translation,\ got\ \{arr.size\}"{}}) }
+\DoxyCodeLine{00067\ \ \ \ \ \textcolor{keywordflow}{return}\ arr }
+\DoxyCodeLine{00068\  }
+\DoxyCodeLine{00069\  }
+
+\end{DoxyCode}
+\Hypertarget{namespaceevaluate__calibration_a29820495239395c4fbcd184f3429dbff}\index{evaluate\_calibration@{evaluate\_calibration}!compute\_metrics\_for\_file@{compute\_metrics\_for\_file}}
+\index{compute\_metrics\_for\_file@{compute\_metrics\_for\_file}!evaluate\_calibration@{evaluate\_calibration}}
+\doxysubsubsection{\texorpdfstring{compute\_metrics\_for\_file()}{compute\_metrics\_for\_file()}}
+{\footnotesize\ttfamily \label{namespaceevaluate__calibration_a29820495239395c4fbcd184f3429dbff} 
+evaluate\+\_\+calibration.\+compute\+\_\+metrics\+\_\+for\+\_\+file (\begin{DoxyParamCaption}\item[{Path}]{calib\+\_\+path}{, }\item[{Path}]{gt\+\_\+path}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Loads a calibration JSON and groundtruth JSON and computes:
+  - numPoses
+  - mean ΔT (m)
+  - mean ΔR (°)
+  - mean reprojection error (px, from intrinsics)
+
+Definitions as in your extrinsic plot:
+  ΔR_cam = angle(R_est * R_gt^T)
+  ΔT_cam = || T_est - T_gt ||_2
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{evaluate__calibration_8py_source_l00070}{70}} of file \mbox{\hyperlink{evaluate__calibration_8py_source}{evaluate\+\_\+calibration.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00070\ \textcolor{keyword}{def\ }compute\_metrics\_for\_file(calib\_path:\ Path,\ gt\_path:\ Path): }
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{} }}
+\DoxyCodeLine{00072\ \textcolor{stringliteral}{\ \ \ \ Loads\ a\ calibration\ JSON\ and\ groundtruth\ JSON\ and\ computes: }}
+\DoxyCodeLine{00073\ \textcolor{stringliteral}{\ \ \ \ \ \ -\/\ numPoses }}
+\DoxyCodeLine{00074\ \textcolor{stringliteral}{\ \ \ \ \ \ -\/\ mean\ ΔT\ (m) }}
+\DoxyCodeLine{00075\ \textcolor{stringliteral}{\ \ \ \ \ \ -\/\ mean\ ΔR\ (°) }}
+\DoxyCodeLine{00076\ \textcolor{stringliteral}{\ \ \ \ \ \ -\/\ mean\ reprojection\ error\ (px,\ from\ intrinsics) }}
+\DoxyCodeLine{00077\ \textcolor{stringliteral}{ }}
+\DoxyCodeLine{00078\ \textcolor{stringliteral}{\ \ \ \ Definitions\ as\ in\ your\ extrinsic\ plot: }}
+\DoxyCodeLine{00079\ \textcolor{stringliteral}{\ \ \ \ \ \ ΔR\_cam\ =\ angle(R\_est\ *\ R\_gt\string^T) }}
+\DoxyCodeLine{00080\ \textcolor{stringliteral}{\ \ \ \ \ \ ΔT\_cam\ =\ ||\ T\_est\ -\/\ T\_gt\ ||\_2 }}
+\DoxyCodeLine{00081\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00082\ \ \ \ \ \textcolor{keyword}{with}\ open(gt\_path,\ \textcolor{stringliteral}{"{}r"{}},\ encoding=\textcolor{stringliteral}{"{}utf-\/8"{}})\ \textcolor{keyword}{as}\ f: }
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ gt\ =\ json.load(f) }
+\DoxyCodeLine{00084\  }
+\DoxyCodeLine{00085\ \ \ \ \ \textcolor{keyword}{with}\ open(calib\_path,\ \textcolor{stringliteral}{"{}r"{}},\ encoding=\textcolor{stringliteral}{"{}utf-\/8"{}})\ \textcolor{keyword}{as}\ f: }
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ calib\ =\ json.load(f) }
+\DoxyCodeLine{00087\  }
+\DoxyCodeLine{00088\ \ \ \ \ meta\ =\ calib.get(\textcolor{stringliteral}{"{}meta"{}},\ \{\}) }
+\DoxyCodeLine{00089\ \ \ \ \ extr\_est\ =\ calib[\textcolor{stringliteral}{"{}state"{}}][\textcolor{stringliteral}{"{}extrinsics"{}}] }
+\DoxyCodeLine{00090\ \ \ \ \ intr\_est\ =\ calib[\textcolor{stringliteral}{"{}state"{}}][\textcolor{stringliteral}{"{}intrinsics"{}}] }
+\DoxyCodeLine{00091\  }
+\DoxyCodeLine{00092\ \ \ \ \ bundle\_adjust\ =\ bool(meta.get(\textcolor{stringliteral}{"{}bundleAdjust"{}},\ \textcolor{keyword}{False})) }
+\DoxyCodeLine{00093\ \ \ \ \ num\_poses\ =\ int(meta.get(\textcolor{stringliteral}{"{}numPoses"{}},\ -\/1)) }
+\DoxyCodeLine{00094\  }
+\DoxyCodeLine{00095\ \ \ \ \ rot\_err\ =\ [] }
+\DoxyCodeLine{00096\ \ \ \ \ trans\_err\ =\ [] }
+\DoxyCodeLine{00097\ \ \ \ \ reproj\_err\ =\ [] }
+\DoxyCodeLine{00098\  }
+\DoxyCodeLine{00099\ \ \ \ \ \textcolor{keywordflow}{for}\ cam\ \textcolor{keywordflow}{in}\ CAM\_IDS: }
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ cam\ \textcolor{keywordflow}{not}\ \textcolor{keywordflow}{in}\ extr\_est\ \textcolor{keywordflow}{or}\ cam\ \textcolor{keywordflow}{not}\ \textcolor{keywordflow}{in}\ gt: }
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}[WARN]\ Camera\ '\{cam\}'\ not\ in\ both\ files\ for\ \{calib\_path.name\},\ skipping\ this\ cam."{}}) }
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue} }
+\DoxyCodeLine{00103\  }
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Extrinsics }}
+\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ R\_est\ =\ np.array(extr\_est[cam][\textcolor{stringliteral}{"{}rotationMatrix"{}}],\ dtype=float) }
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ R\_gt\ \ =\ np.array(gt[cam][\textcolor{stringliteral}{"{}rotationMatrix"{}}],\ dtype=float) }
+\DoxyCodeLine{00107\  }
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ T\_est\ =\ as\_vec3(extr\_est[cam][\textcolor{stringliteral}{"{}translationVector"{}}]) }
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ T\_gt\ \ =\ as\_vec3(gt[cam][\textcolor{stringliteral}{"{}translationVector"{}}]) }
+\DoxyCodeLine{00110\  }
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Rotation\ error\ as\ in\ plot }}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ R\_err\ =\ R\_est\ @\ R\_gt.T }
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ ang\ =\ rot\_angle\_deg(R\_err) }
+\DoxyCodeLine{00114\  }
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Translation\ error\ (absolute,\ m) }}
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ d\_abs\ =\ float(np.linalg.norm(T\_est\ -\/\ T\_gt)) }
+\DoxyCodeLine{00117\  }
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ rot\_err.append(ang) }
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ trans\_err.append(d\_abs) }
+\DoxyCodeLine{00120\  }
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Intrinsic\ reprojection\ error }}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ cam\ \textcolor{keywordflow}{in}\ intr\_est: }
+\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ \ \ \ \ reproj\_err.append(float(intr\_est[cam][\textcolor{stringliteral}{"{}reprojectionError"{}}])) }
+\DoxyCodeLine{00124\  }
+\DoxyCodeLine{00125\ \ \ \ \ \textcolor{comment}{\#\ Mean\ values }}
+\DoxyCodeLine{00126\ \ \ \ \ mean\_dT\ =\ float(np.mean(trans\_err))\ \ \ \ \ \textcolor{keywordflow}{if}\ trans\_err\ \textcolor{keywordflow}{else}\ float(\textcolor{stringliteral}{"{}nan"{}}) }
+\DoxyCodeLine{00127\ \ \ \ \ mean\_dR\ =\ float(np.mean(rot\_err))\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ rot\_err\ \textcolor{keywordflow}{else}\ float(\textcolor{stringliteral}{"{}nan"{}}) }
+\DoxyCodeLine{00128\ \ \ \ \ mean\_reproj\ =\ float(np.mean(reproj\_err))\ \textcolor{keywordflow}{if}\ reproj\_err\ \textcolor{keywordflow}{else}\ float(\textcolor{stringliteral}{"{}nan"{}}) }
+\DoxyCodeLine{00129\  }
+\DoxyCodeLine{00130\ \ \ \ \ \textcolor{keywordflow}{return}\ \{ }
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}bundleAdjust"{}}:\ bundle\_adjust, }
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}numPoses"{}}:\ num\_poses, }
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}mean\_dT"{}}:\ mean\_dT, }
+\DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}mean\_dR"{}}:\ mean\_dR, }
+\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}mean\_reproj"{}}:\ mean\_reproj, }
+\DoxyCodeLine{00136\ \ \ \ \ \} }
+\DoxyCodeLine{00137\  }
+\DoxyCodeLine{00138\ \textcolor{comment}{\#\ Table\ output\ (console) }}
+
+\end{DoxyCode}
+\Hypertarget{namespaceevaluate__calibration_a3fd9ab6dfc21298d70a4ce42329b6c56}\index{evaluate\_calibration@{evaluate\_calibration}!main@{main}}
+\index{main@{main}!evaluate\_calibration@{evaluate\_calibration}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily \label{namespaceevaluate__calibration_a3fd9ab6dfc21298d70a4ce42329b6c56} 
+evaluate\+\_\+calibration.\+main (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{evaluate__calibration_8py_source_l00217}{217}} of file \mbox{\hyperlink{evaluate__calibration_8py_source}{evaluate\+\_\+calibration.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00217\ \textcolor{keyword}{def\ }main(): }
+\DoxyCodeLine{00218\ \ \ \ \ results\_by\_name\ =\ \{\} }
+\DoxyCodeLine{00219\  }
+\DoxyCodeLine{00220\ \ \ \ \ \textcolor{keywordflow}{for}\ name,\ calib\_path\ \textcolor{keywordflow}{in}\ CALIB\_FILES.items(): }
+\DoxyCodeLine{00221\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ calib\_path.exists(): }
+\DoxyCodeLine{00222\ \ \ \ \ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}[WARN]\ File\ not\ found:\ \{calib\_path\}"{}}) }
+\DoxyCodeLine{00223\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue} }
+\DoxyCodeLine{00224\  }
+\DoxyCodeLine{00225\ \ \ \ \ \ \ \ \ gt\_path\ =\ GT\_FILES.get(name) }
+\DoxyCodeLine{00226\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ gt\_path\ \textcolor{keywordflow}{is}\ \textcolor{keywordtype}{None}: }
+\DoxyCodeLine{00227\ \ \ \ \ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}[WARN]\ No\ GT\ file\ mapped\ for\ \{name\},\ skipping."{}}) }
+\DoxyCodeLine{00228\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue} }
+\DoxyCodeLine{00229\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ gt\_path.exists(): }
+\DoxyCodeLine{00230\ \ \ \ \ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}[WARN]\ GT\ file\ not\ found\ for\ \{name\}:\ \{gt\_path\}"{}}) }
+\DoxyCodeLine{00231\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue} }
+\DoxyCodeLine{00232\  }
+\DoxyCodeLine{00233\ \ \ \ \ \ \ \ \ metrics\ =\ compute\_metrics\_for\_file(calib\_path,\ gt\_path) }
+\DoxyCodeLine{00234\ \ \ \ \ \ \ \ \ results\_by\_name[name]\ =\ metrics }
+\DoxyCodeLine{00235\  }
+\DoxyCodeLine{00236\ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ results\_by\_name: }
+\DoxyCodeLine{00237\ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}[ERROR]\ No\ valid\ results\ computed.\ Check\ file\ paths."{}}) }
+\DoxyCodeLine{00238\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return} }
+\DoxyCodeLine{00239\  }
+\DoxyCodeLine{00240\ \ \ \ \ print(\textcolor{stringliteral}{"{}Detailed\ results\ per\ calibration:\(\backslash\)n"{}}) }
+\DoxyCodeLine{00241\ \ \ \ \ print\_per\_file\_table(results\_by\_name) }
+\DoxyCodeLine{00242\  }
+\DoxyCodeLine{00243\ \ \ \ \ print\_scenario\_table(results\_by\_name) }
+\DoxyCodeLine{00244\  }
+\DoxyCodeLine{00245\  }
+
+\end{DoxyCode}
+\Hypertarget{namespaceevaluate__calibration_a52427f1f56ef8923ed4b2777c6ce4cca}\index{evaluate\_calibration@{evaluate\_calibration}!print\_per\_file\_table@{print\_per\_file\_table}}
+\index{print\_per\_file\_table@{print\_per\_file\_table}!evaluate\_calibration@{evaluate\_calibration}}
+\doxysubsubsection{\texorpdfstring{print\_per\_file\_table()}{print\_per\_file\_table()}}
+{\footnotesize\ttfamily \label{namespaceevaluate__calibration_a52427f1f56ef8923ed4b2777c6ce4cca} 
+evaluate\+\_\+calibration.\+print\+\_\+per\+\_\+file\+\_\+table (\begin{DoxyParamCaption}\item[{}]{results\+\_\+by\+\_\+name}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Prints one line per calibration JSON.
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{evaluate__calibration_8py_source_l00139}{139}} of file \mbox{\hyperlink{evaluate__calibration_8py_source}{evaluate\+\_\+calibration.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00139\ \textcolor{keyword}{def\ }print\_per\_file\_table(results\_by\_name): }
+\DoxyCodeLine{00140\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{} }}
+\DoxyCodeLine{00141\ \textcolor{stringliteral}{\ \ \ \ Prints\ one\ line\ per\ calibration\ JSON. }}
+\DoxyCodeLine{00142\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00143\ \ \ \ \ header\ =\ ( }
+\DoxyCodeLine{00144\ \ \ \ \ \ \ \ \ f\textcolor{stringliteral}{"{}\{'Name':<12\}\ "{}} }
+\DoxyCodeLine{00145\ \ \ \ \ \ \ \ \ f\textcolor{stringliteral}{"{}\{'\#Poses':>6\}\ "{}} }
+\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ f\textcolor{stringliteral}{"{}\{'BA':<4\}\ "{}} }
+\DoxyCodeLine{00147\ \ \ \ \ \ \ \ \ f\textcolor{stringliteral}{"{}\{'mean\ dT\ [m]':>12\}\ "{}} }
+\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ f\textcolor{stringliteral}{"{}\{'mean\ dR\ [deg]':>13\}\ "{}} }
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ f\textcolor{stringliteral}{"{}\{'mean\ reproj\ [px]':>16\}"{}} }
+\DoxyCodeLine{00150\ \ \ \ \ ) }
+\DoxyCodeLine{00151\ \ \ \ \ print(header) }
+\DoxyCodeLine{00152\ \ \ \ \ print(\textcolor{stringliteral}{"{}-\/"{}}\ *\ len(header)) }
+\DoxyCodeLine{00153\  }
+\DoxyCodeLine{00154\ \ \ \ \ \textcolor{keywordflow}{for}\ name,\ res\ \textcolor{keywordflow}{in}\ sorted(results\_by\_name.items()): }
+\DoxyCodeLine{00155\ \ \ \ \ \ \ \ \ ba\_flag\ =\ \textcolor{stringliteral}{"{}yes"{}}\ \textcolor{keywordflow}{if}\ res[\textcolor{stringliteral}{"{}bundleAdjust"{}}]\ \textcolor{keywordflow}{else}\ \textcolor{stringliteral}{"{}no"{}} }
+\DoxyCodeLine{00156\ \ \ \ \ \ \ \ \ print( }
+\DoxyCodeLine{00157\ \ \ \ \ \ \ \ \ \ \ \ \ f\textcolor{stringliteral}{"{}\{name:<12\}\ "{}} }
+\DoxyCodeLine{00158\ \ \ \ \ \ \ \ \ \ \ \ \ f\textcolor{stringliteral}{"{}\{res['numPoses']:6d\}\ "{}} }
+\DoxyCodeLine{00159\ \ \ \ \ \ \ \ \ \ \ \ \ f\textcolor{stringliteral}{"{}\{ba\_flag:<4\}\ "{}} }
+\DoxyCodeLine{00160\ \ \ \ \ \ \ \ \ \ \ \ \ f\textcolor{stringliteral}{"{}\{res['mean\_dT']:12.5f\}\ "{}} }
+\DoxyCodeLine{00161\ \ \ \ \ \ \ \ \ \ \ \ \ f\textcolor{stringliteral}{"{}\{res['mean\_dR']:12.5f\}\ "{}} }
+\DoxyCodeLine{00162\ \ \ \ \ \ \ \ \ \ \ \ \ f\textcolor{stringliteral}{"{}\{res['mean\_reproj']:16.5f\}"{}} }
+\DoxyCodeLine{00163\ \ \ \ \ \ \ \ \ ) }
+\DoxyCodeLine{00164\  }
+
+\end{DoxyCode}
+\Hypertarget{namespaceevaluate__calibration_a82fd2281c6b3f39c532924a3cafe3613}\index{evaluate\_calibration@{evaluate\_calibration}!print\_scenario\_table@{print\_scenario\_table}}
+\index{print\_scenario\_table@{print\_scenario\_table}!evaluate\_calibration@{evaluate\_calibration}}
+\doxysubsubsection{\texorpdfstring{print\_scenario\_table()}{print\_scenario\_table()}}
+{\footnotesize\ttfamily \label{namespaceevaluate__calibration_a82fd2281c6b3f39c532924a3cafe3613} 
+evaluate\+\_\+calibration.\+print\+\_\+scenario\+\_\+table (\begin{DoxyParamCaption}\item[{}]{results\+\_\+by\+\_\+name}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Aggregates over scenarios (Robustness / Generalization)
+and prints a compact table.
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{evaluate__calibration_8py_source_l00165}{165}} of file \mbox{\hyperlink{evaluate__calibration_8py_source}{evaluate\+\_\+calibration.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00165\ \textcolor{keyword}{def\ }print\_scenario\_table(results\_by\_name): }
+\DoxyCodeLine{00166\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{} }}
+\DoxyCodeLine{00167\ \textcolor{stringliteral}{\ \ \ \ Aggregates\ over\ scenarios\ (Robustness\ /\ Generalization) }}
+\DoxyCodeLine{00168\ \textcolor{stringliteral}{\ \ \ \ and\ prints\ a\ compact\ table. }}
+\DoxyCodeLine{00169\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00170\ \ \ \ \ print(\textcolor{stringliteral}{"{}\(\backslash\)n\(\backslash\)nScenario\ Summary:\(\backslash\)n"{}}) }
+\DoxyCodeLine{00171\  }
+\DoxyCodeLine{00172\ \ \ \ \ header\ =\ ( }
+\DoxyCodeLine{00173\ \ \ \ \ \ \ \ \ f\textcolor{stringliteral}{"{}\{'Szenario':<22\}\ "{}} }
+\DoxyCodeLine{00174\ \ \ \ \ \ \ \ \ f\textcolor{stringliteral}{"{}\{'\#Runs':>6\}\ "{}} }
+\DoxyCodeLine{00175\ \ \ \ \ \ \ \ \ f\textcolor{stringliteral}{"{}\{'Avg\#Poses':>9\}\ "{}} }
+\DoxyCodeLine{00176\ \ \ \ \ \ \ \ \ f\textcolor{stringliteral}{"{}\{'mean\ dT\ [m]':>12\}\ "{}} }
+\DoxyCodeLine{00177\ \ \ \ \ \ \ \ \ f\textcolor{stringliteral}{"{}\{'mean\ dR\ [deg]':>13\}\ "{}} }
+\DoxyCodeLine{00178\ \ \ \ \ \ \ \ \ f\textcolor{stringliteral}{"{}\{'mean\ reproj\ [px]':>16\}"{}} }
+\DoxyCodeLine{00179\ \ \ \ \ ) }
+\DoxyCodeLine{00180\ \ \ \ \ print(header) }
+\DoxyCodeLine{00181\ \ \ \ \ print(\textcolor{stringliteral}{"{}-\/"{}}\ *\ len(header)) }
+\DoxyCodeLine{00182\  }
+\DoxyCodeLine{00183\ \ \ \ \ \textcolor{keywordflow}{for}\ scen\_name,\ calib\_names\ \textcolor{keywordflow}{in}\ SCENARIOS.items(): }
+\DoxyCodeLine{00184\ \ \ \ \ \ \ \ \ dT\_vals\ =\ [] }
+\DoxyCodeLine{00185\ \ \ \ \ \ \ \ \ dR\_vals\ =\ [] }
+\DoxyCodeLine{00186\ \ \ \ \ \ \ \ \ reproj\_vals\ =\ [] }
+\DoxyCodeLine{00187\ \ \ \ \ \ \ \ \ pose\_counts\ =\ [] }
+\DoxyCodeLine{00188\  }
+\DoxyCodeLine{00189\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ cname\ \textcolor{keywordflow}{in}\ calib\_names: }
+\DoxyCodeLine{00190\ \ \ \ \ \ \ \ \ \ \ \ \ res\ =\ results\_by\_name.get(cname) }
+\DoxyCodeLine{00191\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ res\ \textcolor{keywordflow}{is}\ \textcolor{keywordtype}{None}: }
+\DoxyCodeLine{00192\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue} }
+\DoxyCodeLine{00193\  }
+\DoxyCodeLine{00194\ \ \ \ \ \ \ \ \ \ \ \ \ dT\_vals.append(res[\textcolor{stringliteral}{"{}mean\_dT"{}}]) }
+\DoxyCodeLine{00195\ \ \ \ \ \ \ \ \ \ \ \ \ dR\_vals.append(res[\textcolor{stringliteral}{"{}mean\_dR"{}}]) }
+\DoxyCodeLine{00196\ \ \ \ \ \ \ \ \ \ \ \ \ reproj\_vals.append(res[\textcolor{stringliteral}{"{}mean\_reproj"{}}]) }
+\DoxyCodeLine{00197\ \ \ \ \ \ \ \ \ \ \ \ \ pose\_counts.append(res[\textcolor{stringliteral}{"{}numPoses"{}}]) }
+\DoxyCodeLine{00198\  }
+\DoxyCodeLine{00199\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ dT\_vals: }
+\DoxyCodeLine{00200\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue} }
+\DoxyCodeLine{00201\  }
+\DoxyCodeLine{00202\ \ \ \ \ \ \ \ \ mean\_dT\ =\ float(np.mean(dT\_vals)) }
+\DoxyCodeLine{00203\ \ \ \ \ \ \ \ \ mean\_dR\ =\ float(np.mean(dR\_vals)) }
+\DoxyCodeLine{00204\ \ \ \ \ \ \ \ \ mean\_reproj\ =\ float(np.mean(reproj\_vals)) }
+\DoxyCodeLine{00205\ \ \ \ \ \ \ \ \ mean\_poses\ =\ float(np.mean(pose\_counts)) }
+\DoxyCodeLine{00206\ \ \ \ \ \ \ \ \ num\_runs\ =\ len(dT\_vals) }
+\DoxyCodeLine{00207\  }
+\DoxyCodeLine{00208\ \ \ \ \ \ \ \ \ print( }
+\DoxyCodeLine{00209\ \ \ \ \ \ \ \ \ \ \ \ \ f\textcolor{stringliteral}{"{}\{scen\_name:<22\}\ "{}} }
+\DoxyCodeLine{00210\ \ \ \ \ \ \ \ \ \ \ \ \ f\textcolor{stringliteral}{"{}\{num\_runs:6d\}\ "{}} }
+\DoxyCodeLine{00211\ \ \ \ \ \ \ \ \ \ \ \ \ f\textcolor{stringliteral}{"{}\{mean\_poses:9.1f\}\ "{}} }
+\DoxyCodeLine{00212\ \ \ \ \ \ \ \ \ \ \ \ \ f\textcolor{stringliteral}{"{}\{mean\_dT:12.5f\}\ "{}} }
+\DoxyCodeLine{00213\ \ \ \ \ \ \ \ \ \ \ \ \ f\textcolor{stringliteral}{"{}\{mean\_dR:13.5f\}\ "{}} }
+\DoxyCodeLine{00214\ \ \ \ \ \ \ \ \ \ \ \ \ f\textcolor{stringliteral}{"{}\{mean\_reproj:16.5f\}"{}} }
+\DoxyCodeLine{00215\ \ \ \ \ \ \ \ \ ) }
+\DoxyCodeLine{00216\  }
+
+\end{DoxyCode}
+\Hypertarget{namespaceevaluate__calibration_aa4327f87956b975a0632bfde09f6024a}\index{evaluate\_calibration@{evaluate\_calibration}!rot\_angle\_deg@{rot\_angle\_deg}}
+\index{rot\_angle\_deg@{rot\_angle\_deg}!evaluate\_calibration@{evaluate\_calibration}}
+\doxysubsubsection{\texorpdfstring{rot\_angle\_deg()}{rot\_angle\_deg()}}
+{\footnotesize\ttfamily \label{namespaceevaluate__calibration_aa4327f87956b975a0632bfde09f6024a} 
+evaluate\+\_\+calibration.\+rot\+\_\+angle\+\_\+deg (\begin{DoxyParamCaption}\item[{}]{R}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Extract rotation angle (degrees) from 3x3 rotation matrix.\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{evaluate__calibration_8py_source_l00055}{55}} of file \mbox{\hyperlink{evaluate__calibration_8py_source}{evaluate\+\_\+calibration.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00055\ \textcolor{keyword}{def\ }rot\_angle\_deg(R): }
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}Extract\ rotation\ angle\ (degrees)\ from\ 3x3\ rotation\ matrix."{}"{}"{}} }
+\DoxyCodeLine{00057\ \ \ \ \ tr\ =\ np.trace(R) }
+\DoxyCodeLine{00058\ \ \ \ \ c\ =\ (tr\ -\/\ 1.0)\ /\ 2.0 }
+\DoxyCodeLine{00059\ \ \ \ \ c\ =\ np.clip(c,\ -\/1.0,\ 1.0) }
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keywordflow}{return}\ float(np.degrees(np.arccos(c))) }
+\DoxyCodeLine{00061\  }
+
+\end{DoxyCode}
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{namespaceevaluate__calibration_af3b18615c253a1155c38970524e8cc39}\index{evaluate\_calibration@{evaluate\_calibration}!CALIB\_FILES@{CALIB\_FILES}}
+\index{CALIB\_FILES@{CALIB\_FILES}!evaluate\_calibration@{evaluate\_calibration}}
+\doxysubsubsection{\texorpdfstring{CALIB\_FILES}{CALIB\_FILES}}
+{\footnotesize\ttfamily \label{namespaceevaluate__calibration_af3b18615c253a1155c38970524e8cc39} 
+dict evaluate\+\_\+calibration.\+CALIB\+\_\+\+FILES}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ =\ \ \{}
+\DoxyCodeLine{00002\ \ \ \ \ \textcolor{stringliteral}{"{}imageset1"{}}:\ RESULTS\_DIR\ /\ \textcolor{stringliteral}{"{}calibration\_initial\_imageset1\_20251215\_173701.json"{}},}
+\DoxyCodeLine{00003\ \ \ \ \ \textcolor{stringliteral}{"{}imageset2"{}}:\ RESULTS\_DIR\ /\ \textcolor{stringliteral}{"{}calibration\_initial\_imageset2\_20251215\_181903.json"{}},}
+\DoxyCodeLine{00004\ \ \ \ \ \textcolor{stringliteral}{"{}imageset3"{}}:\ RESULTS\_DIR\ /\ \textcolor{stringliteral}{"{}calibration\_initial\_imageset3\_20251215\_185041.json"{}},}
+\DoxyCodeLine{00005\ \ \ \ \ \textcolor{stringliteral}{"{}imageset4"{}}:\ RESULTS\_DIR\ /\ \textcolor{stringliteral}{"{}calibration\_initial\_imageset4\_20251215\_165644.json"{}},}
+\DoxyCodeLine{00006\ \ \ \ \ \textcolor{stringliteral}{"{}imageset5"{}}:\ RESULTS\_DIR\ /\ \textcolor{stringliteral}{"{}calibration\_initial\_imageset5\_20251217\_011656.json"{}},}
+\DoxyCodeLine{00007\ \ \ \ \ \textcolor{stringliteral}{"{}imageset6"{}}:\ RESULTS\_DIR\ /\ \textcolor{stringliteral}{"{}calibration\_initial\_imageset6\_20251215\_201527.json"{}},}
+\DoxyCodeLine{00008\ \ \ \ \ \textcolor{stringliteral}{"{}imageset7"{}}:\ RESULTS\_DIR\ /\ \textcolor{stringliteral}{"{}calibration\_initial\_imageset7\_20251215\_203849.json"{}},}
+\DoxyCodeLine{00009\ \}}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{evaluate__calibration_8py_source_l00024}{24}} of file \mbox{\hyperlink{evaluate__calibration_8py_source}{evaluate\+\_\+calibration.\+py}}.
+
+\Hypertarget{namespaceevaluate__calibration_a5ffb7363e3e7bf2b7c5c12583cf9d00f}\index{evaluate\_calibration@{evaluate\_calibration}!CALIB\_LFC\_DIR@{CALIB\_LFC\_DIR}}
+\index{CALIB\_LFC\_DIR@{CALIB\_LFC\_DIR}!evaluate\_calibration@{evaluate\_calibration}}
+\doxysubsubsection{\texorpdfstring{CALIB\_LFC\_DIR}{CALIB\_LFC\_DIR}}
+{\footnotesize\ttfamily \label{namespaceevaluate__calibration_a5ffb7363e3e7bf2b7c5c12583cf9d00f} 
+evaluate\+\_\+calibration.\+CALIB\+\_\+\+LFC\+\_\+\+DIR = THIS\+\_\+\+DIR.\+parent}
+
+
+
+Definition at line \mbox{\hyperlink{evaluate__calibration_8py_source_l00007}{7}} of file \mbox{\hyperlink{evaluate__calibration_8py_source}{evaluate\+\_\+calibration.\+py}}.
+
+\Hypertarget{namespaceevaluate__calibration_a3d3baf1b3ef6ba4c8f00733add80074d}\index{evaluate\_calibration@{evaluate\_calibration}!CAM\_IDS@{CAM\_IDS}}
+\index{CAM\_IDS@{CAM\_IDS}!evaluate\_calibration@{evaluate\_calibration}}
+\doxysubsubsection{\texorpdfstring{CAM\_IDS}{CAM\_IDS}}
+{\footnotesize\ttfamily \label{namespaceevaluate__calibration_a3d3baf1b3ef6ba4c8f00733add80074d} 
+list evaluate\+\_\+calibration.\+CAM\+\_\+\+IDS}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ =\ \ [}
+\DoxyCodeLine{00002\ \ \ \ \ \textcolor{stringliteral}{"{}Center"{}},}
+\DoxyCodeLine{00003\ \ \ \ \ \textcolor{stringliteral}{"{}Up1"{}},\ \textcolor{stringliteral}{"{}Up2"{}},\ \textcolor{stringliteral}{"{}Up3"{}},}
+\DoxyCodeLine{00004\ \ \ \ \ \textcolor{stringliteral}{"{}Down1"{}},\ \textcolor{stringliteral}{"{}Down2"{}},\ \textcolor{stringliteral}{"{}Down3"{}},}
+\DoxyCodeLine{00005\ \ \ \ \ \textcolor{stringliteral}{"{}Left1"{}},\ \textcolor{stringliteral}{"{}Left2"{}},\ \textcolor{stringliteral}{"{}Left3"{}},}
+\DoxyCodeLine{00006\ \ \ \ \ \textcolor{stringliteral}{"{}Right1"{}},\ \textcolor{stringliteral}{"{}Right2"{}},\ \textcolor{stringliteral}{"{}Right3"{}},}
+\DoxyCodeLine{00007\ ]}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{evaluate__calibration_8py_source_l00015}{15}} of file \mbox{\hyperlink{evaluate__calibration_8py_source}{evaluate\+\_\+calibration.\+py}}.
+
+\Hypertarget{namespaceevaluate__calibration_aef50d8b1ec05ef0f7726ded4a0351679}\index{evaluate\_calibration@{evaluate\_calibration}!GT\_DIR@{GT\_DIR}}
+\index{GT\_DIR@{GT\_DIR}!evaluate\_calibration@{evaluate\_calibration}}
+\doxysubsubsection{\texorpdfstring{GT\_DIR}{GT\_DIR}}
+{\footnotesize\ttfamily \label{namespaceevaluate__calibration_aef50d8b1ec05ef0f7726ded4a0351679} 
+str evaluate\+\_\+calibration.\+GT\+\_\+\+DIR = \mbox{\hyperlink{namespaceevaluate__calibration_ac12cc9147a88ddfb0304199c03ad9487}{PROJECT\+\_\+\+ROOT}} / "{}Test\+Environment"{} / "{}params"{}}
+
+
+
+Definition at line \mbox{\hyperlink{evaluate__calibration_8py_source_l00012}{12}} of file \mbox{\hyperlink{evaluate__calibration_8py_source}{evaluate\+\_\+calibration.\+py}}.
+
+\Hypertarget{namespaceevaluate__calibration_a0bf5048c8665f4b6f801ff70a3c04cdf}\index{evaluate\_calibration@{evaluate\_calibration}!GT\_FILES@{GT\_FILES}}
+\index{GT\_FILES@{GT\_FILES}!evaluate\_calibration@{evaluate\_calibration}}
+\doxysubsubsection{\texorpdfstring{GT\_FILES}{GT\_FILES}}
+{\footnotesize\ttfamily \label{namespaceevaluate__calibration_a0bf5048c8665f4b6f801ff70a3c04cdf} 
+dict evaluate\+\_\+calibration.\+GT\+\_\+\+FILES}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ =\ \ \{}
+\DoxyCodeLine{00002\ \ \ \ \ \textcolor{comment}{\#\ Rig0\ for\ imageset1–4}}
+\DoxyCodeLine{00003\ \ \ \ \ \textcolor{stringliteral}{"{}imageset1"{}}:\ GT\_DIR\ /\ \textcolor{stringliteral}{"{}groundtruth\_extrinsics\_Rig0.json"{}},}
+\DoxyCodeLine{00004\ \ \ \ \ \textcolor{stringliteral}{"{}imageset2"{}}:\ GT\_DIR\ /\ \textcolor{stringliteral}{"{}groundtruth\_extrinsics\_Rig0.json"{}},}
+\DoxyCodeLine{00005\ \ \ \ \ \textcolor{stringliteral}{"{}imageset3"{}}:\ GT\_DIR\ /\ \textcolor{stringliteral}{"{}groundtruth\_extrinsics\_Rig0.json"{}},}
+\DoxyCodeLine{00006\ \ \ \ \ \textcolor{stringliteral}{"{}imageset4"{}}:\ GT\_DIR\ /\ \textcolor{stringliteral}{"{}groundtruth\_extrinsics\_Rig0.json"{}},}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \ \ \ \ \textcolor{comment}{\#\ Different\ rigs/sets:}}
+\DoxyCodeLine{00009\ \ \ \ \ \textcolor{stringliteral}{"{}imageset5"{}}:\ GT\_DIR\ /\ \textcolor{stringliteral}{"{}groundtruth\_extrinsics\_Rig1\_set5.json"{}},}
+\DoxyCodeLine{00010\ \ \ \ \ \textcolor{stringliteral}{"{}imageset6"{}}:\ GT\_DIR\ /\ \textcolor{stringliteral}{"{}groundtruth\_extrinsics\_Rig2\_set6.json"{}},}
+\DoxyCodeLine{00011\ \ \ \ \ \textcolor{stringliteral}{"{}imageset7"{}}:\ GT\_DIR\ /\ \textcolor{stringliteral}{"{}groundtruth\_extrinsics\_Rig3\_set7.json"{}},\ \ }
+\DoxyCodeLine{00012\ \}}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{evaluate__calibration_8py_source_l00035}{35}} of file \mbox{\hyperlink{evaluate__calibration_8py_source}{evaluate\+\_\+calibration.\+py}}.
+
+\Hypertarget{namespaceevaluate__calibration_ac12cc9147a88ddfb0304199c03ad9487}\index{evaluate\_calibration@{evaluate\_calibration}!PROJECT\_ROOT@{PROJECT\_ROOT}}
+\index{PROJECT\_ROOT@{PROJECT\_ROOT}!evaluate\_calibration@{evaluate\_calibration}}
+\doxysubsubsection{\texorpdfstring{PROJECT\_ROOT}{PROJECT\_ROOT}}
+{\footnotesize\ttfamily \label{namespaceevaluate__calibration_ac12cc9147a88ddfb0304199c03ad9487} 
+evaluate\+\_\+calibration.\+PROJECT\+\_\+\+ROOT = CALIB\+\_\+\+LFC\+\_\+\+DIR.\+parent}
+
+
+
+Definition at line \mbox{\hyperlink{evaluate__calibration_8py_source_l00008}{8}} of file \mbox{\hyperlink{evaluate__calibration_8py_source}{evaluate\+\_\+calibration.\+py}}.
+
+\Hypertarget{namespaceevaluate__calibration_a046db975fb67e89b002e206d81032b81}\index{evaluate\_calibration@{evaluate\_calibration}!RESULTS\_DIR@{RESULTS\_DIR}}
+\index{RESULTS\_DIR@{RESULTS\_DIR}!evaluate\_calibration@{evaluate\_calibration}}
+\doxysubsubsection{\texorpdfstring{RESULTS\_DIR}{RESULTS\_DIR}}
+{\footnotesize\ttfamily \label{namespaceevaluate__calibration_a046db975fb67e89b002e206d81032b81} 
+str evaluate\+\_\+calibration.\+RESULTS\+\_\+\+DIR = \mbox{\hyperlink{namespaceevaluate__calibration_a5ffb7363e3e7bf2b7c5c12583cf9d00f}{CALIB\+\_\+\+LFC\+\_\+\+DIR}} / "{}results"{}}
+
+
+
+Definition at line \mbox{\hyperlink{evaluate__calibration_8py_source_l00009}{9}} of file \mbox{\hyperlink{evaluate__calibration_8py_source}{evaluate\+\_\+calibration.\+py}}.
+
+\Hypertarget{namespaceevaluate__calibration_a55099ed68da2b877a4d626c0c7893854}\index{evaluate\_calibration@{evaluate\_calibration}!SCENARIOS@{SCENARIOS}}
+\index{SCENARIOS@{SCENARIOS}!evaluate\_calibration@{evaluate\_calibration}}
+\doxysubsubsection{\texorpdfstring{SCENARIOS}{SCENARIOS}}
+{\footnotesize\ttfamily \label{namespaceevaluate__calibration_a55099ed68da2b877a4d626c0c7893854} 
+dict evaluate\+\_\+calibration.\+SCENARIOS}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ =\ \ \{}
+\DoxyCodeLine{00002\ \ \ \ \ \textcolor{stringliteral}{"{}A\_Robustheit"{}}:\ [\textcolor{stringliteral}{"{}imageset1"{}},\ \textcolor{stringliteral}{"{}imageset2"{}},\ \textcolor{stringliteral}{"{}imageset3"{}},\ \textcolor{stringliteral}{"{}imageset4"{}}],}
+\DoxyCodeLine{00003\ \ \ \ \ \textcolor{stringliteral}{"{}B\_Generalisation"{}}:\ \ \ \ [\textcolor{stringliteral}{"{}imageset5"{}},\ \textcolor{stringliteral}{"{}imageset6"{}},\ \textcolor{stringliteral}{"{}imageset7"{}}],}
+\DoxyCodeLine{00004\ \}}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{evaluate__calibration_8py_source_l00049}{49}} of file \mbox{\hyperlink{evaluate__calibration_8py_source}{evaluate\+\_\+calibration.\+py}}.
+
+\Hypertarget{namespaceevaluate__calibration_a3630af97b6012ca108cd0fdda47435af}\index{evaluate\_calibration@{evaluate\_calibration}!THIS\_DIR@{THIS\_DIR}}
+\index{THIS\_DIR@{THIS\_DIR}!evaluate\_calibration@{evaluate\_calibration}}
+\doxysubsubsection{\texorpdfstring{THIS\_DIR}{THIS\_DIR}}
+{\footnotesize\ttfamily \label{namespaceevaluate__calibration_a3630af97b6012ca108cd0fdda47435af} 
+evaluate\+\_\+calibration.\+THIS\+\_\+\+DIR = Path(\+\_\+\+\_\+file\+\_\+\+\_\+).resolve().parent}
+
+
+
+Definition at line \mbox{\hyperlink{evaluate__calibration_8py_source_l00006}{6}} of file \mbox{\hyperlink{evaluate__calibration_8py_source}{evaluate\+\_\+calibration.\+py}}.
+

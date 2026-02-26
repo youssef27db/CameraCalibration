@@ -32,6 +32,11 @@ CAM_IDS = [
 
 
 def parse_args():
+    """
+    @brief Parse command line arguments for calibration configuration.
+    
+    @return Parsed arguments with base_dir, num_poses, and bundle_adjust settings
+    """
     parser = argparse.ArgumentParser(description="Run initial camera calibration")
     parser.add_argument("--base_dir", default=DEFAULT_BASE_DIR, help="Path to imageset directory")
     parser.add_argument("--num_poses", type=int, default=DEFAULT_NUM_POSES, help="Number of poses in the imageset")
@@ -52,7 +57,11 @@ def parse_args():
 
 
 def main(args):
-    """Run complete initial calibration pipeline with validation and summary output."""
+    """
+    @brief Run complete initial calibration pipeline with validation and summary output.
+    
+    @param args
+    """
     print("Creating ImageSet...")
     imageSet = ImageSet(args.base_dir, args.num_poses, CAM_IDS)
 

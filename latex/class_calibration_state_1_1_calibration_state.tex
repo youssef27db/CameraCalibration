@@ -1,0 +1,238 @@
+\doxysection{Calibration\+State.\+Calibration\+State Class Reference}
+\hypertarget{class_calibration_state_1_1_calibration_state}{}\label{class_calibration_state_1_1_calibration_state}\index{CalibrationState.CalibrationState@{CalibrationState.CalibrationState}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_calibration_state_1_1_calibration_state_a110b71bae3359f0ebb77b99ddb0bbb88}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self)
+\item 
+\mbox{\hyperlink{class_calibration_state_1_1_calibration_state_abd3c76b035ff61ba83ebf29e6e63aa5b}{set\+Intrinsics}} (self, cam\+Id, camera\+Matrix, distortion\+Coeffs, rep\+Error)
+\item 
+\mbox{\hyperlink{class_calibration_state_1_1_calibration_state_ae9ad32ad446fdef893abde990f8d1f45}{set\+Extrinsics}} (self, cam\+Id, rotation\+Matrix, translation\+Vector, stereo\+RMS)
+\item 
+\mbox{\hyperlink{class_calibration_state_1_1_calibration_state_ade63271926d314d90e0be19b755cba5e}{set\+Time\+Stamp}} (self, timestamp)
+\item 
+\mbox{\hyperlink{class_calibration_state_1_1_calibration_state_af055446551223e6d513808f3cfc1d199}{\+\_\+\+\_\+get\+State\+\_\+\+\_\+}} (self)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_calibration_state_1_1_calibration_state_a6b05e51ababa4fe1d1c374435f7ddf39}{time\+Stamp}} = timestamp
+\item 
+\mbox{\hyperlink{class_calibration_state_1_1_calibration_state_a89ef7d095777c18fce1d28e36bc8cb58}{intrinsics}}
+\item 
+\mbox{\hyperlink{class_calibration_state_1_1_calibration_state_ab11e331fb6069c606fa08b957b26ada8}{extrinsics}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}@brief Stores the complete calibration state for a multi-camera system.
+
+@details This class manages intrinsic and extrinsic parameters for all cameras
+in the system. It provides methods to set and retrieve calibration data including
+camera matrices, distortion coefficients, rotation matrices, and translation vectors.
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{_calibration_state_8py_source_l00001}{1}} of file \mbox{\hyperlink{_calibration_state_8py_source}{Calibration\+State.\+py}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_calibration_state_1_1_calibration_state_a110b71bae3359f0ebb77b99ddb0bbb88}\index{CalibrationState.CalibrationState@{CalibrationState.CalibrationState}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!CalibrationState.CalibrationState@{CalibrationState.CalibrationState}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily \label{class_calibration_state_1_1_calibration_state_a110b71bae3359f0ebb77b99ddb0bbb88} 
+Calibration\+State.\+Calibration\+State.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Constructor for CalibrationState.
+
+@details Initializes empty dictionaries for intrinsic and extrinsic parameters
+and sets the timestamp to None.
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{_calibration_state_8py_source_l00010}{10}} of file \mbox{\hyperlink{_calibration_state_8py_source}{Calibration\+State.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00010\ \ \ \ \ \textcolor{keyword}{def\ }\_\_init\_\_(self): }
+\DoxyCodeLine{00011\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{} }}
+\DoxyCodeLine{00012\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @brief\ Constructor\ for\ CalibrationState. }}
+\DoxyCodeLine{00013\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \  }}
+\DoxyCodeLine{00014\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @details\ Initializes\ empty\ dictionaries\ for\ intrinsic\ and\ extrinsic\ parameters }}
+\DoxyCodeLine{00015\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ and\ sets\ the\ timestamp\ to\ None. }}
+\DoxyCodeLine{00016\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ self.intrinsics\ =\ \{\}\ }
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ self.extrinsics\ =\ \{\}\ }
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ self.timeStamp\ =\ \textcolor{keywordtype}{None}\ }
+\DoxyCodeLine{00020\  }
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_calibration_state_1_1_calibration_state_af055446551223e6d513808f3cfc1d199}\index{CalibrationState.CalibrationState@{CalibrationState.CalibrationState}!\_\_getState\_\_@{\_\_getState\_\_}}
+\index{\_\_getState\_\_@{\_\_getState\_\_}!CalibrationState.CalibrationState@{CalibrationState.CalibrationState}}
+\doxysubsubsection{\texorpdfstring{\_\_getState\_\_()}{\_\_getState\_\_()}}
+{\footnotesize\ttfamily \label{class_calibration_state_1_1_calibration_state_af055446551223e6d513808f3cfc1d199} 
+Calibration\+State.\+Calibration\+State.\+\_\+\+\_\+get\+State\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Return the complete calibration state as dictionary.
+
+@return Dictionary containing intrinsics, extrinsics, and timestamp
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{_calibration_state_8py_source_l00059}{59}} of file \mbox{\hyperlink{_calibration_state_8py_source}{Calibration\+State.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keyword}{def\ }\_\_getState\_\_(self): }
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{} }}
+\DoxyCodeLine{00061\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @brief\ Return\ the\ complete\ calibration\ state\ as\ dictionary. }}
+\DoxyCodeLine{00062\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \  }}
+\DoxyCodeLine{00063\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @return\ Dictionary\ containing\ intrinsics,\ extrinsics,\ and\ timestamp }}
+\DoxyCodeLine{00064\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \{ }
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}intrinsics"{}}:\ self.intrinsics, }
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}extrinsics"{}}:\ self.extrinsics, }
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}timeStamp"{}}:\ self.timeStamp }
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \} }
+
+\end{DoxyCode}
+\Hypertarget{class_calibration_state_1_1_calibration_state_ae9ad32ad446fdef893abde990f8d1f45}\index{CalibrationState.CalibrationState@{CalibrationState.CalibrationState}!setExtrinsics@{setExtrinsics}}
+\index{setExtrinsics@{setExtrinsics}!CalibrationState.CalibrationState@{CalibrationState.CalibrationState}}
+\doxysubsubsection{\texorpdfstring{setExtrinsics()}{setExtrinsics()}}
+{\footnotesize\ttfamily \label{class_calibration_state_1_1_calibration_state_ae9ad32ad446fdef893abde990f8d1f45} 
+Calibration\+State.\+Calibration\+State.\+set\+Extrinsics (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{cam\+Id}{, }\item[{}]{rotation\+Matrix}{, }\item[{}]{translation\+Vector}{, }\item[{}]{stereo\+RMS}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Store extrinsic calibration parameters for a camera.
+
+@param camId Camera identifier
+@param rotationMatrix 3x3 rotation matrix representing camera orientation
+@param translationVector 3x1 translation vector representing camera position
+@param stereoRMS Root mean square error of the stereo calibration
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{_calibration_state_8py_source_l00036}{36}} of file \mbox{\hyperlink{_calibration_state_8py_source}{Calibration\+State.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keyword}{def\ }setExtrinsics(self,\ camId,\ rotationMatrix,\ translationVector,\ stereoRMS): }
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{} }}
+\DoxyCodeLine{00038\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @brief\ Store\ extrinsic\ calibration\ parameters\ for\ a\ camera. }}
+\DoxyCodeLine{00039\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \  }}
+\DoxyCodeLine{00040\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ camId\ Camera\ identifier }}
+\DoxyCodeLine{00041\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ rotationMatrix\ 3x3\ rotation\ matrix\ representing\ camera\ orientation }}
+\DoxyCodeLine{00042\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ translationVector\ 3x1\ translation\ vector\ representing\ camera\ position }}
+\DoxyCodeLine{00043\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ stereoRMS\ Root\ mean\ square\ error\ of\ the\ stereo\ calibration }}
+\DoxyCodeLine{00044\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ self.extrinsics[camId]\ =\ \{ }
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}rotationMatrix"{}}:\ rotationMatrix, }
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}translationVector"{}}:\ translationVector, }
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}stereoRms"{}}:\ stereoRMS }
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \} }
+\DoxyCodeLine{00050\  }
+
+\end{DoxyCode}
+\Hypertarget{class_calibration_state_1_1_calibration_state_abd3c76b035ff61ba83ebf29e6e63aa5b}\index{CalibrationState.CalibrationState@{CalibrationState.CalibrationState}!setIntrinsics@{setIntrinsics}}
+\index{setIntrinsics@{setIntrinsics}!CalibrationState.CalibrationState@{CalibrationState.CalibrationState}}
+\doxysubsubsection{\texorpdfstring{setIntrinsics()}{setIntrinsics()}}
+{\footnotesize\ttfamily \label{class_calibration_state_1_1_calibration_state_abd3c76b035ff61ba83ebf29e6e63aa5b} 
+Calibration\+State.\+Calibration\+State.\+set\+Intrinsics (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{cam\+Id}{, }\item[{}]{camera\+Matrix}{, }\item[{}]{distortion\+Coeffs}{, }\item[{}]{rep\+Error}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Store intrinsic calibration parameters for a camera.
+
+@param camId Camera identifier
+@param cameraMatrix 3x3 camera matrix containing focal lengths and principal point
+@param distortionCoeffs Distortion coefficients vector
+@param repError Reprojection error of the calibration
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{_calibration_state_8py_source_l00021}{21}} of file \mbox{\hyperlink{_calibration_state_8py_source}{Calibration\+State.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keyword}{def\ }setIntrinsics(self,\ camId,\ cameraMatrix,\ distortionCoeffs,\ repError): }
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{} }}
+\DoxyCodeLine{00023\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @brief\ Store\ intrinsic\ calibration\ parameters\ for\ a\ camera. }}
+\DoxyCodeLine{00024\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \  }}
+\DoxyCodeLine{00025\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ camId\ Camera\ identifier }}
+\DoxyCodeLine{00026\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ cameraMatrix\ 3x3\ camera\ matrix\ containing\ focal\ lengths\ and\ principal\ point }}
+\DoxyCodeLine{00027\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ distortionCoeffs\ Distortion\ coefficients\ vector }}
+\DoxyCodeLine{00028\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ repError\ Reprojection\ error\ of\ the\ calibration }}
+\DoxyCodeLine{00029\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ self.intrinsics[camId]\ =\ \{ }
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}cameraMatrix"{}}:\ cameraMatrix, }
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}distortionCoeffs"{}}:\ distortionCoeffs, }
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}reprojectionError"{}}:\ repError }
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \} }
+\DoxyCodeLine{00035\  }
+
+\end{DoxyCode}
+\Hypertarget{class_calibration_state_1_1_calibration_state_ade63271926d314d90e0be19b755cba5e}\index{CalibrationState.CalibrationState@{CalibrationState.CalibrationState}!setTimeStamp@{setTimeStamp}}
+\index{setTimeStamp@{setTimeStamp}!CalibrationState.CalibrationState@{CalibrationState.CalibrationState}}
+\doxysubsubsection{\texorpdfstring{setTimeStamp()}{setTimeStamp()}}
+{\footnotesize\ttfamily \label{class_calibration_state_1_1_calibration_state_ade63271926d314d90e0be19b755cba5e} 
+Calibration\+State.\+Calibration\+State.\+set\+Time\+Stamp (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{timestamp}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Set the calibration timestamp.
+
+@param timestamp Timestamp indicating when the calibration was performed
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{_calibration_state_8py_source_l00051}{51}} of file \mbox{\hyperlink{_calibration_state_8py_source}{Calibration\+State.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keyword}{def\ }setTimeStamp(self,\ timestamp): }
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{} }}
+\DoxyCodeLine{00053\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @brief\ Set\ the\ calibration\ timestamp. }}
+\DoxyCodeLine{00054\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \  }}
+\DoxyCodeLine{00055\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ timestamp\ Timestamp\ indicating\ when\ the\ calibration\ was\ performed }}
+\DoxyCodeLine{00056\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ self.timeStamp\ =\ timestamp }
+\DoxyCodeLine{00058\  }
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_calibration_state_1_1_calibration_state_ab11e331fb6069c606fa08b957b26ada8}\index{CalibrationState.CalibrationState@{CalibrationState.CalibrationState}!extrinsics@{extrinsics}}
+\index{extrinsics@{extrinsics}!CalibrationState.CalibrationState@{CalibrationState.CalibrationState}}
+\doxysubsubsection{\texorpdfstring{extrinsics}{extrinsics}}
+{\footnotesize\ttfamily \label{class_calibration_state_1_1_calibration_state_ab11e331fb6069c606fa08b957b26ada8} 
+Calibration\+State.\+Calibration\+State.\+extrinsics}
+
+
+
+Definition at line \mbox{\hyperlink{_calibration_state_8py_source_l00067}{67}} of file \mbox{\hyperlink{_calibration_state_8py_source}{Calibration\+State.\+py}}.
+
+\Hypertarget{class_calibration_state_1_1_calibration_state_a89ef7d095777c18fce1d28e36bc8cb58}\index{CalibrationState.CalibrationState@{CalibrationState.CalibrationState}!intrinsics@{intrinsics}}
+\index{intrinsics@{intrinsics}!CalibrationState.CalibrationState@{CalibrationState.CalibrationState}}
+\doxysubsubsection{\texorpdfstring{intrinsics}{intrinsics}}
+{\footnotesize\ttfamily \label{class_calibration_state_1_1_calibration_state_a89ef7d095777c18fce1d28e36bc8cb58} 
+Calibration\+State.\+Calibration\+State.\+intrinsics}
+
+
+
+Definition at line \mbox{\hyperlink{_calibration_state_8py_source_l00066}{66}} of file \mbox{\hyperlink{_calibration_state_8py_source}{Calibration\+State.\+py}}.
+
+\Hypertarget{class_calibration_state_1_1_calibration_state_a6b05e51ababa4fe1d1c374435f7ddf39}\index{CalibrationState.CalibrationState@{CalibrationState.CalibrationState}!timeStamp@{timeStamp}}
+\index{timeStamp@{timeStamp}!CalibrationState.CalibrationState@{CalibrationState.CalibrationState}}
+\doxysubsubsection{\texorpdfstring{timeStamp}{timeStamp}}
+{\footnotesize\ttfamily \label{class_calibration_state_1_1_calibration_state_a6b05e51ababa4fe1d1c374435f7ddf39} 
+Calibration\+State.\+Calibration\+State.\+time\+Stamp = timestamp}
+
+
+
+Definition at line \mbox{\hyperlink{_calibration_state_8py_source_l00057}{57}} of file \mbox{\hyperlink{_calibration_state_8py_source}{Calibration\+State.\+py}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+calibration\+LFC/\mbox{\hyperlink{_calibration_state_8py}{Calibration\+State.\+py}}\end{DoxyCompactItemize}

@@ -1,0 +1,659 @@
+\doxysection{run\+\_\+periodic\+\_\+lifcal Namespace Reference}
+\hypertarget{namespacerun__periodic__lifcal}{}\label{namespacerun__periodic__lifcal}\index{run\_periodic\_lifcal@{run\_periodic\_lifcal}}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespacerun__periodic__lifcal_a7d46ab8b912f4f4ab552b4eefb73e615}{setup\+\_\+logger}} ()
+\item 
+bool \mbox{\hyperlink{namespacerun__periodic__lifcal_a704cef81d87d95c20ed90b9e860bf801}{acquire\+\_\+lock}} (logger)
+\item 
+\mbox{\hyperlink{namespacerun__periodic__lifcal_aea185d32733af6bd40d88144a4f2fe74}{release\+\_\+lock}} (logger)
+\item 
+int \mbox{\hyperlink{namespacerun__periodic__lifcal_a23f848cfb828f5c5814ee24c06b5c7c0}{run\+\_\+cmd}} (logger, cmd, cwd=None)
+\item 
+int \mbox{\hyperlink{namespacerun__periodic__lifcal_a9cdfed1accb18d03b82c556990a01373}{count\+\_\+images\+\_\+in\+\_\+dir}} (str d, exts=("{}.png"{}, "{}.jpg"{}, "{}.jpeg"{}))
+\item 
+bool \mbox{\hyperlink{namespacerun__periodic__lifcal_a5d8d962c9ecbd44bacfa6c28c93abbb5}{needs\+\_\+imageset\+\_\+creation}} (logger)
+\item 
+str \mbox{\hyperlink{namespacerun__periodic__lifcal_aaa5a01f58e6545366d98420a4ce1ed21}{find\+\_\+latest\+\_\+run\+\_\+dir}} (str out\+\_\+root)
+\item 
+str \mbox{\hyperlink{namespacerun__periodic__lifcal_ae09f1c6749f08fea2e255d08fc5dcafc}{combined\+\_\+json\+\_\+path}} (str run\+\_\+dir)
+\item 
+\mbox{\hyperlink{namespacerun__periodic__lifcal_ae2efc72d1ae0ad2ff7def20aace6ce1f}{try\+\_\+log\+\_\+lifcal\+\_\+with\+\_\+resultlogger}} (logger, str combined\+\_\+path)
+\item 
+\mbox{\hyperlink{namespacerun__periodic__lifcal_a158845c08aab27eddc3e568ef5d588f3}{run\+\_\+cycle}} (logger)
+\item 
+\mbox{\hyperlink{namespacerun__periodic__lifcal_a5852f1389d109f64903df06bcea36292}{main}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{namespacerun__periodic__lifcal_a5c967bb9bea14fe67a260313bef6d13d}{INTERVAL\+\_\+\+SECONDS}} = 5 \texorpdfstring{$\ast$}{*} 60
+\item 
+str \mbox{\hyperlink{namespacerun__periodic__lifcal_a8233dad01fa72f57854848b6f44429ab}{RUN\+\_\+\+IMAGESET\+\_\+\+CREATION}} = "{}/data/external/Li\+FCal/Li\+FCal\+\_\+\+Data/run\+\_\+imageset\+\_\+creation.\+py"{}
+\item 
+str \mbox{\hyperlink{namespacerun__periodic__lifcal_a01ff388d15c25bc1e61c5aeeb0d2245e}{RUN\+\_\+\+LIFCAL\+\_\+\+CALIB}} = "{}/data/external/Li\+FCal/Li\+FCal\+\_\+\+Data/run\+\_\+\+Li\+FCal\+\_\+calibration.\+py"{}
+\item 
+str \mbox{\hyperlink{namespacerun__periodic__lifcal_ad19c09c6061d3cb345b45e130b24a415}{LIFCAL\+\_\+\+OUT\+\_\+\+ROOT}} = "{}/data/external/Li\+FCal/Li\+FCal\+\_\+\+Data/Recalibration/Calibration\+By\+Camera"{}
+\item 
+str \mbox{\hyperlink{namespacerun__periodic__lifcal_adba89cb02cef5617c2dc7f54c63632e2}{BASELINE\+\_\+\+DIR}} = "{}/data/baseline"{}
+\item 
+\mbox{\hyperlink{namespacerun__periodic__lifcal_a4848a88d75c664fd19b0bdc2ea35ea0a}{LOG\+\_\+\+PATH}} = os.\+path.\+join(\mbox{\hyperlink{namespacerun__periodic__lifcal_adba89cb02cef5617c2dc7f54c63632e2}{BASELINE\+\_\+\+DIR}}, "{}calibration.\+log"{})
+\item 
+str \mbox{\hyperlink{namespacerun__periodic__lifcal_af0bc8fb7ff85133636ebf134946c120f}{LOCK\+\_\+\+PATH}} = "{}/tmp/lifcal\+\_\+periodic.\+lock"{}
+\item 
+str \mbox{\hyperlink{namespacerun__periodic__lifcal_acf6353f300d882599e6e12e7962f4e60}{ROOT\+\_\+\+IMAGESET}} = "{}/data/external/Li\+FCal/Li\+FCal\+\_\+\+Data/Recalibration/Li\+FCal\+\_\+\+Imageset"{}
+\item 
+\mbox{\hyperlink{namespacerun__periodic__lifcal_af73cb66145bccccfa622492e6c4ec468}{FOCUS\+\_\+\+ROOT}} = os.\+path.\+join(\mbox{\hyperlink{namespacerun__periodic__lifcal_acf6353f300d882599e6e12e7962f4e60}{ROOT\+\_\+\+IMAGESET}}, "{}focus"{})
+\item 
+\mbox{\hyperlink{namespacerun__periodic__lifcal_ac1443b61c996787119099d7f460217a2}{DEPTH\+\_\+\+ROOT}} = os.\+path.\+join(\mbox{\hyperlink{namespacerun__periodic__lifcal_acf6353f300d882599e6e12e7962f4e60}{ROOT\+\_\+\+IMAGESET}}, "{}depth"{})
+\item 
+list \mbox{\hyperlink{namespacerun__periodic__lifcal_abcef051d13db75eda49bf293a3b137c0}{CAMERA\+\_\+\+IDS}}
+\item 
+int \mbox{\hyperlink{namespacerun__periodic__lifcal_a564255de7cf6dbda4357a8b479ae24cc}{MIN\+\_\+\+POSES\+\_\+\+PER\+\_\+\+CAM}} = 1
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{namespacerun__periodic__lifcal_a704cef81d87d95c20ed90b9e860bf801}\index{run\_periodic\_lifcal@{run\_periodic\_lifcal}!acquire\_lock@{acquire\_lock}}
+\index{acquire\_lock@{acquire\_lock}!run\_periodic\_lifcal@{run\_periodic\_lifcal}}
+\doxysubsubsection{\texorpdfstring{acquire\_lock()}{acquire\_lock()}}
+{\footnotesize\ttfamily \label{namespacerun__periodic__lifcal_a704cef81d87d95c20ed90b9e860bf801} 
+ bool run\+\_\+periodic\+\_\+lifcal.\+acquire\+\_\+lock (\begin{DoxyParamCaption}\item[{}]{logger}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Create lock file to prevent overlapping scheduler cycles.
+
+@param logger Logger instance for status messages
+@return True if lock was acquired, False otherwise
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{run__periodic__lifcal_8py_source_l00063}{63}} of file \mbox{\hyperlink{run__periodic__lifcal_8py_source}{run\+\_\+periodic\+\_\+lifcal.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00063\ \textcolor{keyword}{def\ }acquire\_lock(logger)\ -\/>\ bool: }
+\DoxyCodeLine{00064\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{} }}
+\DoxyCodeLine{00065\ \textcolor{stringliteral}{\ \ \ \ @brief\ Create\ lock\ file\ to\ prevent\ overlapping\ scheduler\ cycles. }}
+\DoxyCodeLine{00066\ \textcolor{stringliteral}{\ \ \ \  }}
+\DoxyCodeLine{00067\ \textcolor{stringliteral}{\ \ \ \ @param\ logger\ Logger\ instance\ for\ status\ messages }}
+\DoxyCodeLine{00068\ \textcolor{stringliteral}{\ \ \ \ @return\ True\ if\ lock\ was\ acquired,\ False\ otherwise }}
+\DoxyCodeLine{00069\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00070\ \ \ \ \ \textcolor{keywordflow}{if}\ os.path.exists(LOCK\_PATH): }
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ logger.warning(f\textcolor{stringliteral}{"{}Lock\ exists,\ skipping\ this\ cycle:\ \{LOCK\_PATH\}"{}}) }
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{False} }
+\DoxyCodeLine{00073\ \ \ \ \ \textcolor{keywordflow}{try}: }
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \textcolor{keyword}{with}\ open(LOCK\_PATH,\ \textcolor{stringliteral}{"{}w"{}})\ \textcolor{keyword}{as}\ f: }
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \ \ \ \ f.write(str(os.getpid())) }
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{True} }
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keywordflow}{except}\ Exception\ \textcolor{keyword}{as}\ e: }
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ logger.error(f\textcolor{stringliteral}{"{}Could\ not\ create\ lock:\ \{e\}"{}}) }
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{False} }
+\DoxyCodeLine{00080\  }
+\DoxyCodeLine{00081\  }
+
+\end{DoxyCode}
+\Hypertarget{namespacerun__periodic__lifcal_ae09f1c6749f08fea2e255d08fc5dcafc}\index{run\_periodic\_lifcal@{run\_periodic\_lifcal}!combined\_json\_path@{combined\_json\_path}}
+\index{combined\_json\_path@{combined\_json\_path}!run\_periodic\_lifcal@{run\_periodic\_lifcal}}
+\doxysubsubsection{\texorpdfstring{combined\_json\_path()}{combined\_json\_path()}}
+{\footnotesize\ttfamily \label{namespacerun__periodic__lifcal_ae09f1c6749f08fea2e255d08fc5dcafc} 
+ str run\+\_\+periodic\+\_\+lifcal.\+combined\+\_\+json\+\_\+path (\begin{DoxyParamCaption}\item[{str}]{run\+\_\+dir}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Return path to combined.json inside run directory if present.
+
+@param run_dir Path to run directory
+@return Path to combined.json file, or empty string if not found
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{run__periodic__lifcal_8py_source_l00192}{192}} of file \mbox{\hyperlink{run__periodic__lifcal_8py_source}{run\+\_\+periodic\+\_\+lifcal.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00192\ \textcolor{keyword}{def\ }combined\_json\_path(run\_dir:\ str)\ -\/>\ str: }
+\DoxyCodeLine{00193\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{} }}
+\DoxyCodeLine{00194\ \textcolor{stringliteral}{\ \ \ \ @brief\ Return\ path\ to\ combined.json\ inside\ run\ directory\ if\ present. }}
+\DoxyCodeLine{00195\ \textcolor{stringliteral}{\ \ \ \  }}
+\DoxyCodeLine{00196\ \textcolor{stringliteral}{\ \ \ \ @param\ run\_dir\ Path\ to\ run\ directory }}
+\DoxyCodeLine{00197\ \textcolor{stringliteral}{\ \ \ \ @return\ Path\ to\ combined.json\ file,\ or\ empty\ string\ if\ not\ found }}
+\DoxyCodeLine{00198\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00199\ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ run\_dir: }
+\DoxyCodeLine{00200\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}"{}} }
+\DoxyCodeLine{00201\ \ \ \ \ p\ =\ os.path.join(run\_dir,\ \textcolor{stringliteral}{"{}combined.json"{}}) }
+\DoxyCodeLine{00202\ \ \ \ \ \textcolor{keywordflow}{return}\ p\ \textcolor{keywordflow}{if}\ os.path.isfile(p)\ \textcolor{keywordflow}{else}\ \textcolor{stringliteral}{"{}"{}} }
+\DoxyCodeLine{00203\  }
+\DoxyCodeLine{00204\  }
+
+\end{DoxyCode}
+\Hypertarget{namespacerun__periodic__lifcal_a9cdfed1accb18d03b82c556990a01373}\index{run\_periodic\_lifcal@{run\_periodic\_lifcal}!count\_images\_in\_dir@{count\_images\_in\_dir}}
+\index{count\_images\_in\_dir@{count\_images\_in\_dir}!run\_periodic\_lifcal@{run\_periodic\_lifcal}}
+\doxysubsubsection{\texorpdfstring{count\_images\_in\_dir()}{count\_images\_in\_dir()}}
+{\footnotesize\ttfamily \label{namespacerun__periodic__lifcal_a9cdfed1accb18d03b82c556990a01373} 
+ int run\+\_\+periodic\+\_\+lifcal.\+count\+\_\+images\+\_\+in\+\_\+dir (\begin{DoxyParamCaption}\item[{str}]{d}{, }\item[{}]{exts}{ = {\ttfamily ("{}.png"{},~"{}.jpg"{},~"{}.jpeg"{})}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Count images in directory matching expected extensions.
+
+@param d Directory path to scan
+@param exts Tuple of file extensions to match (default: (".png", ".jpg", ".jpeg"))
+@return Number of matching image files
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{run__periodic__lifcal_8py_source_l00124}{124}} of file \mbox{\hyperlink{run__periodic__lifcal_8py_source}{run\+\_\+periodic\+\_\+lifcal.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00124\ \textcolor{keyword}{def\ }count\_images\_in\_dir(d:\ str,\ exts=(\textcolor{stringliteral}{"{}.png"{}},\ \textcolor{stringliteral}{"{}.jpg"{}},\ \textcolor{stringliteral}{"{}.jpeg"{}}))\ -\/>\ int: }
+\DoxyCodeLine{00125\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{} }}
+\DoxyCodeLine{00126\ \textcolor{stringliteral}{\ \ \ \ @brief\ Count\ images\ in\ directory\ matching\ expected\ extensions. }}
+\DoxyCodeLine{00127\ \textcolor{stringliteral}{\ \ \ \  }}
+\DoxyCodeLine{00128\ \textcolor{stringliteral}{\ \ \ \ @param\ d\ Directory\ path\ to\ scan }}
+\DoxyCodeLine{00129\ \textcolor{stringliteral}{\ \ \ \ @param\ exts\ Tuple\ of\ file\ extensions\ to\ match\ (default:\ ("{}.png"{},\ "{}.jpg"{},\ "{}.jpeg"{})) }}
+\DoxyCodeLine{00130\ \textcolor{stringliteral}{\ \ \ \ @return\ Number\ of\ matching\ image\ files }}
+\DoxyCodeLine{00131\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00132\ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ os.path.isdir(d): }
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0 }
+\DoxyCodeLine{00134\ \ \ \ \ cnt\ =\ 0 }
+\DoxyCodeLine{00135\ \ \ \ \ \textcolor{keywordflow}{for}\ fn\ \textcolor{keywordflow}{in}\ os.listdir(d): }
+\DoxyCodeLine{00136\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ fn.lower().endswith(exts): }
+\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ \ \ \ \ cnt\ +=\ 1 }
+\DoxyCodeLine{00138\ \ \ \ \ \textcolor{keywordflow}{return}\ cnt }
+\DoxyCodeLine{00139\  }
+\DoxyCodeLine{00140\  }
+
+\end{DoxyCode}
+\Hypertarget{namespacerun__periodic__lifcal_aaa5a01f58e6545366d98420a4ce1ed21}\index{run\_periodic\_lifcal@{run\_periodic\_lifcal}!find\_latest\_run\_dir@{find\_latest\_run\_dir}}
+\index{find\_latest\_run\_dir@{find\_latest\_run\_dir}!run\_periodic\_lifcal@{run\_periodic\_lifcal}}
+\doxysubsubsection{\texorpdfstring{find\_latest\_run\_dir()}{find\_latest\_run\_dir()}}
+{\footnotesize\ttfamily \label{namespacerun__periodic__lifcal_aaa5a01f58e6545366d98420a4ce1ed21} 
+ str run\+\_\+periodic\+\_\+lifcal.\+find\+\_\+latest\+\_\+run\+\_\+dir (\begin{DoxyParamCaption}\item[{str}]{out\+\_\+root}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Return latest run_* directory inside output root, or empty string if none.
+
+@param out_root Root directory containing run_* folders
+@return Path to the latest run directory, or empty string
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{run__periodic__lifcal_8py_source_l00172}{172}} of file \mbox{\hyperlink{run__periodic__lifcal_8py_source}{run\+\_\+periodic\+\_\+lifcal.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00172\ \textcolor{keyword}{def\ }find\_latest\_run\_dir(out\_root:\ str)\ -\/>\ str: }
+\DoxyCodeLine{00173\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{} }}
+\DoxyCodeLine{00174\ \textcolor{stringliteral}{\ \ \ \ @brief\ Return\ latest\ run\_*\ directory\ inside\ output\ root,\ or\ empty\ string\ if\ none. }}
+\DoxyCodeLine{00175\ \textcolor{stringliteral}{\ \ \ \  }}
+\DoxyCodeLine{00176\ \textcolor{stringliteral}{\ \ \ \ @param\ out\_root\ Root\ directory\ containing\ run\_*\ folders }}
+\DoxyCodeLine{00177\ \textcolor{stringliteral}{\ \ \ \ @return\ Path\ to\ the\ latest\ run\ directory,\ or\ empty\ string }}
+\DoxyCodeLine{00178\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00179\ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ os.path.isdir(out\_root): }
+\DoxyCodeLine{00180\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}"{}} }
+\DoxyCodeLine{00181\ \ \ \ \ runs\ =\ [] }
+\DoxyCodeLine{00182\ \ \ \ \ \textcolor{keywordflow}{for}\ name\ \textcolor{keywordflow}{in}\ os.listdir(out\_root): }
+\DoxyCodeLine{00183\ \ \ \ \ \ \ \ \ p\ =\ os.path.join(out\_root,\ name) }
+\DoxyCodeLine{00184\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ os.path.isdir(p)\ \textcolor{keywordflow}{and}\ name.startswith(\textcolor{stringliteral}{"{}run\_"{}}): }
+\DoxyCodeLine{00185\ \ \ \ \ \ \ \ \ \ \ \ \ runs.append(p) }
+\DoxyCodeLine{00186\ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ runs: }
+\DoxyCodeLine{00187\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}"{}} }
+\DoxyCodeLine{00188\ \ \ \ \ runs.sort(key=\textcolor{keyword}{lambda}\ p:\ os.path.getmtime(p)) }
+\DoxyCodeLine{00189\ \ \ \ \ \textcolor{keywordflow}{return}\ runs[-\/1] }
+\DoxyCodeLine{00190\  }
+\DoxyCodeLine{00191\  }
+
+\end{DoxyCode}
+\Hypertarget{namespacerun__periodic__lifcal_a5852f1389d109f64903df06bcea36292}\index{run\_periodic\_lifcal@{run\_periodic\_lifcal}!main@{main}}
+\index{main@{main}!run\_periodic\_lifcal@{run\_periodic\_lifcal}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily \label{namespacerun__periodic__lifcal_a5852f1389d109f64903df06bcea36292} 
+run\+\_\+periodic\+\_\+lifcal.\+main (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Periodic loop that runs LiFCal recalibration on a schedule.
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{run__periodic__lifcal_8py_source_l00277}{277}} of file \mbox{\hyperlink{run__periodic__lifcal_8py_source}{run\+\_\+periodic\+\_\+lifcal.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00277\ \textcolor{keyword}{def\ }main(): }
+\DoxyCodeLine{00278\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{} }}
+\DoxyCodeLine{00279\ \textcolor{stringliteral}{\ \ \ \ @brief\ Periodic\ loop\ that\ runs\ LiFCal\ recalibration\ on\ a\ schedule. }}
+\DoxyCodeLine{00280\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00281\ \ \ \ \ logger\ =\ setup\_logger() }
+\DoxyCodeLine{00282\ \ \ \ \ logger.info(\textcolor{stringliteral}{"{}Starting\ periodic\ LiFCal\ scheduler."{}}) }
+\DoxyCodeLine{00283\ \ \ \ \ logger.info(f\textcolor{stringliteral}{"{}Interval:\ \{INTERVAL\_SECONDS\}s"{}}) }
+\DoxyCodeLine{00284\ \ \ \ \ logger.info(f\textcolor{stringliteral}{"{}Lock:\ \{LOCK\_PATH\}"{}}) }
+\DoxyCodeLine{00285\  }
+\DoxyCodeLine{00286\ \ \ \ \ \textcolor{keywordflow}{while}\ \textcolor{keyword}{True}: }
+\DoxyCodeLine{00287\ \ \ \ \ \ \ \ \ start\ =\ time.time() }
+\DoxyCodeLine{00288\  }
+\DoxyCodeLine{00289\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ acquire\_lock(logger): }
+\DoxyCodeLine{00290\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}: }
+\DoxyCodeLine{00291\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ logger.info(\textcolor{stringliteral}{"{}===\ CYCLE\ START\ ==="{}}) }
+\DoxyCodeLine{00292\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ run\_cycle(logger) }
+\DoxyCodeLine{00293\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ logger.info(\textcolor{stringliteral}{"{}===\ CYCLE\ END\ ==="{}}) }
+\DoxyCodeLine{00294\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{finally}: }
+\DoxyCodeLine{00295\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ release\_lock(logger) }
+\DoxyCodeLine{00296\  }
+\DoxyCodeLine{00297\ \ \ \ \ \ \ \ \ elapsed\ =\ time.time()\ -\/\ start }
+\DoxyCodeLine{00298\ \ \ \ \ \ \ \ \ sleep\_s\ =\ max(1.0,\ INTERVAL\_SECONDS\ -\/\ elapsed) }
+\DoxyCodeLine{00299\ \ \ \ \ \ \ \ \ logger.info(f\textcolor{stringliteral}{"{}Sleeping\ \{sleep\_s:.1f\}s\(\backslash\)n"{}}) }
+\DoxyCodeLine{00300\ \ \ \ \ \ \ \ \ time.sleep(sleep\_s) }
+\DoxyCodeLine{00301\  }
+\DoxyCodeLine{00302\  }
+
+\end{DoxyCode}
+\Hypertarget{namespacerun__periodic__lifcal_a5d8d962c9ecbd44bacfa6c28c93abbb5}\index{run\_periodic\_lifcal@{run\_periodic\_lifcal}!needs\_imageset\_creation@{needs\_imageset\_creation}}
+\index{needs\_imageset\_creation@{needs\_imageset\_creation}!run\_periodic\_lifcal@{run\_periodic\_lifcal}}
+\doxysubsubsection{\texorpdfstring{needs\_imageset\_creation()}{needs\_imageset\_creation()}}
+{\footnotesize\ttfamily \label{namespacerun__periodic__lifcal_a5d8d962c9ecbd44bacfa6c28c93abbb5} 
+ bool run\+\_\+periodic\+\_\+lifcal.\+needs\+\_\+imageset\+\_\+creation (\begin{DoxyParamCaption}\item[{}]{logger}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Check if imageset exists and has enough images per camera; trigger creation if not.
+
+@param logger Logger instance for status messages
+@return True if imageset needs to be created, False if it already exists
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{run__periodic__lifcal_8py_source_l00141}{141}} of file \mbox{\hyperlink{run__periodic__lifcal_8py_source}{run\+\_\+periodic\+\_\+lifcal.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00141\ \textcolor{keyword}{def\ }needs\_imageset\_creation(logger)\ -\/>\ bool: }
+\DoxyCodeLine{00142\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{} }}
+\DoxyCodeLine{00143\ \textcolor{stringliteral}{\ \ \ \ @brief\ Check\ if\ imageset\ exists\ and\ has\ enough\ images\ per\ camera;\ trigger\ creation\ if\ not. }}
+\DoxyCodeLine{00144\ \textcolor{stringliteral}{\ \ \ \  }}
+\DoxyCodeLine{00145\ \textcolor{stringliteral}{\ \ \ \ @param\ logger\ Logger\ instance\ for\ status\ messages }}
+\DoxyCodeLine{00146\ \textcolor{stringliteral}{\ \ \ \ @return\ True\ if\ imageset\ needs\ to\ be\ created,\ False\ if\ it\ already\ exists }}
+\DoxyCodeLine{00147\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00148\ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ os.path.isdir(ROOT\_IMAGESET): }
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ logger.info(\textcolor{stringliteral}{"{}Imageset\ missing:\ ROOT\_IMAGESET\ not\ found."{}}) }
+\DoxyCodeLine{00150\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{True} }
+\DoxyCodeLine{00151\ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ os.path.isdir(FOCUS\_ROOT)\ \textcolor{keywordflow}{or}\ \textcolor{keywordflow}{not}\ os.path.isdir(DEPTH\_ROOT): }
+\DoxyCodeLine{00152\ \ \ \ \ \ \ \ \ logger.info(\textcolor{stringliteral}{"{}Imageset\ missing:\ focus/depth\ folders\ not\ found."{}}) }
+\DoxyCodeLine{00153\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{True} }
+\DoxyCodeLine{00154\  }
+\DoxyCodeLine{00155\ \ \ \ \ \textcolor{keywordflow}{for}\ cam\ \textcolor{keywordflow}{in}\ CAMERA\_IDS: }
+\DoxyCodeLine{00156\ \ \ \ \ \ \ \ \ fdir\ =\ os.path.join(FOCUS\_ROOT,\ cam) }
+\DoxyCodeLine{00157\ \ \ \ \ \ \ \ \ ddir\ =\ os.path.join(DEPTH\_ROOT,\ cam) }
+\DoxyCodeLine{00158\  }
+\DoxyCodeLine{00159\ \ \ \ \ \ \ \ \ fcnt\ =\ count\_images\_in\_dir(fdir,\ exts=(\textcolor{stringliteral}{"{}.png"{}},\ \textcolor{stringliteral}{"{}.jpg"{}},\ \textcolor{stringliteral}{"{}.jpeg"{}})) }
+\DoxyCodeLine{00160\ \ \ \ \ \ \ \ \ dcnt\ =\ count\_images\_in\_dir(ddir,\ exts=(\textcolor{stringliteral}{"{}.png"{}},\ \textcolor{stringliteral}{"{}.jpg"{}},\ \textcolor{stringliteral}{"{}.jpeg"{}})) }
+\DoxyCodeLine{00161\  }
+\DoxyCodeLine{00162\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ fcnt\ <\ MIN\_POSES\_PER\_CAM: }
+\DoxyCodeLine{00163\ \ \ \ \ \ \ \ \ \ \ \ \ logger.info(f\textcolor{stringliteral}{"{}Imageset\ not\ ready:\ focus/\{cam\}\ has\ \{fcnt\}\ images\ (<\{MIN\_POSES\_PER\_CAM\})."{}}) }
+\DoxyCodeLine{00164\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{True} }
+\DoxyCodeLine{00165\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ dcnt\ <\ MIN\_POSES\_PER\_CAM: }
+\DoxyCodeLine{00166\ \ \ \ \ \ \ \ \ \ \ \ \ logger.info(f\textcolor{stringliteral}{"{}Imageset\ not\ ready:\ depth/\{cam\}\ has\ \{dcnt\}\ images\ (<\{MIN\_POSES\_PER\_CAM\})."{}}) }
+\DoxyCodeLine{00167\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{True} }
+\DoxyCodeLine{00168\ \ \ \ \ logger.info(\textcolor{stringliteral}{"{}Imageset\ looks\ ready.\ Skipping\ run\_imageset\_creation.py."{}}) }
+\DoxyCodeLine{00169\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{False} }
+\DoxyCodeLine{00170\  }
+\DoxyCodeLine{00171\  }
+
+\end{DoxyCode}
+\Hypertarget{namespacerun__periodic__lifcal_aea185d32733af6bd40d88144a4f2fe74}\index{run\_periodic\_lifcal@{run\_periodic\_lifcal}!release\_lock@{release\_lock}}
+\index{release\_lock@{release\_lock}!run\_periodic\_lifcal@{run\_periodic\_lifcal}}
+\doxysubsubsection{\texorpdfstring{release\_lock()}{release\_lock()}}
+{\footnotesize\ttfamily \label{namespacerun__periodic__lifcal_aea185d32733af6bd40d88144a4f2fe74} 
+run\+\_\+periodic\+\_\+lifcal.\+release\+\_\+lock (\begin{DoxyParamCaption}\item[{}]{logger}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Remove lock file after a cycle completes.
+
+@param logger Logger instance for error messages
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{run__periodic__lifcal_8py_source_l00082}{82}} of file \mbox{\hyperlink{run__periodic__lifcal_8py_source}{run\+\_\+periodic\+\_\+lifcal.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00082\ \textcolor{keyword}{def\ }release\_lock(logger): }
+\DoxyCodeLine{00083\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{} }}
+\DoxyCodeLine{00084\ \textcolor{stringliteral}{\ \ \ \ @brief\ Remove\ lock\ file\ after\ a\ cycle\ completes. }}
+\DoxyCodeLine{00085\ \textcolor{stringliteral}{\ \ \ \  }}
+\DoxyCodeLine{00086\ \textcolor{stringliteral}{\ \ \ \ @param\ logger\ Logger\ instance\ for\ error\ messages }}
+\DoxyCodeLine{00087\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00088\ \ \ \ \ \textcolor{keywordflow}{try}: }
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ os.path.exists(LOCK\_PATH): }
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \ \ \ \ os.remove(LOCK\_PATH) }
+\DoxyCodeLine{00091\ \ \ \ \ \textcolor{keywordflow}{except}\ Exception\ \textcolor{keyword}{as}\ e: }
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ logger.error(f\textcolor{stringliteral}{"{}Could\ not\ remove\ lock:\ \{e\}"{}}) }
+\DoxyCodeLine{00093\  }
+\DoxyCodeLine{00094\  }
+
+\end{DoxyCode}
+\Hypertarget{namespacerun__periodic__lifcal_a23f848cfb828f5c5814ee24c06b5c7c0}\index{run\_periodic\_lifcal@{run\_periodic\_lifcal}!run\_cmd@{run\_cmd}}
+\index{run\_cmd@{run\_cmd}!run\_periodic\_lifcal@{run\_periodic\_lifcal}}
+\doxysubsubsection{\texorpdfstring{run\_cmd()}{run\_cmd()}}
+{\footnotesize\ttfamily \label{namespacerun__periodic__lifcal_a23f848cfb828f5c5814ee24c06b5c7c0} 
+ int run\+\_\+periodic\+\_\+lifcal.\+run\+\_\+cmd (\begin{DoxyParamCaption}\item[{}]{logger}{, }\item[{}]{cmd}{, }\item[{}]{cwd}{ = {\ttfamily None}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Run a subprocess, log combined stdout/stderr, and return exit code.
+
+@param logger Logger instance for command output
+@param cmd Command as list of strings
+@param cwd Working directory for the command (default: None)
+@return Exit code of the subprocess
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{run__periodic__lifcal_8py_source_l00095}{95}} of file \mbox{\hyperlink{run__periodic__lifcal_8py_source}{run\+\_\+periodic\+\_\+lifcal.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00095\ \textcolor{keyword}{def\ }run\_cmd(logger,\ cmd,\ cwd=None)\ -\/>\ int: }
+\DoxyCodeLine{00096\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{} }}
+\DoxyCodeLine{00097\ \textcolor{stringliteral}{\ \ \ \ @brief\ Run\ a\ subprocess,\ log\ combined\ stdout/stderr,\ and\ return\ exit\ code. }}
+\DoxyCodeLine{00098\ \textcolor{stringliteral}{\ \ \ \  }}
+\DoxyCodeLine{00099\ \textcolor{stringliteral}{\ \ \ \ @param\ logger\ Logger\ instance\ for\ command\ output }}
+\DoxyCodeLine{00100\ \textcolor{stringliteral}{\ \ \ \ @param\ cmd\ Command\ as\ list\ of\ strings }}
+\DoxyCodeLine{00101\ \textcolor{stringliteral}{\ \ \ \ @param\ cwd\ Working\ directory\ for\ the\ command\ (default:\ None) }}
+\DoxyCodeLine{00102\ \textcolor{stringliteral}{\ \ \ \ @return\ Exit\ code\ of\ the\ subprocess }}
+\DoxyCodeLine{00103\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00104\ \ \ \ \ logger.info(f\textcolor{stringliteral}{"{}RUN:\ \{'\ '.join(cmd)\}"{}}) }
+\DoxyCodeLine{00105\ \ \ \ \ \textcolor{keywordflow}{try}: }
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ p\ =\ subprocess.run( }
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \ \ \ \ cmd, }
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \ \ \ \ cwd=cwd, }
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \ \ \ \ stdout=subprocess.PIPE, }
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \ \ \ \ stderr=subprocess.STDOUT, }
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ \ \ \ \ text=\textcolor{keyword}{True} }
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ ) }
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ out\ =\ p.stdout\ \textcolor{keywordflow}{or}\ \textcolor{stringliteral}{"{}"{}} }
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ len(out)\ >\ 5000: }
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \ \ \ \ logger.info(out[:5000]\ +\ \textcolor{stringliteral}{"{}\(\backslash\)n...\ (truncated)\ ..."{}}) }
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}: }
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \ \ \ \ logger.info(out) }
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ int(p.returncode) }
+\DoxyCodeLine{00119\ \ \ \ \ \textcolor{keywordflow}{except}\ Exception\ \textcolor{keyword}{as}\ e: }
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ logger.error(f\textcolor{stringliteral}{"{}Command\ failed:\ \{e\}"{}},\ exc\_info=\textcolor{keyword}{True}) }
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 1 }
+\DoxyCodeLine{00122\  }
+\DoxyCodeLine{00123\  }
+
+\end{DoxyCode}
+\Hypertarget{namespacerun__periodic__lifcal_a158845c08aab27eddc3e568ef5d588f3}\index{run\_periodic\_lifcal@{run\_periodic\_lifcal}!run\_cycle@{run\_cycle}}
+\index{run\_cycle@{run\_cycle}!run\_periodic\_lifcal@{run\_periodic\_lifcal}}
+\doxysubsubsection{\texorpdfstring{run\_cycle()}{run\_cycle()}}
+{\footnotesize\ttfamily \label{namespacerun__periodic__lifcal_a158845c08aab27eddc3e568ef5d588f3} 
+run\+\_\+periodic\+\_\+lifcal.\+run\+\_\+cycle (\begin{DoxyParamCaption}\item[{}]{logger}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Execute one scheduler cycle: prepare imageset, run LiFCal, log health.
+
+@param logger Logger instance for cycle logging
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{run__periodic__lifcal_8py_source_l00234}{234}} of file \mbox{\hyperlink{run__periodic__lifcal_8py_source}{run\+\_\+periodic\+\_\+lifcal.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00234\ \textcolor{keyword}{def\ }run\_cycle(logger): }
+\DoxyCodeLine{00235\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{} }}
+\DoxyCodeLine{00236\ \textcolor{stringliteral}{\ \ \ \ @brief\ Execute\ one\ scheduler\ cycle:\ prepare\ imageset,\ run\ LiFCal,\ log\ health. }}
+\DoxyCodeLine{00237\ \textcolor{stringliteral}{\ \ \ \  }}
+\DoxyCodeLine{00238\ \textcolor{stringliteral}{\ \ \ \ @param\ logger\ Logger\ instance\ for\ cycle\ logging }}
+\DoxyCodeLine{00239\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00240\ \ \ \ \ \textcolor{comment}{\#\ 1)\ Only\ prepare\ imageset\ if\ needed }}
+\DoxyCodeLine{00241\ \ \ \ \ \textcolor{keywordflow}{if}\ needs\_imageset\_creation(logger): }
+\DoxyCodeLine{00242\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ os.path.isfile(RUN\_IMAGESET\_CREATION): }
+\DoxyCodeLine{00243\ \ \ \ \ \ \ \ \ \ \ \ \ logger.error(f\textcolor{stringliteral}{"{}Missing:\ \{RUN\_IMAGESET\_CREATION\}"{}}) }
+\DoxyCodeLine{00244\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return} }
+\DoxyCodeLine{00245\  }
+\DoxyCodeLine{00246\ \ \ \ \ \ \ \ \ rc\ =\ run\_cmd(logger,\ [sys.executable,\ RUN\_IMAGESET\_CREATION]) }
+\DoxyCodeLine{00247\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ rc\ !=\ 0: }
+\DoxyCodeLine{00248\ \ \ \ \ \ \ \ \ \ \ \ \ logger.error(f\textcolor{stringliteral}{"{}run\_imageset\_creation\ failed\ (rc=\{rc\}).\ Skipping\ LiFCal."{}}) }
+\DoxyCodeLine{00249\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return} }
+\DoxyCodeLine{00250\  }
+\DoxyCodeLine{00251\ \ \ \ \ \textcolor{comment}{\#\ 2)\ LiFCal\ calibration }}
+\DoxyCodeLine{00252\ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ os.path.isfile(RUN\_LIFCAL\_CALIB): }
+\DoxyCodeLine{00253\ \ \ \ \ \ \ \ \ logger.error(f\textcolor{stringliteral}{"{}Missing:\ \{RUN\_LIFCAL\_CALIB\}"{}}) }
+\DoxyCodeLine{00254\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return} }
+\DoxyCodeLine{00255\  }
+\DoxyCodeLine{00256\ \ \ \ \ rc\ =\ run\_cmd(logger,\ [sys.executable,\ RUN\_LIFCAL\_CALIB]) }
+\DoxyCodeLine{00257\ \ \ \ \ \textcolor{keywordflow}{if}\ rc\ !=\ 0: }
+\DoxyCodeLine{00258\ \ \ \ \ \ \ \ \ logger.error(f\textcolor{stringliteral}{"{}run\_LiFCal\_calibration\ failed\ (rc=\{rc\})."{}}) }
+\DoxyCodeLine{00259\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return} }
+\DoxyCodeLine{00260\  }
+\DoxyCodeLine{00261\ \ \ \ \ \textcolor{comment}{\#\ 3)\ locate\ combined.json\ (latest\ run) }}
+\DoxyCodeLine{00262\ \ \ \ \ latest\ =\ find\_latest\_run\_dir(LIFCAL\_OUT\_ROOT) }
+\DoxyCodeLine{00263\ \ \ \ \ cpath\ =\ combined\_json\_path(latest) }
+\DoxyCodeLine{00264\  }
+\DoxyCodeLine{00265\ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ cpath: }
+\DoxyCodeLine{00266\ \ \ \ \ \ \ \ \ logger.warning(\textcolor{stringliteral}{"{}No\ combined.json\ found\ after\ LiFCal\ run."{}}) }
+\DoxyCodeLine{00267\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return} }
+\DoxyCodeLine{00268\  }
+\DoxyCodeLine{00269\ \ \ \ \ logger.info(f\textcolor{stringliteral}{"{}Latest\ combined.json:\ \{cpath\}"{}}) }
+\DoxyCodeLine{00270\  }
+\DoxyCodeLine{00271\ \ \ \ \ \textcolor{comment}{\#\ 4)\ log\ health\ +\ baseline\ update\ using\ your\ ResultLogger }}
+\DoxyCodeLine{00272\ \ \ \ \ ok\ =\ try\_log\_lifcal\_with\_resultlogger(logger,\ cpath) }
+\DoxyCodeLine{00273\ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ ok: }
+\DoxyCodeLine{00274\ \ \ \ \ \ \ \ \ logger.info(\textcolor{stringliteral}{"{}LiFCal\ finished,\ but\ no\ baseline/health\ logging\ was\ executed."{}}) }
+\DoxyCodeLine{00275\  }
+\DoxyCodeLine{00276\  }
+
+\end{DoxyCode}
+\Hypertarget{namespacerun__periodic__lifcal_a7d46ab8b912f4f4ab552b4eefb73e615}\index{run\_periodic\_lifcal@{run\_periodic\_lifcal}!setup\_logger@{setup\_logger}}
+\index{setup\_logger@{setup\_logger}!run\_periodic\_lifcal@{run\_periodic\_lifcal}}
+\doxysubsubsection{\texorpdfstring{setup\_logger()}{setup\_logger()}}
+{\footnotesize\ttfamily \label{namespacerun__periodic__lifcal_a7d46ab8b912f4f4ab552b4eefb73e615} 
+run\+\_\+periodic\+\_\+lifcal.\+setup\+\_\+logger (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Create logger that writes to file and stdout.
+
+@return Logger instance configured for calibration logging
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{run__periodic__lifcal_8py_source_l00041}{41}} of file \mbox{\hyperlink{run__periodic__lifcal_8py_source}{run\+\_\+periodic\+\_\+lifcal.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00041\ \textcolor{keyword}{def\ }setup\_logger(): }
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{} }}
+\DoxyCodeLine{00043\ \textcolor{stringliteral}{\ \ \ \ @brief\ Create\ logger\ that\ writes\ to\ file\ and\ stdout. }}
+\DoxyCodeLine{00044\ \textcolor{stringliteral}{\ \ \ \  }}
+\DoxyCodeLine{00045\ \textcolor{stringliteral}{\ \ \ \ @return\ Logger\ instance\ configured\ for\ calibration\ logging }}
+\DoxyCodeLine{00046\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00047\ \ \ \ \ os.makedirs(BASELINE\_DIR,\ exist\_ok=\textcolor{keyword}{True}) }
+\DoxyCodeLine{00048\ \ \ \ \ logger\ =\ logging.getLogger(\textcolor{stringliteral}{"{}lifcal\_periodic"{}}) }
+\DoxyCodeLine{00049\ \ \ \ \ logger.setLevel(logging.INFO) }
+\DoxyCodeLine{00050\  }
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ logger.handlers: }
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ fh\ =\ logging.FileHandler(LOG\_PATH,\ encoding=\textcolor{stringliteral}{"{}utf-\/8"{}}) }
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ fh.setFormatter(logging.Formatter(\textcolor{stringliteral}{"{}\%(asctime)s\ [\%(levelname)s]\ \%(message)s"{}})) }
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ logger.addHandler(fh) }
+\DoxyCodeLine{00055\  }
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ sh\ =\ logging.StreamHandler(sys.stdout) }
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ sh.setFormatter(logging.Formatter(\textcolor{stringliteral}{"{}\%(asctime)s\ [\%(levelname)s]\ \%(message)s"{}})) }
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ logger.addHandler(sh) }
+\DoxyCodeLine{00059\  }
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keywordflow}{return}\ logger }
+\DoxyCodeLine{00061\  }
+\DoxyCodeLine{00062\  }
+
+\end{DoxyCode}
+\Hypertarget{namespacerun__periodic__lifcal_ae2efc72d1ae0ad2ff7def20aace6ce1f}\index{run\_periodic\_lifcal@{run\_periodic\_lifcal}!try\_log\_lifcal\_with\_resultlogger@{try\_log\_lifcal\_with\_resultlogger}}
+\index{try\_log\_lifcal\_with\_resultlogger@{try\_log\_lifcal\_with\_resultlogger}!run\_periodic\_lifcal@{run\_periodic\_lifcal}}
+\doxysubsubsection{\texorpdfstring{try\_log\_lifcal\_with\_resultlogger()}{try\_log\_lifcal\_with\_resultlogger()}}
+{\footnotesize\ttfamily \label{namespacerun__periodic__lifcal_ae2efc72d1ae0ad2ff7def20aace6ce1f} 
+run\+\_\+periodic\+\_\+lifcal.\+try\+\_\+log\+\_\+lifcal\+\_\+with\+\_\+resultlogger (\begin{DoxyParamCaption}\item[{}]{logger}{, }\item[{str}]{combined\+\_\+path}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Use ResultLogger to record LiFCal health score and update baseline.
+
+@param logger Logger instance for status messages
+@param combined_path Path to combined.json from LiFCal
+@return True if logging succeeded, False otherwise
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{run__periodic__lifcal_8py_source_l00205}{205}} of file \mbox{\hyperlink{run__periodic__lifcal_8py_source}{run\+\_\+periodic\+\_\+lifcal.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00205\ \textcolor{keyword}{def\ }try\_log\_lifcal\_with\_resultlogger(logger,\ combined\_path:\ str): }
+\DoxyCodeLine{00206\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{} }}
+\DoxyCodeLine{00207\ \textcolor{stringliteral}{\ \ \ \ @brief\ Use\ ResultLogger\ to\ record\ LiFCal\ health\ score\ and\ update\ baseline. }}
+\DoxyCodeLine{00208\ \textcolor{stringliteral}{\ \ \ \  }}
+\DoxyCodeLine{00209\ \textcolor{stringliteral}{\ \ \ \ @param\ logger\ Logger\ instance\ for\ status\ messages }}
+\DoxyCodeLine{00210\ \textcolor{stringliteral}{\ \ \ \ @param\ combined\_path\ Path\ to\ combined.json\ from\ LiFCal }}
+\DoxyCodeLine{00211\ \textcolor{stringliteral}{\ \ \ \ @return\ True\ if\ logging\ succeeded,\ False\ otherwise }}
+\DoxyCodeLine{00212\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00213\ \ \ \ \ \textcolor{keywordflow}{try}: }
+\DoxyCodeLine{00214\ \ \ \ \ \ \ \ \ repo\_dir\ =\ \textcolor{stringliteral}{"{}/data/calibrationLFC"{}} }
+\DoxyCodeLine{00215\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ repo\_dir\ \textcolor{keywordflow}{not}\ \textcolor{keywordflow}{in}\ sys.path: }
+\DoxyCodeLine{00216\ \ \ \ \ \ \ \ \ \ \ \ \ sys.path.insert(0,\ repo\_dir) }
+\DoxyCodeLine{00217\  }
+\DoxyCodeLine{00218\ \ \ \ \ \ \ \ \ \textcolor{keyword}{from}\ ResultLogger\ \textcolor{keyword}{import}\ ResultLogger }
+\DoxyCodeLine{00219\ \ \ \ \ \ \ \ \ rl\ =\ \mbox{\hyperlink{namespace_result_logger}{ResultLogger}}(baseDir=BASELINE\_DIR) }
+\DoxyCodeLine{00220\  }
+\DoxyCodeLine{00221\ \ \ \ \ \ \ \ \ meta\ =\ \{ }
+\DoxyCodeLine{00222\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}runType"{}}:\ \textcolor{stringliteral}{"{}recalib"{}}, }
+\DoxyCodeLine{00223\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}source"{}}:\ \textcolor{stringliteral}{"{}periodic\_scheduler"{}}, }
+\DoxyCodeLine{00224\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}timestamp"{}}:\ datetime.now().isoformat(timespec=\textcolor{stringliteral}{"{}seconds"{}}), }
+\DoxyCodeLine{00225\ \ \ \ \ \ \ \ \ \} }
+\DoxyCodeLine{00226\ \ \ \ \ \ \ \ \ score\ =\ rl.logRecalibration(combined\_path,\ meta=meta) }
+\DoxyCodeLine{00227\ \ \ \ \ \ \ \ \ logger.info(f\textcolor{stringliteral}{"{}LiFCal\ HealthScore\ logged\ via\ ResultLogger:\ \{score:.2f\}"{}}) }
+\DoxyCodeLine{00228\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{True} }
+\DoxyCodeLine{00229\ \ \ \ \ \textcolor{keywordflow}{except}\ Exception\ \textcolor{keyword}{as}\ e: }
+\DoxyCodeLine{00230\ \ \ \ \ \ \ \ \ logger.warning(f\textcolor{stringliteral}{"{}Could\ not\ use\ ResultLogger\ for\ LiFCal\ logging:\ \{e\}"{}}) }
+\DoxyCodeLine{00231\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{False} }
+\DoxyCodeLine{00232\  }
+\DoxyCodeLine{00233\  }
+
+\end{DoxyCode}
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{namespacerun__periodic__lifcal_adba89cb02cef5617c2dc7f54c63632e2}\index{run\_periodic\_lifcal@{run\_periodic\_lifcal}!BASELINE\_DIR@{BASELINE\_DIR}}
+\index{BASELINE\_DIR@{BASELINE\_DIR}!run\_periodic\_lifcal@{run\_periodic\_lifcal}}
+\doxysubsubsection{\texorpdfstring{BASELINE\_DIR}{BASELINE\_DIR}}
+{\footnotesize\ttfamily \label{namespacerun__periodic__lifcal_adba89cb02cef5617c2dc7f54c63632e2} 
+str run\+\_\+periodic\+\_\+lifcal.\+BASELINE\+\_\+\+DIR = "{}/data/baseline"{}}
+
+
+
+Definition at line \mbox{\hyperlink{run__periodic__lifcal_8py_source_l00020}{20}} of file \mbox{\hyperlink{run__periodic__lifcal_8py_source}{run\+\_\+periodic\+\_\+lifcal.\+py}}.
+
+\Hypertarget{namespacerun__periodic__lifcal_abcef051d13db75eda49bf293a3b137c0}\index{run\_periodic\_lifcal@{run\_periodic\_lifcal}!CAMERA\_IDS@{CAMERA\_IDS}}
+\index{CAMERA\_IDS@{CAMERA\_IDS}!run\_periodic\_lifcal@{run\_periodic\_lifcal}}
+\doxysubsubsection{\texorpdfstring{CAMERA\_IDS}{CAMERA\_IDS}}
+{\footnotesize\ttfamily \label{namespacerun__periodic__lifcal_abcef051d13db75eda49bf293a3b137c0} 
+list run\+\_\+periodic\+\_\+lifcal.\+CAMERA\+\_\+\+IDS}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ =\ \ [}
+\DoxyCodeLine{00002\ \ \ \ \ \textcolor{stringliteral}{"{}Center"{}},\ \textcolor{stringliteral}{"{}Up1"{}},\ \textcolor{stringliteral}{"{}Up2"{}},\ \textcolor{stringliteral}{"{}Up3"{}},}
+\DoxyCodeLine{00003\ \ \ \ \ \textcolor{stringliteral}{"{}Down1"{}},\ \textcolor{stringliteral}{"{}Down2"{}},\ \textcolor{stringliteral}{"{}Down3"{}},}
+\DoxyCodeLine{00004\ \ \ \ \ \textcolor{stringliteral}{"{}Left1"{}},\ \textcolor{stringliteral}{"{}Left2"{}},\ \textcolor{stringliteral}{"{}Left3"{}},}
+\DoxyCodeLine{00005\ \ \ \ \ \textcolor{stringliteral}{"{}Right1"{}},\ \textcolor{stringliteral}{"{}Right2"{}},\ \textcolor{stringliteral}{"{}Right3"{}}}
+\DoxyCodeLine{00006\ ]}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{run__periodic__lifcal_8py_source_l00030}{30}} of file \mbox{\hyperlink{run__periodic__lifcal_8py_source}{run\+\_\+periodic\+\_\+lifcal.\+py}}.
+
+\Hypertarget{namespacerun__periodic__lifcal_ac1443b61c996787119099d7f460217a2}\index{run\_periodic\_lifcal@{run\_periodic\_lifcal}!DEPTH\_ROOT@{DEPTH\_ROOT}}
+\index{DEPTH\_ROOT@{DEPTH\_ROOT}!run\_periodic\_lifcal@{run\_periodic\_lifcal}}
+\doxysubsubsection{\texorpdfstring{DEPTH\_ROOT}{DEPTH\_ROOT}}
+{\footnotesize\ttfamily \label{namespacerun__periodic__lifcal_ac1443b61c996787119099d7f460217a2} 
+run\+\_\+periodic\+\_\+lifcal.\+DEPTH\+\_\+\+ROOT = os.\+path.\+join(\mbox{\hyperlink{namespacerun__periodic__lifcal_acf6353f300d882599e6e12e7962f4e60}{ROOT\+\_\+\+IMAGESET}}, "{}depth"{})}
+
+
+
+Definition at line \mbox{\hyperlink{run__periodic__lifcal_8py_source_l00028}{28}} of file \mbox{\hyperlink{run__periodic__lifcal_8py_source}{run\+\_\+periodic\+\_\+lifcal.\+py}}.
+
+\Hypertarget{namespacerun__periodic__lifcal_af73cb66145bccccfa622492e6c4ec468}\index{run\_periodic\_lifcal@{run\_periodic\_lifcal}!FOCUS\_ROOT@{FOCUS\_ROOT}}
+\index{FOCUS\_ROOT@{FOCUS\_ROOT}!run\_periodic\_lifcal@{run\_periodic\_lifcal}}
+\doxysubsubsection{\texorpdfstring{FOCUS\_ROOT}{FOCUS\_ROOT}}
+{\footnotesize\ttfamily \label{namespacerun__periodic__lifcal_af73cb66145bccccfa622492e6c4ec468} 
+run\+\_\+periodic\+\_\+lifcal.\+FOCUS\+\_\+\+ROOT = os.\+path.\+join(\mbox{\hyperlink{namespacerun__periodic__lifcal_acf6353f300d882599e6e12e7962f4e60}{ROOT\+\_\+\+IMAGESET}}, "{}focus"{})}
+
+
+
+Definition at line \mbox{\hyperlink{run__periodic__lifcal_8py_source_l00027}{27}} of file \mbox{\hyperlink{run__periodic__lifcal_8py_source}{run\+\_\+periodic\+\_\+lifcal.\+py}}.
+
+\Hypertarget{namespacerun__periodic__lifcal_a5c967bb9bea14fe67a260313bef6d13d}\index{run\_periodic\_lifcal@{run\_periodic\_lifcal}!INTERVAL\_SECONDS@{INTERVAL\_SECONDS}}
+\index{INTERVAL\_SECONDS@{INTERVAL\_SECONDS}!run\_periodic\_lifcal@{run\_periodic\_lifcal}}
+\doxysubsubsection{\texorpdfstring{INTERVAL\_SECONDS}{INTERVAL\_SECONDS}}
+{\footnotesize\ttfamily \label{namespacerun__periodic__lifcal_a5c967bb9bea14fe67a260313bef6d13d} 
+int run\+\_\+periodic\+\_\+lifcal.\+INTERVAL\+\_\+\+SECONDS = 5 \texorpdfstring{$\ast$}{*} 60}
+
+
+
+Definition at line \mbox{\hyperlink{run__periodic__lifcal_8py_source_l00014}{14}} of file \mbox{\hyperlink{run__periodic__lifcal_8py_source}{run\+\_\+periodic\+\_\+lifcal.\+py}}.
+
+\Hypertarget{namespacerun__periodic__lifcal_ad19c09c6061d3cb345b45e130b24a415}\index{run\_periodic\_lifcal@{run\_periodic\_lifcal}!LIFCAL\_OUT\_ROOT@{LIFCAL\_OUT\_ROOT}}
+\index{LIFCAL\_OUT\_ROOT@{LIFCAL\_OUT\_ROOT}!run\_periodic\_lifcal@{run\_periodic\_lifcal}}
+\doxysubsubsection{\texorpdfstring{LIFCAL\_OUT\_ROOT}{LIFCAL\_OUT\_ROOT}}
+{\footnotesize\ttfamily \label{namespacerun__periodic__lifcal_ad19c09c6061d3cb345b45e130b24a415} 
+str run\+\_\+periodic\+\_\+lifcal.\+LIFCAL\+\_\+\+OUT\+\_\+\+ROOT = "{}/data/external/Li\+FCal/Li\+FCal\+\_\+\+Data/Recalibration/Calibration\+By\+Camera"{}}
+
+
+
+Definition at line \mbox{\hyperlink{run__periodic__lifcal_8py_source_l00019}{19}} of file \mbox{\hyperlink{run__periodic__lifcal_8py_source}{run\+\_\+periodic\+\_\+lifcal.\+py}}.
+
+\Hypertarget{namespacerun__periodic__lifcal_af0bc8fb7ff85133636ebf134946c120f}\index{run\_periodic\_lifcal@{run\_periodic\_lifcal}!LOCK\_PATH@{LOCK\_PATH}}
+\index{LOCK\_PATH@{LOCK\_PATH}!run\_periodic\_lifcal@{run\_periodic\_lifcal}}
+\doxysubsubsection{\texorpdfstring{LOCK\_PATH}{LOCK\_PATH}}
+{\footnotesize\ttfamily \label{namespacerun__periodic__lifcal_af0bc8fb7ff85133636ebf134946c120f} 
+str run\+\_\+periodic\+\_\+lifcal.\+LOCK\+\_\+\+PATH = "{}/tmp/lifcal\+\_\+periodic.\+lock"{}}
+
+
+
+Definition at line \mbox{\hyperlink{run__periodic__lifcal_8py_source_l00023}{23}} of file \mbox{\hyperlink{run__periodic__lifcal_8py_source}{run\+\_\+periodic\+\_\+lifcal.\+py}}.
+
+\Hypertarget{namespacerun__periodic__lifcal_a4848a88d75c664fd19b0bdc2ea35ea0a}\index{run\_periodic\_lifcal@{run\_periodic\_lifcal}!LOG\_PATH@{LOG\_PATH}}
+\index{LOG\_PATH@{LOG\_PATH}!run\_periodic\_lifcal@{run\_periodic\_lifcal}}
+\doxysubsubsection{\texorpdfstring{LOG\_PATH}{LOG\_PATH}}
+{\footnotesize\ttfamily \label{namespacerun__periodic__lifcal_a4848a88d75c664fd19b0bdc2ea35ea0a} 
+run\+\_\+periodic\+\_\+lifcal.\+LOG\+\_\+\+PATH = os.\+path.\+join(\mbox{\hyperlink{namespacerun__periodic__lifcal_adba89cb02cef5617c2dc7f54c63632e2}{BASELINE\+\_\+\+DIR}}, "{}calibration.\+log"{})}
+
+
+
+Definition at line \mbox{\hyperlink{run__periodic__lifcal_8py_source_l00021}{21}} of file \mbox{\hyperlink{run__periodic__lifcal_8py_source}{run\+\_\+periodic\+\_\+lifcal.\+py}}.
+
+\Hypertarget{namespacerun__periodic__lifcal_a564255de7cf6dbda4357a8b479ae24cc}\index{run\_periodic\_lifcal@{run\_periodic\_lifcal}!MIN\_POSES\_PER\_CAM@{MIN\_POSES\_PER\_CAM}}
+\index{MIN\_POSES\_PER\_CAM@{MIN\_POSES\_PER\_CAM}!run\_periodic\_lifcal@{run\_periodic\_lifcal}}
+\doxysubsubsection{\texorpdfstring{MIN\_POSES\_PER\_CAM}{MIN\_POSES\_PER\_CAM}}
+{\footnotesize\ttfamily \label{namespacerun__periodic__lifcal_a564255de7cf6dbda4357a8b479ae24cc} 
+int run\+\_\+periodic\+\_\+lifcal.\+MIN\+\_\+\+POSES\+\_\+\+PER\+\_\+\+CAM = 1}
+
+
+
+Definition at line \mbox{\hyperlink{run__periodic__lifcal_8py_source_l00038}{38}} of file \mbox{\hyperlink{run__periodic__lifcal_8py_source}{run\+\_\+periodic\+\_\+lifcal.\+py}}.
+
+\Hypertarget{namespacerun__periodic__lifcal_acf6353f300d882599e6e12e7962f4e60}\index{run\_periodic\_lifcal@{run\_periodic\_lifcal}!ROOT\_IMAGESET@{ROOT\_IMAGESET}}
+\index{ROOT\_IMAGESET@{ROOT\_IMAGESET}!run\_periodic\_lifcal@{run\_periodic\_lifcal}}
+\doxysubsubsection{\texorpdfstring{ROOT\_IMAGESET}{ROOT\_IMAGESET}}
+{\footnotesize\ttfamily \label{namespacerun__periodic__lifcal_acf6353f300d882599e6e12e7962f4e60} 
+str run\+\_\+periodic\+\_\+lifcal.\+ROOT\+\_\+\+IMAGESET = "{}/data/external/Li\+FCal/Li\+FCal\+\_\+\+Data/Recalibration/Li\+FCal\+\_\+\+Imageset"{}}
+
+
+
+Definition at line \mbox{\hyperlink{run__periodic__lifcal_8py_source_l00026}{26}} of file \mbox{\hyperlink{run__periodic__lifcal_8py_source}{run\+\_\+periodic\+\_\+lifcal.\+py}}.
+
+\Hypertarget{namespacerun__periodic__lifcal_a8233dad01fa72f57854848b6f44429ab}\index{run\_periodic\_lifcal@{run\_periodic\_lifcal}!RUN\_IMAGESET\_CREATION@{RUN\_IMAGESET\_CREATION}}
+\index{RUN\_IMAGESET\_CREATION@{RUN\_IMAGESET\_CREATION}!run\_periodic\_lifcal@{run\_periodic\_lifcal}}
+\doxysubsubsection{\texorpdfstring{RUN\_IMAGESET\_CREATION}{RUN\_IMAGESET\_CREATION}}
+{\footnotesize\ttfamily \label{namespacerun__periodic__lifcal_a8233dad01fa72f57854848b6f44429ab} 
+str run\+\_\+periodic\+\_\+lifcal.\+RUN\+\_\+\+IMAGESET\+\_\+\+CREATION = "{}/data/external/Li\+FCal/Li\+FCal\+\_\+\+Data/run\+\_\+imageset\+\_\+creation.\+py"{}}
+
+
+
+Definition at line \mbox{\hyperlink{run__periodic__lifcal_8py_source_l00016}{16}} of file \mbox{\hyperlink{run__periodic__lifcal_8py_source}{run\+\_\+periodic\+\_\+lifcal.\+py}}.
+
+\Hypertarget{namespacerun__periodic__lifcal_a01ff388d15c25bc1e61c5aeeb0d2245e}\index{run\_periodic\_lifcal@{run\_periodic\_lifcal}!RUN\_LIFCAL\_CALIB@{RUN\_LIFCAL\_CALIB}}
+\index{RUN\_LIFCAL\_CALIB@{RUN\_LIFCAL\_CALIB}!run\_periodic\_lifcal@{run\_periodic\_lifcal}}
+\doxysubsubsection{\texorpdfstring{RUN\_LIFCAL\_CALIB}{RUN\_LIFCAL\_CALIB}}
+{\footnotesize\ttfamily \label{namespacerun__periodic__lifcal_a01ff388d15c25bc1e61c5aeeb0d2245e} 
+str run\+\_\+periodic\+\_\+lifcal.\+RUN\+\_\+\+LIFCAL\+\_\+\+CALIB = "{}/data/external/Li\+FCal/Li\+FCal\+\_\+\+Data/run\+\_\+\+Li\+FCal\+\_\+calibration.\+py"{}}
+
+
+
+Definition at line \mbox{\hyperlink{run__periodic__lifcal_8py_source_l00017}{17}} of file \mbox{\hyperlink{run__periodic__lifcal_8py_source}{run\+\_\+periodic\+\_\+lifcal.\+py}}.
+

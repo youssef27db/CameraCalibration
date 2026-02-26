@@ -1,0 +1,424 @@
+\doxysection{Result\+Logger.\+Result\+Logger Class Reference}
+\hypertarget{class_result_logger_1_1_result_logger}{}\label{class_result_logger_1_1_result_logger}\index{ResultLogger.ResultLogger@{ResultLogger.ResultLogger}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_result_logger_1_1_result_logger_a15768864df42cd090e448b06642e9da3}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, \mbox{\hyperlink{class_result_logger_1_1_result_logger_aa86a993c5fe956e3311eb6fc23fda15b}{base\+Dir}}="{}/data/baseline"{})
+\item 
+\mbox{\hyperlink{class_result_logger_1_1_result_logger_aa4437e9678f93f4517e9a86e061f6f75}{to\+\_\+serializable}} (self, obj)
+\item 
+float \mbox{\hyperlink{class_result_logger_1_1_result_logger_a29da0eb2930057eac885511aeaaeb79c}{read\+\_\+baseline\+\_\+health}} (self, str baseline\+\_\+path)
+\item 
+None \mbox{\hyperlink{class_result_logger_1_1_result_logger_abe7c65f1d907868c9dc1e8267bc5e83a}{update\+\_\+baseline}} (self, dict candidate\+\_\+obj, float candidate\+\_\+score, str method)
+\item 
+\mbox{\hyperlink{class_result_logger_1_1_result_logger_a7c8cde04bd5fa23e7ed16f0df3cb406f}{log\+Initial\+Calibration}} (self, calibration\+State, meta=None)
+\item 
+\mbox{\hyperlink{class_result_logger_1_1_result_logger_aa6e3344c9bd2260c62a3d7c9e03b2492}{log\+Recalibration}} (self, str combined\+\_\+json\+\_\+path, meta=None)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_result_logger_1_1_result_logger_aa86a993c5fe956e3311eb6fc23fda15b}{base\+Dir}} = base\+Dir
+\item 
+\mbox{\hyperlink{class_result_logger_1_1_result_logger_a8dc1c2395b3a3edbcc9d87553b22e771}{logger}} = logging.\+get\+Logger("{}calibration"{})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}@brief Manages calibration result logging and baseline versioning.
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{_result_logger_8py_source_l00008}{8}} of file \mbox{\hyperlink{_result_logger_8py_source}{Result\+Logger.\+py}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_result_logger_1_1_result_logger_a15768864df42cd090e448b06642e9da3}\index{ResultLogger.ResultLogger@{ResultLogger.ResultLogger}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!ResultLogger.ResultLogger@{ResultLogger.ResultLogger}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily \label{class_result_logger_1_1_result_logger_a15768864df42cd090e448b06642e9da3} 
+Result\+Logger.\+Result\+Logger.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{base\+Dir}{ = {\ttfamily "{}/data/baseline"{}}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Constructor for ResultLogger.
+
+@param baseDir Directory for storing calibration results and baseline (default: "/data/baseline")
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{_result_logger_8py_source_l00013}{13}} of file \mbox{\hyperlink{_result_logger_8py_source}{Result\+Logger.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00013\ \ \ \ \ \textcolor{keyword}{def\ }\_\_init\_\_(self,\ baseDir="{}/data/baseline"{}): }
+\DoxyCodeLine{00014\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{} }}
+\DoxyCodeLine{00015\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @brief\ Constructor\ for\ ResultLogger. }}
+\DoxyCodeLine{00016\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \  }}
+\DoxyCodeLine{00017\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ baseDir\ Directory\ for\ storing\ calibration\ results\ and\ baseline\ (default:\ "{}/data/baseline"{}) }}
+\DoxyCodeLine{00018\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ self.baseDir\ =\ baseDir }
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ os.makedirs(baseDir,\ exist\_ok=\textcolor{keyword}{True}) }
+\DoxyCodeLine{00021\  }
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ self.logger\ =\ logging.getLogger(\textcolor{stringliteral}{"{}calibration"{}}) }
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ self.logger.setLevel(logging.INFO) }
+\DoxyCodeLine{00024\  }
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ self.logger.handlers: }
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \ \ \ \ log\_path\ =\ os.path.join(baseDir,\ \textcolor{stringliteral}{"{}calibration.log"{}}) }
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \ \ \ \ file\_handler\ =\ logging.FileHandler(log\_path,\ encoding=\textcolor{stringliteral}{"{}utf-\/8"{}}) }
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \ \ \ \ file\_handler.setFormatter(logging.Formatter(\textcolor{stringliteral}{"{}\%(asctime)s\ [\%(levelname)s]\ \%(message)s"{}})) }
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \ \ \ \ self.logger.addHandler(file\_handler) }
+\DoxyCodeLine{00030\  }
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_result_logger_1_1_result_logger_a7c8cde04bd5fa23e7ed16f0df3cb406f}\index{ResultLogger.ResultLogger@{ResultLogger.ResultLogger}!logInitialCalibration@{logInitialCalibration}}
+\index{logInitialCalibration@{logInitialCalibration}!ResultLogger.ResultLogger@{ResultLogger.ResultLogger}}
+\doxysubsubsection{\texorpdfstring{logInitialCalibration()}{logInitialCalibration()}}
+{\footnotesize\ttfamily \label{class_result_logger_1_1_result_logger_a7c8cde04bd5fa23e7ed16f0df3cb406f} 
+Result\+Logger.\+Result\+Logger.\+log\+Initial\+Calibration (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{calibration\+State}{, }\item[{}]{meta}{ = {\ttfamily None}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Store initial calibration result with health score.
+
+@param calibrationState CalibrationState object with intrinsic and extrinsic parameters
+@param meta Optional dictionary with metadata about the calibration run
+@return Health score as float
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{_result_logger_8py_source_l00125}{125}} of file \mbox{\hyperlink{_result_logger_8py_source}{Result\+Logger.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00125\ \ \ \ \ \textcolor{keyword}{def\ }logInitialCalibration(self,\ calibrationState,\ meta=None): }
+\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{} }}
+\DoxyCodeLine{00127\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @brief\ Store\ initial\ calibration\ result\ with\ health\ score. }}
+\DoxyCodeLine{00128\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \  }}
+\DoxyCodeLine{00129\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ calibrationState\ CalibrationState\ object\ with\ intrinsic\ and\ extrinsic\ parameters }}
+\DoxyCodeLine{00130\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ meta\ Optional\ dictionary\ with\ metadata\ about\ the\ calibration\ run }}
+\DoxyCodeLine{00131\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @return\ Health\ score\ as\ float }}
+\DoxyCodeLine{00132\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ meta\ \textcolor{keywordflow}{is}\ \textcolor{keywordtype}{None}: }
+\DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ \ \ \ \ meta\ =\ \{\} }
+\DoxyCodeLine{00135\  }
+\DoxyCodeLine{00136\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Extract\ calibration\ state }}
+\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}: }
+\DoxyCodeLine{00138\ \ \ \ \ \ \ \ \ \ \ \ \ state\_dict\ =\ calibrationState.\_\_getState\_\_() }
+\DoxyCodeLine{00139\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{except}\ Exception\ \textcolor{keyword}{as}\ e: }
+\DoxyCodeLine{00140\ \ \ \ \ \ \ \ \ \ \ \ \ self.logger.error(f\textcolor{stringliteral}{"{}Could\ not\ extract\ state\ dict\ from\ CalibrationState:\ \{e\}"{}}) }
+\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0.0 }
+\DoxyCodeLine{00142\  }
+\DoxyCodeLine{00143\ \ \ \ \ \ \ \ \ safe\_state\ =\ self.to\_serializable(state\_dict) }
+\DoxyCodeLine{00144\ \ \ \ \ \ \ \ \ safe\_meta\ =\ self.to\_serializable(meta) }
+\DoxyCodeLine{00145\  }
+\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Compute\ health\ score\ from\ metrics }}
+\DoxyCodeLine{00147\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}: }
+\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{from}\ HealthMonitor\ \textcolor{keyword}{import}\ compute\_initial\_health\_from\_state }
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ \ \ \ \ report\ =\ compute\_initial\_health\_from\_state(state\_dict) }
+\DoxyCodeLine{00150\ \ \ \ \ \ \ \ \ \ \ \ \ score\ =\ float(report.get(\textcolor{stringliteral}{"{}health"{}},\ 0.0)) }
+\DoxyCodeLine{00151\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{except}\ Exception\ \textcolor{keyword}{as}\ e: }
+\DoxyCodeLine{00152\ \ \ \ \ \ \ \ \ \ \ \ \ self.logger.error(f\textcolor{stringliteral}{"{}Initial\ HealthScore\ computation\ failed:\ \{e\}"{}},\ exc\_info=\textcolor{keyword}{True}) }
+\DoxyCodeLine{00153\ \ \ \ \ \ \ \ \ \ \ \ \ score\ =\ 0.0 }
+\DoxyCodeLine{00154\  }
+\DoxyCodeLine{00155\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Create\ timestamped\ filename }}
+\DoxyCodeLine{00156\ \ \ \ \ \ \ \ \ timestamp\ =\ datetime.now().strftime(\textcolor{stringliteral}{"{}\%Y\%m\%d\_\%H\%M\%S"{}}) }
+\DoxyCodeLine{00157\ \ \ \ \ \ \ \ \ imagesetnumber\ =\ meta.get(\textcolor{stringliteral}{"{}imageDir"{}},\ \textcolor{stringliteral}{"{}unknown"{}}) }
+\DoxyCodeLine{00158\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ isinstance(imagesetnumber,\ str)\ \textcolor{keywordflow}{and}\ \textcolor{stringliteral}{"{}imageset"{}}\ \textcolor{keywordflow}{in}\ imagesetnumber: }
+\DoxyCodeLine{00159\ \ \ \ \ \ \ \ \ \ \ \ \ imagesetnumber\ =\ imagesetnumber.split(\textcolor{stringliteral}{"{}imageset"{}})[-\/1] }
+\DoxyCodeLine{00160\  }
+\DoxyCodeLine{00161\ \ \ \ \ \ \ \ \ json\_name\ =\ f\textcolor{stringliteral}{"{}calibration\_initial\_imageset\{imagesetnumber\}\_\{timestamp\}.json"{}} }
+\DoxyCodeLine{00162\ \ \ \ \ \ \ \ \ json\_path\ =\ os.path.join(self.baseDir,\ json\_name) }
+\DoxyCodeLine{00163\  }
+\DoxyCodeLine{00164\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Prepare\ output\ structure }}
+\DoxyCodeLine{00165\ \ \ \ \ \ \ \ \ out\ =\ \{ }
+\DoxyCodeLine{00166\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}meta"{}}:\ safe\_meta, }
+\DoxyCodeLine{00167\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}state"{}}:\ safe\_state }
+\DoxyCodeLine{00168\ \ \ \ \ \ \ \ \ \} }
+\DoxyCodeLine{00169\  }
+\DoxyCodeLine{00170\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Attach\ health\ score\ to\ metadata }}
+\DoxyCodeLine{00171\ \ \ \ \ \ \ \ \ out.setdefault(\textcolor{stringliteral}{"{}meta"{}},\ \{\}) }
+\DoxyCodeLine{00172\ \ \ \ \ \ \ \ \ out[\textcolor{stringliteral}{"{}meta"{}}][\textcolor{stringliteral}{"{}health"{}}]\ =\ score }
+\DoxyCodeLine{00173\ \ \ \ \ \ \ \ \ out[\textcolor{stringliteral}{"{}meta"{}}][\textcolor{stringliteral}{"{}method"{}}]\ =\ \textcolor{stringliteral}{"{}initial"{}} }
+\DoxyCodeLine{00174\ \ \ \ \ \ \ \ \ out[\textcolor{stringliteral}{"{}meta"{}}][\textcolor{stringliteral}{"{}runType"{}}]\ =\ out[\textcolor{stringliteral}{"{}meta"{}}].get(\textcolor{stringliteral}{"{}runType"{}},\ \textcolor{stringliteral}{"{}initial"{}}) }
+\DoxyCodeLine{00175\  }
+\DoxyCodeLine{00176\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Save\ to\ file }}
+\DoxyCodeLine{00177\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}: }
+\DoxyCodeLine{00178\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{with}\ open(json\_path,\ \textcolor{stringliteral}{"{}w"{}},\ encoding=\textcolor{stringliteral}{"{}utf-\/8"{}})\ \textcolor{keyword}{as}\ f: }
+\DoxyCodeLine{00179\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ json.dump(out,\ f,\ indent=2) }
+\DoxyCodeLine{00180\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{except}\ Exception\ \textcolor{keyword}{as}\ e: }
+\DoxyCodeLine{00181\ \ \ \ \ \ \ \ \ \ \ \ \ self.logger.error(f\textcolor{stringliteral}{"{}Failed\ to\ write\ JSON\ result\ file\ '\{json\_path\}':\ \{e\}"{}}) }
+\DoxyCodeLine{00182\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0.0 }
+\DoxyCodeLine{00183\  }
+\DoxyCodeLine{00184\ \ \ \ \ \ \ \ \ intr\ =\ state\_dict.get(\textcolor{stringliteral}{"{}intrinsics"{}},\ \{\}) }
+\DoxyCodeLine{00185\ \ \ \ \ \ \ \ \ extr\ =\ state\_dict.get(\textcolor{stringliteral}{"{}extrinsics"{}},\ \{\}) }
+\DoxyCodeLine{00186\ \ \ \ \ \ \ \ \ self.logger.info( }
+\DoxyCodeLine{00187\ \ \ \ \ \ \ \ \ \ \ \ \ f\textcolor{stringliteral}{"{}Stored\ initial\ calibration\ to\ '\{json\_name\}'\ "{}} }
+\DoxyCodeLine{00188\ \ \ \ \ \ \ \ \ \ \ \ \ f\textcolor{stringliteral}{"{}(intrinsics\ for\ \{len(intr)\}\ cams,\ extrinsics\ for\ \{len(extr)\}\ cams,\ bundleAdjustf:\ \{meta.get('bundleAdjust',\ True)\})."{}} }
+\DoxyCodeLine{00189\ \ \ \ \ \ \ \ \ ) }
+\DoxyCodeLine{00190\ \ \ \ \ \ \ \ \ self.logger.info(f\textcolor{stringliteral}{"{}HealthScore\ =\ \{score:.2f\}\ (method=initial)"{}}) }
+\DoxyCodeLine{00191\  }
+\DoxyCodeLine{00192\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Update\ baseline\ (creates\ baseline\ on\ first\ run) }}
+\DoxyCodeLine{00193\ \ \ \ \ \ \ \ \ self.update\_baseline(out,\ score,\ method=\textcolor{stringliteral}{"{}initial"{}}) }
+\DoxyCodeLine{00194\  }
+\DoxyCodeLine{00195\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ score }
+\DoxyCodeLine{00196\  }
+
+\end{DoxyCode}
+\Hypertarget{class_result_logger_1_1_result_logger_aa6e3344c9bd2260c62a3d7c9e03b2492}\index{ResultLogger.ResultLogger@{ResultLogger.ResultLogger}!logRecalibration@{logRecalibration}}
+\index{logRecalibration@{logRecalibration}!ResultLogger.ResultLogger@{ResultLogger.ResultLogger}}
+\doxysubsubsection{\texorpdfstring{logRecalibration()}{logRecalibration()}}
+{\footnotesize\ttfamily \label{class_result_logger_1_1_result_logger_aa6e3344c9bd2260c62a3d7c9e03b2492} 
+Result\+Logger.\+Result\+Logger.\+log\+Recalibration (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{combined\+\_\+json\+\_\+path}{, }\item[{}]{meta}{ = {\ttfamily None}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Store LiFCal recalibration result with health score.
+
+@param combined_json_path Path to the combined.json file from LiFCal
+@param meta Optional dictionary with metadata about the recalibration run
+@return Health score as float
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{_result_logger_8py_source_l00197}{197}} of file \mbox{\hyperlink{_result_logger_8py_source}{Result\+Logger.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00197\ \ \ \ \ \textcolor{keyword}{def\ }logRecalibration(self,\ combined\_json\_path:\ str,\ meta=\textcolor{keywordtype}{None}): }
+\DoxyCodeLine{00198\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{} }}
+\DoxyCodeLine{00199\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @brief\ Store\ LiFCal\ recalibration\ result\ with\ health\ score. }}
+\DoxyCodeLine{00200\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \  }}
+\DoxyCodeLine{00201\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ combined\_json\_path\ Path\ to\ the\ combined.json\ file\ from\ LiFCal }}
+\DoxyCodeLine{00202\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ meta\ Optional\ dictionary\ with\ metadata\ about\ the\ recalibration\ run }}
+\DoxyCodeLine{00203\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @return\ Health\ score\ as\ float }}
+\DoxyCodeLine{00204\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00205\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ meta\ \textcolor{keywordflow}{is}\ \textcolor{keywordtype}{None}: }
+\DoxyCodeLine{00206\ \ \ \ \ \ \ \ \ \ \ \ \ meta\ =\ \{\} }
+\DoxyCodeLine{00207\  }
+\DoxyCodeLine{00208\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Import\ locally\ to\ avoid\ errors\ when\ not\ needed }}
+\DoxyCodeLine{00209\ \ \ \ \ \ \ \ \ \textcolor{keyword}{from}\ HealthMonitor\ \textcolor{keyword}{import}\ compute\_lifcal\_health\_from\_combined\_path }
+\DoxyCodeLine{00210\  }
+\DoxyCodeLine{00211\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Read\ combined.json }}
+\DoxyCodeLine{00212\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}: }
+\DoxyCodeLine{00213\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{with}\ open(combined\_json\_path,\ \textcolor{stringliteral}{"{}r"{}},\ encoding=\textcolor{stringliteral}{"{}utf-\/8"{}})\ \textcolor{keyword}{as}\ f: }
+\DoxyCodeLine{00214\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ combined\ =\ json.load(f) }
+\DoxyCodeLine{00215\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{except}\ Exception\ \textcolor{keyword}{as}\ e: }
+\DoxyCodeLine{00216\ \ \ \ \ \ \ \ \ \ \ \ \ self.logger.error(f\textcolor{stringliteral}{"{}Could\ not\ read\ combined.json\ '\{combined\_json\_path\}':\ \{e\}"{}}) }
+\DoxyCodeLine{00217\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0.0 }
+\DoxyCodeLine{00218\  }
+\DoxyCodeLine{00219\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Compute\ health\ score }}
+\DoxyCodeLine{00220\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}: }
+\DoxyCodeLine{00221\ \ \ \ \ \ \ \ \ \ \ \ \ report\ =\ compute\_lifcal\_health\_from\_combined\_path(combined\_json\_path) }
+\DoxyCodeLine{00222\ \ \ \ \ \ \ \ \ \ \ \ \ score\ =\ float(report.get(\textcolor{stringliteral}{"{}health"{}},\ 0.0)) }
+\DoxyCodeLine{00223\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{except}\ Exception\ \textcolor{keyword}{as}\ e: }
+\DoxyCodeLine{00224\ \ \ \ \ \ \ \ \ \ \ \ \ self.logger.error(f\textcolor{stringliteral}{"{}LiFCal\ HealthScore\ computation\ failed:\ \{e\}"{}},\ exc\_info=\textcolor{keyword}{True}) }
+\DoxyCodeLine{00225\ \ \ \ \ \ \ \ \ \ \ \ \ score\ =\ 0.0 }
+\DoxyCodeLine{00226\  }
+\DoxyCodeLine{00227\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Create\ timestamped\ copy }}
+\DoxyCodeLine{00228\ \ \ \ \ \ \ \ \ timestamp\ =\ datetime.now().strftime(\textcolor{stringliteral}{"{}\%Y\%m\%d\_\%H\%M\%S"{}}) }
+\DoxyCodeLine{00229\ \ \ \ \ \ \ \ \ json\_name\ =\ f\textcolor{stringliteral}{"{}calibration\_lifcal\_\{timestamp\}.json"{}} }
+\DoxyCodeLine{00230\ \ \ \ \ \ \ \ \ out\_path\ =\ os.path.join(self.baseDir,\ json\_name) }
+\DoxyCodeLine{00231\  }
+\DoxyCodeLine{00232\ \ \ \ \ \ \ \ \ combined.setdefault(\textcolor{stringliteral}{"{}meta"{}},\ \{\}) }
+\DoxyCodeLine{00233\ \ \ \ \ \ \ \ \ combined[\textcolor{stringliteral}{"{}meta"{}}].update(self.to\_serializable(meta)) }
+\DoxyCodeLine{00234\ \ \ \ \ \ \ \ \ combined[\textcolor{stringliteral}{"{}meta"{}}][\textcolor{stringliteral}{"{}health"{}}]\ =\ score }
+\DoxyCodeLine{00235\ \ \ \ \ \ \ \ \ combined[\textcolor{stringliteral}{"{}meta"{}}][\textcolor{stringliteral}{"{}method"{}}]\ =\ \textcolor{stringliteral}{"{}lifcal"{}} }
+\DoxyCodeLine{00236\ \ \ \ \ \ \ \ \ combined[\textcolor{stringliteral}{"{}meta"{}}][\textcolor{stringliteral}{"{}runType"{}}]\ =\ combined[\textcolor{stringliteral}{"{}meta"{}}].get(\textcolor{stringliteral}{"{}runType"{}},\ \textcolor{stringliteral}{"{}recalib"{}}) }
+\DoxyCodeLine{00237\  }
+\DoxyCodeLine{00238\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Save\ to\ file }}
+\DoxyCodeLine{00239\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}: }
+\DoxyCodeLine{00240\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{with}\ open(out\_path,\ \textcolor{stringliteral}{"{}w"{}},\ encoding=\textcolor{stringliteral}{"{}utf-\/8"{}})\ \textcolor{keyword}{as}\ f: }
+\DoxyCodeLine{00241\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ json.dump(combined,\ f,\ indent=2) }
+\DoxyCodeLine{00242\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{except}\ Exception\ \textcolor{keyword}{as}\ e: }
+\DoxyCodeLine{00243\ \ \ \ \ \ \ \ \ \ \ \ \ self.logger.error(f\textcolor{stringliteral}{"{}Failed\ to\ write\ LiFCal\ result\ '\{out\_path\}':\ \{e\}"{}}) }
+\DoxyCodeLine{00244\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0.0 }
+\DoxyCodeLine{00245\  }
+\DoxyCodeLine{00246\ \ \ \ \ \ \ \ \ num\_cams\ =\ len(combined.get(\textcolor{stringliteral}{"{}state"{}},\ \{\}).get(\textcolor{stringliteral}{"{}parameters"{}},\ \{\})) }
+\DoxyCodeLine{00247\ \ \ \ \ \ \ \ \ self.logger.info(f\textcolor{stringliteral}{"{}Stored\ lifcal\ recalibration\ to\ '\{json\_name\}'\ (cams=\{num\_cams\})."{}}) }
+\DoxyCodeLine{00248\ \ \ \ \ \ \ \ \ self.logger.info(f\textcolor{stringliteral}{"{}HealthScore\ =\ \{score:.2f\}\ (method=lifcal)"{}}) }
+\DoxyCodeLine{00249\  }
+\DoxyCodeLine{00250\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Update\ baseline\ only\ if\ better }}
+\DoxyCodeLine{00251\ \ \ \ \ \ \ \ \ self.update\_baseline(combined,\ score,\ method=\textcolor{stringliteral}{"{}lifcal"{}}) }
+\DoxyCodeLine{00252\  }
+\DoxyCodeLine{00253\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ score }
+
+\end{DoxyCode}
+\Hypertarget{class_result_logger_1_1_result_logger_a29da0eb2930057eac885511aeaaeb79c}\index{ResultLogger.ResultLogger@{ResultLogger.ResultLogger}!read\_baseline\_health@{read\_baseline\_health}}
+\index{read\_baseline\_health@{read\_baseline\_health}!ResultLogger.ResultLogger@{ResultLogger.ResultLogger}}
+\doxysubsubsection{\texorpdfstring{read\_baseline\_health()}{read\_baseline\_health()}}
+{\footnotesize\ttfamily \label{class_result_logger_1_1_result_logger_a29da0eb2930057eac885511aeaaeb79c} 
+ float Result\+Logger.\+Result\+Logger.\+read\+\_\+baseline\+\_\+health (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{baseline\+\_\+path}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Extract health score from baseline.json.
+
+@param baseline_path Path to the baseline.json file
+@return Health score as float, or -1.0 if not found or cannot be determined
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{_result_logger_8py_source_l00050}{50}} of file \mbox{\hyperlink{_result_logger_8py_source}{Result\+Logger.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keyword}{def\ }read\_baseline\_health(self,\ baseline\_path:\ str)\ -\/>\ float: }
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{} }}
+\DoxyCodeLine{00052\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @brief\ Extract\ health\ score\ from\ baseline.json. }}
+\DoxyCodeLine{00053\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \  }}
+\DoxyCodeLine{00054\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ baseline\_path\ Path\ to\ the\ baseline.json\ file }}
+\DoxyCodeLine{00055\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @return\ Health\ score\ as\ float,\ or\ -\/1.0\ if\ not\ found\ or\ cannot\ be\ determined }}
+\DoxyCodeLine{00056\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ os.path.isfile(baseline\_path): }
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/1.0 }
+\DoxyCodeLine{00059\  }
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}: }
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{with}\ open(baseline\_path,\ \textcolor{stringliteral}{"{}r"{}},\ encoding=\textcolor{stringliteral}{"{}utf-\/8"{}})\ \textcolor{keyword}{as}\ f: }
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ base\ =\ json.load(f) }
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{except}\ Exception: }
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/1.0 }
+\DoxyCodeLine{00065\  }
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Try\ direct\ health\ value\ from\ metadata }}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}: }
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \ \ \ \ h\ =\ float(base.get(\textcolor{stringliteral}{"{}meta"{}},\ \{\}).get(\textcolor{stringliteral}{"{}health"{}},\ -\/1.0)) }
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ np.isfinite(h)\ \textcolor{keywordflow}{and}\ h\ >=\ 0: }
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ h }
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{except}\ Exception: }
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{pass} }
+\DoxyCodeLine{00073\  }
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Fallback:\ compute\ based\ on\ calibration\ type }}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}: }
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{from}\ HealthMonitor\ \textcolor{keyword}{import}\ ( }
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ compute\_initial\_health\_from\_state, }
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ compute\_lifcal\_health\_from\_combined\_dict, }
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \ \ \ \ ) }
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{except}\ Exception: }
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/1.0 }
+\DoxyCodeLine{00082\  }
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ run\_type\ =\ (base.get(\textcolor{stringliteral}{"{}meta"{}},\ \{\})\ \textcolor{keywordflow}{or}\ \{\}).get(\textcolor{stringliteral}{"{}runType"{}},\ \textcolor{stringliteral}{"{}"{}}) }
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ state\ =\ base.get(\textcolor{stringliteral}{"{}state"{}},\ \{\}) }
+\DoxyCodeLine{00085\  }
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}: }
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ run\_type\ ==\ \textcolor{stringliteral}{"{}initial"{}}: }
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ rep\ =\ compute\_initial\_health\_from\_state(state) }
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ float(rep.get(\textcolor{stringliteral}{"{}health"{}},\ -\/1.0)) }
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}: }
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Treat\ as\ lifcal/combined }}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ rep\ =\ compute\_lifcal\_health\_from\_combined\_dict(base) }
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ float(rep.get(\textcolor{stringliteral}{"{}health"{}},\ -\/1.0)) }
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{except}\ Exception: }
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/1.0 }
+\DoxyCodeLine{00096\  }
+
+\end{DoxyCode}
+\Hypertarget{class_result_logger_1_1_result_logger_aa4437e9678f93f4517e9a86e061f6f75}\index{ResultLogger.ResultLogger@{ResultLogger.ResultLogger}!to\_serializable@{to\_serializable}}
+\index{to\_serializable@{to\_serializable}!ResultLogger.ResultLogger@{ResultLogger.ResultLogger}}
+\doxysubsubsection{\texorpdfstring{to\_serializable()}{to\_serializable()}}
+{\footnotesize\ttfamily \label{class_result_logger_1_1_result_logger_aa4437e9678f93f4517e9a86e061f6f75} 
+Result\+Logger.\+Result\+Logger.\+to\+\_\+serializable (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{obj}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Convert numpy arrays and types to JSON-serializable format.
+
+@param obj Object to convert (numpy array, dict, list, or primitive type)
+@return JSON-serializable version of the object
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{_result_logger_8py_source_l00031}{31}} of file \mbox{\hyperlink{_result_logger_8py_source}{Result\+Logger.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keyword}{def\ }to\_serializable(self,\ obj): }
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{} }}
+\DoxyCodeLine{00033\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @brief\ Convert\ numpy\ arrays\ and\ types\ to\ JSON-\/serializable\ format. }}
+\DoxyCodeLine{00034\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \  }}
+\DoxyCodeLine{00035\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ obj\ Object\ to\ convert\ (numpy\ array,\ dict,\ list,\ or\ primitive\ type) }}
+\DoxyCodeLine{00036\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @return\ JSON-\/serializable\ version\ of\ the\ object }}
+\DoxyCodeLine{00037\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ isinstance(obj,\ np.ndarray): }
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ obj.tolist() }
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ isinstance(obj,\ (np.floating,\ np.float32,\ np.float64)): }
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ float(obj) }
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ isinstance(obj,\ (np.integer,\ np.int32,\ np.int64)): }
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ int(obj) }
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ isinstance(obj,\ dict): }
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \{k:\ self.to\_serializable(v)\ \textcolor{keywordflow}{for}\ k,\ v\ \textcolor{keywordflow}{in}\ obj.items()\} }
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ isinstance(obj,\ (list,\ tuple)): }
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ [self.to\_serializable(v)\ \textcolor{keywordflow}{for}\ v\ \textcolor{keywordflow}{in}\ obj] }
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ obj }
+\DoxyCodeLine{00049\  }
+
+\end{DoxyCode}
+\Hypertarget{class_result_logger_1_1_result_logger_abe7c65f1d907868c9dc1e8267bc5e83a}\index{ResultLogger.ResultLogger@{ResultLogger.ResultLogger}!update\_baseline@{update\_baseline}}
+\index{update\_baseline@{update\_baseline}!ResultLogger.ResultLogger@{ResultLogger.ResultLogger}}
+\doxysubsubsection{\texorpdfstring{update\_baseline()}{update\_baseline()}}
+{\footnotesize\ttfamily \label{class_result_logger_1_1_result_logger_abe7c65f1d907868c9dc1e8267bc5e83a} 
+ None Result\+Logger.\+Result\+Logger.\+update\+\_\+baseline (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{dict}]{candidate\+\_\+obj}{, }\item[{float}]{candidate\+\_\+score}{, }\item[{str}]{method}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Update baseline.json with new calibration if health improved.
+
+@param candidate_obj Dictionary containing calibration data
+@param candidate_score Health score of the candidate calibration
+@param method Calibration method identifier ("initial" or "lifcal")
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{_result_logger_8py_source_l00097}{97}} of file \mbox{\hyperlink{_result_logger_8py_source}{Result\+Logger.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00097\ \ \ \ \ \textcolor{keyword}{def\ }update\_baseline(self,\ candidate\_obj:\ dict,\ candidate\_score:\ float,\ method:\ str)\ -\/>\ \textcolor{keywordtype}{None}: }
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{} }}
+\DoxyCodeLine{00099\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @brief\ Update\ baseline.json\ with\ new\ calibration\ if\ health\ improved. }}
+\DoxyCodeLine{00100\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \  }}
+\DoxyCodeLine{00101\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ candidate\_obj\ Dictionary\ containing\ calibration\ data }}
+\DoxyCodeLine{00102\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ candidate\_score\ Health\ score\ of\ the\ candidate\ calibration }}
+\DoxyCodeLine{00103\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ method\ Calibration\ method\ identifier\ ("{}initial"{}\ or\ "{}lifcal"{}) }}
+\DoxyCodeLine{00104\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ baseline\_path\ =\ os.path.join(self.baseDir,\ \textcolor{stringliteral}{"{}baseline.json"{}}) }
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ old\_score\ =\ self.read\_baseline\_health(baseline\_path) }
+\DoxyCodeLine{00107\  }
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\textcolor{keywordflow}{not}\ os.path.isfile(baseline\_path))\ \textcolor{keywordflow}{or}\ (candidate\_score\ >\ old\_score): }
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}: }
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{with}\ open(baseline\_path,\ \textcolor{stringliteral}{"{}w"{}},\ encoding=\textcolor{stringliteral}{"{}utf-\/8"{}})\ \textcolor{keyword}{as}\ f: }
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ json.dump(candidate\_obj,\ f,\ indent=2) }
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ old\_score\ <\ 0: }
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ self.logger.info(f\textcolor{stringliteral}{"{}Baseline\ created:\ baseline.json\ (new=\{candidate\_score:.2f\},\ method=\{method\})"{}}) }
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}: }
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ self.logger.info( }
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ f\textcolor{stringliteral}{"{}Baseline\ updated:\ baseline.json\ (old=\{old\_score:.2f\},\ new=\{candidate\_score:.2f\},\ method=\{method\})"{}} }
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ) }
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{except}\ Exception\ \textcolor{keyword}{as}\ e: }
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ self.logger.error(f\textcolor{stringliteral}{"{}Failed\ to\ update\ baseline.json:\ \{e\}"{}}) }
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}: }
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \ \ \ \ self.logger.info( }
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ f\textcolor{stringliteral}{"{}Baseline\ kept:\ baseline.json\ (old=\{old\_score:.2f\}\ >=\ new=\{candidate\_score:.2f\},\ method=\{method\})"{}} }
+\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ \ \ \ \ ) }
+\DoxyCodeLine{00124\  }
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_result_logger_1_1_result_logger_aa86a993c5fe956e3311eb6fc23fda15b}\index{ResultLogger.ResultLogger@{ResultLogger.ResultLogger}!baseDir@{baseDir}}
+\index{baseDir@{baseDir}!ResultLogger.ResultLogger@{ResultLogger.ResultLogger}}
+\doxysubsubsection{\texorpdfstring{baseDir}{baseDir}}
+{\footnotesize\ttfamily \label{class_result_logger_1_1_result_logger_aa86a993c5fe956e3311eb6fc23fda15b} 
+Result\+Logger.\+Result\+Logger.\+base\+Dir = base\+Dir}
+
+
+
+Definition at line \mbox{\hyperlink{_result_logger_8py_source_l00019}{19}} of file \mbox{\hyperlink{_result_logger_8py_source}{Result\+Logger.\+py}}.
+
+\Hypertarget{class_result_logger_1_1_result_logger_a8dc1c2395b3a3edbcc9d87553b22e771}\index{ResultLogger.ResultLogger@{ResultLogger.ResultLogger}!logger@{logger}}
+\index{logger@{logger}!ResultLogger.ResultLogger@{ResultLogger.ResultLogger}}
+\doxysubsubsection{\texorpdfstring{logger}{logger}}
+{\footnotesize\ttfamily \label{class_result_logger_1_1_result_logger_a8dc1c2395b3a3edbcc9d87553b22e771} 
+Result\+Logger.\+Result\+Logger.\+logger = logging.\+get\+Logger("{}calibration"{})}
+
+
+
+Definition at line \mbox{\hyperlink{_result_logger_8py_source_l00022}{22}} of file \mbox{\hyperlink{_result_logger_8py_source}{Result\+Logger.\+py}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+calibration\+LFC/\mbox{\hyperlink{_result_logger_8py}{Result\+Logger.\+py}}\end{DoxyCompactItemize}

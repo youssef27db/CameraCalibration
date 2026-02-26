@@ -7,8 +7,17 @@ from typing import Dict, Any, Optional
 import numpy as np
 import cv2
 
+"""
+@brief code to parse LiFCal calibration protocol and extrinsic XML files, and export parameters.json for each camera, as well as a combined.json for all cameras. This is used to convert LiFCal's output into a structured JSON format that can be easily consumed for further analysis or processing.
+
+"""
 
 def parse_protocol(protocol_path: str) -> dict:
+    """
+    @brief Parse LiFCal calibration protocol text file.
+    
+    @return Dictionary containing parsed calibration parameters and reprojection errors
+    """
     txt = open(protocol_path, "r", encoding="utf-8", errors="ignore").read()
 
     def find_float(pattern: str, default=None) -> Optional[float]:
@@ -59,6 +68,12 @@ def parse_protocol(protocol_path: str) -> dict:
 
 
 def parse_extrinsics_xml(xml_path: str) -> Dict[str, Any]:
+    """
+    @brief Parse LiFCal extrinsic orientations XML file.
+    
+    @param xml_path Path to extrinsicOrientations.xml file
+    @return Dictionary mapping pose keys to rotation and translation data
+    """
     root = ET.parse(xml_path).getroot()
     out: Dict[str, Any] = {}
 
@@ -109,11 +124,20 @@ def export_lifcal_parameters_json_in_place(
     fallback_cy: Optional[float] = None,  # accepted for compatibility, not used
 ) -> str:
     """
-    Writes LiFCal parameters.json for a single camera.
-
-    - Expects calibrationProtocol.txt and extrinsicOrientations.xml in result_dir
-    - Produces result_dir/parameters.json
-    - fallback_cx/fallback_cy are accepted for compatibility only; camera matrix is not stored.
+    @brief Write LiFCal parameters.json for a single camera.
+    
+    @param result_dir Directory containing LiFCal output files
+    @param cam_id Camera identifier
+    @param image_dir Directory containing input images
+    @param run_type Type of calibration run (default: "recalib")
+    @param pixel_size_mm_fallback Fallback pixel size in mm (default: 0.0055)
+    @param protocol_name Protocol filename (default: "calibrationProtocol.txt")
+    @param extr_name Extrinsics filename (default: "extrinsicOrientations.xml")
+    @param out_name Output JSON filename (default: "parameters.json")
+    @param pixel_size_mm Optional pixel size override
+    @param fallback_cx Optional fallback cx (compatibility only, not used)
+    @param fallback_cy Optional fallback cy (compatibility only, not used)
+    @return Path to written parameters.json file
     """
     if pixel_size_mm is not None:
         pixel_size_mm_fallback = float(pixel_size_mm)
@@ -181,9 +205,12 @@ def export_lifcal_parameters_json_in_place(
 
 def build_combined_parameters_json(run_root: str, camera_ids: list, out_name: str = "combined.json") -> str:
     """
-    Combines per-camera parameters.json files into a single combined.json.
-
-    Expects each camera to have: run_root/<CamId>/parameters.json
+    @brief Combine per-camera parameters.json files into a single combined.json.
+    
+    @param run_root Root directory containing per-camera subdirectories
+    @param camera_ids List of camera identifiers
+    @param out_name Output filename (default: "combined.json")
+    @return Path to written combined.json file
     """
     combined = {
         "meta": {

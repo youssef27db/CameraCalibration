@@ -1,0 +1,37 @@
+\doxysection{calibration\+LFC/\+Health\+Monitor.py File Reference}
+\hypertarget{_health_monitor_8py}{}\label{_health_monitor_8py}\index{calibrationLFC/HealthMonitor.py@{calibrationLFC/HealthMonitor.py}}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespace_health_monitor}{Health\+Monitor}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+float \mbox{\hyperlink{namespace_health_monitor_a4cc981a82351b124fe66429bc1b20f16}{Health\+Monitor.\+clamp}} (float x, float lo=0.\+0, float hi=1.\+0)
+\item 
+\mbox{\hyperlink{namespace_health_monitor_afa30e56be01511c5e2fd7aad7730055a}{Health\+Monitor.\+safe\+\_\+float}} (v, default=None)
+\item 
+float \mbox{\hyperlink{namespace_health_monitor_afaf436975b71f59fa17ded66fa3e62de}{Health\+Monitor.\+score\+\_\+from\+\_\+errors}} (float E\+\_\+a, float E\+\_\+b, float w\+\_\+a=0.\+6, float w\+\_\+b=0.\+4)
+\item 
+Dict\mbox{[}str, Any\mbox{]} \mbox{\hyperlink{namespace_health_monitor_a68292483868771d14cb240554d2406aa}{Health\+Monitor.\+compute\+\_\+initial\+\_\+health\+\_\+from\+\_\+state}} (Dict\mbox{[}str, Any\mbox{]} state\+\_\+dict, float r\+\_\+best=\mbox{\hyperlink{namespace_health_monitor_afaf986f238234c66f66bdfe5688f786c}{R\+\_\+\+BEST}}, float r\+\_\+worst=\mbox{\hyperlink{namespace_health_monitor_a31f29544855dfc65d157c2e2278ac866}{R\+\_\+\+WORST}}, float s\+\_\+best=\mbox{\hyperlink{namespace_health_monitor_ac31a13688956ec7e37301566ae7af87e}{S\+\_\+\+BEST}}, float s\+\_\+worst=\mbox{\hyperlink{namespace_health_monitor_a103c572c4b23101ea513e9e084a6af51}{S\+\_\+\+WORST}})
+\item 
+Dict\mbox{[}str, Optional\mbox{[}float\mbox{]}\mbox{]} \mbox{\hyperlink{namespace_health_monitor_a79511a86b0813f0b4a955c5da76d8ebc}{Health\+Monitor.\+parse\+\_\+lifcal\+\_\+protocol}} (str protocol\+\_\+path)
+\item 
+Dict\mbox{[}str, Any\mbox{]} \mbox{\hyperlink{namespace_health_monitor_a56aef51f9aa11eb7f3662b403d365545}{Health\+Monitor.\+compute\+\_\+lifcal\+\_\+health\+\_\+from\+\_\+xy}} (float x\+\_\+std, float y\+\_\+std, float x\+\_\+mae, float y\+\_\+mae, float r\+\_\+best=\mbox{\hyperlink{namespace_health_monitor_afaf986f238234c66f66bdfe5688f786c}{R\+\_\+\+BEST}}, float r\+\_\+worst=\mbox{\hyperlink{namespace_health_monitor_a31f29544855dfc65d157c2e2278ac866}{R\+\_\+\+WORST}}, float s\+\_\+best=\mbox{\hyperlink{namespace_health_monitor_ac31a13688956ec7e37301566ae7af87e}{S\+\_\+\+BEST}}, float s\+\_\+worst=\mbox{\hyperlink{namespace_health_monitor_a103c572c4b23101ea513e9e084a6af51}{S\+\_\+\+WORST}})
+\item 
+Dict\mbox{[}str, Any\mbox{]} \mbox{\hyperlink{namespace_health_monitor_a1163a29e9f18e79dd4c47ae9717aa55b}{Health\+Monitor.\+compute\+\_\+lifcal\+\_\+health\+\_\+from\+\_\+combined\+\_\+dict}} (Dict\mbox{[}str, Any\mbox{]} combined)
+\item 
+Dict\mbox{[}str, Any\mbox{]} \mbox{\hyperlink{namespace_health_monitor_a795ce112d3003ba5d0173689c109391c}{Health\+Monitor.\+compute\+\_\+lifcal\+\_\+health\+\_\+from\+\_\+combined\+\_\+path}} (str combined\+\_\+json\+\_\+path)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+float \mbox{\hyperlink{namespace_health_monitor_afaf986f238234c66f66bdfe5688f786c}{Health\+Monitor.\+R\+\_\+\+BEST}} = 0.\+03
+\item 
+float \mbox{\hyperlink{namespace_health_monitor_a31f29544855dfc65d157c2e2278ac866}{Health\+Monitor.\+R\+\_\+\+WORST}} = 1.\+0
+\item 
+float \mbox{\hyperlink{namespace_health_monitor_ac31a13688956ec7e37301566ae7af87e}{Health\+Monitor.\+S\+\_\+\+BEST}} = 0.\+0
+\item 
+float \mbox{\hyperlink{namespace_health_monitor_a103c572c4b23101ea513e9e084a6af51}{Health\+Monitor.\+S\+\_\+\+WORST}} = 50.\+0
+\end{DoxyCompactItemize}

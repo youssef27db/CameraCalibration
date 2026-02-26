@@ -5,21 +5,35 @@ from HealthMonitor import compute_initial_health_from_state
 
 class Controller:
     """
-    Main controller for managing calibration workflow.
-    Orchestrates initial calibration, health monitoring, and result logging.
+    @brief Main controller for managing calibration workflow.
+    
+    @details Orchestrates the complete calibration process including initial calibration,
+    health monitoring, and result logging. Manages the calibration state and maintains
+    a history of health scores.
     """
 
     def __init__(self, bundleAdjust):
+        """
+        @brief Constructor for Controller.
+        
+        @param bundleAdjust Boolean flag indicating whether to apply bundle adjustment
+        
+        @details Initializes the controller with an InitialCalibration instance,
+        empty score history, result logger, and bundle adjustment setting.
+        """
         self.initialCalibration = InitialCalibration()
-        self.scoreHistory = []
-        self.currentState = None
+        self.scoreHistory = [] 
+        self.currentState = None 
         self.resultLogger = ResultLogger()
-        self.bundleAdjust = bundleAdjust
+        self.bundleAdjust = bundleAdjust 
 
     def runInitialCalibration(self, imageSet):
         """
-        Execute initial calibration for all cameras in the image set.
-        Logs results with metadata about the calibration run.
+        @brief Execute initial calibration for all cameras in the image set.
+        
+        @param imageSet ImageSet object containing calibration images and camera information
+        @return CalibrationState object with computed intrinsic and extrinsic parameters
+    
         """
         print("Controller: starting initial calibration...")
         calibrationState = self.initialCalibration.run(imageSet, self.bundleAdjust)
@@ -38,8 +52,11 @@ class Controller:
 
     def selfHealthCheck(self, calibrationState) -> float:
         """
-        Computes a global health score (0..100) for the calibration quality.
-        Based on reprojection errors and stereo RMS values.
+        @brief Computes a global health score for the calibration quality.
+        
+        @param calibrationState CalibrationState object to evaluate
+        @return Health score as float between 0 and 100, or 0.0 if evaluation fails
+        
         """
         # Extract state dictionary
         try:

@@ -1,0 +1,227 @@
+\@ifundefined {etoctocstyle}{\let \etoc@startlocaltoc \@gobble \let \etoc@settocdepth \@gobble \let \etoc@depthtag \@gobble \let \etoc@setlocaltop \@gobble }{}
+\contentsline {chapter}{\numberline {1}Namespace Index}{1}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Namespace List}{1}{section.1.1}%
+\contentsline {chapter}{\numberline {2}Class Index}{3}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Class List}{3}{section.2.1}%
+\contentsline {chapter}{\numberline {3}File Index}{5}{chapter.3}%
+\contentsline {section}{\numberline {3.1}File List}{5}{section.3.1}%
+\contentsline {chapter}{\numberline {4}Namespace Documentation}{7}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Calibration\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}State Namespace Reference}{7}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Controller Namespace Reference}{7}{section.4.2}%
+\contentsline {section}{\numberline {4.3}depthmap Namespace Reference}{7}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}Function Documentation}{8}{subsection.4.3.1}%
+\contentsline {subsubsection}{\numberline {4.3.1.1}build\_matchers()}{8}{subsubsection.4.3.1.1}%
+\contentsline {subsubsection}{\numberline {4.3.1.2}disparity()}{8}{subsubsection.4.3.1.2}%
+\contentsline {subsubsection}{\numberline {4.3.1.3}fuse\_disparities\_median()}{9}{subsubsection.4.3.1.3}%
+\contentsline {subsubsection}{\numberline {4.3.1.4}generate\_depthmaps\_for\_pose()}{9}{subsubsection.4.3.1.4}%
+\contentsline {subsubsection}{\numberline {4.3.1.5}imwrite\_u16()}{10}{subsubsection.4.3.1.5}%
+\contentsline {subsubsection}{\numberline {4.3.1.6}to\_u16\_from\_disp()}{11}{subsubsection.4.3.1.6}%
+\contentsline {subsection}{\numberline {4.3.2}Variable Documentation}{11}{subsection.4.3.2}%
+\contentsline {subsubsection}{\numberline {4.3.2.1}\_LEFT\_MATCHER}{11}{subsubsection.4.3.2.1}%
+\contentsline {subsubsection}{\numberline {4.3.2.2}\_RIGHT\_MATCHER}{11}{subsubsection.4.3.2.2}%
+\contentsline {subsubsection}{\numberline {4.3.2.3}\_WLS}{12}{subsubsection.4.3.2.3}%
+\contentsline {section}{\numberline {4.4}evaluate\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}calibration Namespace Reference}{12}{section.4.4}%
+\contentsline {subsection}{\numberline {4.4.1}Function Documentation}{12}{subsection.4.4.1}%
+\contentsline {subsubsection}{\numberline {4.4.1.1}as\_vec3()}{12}{subsubsection.4.4.1.1}%
+\contentsline {subsubsection}{\numberline {4.4.1.2}compute\_metrics\_for\_file()}{13}{subsubsection.4.4.1.2}%
+\contentsline {subsubsection}{\numberline {4.4.1.3}main()}{14}{subsubsection.4.4.1.3}%
+\contentsline {subsubsection}{\numberline {4.4.1.4}print\_per\_file\_table()}{14}{subsubsection.4.4.1.4}%
+\contentsline {subsubsection}{\numberline {4.4.1.5}print\_scenario\_table()}{15}{subsubsection.4.4.1.5}%
+\contentsline {subsubsection}{\numberline {4.4.1.6}rot\_angle\_deg()}{15}{subsubsection.4.4.1.6}%
+\contentsline {subsection}{\numberline {4.4.2}Variable Documentation}{16}{subsection.4.4.2}%
+\contentsline {subsubsection}{\numberline {4.4.2.1}CALIB\_FILES}{16}{subsubsection.4.4.2.1}%
+\contentsline {subsubsection}{\numberline {4.4.2.2}CALIB\_LFC\_DIR}{16}{subsubsection.4.4.2.2}%
+\contentsline {subsubsection}{\numberline {4.4.2.3}CAM\_IDS}{16}{subsubsection.4.4.2.3}%
+\contentsline {subsubsection}{\numberline {4.4.2.4}GT\_DIR}{16}{subsubsection.4.4.2.4}%
+\contentsline {subsubsection}{\numberline {4.4.2.5}GT\_FILES}{16}{subsubsection.4.4.2.5}%
+\contentsline {subsubsection}{\numberline {4.4.2.6}PROJECT\_ROOT}{17}{subsubsection.4.4.2.6}%
+\contentsline {subsubsection}{\numberline {4.4.2.7}RESULTS\_DIR}{17}{subsubsection.4.4.2.7}%
+\contentsline {subsubsection}{\numberline {4.4.2.8}SCENARIOS}{17}{subsubsection.4.4.2.8}%
+\contentsline {subsubsection}{\numberline {4.4.2.9}THIS\_DIR}{17}{subsubsection.4.4.2.9}%
+\contentsline {section}{\numberline {4.5}Health\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Monitor Namespace Reference}{17}{section.4.5}%
+\contentsline {subsection}{\numberline {4.5.1}Detailed Description}{18}{subsection.4.5.1}%
+\contentsline {subsection}{\numberline {4.5.2}Function Documentation}{18}{subsection.4.5.2}%
+\contentsline {subsubsection}{\numberline {4.5.2.1}clamp()}{18}{subsubsection.4.5.2.1}%
+\contentsline {subsubsection}{\numberline {4.5.2.2}compute\_initial\_health\_from\_state()}{19}{subsubsection.4.5.2.2}%
+\contentsline {subsubsection}{\numberline {4.5.2.3}compute\_lifcal\_health\_from\_combined\_dict()}{20}{subsubsection.4.5.2.3}%
+\contentsline {subsubsection}{\numberline {4.5.2.4}compute\_lifcal\_health\_from\_combined\_path()}{20}{subsubsection.4.5.2.4}%
+\contentsline {subsubsection}{\numberline {4.5.2.5}compute\_lifcal\_health\_from\_xy()}{21}{subsubsection.4.5.2.5}%
+\contentsline {subsubsection}{\numberline {4.5.2.6}parse\_lifcal\_protocol()}{22}{subsubsection.4.5.2.6}%
+\contentsline {subsubsection}{\numberline {4.5.2.7}safe\_float()}{22}{subsubsection.4.5.2.7}%
+\contentsline {subsubsection}{\numberline {4.5.2.8}score\_from\_errors()}{23}{subsubsection.4.5.2.8}%
+\contentsline {subsection}{\numberline {4.5.3}Variable Documentation}{23}{subsection.4.5.3}%
+\contentsline {subsubsection}{\numberline {4.5.3.1}R\_BEST}{23}{subsubsection.4.5.3.1}%
+\contentsline {subsubsection}{\numberline {4.5.3.2}R\_WORST}{23}{subsubsection.4.5.3.2}%
+\contentsline {subsubsection}{\numberline {4.5.3.3}S\_BEST}{23}{subsubsection.4.5.3.3}%
+\contentsline {subsubsection}{\numberline {4.5.3.4}S\_WORST}{23}{subsubsection.4.5.3.4}%
+\contentsline {section}{\numberline {4.6}Image\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Set Namespace Reference}{24}{section.4.6}%
+\contentsline {section}{\numberline {4.7}Initial\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Calibration Namespace Reference}{24}{section.4.7}%
+\contentsline {section}{\numberline {4.8}lifcal\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}to\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}json Namespace Reference}{24}{section.4.8}%
+\contentsline {subsection}{\numberline {4.8.1}Function Documentation}{24}{subsection.4.8.1}%
+\contentsline {subsubsection}{\numberline {4.8.1.1}build\_combined\_parameters\_json()}{24}{subsubsection.4.8.1.1}%
+\contentsline {subsubsection}{\numberline {4.8.1.2}export\_lifcal\_parameters\_json\_in\_place()}{25}{subsubsection.4.8.1.2}%
+\contentsline {subsubsection}{\numberline {4.8.1.3}parse\_extrinsics\_xml()}{27}{subsubsection.4.8.1.3}%
+\contentsline {subsubsection}{\numberline {4.8.1.4}parse\_protocol()}{27}{subsubsection.4.8.1.4}%
+\contentsline {section}{\numberline {4.9}Result\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Logger Namespace Reference}{28}{section.4.9}%
+\contentsline {section}{\numberline {4.10}run\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}imageset\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}creation Namespace Reference}{28}{section.4.10}%
+\contentsline {subsection}{\numberline {4.10.1}Function Documentation}{29}{subsection.4.10.1}%
+\contentsline {subsubsection}{\numberline {4.10.1.1}cleanup\_focus\_root()}{29}{subsubsection.4.10.1.1}%
+\contentsline {subsubsection}{\numberline {4.10.1.2}copy\_focus\_into\_camera\_folders()}{29}{subsubsection.4.10.1.2}%
+\contentsline {subsubsection}{\numberline {4.10.1.3}ensure\_camera\_subfolders()}{30}{subsubsection.4.10.1.3}%
+\contentsline {subsubsection}{\numberline {4.10.1.4}group\_focus\_images\_by\_pose()}{30}{subsubsection.4.10.1.4}%
+\contentsline {subsubsection}{\numberline {4.10.1.5}main()}{30}{subsubsection.4.10.1.5}%
+\contentsline {subsection}{\numberline {4.10.2}Variable Documentation}{31}{subsection.4.10.2}%
+\contentsline {subsubsection}{\numberline {4.10.2.1}CAMERA\_IDS}{31}{subsubsection.4.10.2.1}%
+\contentsline {subsubsection}{\numberline {4.10.2.2}CLEAN\_FOCUS\_ROOT\_AFTER}{31}{subsubsection.4.10.2.2}%
+\contentsline {subsubsection}{\numberline {4.10.2.3}DEPTH\_DIR}{31}{subsubsection.4.10.2.3}%
+\contentsline {subsubsection}{\numberline {4.10.2.4}FOCUS\_DIR}{31}{subsubsection.4.10.2.4}%
+\contentsline {subsubsection}{\numberline {4.10.2.5}PATTERN}{32}{subsubsection.4.10.2.5}%
+\contentsline {subsubsection}{\numberline {4.10.2.6}ROOT}{32}{subsubsection.4.10.2.6}%
+\contentsline {section}{\numberline {4.11}run\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}initial\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}calibration Namespace Reference}{32}{section.4.11}%
+\contentsline {subsection}{\numberline {4.11.1}Detailed Description}{32}{subsection.4.11.1}%
+\contentsline {subsection}{\numberline {4.11.2}Function Documentation}{33}{subsection.4.11.2}%
+\contentsline {subsubsection}{\numberline {4.11.2.1}main()}{33}{subsubsection.4.11.2.1}%
+\contentsline {subsubsection}{\numberline {4.11.2.2}parse\_args()}{34}{subsubsection.4.11.2.2}%
+\contentsline {subsection}{\numberline {4.11.3}Variable Documentation}{34}{subsection.4.11.3}%
+\contentsline {subsubsection}{\numberline {4.11.3.1}CAM\_IDS}{34}{subsubsection.4.11.3.1}%
+\contentsline {subsubsection}{\numberline {4.11.3.2}DEFAULT\_BASE\_DIR}{35}{subsubsection.4.11.3.2}%
+\contentsline {subsubsection}{\numberline {4.11.3.3}DEFAULT\_NUM\_POSES}{35}{subsubsection.4.11.3.3}%
+\contentsline {subsubsection}{\numberline {4.11.3.4}repoRoot}{35}{subsubsection.4.11.3.4}%
+\contentsline {section}{\numberline {4.12}run\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Li\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}FCal\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}calibration Namespace Reference}{35}{section.4.12}%
+\contentsline {subsection}{\numberline {4.12.1}Function Documentation}{36}{subsection.4.12.1}%
+\contentsline {subsubsection}{\numberline {4.12.1.1}copy\_essentials()}{36}{subsubsection.4.12.1.1}%
+\contentsline {subsubsection}{\numberline {4.12.1.2}find\_results\_folder()}{36}{subsubsection.4.12.1.2}%
+\contentsline {subsubsection}{\numberline {4.12.1.3}main()}{37}{subsubsection.4.12.1.3}%
+\contentsline {subsubsection}{\numberline {4.12.1.4}patch\_settings\_yaml()}{38}{subsubsection.4.12.1.4}%
+\contentsline {subsubsection}{\numberline {4.12.1.5}read\_text()}{38}{subsubsection.4.12.1.5}%
+\contentsline {subsubsection}{\numberline {4.12.1.6}replace\_yaml\_key\_line()}{39}{subsubsection.4.12.1.6}%
+\contentsline {subsubsection}{\numberline {4.12.1.7}run\_lifcal\_recalib()}{39}{subsubsection.4.12.1.7}%
+\contentsline {subsubsection}{\numberline {4.12.1.8}write\_text()}{40}{subsubsection.4.12.1.8}%
+\contentsline {subsection}{\numberline {4.12.2}Variable Documentation}{40}{subsection.4.12.2}%
+\contentsline {subsubsection}{\numberline {4.12.2.1}CAMERA\_IDS}{40}{subsubsection.4.12.2.1}%
+\contentsline {subsubsection}{\numberline {4.12.2.2}DEPTH\_ROOT}{41}{subsubsection.4.12.2.2}%
+\contentsline {subsubsection}{\numberline {4.12.2.3}FIXED\_PARAMS}{41}{subsubsection.4.12.2.3}%
+\contentsline {subsubsection}{\numberline {4.12.2.4}FOCUS\_ROOT}{41}{subsubsection.4.12.2.4}%
+\contentsline {subsubsection}{\numberline {4.12.2.5}LIFCAL\_BIN}{41}{subsubsection.4.12.2.5}%
+\contentsline {subsubsection}{\numberline {4.12.2.6}MLA\_CALIB\_XML}{41}{subsubsection.4.12.2.6}%
+\contentsline {subsubsection}{\numberline {4.12.2.7}OUT\_ROOT}{41}{subsubsection.4.12.2.7}%
+\contentsline {subsubsection}{\numberline {4.12.2.8}ROOT\_IMAGESET}{41}{subsubsection.4.12.2.8}%
+\contentsline {subsubsection}{\numberline {4.12.2.9}SETTINGS}{42}{subsubsection.4.12.2.9}%
+\contentsline {section}{\numberline {4.13}run\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}periodic\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}lifcal Namespace Reference}{42}{section.4.13}%
+\contentsline {subsection}{\numberline {4.13.1}Function Documentation}{42}{subsection.4.13.1}%
+\contentsline {subsubsection}{\numberline {4.13.1.1}acquire\_lock()}{42}{subsubsection.4.13.1.1}%
+\contentsline {subsubsection}{\numberline {4.13.1.2}combined\_json\_path()}{43}{subsubsection.4.13.1.2}%
+\contentsline {subsubsection}{\numberline {4.13.1.3}count\_images\_in\_dir()}{43}{subsubsection.4.13.1.3}%
+\contentsline {subsubsection}{\numberline {4.13.1.4}find\_latest\_run\_dir()}{44}{subsubsection.4.13.1.4}%
+\contentsline {subsubsection}{\numberline {4.13.1.5}main()}{44}{subsubsection.4.13.1.5}%
+\contentsline {subsubsection}{\numberline {4.13.1.6}needs\_imageset\_creation()}{45}{subsubsection.4.13.1.6}%
+\contentsline {subsubsection}{\numberline {4.13.1.7}release\_lock()}{45}{subsubsection.4.13.1.7}%
+\contentsline {subsubsection}{\numberline {4.13.1.8}run\_cmd()}{46}{subsubsection.4.13.1.8}%
+\contentsline {subsubsection}{\numberline {4.13.1.9}run\_cycle()}{46}{subsubsection.4.13.1.9}%
+\contentsline {subsubsection}{\numberline {4.13.1.10}setup\_logger()}{47}{subsubsection.4.13.1.10}%
+\contentsline {subsubsection}{\numberline {4.13.1.11}try\_log\_lifcal\_with\_resultlogger()}{47}{subsubsection.4.13.1.11}%
+\contentsline {subsection}{\numberline {4.13.2}Variable Documentation}{48}{subsection.4.13.2}%
+\contentsline {subsubsection}{\numberline {4.13.2.1}BASELINE\_DIR}{48}{subsubsection.4.13.2.1}%
+\contentsline {subsubsection}{\numberline {4.13.2.2}CAMERA\_IDS}{48}{subsubsection.4.13.2.2}%
+\contentsline {subsubsection}{\numberline {4.13.2.3}DEPTH\_ROOT}{48}{subsubsection.4.13.2.3}%
+\contentsline {subsubsection}{\numberline {4.13.2.4}FOCUS\_ROOT}{48}{subsubsection.4.13.2.4}%
+\contentsline {subsubsection}{\numberline {4.13.2.5}INTERVAL\_SECONDS}{49}{subsubsection.4.13.2.5}%
+\contentsline {subsubsection}{\numberline {4.13.2.6}LIFCAL\_OUT\_ROOT}{49}{subsubsection.4.13.2.6}%
+\contentsline {subsubsection}{\numberline {4.13.2.7}LOCK\_PATH}{49}{subsubsection.4.13.2.7}%
+\contentsline {subsubsection}{\numberline {4.13.2.8}LOG\_PATH}{49}{subsubsection.4.13.2.8}%
+\contentsline {subsubsection}{\numberline {4.13.2.9}MIN\_POSES\_PER\_CAM}{49}{subsubsection.4.13.2.9}%
+\contentsline {subsubsection}{\numberline {4.13.2.10}ROOT\_IMAGESET}{49}{subsubsection.4.13.2.10}%
+\contentsline {subsubsection}{\numberline {4.13.2.11}RUN\_IMAGESET\_CREATION}{49}{subsubsection.4.13.2.11}%
+\contentsline {subsubsection}{\numberline {4.13.2.12}RUN\_LIFCAL\_CALIB}{49}{subsubsection.4.13.2.12}%
+\contentsline {chapter}{\numberline {5}Class Documentation}{51}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Calibration\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}State.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Calibration\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}State Class Reference}{51}{section.5.1}%
+\contentsline {subsection}{\numberline {5.1.1}Detailed Description}{51}{subsection.5.1.1}%
+\contentsline {subsection}{\numberline {5.1.2}Constructor \& Destructor Documentation}{52}{subsection.5.1.2}%
+\contentsline {subsubsection}{\numberline {5.1.2.1}\_\_init\_\_()}{52}{subsubsection.5.1.2.1}%
+\contentsline {subsection}{\numberline {5.1.3}Member Function Documentation}{52}{subsection.5.1.3}%
+\contentsline {subsubsection}{\numberline {5.1.3.1}\_\_getState\_\_()}{52}{subsubsection.5.1.3.1}%
+\contentsline {subsubsection}{\numberline {5.1.3.2}setExtrinsics()}{52}{subsubsection.5.1.3.2}%
+\contentsline {subsubsection}{\numberline {5.1.3.3}setIntrinsics()}{53}{subsubsection.5.1.3.3}%
+\contentsline {subsubsection}{\numberline {5.1.3.4}setTimeStamp()}{53}{subsubsection.5.1.3.4}%
+\contentsline {subsection}{\numberline {5.1.4}Member Data Documentation}{54}{subsection.5.1.4}%
+\contentsline {subsubsection}{\numberline {5.1.4.1}extrinsics}{54}{subsubsection.5.1.4.1}%
+\contentsline {subsubsection}{\numberline {5.1.4.2}intrinsics}{54}{subsubsection.5.1.4.2}%
+\contentsline {subsubsection}{\numberline {5.1.4.3}timeStamp}{54}{subsubsection.5.1.4.3}%
+\contentsline {section}{\numberline {5.2}Controller.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Controller Class Reference}{54}{section.5.2}%
+\contentsline {subsection}{\numberline {5.2.1}Detailed Description}{55}{subsection.5.2.1}%
+\contentsline {subsection}{\numberline {5.2.2}Constructor \& Destructor Documentation}{55}{subsection.5.2.2}%
+\contentsline {subsubsection}{\numberline {5.2.2.1}\_\_init\_\_()}{55}{subsubsection.5.2.2.1}%
+\contentsline {subsection}{\numberline {5.2.3}Member Function Documentation}{55}{subsection.5.2.3}%
+\contentsline {subsubsection}{\numberline {5.2.3.1}runInitialCalibration()}{55}{subsubsection.5.2.3.1}%
+\contentsline {subsubsection}{\numberline {5.2.3.2}selfHealthCheck()}{56}{subsubsection.5.2.3.2}%
+\contentsline {subsection}{\numberline {5.2.4}Member Data Documentation}{56}{subsection.5.2.4}%
+\contentsline {subsubsection}{\numberline {5.2.4.1}bundleAdjust}{56}{subsubsection.5.2.4.1}%
+\contentsline {subsubsection}{\numberline {5.2.4.2}currentState}{57}{subsubsection.5.2.4.2}%
+\contentsline {subsubsection}{\numberline {5.2.4.3}initialCalibration}{57}{subsubsection.5.2.4.3}%
+\contentsline {subsubsection}{\numberline {5.2.4.4}resultLogger}{57}{subsubsection.5.2.4.4}%
+\contentsline {subsubsection}{\numberline {5.2.4.5}scoreHistory}{57}{subsubsection.5.2.4.5}%
+\contentsline {section}{\numberline {5.3}Image\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Set.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Image\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Set Class Reference}{57}{section.5.3}%
+\contentsline {subsection}{\numberline {5.3.1}Detailed Description}{57}{subsection.5.3.1}%
+\contentsline {subsection}{\numberline {5.3.2}Constructor \& Destructor Documentation}{58}{subsection.5.3.2}%
+\contentsline {subsubsection}{\numberline {5.3.2.1}\_\_init\_\_()}{58}{subsubsection.5.3.2.1}%
+\contentsline {subsection}{\numberline {5.3.3}Member Function Documentation}{58}{subsection.5.3.3}%
+\contentsline {subsubsection}{\numberline {5.3.3.1}getImagePath()}{58}{subsubsection.5.3.3.1}%
+\contentsline {subsection}{\numberline {5.3.4}Member Data Documentation}{59}{subsection.5.3.4}%
+\contentsline {subsubsection}{\numberline {5.3.4.1}baseDir}{59}{subsubsection.5.3.4.1}%
+\contentsline {subsubsection}{\numberline {5.3.4.2}cameraIds}{59}{subsubsection.5.3.4.2}%
+\contentsline {subsubsection}{\numberline {5.3.4.3}numPoses}{59}{subsubsection.5.3.4.3}%
+\contentsline {section}{\numberline {5.4}Initial\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Calibration.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Initial\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Calibration Class Reference}{59}{section.5.4}%
+\contentsline {subsection}{\numberline {5.4.1}Detailed Description}{59}{subsection.5.4.1}%
+\contentsline {subsection}{\numberline {5.4.2}Constructor \& Destructor Documentation}{60}{subsection.5.4.2}%
+\contentsline {subsubsection}{\numberline {5.4.2.1}\_\_init\_\_()}{60}{subsubsection.5.4.2.1}%
+\contentsline {subsection}{\numberline {5.4.3}Member Function Documentation}{60}{subsection.5.4.3}%
+\contentsline {subsubsection}{\numberline {5.4.3.1}bundleAdjustExtrinsics()}{60}{subsubsection.5.4.3.1}%
+\contentsline {subsubsection}{\numberline {5.4.3.2}calibrateExtrinsics()}{63}{subsubsection.5.4.3.2}%
+\contentsline {subsubsection}{\numberline {5.4.3.3}calibrateIntrinsics()}{64}{subsubsection.5.4.3.3}%
+\contentsline {subsubsection}{\numberline {5.4.3.4}createObjectPoints()}{65}{subsubsection.5.4.3.4}%
+\contentsline {subsubsection}{\numberline {5.4.3.5}detectCorners()}{66}{subsubsection.5.4.3.5}%
+\contentsline {subsubsection}{\numberline {5.4.3.6}run()}{66}{subsubsection.5.4.3.6}%
+\contentsline {subsection}{\numberline {5.4.4}Member Data Documentation}{67}{subsection.5.4.4}%
+\contentsline {subsubsection}{\numberline {5.4.4.1}chessboardSize}{67}{subsubsection.5.4.4.1}%
+\contentsline {subsubsection}{\numberline {5.4.4.2}criteria}{67}{subsubsection.5.4.4.2}%
+\contentsline {subsubsection}{\numberline {5.4.4.3}squareSize}{67}{subsubsection.5.4.4.3}%
+\contentsline {section}{\numberline {5.5}Result\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Logger.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Result\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Logger Class Reference}{67}{section.5.5}%
+\contentsline {subsection}{\numberline {5.5.1}Detailed Description}{67}{subsection.5.5.1}%
+\contentsline {subsection}{\numberline {5.5.2}Constructor \& Destructor Documentation}{68}{subsection.5.5.2}%
+\contentsline {subsubsection}{\numberline {5.5.2.1}\_\_init\_\_()}{68}{subsubsection.5.5.2.1}%
+\contentsline {subsection}{\numberline {5.5.3}Member Function Documentation}{68}{subsection.5.5.3}%
+\contentsline {subsubsection}{\numberline {5.5.3.1}logInitialCalibration()}{68}{subsubsection.5.5.3.1}%
+\contentsline {subsubsection}{\numberline {5.5.3.2}logRecalibration()}{69}{subsubsection.5.5.3.2}%
+\contentsline {subsubsection}{\numberline {5.5.3.3}read\_baseline\_health()}{70}{subsubsection.5.5.3.3}%
+\contentsline {subsubsection}{\numberline {5.5.3.4}to\_serializable()}{71}{subsubsection.5.5.3.4}%
+\contentsline {subsubsection}{\numberline {5.5.3.5}update\_baseline()}{71}{subsubsection.5.5.3.5}%
+\contentsline {subsection}{\numberline {5.5.4}Member Data Documentation}{72}{subsection.5.5.4}%
+\contentsline {subsubsection}{\numberline {5.5.4.1}baseDir}{72}{subsubsection.5.5.4.1}%
+\contentsline {subsubsection}{\numberline {5.5.4.2}logger}{72}{subsubsection.5.5.4.2}%
+\contentsline {chapter}{\numberline {6}File Documentation}{73}{chapter.6}%
+\contentsline {section}{\numberline {6.1}calibration\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}LFC/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Calibration\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}State.py File Reference}{73}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Calibration\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}State.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}py}{73}{section.6.2}%
+\contentsline {section}{\numberline {6.3}calibration\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}LFC/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Controller.py File Reference}{74}{section.6.3}%
+\contentsline {section}{\numberline {6.4}Controller.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}py}{74}{section.6.4}%
+\contentsline {section}{\numberline {6.5}calibration\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}LFC/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Health\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Monitor.py File Reference}{75}{section.6.5}%
+\contentsline {section}{\numberline {6.6}Health\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Monitor.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}py}{76}{section.6.6}%
+\contentsline {section}{\numberline {6.7}calibration\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}LFC/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Image\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Set.py File Reference}{79}{section.6.7}%
+\contentsline {section}{\numberline {6.8}Image\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Set.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}py}{80}{section.6.8}%
+\contentsline {section}{\numberline {6.9}calibration\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}LFC/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Initial\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Calibration.py File Reference}{80}{section.6.9}%
+\contentsline {section}{\numberline {6.10}Initial\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Calibration.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}py}{80}{section.6.10}%
+\contentsline {section}{\numberline {6.11}calibration\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}LFC/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Result\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Logger.py File Reference}{85}{section.6.11}%
+\contentsline {section}{\numberline {6.12}Result\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Logger.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}py}{86}{section.6.12}%
+\contentsline {section}{\numberline {6.13}calibration\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}LFC/results/evaluate\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}calibration.py File Reference}{89}{section.6.13}%
+\contentsline {section}{\numberline {6.14}evaluate\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}calibration.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}py}{89}{section.6.14}%
+\contentsline {section}{\numberline {6.15}calibration\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}LFC/run\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}initial\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}calibration.py File Reference}{92}{section.6.15}%
+\contentsline {section}{\numberline {6.16}run\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}initial\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}calibration.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}py}{93}{section.6.16}%
+\contentsline {section}{\numberline {6.17}calibration\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}LFC/run\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}periodic\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}lifcal.py File Reference}{94}{section.6.17}%
+\contentsline {section}{\numberline {6.18}run\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}periodic\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}lifcal.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}py}{95}{section.6.18}%
+\contentsline {section}{\numberline {6.19}external/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Li\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}FCal/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Li\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}FCal\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Data/depthmap.py File Reference}{99}{section.6.19}%
+\contentsline {section}{\numberline {6.20}depthmap.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}py}{99}{section.6.20}%
+\contentsline {section}{\numberline {6.21}external/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Li\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}FCal/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Li\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}FCal\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Data/lifcal\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}to\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}json.py File Reference}{102}{section.6.21}%
+\contentsline {section}{\numberline {6.22}lifcal\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}to\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}json.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}py}{102}{section.6.22}%
+\contentsline {section}{\numberline {6.23}external/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Li\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}FCal/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Li\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}FCal\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Data/run\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}imageset\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}creation.py File Reference}{105}{section.6.23}%
+\contentsline {section}{\numberline {6.24}run\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}imageset\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}creation.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}py}{106}{section.6.24}%
+\contentsline {section}{\numberline {6.25}external/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Li\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}FCal/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Li\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}FCal\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Data/run\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Li\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}FCal\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}calibration.py File Reference}{107}{section.6.25}%
+\contentsline {section}{\numberline {6.26}run\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Li\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}FCal\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}calibration.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}py}{108}{section.6.26}%

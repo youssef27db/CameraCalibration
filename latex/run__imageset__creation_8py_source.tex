@@ -1,0 +1,128 @@
+\doxysection{run\+\_\+imageset\+\_\+creation.\+py}
+\hypertarget{run__imageset__creation_8py_source}{}\label{run__imageset__creation_8py_source}\index{external/LiFCal/LiFCal\_Data/run\_imageset\_creation.py@{external/LiFCal/LiFCal\_Data/run\_imageset\_creation.py}}
+\mbox{\hyperlink{run__imageset__creation_8py}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00001}\mbox{\hyperlink{namespacerun__imageset__creation}{00001}}\ \textcolor{keyword}{import}\ os}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00002}00002\ \textcolor{keyword}{import}\ re}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00003}00003\ \textcolor{keyword}{import}\ shutil}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00004}00004\ \textcolor{keyword}{from}\ collections\ \textcolor{keyword}{import}\ defaultdict}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00005}00005\ \textcolor{keyword}{import}\ depthmap}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00006}00006\ }
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00007}00007\ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00008}00008\ \textcolor{stringliteral}{@brief\ Organizes\ focus\ images\ by\ camera\ and\ generates\ depth\ maps\ for\ LiFCal\ recalibration.}}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00009}00009\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00010}00010\ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00012}\mbox{\hyperlink{namespacerun__imageset__creation_ad9cfaf894ce7f8e9f742aa0f7473eaeb}{00012}}\ ROOT\ =\ \textcolor{stringliteral}{"{}/data/external/LiFCal/LiFCal\_Data/Recalibration/LiFCal\_Imageset"{}}}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00013}\mbox{\hyperlink{namespacerun__imageset__creation_afa2f587b34c6210120c63dd47cc0be0a}{00013}}\ FOCUS\_DIR\ =\ os.path.join(ROOT,\ \textcolor{stringliteral}{"{}focus"{}})}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00014}\mbox{\hyperlink{namespacerun__imageset__creation_a321ec7e2b7950352a40a69da74c70e33}{00014}}\ DEPTH\_DIR\ =\ os.path.join(ROOT,\ \textcolor{stringliteral}{"{}depth"{}})}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00016}00016\ \textcolor{comment}{\#\ If\ True:\ original\ files\ in\ focus\ root\ directory\ are\ deleted\ after\ sorting}}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00017}\mbox{\hyperlink{namespacerun__imageset__creation_a8686652a61daad1a25d67544feb89753}{00017}}\ CLEAN\_FOCUS\_ROOT\_AFTER\ =\ \textcolor{keyword}{True}}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00019}\mbox{\hyperlink{namespacerun__imageset__creation_a6cd93497dfea9f25e924ae249e93f577}{00019}}\ CAMERA\_IDS\ =\ [}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00020}00020\ \ \ \ \ \textcolor{stringliteral}{"{}Center"{}},\ \textcolor{stringliteral}{"{}Up1"{}},\ \textcolor{stringliteral}{"{}Up2"{}},\ \textcolor{stringliteral}{"{}Up3"{}},}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00021}00021\ \ \ \ \ \textcolor{stringliteral}{"{}Down1"{}},\ \textcolor{stringliteral}{"{}Down2"{}},\ \textcolor{stringliteral}{"{}Down3"{}},}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00022}00022\ \ \ \ \ \textcolor{stringliteral}{"{}Left1"{}},\ \textcolor{stringliteral}{"{}Left2"{}},\ \textcolor{stringliteral}{"{}Left3"{}},}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00023}00023\ \ \ \ \ \textcolor{stringliteral}{"{}Right1"{}},\ \textcolor{stringliteral}{"{}Right2"{}},\ \textcolor{stringliteral}{"{}Right3"{}}}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00024}00024\ ]}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00025}00025\ }
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00026}00026\ \textcolor{comment}{\#\ Expected\ filenames:\ pose000\_Center.png\ ...\ pose000\_Down3.png}}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00027}\mbox{\hyperlink{namespacerun__imageset__creation_a2c4520cf580e508c21cee543b1bdee67}{00027}}\ PATTERN\ =\ re.compile(}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00028}00028\ \ \ \ \ \textcolor{stringliteral}{r"{}\string^(pose\(\backslash\)d+)\_(Center|Up[123]|Down[123]|Left[123]|Right[123])\(\backslash\).(png|jpg|jpeg)\$"{}},}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00029}00029\ \ \ \ \ re.IGNORECASE}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00030}00030\ )}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00032}\mbox{\hyperlink{namespacerun__imageset__creation_af234e2dfbd9b72b2a7a394a2273eea58}{00032}}\ \textcolor{keyword}{def\ }\mbox{\hyperlink{namespacerun__imageset__creation_af234e2dfbd9b72b2a7a394a2273eea58}{ensure\_camera\_subfolders}}(base\_dir:\ str):}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00033}00033\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00034}00034\ \textcolor{stringliteral}{\ \ \ \ @brief\ Create\ subdirectory\ for\ each\ camera\ ID\ under\ base\_dir.}}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00035}00035\ \textcolor{stringliteral}{\ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00036}00036\ \textcolor{stringliteral}{\ \ \ \ @param\ base\_dir\ Base\ directory\ path}}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00037}00037\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00038}00038\ \ \ \ \ os.makedirs(base\_dir,\ exist\_ok=\textcolor{keyword}{True})}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00039}00039\ \ \ \ \ \textcolor{keywordflow}{for}\ cid\ \textcolor{keywordflow}{in}\ CAMERA\_IDS:}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00040}00040\ \ \ \ \ \ \ \ \ os.makedirs(os.path.join(base\_dir,\ cid),\ exist\_ok=\textcolor{keyword}{True})}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00042}\mbox{\hyperlink{namespacerun__imageset__creation_a66f27e20b2da2e0abd88f4de6aebe582}{00042}}\ \textcolor{keyword}{def\ }\mbox{\hyperlink{namespacerun__imageset__creation_a66f27e20b2da2e0abd88f4de6aebe582}{group\_focus\_images\_by\_pose}}():}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00043}00043\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00044}00044\ \textcolor{stringliteral}{\ \ \ \ @brief\ Group\ focus\ images\ by\ pose\ ID\ from\ flat\ directory\ structure.}}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00045}00045\ \textcolor{stringliteral}{\ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00046}00046\ \textcolor{stringliteral}{\ \ \ \ @return\ Dictionary\ mapping\ pose\ IDs\ to\ camera-\/path\ dictionaries}}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00047}00047\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00048}00048\ \ \ \ \ pose\_to\_cam\ =\ defaultdict(dict)}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00049}00049\ \ \ \ \ \textcolor{keywordflow}{for}\ fn\ \textcolor{keywordflow}{in}\ sorted(os.listdir(FOCUS\_DIR)):}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00050}00050\ \ \ \ \ \ \ \ \ m\ =\ PATTERN.match(fn)}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00051}00051\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ m:}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00052}00052\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue}}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00053}00053\ \ \ \ \ \ \ \ \ pose,\ cam,\ ext\ =\ m.group(1),\ m.group(2),\ m.group(3)}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00054}00054\ \ \ \ \ \ \ \ \ pose\_to\_cam[pose][cam]\ =\ os.path.join(FOCUS\_DIR,\ fn)}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00055}00055\ \ \ \ \ \textcolor{keywordflow}{return}\ pose\_to\_cam}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00056}00056\ }
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00057}\mbox{\hyperlink{namespacerun__imageset__creation_a6764abf2d8c93d56d6c7807471becb22}{00057}}\ \textcolor{keyword}{def\ }\mbox{\hyperlink{namespacerun__imageset__creation_a6764abf2d8c93d56d6c7807471becb22}{copy\_focus\_into\_camera\_folders}}(pose:\ str,\ cam\_to\_path:\ dict):}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00058}00058\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00059}00059\ \textcolor{stringliteral}{\ \ \ \ @brief\ Copy\ focus\ images\ into\ camera-\/specific\ subdirectories.}}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00060}00060\ \textcolor{stringliteral}{\ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00061}00061\ \textcolor{stringliteral}{\ \ \ \ @param\ pose\ Pose\ identifier\ string\ (e.g.,\ "{}pose000"{})}}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00062}00062\ \textcolor{stringliteral}{\ \ \ \ @param\ cam\_to\_path\ Dictionary\ mapping\ camera\ IDs\ to\ source\ image\ paths}}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00063}00063\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00064}00064\ \ \ \ \ \textcolor{keywordflow}{for}\ cam,\ src\ \textcolor{keywordflow}{in}\ cam\_to\_path.items():}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00065}00065\ \ \ \ \ \ \ \ \ ext\ =\ os.path.splitext(src)[1].lower()}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00066}00066\ \ \ \ \ \ \ \ \ dst\ =\ os.path.join(FOCUS\_DIR,\ cam,\ f\textcolor{stringliteral}{"{}\{pose\}\_\{cam\}\{ext\}"{}})}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00067}00067\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ os.path.abspath(src)\ !=\ os.path.abspath(dst):}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00068}00068\ \ \ \ \ \ \ \ \ \ \ \ \ shutil.copy2(src,\ dst)}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00069}00069\ }
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00070}\mbox{\hyperlink{namespacerun__imageset__creation_a3aa87987b55f2ed7d71232f981178402}{00070}}\ \textcolor{keyword}{def\ }\mbox{\hyperlink{namespacerun__imageset__creation_a3aa87987b55f2ed7d71232f981178402}{cleanup\_focus\_root}}():}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00071}00071\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00072}00072\ \textcolor{stringliteral}{\ \ \ \ @brief\ Delete\ only\ loose\ files\ directly\ in\ focus/\ (not\ in\ subdirectories).}}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00073}00073\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00074}00074\ \ \ \ \ \textcolor{keywordflow}{for}\ fn\ \textcolor{keywordflow}{in}\ os.listdir(FOCUS\_DIR):}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00075}00075\ \ \ \ \ \ \ \ \ p\ =\ os.path.join(FOCUS\_DIR,\ fn)}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00076}00076\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ os.path.isfile(p)\ \textcolor{keywordflow}{and}\ PATTERN.match(fn):}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00077}00077\ \ \ \ \ \ \ \ \ \ \ \ \ os.remove(p)}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00078}00078\ }
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00079}\mbox{\hyperlink{namespacerun__imageset__creation_a7fb855fdc6d584df5499b73c31c2ed35}{00079}}\ \textcolor{keyword}{def\ }\mbox{\hyperlink{namespacerun__imageset__creation_a7fb855fdc6d584df5499b73c31c2ed35}{main}}():}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00080}00080\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00081}00081\ \textcolor{stringliteral}{\ \ \ \ @brief\ Main\ pipeline:\ organize\ focus\ images\ and\ generate\ depth\ maps.}}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00082}00082\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00083}00083\ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ os.path.isdir(FOCUS\_DIR):}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00084}00084\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{raise}\ SystemExit(f\textcolor{stringliteral}{"{}focus\ folder\ not\ found:\ \{FOCUS\_DIR\}"{}})}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00085}00085\ }
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00086}00086\ \ \ \ \ \mbox{\hyperlink{namespacerun__imageset__creation_af234e2dfbd9b72b2a7a394a2273eea58}{ensure\_camera\_subfolders}}(FOCUS\_DIR)}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00087}00087\ \ \ \ \ \mbox{\hyperlink{namespacerun__imageset__creation_af234e2dfbd9b72b2a7a394a2273eea58}{ensure\_camera\_subfolders}}(DEPTH\_DIR)}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00088}00088\ }
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00089}00089\ \ \ \ \ pose\_to\_cam\ =\ \mbox{\hyperlink{namespacerun__imageset__creation_a66f27e20b2da2e0abd88f4de6aebe582}{group\_focus\_images\_by\_pose}}()}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00090}00090\ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ pose\_to\_cam:}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00091}00091\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{raise}\ SystemExit(\textcolor{stringliteral}{"{}No\ focus\ images\ found.\ Expected:\ pose000\_Center.png\ etc."{}})}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00092}00092\ }
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00093}00093\ \ \ \ \ poses\ =\ sorted(pose\_to\_cam.keys())}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00094}00094\ \ \ \ \ print(\textcolor{stringliteral}{"{}Found\ poses:"{}},\ len(poses))}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00095}00095\ }
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00096}00096\ \ \ \ \ \textcolor{keywordflow}{for}\ i,\ pose\ \textcolor{keywordflow}{in}\ enumerate(poses,\ start=1):}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00097}00097\ \ \ \ \ \ \ \ \ cam\_to\_focus\_path\ =\ pose\_to\_cam[pose]}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00098}00098\ }
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00099}00099\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Sort\ focus\ images\ into\ camera\ folders}}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00100}00100\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacerun__imageset__creation_a6764abf2d8c93d56d6c7807471becb22}{copy\_focus\_into\_camera\_folders}}(pose,\ cam\_to\_focus\_path)}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00101}00101\ }
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00102}00102\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Generate\ depth\ maps\ for\ this\ pose}}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00103}00103\ \ \ \ \ \ \ \ \ depthmaps\ =\ \mbox{\hyperlink{namespacedepthmap_a5e95b42c1c2c9b2ed81d37ca32f09530}{depthmap.generate\_depthmaps\_for\_pose}}(cam\_to\_focus\_path)}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00104}00104\ }
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00105}00105\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Save\ depth\ maps:\ depth/<CamId>/<pose>\_<CamId>\_depth.png}}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00106}00106\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ cam,\ depth\_u16\ \textcolor{keywordflow}{in}\ depthmaps.items():}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00107}00107\ \ \ \ \ \ \ \ \ \ \ \ \ out\_path\ =\ os.path.join(DEPTH\_DIR,\ cam,\ f\textcolor{stringliteral}{"{}\{pose\}\_\{cam\}\_depth.png"{}})}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00108}00108\ \ \ \ \ \ \ \ \ \ \ \ \ ok\ =\ \mbox{\hyperlink{namespacedepthmap_a4cfab791bc6b43425d0d6daddde9dbd5}{depthmap.imwrite\_u16}}(out\_path,\ depth\_u16)}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00109}00109\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ ok:}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00110}00110\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}FAILED\ write:"{}},\ out\_path)}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00111}00111\ }
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00112}00112\ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}[\{i\}/\{len(poses)\}]\ \{pose\}:\ views=\{len(cam\_to\_focus\_path)\}\ depthmaps=\{len(depthmaps)\}"{}})}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00113}00113\ }
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00114}00114\ \ \ \ \ \textcolor{keywordflow}{if}\ CLEAN\_FOCUS\_ROOT\_AFTER:}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00115}00115\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacerun__imageset__creation_a3aa87987b55f2ed7d71232f981178402}{cleanup\_focus\_root}}()}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00116}00116\ }
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00117}00117\ \ \ \ \ print(\textcolor{stringliteral}{"{}DONE."{}})}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00118}00118\ \ \ \ \ print(\textcolor{stringliteral}{"{}Focus\ by\ camera:"{}},\ FOCUS\_DIR)}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00119}00119\ \ \ \ \ print(\textcolor{stringliteral}{"{}Depth\ by\ camera:"{}},\ DEPTH\_DIR)}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00120}00120\ }
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00121}00121\ \textcolor{keywordflow}{if}\ \_\_name\_\_\ ==\ \textcolor{stringliteral}{"{}\_\_main\_\_"{}}:}
+\DoxyCodeLine{\Hypertarget{run__imageset__creation_8py_source_l00122}00122\ \ \ \ \ \mbox{\hyperlink{namespacerun__imageset__creation_a7fb855fdc6d584df5499b73c31c2ed35}{main}}()}
+
+\end{DoxyCode}

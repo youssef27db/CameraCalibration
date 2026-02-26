@@ -1,0 +1,1370 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.12.24)  27 FEB 2026 00:55
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**./refman.tex
+(refman.tex
+LaTeX2e <2025-11-01>
+L3 programming layer <2025-11-06>
+(C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/generic/iftex\iftex.sty
+Package: iftex 2024/12/12 v1.0g TeX engine tests
+)
+(C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/base\book.cls
+Document Class: book 2025/01/22 v1.4n Standard LaTeX document class
+(C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/base\bk10.clo
+File: bk10.clo 2025/01/22 v1.4n Standard LaTeX file (size option)
+)
+\c@part=\count275
+\c@chapter=\count276
+\c@section=\count277
+\c@subsection=\count278
+\c@subsubsection=\count279
+\c@paragraph=\count280
+\c@subparagraph=\count281
+\c@figure=\count282
+\c@table=\count283
+\abovecaptionskip=\skip49
+\belowcaptionskip=\skip50
+\bibindent=\dimen148
+)
+(C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/base\ifthen.sty
+Package: ifthen 2024/03/16 v1.1e Standard LaTeX ifthen package (DPC)
+)
+(C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/tools\array.sty
+Rollback for package 'array' requested -> date 2016-10-06.
+         Best approximation is the release introduced on 2016-10-06.
+
+(C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/tools\array-2016-10-0
+6.sty
+Package: array 2016/10/06 v2.4d Tabular extension package (FMi)
+\col@sep=\dimen149
+\extrarowheight=\dimen150
+\NC@list=\toks17
+\extratabsurround=\skip51
+\backup@length=\skip52
+))
+(C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/generic/infwarerr\infwarerr
+.sty
+package info suppressed
+) (doxygen.sty
+Package: doxygen 
+
+(C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/base\alltt.sty
+Package: alltt 2024/07/07 v2.0g defines alltt environment
+)
+(C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/tools\calc.sty
+Package: calc 2025/03/01 v4.3b Infix arithmetic (KKT,FJ)
+\calc@Acount=\count284
+\calc@Bcount=\count285
+\calc@Adimen=\dimen151
+\calc@Bdimen=\dimen152
+\calc@Askip=\skip53
+\calc@Bskip=\skip54
+LaTeX Info: Redefining \setlength on input line 86.
+LaTeX Info: Redefining \addtolength on input line 87.
+\calc@Ccount=\count286
+\calc@Cskip=\skip55
+)
+(C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/float\float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count287
+\float@exts=\toks18
+\float@box=\box53
+\@float@everytoks=\toks19
+\@floatcapt=\box54
+)
+(C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/tools\verbatim.sty
+Package: verbatim 2024-01-22 v1.5x LaTeX2e package for verbatim enhancements
+\every@verbatim=\toks20
+\verbatim@line=\toks21
+\verbatim@in@stream=\read2
+)
+(C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/xcolor\xcolor.sty
+Package: xcolor 2024/09/29 v3.02 LaTeX color extensions (UK)
+
+(C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\color.cf
+g
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package xcolor Info: Driver file: pdftex.def on input line 274.
+
+(C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/graphics-def\pdftex.d
+ef
+File: pdftex.def 2025/09/29 v1.2d Graphics/color driver for pdftex
+)
+(C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/graphics\mathcolor.lt
+x)
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1349.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1353.
+Package xcolor Info: Model `RGB' extended on input line 1365.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1367.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1368.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1369.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1370.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1371.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1372.
+)
+(C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/colortbl\colortbl.sty
+Package: colortbl 2024/10/29 v1.0k Color table columns (DPC)
+\everycr=\toks22
+\minrowclearance=\skip56
+\rownum=\count288
+) (longtable_doxygen.sty
+Package: longtable_doxygen 2014/10/28 v4.11 Multi-page Table package (DPC) - fr
+ozen version for doxygen
+\LTleft=\skip57
+\LTright=\skip58
+\LTpre=\skip59
+\LTpost=\skip60
+\LTchunksize=\count289
+\LTcapwidth=\dimen153
+\LT@head=\box55
+\LT@firsthead=\box56
+\LT@foot=\box57
+\LT@lastfoot=\box58
+\LT@cols=\count290
+\LT@rows=\count291
+\c@LT@tables=\count292
+\c@LT@chunks=\count293
+\LT@p@ftn=\toks23
+) (tabu_doxygen.sty
+Package: tabu_doxygen 2011/02/26 v2.8 - flexible LaTeX tabulars (FC), frozen ve
+rsion for doxygen
+
+(C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/varwidth\varwidth.sty
+Package: varwidth 2009/03/30 ver 0.92;  Variable-width minipages
+\@vwid@box=\box59
+\sift@deathcycles=\count294
+\@vwid@loff=\dimen154
+\@vwid@roff=\dimen155
+)
+==> First Aid for varwidth.sty applied!
+\c@taburow=\count295
+\tabu@nbcols=\count296
+\tabu@cnt=\count297
+\tabu@Xcol=\count298
+\tabu@alloc=\count299
+\tabu@nested=\count300
+\tabu@target=\dimen156
+\tabu@spreadtarget=\dimen157
+\tabu@naturalX=\dimen158
+\tabucolX=\dimen159
+\tabu@Xsum=\dimen160
+\extrarowdepth=\dimen161
+\abovetabulinesep=\dimen162
+\belowtabulinesep=\dimen163
+\tabustrutrule=\dimen164
+\tabu@thebody=\toks24
+\tabu@footnotes=\toks25
+\tabu@box=\box60
+\tabu@arstrutbox=\box61
+\tabu@hleads=\box62
+\tabu@vleads=\box63
+\tabu@cellskip=\skip61
+)
+(C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/fancyvrb\fancyvrb.sty
+Package: fancyvrb 2025/07/28 4.6 verbatim text (tvz,hv)
+(C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/graphics\keyval.sty
+Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
+\KV@toks@=\toks26
+)
+\FV@CodeLineNo=\count301
+\FV@InFile=\read3
+\FV@TabBox=\box64
+\c@FancyVerbLine=\count302
+\FV@StepNumber=\count303
+\FV@OutFile=\write3
+) (C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/tools\tabularx.sty
+Package: tabularx 2023/12/11 v2.12a `tabularx' package (DPC)
+\TX@col@width=\dimen165
+\TX@old@table=\dimen166
+\TX@old@col=\dimen167
+\TX@target=\dimen168
+\TX@delta=\dimen169
+\TX@cols=\count304
+\TX@ftn=\toks27
+)
+(C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/tools\multicol.sty
+Package: multicol 2025/10/21 v2.0b multicolumn formatting (FMi)
+\c@tracingmulticols=\count305
+\mult@box=\box65
+\multicol@leftmargin=\dimen170
+\c@unbalance=\count306
+\c@collectmore=\count307
+\doublecol@number=\count308
+\multicoltolerance=\count309
+\multicolpretolerance=\count310
+\full@width=\dimen171
+\page@free=\dimen172
+\premulticols=\dimen173
+\postmulticols=\dimen174
+\multicolsep=\skip62
+\multicolbaselineskip=\skip63
+\partial@page=\box66
+\last@line=\box67
+\mc@boxedresult=\box68
+\maxbalancingoverflow=\dimen175
+\mult@rightbox=\box69
+\mult@grightbox=\box70
+\mult@firstbox=\box71
+\mult@gfirstbox=\box72
+\@tempa=\box73
+\@tempa=\box74
+\@tempa=\box75
+\@tempa=\box76
+\@tempa=\box77
+\@tempa=\box78
+\@tempa=\box79
+\@tempa=\box80
+\@tempa=\box81
+\@tempa=\box82
+\@tempa=\box83
+\@tempa=\box84
+\@tempa=\box85
+\@tempa=\box86
+\@tempa=\box87
+\@tempa=\box88
+\@tempa=\box89
+\@tempa=\box90
+\@tempa=\box91
+\@tempa=\box92
+\@tempa=\box93
+\@tempa=\box94
+\@tempa=\box95
+\@tempa=\box96
+\@tempa=\box97
+\@tempa=\box98
+\@tempa=\box99
+\@tempa=\box100
+\@tempa=\box101
+\@tempa=\box102
+\@tempa=\box103
+\@tempa=\box104
+\@tempa=\box105
+\@tempa=\box106
+\@tempa=\box107
+\@tempa=\box108
+\c@minrows=\count311
+\c@columnbadness=\count312
+\c@finalcolumnbadness=\count313
+\last@try=\dimen176
+\multicolovershoot=\dimen177
+\multicolundershoot=\dimen178
+\mult@nat@firstbox=\box109
+\colbreak@box=\box110
+\mc@col@check@num=\count314
+\g__mc_curr_col_int=\count315
+)
+(C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/multirow\multirow.sty
+Package: multirow 2024/11/12 v2.9 Span multiple rows of a table
+\multirow@colwidth=\skip64
+\multirow@cntb=\count316
+\multirow@dima=\skip65
+\bigstrutjot=\dimen179
+) (C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/hanging\hanging.sty
+Package: hanging 2009/09/02 v1.2b hanging paragraphs and punctuation
+\h@ngcommawd=\skip66
+\h@ngfstopwd=\skip67
+\h@ngquotewd=\skip68
+\h@ngdquotewd=\skip69
+\h@ngquerywd=\skip70
+\h@ngexclwd=\skip71
+\h@ngcolonwd=\skip72
+\h@ngscolonwd=\skip73
+) (C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/generic/iftex\ifpdf.sty
+Package: ifpdf 2019/10/25 v3.4 ifpdf legacy package. Use iftex instead.
+)
+(C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/adjustbox\adjustbox.s
+ty
+Package: adjustbox 2025/02/26 v1.3c Adjusting TeX boxes (trim, clip, ...)
+
+(C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/xkeyval\xkeyval.sty
+Package: xkeyval 2022/06/16 v2.9 package option processing (HA)
+
+(C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/generic/xkeyval\xkeyval.tex
+
+(C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/generic/xkeyval\xkvutils.te
+x
+\XKV@toks=\toks28
+\XKV@tempa@toks=\toks29
+)
+\XKV@depth=\count317
+File: xkeyval.tex 2014/12/03 v2.7a key=value parser (HA)
+))
+(C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/adjustbox\adjcalc.sty
+Package: adjcalc 2012/05/16 v1.1 Provides advanced setlength with multiple back
+-ends (calc, etex, pgfmath)
+)
+(C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/adjustbox\trimclip.st
+y
+Package: trimclip 2025/02/21 v1.2a Trim and clip general TeX material
+
+(C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphicx.sty
+Package: graphicx 2024/12/31 v1.2e Enhanced LaTeX Graphics (DPC,SPQR)
+
+(C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphics.sty
+Package: graphics 2024/08/06 v1.4g Standard LaTeX Graphics (DPC,SPQR)
+(C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/graphics\trig.sty
+Package: trig 2023/12/02 v1.11 sin cos tan (DPC)
+)
+(C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\graphics
+.cfg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 106.
+)
+\Gin@req@height=\dimen180
+\Gin@req@width=\dimen181
+)
+(C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/collectbox\collectbox
+.sty
+Package: collectbox 2022/10/17 v0.4c Collect macro arguments as boxes
+\collectedbox=\box111
+)
+\tc@llx=\dimen182
+\tc@lly=\dimen183
+\tc@urx=\dimen184
+\tc@ury=\dimen185
+Package trimclip Info: Using driver 'tc-pdftex.def'.
+
+(C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/adjustbox\tc-pdftex.d
+ef
+File: tc-pdftex.def 2025/02/26 v2.3 Clipping driver for pdftex
+))
+\adjbox@Width=\dimen186
+\adjbox@Height=\dimen187
+\adjbox@Depth=\dimen188
+\adjbox@Totalheight=\dimen189
+\adjbox@pwidth=\dimen190
+\adjbox@pheight=\dimen191
+\adjbox@pdepth=\dimen192
+\adjbox@ptotalheight=\dimen193
+
+(C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/ifoddpage\ifoddpage.s
+ty
+Package: ifoddpage 2022/10/18 v1.2 Conditionals for odd/even page detection
+\c@checkoddpage=\count318
+))
+(C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\amssymb.sty
+Package: amssymb 2013/01/14 v3.01 AMS font symbols
+
+(C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\amsfonts.sty
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\@emptytoks=\toks30
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+))
+(C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/stackengine\stackengi
+ne.sty
+Package: stackengine 2021/07/22 v4.11\ Stacking text and objects in convenient 
+ways
+
+(C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/etoolbox\etoolbox.sty
+Package: etoolbox 2025/10/02 v2.5m e-TeX tools for LaTeX (JAW)
+\etb@tempcnta=\count319
+)
+(C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/listofitems\listofite
+ms.sty
+(C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/generic/listofitems\listofi
+tems.tex
+\loi_cnt_foreach_nest=\count320
+\loi_nestcnt=\count321
+)
+Package: listofitems 2024/03/09 v1.65 Grab items in lists using user-specified 
+sep char (CT)
+)
+\c@@stackindex=\count322
+\@boxshift=\skip74
+\stack@tmplength=\skip75
+\temp@stkl=\skip76
+\@stackedboxwidth=\skip77
+\@addedbox=\box112
+\@anchorbox=\box113
+\@insetbox=\box114
+\se@backgroundbox=\box115
+\stackedbox=\box116
+\@centerbox=\box117
+\c@ROWcellindex@=\count323
+)
+(C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/enumitem\enumitem.sty
+Package: enumitem 2025/02/06 v3.11 Customized lists
+\labelindent=\skip78
+\enit@outerparindent=\dimen194
+\enit@toks=\toks31
+\enit@inbox=\box118
+\enit@count@id=\count324
+\enitdp@description=\count325
+)
+(C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/generic/alphalph\alphalph.s
+ty
+Package: alphalph 2019/12/09 v2.6 Convert numbers to letters (HO)
+
+(C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/generic/intcalc\intcalc.sty
+Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
+)) (C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/ulem\ulem.sty
+\UL@box=\box119
+\UL@hyphenbox=\box120
+\UL@skip=\skip79
+\UL@hook=\toks32
+\UL@height=\dimen195
+\UL@pe=\count326
+\UL@pixel=\dimen196
+\ULC@box=\box121
+Package: ulem 2019/11/18
+\ULdepth=\dimen197
+)
+\xrefbox=\box122
+\xreflength=\skip80
+\CodeWidthChar=\skip81
+\CodeHeightChar=\skip82
+\DoxyCodeWidth=\skip83
+\c@DoxyEnumeratei=\count327
+\c@DoxyEnumerateii=\count328
+\c@DoxyEnumerateiii=\count329
+\c@DoxyEnumerateiv=\count330
+\c@DoxyEnumeratev=\count331
+\c@DoxyEnumeratevi=\count332
+\c@DoxyEnumeratevii=\count333
+\c@DoxyEnumerateviii=\count334
+\c@DoxyEnumerateix=\count335
+\c@DoxyEnumeratex=\count336
+\c@DoxyEnumeratexi=\count337
+\c@DoxyEnumeratexii=\count338
+\enitdp@DoxyEnumerate=\count339
+\enitdp@DoxyItemize=\count340
+\c@subsubsubsection=\count341
+\c@subsubsubsubsection=\count342
+\c@subsubsubsubsubsection=\count343
+\c@subsubsubsubsubsubsection=\count344
+)
+(C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/base\inputenc.sty
+Package: inputenc 2024/02/08 v1.3d Input encoding file
+\inpenc@prehook=\toks33
+\inpenc@posthook=\toks34
+)
+(C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/base\makeidx.sty
+Package: makeidx 2021/10/04 v1.0m Standard LaTeX package
+)
+(C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/base\textcomp.sty
+Package: textcomp 2024/04/24 v2.1b Standard LaTeX package
+)
+(C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/wasysym\wasysym.sty
+Package: wasysym 2020/01/19 v2.4 Wasy-2 symbol support package
+\symwasy=\mathgroup6
+LaTeX Font Info:    Overwriting symbol font `wasy' in version `bold'
+(Font)                  U/wasy/m/n --> U/wasy/b/n on input line 93.
+)
+(C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/generic/iftex\ifxetex.sty
+Package: ifxetex 2019/10/25 v0.7 ifxetex legacy package. Use iftex instead.
+)
+(C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/base\fontenc.sty
+Package: fontenc 2025/07/18 v2.1d Standard LaTeX package
+)
+(C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\helvet.sty
+Package: helvet 2020/03/25 PSNFSS-v9.3 (WaS) 
+)
+(C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\courier.sty
+Package: courier 2020/03/25 PSNFSS-v9.3 (WaS) 
+)
+(C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/geometry\geometry.sty
+Package: geometry 2020/01/02 v5.9 Page Geometry
+(C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/generic/iftex\ifvtex.sty
+Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
+)
+\Gm@cnth=\count345
+\Gm@cntv=\count346
+\c@Gm@tempcnt=\count347
+\Gm@bindingoffset=\dimen198
+\Gm@wd@mp=\dimen199
+\Gm@odd@mp=\dimen256
+\Gm@even@mp=\dimen257
+\Gm@layoutwidth=\dimen258
+\Gm@layoutheight=\dimen259
+\Gm@layouthoffset=\dimen260
+\Gm@layoutvoffset=\dimen261
+\Gm@dimlist=\toks35
+
+(C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/geometry\geometry.cfg
+))
+(C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/changepage\changepage
+.sty
+Package: changepage 2009/10/20 v1.0c check page and change page layout
+\c@cp@cntr=\count348
+\cp@tempcnt=\count349
+LaTeX Info: Redefining \checkoddpage on input line 59.
+)
+(C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/fancyhdr\fancyhdr.sty
+Package: fancyhdr 2025/02/07 v5.2 Extensive control of page headers and footers
+
+\f@nch@headwidth=\skip84
+\f@nch@offset@elh=\skip85
+\f@nch@offset@erh=\skip86
+\f@nch@offset@olh=\skip87
+\f@nch@offset@orh=\skip88
+\f@nch@offset@elf=\skip89
+\f@nch@offset@erf=\skip90
+\f@nch@offset@olf=\skip91
+\f@nch@offset@orf=\skip92
+\f@nch@height=\skip93
+\f@nch@footalignment=\skip94
+\f@nch@widthL=\skip95
+\f@nch@widthC=\skip96
+\f@nch@widthR=\skip97
+\@temptokenb=\toks36
+) (C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/natbib\natbib.sty
+Package: natbib 2010/09/13 8.31b (PWD, AO)
+\bibhang=\skip98
+\bibsep=\skip99
+LaTeX Info: Redefining \cite on input line 694.
+\c@NAT@ctr=\count350
+)
+(C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/tocloft\tocloft.sty
+Package: tocloft 2017/08/31 v2.3i parameterised ToC, etc., typesetting
+Package tocloft Info: The document has chapter divisions on input line 51.
+\cftparskip=\skip100
+\cftbeforetoctitleskip=\skip101
+\cftaftertoctitleskip=\skip102
+\cftbeforepartskip=\skip103
+\cftpartnumwidth=\skip104
+\cftpartindent=\skip105
+\cftbeforechapskip=\skip106
+\cftchapindent=\skip107
+\cftchapnumwidth=\skip108
+\cftbeforesecskip=\skip109
+\cftsecindent=\skip110
+\cftsecnumwidth=\skip111
+\cftbeforesubsecskip=\skip112
+\cftsubsecindent=\skip113
+\cftsubsecnumwidth=\skip114
+\cftbeforesubsubsecskip=\skip115
+\cftsubsubsecindent=\skip116
+\cftsubsubsecnumwidth=\skip117
+\cftbeforeparaskip=\skip118
+\cftparaindent=\skip119
+\cftparanumwidth=\skip120
+\cftbeforesubparaskip=\skip121
+\cftsubparaindent=\skip122
+\cftsubparanumwidth=\skip123
+\cftbeforeloftitleskip=\skip124
+\cftafterloftitleskip=\skip125
+\cftbeforefigskip=\skip126
+\cftfigindent=\skip127
+\cftfignumwidth=\skip128
+\c@lofdepth=\count351
+\c@lotdepth=\count352
+\cftbeforelottitleskip=\skip129
+\cftafterlottitleskip=\skip130
+\cftbeforetabskip=\skip131
+\cfttabindent=\skip132
+\cfttabnumwidth=\skip133
+)
+\@indexfile=\write4
+\openout4 = `refman.idx'.
+
+
+Writing index file refman.idx
+
+(C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/newunicodechar\newuni
+codechar.sty
+Package: newunicodechar 2018/04/08 v1.2 Defining Unicode characters
+)
+(C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\hyperref.sty
+Package: hyperref 2025-07-12 v7.01o Hypertext links for LaTeX
+
+(C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/kvsetkeys\kvsetkeys.s
+ty
+Package: kvsetkeys 2022-10-05 v1.19 Key value parser (HO)
+)
+(C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/generic/kvdefinekeys\kvdefi
+nekeys.sty
+Package: kvdefinekeys 2019-12-19 v1.6 Define keys (HO)
+)
+(C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/generic/pdfescape\pdfescape
+.sty
+Package: pdfescape 2019/12/09 v1.15 Implements pdfTeX's escape features (HO)
+
+(C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/generic/ltxcmds\ltxcmds.sty
+Package: ltxcmds 2023-12-04 v1.26 LaTeX kernel commands for general use (HO)
+)
+(C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/generic/pdftexcmds\pdftexcm
+ds.sty
+Package: pdftexcmds 2020-06-27 v0.33 Utility functions of pdfTeX for LuaTeX (HO
+)
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+))
+(C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/hycolor\hycolor.sty
+Package: hycolor 2020-01-27 v1.10 Color options for hyperref/bookmark (HO)
+)
+(C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\nameref.sty
+Package: nameref 2025-06-21 v2.57 Cross-referencing by name of section
+
+(C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/refcount\refcount.sty
+Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
+)
+(C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/generic/gettitlestring\gett
+itlestring.sty
+Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
+
+(C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/kvoptions\kvoptions.s
+ty
+Package: kvoptions 2022-06-15 v3.15 Key value format for package options (HO)
+))
+\c@section@level=\count353
+)
+(C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/generic/stringenc\stringenc
+.sty
+Package: stringenc 2019/11/29 v1.12 Convert strings between diff. encodings (HO
+)
+)
+\@linkdim=\dimen262
+\Hy@linkcounter=\count354
+\Hy@pagecounter=\count355
+
+(C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\pd1enc.def
+File: pd1enc.def 2025-07-12 v7.01o Hyperref: PDFDocEncoding definition (HO)
+Now handling font encoding PD1 ...
+... no UTF-8 mapping file for font encoding PD1
+)
+\Hy@SavedSpaceFactor=\count356
+
+(C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\puenc.def
+File: puenc.def 2025-07-12 v7.01o Hyperref: PDF Unicode definition (HO)
+Now handling font encoding PU ...
+... no UTF-8 mapping file for font encoding PU
+)
+Package hyperref Info: Hyper figures OFF on input line 4195.
+Package hyperref Info: Link nesting OFF on input line 4200.
+Package hyperref Info: Hyper index ON on input line 4203.
+Package hyperref Info: Plain pages OFF on input line 4210.
+Package hyperref Info: Backreferencing ON on input line 4213.
+Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
+Package hyperref Info: Bookmarks ON on input line 4462.
+
+(C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\backref.sty
+Package: backref 2025-06-21 v1.45 Bibliographical back referencing
+
+(C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/rerunfilecheck\rerunf
+ilecheck.sty
+Package: rerunfilecheck 2025-06-21 v1.11 Rerun checks for auxiliary files (HO)
+
+(C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/generic/uniquecounter\uniqu
+ecounter.sty
+Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
+
+(C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/generic/bigintcalc\bigintca
+lc.sty
+Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO
+)
+))
+Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
+84.
+))
+\c@Hy@tempcnt=\count357
+
+(C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/url\url.sty
+\Urlmuskip=\muskip17
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+)
+LaTeX Info: Redefining \url on input line 4801.
+\XeTeXLinkMargin=\dimen263
+
+(C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/generic/bitset\bitset.sty
+Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
+)
+\Fld@menulength=\count358
+\Field@Width=\dimen264
+\Fld@charsize=\dimen265
+Package hyperref Info: Hyper figures OFF on input line 6078.
+Package hyperref Info: Link nesting OFF on input line 6083.
+Package hyperref Info: Hyper index ON on input line 6086.
+Package hyperref Info: backreferencing ON on input line 6091.
+Package hyperref Info: Link coloring OFF on input line 6098.
+Package hyperref Info: Link coloring with OCG OFF on input line 6103.
+Package hyperref Info: PDF/A mode OFF on input line 6108.
+\Hy@abspage=\count359
+\c@Item=\count360
+\c@Hfootnote=\count361
+)
+Package hyperref Info: Driver: hpdftex.
+(C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\hpdftex.def
+File: hpdftex.def 2025-07-12 v7.01o Hyperref driver for pdfTeX
+\Fld@listcount=\count362
+\c@bookmark@seq@number=\count363
+\Hy@SectionHShift=\skip134
+)
+Package hyperref Info: Option `colorlinks' set `true' on input line 187.
+Package hyperref Info: Option `unicode' set `true' on input line 187.
+(C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/caption\caption.sty
+Package: caption 2023/08/05 v3.6o Customizing captions (AR)
+
+(C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/caption\caption3.sty
+Package: caption3 2023/07/31 v2.4d caption3 kernel (AR)
+\caption@tempdima=\dimen266
+\captionmargin=\dimen267
+\caption@leftmargin=\dimen268
+\caption@rightmargin=\dimen269
+\caption@width=\dimen270
+\caption@indent=\dimen271
+\caption@parindent=\dimen272
+\caption@hangindent=\dimen273
+Package caption Info: Standard document class detected.
+)
+\c@caption@flags=\count364
+\c@continuedfloat=\count365
+Package caption Info: changepage package is loaded.
+\caption@adjustwidth@hsize=\dimen274
+\caption@adjustwidth@linewidth=\dimen275
+Package caption Info: float package is loaded.
+Package caption Info: hyperref package is loaded.
+Package caption Info: longtable package is loaded.
+
+(C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/caption\ltcaption.sty
+Package: ltcaption 2021/01/08 v1.4c longtable captions (AR)
+)) (C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/etoc\etoc.sty
+Package: etoc 2023/10/29 v1.2d Completely customisable TOCs (JFB)
+\Etoc@toctoks=\toks37
+\c@etoc@tocid=\count366
+\etoc@framed@titlebox=\box123
+\etoc@framed@contentsbox=\box124
+)
+LaTeX Font Info:    Trying to load font information for T1+phv on input line 20
+9.
+
+(C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\t1phv.fd
+File: t1phv.fd 2020/03/25 scalable font definitions for T1/phv.
+)
+LaTeX Font Info:    Font shape `T1/phv/m/n' will be
+(Font)              scaled to size 8.99994pt on input line 209.
+
+(C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-p
+dftex.def
+File: l3backend-pdftex.def 2025-10-09 L3 backend support: PDF output (pdfTeX)
+\l__color_backend_stack_int=\count367
+)
+No file refman.aux.
+\openout1 = `refman.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 209.
+LaTeX Font Info:    ... okay on input line 209.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 209.
+LaTeX Font Info:    ... okay on input line 209.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 209.
+LaTeX Font Info:    ... okay on input line 209.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 209.
+LaTeX Font Info:    ... okay on input line 209.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 209.
+LaTeX Font Info:    ... okay on input line 209.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 209.
+LaTeX Font Info:    ... okay on input line 209.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 209.
+LaTeX Font Info:    ... okay on input line 209.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 209.
+LaTeX Font Info:    ... okay on input line 209.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 209.
+LaTeX Font Info:    ... okay on input line 209.
+
+(C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.
+mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count368
+\scratchdimen=\dimen276
+\scratchbox=\box125
+\nofMPsegments=\count369
+\nofMParguments=\count370
+\everyMPshowfont=\toks38
+\MPscratchCnt=\count371
+\MPscratchDim=\dimen277
+\MPnumerator=\count372
+\makeMPintoPDFobject=\count373
+\everyMPtoPDFconversion=\toks39
+)
+(C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\epstopdf
+-base.sty
+Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
+85.
+
+(C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/00miktex\epstopdf-sys
+.cfg
+File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
+))
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+*geometry* verbose mode - [ preamble ] result:
+* driver: pdftex
+* paper: a4paper
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: twoside 
+* h-part:(L,W,R)=(71.13188pt, 455.24411pt, 71.13188pt)
+* v-part:(T,H,B)=(71.13188pt, 702.78308pt, 71.13188pt)
+* \paperwidth=597.50787pt
+* \paperheight=845.04684pt
+* \textwidth=455.24411pt
+* \textheight=702.78308pt
+* \oddsidemargin=-1.1381pt
+* \evensidemargin=-1.1381pt
+* \topmargin=-31.2056pt
+* \headheight=12.0pt
+* \headsep=18.06749pt
+* \topskip=10.0pt
+* \footskip=25.29494pt
+* \marginparwidth=125.0pt
+* \marginparsep=7.0pt
+* \columnsep=10.0pt
+* \skip\footins=9.0pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidetrue
+* \@mparswitchtrue
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+Package backref Info: ** backref set up for natbib ** on input line 209.
+Package hyperref Info: Link coloring ON on input line 209.
+\@outlinefile=\write5
+\openout5 = `refman.out'.
+
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: End \AtBeginDocument code.
+No file refman.toc.
+Package hyperref Info: Option `pageanchor' set `false' on input line 217.
+Package hyperref Info: Option `bookmarksnumbered' set `true' on input line 217.
+
+Package hyperref Info: Option `unicode' set `true' on input line 217.
+LaTeX Font Info:    Font shape `T1/phv/m/n' will be
+(Font)              scaled to size 12.9599pt on input line 222.
+LaTeX Font Info:    Font shape `T1/phv/m/n' will be
+(Font)              scaled to size 10.79993pt on input line 224.
+[1
+
+
+{C:/Users/Youssef/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}{C:/Users/Yo
+ussef/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc}] [2
+
+]
+\tf@toc=\write6
+\openout6 = `refman.toc'.
+
+Package hyperref Info: Option `pageanchor' set `true' on input line 233.
+
+Chapter 1.
+LaTeX Font Info:    Font shape `T1/phv/m/n' will be
+(Font)              scaled to size 18.66588pt on input line 235.
+LaTeX Font Info:    Font shape `T1/phv/b/n' will be
+(Font)              scaled to size 18.66588pt on input line 235.
+LaTeX Font Info:    Font shape `T1/phv/b/n' will be
+(Font)              scaled to size 22.39185pt on input line 235.
+(namespaces.tex
+LaTeX Font Info:    Font shape `T1/phv/b/n' will be
+(Font)              scaled to size 12.9599pt on input line 1.
+LaTeX Font Info:    Font shape `T1/phv/m/n' will be
+(Font)              scaled to size 6.29996pt on input line 2.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 2.
+
+(C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Trying to load font information for U+msb on input line 2.
+
+(C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
+LaTeX Font Info:    Trying to load font information for U+wasy on input line 2.
+
+
+(C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/wasysym\uwasy.fd
+File: uwasy.fd 2020/01/19 v2.4 Wasy-2 symbol font definitions
+)
+LaTeX Font Info:    Font shape `T1/phv/b/n' will be
+(Font)              scaled to size 8.99994pt on input line 3.
+
+
+LaTeX Warning: Reference `namespace_calibration_state' on page 1 undefined on i
+nput line 3.
+
+
+LaTeX Warning: Reference `namespace_controller' on page 1 undefined on input li
+ne 4.
+
+
+LaTeX Warning: Reference `namespacedepthmap' on page 1 undefined on input line 
+5.
+
+
+LaTeX Warning: Reference `namespaceevaluate__calibration' on page 1 undefined o
+n input line 6.
+
+
+LaTeX Warning: Reference `namespace_health_monitor' on page 1 undefined on inpu
+t line 7.
+
+
+LaTeX Warning: Reference `namespace_image_set' on page 1 undefined on input lin
+e 8.
+
+
+LaTeX Warning: Reference `namespace_initial_calibration' on page 1 undefined on
+ input line 9.
+
+
+LaTeX Warning: Reference `namespacelifcal__to__json' on page 1 undefined on inp
+ut line 10.
+
+
+LaTeX Warning: Reference `namespace_result_logger' on page 1 undefined on input
+ line 11.
+
+
+LaTeX Warning: Reference `namespacerun__imageset__creation' on page 1 undefined
+ on input line 12.
+
+
+LaTeX Warning: Reference `namespacerun__initial__calibration' on page 1 undefin
+ed on input line 13.
+
+
+LaTeX Warning: Reference `namespacerun___li_f_cal__calibration' on page 1 undef
+ined on input line 14.
+
+
+LaTeX Warning: Reference `namespacerun__periodic__lifcal' on page 1 undefined o
+n input line 15.
+
+)
+LaTeX Font Info:    Font shape `T1/phv/b/n' will be
+(Font)              scaled to size 6.29996pt on input line 237.
+ [1
+
+
+] [2
+
+]
+Chapter 2.
+(annotated.tex
+
+LaTeX Warning: Reference `class_calibration_state_1_1_calibration_state' on pag
+e 3 undefined on input line 3.
+
+
+LaTeX Warning: Reference `class_controller_1_1_controller' on page 3 undefined 
+on input line 4.
+
+
+LaTeX Warning: Reference `class_image_set_1_1_image_set' on page 3 undefined on
+ input line 5.
+
+
+LaTeX Warning: Reference `class_initial_calibration_1_1_initial_calibration' on
+ page 3 undefined on input line 6.
+
+
+LaTeX Warning: Reference `class_result_logger_1_1_result_logger' on page 3 unde
+fined on input line 7.
+
+) [3] [4
+
+]
+Chapter 3.
+(files.tex
+
+LaTeX Warning: Reference `_calibration_state_8py' on page 5 undefined on input 
+line 3.
+
+
+LaTeX Warning: Reference `_controller_8py' on page 5 undefined on input line 4.
+
+
+
+LaTeX Warning: Reference `_health_monitor_8py' on page 5 undefined on input lin
+e 5.
+
+
+LaTeX Warning: Reference `_image_set_8py' on page 5 undefined on input line 6.
+
+
+LaTeX Warning: Reference `_initial_calibration_8py' on page 5 undefined on inpu
+t line 7.
+
+
+LaTeX Warning: Reference `_result_logger_8py' on page 5 undefined on input line
+ 8.
+
+
+LaTeX Warning: Reference `run__initial__calibration_8py' on page 5 undefined on
+ input line 9.
+
+
+LaTeX Warning: Reference `run__periodic__lifcal_8py' on page 5 undefined on inp
+ut line 10.
+
+
+LaTeX Warning: Reference `evaluate__calibration_8py' on page 5 undefined on inp
+ut line 11.
+
+
+LaTeX Warning: Reference `depthmap_8py' on page 5 undefined on input line 12.
+
+
+LaTeX Warning: Reference `lifcal__to__json_8py' on page 5 undefined on input li
+ne 13.
+
+
+LaTeX Warning: Reference `run__imageset__creation_8py' on page 5 undefined on i
+nput line 14.
+
+
+LaTeX Warning: Reference `run___li_f_cal__calibration_8py' on page 5 undefined 
+on input line 15.
+
+) [5] [6
+
+]
+Chapter 4.
+(namespace_calibration_state.tex
+LaTeX Font Info:    Trying to load font information for TS1+phv on input line 6
+.
+
+(C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ts1phv.fd
+File: ts1phv.fd 2020/03/25 scalable font definitions for TS1/phv.
+)
+LaTeX Font Info:    Font shape `TS1/phv/m/n' will be
+(Font)              scaled to size 8.99994pt on input line 6.
+)
+(namespace_controller.tex) (namespacedepthmap.tex
+LaTeX Font Info:    Font shape `T1/phv/b/n' will be
+(Font)              scaled to size 10.79993pt on input line 29.
+LaTeX Font Info:    Font shape `T1/phv/m/n' will be
+(Font)              scaled to size 7.19995pt on input line 33.
+LaTeX Font Info:    Trying to load font information for T1+pcr on input line 33
+.
+
+(C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\t1pcr.fd
+File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
+)
+[7]
+LaTeX Font Info:    Font shape `T1/pcr/m/it' in size <8> not available
+(Font)              Font shape `T1/pcr/m/sl' tried instead on input line 88.
+LaTeX Font Info:    Font shape `T1/pcr/m/it' in size <7> not available
+(Font)              Font shape `T1/pcr/m/sl' tried instead on input line 88.
+ [8] [9] [10]) (namespaceevaluate__calibration.tex [11]
+
+! LaTeX Error: Unicode character Δ (U+0394)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.73   - mean ΔT (m)
+                     
+? 
+
+! LaTeX Error: Unicode character Δ (U+0394)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.74   - mean ΔR (°)
+                      
+? 
+LaTeX Font Info:    Trying to load font information for TS1+pcr on input line 7
+4.
+(C:\Users\Youssef\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ts1pcr.fd
+File: ts1pcr.fd 2001/06/04 font definitions for TS1/pcr.
+)
+
+! LaTeX Error: Unicode character Δ (U+0394)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.78   ΔR_cam = angle(R_est * R_gt^T)
+                                      
+? 
+
+! LaTeX Error: Unicode character Δ (U+0394)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.79   ΔT_cam = || T_est - T_gt ||_2
+                                     
+? 
+[12]
+
+! LaTeX Error: Unicode character Δ (U+0394)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.91 ...iteral}{\ \ \ \ \ \ -\/\ mean\ ΔT\ (m) }}
+                                                  
+? 
+
+! LaTeX Error: Unicode character Δ (U+0394)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.92 ...teral}{\ \ \ \ \ \ -\/\ mean\ ΔR\ (°) }}
+                                                  
+? 
+
+! LaTeX Error: Unicode character Δ (U+0394)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.96 ...am\ =\ angle(R\_est\ *\ R\_gt\string^T) }}
+                                                  
+? 
+
+! LaTeX Error: Unicode character Δ (U+0394)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.97 ...\_cam\ =\ ||\ T\_est\ -\/\ T\_gt\ ||\_2 }}
+                                                  
+? 
+[13] [14] [15] [16]) (namespace_health_monitor.tex [17] [18] [19] [20] [21]
+[22]) (namespace_image_set.tex) (namespace_initial_calibration.tex [23])
+(namespacelifcal__to__json.tex
+Underfull \hbox (badness 1127) in paragraph at lines 10--12
+\T1/phv/m/n/10 Orientations.[]xml", str out[]_[]name="parameters.[]json", Optio
+nal[]float[] pixel[]_[]size[]_[]mm=None, Optional[]float[]
+ []
+
+[24] [25] [26] [27]) (namespace_result_logger.tex)
+(namespacerun__imageset__creation.tex [28] [29] [30] [31]
+Underfull \hbox (badness 10000) in paragraph at lines 285--286
+\T1/pcr/m/n/8 str run[]_[]imageset[]_[]creation.[]ROOT = "/data/external/Li[]FC
+al/Li[]FCal[]_[][]Data/Recalibration/Li[]FCal[]_[][]
+ []
+
+) (namespacerun__initial__calibration.tex
+Overfull \hbox (19.95619pt too wide) in paragraph at lines 29--29
+[]  \T1/pcr/m/n/8 python3 run_initial_calibration.py --base_dir /path/to/images
+et --num_poses 28 --no-bundle-adjust[] 
+ []
+
+[32] [33] [34]) (namespacerun___li_f_cal__calibration.tex [35] [36] [37]
+[38] [39] [40]
+Overfull \hbox (24.1377pt too wide) in paragraph at lines 511--512
+\T1/pcr/m/n/8 str run[]_[][]Li[]FCal[]_[]calibration.[]OUT[]_[][]ROOT = "/data/
+external/Li[]FCal/Li[]FCal[]_[][]Data/Recalibration/Calibration[]
+ []
+
+) (namespacerun__periodic__lifcal.tex [41] [42] [43] [44] [45] [46] [47]
+Overfull \hbox (43.3377pt too wide) in paragraph at lines 594--595
+\T1/pcr/m/n/8 str run[]_[]periodic[]_[]lifcal.[]LIFCAL[]_[][]OUT[]_[][]ROOT = "
+/data/external/Li[]FCal/Li[]FCal[]_[][]Data/Recalibration/Calibration[]
+ []
+
+[48]
+Underfull \hbox (badness 10000) in paragraph at lines 634--635
+\T1/pcr/m/n/8 str run[]_[]periodic[]_[]lifcal.[]ROOT[]_[][]IMAGESET = "/data/ex
+ternal/Li[]FCal/Li[]FCal[]_[][]Data/Recalibration/Li[]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 644--645
+\T1/pcr/m/n/8 str run[]_[]periodic[]_[]lifcal.[]RUN[]_[][]IMAGESET[]_[][]CREATI
+ON = "/data/external/Li[]FCal/Li[]FCal[]_[][]Data/run[]_[]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 654--655
+\T1/pcr/m/n/8 str run[]_[]periodic[]_[]lifcal.[]RUN[]_[][]LIFCAL[]_[][]CALIB = 
+"/data/external/Li[]FCal/Li[]FCal[]_[][]Data/run[]_[][]Li[]FCal[]_[]
+ []
+
+) [49] [50
+
+]
+Chapter 5.
+(class_calibration_state_1_1_calibration_state.tex [51] [52] [53])
+(class_controller_1_1_controller.tex [54] [55] [56])
+(class_image_set_1_1_image_set.tex [57]
+
+Package textcomp Warning: Symbol \textrightarrow not provided by
+(textcomp)                font family pcr in TS1 encoding.
+(textcomp)                Default family used instead on input line 98.
+
+[58]) (class_initial_calibration_1_1_initial_calibration.tex [59] [60] [61]
+[62] [63] [64]
+Overfull \hbox (168.75629pt too wide) in paragraph at lines 539--539
+[]\T1/pcr/m/n/8 @return Tuple (success, corners, imageSize) where success is bo
+ol, corners are refined 2D points, and imageSize is (width, height)[] 
+ []
+
+[65]
+Underfull \hbox (badness 10000) in paragraph at lines 624--625
+\T1/pcr/m/n/8 tuple Initial[]Calibration.[]Initial[]Calibration.[]criteria = (c
+v2.[]TERM[]_[][]CRITERIA[]_[][]EPS + cv2.[]TERM[]_[][]
+ []
+
+[66]) (class_result_logger_1_1_result_logger.tex [67] [68] [69] [70] [71])
+[72]
+Chapter 6.
+(_calibration_state_8py.tex) (_calibration_state_8py_source.tex [73
+
+])
+(_controller_8py.tex) (_controller_8py_source.tex [74])
+(_health_monitor_8py.tex
+Underfull \hbox (badness 5388) in paragraph at lines 17--19
+[]\T1/phv/m/n/10 Dict[]str, Any[] [] (Dict[]str, Any[] state[]_[]dict, float r[
+]_[]
+ []
+
+[75]) (_health_monitor_8py_source.tex [76] [77] [78]) (_image_set_8py.tex)
+(_image_set_8py_source.tex [79]
+
+Package textcomp Warning: Symbol \textrightarrow not provided by
+(textcomp)                font family pcr in TS1 encoding.
+(textcomp)                Default family used instead on input line 38.
+
+) (_initial_calibration_8py.tex) (_initial_calibration_8py_source.tex [80]
+[81] [82] [83] [84]) (_result_logger_8py.tex [85])
+(_result_logger_8py_source.tex [86] [87] [88]) (evaluate__calibration_8py.tex)
+(evaluate__calibration_8py_source.tex [89]
+
+! LaTeX Error: Unicode character Δ (U+0394)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.78 ...literal}{\ \ \ \ \ \ -\/\ mean\ ΔT\ (m)}}
+                                                  
+? 
+
+! LaTeX Error: Unicode character Δ (U+0394)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.79 ...iteral}{\ \ \ \ \ \ -\/\ mean\ ΔR\ (°)}}
+                                                  
+? 
+
+! LaTeX Error: Unicode character Δ (U+0394)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.83 ...cam\ =\ angle(R\_est\ *\ R\_gt\string^T)}}
+                                                  
+? 
+
+! LaTeX Error: Unicode character Δ (U+0394)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.84 ...T\_cam\ =\ ||\ T\_est\ -\/\ T\_gt\ ||\_2}}
+                                                  
+? 
+[90] [91]) (run__initial__calibration_8py.tex)
+(run__initial__calibration_8py_source.tex [92] [93])
+(run__periodic__lifcal_8py.tex [94]
+Underfull \hbox (badness 8075) in paragraph at lines 50--52
+[]\T1/phv/m/n/10 str [] = "/data/external/Li[]FCal/Li[]FCal[]_[][]Data/Recalibr
+ation/Li[]FCal[]_[][]
+ []
+
+) (run__periodic__lifcal_8py_source.tex [95] [96] [97] [98]) (depthmap_8py.tex)
+(depthmap_8py_source.tex [99] [100] [101]) (lifcal__to__json_8py.tex)
+(lifcal__to__json_8py_source.tex [102] [103] [104])
+(run__imageset__creation_8py.tex) (run__imageset__creation_8py_source.tex
+[105] [106]) (run___li_f_cal__calibration_8py.tex
+Underfull \hbox (badness 3471) in paragraph at lines 34--36
+[]\T1/phv/m/n/10 str [] = "/data/external/Li[]FCal/Li[]FCal[]_[][]Data/Recalibr
+ation/Fixed[]_[][]
+ []
+
+
+Underfull \hbox (badness 2591) in paragraph at lines 36--38
+[]\T1/phv/m/n/10 str [] = "/data/external/Li[]FCal/Li[]FCal[]_[][]Data/Recalibr
+ation/MLA[]_[][]
+ []
+
+[107]) (run___li_f_cal__calibration_8py_source.tex [108] [109] [110]) [111]
+[112
+
+]
+No file refman.ind.
+(refman.aux)
+ ***********
+LaTeX2e <2025-11-01>
+L3 programming layer <2025-11-06>
+ ***********
+
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+
+Package rerunfilecheck Warning: File `refman.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `refman.out':
+(rerunfilecheck)             Before: <no file>
+(rerunfilecheck)             After:  AFF30CB1B571B11252C9A62B3B0BDB2A;48823.
+ ) 
+Here is how much of TeX's memory you used:
+ 21806 strings out of 467871
+ 431857 string characters out of 5417407
+ 751030 words of memory out of 5000000
+ 46977 multiletter control sequences out of 15000+600000
+ 668606 words of font info for 100 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 101i,16n,117p,1005b,685s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ <C:\Users\Youssef\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi525\tc
+tt0800.pk><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1/public/am
+sfonts/cm/cmmi7.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/fonts/type1
+/public/amsfonts/cm/cmsy10.pfb><C:/Users/Youssef/AppData/Local/Programs/MiKTeX/
+fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/Youssef/AppData/Local/Progra
+ms/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/Youssef/AppData/Lo
+cal/Programs/MiKTeX/fonts/type1/urw/courier/ucrr8a.pfb><C:/Users/Youssef/AppDat
+a/Local/Programs/MiKTeX/fonts/type1/urw/courier/ucrro8a.pfb><C:/Users/Youssef/A
+ppData/Local/Programs/MiKTeX/fonts/type1/urw/helvetic/uhvb8a.pfb><C:/Users/Yous
+sef/AppData/Local/Programs/MiKTeX/fonts/type1/urw/helvetic/uhvr8a.pfb>
+Output written on refman.pdf (114 pages, 1072768 bytes).
+PDF statistics:
+ 5422 PDF objects out of 6186 (max. 8388607)
+ 3307 named destinations out of 3580 (max. 500000)
+ 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+

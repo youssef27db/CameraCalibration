@@ -1,0 +1,59 @@
+\doxysection{calibration\+LFC/run\+\_\+periodic\+\_\+lifcal.py File Reference}
+\hypertarget{run__periodic__lifcal_8py}{}\label{run__periodic__lifcal_8py}\index{calibrationLFC/run\_periodic\_lifcal.py@{calibrationLFC/run\_periodic\_lifcal.py}}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespacerun__periodic__lifcal}{run\+\_\+periodic\+\_\+lifcal}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespacerun__periodic__lifcal_a7d46ab8b912f4f4ab552b4eefb73e615}{run\+\_\+periodic\+\_\+lifcal.\+setup\+\_\+logger}} ()
+\item 
+bool \mbox{\hyperlink{namespacerun__periodic__lifcal_a704cef81d87d95c20ed90b9e860bf801}{run\+\_\+periodic\+\_\+lifcal.\+acquire\+\_\+lock}} (logger)
+\item 
+\mbox{\hyperlink{namespacerun__periodic__lifcal_aea185d32733af6bd40d88144a4f2fe74}{run\+\_\+periodic\+\_\+lifcal.\+release\+\_\+lock}} (logger)
+\item 
+int \mbox{\hyperlink{namespacerun__periodic__lifcal_a23f848cfb828f5c5814ee24c06b5c7c0}{run\+\_\+periodic\+\_\+lifcal.\+run\+\_\+cmd}} (logger, cmd, cwd=None)
+\item 
+int \mbox{\hyperlink{namespacerun__periodic__lifcal_a9cdfed1accb18d03b82c556990a01373}{run\+\_\+periodic\+\_\+lifcal.\+count\+\_\+images\+\_\+in\+\_\+dir}} (str d, exts=("{}.png"{}, "{}.jpg"{}, "{}.jpeg"{}))
+\item 
+bool \mbox{\hyperlink{namespacerun__periodic__lifcal_a5d8d962c9ecbd44bacfa6c28c93abbb5}{run\+\_\+periodic\+\_\+lifcal.\+needs\+\_\+imageset\+\_\+creation}} (logger)
+\item 
+str \mbox{\hyperlink{namespacerun__periodic__lifcal_aaa5a01f58e6545366d98420a4ce1ed21}{run\+\_\+periodic\+\_\+lifcal.\+find\+\_\+latest\+\_\+run\+\_\+dir}} (str out\+\_\+root)
+\item 
+str \mbox{\hyperlink{namespacerun__periodic__lifcal_ae09f1c6749f08fea2e255d08fc5dcafc}{run\+\_\+periodic\+\_\+lifcal.\+combined\+\_\+json\+\_\+path}} (str run\+\_\+dir)
+\item 
+\mbox{\hyperlink{namespacerun__periodic__lifcal_ae2efc72d1ae0ad2ff7def20aace6ce1f}{run\+\_\+periodic\+\_\+lifcal.\+try\+\_\+log\+\_\+lifcal\+\_\+with\+\_\+resultlogger}} (logger, str combined\+\_\+path)
+\item 
+\mbox{\hyperlink{namespacerun__periodic__lifcal_a158845c08aab27eddc3e568ef5d588f3}{run\+\_\+periodic\+\_\+lifcal.\+run\+\_\+cycle}} (logger)
+\item 
+\mbox{\hyperlink{namespacerun__periodic__lifcal_a5852f1389d109f64903df06bcea36292}{run\+\_\+periodic\+\_\+lifcal.\+main}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{namespacerun__periodic__lifcal_a5c967bb9bea14fe67a260313bef6d13d}{run\+\_\+periodic\+\_\+lifcal.\+INTERVAL\+\_\+\+SECONDS}} = 5 \texorpdfstring{$\ast$}{*} 60
+\item 
+str \mbox{\hyperlink{namespacerun__periodic__lifcal_a8233dad01fa72f57854848b6f44429ab}{run\+\_\+periodic\+\_\+lifcal.\+RUN\+\_\+\+IMAGESET\+\_\+\+CREATION}} = "{}/data/external/Li\+FCal/Li\+FCal\+\_\+\+Data/run\+\_\+imageset\+\_\+creation.\+py"{}
+\item 
+str \mbox{\hyperlink{namespacerun__periodic__lifcal_a01ff388d15c25bc1e61c5aeeb0d2245e}{run\+\_\+periodic\+\_\+lifcal.\+RUN\+\_\+\+LIFCAL\+\_\+\+CALIB}} = "{}/data/external/Li\+FCal/Li\+FCal\+\_\+\+Data/run\+\_\+\+Li\+FCal\+\_\+calibration.\+py"{}
+\item 
+str \mbox{\hyperlink{namespacerun__periodic__lifcal_ad19c09c6061d3cb345b45e130b24a415}{run\+\_\+periodic\+\_\+lifcal.\+LIFCAL\+\_\+\+OUT\+\_\+\+ROOT}} = "{}/data/external/Li\+FCal/Li\+FCal\+\_\+\+Data/Recalibration/Calibration\+By\+Camera"{}
+\item 
+str \mbox{\hyperlink{namespacerun__periodic__lifcal_adba89cb02cef5617c2dc7f54c63632e2}{run\+\_\+periodic\+\_\+lifcal.\+BASELINE\+\_\+\+DIR}} = "{}/data/baseline"{}
+\item 
+\mbox{\hyperlink{namespacerun__periodic__lifcal_a4848a88d75c664fd19b0bdc2ea35ea0a}{run\+\_\+periodic\+\_\+lifcal.\+LOG\+\_\+\+PATH}} = os.\+path.\+join(\mbox{\hyperlink{namespacerun__periodic__lifcal_adba89cb02cef5617c2dc7f54c63632e2}{BASELINE\+\_\+\+DIR}}, "{}calibration.\+log"{})
+\item 
+str \mbox{\hyperlink{namespacerun__periodic__lifcal_af0bc8fb7ff85133636ebf134946c120f}{run\+\_\+periodic\+\_\+lifcal.\+LOCK\+\_\+\+PATH}} = "{}/tmp/lifcal\+\_\+periodic.\+lock"{}
+\item 
+str \mbox{\hyperlink{namespacerun__periodic__lifcal_acf6353f300d882599e6e12e7962f4e60}{run\+\_\+periodic\+\_\+lifcal.\+ROOT\+\_\+\+IMAGESET}} = "{}/data/external/Li\+FCal/Li\+FCal\+\_\+\+Data/Recalibration/Li\+FCal\+\_\+\+Imageset"{}
+\item 
+\mbox{\hyperlink{namespacerun__periodic__lifcal_af73cb66145bccccfa622492e6c4ec468}{run\+\_\+periodic\+\_\+lifcal.\+FOCUS\+\_\+\+ROOT}} = os.\+path.\+join(\mbox{\hyperlink{namespacerun__periodic__lifcal_acf6353f300d882599e6e12e7962f4e60}{ROOT\+\_\+\+IMAGESET}}, "{}focus"{})
+\item 
+\mbox{\hyperlink{namespacerun__periodic__lifcal_ac1443b61c996787119099d7f460217a2}{run\+\_\+periodic\+\_\+lifcal.\+DEPTH\+\_\+\+ROOT}} = os.\+path.\+join(\mbox{\hyperlink{namespacerun__periodic__lifcal_acf6353f300d882599e6e12e7962f4e60}{ROOT\+\_\+\+IMAGESET}}, "{}depth"{})
+\item 
+list \mbox{\hyperlink{namespacerun__periodic__lifcal_abcef051d13db75eda49bf293a3b137c0}{run\+\_\+periodic\+\_\+lifcal.\+CAMERA\+\_\+\+IDS}}
+\item 
+int \mbox{\hyperlink{namespacerun__periodic__lifcal_a564255de7cf6dbda4357a8b479ae24cc}{run\+\_\+periodic\+\_\+lifcal.\+MIN\+\_\+\+POSES\+\_\+\+PER\+\_\+\+CAM}} = 1
+\end{DoxyCompactItemize}

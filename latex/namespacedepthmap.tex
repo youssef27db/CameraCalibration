@@ -1,0 +1,366 @@
+\doxysection{depthmap Namespace Reference}
+\hypertarget{namespacedepthmap}{}\label{namespacedepthmap}\index{depthmap@{depthmap}}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespacedepthmap_ac63a7271da36c070991dce9a06debc12}{build\+\_\+matchers}} ()
+\item 
+bool \mbox{\hyperlink{namespacedepthmap_a4cfab791bc6b43425d0d6daddde9dbd5}{imwrite\+\_\+u16}} (str path, np.\+ndarray img\+\_\+u16)
+\item 
+np.\+ndarray \mbox{\hyperlink{namespacedepthmap_af92f086ee3f3b61f1e5cbac8655b42cf}{disparity}} (np.\+ndarray left\+\_\+gray, np.\+ndarray right\+\_\+gray)
+\item 
+np.\+ndarray \mbox{\hyperlink{namespacedepthmap_ab4900bbd4fb2c17775febac47f52b009}{to\+\_\+u16\+\_\+from\+\_\+disp}} (np.\+ndarray disp)
+\item 
+np.\+ndarray \mbox{\hyperlink{namespacedepthmap_a78031c56dd99c1eb9c2db907d9f8ccf9}{fuse\+\_\+disparities\+\_\+median}} (list disp\+\_\+list)
+\item 
+Dict\mbox{[}str, np.\+ndarray\mbox{]} \mbox{\hyperlink{namespacedepthmap_a5e95b42c1c2c9b2ed81d37ca32f09530}{generate\+\_\+depthmaps\+\_\+for\+\_\+pose}} (Dict\mbox{[}str, str\mbox{]} cam\+\_\+to\+\_\+focus\+\_\+path)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespacedepthmap_a24d39cb841a75cdd270e4d1f5a313dc5}{\+\_\+\+LEFT\+\_\+\+MATCHER}}
+\item 
+\mbox{\hyperlink{namespacedepthmap_a5780ccaf9c160f60801fdb45337de2d7}{\+\_\+\+RIGHT\+\_\+\+MATCHER}}
+\item 
+\mbox{\hyperlink{namespacedepthmap_af7b91594534de3eadd9569530bb47bb1}{\+\_\+\+WLS}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{namespacedepthmap_ac63a7271da36c070991dce9a06debc12}\index{depthmap@{depthmap}!build\_matchers@{build\_matchers}}
+\index{build\_matchers@{build\_matchers}!depthmap@{depthmap}}
+\doxysubsubsection{\texorpdfstring{build\_matchers()}{build\_matchers()}}
+{\footnotesize\ttfamily \label{namespacedepthmap_ac63a7271da36c070991dce9a06debc12} 
+depthmap.\+build\+\_\+matchers (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Build stereo matchers with SGBM and optional Weighted Least Squares (WLS) filtering.
+
+@return Tuple (left_matcher, right_matcher, wls_filter)
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{depthmap_8py_source_l00011}{11}} of file \mbox{\hyperlink{depthmap_8py_source}{depthmap.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00011\ \textcolor{keyword}{def\ }build\_matchers(): }
+\DoxyCodeLine{00012\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{} }}
+\DoxyCodeLine{00013\ \textcolor{stringliteral}{\ \ \ \ @brief\ Build\ stereo\ matchers\ with\ SGBM\ and\ optional\ Weighted\ Least\ Squares\ (WLS)\ filtering. }}
+\DoxyCodeLine{00014\ \textcolor{stringliteral}{\ \ \ \  }}
+\DoxyCodeLine{00015\ \textcolor{stringliteral}{\ \ \ \ @return\ Tuple\ (left\_matcher,\ right\_matcher,\ wls\_filter) }}
+\DoxyCodeLine{00016\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00017\ \ \ \ \ left\_matcher\ =\ cv2.StereoSGBM\_create( }
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ minDisparity=0, }
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ numDisparities=128,\ \ \textcolor{comment}{\#\ must\ be\ divisible\ by\ 16 }}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ blockSize=7, }
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ P1=8\ *\ 7\ *\ 7, }
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ P2=32\ *\ 7\ *\ 7, }
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ uniquenessRatio=5, }
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ speckleWindowSize=100, }
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ speckleRange=2, }
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ disp12MaxDiff=1, }
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ preFilterCap=31, }
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ mode=cv2.STEREO\_SGBM\_MODE\_SGBM\_3WAY }
+\DoxyCodeLine{00029\ \ \ \ \ ) }
+\DoxyCodeLine{00030\  }
+\DoxyCodeLine{00031\ \ \ \ \ right\_matcher\ =\ \textcolor{keywordtype}{None} }
+\DoxyCodeLine{00032\ \ \ \ \ wls\ =\ \textcolor{keywordtype}{None} }
+\DoxyCodeLine{00033\  }
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordflow}{try}: }
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ hasattr(cv2,\ \textcolor{stringliteral}{"{}ximgproc"{}}): }
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \ \ \ \ right\_matcher\ =\ cv2.ximgproc.createRightMatcher(left\_matcher) }
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \ \ \ \ wls\ =\ cv2.ximgproc.createDisparityWLSFilter(left\_matcher) }
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \ \ \ \ wls.setLambda(6000) }
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \ \ \ \ wls.setSigmaColor(1.0) }
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keywordflow}{except}\ Exception: }
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ right\_matcher\ =\ \textcolor{keywordtype}{None} }
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ wls\ =\ \textcolor{keywordtype}{None} }
+\DoxyCodeLine{00043\  }
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keywordflow}{return}\ left\_matcher,\ right\_matcher,\ wls }
+\DoxyCodeLine{00045\  }
+\DoxyCodeLine{00046\  }
+
+\end{DoxyCode}
+\Hypertarget{namespacedepthmap_af92f086ee3f3b61f1e5cbac8655b42cf}\index{depthmap@{depthmap}!disparity@{disparity}}
+\index{disparity@{disparity}!depthmap@{depthmap}}
+\doxysubsubsection{\texorpdfstring{disparity()}{disparity()}}
+{\footnotesize\ttfamily \label{namespacedepthmap_af92f086ee3f3b61f1e5cbac8655b42cf} 
+ np.\+ndarray depthmap.\+disparity (\begin{DoxyParamCaption}\item[{np.\+ndarray}]{left\+\_\+gray}{, }\item[{np.\+ndarray}]{right\+\_\+gray}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Compute stereo disparity map with optional WLS filtering.
+
+@param left_gray Left grayscale image
+@param right_gray Right grayscale image
+@return Float32 disparity map with NaNs for invalid pixels (<=0)
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{depthmap_8py_source_l00064}{64}} of file \mbox{\hyperlink{depthmap_8py_source}{depthmap.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00064\ \textcolor{keyword}{def\ }disparity(left\_gray:\ np.ndarray,\ right\_gray:\ np.ndarray)\ -\/>\ np.ndarray: }
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{} }}
+\DoxyCodeLine{00066\ \textcolor{stringliteral}{\ \ \ \ @brief\ Compute\ stereo\ disparity\ map\ with\ optional\ WLS\ filtering. }}
+\DoxyCodeLine{00067\ \textcolor{stringliteral}{\ \ \ \  }}
+\DoxyCodeLine{00068\ \textcolor{stringliteral}{\ \ \ \ @param\ left\_gray\ Left\ grayscale\ image }}
+\DoxyCodeLine{00069\ \textcolor{stringliteral}{\ \ \ \ @param\ right\_gray\ Right\ grayscale\ image }}
+\DoxyCodeLine{00070\ \textcolor{stringliteral}{\ \ \ \ @return\ Float32\ disparity\ map\ with\ NaNs\ for\ invalid\ pixels\ (<=0) }}
+\DoxyCodeLine{00071\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00072\ \ \ \ \ dl\ =\ \_LEFT\_MATCHER.compute(left\_gray,\ right\_gray)\ \ \textcolor{comment}{\#\ int16\ scaled\ by\ 16 }}
+\DoxyCodeLine{00073\  }
+\DoxyCodeLine{00074\ \ \ \ \ \textcolor{keywordflow}{if}\ \_RIGHT\_MATCHER\ \textcolor{keywordflow}{is}\ \textcolor{keywordflow}{not}\ \textcolor{keywordtype}{None}\ \textcolor{keywordflow}{and}\ \_WLS\ \textcolor{keywordflow}{is}\ \textcolor{keywordflow}{not}\ \textcolor{keywordtype}{None}: }
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ dr\ =\ \_RIGHT\_MATCHER.compute(right\_gray,\ left\_gray) }
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ d\ =\ \_WLS.filter(dl,\ left\_gray,\ \textcolor{keywordtype}{None},\ dr) }
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keywordflow}{else}: }
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ d\ =\ dl }
+\DoxyCodeLine{00079\  }
+\DoxyCodeLine{00080\ \ \ \ \ d\ =\ d.astype(np.float32)\ /\ 16.0 }
+\DoxyCodeLine{00081\ \ \ \ \ d[d\ <=\ 0]\ =\ np.nan }
+\DoxyCodeLine{00082\ \ \ \ \ \textcolor{keywordflow}{return}\ d }
+\DoxyCodeLine{00083\  }
+\DoxyCodeLine{00084\  }
+
+\end{DoxyCode}
+\Hypertarget{namespacedepthmap_a78031c56dd99c1eb9c2db907d9f8ccf9}\index{depthmap@{depthmap}!fuse\_disparities\_median@{fuse\_disparities\_median}}
+\index{fuse\_disparities\_median@{fuse\_disparities\_median}!depthmap@{depthmap}}
+\doxysubsubsection{\texorpdfstring{fuse\_disparities\_median()}{fuse\_disparities\_median()}}
+{\footnotesize\ttfamily \label{namespacedepthmap_a78031c56dd99c1eb9c2db907d9f8ccf9} 
+ np.\+ndarray depthmap.\+fuse\+\_\+disparities\+\_\+median (\begin{DoxyParamCaption}\item[{list}]{disp\+\_\+list}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Fuse multiple disparity maps robustly using median.
+
+@param disp_list List of float32 disparity maps to fuse
+@return Float32 fused disparity map with 0 where no valid data exists
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{depthmap_8py_source_l00103}{103}} of file \mbox{\hyperlink{depthmap_8py_source}{depthmap.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00103\ \textcolor{keyword}{def\ }fuse\_disparities\_median(disp\_list:\ list)\ -\/>\ np.ndarray: }
+\DoxyCodeLine{00104\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{} }}
+\DoxyCodeLine{00105\ \textcolor{stringliteral}{\ \ \ \ @brief\ Fuse\ multiple\ disparity\ maps\ robustly\ using\ median. }}
+\DoxyCodeLine{00106\ \textcolor{stringliteral}{\ \ \ \  }}
+\DoxyCodeLine{00107\ \textcolor{stringliteral}{\ \ \ \ @param\ disp\_list\ List\ of\ float32\ disparity\ maps\ to\ fuse }}
+\DoxyCodeLine{00108\ \textcolor{stringliteral}{\ \ \ \ @return\ Float32\ fused\ disparity\ map\ with\ 0\ where\ no\ valid\ data\ exists }}
+\DoxyCodeLine{00109\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00110\ \ \ \ \ stack\ =\ np.stack(disp\_list,\ axis=0)\ \ \textcolor{comment}{\#\ (K,H,W) }}
+\DoxyCodeLine{00111\  }
+\DoxyCodeLine{00112\ \ \ \ \ \textcolor{comment}{\#\ Locations\ where\ at\ least\ one\ value\ is\ valid }}
+\DoxyCodeLine{00113\ \ \ \ \ valid\_any\ =\ np.any(\string~np.isnan(stack),\ axis=0) }
+\DoxyCodeLine{00114\  }
+\DoxyCodeLine{00115\ \ \ \ \ \textcolor{comment}{\#\ Initialize\ result\ with\ zeros }}
+\DoxyCodeLine{00116\ \ \ \ \ disp\_final\ =\ np.zeros(stack.shape[1:],\ dtype=np.float32) }
+\DoxyCodeLine{00117\  }
+\DoxyCodeLine{00118\ \ \ \ \ \textcolor{comment}{\#\ Compute\ median\ only\ where\ we\ have\ valid\ data }}
+\DoxyCodeLine{00119\ \ \ \ \ \textcolor{keywordflow}{if}\ np.any(valid\_any): }
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ disp\_final[valid\_any]\ =\ np.nanmedian(stack[:,\ valid\_any],\ axis=0) }
+\DoxyCodeLine{00121\  }
+\DoxyCodeLine{00122\ \ \ \ \ \textcolor{comment}{\#\ Remove\ non-\/positive\ disparities }}
+\DoxyCodeLine{00123\ \ \ \ \ disp\_final[disp\_final\ <=\ 0]\ =\ 0.0 }
+\DoxyCodeLine{00124\ \ \ \ \ \textcolor{keywordflow}{return}\ disp\_final }
+\DoxyCodeLine{00125\  }
+\DoxyCodeLine{00126\  }
+
+\end{DoxyCode}
+\Hypertarget{namespacedepthmap_a5e95b42c1c2c9b2ed81d37ca32f09530}\index{depthmap@{depthmap}!generate\_depthmaps\_for\_pose@{generate\_depthmaps\_for\_pose}}
+\index{generate\_depthmaps\_for\_pose@{generate\_depthmaps\_for\_pose}!depthmap@{depthmap}}
+\doxysubsubsection{\texorpdfstring{generate\_depthmaps\_for\_pose()}{generate\_depthmaps\_for\_pose()}}
+{\footnotesize\ttfamily \label{namespacedepthmap_a5e95b42c1c2c9b2ed81d37ca32f09530} 
+ Dict\mbox{[}str, np.\+ndarray\mbox{]} depthmap.\+generate\+\_\+depthmaps\+\_\+for\+\_\+pose (\begin{DoxyParamCaption}\item[{Dict\mbox{[}str, str\mbox{]}}]{cam\+\_\+to\+\_\+focus\+\_\+path}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Generate depth maps for all cameras in a multi-camera pose.
+
+@param cam_to_focus_path Dictionary mapping camera IDs to image file paths
+@return Dictionary mapping camera IDs to uint16 depth maps
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{depthmap_8py_source_l00127}{127}} of file \mbox{\hyperlink{depthmap_8py_source}{depthmap.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00127\ \textcolor{keyword}{def\ }generate\_depthmaps\_for\_pose(cam\_to\_focus\_path:\ Dict[str,\ str])\ -\/>\ Dict[str,\ np.ndarray]: }
+\DoxyCodeLine{00128\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{} }}
+\DoxyCodeLine{00129\ \textcolor{stringliteral}{\ \ \ \ @brief\ Generate\ depth\ maps\ for\ all\ cameras\ in\ a\ multi-\/camera\ pose. }}
+\DoxyCodeLine{00130\ \textcolor{stringliteral}{\ \ \ \  }}
+\DoxyCodeLine{00131\ \textcolor{stringliteral}{\ \ \ \ @param\ cam\_to\_focus\_path\ Dictionary\ mapping\ camera\ IDs\ to\ image\ file\ paths }}
+\DoxyCodeLine{00132\ \textcolor{stringliteral}{\ \ \ \ @return\ Dictionary\ mapping\ camera\ IDs\ to\ uint16\ depth\ maps }}
+\DoxyCodeLine{00133\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00134\  }
+\DoxyCodeLine{00135\ \ \ \ \ \textcolor{comment}{\#\ 1)\ Load\ images }}
+\DoxyCodeLine{00136\ \ \ \ \ imgs\ =\ \{\} }
+\DoxyCodeLine{00137\ \ \ \ \ \textcolor{keywordflow}{for}\ cam,\ path\ \textcolor{keywordflow}{in}\ cam\_to\_focus\_path.items(): }
+\DoxyCodeLine{00138\ \ \ \ \ \ \ \ \ im\ =\ cv2.imread(path,\ cv2.IMREAD\_GRAYSCALE) }
+\DoxyCodeLine{00139\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ im\ \textcolor{keywordflow}{is}\ \textcolor{keywordtype}{None}: }
+\DoxyCodeLine{00140\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue} }
+\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ imgs[cam]\ =\ im }
+\DoxyCodeLine{00142\  }
+\DoxyCodeLine{00143\ \ \ \ \ \textcolor{keywordflow}{if}\ len(imgs)\ <\ 2: }
+\DoxyCodeLine{00144\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \{\} }
+\DoxyCodeLine{00145\  }
+\DoxyCodeLine{00146\ \ \ \ \ \textcolor{comment}{\#\ helper }}
+\DoxyCodeLine{00147\ \ \ \ \ \textcolor{keyword}{def\ }opposite\_name(name:\ str)\ -\/>\ Optional[str]: }
+\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ name.startswith(\textcolor{stringliteral}{"{}Left"{}}): }
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ name.replace(\textcolor{stringliteral}{"{}Left"{}},\ \textcolor{stringliteral}{"{}Right"{}},\ 1) }
+\DoxyCodeLine{00150\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ name.startswith(\textcolor{stringliteral}{"{}Right"{}}): }
+\DoxyCodeLine{00151\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ name.replace(\textcolor{stringliteral}{"{}Right"{}},\ \textcolor{stringliteral}{"{}Left"{}},\ 1) }
+\DoxyCodeLine{00152\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ name.startswith(\textcolor{stringliteral}{"{}Up"{}}): }
+\DoxyCodeLine{00153\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ name.replace(\textcolor{stringliteral}{"{}Up"{}},\ \textcolor{stringliteral}{"{}Down"{}},\ 1) }
+\DoxyCodeLine{00154\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ name.startswith(\textcolor{stringliteral}{"{}Down"{}}): }
+\DoxyCodeLine{00155\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ name.replace(\textcolor{stringliteral}{"{}Down"{}},\ \textcolor{stringliteral}{"{}Up"{}},\ 1) }
+\DoxyCodeLine{00156\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keywordtype}{None} }
+\DoxyCodeLine{00157\  }
+\DoxyCodeLine{00158\ \ \ \ \ depthmaps\ =\ \{\} }
+\DoxyCodeLine{00159\  }
+\DoxyCodeLine{00160\ \ \ \ \ \textcolor{keywordflow}{for}\ cam,\ img\ \textcolor{keywordflow}{in}\ imgs.items(): }
+\DoxyCodeLine{00161\ \ \ \ \ \ \ \ \ disp\_list\ =\ [] }
+\DoxyCodeLine{00162\  }
+\DoxyCodeLine{00163\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ cam\ ==\ \textcolor{stringliteral}{"{}Center"{}}: }
+\DoxyCodeLine{00164\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Center\ uses\ all\ other\ views }}
+\DoxyCodeLine{00165\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ other\_cam,\ other\_img\ \textcolor{keywordflow}{in}\ imgs.items(): }
+\DoxyCodeLine{00166\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ other\_cam\ ==\ \textcolor{stringliteral}{"{}Center"{}}: }
+\DoxyCodeLine{00167\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue} }
+\DoxyCodeLine{00168\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ d\ =\ disparity(img,\ other\_img) }
+\DoxyCodeLine{00169\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Keep\ only\ if\ there\ is\ any\ valid\ disparity }}
+\DoxyCodeLine{00170\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ np.any(\string~np.isnan(d)): }
+\DoxyCodeLine{00171\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ disp\_list.append(d) }
+\DoxyCodeLine{00172\  }
+\DoxyCodeLine{00173\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}: }
+\DoxyCodeLine{00174\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Opposite\ direction\ if\ available }}
+\DoxyCodeLine{00175\ \ \ \ \ \ \ \ \ \ \ \ \ opp\ =\ opposite\_name(cam) }
+\DoxyCodeLine{00176\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ opp\ \textcolor{keywordflow}{is}\ \textcolor{keywordflow}{not}\ \textcolor{keywordtype}{None}\ \textcolor{keywordflow}{and}\ opp\ \textcolor{keywordflow}{in}\ imgs: }
+\DoxyCodeLine{00177\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ cam.startswith(\textcolor{stringliteral}{"{}Right"{}})\ \textcolor{keywordflow}{or}\ cam.startswith(\textcolor{stringliteral}{"{}Down"{}}): }
+\DoxyCodeLine{00178\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ d\ =\ disparity(imgs[opp],\ img) }
+\DoxyCodeLine{00179\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}: }
+\DoxyCodeLine{00180\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ d\ =\ disparity(img,\ imgs[opp]) }
+\DoxyCodeLine{00181\  }
+\DoxyCodeLine{00182\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ np.any(\string~np.isnan(d)): }
+\DoxyCodeLine{00183\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ disp\_list.append(d) }
+\DoxyCodeLine{00184\  }
+\DoxyCodeLine{00185\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Add\ Center\ view }}
+\DoxyCodeLine{00186\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{stringliteral}{"{}Center"{}}\ \textcolor{keywordflow}{in}\ imgs: }
+\DoxyCodeLine{00187\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ d\ =\ disparity(img,\ imgs[\textcolor{stringliteral}{"{}Center"{}}]) }
+\DoxyCodeLine{00188\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ np.any(\string~np.isnan(d)): }
+\DoxyCodeLine{00189\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ disp\_list.append(d) }
+\DoxyCodeLine{00190\  }
+\DoxyCodeLine{00191\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ disp\_list: }
+\DoxyCodeLine{00192\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ No\ valid\ disparity\ found;\ skip }}
+\DoxyCodeLine{00193\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue} }
+\DoxyCodeLine{00194\  }
+\DoxyCodeLine{00195\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Robust\ fusion }}
+\DoxyCodeLine{00196\ \ \ \ \ \ \ \ \ disp\_final\ =\ fuse\_disparities\_median(disp\_list) }
+\DoxyCodeLine{00197\  }
+\DoxyCodeLine{00198\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Convert\ to\ uint16\ depth\ map }}
+\DoxyCodeLine{00199\ \ \ \ \ \ \ \ \ depth16\ =\ to\_u16\_from\_disp(disp\_final) }
+\DoxyCodeLine{00200\ \ \ \ \ \ \ \ \ depthmaps[cam]\ =\ depth16 }
+\DoxyCodeLine{00201\  }
+\DoxyCodeLine{00202\ \ \ \ \ \textcolor{keywordflow}{return}\ depthmaps }
+
+\end{DoxyCode}
+\Hypertarget{namespacedepthmap_a4cfab791bc6b43425d0d6daddde9dbd5}\index{depthmap@{depthmap}!imwrite\_u16@{imwrite\_u16}}
+\index{imwrite\_u16@{imwrite\_u16}!depthmap@{depthmap}}
+\doxysubsubsection{\texorpdfstring{imwrite\_u16()}{imwrite\_u16()}}
+{\footnotesize\ttfamily \label{namespacedepthmap_a4cfab791bc6b43425d0d6daddde9dbd5} 
+ bool depthmap.\+imwrite\+\_\+u16 (\begin{DoxyParamCaption}\item[{str}]{path}{, }\item[{np.\+ndarray}]{img\+\_\+u16}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Write uint16 png, create dirs automatically.
+
+@param path Output file path
+@param img_u16 Image array in uint16 format
+@return True if write succeeded, False otherwise
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{depthmap_8py_source_l00050}{50}} of file \mbox{\hyperlink{depthmap_8py_source}{depthmap.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00050\ \textcolor{keyword}{def\ }imwrite\_u16(path:\ str,\ img\_u16:\ np.ndarray)\ -\/>\ bool: }
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{} }}
+\DoxyCodeLine{00052\ \textcolor{stringliteral}{\ \ \ \ @brief\ Write\ uint16\ png,\ create\ dirs\ automatically. }}
+\DoxyCodeLine{00053\ \textcolor{stringliteral}{\ \ \ \  }}
+\DoxyCodeLine{00054\ \textcolor{stringliteral}{\ \ \ \ @param\ path\ Output\ file\ path }}
+\DoxyCodeLine{00055\ \textcolor{stringliteral}{\ \ \ \ @param\ img\_u16\ Image\ array\ in\ uint16\ format }}
+\DoxyCodeLine{00056\ \textcolor{stringliteral}{\ \ \ \ @return\ True\ if\ write\ succeeded,\ False\ otherwise }}
+\DoxyCodeLine{00057\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00058\ \ \ \ \ os.makedirs(os.path.dirname(path),\ exist\_ok=\textcolor{keyword}{True}) }
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keywordflow}{if}\ img\_u16.dtype\ !=\ np.uint16: }
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ img\_u16\ =\ img\_u16.astype(np.uint16) }
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keywordflow}{return}\ bool(cv2.imwrite(path,\ img\_u16)) }
+\DoxyCodeLine{00062\  }
+\DoxyCodeLine{00063\  }
+
+\end{DoxyCode}
+\Hypertarget{namespacedepthmap_ab4900bbd4fb2c17775febac47f52b009}\index{depthmap@{depthmap}!to\_u16\_from\_disp@{to\_u16\_from\_disp}}
+\index{to\_u16\_from\_disp@{to\_u16\_from\_disp}!depthmap@{depthmap}}
+\doxysubsubsection{\texorpdfstring{to\_u16\_from\_disp()}{to\_u16\_from\_disp()}}
+{\footnotesize\ttfamily \label{namespacedepthmap_ab4900bbd4fb2c17775febac47f52b009} 
+ np.\+ndarray depthmap.\+to\+\_\+u16\+\_\+from\+\_\+disp (\begin{DoxyParamCaption}\item[{np.\+ndarray}]{disp}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Convert disparity to uint16 depth map to be compatible with LiFCal.
+
+@param disp Float32 disparity map
+@return Uint16 depth map
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{depthmap_8py_source_l00085}{85}} of file \mbox{\hyperlink{depthmap_8py_source}{depthmap.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00085\ \textcolor{keyword}{def\ }to\_u16\_from\_disp(disp:\ np.ndarray)\ -\/>\ np.ndarray: }
+\DoxyCodeLine{00086\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{} }}
+\DoxyCodeLine{00087\ \textcolor{stringliteral}{\ \ \ \ @brief\ Convert\ disparity\ to\ uint16\ depth\ map\ to\ be\ compatible\ with\ LiFCal. }}
+\DoxyCodeLine{00088\ \textcolor{stringliteral}{\ \ \ \  }}
+\DoxyCodeLine{00089\ \textcolor{stringliteral}{\ \ \ \ @param\ disp\ Float32\ disparity\ map }}
+\DoxyCodeLine{00090\ \textcolor{stringliteral}{\ \ \ \ @return\ Uint16\ depth\ map }}
+\DoxyCodeLine{00091\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00092\ \ \ \ \ disp\ =\ np.nan\_to\_num(disp,\ nan=0.0,\ posinf=0.0,\ neginf=0.0) }
+\DoxyCodeLine{00093\  }
+\DoxyCodeLine{00094\ \ \ \ \ mx\ =\ float(np.percentile(disp,\ 99)) }
+\DoxyCodeLine{00095\ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ np.isfinite(mx)\ \textcolor{keywordflow}{or}\ mx\ <=\ 1e-\/6: }
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ np.zeros(disp.shape,\ dtype=np.uint16) }
+\DoxyCodeLine{00097\  }
+\DoxyCodeLine{00098\ \ \ \ \ disp\ =\ np.clip(disp,\ 0.0,\ mx) }
+\DoxyCodeLine{00099\ \ \ \ \ depth16\ =\ (disp\ /\ mx\ *\ 65535.0).astype(np.uint16) }
+\DoxyCodeLine{00100\ \ \ \ \ \textcolor{keywordflow}{return}\ depth16 }
+\DoxyCodeLine{00101\  }
+\DoxyCodeLine{00102\  }
+
+\end{DoxyCode}
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{namespacedepthmap_a24d39cb841a75cdd270e4d1f5a313dc5}\index{depthmap@{depthmap}!\_LEFT\_MATCHER@{\_LEFT\_MATCHER}}
+\index{\_LEFT\_MATCHER@{\_LEFT\_MATCHER}!depthmap@{depthmap}}
+\doxysubsubsection{\texorpdfstring{\_LEFT\_MATCHER}{\_LEFT\_MATCHER}}
+{\footnotesize\ttfamily \label{namespacedepthmap_a24d39cb841a75cdd270e4d1f5a313dc5} 
+depthmap.\+\_\+\+LEFT\+\_\+\+MATCHER\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line \mbox{\hyperlink{depthmap_8py_source_l00047}{47}} of file \mbox{\hyperlink{depthmap_8py_source}{depthmap.\+py}}.
+
+\Hypertarget{namespacedepthmap_a5780ccaf9c160f60801fdb45337de2d7}\index{depthmap@{depthmap}!\_RIGHT\_MATCHER@{\_RIGHT\_MATCHER}}
+\index{\_RIGHT\_MATCHER@{\_RIGHT\_MATCHER}!depthmap@{depthmap}}
+\doxysubsubsection{\texorpdfstring{\_RIGHT\_MATCHER}{\_RIGHT\_MATCHER}}
+{\footnotesize\ttfamily \label{namespacedepthmap_a5780ccaf9c160f60801fdb45337de2d7} 
+depthmap.\+\_\+\+RIGHT\+\_\+\+MATCHER\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line \mbox{\hyperlink{depthmap_8py_source_l00047}{47}} of file \mbox{\hyperlink{depthmap_8py_source}{depthmap.\+py}}.
+
+\Hypertarget{namespacedepthmap_af7b91594534de3eadd9569530bb47bb1}\index{depthmap@{depthmap}!\_WLS@{\_WLS}}
+\index{\_WLS@{\_WLS}!depthmap@{depthmap}}
+\doxysubsubsection{\texorpdfstring{\_WLS}{\_WLS}}
+{\footnotesize\ttfamily \label{namespacedepthmap_af7b91594534de3eadd9569530bb47bb1} 
+depthmap.\+\_\+\+WLS\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line \mbox{\hyperlink{depthmap_8py_source_l00047}{47}} of file \mbox{\hyperlink{depthmap_8py_source}{depthmap.\+py}}.
+

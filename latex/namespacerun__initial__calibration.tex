@@ -1,0 +1,245 @@
+\doxysection{run\+\_\+initial\+\_\+calibration Namespace Reference}
+\hypertarget{namespacerun__initial__calibration}{}\label{namespacerun__initial__calibration}\index{run\_initial\_calibration@{run\_initial\_calibration}}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespacerun__initial__calibration_ad5d1109ec07b76e00c683010944c19da}{parse\+\_\+args}} ()
+\item 
+\mbox{\hyperlink{namespacerun__initial__calibration_a09cdc144574ca7f6703a09c05cd962d2}{main}} (args)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+str \mbox{\hyperlink{namespacerun__initial__calibration_af6a877ffd6b195a4dbb2158784363b56}{DEFAULT\+\_\+\+BASE\+\_\+\+DIR}} = "{}/data/calibration\+LFC/sets/imageset5"{}
+\item 
+int \mbox{\hyperlink{namespacerun__initial__calibration_ab111c2c3d4bcbbe62ce31767ff98e28f}{DEFAULT\+\_\+\+NUM\+\_\+\+POSES}} = 28
+\item 
+list \mbox{\hyperlink{namespacerun__initial__calibration_ab8100c90bf96b63231a8edb40a511f04}{CAM\+\_\+\+IDS}}
+\item 
+\mbox{\hyperlink{namespacerun__initial__calibration_ab86aa06d4bbe88abce338adfd56cb44f}{repo\+Root}} = os.\+path.\+dirname(os.\+path.\+dirname(os.\+path.\+abspath(\+\_\+\+\_\+file\+\_\+\+\_\+)))
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Test runner for initial calibration.
+
+Usage:
+  cd calibrationLFC
+  python3 run_initial_calibration.py --base_dir /path/to/imageset --num_poses 28 --bundle-adjust
+  python3 run_initial_calibration.py --base_dir /path/to/imageset --num_poses 28 --no-bundle-adjust
+
+Performs validation checks (file existence, corner detection on pose 0)
+then runs the complete initial calibration pipeline. Outputs summary statistics
+for intrinsics, extrinsics, and health score.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Function Documentation}
+\Hypertarget{namespacerun__initial__calibration_a09cdc144574ca7f6703a09c05cd962d2}\index{run\_initial\_calibration@{run\_initial\_calibration}!main@{main}}
+\index{main@{main}!run\_initial\_calibration@{run\_initial\_calibration}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily \label{namespacerun__initial__calibration_a09cdc144574ca7f6703a09c05cd962d2} 
+run\+\_\+initial\+\_\+calibration.\+main (\begin{DoxyParamCaption}\item[{}]{args}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Run complete initial calibration pipeline with validation and summary output.
+
+@param args
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{run__initial__calibration_8py_source_l00059}{59}} of file \mbox{\hyperlink{run__initial__calibration_8py_source}{run\+\_\+initial\+\_\+calibration.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00059\ \textcolor{keyword}{def\ }main(args): }
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{} }}
+\DoxyCodeLine{00061\ \textcolor{stringliteral}{\ \ \ \ @brief\ Run\ complete\ initial\ calibration\ pipeline\ with\ validation\ and\ summary\ output. }}
+\DoxyCodeLine{00062\ \textcolor{stringliteral}{\ \ \ \  }}
+\DoxyCodeLine{00063\ \textcolor{stringliteral}{\ \ \ \ @param\ args }}
+\DoxyCodeLine{00064\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00065\ \ \ \ \ print(\textcolor{stringliteral}{"{}Creating\ ImageSet..."{}}) }
+\DoxyCodeLine{00066\ \ \ \ \ imageSet\ =\ \mbox{\hyperlink{namespace_image_set}{ImageSet}}(args.base\_dir,\ args.num\_poses,\ CAM\_IDS) }
+\DoxyCodeLine{00067\  }
+\DoxyCodeLine{00068\ \ \ \ \ print(\textcolor{stringliteral}{"{}Instantiating\ Controller\ and\ InitialCalibration..."{}}) }
+\DoxyCodeLine{00069\ \ \ \ \ controller\ =\ \mbox{\hyperlink{namespace_controller}{Controller}}(bundleAdjust=args.bundle\_adjust) }
+\DoxyCodeLine{00070\ \ \ \ \ logger\ =\ controller.resultLogger }
+\DoxyCodeLine{00071\  }
+\DoxyCodeLine{00072\ \ \ \ \ print(\textcolor{stringliteral}{"{}\(\backslash\)nQuick\ checks\ (pose\ 0):\ file\ exists\ /\ corners\ detected"{}}) }
+\DoxyCodeLine{00073\ \ \ \ \ \textcolor{keywordflow}{for}\ cam\ \textcolor{keywordflow}{in}\ CAM\_IDS: }
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ path\ =\ imageSet.getImagePath(0,\ cam) }
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ exists\ =\ os.path.exists(path) }
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ cornersFound\ =\ \textcolor{keywordtype}{None} }
+\DoxyCodeLine{00077\  }
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}: }
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \ \ \ \ cornersFound,\ \_,\ \_\ =\ controller.initialCalibration.detectCorners(path) }
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{except}\ Exception\ \textcolor{keyword}{as}\ e: }
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \ \ \ \ cornersFound\ =\ f\textcolor{stringliteral}{"{}error:\ \{e.\_\_class\_\_.\_\_name\_\_\}"{}} }
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}\ \{cam\}:\ \{path\}\ -\/\ exists=\{exists\}\ -\/\ corners=\{cornersFound\}"{}}) }
+\DoxyCodeLine{00083\  }
+\DoxyCodeLine{00084\ \ \ \ \ print(\textcolor{stringliteral}{"{}\(\backslash\)nRunning\ initial\ calibration\ (this\ may\ take\ time\ depending\ on\ data)..."{}}) }
+\DoxyCodeLine{00085\ \ \ \ \ \textcolor{keywordflow}{try}: }
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ calibrationState\ =\ controller.runInitialCalibration(imageSet) }
+\DoxyCodeLine{00087\ \ \ \ \ \textcolor{keywordflow}{except}\ Exception\ \textcolor{keyword}{as}\ e: }
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ logger.logger.error(f\textcolor{stringliteral}{"{}Calibration\ failed\ with\ exception:\ \{e\}"{}},\ exc\_info=\textcolor{keyword}{True}) }
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}Calibration\ failed,\ see\ calibration.log\ for\ details."{}}) }
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{raise} }
+\DoxyCodeLine{00091\  }
+\DoxyCodeLine{00092\ \ \ \ \ print(\textcolor{stringliteral}{"{}\(\backslash\)nCalibration\ finished.\ Attempting\ to\ print\ summary..."{}}) }
+\DoxyCodeLine{00093\ \ \ \ \ \textcolor{keywordflow}{try}: }
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ stateDict\ =\ calibrationState.\_\_getState\_\_() }
+\DoxyCodeLine{00095\ \ \ \ \ \textcolor{keywordflow}{except}\ Exception: }
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ stateDict\ =\ \textcolor{keywordtype}{None} }
+\DoxyCodeLine{00097\  }
+\DoxyCodeLine{00098\ \ \ \ \ \textcolor{keywordflow}{if}\ stateDict\ \textcolor{keywordflow}{is}\ \textcolor{keywordtype}{None}: }
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}Could\ not\ extract\ a\ state\ dictionary."{}}) }
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return} }
+\DoxyCodeLine{00101\  }
+\DoxyCodeLine{00102\ \ \ \ \ intr\ =\ stateDict.get(\textcolor{stringliteral}{"{}intrinsics"{}},\ \{\}) }
+\DoxyCodeLine{00103\ \ \ \ \ extr\ =\ stateDict.get(\textcolor{stringliteral}{"{}extrinsics"{}},\ \{\}) }
+\DoxyCodeLine{00104\  }
+\DoxyCodeLine{00105\ \ \ \ \ \textcolor{comment}{\#\ Print\ calibration\ results\ per\ camera }}
+\DoxyCodeLine{00106\ \ \ \ \ print(\textcolor{stringliteral}{"{}\(\backslash\)nCalibration\ Results\ by\ Camera"{}}) }
+\DoxyCodeLine{00107\ \ \ \ \ print(\textcolor{stringliteral}{"{}="{}}\ *\ 50) }
+\DoxyCodeLine{00108\  }
+\DoxyCodeLine{00109\ \ \ \ \ \textcolor{keywordflow}{for}\ cam\ \textcolor{keywordflow}{in}\ CAM\_IDS: }
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}\(\backslash\)n-\/-\/-\/\ \{cam\}\ -\/-\/-\/"{}}) }
+\DoxyCodeLine{00111\  }
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Intrinsic\ parameters }}
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ cam\ \textcolor{keywordflow}{in}\ intr: }
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \ \ \ \ data\ =\ intr[cam] }
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \ \ \ \ K\ =\ data[\textcolor{stringliteral}{"{}cameraMatrix"{}}] }
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ \ \ \ \ dist\ =\ data[\textcolor{stringliteral}{"{}distortionCoeffs"{}}].ravel() }
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \ \ \ \ err\ =\ data[\textcolor{stringliteral}{"{}reprojectionError"{}}] }
+\DoxyCodeLine{00118\  }
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}Intrinsics:"{}}) }
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}\ K\ ="{}}) }
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}\ \ \{K[0][0]:.3f\}\ \{K[0][1]:.3f\}\ \{K[0][2]:.3f\}"{}}) }
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}\ \ \{K[1][0]:.3f\}\ \{K[1][1]:.3f\}\ \{K[1][2]:.3f\}"{}}) }
+\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}\ \ \{K[2][0]:.3f\}\ \{K[2][1]:.3f\}\ \{K[2][2]:.3f\}"{}}) }
+\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}\ distCoeffs\ ="{}},\ dist) }
+\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}\ reprojectionError\ =\ \{err:.6f\}"{}}) }
+\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}: }
+\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}Intrinsics:\ (no\ data)"{}}) }
+\DoxyCodeLine{00128\  }
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Extrinsic\ parameters }}
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ cam\ \textcolor{keywordflow}{in}\ extr: }
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \ \ \ \ data\ =\ extr[cam] }
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ \ \ \ \ R\ =\ data[\textcolor{stringliteral}{"{}rotationMatrix"{}}] }
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \ \ \ \ T\ =\ data[\textcolor{stringliteral}{"{}translationVector"{}}].ravel() }
+\DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ \ \ \ \ rms\ =\ data[\textcolor{stringliteral}{"{}stereoRms"{}}] }
+\DoxyCodeLine{00135\  }
+\DoxyCodeLine{00136\ \ \ \ \ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}Extrinsics:"{}}) }
+\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}\ R\ ="{}}) }
+\DoxyCodeLine{00138\ \ \ \ \ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}\ \ \{R[0][0]:.5f\}\ \{R[0][1]:.5f\}\ \{R[0][2]:.5f\}"{}}) }
+\DoxyCodeLine{00139\ \ \ \ \ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}\ \ \{R[1][0]:.5f\}\ \{R[1][1]:.5f\}\ \{R[1][2]:.5f\}"{}}) }
+\DoxyCodeLine{00140\ \ \ \ \ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}\ \ \{R[2][0]:.5f\}\ \{R[2][1]:.5f\}\ \{R[2][2]:.5f\}"{}}) }
+\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}\ T\ ="{}},\ T) }
+\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}\ stereoRMS\ =\ \{rms:.6f\}"{}}) }
+\DoxyCodeLine{00143\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}: }
+\DoxyCodeLine{00144\ \ \ \ \ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}\ \ Extrinsics:\ (no\ data)"{}}) }
+\DoxyCodeLine{00145\  }
+\DoxyCodeLine{00146\ \ \ \ \ \textcolor{comment}{\#\ Print\ health\ score }}
+\DoxyCodeLine{00147\ \ \ \ \ print(\textcolor{stringliteral}{"{}\(\backslash\)nOverall\ Health\ Score"{}}) }
+\DoxyCodeLine{00148\ \ \ \ \ print(\textcolor{stringliteral}{"{}="{}}\ *\ 50) }
+\DoxyCodeLine{00149\ \ \ \ \ score\ =\ controller.selfHealthCheck(calibrationState) }
+\DoxyCodeLine{00150\ \ \ \ \ print(f\textcolor{stringliteral}{"{}Global\ HealthScore\ =\ \{score:.2f\}\ /\ 100"{}}) }
+\DoxyCodeLine{00151\  }
+
+\end{DoxyCode}
+\Hypertarget{namespacerun__initial__calibration_ad5d1109ec07b76e00c683010944c19da}\index{run\_initial\_calibration@{run\_initial\_calibration}!parse\_args@{parse\_args}}
+\index{parse\_args@{parse\_args}!run\_initial\_calibration@{run\_initial\_calibration}}
+\doxysubsubsection{\texorpdfstring{parse\_args()}{parse\_args()}}
+{\footnotesize\ttfamily \label{namespacerun__initial__calibration_ad5d1109ec07b76e00c683010944c19da} 
+run\+\_\+initial\+\_\+calibration.\+parse\+\_\+args (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Parse command line arguments for calibration configuration.
+
+@return Parsed arguments with base_dir, num_poses, and bundle_adjust settings
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{run__initial__calibration_8py_source_l00034}{34}} of file \mbox{\hyperlink{run__initial__calibration_8py_source}{run\+\_\+initial\+\_\+calibration.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00034\ \textcolor{keyword}{def\ }parse\_args(): }
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{} }}
+\DoxyCodeLine{00036\ \textcolor{stringliteral}{\ \ \ \ @brief\ Parse\ command\ line\ arguments\ for\ calibration\ configuration. }}
+\DoxyCodeLine{00037\ \textcolor{stringliteral}{\ \ \ \  }}
+\DoxyCodeLine{00038\ \textcolor{stringliteral}{\ \ \ \ @return\ Parsed\ arguments\ with\ base\_dir,\ num\_poses,\ and\ bundle\_adjust\ settings }}
+\DoxyCodeLine{00039\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00040\ \ \ \ \ parser\ =\ argparse.ArgumentParser(description=\textcolor{stringliteral}{"{}Run\ initial\ camera\ calibration"{}}) }
+\DoxyCodeLine{00041\ \ \ \ \ parser.add\_argument(\textcolor{stringliteral}{"{}-\/-\/base\_dir"{}},\ default=DEFAULT\_BASE\_DIR,\ help=\textcolor{stringliteral}{"{}Path\ to\ imageset\ directory"{}}) }
+\DoxyCodeLine{00042\ \ \ \ \ parser.add\_argument(\textcolor{stringliteral}{"{}-\/-\/num\_poses"{}},\ type=int,\ default=DEFAULT\_NUM\_POSES,\ help=\textcolor{stringliteral}{"{}Number\ of\ poses\ in\ the\ imageset"{}}) }
+\DoxyCodeLine{00043\ \ \ \ \ parser.add\_argument( }
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}-\/-\/bundle-\/adjust"{}}, }
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ dest=\textcolor{stringliteral}{"{}bundle\_adjust"{}}, }
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ action=\textcolor{stringliteral}{"{}store\_true"{}}, }
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ help=\textcolor{stringliteral}{"{}Enable\ bundle\ adjustment\ (default)"{}}, }
+\DoxyCodeLine{00048\ \ \ \ \ ) }
+\DoxyCodeLine{00049\ \ \ \ \ parser.add\_argument( }
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}-\/-\/no-\/bundle-\/adjust"{}}, }
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ dest=\textcolor{stringliteral}{"{}bundle\_adjust"{}}, }
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ action=\textcolor{stringliteral}{"{}store\_false"{}}, }
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ help=\textcolor{stringliteral}{"{}Disable\ bundle\ adjustment"{}}, }
+\DoxyCodeLine{00054\ \ \ \ \ ) }
+\DoxyCodeLine{00055\ \ \ \ \ parser.set\_defaults(bundle\_adjust=\textcolor{keyword}{True}) }
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keywordflow}{return}\ parser.parse\_args() }
+\DoxyCodeLine{00057\  }
+\DoxyCodeLine{00058\  }
+
+\end{DoxyCode}
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{namespacerun__initial__calibration_ab8100c90bf96b63231a8edb40a511f04}\index{run\_initial\_calibration@{run\_initial\_calibration}!CAM\_IDS@{CAM\_IDS}}
+\index{CAM\_IDS@{CAM\_IDS}!run\_initial\_calibration@{run\_initial\_calibration}}
+\doxysubsubsection{\texorpdfstring{CAM\_IDS}{CAM\_IDS}}
+{\footnotesize\ttfamily \label{namespacerun__initial__calibration_ab8100c90bf96b63231a8edb40a511f04} 
+list run\+\_\+initial\+\_\+calibration.\+CAM\+\_\+\+IDS}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ =\ \ [}
+\DoxyCodeLine{00002\ \ \ \ \ \textcolor{stringliteral}{"{}Center"{}},}
+\DoxyCodeLine{00003\ \ \ \ \ \textcolor{stringliteral}{"{}Up1"{}},\ \textcolor{stringliteral}{"{}Up2"{}},\ \textcolor{stringliteral}{"{}Up3"{}},}
+\DoxyCodeLine{00004\ \ \ \ \ \textcolor{stringliteral}{"{}Down1"{}},\ \textcolor{stringliteral}{"{}Down2"{}},\ \textcolor{stringliteral}{"{}Down3"{}},}
+\DoxyCodeLine{00005\ \ \ \ \ \textcolor{stringliteral}{"{}Left1"{}},\ \textcolor{stringliteral}{"{}Left2"{}},\ \textcolor{stringliteral}{"{}Left3"{}},}
+\DoxyCodeLine{00006\ \ \ \ \ \textcolor{stringliteral}{"{}Right1"{}},\ \textcolor{stringliteral}{"{}Right2"{}},\ \textcolor{stringliteral}{"{}Right3"{}},}
+\DoxyCodeLine{00007\ ]}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{run__initial__calibration_8py_source_l00025}{25}} of file \mbox{\hyperlink{run__initial__calibration_8py_source}{run\+\_\+initial\+\_\+calibration.\+py}}.
+
+\Hypertarget{namespacerun__initial__calibration_af6a877ffd6b195a4dbb2158784363b56}\index{run\_initial\_calibration@{run\_initial\_calibration}!DEFAULT\_BASE\_DIR@{DEFAULT\_BASE\_DIR}}
+\index{DEFAULT\_BASE\_DIR@{DEFAULT\_BASE\_DIR}!run\_initial\_calibration@{run\_initial\_calibration}}
+\doxysubsubsection{\texorpdfstring{DEFAULT\_BASE\_DIR}{DEFAULT\_BASE\_DIR}}
+{\footnotesize\ttfamily \label{namespacerun__initial__calibration_af6a877ffd6b195a4dbb2158784363b56} 
+str run\+\_\+initial\+\_\+calibration.\+DEFAULT\+\_\+\+BASE\+\_\+\+DIR = "{}/data/calibration\+LFC/sets/imageset5"{}}
+
+
+
+Definition at line \mbox{\hyperlink{run__initial__calibration_8py_source_l00023}{23}} of file \mbox{\hyperlink{run__initial__calibration_8py_source}{run\+\_\+initial\+\_\+calibration.\+py}}.
+
+\Hypertarget{namespacerun__initial__calibration_ab111c2c3d4bcbbe62ce31767ff98e28f}\index{run\_initial\_calibration@{run\_initial\_calibration}!DEFAULT\_NUM\_POSES@{DEFAULT\_NUM\_POSES}}
+\index{DEFAULT\_NUM\_POSES@{DEFAULT\_NUM\_POSES}!run\_initial\_calibration@{run\_initial\_calibration}}
+\doxysubsubsection{\texorpdfstring{DEFAULT\_NUM\_POSES}{DEFAULT\_NUM\_POSES}}
+{\footnotesize\ttfamily \label{namespacerun__initial__calibration_ab111c2c3d4bcbbe62ce31767ff98e28f} 
+int run\+\_\+initial\+\_\+calibration.\+DEFAULT\+\_\+\+NUM\+\_\+\+POSES = 28}
+
+
+
+Definition at line \mbox{\hyperlink{run__initial__calibration_8py_source_l00024}{24}} of file \mbox{\hyperlink{run__initial__calibration_8py_source}{run\+\_\+initial\+\_\+calibration.\+py}}.
+
+\Hypertarget{namespacerun__initial__calibration_ab86aa06d4bbe88abce338adfd56cb44f}\index{run\_initial\_calibration@{run\_initial\_calibration}!repoRoot@{repoRoot}}
+\index{repoRoot@{repoRoot}!run\_initial\_calibration@{run\_initial\_calibration}}
+\doxysubsubsection{\texorpdfstring{repoRoot}{repoRoot}}
+{\footnotesize\ttfamily \label{namespacerun__initial__calibration_ab86aa06d4bbe88abce338adfd56cb44f} 
+run\+\_\+initial\+\_\+calibration.\+repo\+Root = os.\+path.\+dirname(os.\+path.\+dirname(os.\+path.\+abspath(\+\_\+\+\_\+file\+\_\+\+\_\+)))}
+
+
+
+Definition at line \mbox{\hyperlink{run__initial__calibration_8py_source_l00154}{154}} of file \mbox{\hyperlink{run__initial__calibration_8py_source}{run\+\_\+initial\+\_\+calibration.\+py}}.
+

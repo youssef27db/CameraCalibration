@@ -1,0 +1,44 @@
+\doxysection{Image\+Set.\+py}
+\hypertarget{_image_set_8py_source}{}\label{_image_set_8py_source}\index{calibrationLFC/ImageSet.py@{calibrationLFC/ImageSet.py}}
+\mbox{\hyperlink{_image_set_8py}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_image_set_8py_source_l00001}\mbox{\hyperlink{namespace_image_set}{00001}}\ \textcolor{keyword}{from}\ typing\ \textcolor{keyword}{import}\ List}
+\DoxyCodeLine{\Hypertarget{_image_set_8py_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{_image_set_8py_source_l00003}\mbox{\hyperlink{class_image_set_1_1_image_set}{00003}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_image_set_1_1_image_set}{ImageSet}}:}
+\DoxyCodeLine{\Hypertarget{_image_set_8py_source_l00004}00004\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_image_set_8py_source_l00005}00005\ \textcolor{stringliteral}{\ \ \ \ @brief\ Represents\ a\ set\ of\ calibration\ images\ organized\ by\ pose\ and\ camera.}}
+\DoxyCodeLine{\Hypertarget{_image_set_8py_source_l00006}00006\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_image_set_8py_source_l00007}00007\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_image_set_8py_source_l00008}\mbox{\hyperlink{class_image_set_1_1_image_set_a32a1541e0205f40193cb43e072007088}{00008}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{class_image_set_1_1_image_set_a32a1541e0205f40193cb43e072007088}{\_\_init\_\_}}(self,\ baseDir:\ str,\ numPoses:\ int,\ cameraIds:\ List[str]):}
+\DoxyCodeLine{\Hypertarget{_image_set_8py_source_l00009}00009\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_image_set_8py_source_l00010}00010\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @brief\ Constructor\ for\ ImageSet.}}
+\DoxyCodeLine{\Hypertarget{_image_set_8py_source_l00011}00011\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{_image_set_8py_source_l00012}00012\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ baseDir\ Base\ directory\ containing\ calibration\ images}}
+\DoxyCodeLine{\Hypertarget{_image_set_8py_source_l00013}00013\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ numPoses\ Total\ number\ of\ poses\ in\ the\ calibration\ set}}
+\DoxyCodeLine{\Hypertarget{_image_set_8py_source_l00014}00014\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ cameraIds\ List\ of\ camera\ identifiers}}
+\DoxyCodeLine{\Hypertarget{_image_set_8py_source_l00015}00015\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_image_set_8py_source_l00016}\mbox{\hyperlink{class_image_set_1_1_image_set_a8014d0f2450027a84191aebb4726a881}{00016}}\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{class_image_set_1_1_image_set_a8014d0f2450027a84191aebb4726a881}{baseDir}}\ =\ baseDir}
+\DoxyCodeLine{\Hypertarget{_image_set_8py_source_l00017}\mbox{\hyperlink{class_image_set_1_1_image_set_a6ca95edef63b4a04097517da9992d8b9}{00017}}\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{class_image_set_1_1_image_set_a6ca95edef63b4a04097517da9992d8b9}{numPoses}}\ =\ numPoses}
+\DoxyCodeLine{\Hypertarget{_image_set_8py_source_l00018}\mbox{\hyperlink{class_image_set_1_1_image_set_a410735b7e1121e585c910d363cb17b05}{00018}}\ \ \ \ \ \ \ \ \ self.\mbox{\hyperlink{class_image_set_1_1_image_set_a410735b7e1121e585c910d363cb17b05}{cameraIds}}\ =\ cameraIds}
+\DoxyCodeLine{\Hypertarget{_image_set_8py_source_l00019}00019\ }
+\DoxyCodeLine{\Hypertarget{_image_set_8py_source_l00020}\mbox{\hyperlink{class_image_set_1_1_image_set_ac4818d9d9651a434242df64d8067a7c4}{00020}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{class_image_set_1_1_image_set_ac4818d9d9651a434242df64d8067a7c4}{getImagePath}}(self,\ poseIndex:\ int,\ cameraId:\ str)\ -\/>\ str:}
+\DoxyCodeLine{\Hypertarget{_image_set_8py_source_l00021}00021\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_image_set_8py_source_l00022}00022\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @brief\ Construct\ the\ file\ path\ for\ a\ specific\ pose\ and\ camera.}}
+\DoxyCodeLine{\Hypertarget{_image_set_8py_source_l00023}00023\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{_image_set_8py_source_l00024}00024\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ poseIndex\ Zero-\/based\ pose\ index}}
+\DoxyCodeLine{\Hypertarget{_image_set_8py_source_l00025}00025\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ cameraId\ Camera\ identifier\ string}}
+\DoxyCodeLine{\Hypertarget{_image_set_8py_source_l00026}00026\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @return\ String\ path\ in\ format:\ baseDir/pose\_XXX\_cameraId.png}}
+\DoxyCodeLine{\Hypertarget{_image_set_8py_source_l00027}00027\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_image_set_8py_source_l00028}00028\ \ \ \ \ \ \ \ \ poseStr\ =\ f\textcolor{stringliteral}{"{}pose\_\{poseIndex:03d\}"{}}}
+\DoxyCodeLine{\Hypertarget{_image_set_8py_source_l00029}00029\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ f\textcolor{stringliteral}{"{}\{self.baseDir\}/\{poseStr\}\_\{cameraId\}.png"{}}}
+\DoxyCodeLine{\Hypertarget{_image_set_8py_source_l00030}00030\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_image_set_8py_source_l00031}00031\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}\ }}
+\DoxyCodeLine{\Hypertarget{_image_set_8py_source_l00032}00032\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ Beispiel:}}
+\DoxyCodeLine{\Hypertarget{_image_set_8py_source_l00033}00033\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ baseDir\ =\ "{}/data/images"{}}}
+\DoxyCodeLine{\Hypertarget{_image_set_8py_source_l00034}00034\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ poseIndex\ =\ 5\ \ →\ poseStr\ =\ "{}pose\_005"{}}}
+\DoxyCodeLine{\Hypertarget{_image_set_8py_source_l00035}00035\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ cameraId\ =\ "{}center"{}}}
+\DoxyCodeLine{\Hypertarget{_image_set_8py_source_l00036}00036\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{_image_set_8py_source_l00037}00037\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ Ergebnis:\ "{}/data/images/pose\_005\_center.png"{}\ }}
+\DoxyCodeLine{\Hypertarget{_image_set_8py_source_l00038}00038\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
+
+\end{DoxyCode}
