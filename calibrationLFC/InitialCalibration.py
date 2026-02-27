@@ -37,7 +37,8 @@ class InitialCalibration:
         @brief Detect and refine chessboard corner positions in image.
         
         @param imagePath Path to the image file
-        @return Tuple (success, corners, imageSize) where success is bool, corners are refined 2D points, and imageSize is (width, height)
+        @return Tuple (success, corners, imageSize) where success is bool, 
+        corners are refined 2D points, and imageSize is (width, height)
         """
         img = cv2.imread(imagePath)
         if img is None:

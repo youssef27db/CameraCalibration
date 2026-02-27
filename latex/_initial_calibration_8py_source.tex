@@ -41,403 +41,404 @@
 \DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00037}00037\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @brief\ Detect\ and\ refine\ chessboard\ corner\ positions\ in\ image.}}
 \DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00038}00038\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ }}
 \DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00039}00039\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ imagePath\ Path\ to\ the\ image\ file}}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00040}00040\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @return\ Tuple\ (success,\ corners,\ imageSize)\ where\ success\ is\ bool,\ corners\ are\ refined\ 2D\ points,\ and\ imageSize\ is\ (width,\ height)}}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00041}00041\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00042}00042\ \ \ \ \ \ \ \ \ img\ =\ cv2.imread(imagePath)}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00043}00043\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ img\ \textcolor{keywordflow}{is}\ \textcolor{keywordtype}{None}:}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00044}00044\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{False},\ \textcolor{keywordtype}{None},\ \textcolor{keywordtype}{None}}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00045}00045\ \ \ \ \ \ \ \ \ gray\ =\ cv2.cvtColor(img,\ cv2.COLOR\_BGR2GRAY)}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00046}00046\ }
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00047}00047\ \ \ \ \ \ \ \ \ found,\ corners\ =\ cv2.findChessboardCorners(gray,\ self.\mbox{\hyperlink{class_initial_calibration_1_1_initial_calibration_a59f035559e30d1c6ff53c0d0f4f17187}{chessboardSize}})}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00048}00048\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ found:}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00049}00049\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{False},\ \textcolor{keywordtype}{None},\ \textcolor{keywordtype}{None}}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00050}00050\ }
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00051}00051\ \ \ \ \ \ \ \ \ refined\ =\ cv2.cornerSubPix(gray,\ corners,\ (11,\ 11),\ (-\/1,\ -\/1),\ self.\mbox{\hyperlink{class_initial_calibration_1_1_initial_calibration_a640a1c4660ee22af13caae018ead4870}{criteria}})}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00052}00052\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{True},\ refined,\ gray.shape[::-\/1]}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00053}00053\ }
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00054}\mbox{\hyperlink{class_initial_calibration_1_1_initial_calibration_a2feadd4ca2e73100f81eaa590ff6a00d}{00054}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{class_initial_calibration_1_1_initial_calibration_a2feadd4ca2e73100f81eaa590ff6a00d}{calibrateIntrinsics}}(self,\ imageSet):}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00055}00055\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00056}00056\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @brief\ Calibrate\ intrinsic\ parameters\ independently\ for\ each\ camera.}}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00057}00057\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ }}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00058}00058\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ imageSet\ ImageSet\ object\ containing\ calibration\ images}}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00059}00059\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @return\ CalibrationState\ with\ populated\ intrinsics\ for\ all\ cameras}}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00060}00060\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00061}00061\ \ \ \ \ \ \ \ \ state\ =\ \mbox{\hyperlink{class_calibration_state_1_1_calibration_state}{CalibrationState}}()}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00062}00062\ \ \ \ \ \ \ \ \ objp\ =\ self.\mbox{\hyperlink{class_initial_calibration_1_1_initial_calibration_a548c80ecafbb6d9f98d7feba772647bd}{createObjectPoints}}()}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00063}00063\ }
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00064}00064\ \ \ \ \ \ \ \ \ objpoints\ =\ \{cam:\ []\ \textcolor{keywordflow}{for}\ cam\ \textcolor{keywordflow}{in}\ imageSet.cameraIds\}}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00065}00065\ \ \ \ \ \ \ \ \ imgpoints\ =\ \{cam:\ []\ \textcolor{keywordflow}{for}\ cam\ \textcolor{keywordflow}{in}\ imageSet.cameraIds\}}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00066}00066\ \ \ \ \ \ \ \ \ imgsize\ =\ \{\}}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00067}00067\ }
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00068}00068\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Collect\ corner\ points\ from\ all\ poses\ for\ each\ camera}}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00069}00069\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ pose\ \textcolor{keywordflow}{in}\ range(imageSet.numPoses):}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00070}00070\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ cam\ \textcolor{keywordflow}{in}\ imageSet.cameraIds:}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00071}00071\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ path\ =\ imageSet.getImagePath(pose,\ cam)}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00072}00072\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ok,\ corners,\ size\ =\ self.\mbox{\hyperlink{class_initial_calibration_1_1_initial_calibration_a32ae09d234b1fe5af3ffc4b647b6143b}{detectCorners}}(path)}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00073}00073\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ok:}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00074}00074\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ objpoints[cam].append(objp)}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00075}00075\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ imgpoints[cam].append(corners)}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00076}00076\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ imgsize[cam]\ =\ size}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00077}00077\ }
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00078}00078\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Calibrate\ each\ camera\ separately}}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00079}00079\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ cam\ \textcolor{keywordflow}{in}\ imageSet.cameraIds:}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00080}00080\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ len(objpoints[cam])\ <\ 5:}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00081}00081\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}[WARN]\ Not\ enough\ samples\ for\ camera\ \{cam\}"{}})}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00082}00082\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue}}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00083}00083\ }
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00084}00084\ \ \ \ \ \ \ \ \ \ \ \ \ err,\ K,\ dist,\ rvecs,\ tvecs\ =\ cv2.calibrateCamera(}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00085}00085\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ objpoints[cam],\ imgpoints[cam],\ imgsize[cam],\ \textcolor{keywordtype}{None},\ \textcolor{keywordtype}{None})}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00086}00086\ }
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00087}00087\ \ \ \ \ \ \ \ \ \ \ \ \ state.setIntrinsics(cam,\ K,\ dist,\ err)}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00088}00088\ }
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00089}00089\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ state}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00090}00090\ }
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00091}\mbox{\hyperlink{class_initial_calibration_1_1_initial_calibration_acfd129347ae61b94bc62fca90c13c58a}{00091}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{class_initial_calibration_1_1_initial_calibration_acfd129347ae61b94bc62fca90c13c58a}{calibrateExtrinsics}}(self,\ imageSet,\ state,\ refCamId):}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00092}00092\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00093}00093\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @brief\ Compute\ pairwise\ stereo\ calibration\ between\ reference\ and\ each\ other\ camera.}}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00094}00094\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ }}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00095}00095\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ imageSet\ ImageSet\ object\ containing\ calibration\ images}}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00096}00096\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ state\ CalibrationState\ with\ intrinsics\ already\ computed}}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00097}00097\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ refCamId\ Camera\ ID\ to\ use\ as\ reference\ coordinate\ system}}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00098}00098\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @return\ Updated\ CalibrationState\ with\ extrinsics\ for\ all\ cameras}}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00099}00099\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00100}00100\ \ \ \ \ \ \ \ \ objectPoints\ =\ self.\mbox{\hyperlink{class_initial_calibration_1_1_initial_calibration_a548c80ecafbb6d9f98d7feba772647bd}{createObjectPoints}}()}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00101}00101\ \ \ \ \ \ \ \ \ K\_ref\ =\ state.intrinsics[refCamId][\textcolor{stringliteral}{"{}cameraMatrix"{}}]}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00102}00102\ \ \ \ \ \ \ \ \ dist\_ref\ =\ state.intrinsics[refCamId][\textcolor{stringliteral}{"{}distortionCoeffs"{}}]}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00103}00103\ }
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00104}00104\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ cam\ \textcolor{keywordflow}{in}\ imageSet.cameraIds:}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00105}00105\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ cam\ ==\ refCamId:}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00106}00106\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ state.setExtrinsics(cam,\ np.eye(3),\ np.zeros((3,1)),\ 0.0)}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00107}00107\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue}}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00108}00108\ }
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00109}00109\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ cam\ \textcolor{keywordflow}{not}\ \textcolor{keywordflow}{in}\ state.intrinsics:}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00110}00110\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue}}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00111}00111\ }
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00112}00112\ \ \ \ \ \ \ \ \ \ \ \ \ K\_cam\ =\ state.intrinsics[cam][\textcolor{stringliteral}{"{}cameraMatrix"{}}]}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00113}00113\ \ \ \ \ \ \ \ \ \ \ \ \ dist\_cam\ =\ state.intrinsics[cam][\textcolor{stringliteral}{"{}distortionCoeffs"{}}]}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00114}00114\ }
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00115}00115\ \ \ \ \ \ \ \ \ \ \ \ \ objList\ =\ []}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00116}00116\ \ \ \ \ \ \ \ \ \ \ \ \ imgRef\ =\ []}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00117}00117\ \ \ \ \ \ \ \ \ \ \ \ \ imgCam\ =\ []}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00118}00118\ \ \ \ \ \ \ \ \ \ \ \ \ imageSize\ =\ \textcolor{keywordtype}{None}}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00119}00119\ }
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00120}00120\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ pose\ \textcolor{keywordflow}{in}\ range(imageSet.numPoses):}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00121}00121\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pRef\ =\ imageSet.getImagePath(pose,\ refCamId)}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00122}00122\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pCam\ =\ imageSet.getImagePath(pose,\ cam)}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00123}00123\ }
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00124}00124\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ okR,\ cornersR,\ sizeR\ =\ self.\mbox{\hyperlink{class_initial_calibration_1_1_initial_calibration_a32ae09d234b1fe5af3ffc4b647b6143b}{detectCorners}}(pRef)}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00125}00125\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ okC,\ cornersC,\ sizeC\ =\ self.\mbox{\hyperlink{class_initial_calibration_1_1_initial_calibration_a32ae09d234b1fe5af3ffc4b647b6143b}{detectCorners}}(pCam)}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00126}00126\ }
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00127}00127\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ okR\ \textcolor{keywordflow}{and}\ okC:}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00128}00128\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ objList.append(objectPoints)}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00129}00129\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ imgRef.append(cornersR)}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00130}00130\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ imgCam.append(cornersC)}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00131}00131\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ imageSize\ =\ sizeR}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00132}00132\ }
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00133}00133\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ len(objList)\ <\ 3:}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00134}00134\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue}}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00135}00135\ }
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00136}00136\ \ \ \ \ \ \ \ \ \ \ \ \ flags\ =\ cv2.CALIB\_FIX\_INTRINSIC}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00137}00137\ }
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00138}00138\ \ \ \ \ \ \ \ \ \ \ \ \ stereo\_rms,\ KR0,\ d0,\ KC1,\ d1,\ R,\ T,\ E,\ F\ =\ cv2.stereoCalibrate(}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00139}00139\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ objList,}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00140}00140\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ imgRef,}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00141}00141\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ imgCam,}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00142}00142\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ K\_ref,}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00143}00143\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ dist\_ref,}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00144}00144\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ K\_cam,}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00145}00145\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ dist\_cam,}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00146}00146\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ imageSize,}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00147}00147\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ criteria=self.\mbox{\hyperlink{class_initial_calibration_1_1_initial_calibration_a640a1c4660ee22af13caae018ead4870}{criteria}},}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00148}00148\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ flags=flags}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00149}00149\ \ \ \ \ \ \ \ \ \ \ \ \ )}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00150}00150\ }
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00151}00151\ \ \ \ \ \ \ \ \ \ \ \ \ state.setExtrinsics(cam,\ R,\ T,\ stereo\_rms)}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00152}00152\ }
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00153}00153\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ state}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00154}00154\ \ \ \ \ }
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00155}\mbox{\hyperlink{class_initial_calibration_1_1_initial_calibration_af6d9f1fa8ae15369176c6c878c37a94f}{00155}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{class_initial_calibration_1_1_initial_calibration_af6d9f1fa8ae15369176c6c878c37a94f}{bundleAdjustExtrinsics}}(self,\ imageSet,\ state,\ refCamId):}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00156}00156\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00157}00157\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @brief\ Global\ bundle\ adjustment\ optimizing\ extrinsics\ and\ board\ poses.}}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00158}00158\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ }}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00159}00159\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ imageSet\ ImageSet\ object\ containing\ calibration\ images}}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00160}00160\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ state\ CalibrationState\ with\ initial\ intrinsics\ and\ extrinsics}}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00161}00161\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ refCamId\ Camera\ ID\ to\ use\ as\ reference\ coordinate\ system}}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00162}00162\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @return\ Updated\ CalibrationState\ with\ refined\ extrinsics\ after\ bundle\ adjustment}}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00163}00163\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00164}00164\ \ \ \ \ \ \ \ \ objp\ =\ self.\mbox{\hyperlink{class_initial_calibration_1_1_initial_calibration_a548c80ecafbb6d9f98d7feba772647bd}{createObjectPoints}}()}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00165}00165\ \ \ \ \ \ \ \ \ cameraIds\ =\ list(imageSet.cameraIds)}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00166}00166\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ refCamId\ \textcolor{keywordflow}{not}\ \textcolor{keywordflow}{in}\ cameraIds:}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00167}00167\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{raise}\ ValueError(\textcolor{stringliteral}{"{}refCamId\ not\ in\ imageSet.cameraIds"{}})}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00168}00168\ }
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00169}00169\ \ \ \ \ \ \ \ \ ref\_idx\ =\ cameraIds.index(refCamId)}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00170}00170\ }
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00171}00171\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Initialize\ board\ poses\ via\ PnP-\/RANSAC\ in\ reference\ camera}}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00172}00172\ \ \ \ \ \ \ \ \ K\_ref\ =\ state.intrinsics[refCamId][\textcolor{stringliteral}{"{}cameraMatrix"{}}]}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00173}00173\ \ \ \ \ \ \ \ \ dist\_ref\ =\ state.intrinsics[refCamId][\textcolor{stringliteral}{"{}distortionCoeffs"{}}]}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00174}00174\ }
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00175}00175\ \ \ \ \ \ \ \ \ pose\_rvecs\ =\ \{\}}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00176}00176\ \ \ \ \ \ \ \ \ pose\_tvecs\ =\ \{\}}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00177}00177\ \ \ \ \ \ \ \ \ valid\_poses\ =\ []}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00178}00178\ }
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00179}00179\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ pose\ \textcolor{keywordflow}{in}\ range(imageSet.numPoses):}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00180}00180\ \ \ \ \ \ \ \ \ \ \ \ \ img\_path\ =\ imageSet.getImagePath(pose,\ refCamId)}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00181}00181\ \ \ \ \ \ \ \ \ \ \ \ \ ok,\ corners,\ size\ =\ self.\mbox{\hyperlink{class_initial_calibration_1_1_initial_calibration_a32ae09d234b1fe5af3ffc4b647b6143b}{detectCorners}}(img\_path)}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00182}00182\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ ok:}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00183}00183\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue}}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00184}00184\ }
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00185}00185\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Use\ PnP-\/RANSAC\ for\ robust\ board\ pose\ estimation}}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00186}00186\ \ \ \ \ \ \ \ \ \ \ \ \ ok\_pnp,\ rvec,\ tvec,\ inliers\ =\ cv2.solvePnPRansac(}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00187}00187\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ objp,}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00188}00188\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ corners,}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00189}00189\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ K\_ref,}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00190}00190\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ dist\_ref,}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00191}00191\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ reprojectionError=2.0,\ \ \ }
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00192}00192\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ confidence=0.99,}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00193}00193\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ flags=cv2.SOLVEPNP\_ITERATIVE}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00194}00194\ \ \ \ \ \ \ \ \ \ \ \ \ )}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00195}00195\ }
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00196}00196\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ ok\_pnp\ \textcolor{keywordflow}{or}\ inliers\ \textcolor{keywordflow}{is}\ \textcolor{keywordtype}{None}\ \textcolor{keywordflow}{or}\ len(inliers)\ <\ 10:}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00197}00197\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Skip\ pose\ if\ too\ few\ reliable\ points}}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00198}00198\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue}}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00199}00199\ }
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00200}00200\ \ \ \ \ \ \ \ \ \ \ \ \ pose\_rvecs[pose]\ =\ rvec.astype(np.float64).reshape(3)}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00201}00201\ \ \ \ \ \ \ \ \ \ \ \ \ pose\_tvecs[pose]\ =\ tvec.astype(np.float64).reshape(3)}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00202}00202\ \ \ \ \ \ \ \ \ \ \ \ \ valid\_poses.append(pose)}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00203}00203\ }
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00204}00204\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ len(valid\_poses)\ <\ 3:}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00205}00205\ \ \ \ \ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}[BA]\ Not\ enough\ valid\ poses\ for\ bundle\ adjustment."{}})}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00206}00206\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ state}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00207}00207\ }
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00208}00208\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Initialize\ extrinsics\ from\ state}}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00209}00209\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Only\ optimize\ non-\/reference\ cameras}}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00210}00210\ \ \ \ \ \ \ \ \ optim\_cams\ =\ []}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00211}00211\ \ \ \ \ \ \ \ \ cam\_param\_index\ =\ \{\}}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00212}00212\ }
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00213}00213\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ ci,\ cam\ \textcolor{keywordflow}{in}\ enumerate(cameraIds):}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00214}00214\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ cam\ ==\ refCamId:}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00215}00215\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue}}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00216}00216\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ cam\ \textcolor{keywordflow}{not}\ \textcolor{keywordflow}{in}\ state.extrinsics:}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00217}00217\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue}}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00218}00218\ }
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00219}00219\ \ \ \ \ \ \ \ \ \ \ \ \ optim\_cams.append(ci)}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00220}00220\ \ \ \ \ \ \ \ \ \ \ \ \ cam\_param\_index[ci]\ =\ len(cam\_param\_index)}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00221}00221\ }
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00222}00222\ \ \ \ \ \ \ \ \ num\_optim\_cams\ =\ len(optim\_cams)}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00223}00223\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ num\_optim\_cams\ ==\ 0:}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00224}00224\ \ \ \ \ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}[BA]\ No\ extrinsic\ data\ to\ optimize,\ skipping\ BA."{}})}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00225}00225\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ state}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00226}00226\ }
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00227}00227\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Collect\ measurements\ (all\ cameras,\ all\ valid\ poses)}}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00228}00228\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Each\ measurement:\ (cam\_idx,\ pose,\ 2D\ points)}}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00229}00229\ \ \ \ \ \ \ \ \ measurements\ =\ []}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00230}00230\ }
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00231}00231\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ ci,\ cam\ \textcolor{keywordflow}{in}\ enumerate(cameraIds):}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00232}00232\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ pose\ \textcolor{keywordflow}{in}\ valid\_poses:}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00233}00233\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ img\_path\ =\ imageSet.getImagePath(pose,\ cam)}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00234}00234\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ok,\ corners,\ size\ =\ self.\mbox{\hyperlink{class_initial_calibration_1_1_initial_calibration_a32ae09d234b1fe5af3ffc4b647b6143b}{detectCorners}}(img\_path)}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00235}00235\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ ok:}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00236}00236\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue}}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00237}00237\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pts2d\ =\ corners.reshape(-\/1,\ 2).astype(np.float64)}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00238}00238\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ measurements.append((ci,\ pose,\ pts2d))}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00239}00239\ }
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00240}00240\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ len(measurements)\ ==\ 0:}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00241}00241\ \ \ \ \ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}[BA]\ No\ overlapping\ detections\ found,\ skipping\ BA."{}})}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00242}00242\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ state}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00243}00243\ }
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00244}00244\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Initialize\ parameter\ vector}}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00245}00245\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Layout:\ [cams\ (without\ ref):\ (r\_cam(3),\ t\_cam(3))...\ ,\ poses:\ (r\_p(3),\ t\_p(3))...]}}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00246}00246\ }
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00247}00247\ \ \ \ \ \ \ \ \ param\_cam\ =\ []}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00248}00248\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ ci\ \textcolor{keywordflow}{in}\ optim\_cams:}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00249}00249\ \ \ \ \ \ \ \ \ \ \ \ \ cam\ =\ cameraIds[ci]}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00250}00250\ \ \ \ \ \ \ \ \ \ \ \ \ extr\ =\ state.extrinsics[cam]}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00251}00251\ \ \ \ \ \ \ \ \ \ \ \ \ R\ =\ extr[\textcolor{stringliteral}{"{}rotationMatrix"{}}]}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00252}00252\ \ \ \ \ \ \ \ \ \ \ \ \ T\ =\ extr[\textcolor{stringliteral}{"{}translationVector"{}}].reshape(3)}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00253}00253\ \ \ \ \ \ \ \ \ \ \ \ \ rvec\_cam,\ \_\ =\ cv2.Rodrigues(R)}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00254}00254\ \ \ \ \ \ \ \ \ \ \ \ \ param\_cam.append(rvec\_cam.reshape(3))}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00255}00255\ \ \ \ \ \ \ \ \ \ \ \ \ param\_cam.append(T)}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00256}00256\ \ \ \ \ \ \ \ \ param\_cam\ =\ np.concatenate(param\_cam).astype(np.float64)}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00257}00257\ }
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00258}00258\ \ \ \ \ \ \ \ \ param\_pose\ =\ []}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00259}00259\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ pose\ \textcolor{keywordflow}{in}\ valid\_poses:}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00260}00260\ \ \ \ \ \ \ \ \ \ \ \ \ param\_pose.append(pose\_rvecs[pose])}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00261}00261\ \ \ \ \ \ \ \ \ \ \ \ \ param\_pose.append(pose\_tvecs[pose])}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00262}00262\ \ \ \ \ \ \ \ \ param\_pose\ =\ np.concatenate(param\_pose).astype(np.float64)}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00263}00263\ }
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00264}00264\ \ \ \ \ \ \ \ \ x0\ =\ np.concatenate([param\_cam,\ param\_pose])}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00265}00265\ }
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00266}00266\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Helper\ functions\ for\ parameter\ decoding}}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00267}00267\ \ \ \ \ \ \ \ \ \textcolor{keyword}{def\ }decode\_params(params):}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00268}00268\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Cameras}}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00269}00269\ \ \ \ \ \ \ \ \ \ \ \ \ cam\_rvecs\ =\ \{\}}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00270}00270\ \ \ \ \ \ \ \ \ \ \ \ \ cam\_tvecs\ =\ \{\}}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00271}00271\ \ \ \ \ \ \ \ \ \ \ \ \ idx\ =\ 0}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00272}00272\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ ci\ \textcolor{keywordflow}{in}\ optim\_cams:}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00273}00273\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ r\ =\ params[idx:idx+3];\ idx\ +=\ 3}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00274}00274\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ t\ =\ params[idx:idx+3];\ idx\ +=\ 3}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00275}00275\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cam\_rvecs[ci]\ =\ r}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00276}00276\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cam\_tvecs[ci]\ =\ t}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00277}00277\ }
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00278}00278\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Poses}}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00279}00279\ \ \ \ \ \ \ \ \ \ \ \ \ pose\_r\ =\ \{\}}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00280}00280\ \ \ \ \ \ \ \ \ \ \ \ \ pose\_t\ =\ \{\}}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00281}00281\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ pose\ \textcolor{keywordflow}{in}\ valid\_poses:}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00282}00282\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ r\ =\ params[idx:idx+3];\ idx\ +=\ 3}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00283}00283\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ t\ =\ params[idx:idx+3];\ idx\ +=\ 3}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00284}00284\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pose\_r[pose]\ =\ r}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00285}00285\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pose\_t[pose]\ =\ t}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00286}00286\ }
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00287}00287\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ cam\_rvecs,\ cam\_tvecs,\ pose\_r,\ pose\_t}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00288}00288\ }
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00289}00289\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Residuals\ function}}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00290}00290\ \ \ \ \ \ \ \ \ \textcolor{keyword}{def\ }residuals(params):}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00291}00291\ \ \ \ \ \ \ \ \ \ \ \ \ cam\_rvecs,\ cam\_tvecs,\ pose\_r,\ pose\_t\ =\ decode\_params(params)}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00292}00292\ }
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00293}00293\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Precompute\ rotation\ matrices}}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00294}00294\ \ \ \ \ \ \ \ \ \ \ \ \ R\_cam\ =\ \{\}}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00295}00295\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ ci,\ r\ \textcolor{keywordflow}{in}\ cam\_rvecs.items():}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00296}00296\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ R\_cam[ci],\ \_\ =\ cv2.Rodrigues(r.astype(np.float64))}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00297}00297\ }
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00298}00298\ \ \ \ \ \ \ \ \ \ \ \ \ R\_pose\ =\ \{\}}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00299}00299\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ pose,\ r\ \textcolor{keywordflow}{in}\ pose\_r.items():}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00300}00300\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ R\_pose[pose],\ \_\ =\ cv2.Rodrigues(r.astype(np.float64))}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00301}00301\ }
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00302}00302\ \ \ \ \ \ \ \ \ \ \ \ \ residual\_list\ =\ []}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00303}00303\ }
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00304}00304\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ ci,\ pose,\ pts2d\ \textcolor{keywordflow}{in}\ measurements:}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00305}00305\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cam\_id\ =\ cameraIds[ci]}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00306}00306\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ K\ =\ state.intrinsics[cam\_id][\textcolor{stringliteral}{"{}cameraMatrix"{}}]}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00307}00307\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ dist\ =\ state.intrinsics[cam\_id][\textcolor{stringliteral}{"{}distortionCoeffs"{}}]}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00308}00308\ }
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00309}00309\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Board\ pose\ in\ reference\ frame}}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00310}00310\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ r\_p\ =\ pose\_r[pose]}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00311}00311\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ t\_p\ =\ pose\_t[pose]}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00312}00312\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ R\_p\ =\ R\_pose[pose]}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00313}00313\ }
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00314}00314\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ci\ ==\ ref\_idx:}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00315}00315\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Reference\ camera:\ use\ board\ pose\ directly}}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00316}00316\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ r\_total\ =\ r\_p}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00317}00317\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ t\_total\ =\ t\_p}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00318}00318\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}:}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00319}00319\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ci\ \textcolor{keywordflow}{not}\ \textcolor{keywordflow}{in}\ cam\_rvecs:}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00320}00320\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ For\ non-\/optimized\ cameras,\ use\ static\ extrinsics}}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00321}00321\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ extr\ =\ state.extrinsics[cam\_id]}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00322}00322\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ R\_c\ =\ extr[\textcolor{stringliteral}{"{}rotationMatrix"{}}]}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00323}00323\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ t\_c\ =\ extr[\textcolor{stringliteral}{"{}translationVector"{}}].reshape(3)}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00324}00324\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}:}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00325}00325\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ R\_c\ =\ R\_cam[ci]}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00326}00326\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ t\_c\ =\ cam\_tvecs[ci]}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00327}00327\ }
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00328}00328\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Composition:\ X\_cam\ =\ R\_c\ *\ (R\_p\ *\ X\ +\ t\_p)\ +\ t\_c}}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00329}00329\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ R\_total\ =\ R\_c\ @\ R\_p}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00330}00330\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ t\_total\ =\ R\_c\ @\ t\_p\ +\ t\_c}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00331}00331\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ r\_total,\ \_\ =\ cv2.Rodrigues(R\_total.astype(np.float64))}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00332}00332\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ r\_total\ =\ r\_total.reshape(3)}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00333}00333\ }
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00334}00334\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Projection}}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00335}00335\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ proj,\ \_\ =\ cv2.projectPoints(}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00336}00336\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ objp,}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00337}00337\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ r\_total.astype(np.float64),}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00338}00338\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ t\_total.astype(np.float64),}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00339}00339\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ K,}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00340}00340\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ dist}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00341}00341\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ )}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00342}00342\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ proj\ =\ proj.reshape(-\/1,\ 2)}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00343}00343\ }
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00344}00344\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ res\ =\ (proj\ -\/\ pts2d).reshape(-\/1)}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00345}00345\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ residual\_list.append(res)}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00346}00346\ }
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00347}00347\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ residual\_list:}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00348}00348\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ np.zeros(0,\ dtype=np.float64)}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00349}00349\ }
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00350}00350\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ np.concatenate(residual\_list)}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00351}00351\ }
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00352}00352\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Optimization\ (robust,\ soft\_l1)}}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00353}00353\ \ \ \ \ \ \ \ \ result\ =\ least\_squares(}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00354}00354\ \ \ \ \ \ \ \ \ \ \ \ \ residuals,}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00355}00355\ \ \ \ \ \ \ \ \ \ \ \ \ x0,}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00356}00356\ \ \ \ \ \ \ \ \ \ \ \ \ verbose=2,}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00357}00357\ \ \ \ \ \ \ \ \ \ \ \ \ method=\textcolor{stringliteral}{"{}trf"{}},\ \ \ \ \ \ \ }
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00358}00358\ \ \ \ \ \ \ \ \ \ \ \ \ loss=\textcolor{stringliteral}{"{}soft\_l1"{}},\ \ \ \ \ }
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00359}00359\ \ \ \ \ \ \ \ \ \ \ \ \ f\_scale=1.0\ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00360}00360\ \ \ \ \ \ \ \ \ )}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00361}00361\ }
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00362}00362\ \ \ \ \ \ \ \ \ print(}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00363}00363\ \ \ \ \ \ \ \ \ \ \ \ \ f\textcolor{stringliteral}{"{}[BA]\ Done.\ Final\ cost:\ \{result.cost:.4f\},\ "{}}}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00364}00364\ \ \ \ \ \ \ \ \ \ \ \ \ f\textcolor{stringliteral}{"{}RMS\ per\ coord:\ \{np.sqrt(2*result.cost/len(result.fun)):.4f\}\ px"{}}}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00365}00365\ \ \ \ \ \ \ \ \ )}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00366}00366\ }
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00367}00367\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Write\ results\ back\ to\ state.extrinsics}}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00368}00368\ \ \ \ \ \ \ \ \ cam\_rvecs\_opt,\ cam\_tvecs\_opt,\ pose\_r\_opt,\ pose\_t\_opt\ =\ decode\_params(result.x)}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00369}00369\ }
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00370}00370\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Reference\ camera\ remains\ identity}}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00371}00371\ \ \ \ \ \ \ \ \ state.setExtrinsics(}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00372}00372\ \ \ \ \ \ \ \ \ \ \ \ \ refCamId,}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00373}00373\ \ \ \ \ \ \ \ \ \ \ \ \ np.eye(3,\ dtype=np.float64),}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00374}00374\ \ \ \ \ \ \ \ \ \ \ \ \ np.zeros((3,\ 1),\ dtype=np.float64),}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00375}00375\ \ \ \ \ \ \ \ \ \ \ \ \ 0.0}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00376}00376\ \ \ \ \ \ \ \ \ )}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00377}00377\ }
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00378}00378\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Store\ optimized\ cameras}}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00379}00379\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ ci\ \textcolor{keywordflow}{in}\ optim\_cams:}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00380}00380\ \ \ \ \ \ \ \ \ \ \ \ \ cam\_id\ =\ cameraIds[ci]}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00381}00381\ \ \ \ \ \ \ \ \ \ \ \ \ r\ =\ cam\_rvecs\_opt[ci]}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00382}00382\ \ \ \ \ \ \ \ \ \ \ \ \ t\ =\ cam\_tvecs\_opt[ci]}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00383}00383\ \ \ \ \ \ \ \ \ \ \ \ \ R,\ \_\ =\ cv2.Rodrigues(r.astype(np.float64))}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00384}00384\ \ \ \ \ \ \ \ \ \ \ \ \ T\ =\ t.reshape(3,\ 1).astype(np.float64)}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00385}00385\ }
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00386}00386\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Approximate\ RMS\ for\ this\ camera\ from\ global\ residuals}}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00387}00387\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ (simple\ average\ across\ all\ measurements)}}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00388}00388\ \ \ \ \ \ \ \ \ \ \ \ \ cam\_residuals\ =\ []}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00389}00389\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ m\_ci,\ pose,\ pts2d\ \textcolor{keywordflow}{in}\ measurements:}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00390}00390\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ m\_ci\ !=\ ci:}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00391}00391\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue}}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00392}00392\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Reproject\ with\ final\ parameters}}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00393}00393\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ R\_p,\ \_\ =\ cv2.Rodrigues(pose\_r\_opt[pose].astype(np.float64))}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00394}00394\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ t\_p\ =\ pose\_t\_opt[pose].astype(np.float64)}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00395}00395\ }
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00396}00396\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ R\_total\ =\ R\ @\ R\_p}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00397}00397\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ t\_total\ =\ R\ @\ t\_p\ +\ t.flatten()}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00398}00398\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ r\_total,\ \_\ =\ cv2.Rodrigues(R\_total)}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00399}00399\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ K\ =\ state.intrinsics[cam\_id][\textcolor{stringliteral}{"{}cameraMatrix"{}}]}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00400}00400\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ dist\ =\ state.intrinsics[cam\_id][\textcolor{stringliteral}{"{}distortionCoeffs"{}}]}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00401}00401\ }
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00402}00402\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ proj,\ \_\ =\ cv2.projectPoints(}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00403}00403\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ objp,\ r\_total,\ t\_total,\ K,\ dist}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00404}00404\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ )}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00405}00405\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ proj\ =\ proj.reshape(-\/1,\ 2)}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00406}00406\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ res\ =\ (proj\ -\/\ pts2d).reshape(-\/1)}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00407}00407\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cam\_residuals.append(res)}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00408}00408\ }
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00409}00409\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ cam\_residuals:}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00410}00410\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cam\_residuals\ =\ np.concatenate(cam\_residuals)}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00411}00411\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stereo\_rms\ =\ float(np.sqrt(np.mean(cam\_residuals**2)))}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00412}00412\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}:}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00413}00413\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stereo\_rms\ =\ state.extrinsics[cam\_id].get(\textcolor{stringliteral}{"{}stereoRms"{}},\ 0.0)}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00414}00414\ }
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00415}00415\ \ \ \ \ \ \ \ \ \ \ \ \ state.setExtrinsics(cam\_id,\ R,\ T,\ stereo\_rms)}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00416}00416\ }
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00417}00417\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ state}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00418}00418\ }
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00419}\mbox{\hyperlink{class_initial_calibration_1_1_initial_calibration_af1f856bd64d46e7a47f7768347364d36}{00419}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{class_initial_calibration_1_1_initial_calibration_af1f856bd64d46e7a47f7768347364d36}{run}}(self,\ imageSet,\ bundleAdjust=True):}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00420}00420\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00421}00421\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @brief\ Main\ entry\ point\ for\ calibration\ pipeline.}}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00422}00422\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ }}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00423}00423\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ imageSet\ ImageSet\ object\ containing\ calibration\ images}}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00424}00424\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ bundleAdjust\ Whether\ to\ apply\ bundle\ adjustment\ (default:\ True)}}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00425}00425\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @return\ CalibrationState\ with\ complete\ intrinsic\ and\ extrinsic\ calibration}}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00426}00426\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00427}00427\ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}Running\ intrinsic\ calibration..."{}})}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00428}00428\ \ \ \ \ \ \ \ \ state\ =\ self.\mbox{\hyperlink{class_initial_calibration_1_1_initial_calibration_a2feadd4ca2e73100f81eaa590ff6a00d}{calibrateIntrinsics}}(imageSet)}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00429}00429\ }
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00430}00430\ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}\(\backslash\)nRunning\ pairwise\ extrinsic\ calibration..."{}})}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00431}00431\ \ \ \ \ \ \ \ \ state\ =\ self.\mbox{\hyperlink{class_initial_calibration_1_1_initial_calibration_acfd129347ae61b94bc62fca90c13c58a}{calibrateExtrinsics}}(imageSet,\ state,\ refCamId=imageSet.cameraIds[0])}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00432}00432\ }
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00433}00433\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ bundleAdjust:}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00434}00434\ \ \ \ \ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}\(\backslash\)nRunning\ global\ bundle\ adjustment\ on\ extrinsics..."{}})}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00435}00435\ \ \ \ \ \ \ \ \ \ \ \ \ state\ =\ self.\mbox{\hyperlink{class_initial_calibration_1_1_initial_calibration_af6d9f1fa8ae15369176c6c878c37a94f}{bundleAdjustExtrinsics}}(imageSet,\ state,\ refCamId=imageSet.cameraIds[0])}
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00436}00436\ }
-\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00437}00437\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ state}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00040}00040\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @return\ Tuple\ (success,\ corners,\ imageSize)\ where\ success\ is\ bool,\ }}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00041}00041\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ corners\ are\ refined\ 2D\ points,\ and\ imageSize\ is\ (width,\ height)}}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00042}00042\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00043}00043\ \ \ \ \ \ \ \ \ img\ =\ cv2.imread(imagePath)}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00044}00044\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ img\ \textcolor{keywordflow}{is}\ \textcolor{keywordtype}{None}:}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00045}00045\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{False},\ \textcolor{keywordtype}{None},\ \textcolor{keywordtype}{None}}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00046}00046\ \ \ \ \ \ \ \ \ gray\ =\ cv2.cvtColor(img,\ cv2.COLOR\_BGR2GRAY)}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00047}00047\ }
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00048}00048\ \ \ \ \ \ \ \ \ found,\ corners\ =\ cv2.findChessboardCorners(gray,\ self.\mbox{\hyperlink{class_initial_calibration_1_1_initial_calibration_a59f035559e30d1c6ff53c0d0f4f17187}{chessboardSize}})}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00049}00049\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ found:}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00050}00050\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{False},\ \textcolor{keywordtype}{None},\ \textcolor{keywordtype}{None}}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00051}00051\ }
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00052}00052\ \ \ \ \ \ \ \ \ refined\ =\ cv2.cornerSubPix(gray,\ corners,\ (11,\ 11),\ (-\/1,\ -\/1),\ self.\mbox{\hyperlink{class_initial_calibration_1_1_initial_calibration_a640a1c4660ee22af13caae018ead4870}{criteria}})}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00053}00053\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{True},\ refined,\ gray.shape[::-\/1]}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00054}00054\ }
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00055}\mbox{\hyperlink{class_initial_calibration_1_1_initial_calibration_a2feadd4ca2e73100f81eaa590ff6a00d}{00055}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{class_initial_calibration_1_1_initial_calibration_a2feadd4ca2e73100f81eaa590ff6a00d}{calibrateIntrinsics}}(self,\ imageSet):}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00056}00056\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00057}00057\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @brief\ Calibrate\ intrinsic\ parameters\ independently\ for\ each\ camera.}}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00058}00058\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00059}00059\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ imageSet\ ImageSet\ object\ containing\ calibration\ images}}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00060}00060\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @return\ CalibrationState\ with\ populated\ intrinsics\ for\ all\ cameras}}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00061}00061\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00062}00062\ \ \ \ \ \ \ \ \ state\ =\ \mbox{\hyperlink{class_calibration_state_1_1_calibration_state}{CalibrationState}}()}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00063}00063\ \ \ \ \ \ \ \ \ objp\ =\ self.\mbox{\hyperlink{class_initial_calibration_1_1_initial_calibration_a548c80ecafbb6d9f98d7feba772647bd}{createObjectPoints}}()}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00064}00064\ }
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00065}00065\ \ \ \ \ \ \ \ \ objpoints\ =\ \{cam:\ []\ \textcolor{keywordflow}{for}\ cam\ \textcolor{keywordflow}{in}\ imageSet.cameraIds\}}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00066}00066\ \ \ \ \ \ \ \ \ imgpoints\ =\ \{cam:\ []\ \textcolor{keywordflow}{for}\ cam\ \textcolor{keywordflow}{in}\ imageSet.cameraIds\}}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00067}00067\ \ \ \ \ \ \ \ \ imgsize\ =\ \{\}}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00068}00068\ }
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00069}00069\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Collect\ corner\ points\ from\ all\ poses\ for\ each\ camera}}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00070}00070\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ pose\ \textcolor{keywordflow}{in}\ range(imageSet.numPoses):}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00071}00071\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ cam\ \textcolor{keywordflow}{in}\ imageSet.cameraIds:}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00072}00072\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ path\ =\ imageSet.getImagePath(pose,\ cam)}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00073}00073\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ok,\ corners,\ size\ =\ self.\mbox{\hyperlink{class_initial_calibration_1_1_initial_calibration_a32ae09d234b1fe5af3ffc4b647b6143b}{detectCorners}}(path)}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00074}00074\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ok:}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00075}00075\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ objpoints[cam].append(objp)}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00076}00076\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ imgpoints[cam].append(corners)}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00077}00077\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ imgsize[cam]\ =\ size}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00078}00078\ }
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00079}00079\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Calibrate\ each\ camera\ separately}}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00080}00080\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ cam\ \textcolor{keywordflow}{in}\ imageSet.cameraIds:}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00081}00081\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ len(objpoints[cam])\ <\ 5:}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00082}00082\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}[WARN]\ Not\ enough\ samples\ for\ camera\ \{cam\}"{}})}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00083}00083\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue}}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00084}00084\ }
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00085}00085\ \ \ \ \ \ \ \ \ \ \ \ \ err,\ K,\ dist,\ rvecs,\ tvecs\ =\ cv2.calibrateCamera(}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00086}00086\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ objpoints[cam],\ imgpoints[cam],\ imgsize[cam],\ \textcolor{keywordtype}{None},\ \textcolor{keywordtype}{None})}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00087}00087\ }
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00088}00088\ \ \ \ \ \ \ \ \ \ \ \ \ state.setIntrinsics(cam,\ K,\ dist,\ err)}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00089}00089\ }
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00090}00090\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ state}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00091}00091\ }
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00092}\mbox{\hyperlink{class_initial_calibration_1_1_initial_calibration_acfd129347ae61b94bc62fca90c13c58a}{00092}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{class_initial_calibration_1_1_initial_calibration_acfd129347ae61b94bc62fca90c13c58a}{calibrateExtrinsics}}(self,\ imageSet,\ state,\ refCamId):}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00093}00093\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00094}00094\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @brief\ Compute\ pairwise\ stereo\ calibration\ between\ reference\ and\ each\ other\ camera.}}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00095}00095\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00096}00096\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ imageSet\ ImageSet\ object\ containing\ calibration\ images}}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00097}00097\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ state\ CalibrationState\ with\ intrinsics\ already\ computed}}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00098}00098\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ refCamId\ Camera\ ID\ to\ use\ as\ reference\ coordinate\ system}}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00099}00099\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @return\ Updated\ CalibrationState\ with\ extrinsics\ for\ all\ cameras}}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00100}00100\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00101}00101\ \ \ \ \ \ \ \ \ objectPoints\ =\ self.\mbox{\hyperlink{class_initial_calibration_1_1_initial_calibration_a548c80ecafbb6d9f98d7feba772647bd}{createObjectPoints}}()}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00102}00102\ \ \ \ \ \ \ \ \ K\_ref\ =\ state.intrinsics[refCamId][\textcolor{stringliteral}{"{}cameraMatrix"{}}]}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00103}00103\ \ \ \ \ \ \ \ \ dist\_ref\ =\ state.intrinsics[refCamId][\textcolor{stringliteral}{"{}distortionCoeffs"{}}]}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00104}00104\ }
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00105}00105\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ cam\ \textcolor{keywordflow}{in}\ imageSet.cameraIds:}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00106}00106\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ cam\ ==\ refCamId:}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00107}00107\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ state.setExtrinsics(cam,\ np.eye(3),\ np.zeros((3,1)),\ 0.0)}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00108}00108\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue}}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00109}00109\ }
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00110}00110\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ cam\ \textcolor{keywordflow}{not}\ \textcolor{keywordflow}{in}\ state.intrinsics:}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00111}00111\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue}}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00112}00112\ }
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00113}00113\ \ \ \ \ \ \ \ \ \ \ \ \ K\_cam\ =\ state.intrinsics[cam][\textcolor{stringliteral}{"{}cameraMatrix"{}}]}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00114}00114\ \ \ \ \ \ \ \ \ \ \ \ \ dist\_cam\ =\ state.intrinsics[cam][\textcolor{stringliteral}{"{}distortionCoeffs"{}}]}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00115}00115\ }
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00116}00116\ \ \ \ \ \ \ \ \ \ \ \ \ objList\ =\ []}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00117}00117\ \ \ \ \ \ \ \ \ \ \ \ \ imgRef\ =\ []}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00118}00118\ \ \ \ \ \ \ \ \ \ \ \ \ imgCam\ =\ []}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00119}00119\ \ \ \ \ \ \ \ \ \ \ \ \ imageSize\ =\ \textcolor{keywordtype}{None}}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00120}00120\ }
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00121}00121\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ pose\ \textcolor{keywordflow}{in}\ range(imageSet.numPoses):}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00122}00122\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pRef\ =\ imageSet.getImagePath(pose,\ refCamId)}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00123}00123\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pCam\ =\ imageSet.getImagePath(pose,\ cam)}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00124}00124\ }
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00125}00125\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ okR,\ cornersR,\ sizeR\ =\ self.\mbox{\hyperlink{class_initial_calibration_1_1_initial_calibration_a32ae09d234b1fe5af3ffc4b647b6143b}{detectCorners}}(pRef)}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00126}00126\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ okC,\ cornersC,\ sizeC\ =\ self.\mbox{\hyperlink{class_initial_calibration_1_1_initial_calibration_a32ae09d234b1fe5af3ffc4b647b6143b}{detectCorners}}(pCam)}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00127}00127\ }
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00128}00128\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ okR\ \textcolor{keywordflow}{and}\ okC:}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00129}00129\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ objList.append(objectPoints)}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00130}00130\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ imgRef.append(cornersR)}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00131}00131\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ imgCam.append(cornersC)}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00132}00132\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ imageSize\ =\ sizeR}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00133}00133\ }
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00134}00134\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ len(objList)\ <\ 3:}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00135}00135\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue}}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00136}00136\ }
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00137}00137\ \ \ \ \ \ \ \ \ \ \ \ \ flags\ =\ cv2.CALIB\_FIX\_INTRINSIC}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00138}00138\ }
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00139}00139\ \ \ \ \ \ \ \ \ \ \ \ \ stereo\_rms,\ KR0,\ d0,\ KC1,\ d1,\ R,\ T,\ E,\ F\ =\ cv2.stereoCalibrate(}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00140}00140\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ objList,}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00141}00141\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ imgRef,}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00142}00142\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ imgCam,}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00143}00143\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ K\_ref,}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00144}00144\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ dist\_ref,}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00145}00145\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ K\_cam,}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00146}00146\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ dist\_cam,}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00147}00147\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ imageSize,}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00148}00148\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ criteria=self.\mbox{\hyperlink{class_initial_calibration_1_1_initial_calibration_a640a1c4660ee22af13caae018ead4870}{criteria}},}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00149}00149\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ flags=flags}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00150}00150\ \ \ \ \ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00151}00151\ }
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00152}00152\ \ \ \ \ \ \ \ \ \ \ \ \ state.setExtrinsics(cam,\ R,\ T,\ stereo\_rms)}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00153}00153\ }
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00154}00154\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ state}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00155}00155\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00156}\mbox{\hyperlink{class_initial_calibration_1_1_initial_calibration_af6d9f1fa8ae15369176c6c878c37a94f}{00156}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{class_initial_calibration_1_1_initial_calibration_af6d9f1fa8ae15369176c6c878c37a94f}{bundleAdjustExtrinsics}}(self,\ imageSet,\ state,\ refCamId):}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00157}00157\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00158}00158\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @brief\ Global\ bundle\ adjustment\ optimizing\ extrinsics\ and\ board\ poses.}}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00159}00159\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00160}00160\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ imageSet\ ImageSet\ object\ containing\ calibration\ images}}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00161}00161\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ state\ CalibrationState\ with\ initial\ intrinsics\ and\ extrinsics}}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00162}00162\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ refCamId\ Camera\ ID\ to\ use\ as\ reference\ coordinate\ system}}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00163}00163\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @return\ Updated\ CalibrationState\ with\ refined\ extrinsics\ after\ bundle\ adjustment}}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00164}00164\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00165}00165\ \ \ \ \ \ \ \ \ objp\ =\ self.\mbox{\hyperlink{class_initial_calibration_1_1_initial_calibration_a548c80ecafbb6d9f98d7feba772647bd}{createObjectPoints}}()}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00166}00166\ \ \ \ \ \ \ \ \ cameraIds\ =\ list(imageSet.cameraIds)}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00167}00167\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ refCamId\ \textcolor{keywordflow}{not}\ \textcolor{keywordflow}{in}\ cameraIds:}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00168}00168\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{raise}\ ValueError(\textcolor{stringliteral}{"{}refCamId\ not\ in\ imageSet.cameraIds"{}})}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00169}00169\ }
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00170}00170\ \ \ \ \ \ \ \ \ ref\_idx\ =\ cameraIds.index(refCamId)}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00171}00171\ }
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00172}00172\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Initialize\ board\ poses\ via\ PnP-\/RANSAC\ in\ reference\ camera}}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00173}00173\ \ \ \ \ \ \ \ \ K\_ref\ =\ state.intrinsics[refCamId][\textcolor{stringliteral}{"{}cameraMatrix"{}}]}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00174}00174\ \ \ \ \ \ \ \ \ dist\_ref\ =\ state.intrinsics[refCamId][\textcolor{stringliteral}{"{}distortionCoeffs"{}}]}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00175}00175\ }
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00176}00176\ \ \ \ \ \ \ \ \ pose\_rvecs\ =\ \{\}}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00177}00177\ \ \ \ \ \ \ \ \ pose\_tvecs\ =\ \{\}}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00178}00178\ \ \ \ \ \ \ \ \ valid\_poses\ =\ []}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00179}00179\ }
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00180}00180\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ pose\ \textcolor{keywordflow}{in}\ range(imageSet.numPoses):}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00181}00181\ \ \ \ \ \ \ \ \ \ \ \ \ img\_path\ =\ imageSet.getImagePath(pose,\ refCamId)}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00182}00182\ \ \ \ \ \ \ \ \ \ \ \ \ ok,\ corners,\ size\ =\ self.\mbox{\hyperlink{class_initial_calibration_1_1_initial_calibration_a32ae09d234b1fe5af3ffc4b647b6143b}{detectCorners}}(img\_path)}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00183}00183\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ ok:}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00184}00184\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue}}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00185}00185\ }
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00186}00186\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Use\ PnP-\/RANSAC\ for\ robust\ board\ pose\ estimation}}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00187}00187\ \ \ \ \ \ \ \ \ \ \ \ \ ok\_pnp,\ rvec,\ tvec,\ inliers\ =\ cv2.solvePnPRansac(}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00188}00188\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ objp,}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00189}00189\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ corners,}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00190}00190\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ K\_ref,}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00191}00191\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ dist\_ref,}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00192}00192\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ reprojectionError=2.0,\ \ \ }
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00193}00193\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ confidence=0.99,}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00194}00194\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ flags=cv2.SOLVEPNP\_ITERATIVE}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00195}00195\ \ \ \ \ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00196}00196\ }
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00197}00197\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ ok\_pnp\ \textcolor{keywordflow}{or}\ inliers\ \textcolor{keywordflow}{is}\ \textcolor{keywordtype}{None}\ \textcolor{keywordflow}{or}\ len(inliers)\ <\ 10:}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00198}00198\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Skip\ pose\ if\ too\ few\ reliable\ points}}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00199}00199\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue}}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00200}00200\ }
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00201}00201\ \ \ \ \ \ \ \ \ \ \ \ \ pose\_rvecs[pose]\ =\ rvec.astype(np.float64).reshape(3)}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00202}00202\ \ \ \ \ \ \ \ \ \ \ \ \ pose\_tvecs[pose]\ =\ tvec.astype(np.float64).reshape(3)}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00203}00203\ \ \ \ \ \ \ \ \ \ \ \ \ valid\_poses.append(pose)}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00204}00204\ }
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00205}00205\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ len(valid\_poses)\ <\ 3:}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00206}00206\ \ \ \ \ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}[BA]\ Not\ enough\ valid\ poses\ for\ bundle\ adjustment."{}})}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00207}00207\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ state}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00208}00208\ }
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00209}00209\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Initialize\ extrinsics\ from\ state}}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00210}00210\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Only\ optimize\ non-\/reference\ cameras}}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00211}00211\ \ \ \ \ \ \ \ \ optim\_cams\ =\ []}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00212}00212\ \ \ \ \ \ \ \ \ cam\_param\_index\ =\ \{\}}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00213}00213\ }
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00214}00214\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ ci,\ cam\ \textcolor{keywordflow}{in}\ enumerate(cameraIds):}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00215}00215\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ cam\ ==\ refCamId:}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00216}00216\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue}}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00217}00217\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ cam\ \textcolor{keywordflow}{not}\ \textcolor{keywordflow}{in}\ state.extrinsics:}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00218}00218\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue}}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00219}00219\ }
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00220}00220\ \ \ \ \ \ \ \ \ \ \ \ \ optim\_cams.append(ci)}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00221}00221\ \ \ \ \ \ \ \ \ \ \ \ \ cam\_param\_index[ci]\ =\ len(cam\_param\_index)}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00222}00222\ }
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00223}00223\ \ \ \ \ \ \ \ \ num\_optim\_cams\ =\ len(optim\_cams)}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00224}00224\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ num\_optim\_cams\ ==\ 0:}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00225}00225\ \ \ \ \ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}[BA]\ No\ extrinsic\ data\ to\ optimize,\ skipping\ BA."{}})}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00226}00226\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ state}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00227}00227\ }
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00228}00228\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Collect\ measurements\ (all\ cameras,\ all\ valid\ poses)}}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00229}00229\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Each\ measurement:\ (cam\_idx,\ pose,\ 2D\ points)}}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00230}00230\ \ \ \ \ \ \ \ \ measurements\ =\ []}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00231}00231\ }
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00232}00232\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ ci,\ cam\ \textcolor{keywordflow}{in}\ enumerate(cameraIds):}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00233}00233\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ pose\ \textcolor{keywordflow}{in}\ valid\_poses:}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00234}00234\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ img\_path\ =\ imageSet.getImagePath(pose,\ cam)}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00235}00235\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ok,\ corners,\ size\ =\ self.\mbox{\hyperlink{class_initial_calibration_1_1_initial_calibration_a32ae09d234b1fe5af3ffc4b647b6143b}{detectCorners}}(img\_path)}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00236}00236\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ ok:}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00237}00237\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue}}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00238}00238\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pts2d\ =\ corners.reshape(-\/1,\ 2).astype(np.float64)}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00239}00239\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ measurements.append((ci,\ pose,\ pts2d))}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00240}00240\ }
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00241}00241\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ len(measurements)\ ==\ 0:}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00242}00242\ \ \ \ \ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}[BA]\ No\ overlapping\ detections\ found,\ skipping\ BA."{}})}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00243}00243\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ state}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00244}00244\ }
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00245}00245\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Initialize\ parameter\ vector}}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00246}00246\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Layout:\ [cams\ (without\ ref):\ (r\_cam(3),\ t\_cam(3))...\ ,\ poses:\ (r\_p(3),\ t\_p(3))...]}}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00247}00247\ }
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00248}00248\ \ \ \ \ \ \ \ \ param\_cam\ =\ []}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00249}00249\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ ci\ \textcolor{keywordflow}{in}\ optim\_cams:}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00250}00250\ \ \ \ \ \ \ \ \ \ \ \ \ cam\ =\ cameraIds[ci]}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00251}00251\ \ \ \ \ \ \ \ \ \ \ \ \ extr\ =\ state.extrinsics[cam]}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00252}00252\ \ \ \ \ \ \ \ \ \ \ \ \ R\ =\ extr[\textcolor{stringliteral}{"{}rotationMatrix"{}}]}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00253}00253\ \ \ \ \ \ \ \ \ \ \ \ \ T\ =\ extr[\textcolor{stringliteral}{"{}translationVector"{}}].reshape(3)}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00254}00254\ \ \ \ \ \ \ \ \ \ \ \ \ rvec\_cam,\ \_\ =\ cv2.Rodrigues(R)}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00255}00255\ \ \ \ \ \ \ \ \ \ \ \ \ param\_cam.append(rvec\_cam.reshape(3))}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00256}00256\ \ \ \ \ \ \ \ \ \ \ \ \ param\_cam.append(T)}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00257}00257\ \ \ \ \ \ \ \ \ param\_cam\ =\ np.concatenate(param\_cam).astype(np.float64)}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00258}00258\ }
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00259}00259\ \ \ \ \ \ \ \ \ param\_pose\ =\ []}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00260}00260\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ pose\ \textcolor{keywordflow}{in}\ valid\_poses:}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00261}00261\ \ \ \ \ \ \ \ \ \ \ \ \ param\_pose.append(pose\_rvecs[pose])}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00262}00262\ \ \ \ \ \ \ \ \ \ \ \ \ param\_pose.append(pose\_tvecs[pose])}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00263}00263\ \ \ \ \ \ \ \ \ param\_pose\ =\ np.concatenate(param\_pose).astype(np.float64)}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00264}00264\ }
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00265}00265\ \ \ \ \ \ \ \ \ x0\ =\ np.concatenate([param\_cam,\ param\_pose])}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00266}00266\ }
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00267}00267\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Helper\ functions\ for\ parameter\ decoding}}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00268}00268\ \ \ \ \ \ \ \ \ \textcolor{keyword}{def\ }decode\_params(params):}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00269}00269\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Cameras}}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00270}00270\ \ \ \ \ \ \ \ \ \ \ \ \ cam\_rvecs\ =\ \{\}}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00271}00271\ \ \ \ \ \ \ \ \ \ \ \ \ cam\_tvecs\ =\ \{\}}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00272}00272\ \ \ \ \ \ \ \ \ \ \ \ \ idx\ =\ 0}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00273}00273\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ ci\ \textcolor{keywordflow}{in}\ optim\_cams:}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00274}00274\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ r\ =\ params[idx:idx+3];\ idx\ +=\ 3}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00275}00275\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ t\ =\ params[idx:idx+3];\ idx\ +=\ 3}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00276}00276\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cam\_rvecs[ci]\ =\ r}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00277}00277\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cam\_tvecs[ci]\ =\ t}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00278}00278\ }
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00279}00279\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Poses}}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00280}00280\ \ \ \ \ \ \ \ \ \ \ \ \ pose\_r\ =\ \{\}}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00281}00281\ \ \ \ \ \ \ \ \ \ \ \ \ pose\_t\ =\ \{\}}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00282}00282\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ pose\ \textcolor{keywordflow}{in}\ valid\_poses:}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00283}00283\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ r\ =\ params[idx:idx+3];\ idx\ +=\ 3}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00284}00284\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ t\ =\ params[idx:idx+3];\ idx\ +=\ 3}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00285}00285\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pose\_r[pose]\ =\ r}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00286}00286\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pose\_t[pose]\ =\ t}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00287}00287\ }
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00288}00288\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ cam\_rvecs,\ cam\_tvecs,\ pose\_r,\ pose\_t}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00289}00289\ }
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00290}00290\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Residuals\ function}}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00291}00291\ \ \ \ \ \ \ \ \ \textcolor{keyword}{def\ }residuals(params):}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00292}00292\ \ \ \ \ \ \ \ \ \ \ \ \ cam\_rvecs,\ cam\_tvecs,\ pose\_r,\ pose\_t\ =\ decode\_params(params)}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00293}00293\ }
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00294}00294\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Precompute\ rotation\ matrices}}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00295}00295\ \ \ \ \ \ \ \ \ \ \ \ \ R\_cam\ =\ \{\}}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00296}00296\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ ci,\ r\ \textcolor{keywordflow}{in}\ cam\_rvecs.items():}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00297}00297\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ R\_cam[ci],\ \_\ =\ cv2.Rodrigues(r.astype(np.float64))}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00298}00298\ }
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00299}00299\ \ \ \ \ \ \ \ \ \ \ \ \ R\_pose\ =\ \{\}}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00300}00300\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ pose,\ r\ \textcolor{keywordflow}{in}\ pose\_r.items():}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00301}00301\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ R\_pose[pose],\ \_\ =\ cv2.Rodrigues(r.astype(np.float64))}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00302}00302\ }
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00303}00303\ \ \ \ \ \ \ \ \ \ \ \ \ residual\_list\ =\ []}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00304}00304\ }
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00305}00305\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ ci,\ pose,\ pts2d\ \textcolor{keywordflow}{in}\ measurements:}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00306}00306\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cam\_id\ =\ cameraIds[ci]}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00307}00307\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ K\ =\ state.intrinsics[cam\_id][\textcolor{stringliteral}{"{}cameraMatrix"{}}]}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00308}00308\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ dist\ =\ state.intrinsics[cam\_id][\textcolor{stringliteral}{"{}distortionCoeffs"{}}]}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00309}00309\ }
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00310}00310\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Board\ pose\ in\ reference\ frame}}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00311}00311\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ r\_p\ =\ pose\_r[pose]}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00312}00312\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ t\_p\ =\ pose\_t[pose]}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00313}00313\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ R\_p\ =\ R\_pose[pose]}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00314}00314\ }
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00315}00315\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ci\ ==\ ref\_idx:}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00316}00316\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Reference\ camera:\ use\ board\ pose\ directly}}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00317}00317\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ r\_total\ =\ r\_p}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00318}00318\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ t\_total\ =\ t\_p}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00319}00319\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00320}00320\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ci\ \textcolor{keywordflow}{not}\ \textcolor{keywordflow}{in}\ cam\_rvecs:}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00321}00321\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ For\ non-\/optimized\ cameras,\ use\ static\ extrinsics}}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00322}00322\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ extr\ =\ state.extrinsics[cam\_id]}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00323}00323\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ R\_c\ =\ extr[\textcolor{stringliteral}{"{}rotationMatrix"{}}]}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00324}00324\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ t\_c\ =\ extr[\textcolor{stringliteral}{"{}translationVector"{}}].reshape(3)}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00325}00325\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00326}00326\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ R\_c\ =\ R\_cam[ci]}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00327}00327\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ t\_c\ =\ cam\_tvecs[ci]}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00328}00328\ }
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00329}00329\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Composition:\ X\_cam\ =\ R\_c\ *\ (R\_p\ *\ X\ +\ t\_p)\ +\ t\_c}}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00330}00330\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ R\_total\ =\ R\_c\ @\ R\_p}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00331}00331\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ t\_total\ =\ R\_c\ @\ t\_p\ +\ t\_c}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00332}00332\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ r\_total,\ \_\ =\ cv2.Rodrigues(R\_total.astype(np.float64))}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00333}00333\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ r\_total\ =\ r\_total.reshape(3)}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00334}00334\ }
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00335}00335\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Projection}}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00336}00336\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ proj,\ \_\ =\ cv2.projectPoints(}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00337}00337\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ objp,}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00338}00338\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ r\_total.astype(np.float64),}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00339}00339\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ t\_total.astype(np.float64),}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00340}00340\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ K,}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00341}00341\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ dist}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00342}00342\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00343}00343\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ proj\ =\ proj.reshape(-\/1,\ 2)}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00344}00344\ }
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00345}00345\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ res\ =\ (proj\ -\/\ pts2d).reshape(-\/1)}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00346}00346\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ residual\_list.append(res)}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00347}00347\ }
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00348}00348\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ residual\_list:}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00349}00349\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ np.zeros(0,\ dtype=np.float64)}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00350}00350\ }
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00351}00351\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ np.concatenate(residual\_list)}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00352}00352\ }
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00353}00353\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Optimization\ (robust,\ soft\_l1)}}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00354}00354\ \ \ \ \ \ \ \ \ result\ =\ least\_squares(}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00355}00355\ \ \ \ \ \ \ \ \ \ \ \ \ residuals,}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00356}00356\ \ \ \ \ \ \ \ \ \ \ \ \ x0,}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00357}00357\ \ \ \ \ \ \ \ \ \ \ \ \ verbose=2,}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00358}00358\ \ \ \ \ \ \ \ \ \ \ \ \ method=\textcolor{stringliteral}{"{}trf"{}},\ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00359}00359\ \ \ \ \ \ \ \ \ \ \ \ \ loss=\textcolor{stringliteral}{"{}soft\_l1"{}},\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00360}00360\ \ \ \ \ \ \ \ \ \ \ \ \ f\_scale=1.0\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00361}00361\ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00362}00362\ }
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00363}00363\ \ \ \ \ \ \ \ \ print(}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00364}00364\ \ \ \ \ \ \ \ \ \ \ \ \ f\textcolor{stringliteral}{"{}[BA]\ Done.\ Final\ cost:\ \{result.cost:.4f\},\ "{}}}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00365}00365\ \ \ \ \ \ \ \ \ \ \ \ \ f\textcolor{stringliteral}{"{}RMS\ per\ coord:\ \{np.sqrt(2*result.cost/len(result.fun)):.4f\}\ px"{}}}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00366}00366\ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00367}00367\ }
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00368}00368\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Write\ results\ back\ to\ state.extrinsics}}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00369}00369\ \ \ \ \ \ \ \ \ cam\_rvecs\_opt,\ cam\_tvecs\_opt,\ pose\_r\_opt,\ pose\_t\_opt\ =\ decode\_params(result.x)}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00370}00370\ }
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00371}00371\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Reference\ camera\ remains\ identity}}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00372}00372\ \ \ \ \ \ \ \ \ state.setExtrinsics(}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00373}00373\ \ \ \ \ \ \ \ \ \ \ \ \ refCamId,}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00374}00374\ \ \ \ \ \ \ \ \ \ \ \ \ np.eye(3,\ dtype=np.float64),}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00375}00375\ \ \ \ \ \ \ \ \ \ \ \ \ np.zeros((3,\ 1),\ dtype=np.float64),}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00376}00376\ \ \ \ \ \ \ \ \ \ \ \ \ 0.0}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00377}00377\ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00378}00378\ }
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00379}00379\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Store\ optimized\ cameras}}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00380}00380\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ ci\ \textcolor{keywordflow}{in}\ optim\_cams:}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00381}00381\ \ \ \ \ \ \ \ \ \ \ \ \ cam\_id\ =\ cameraIds[ci]}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00382}00382\ \ \ \ \ \ \ \ \ \ \ \ \ r\ =\ cam\_rvecs\_opt[ci]}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00383}00383\ \ \ \ \ \ \ \ \ \ \ \ \ t\ =\ cam\_tvecs\_opt[ci]}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00384}00384\ \ \ \ \ \ \ \ \ \ \ \ \ R,\ \_\ =\ cv2.Rodrigues(r.astype(np.float64))}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00385}00385\ \ \ \ \ \ \ \ \ \ \ \ \ T\ =\ t.reshape(3,\ 1).astype(np.float64)}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00386}00386\ }
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00387}00387\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Approximate\ RMS\ for\ this\ camera\ from\ global\ residuals}}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00388}00388\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ (simple\ average\ across\ all\ measurements)}}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00389}00389\ \ \ \ \ \ \ \ \ \ \ \ \ cam\_residuals\ =\ []}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00390}00390\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ m\_ci,\ pose,\ pts2d\ \textcolor{keywordflow}{in}\ measurements:}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00391}00391\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ m\_ci\ !=\ ci:}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00392}00392\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue}}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00393}00393\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Reproject\ with\ final\ parameters}}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00394}00394\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ R\_p,\ \_\ =\ cv2.Rodrigues(pose\_r\_opt[pose].astype(np.float64))}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00395}00395\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ t\_p\ =\ pose\_t\_opt[pose].astype(np.float64)}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00396}00396\ }
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00397}00397\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ R\_total\ =\ R\ @\ R\_p}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00398}00398\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ t\_total\ =\ R\ @\ t\_p\ +\ t.flatten()}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00399}00399\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ r\_total,\ \_\ =\ cv2.Rodrigues(R\_total)}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00400}00400\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ K\ =\ state.intrinsics[cam\_id][\textcolor{stringliteral}{"{}cameraMatrix"{}}]}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00401}00401\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ dist\ =\ state.intrinsics[cam\_id][\textcolor{stringliteral}{"{}distortionCoeffs"{}}]}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00402}00402\ }
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00403}00403\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ proj,\ \_\ =\ cv2.projectPoints(}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00404}00404\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ objp,\ r\_total,\ t\_total,\ K,\ dist}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00405}00405\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00406}00406\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ proj\ =\ proj.reshape(-\/1,\ 2)}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00407}00407\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ res\ =\ (proj\ -\/\ pts2d).reshape(-\/1)}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00408}00408\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cam\_residuals.append(res)}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00409}00409\ }
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00410}00410\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ cam\_residuals:}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00411}00411\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cam\_residuals\ =\ np.concatenate(cam\_residuals)}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00412}00412\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stereo\_rms\ =\ float(np.sqrt(np.mean(cam\_residuals**2)))}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00413}00413\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00414}00414\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stereo\_rms\ =\ state.extrinsics[cam\_id].get(\textcolor{stringliteral}{"{}stereoRms"{}},\ 0.0)}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00415}00415\ }
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00416}00416\ \ \ \ \ \ \ \ \ \ \ \ \ state.setExtrinsics(cam\_id,\ R,\ T,\ stereo\_rms)}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00417}00417\ }
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00418}00418\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ state}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00419}00419\ }
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00420}\mbox{\hyperlink{class_initial_calibration_1_1_initial_calibration_af1f856bd64d46e7a47f7768347364d36}{00420}}\ \ \ \ \ \textcolor{keyword}{def\ }\mbox{\hyperlink{class_initial_calibration_1_1_initial_calibration_af1f856bd64d46e7a47f7768347364d36}{run}}(self,\ imageSet,\ bundleAdjust=True):}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00421}00421\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00422}00422\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @brief\ Main\ entry\ point\ for\ calibration\ pipeline.}}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00423}00423\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00424}00424\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ imageSet\ ImageSet\ object\ containing\ calibration\ images}}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00425}00425\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ bundleAdjust\ Whether\ to\ apply\ bundle\ adjustment\ (default:\ True)}}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00426}00426\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @return\ CalibrationState\ with\ complete\ intrinsic\ and\ extrinsic\ calibration}}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00427}00427\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00428}00428\ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}Running\ intrinsic\ calibration..."{}})}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00429}00429\ \ \ \ \ \ \ \ \ state\ =\ self.\mbox{\hyperlink{class_initial_calibration_1_1_initial_calibration_a2feadd4ca2e73100f81eaa590ff6a00d}{calibrateIntrinsics}}(imageSet)}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00430}00430\ }
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00431}00431\ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}\(\backslash\)nRunning\ pairwise\ extrinsic\ calibration..."{}})}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00432}00432\ \ \ \ \ \ \ \ \ state\ =\ self.\mbox{\hyperlink{class_initial_calibration_1_1_initial_calibration_acfd129347ae61b94bc62fca90c13c58a}{calibrateExtrinsics}}(imageSet,\ state,\ refCamId=imageSet.cameraIds[0])}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00433}00433\ }
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00434}00434\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ bundleAdjust:}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00435}00435\ \ \ \ \ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}\(\backslash\)nRunning\ global\ bundle\ adjustment\ on\ extrinsics..."{}})}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00436}00436\ \ \ \ \ \ \ \ \ \ \ \ \ state\ =\ self.\mbox{\hyperlink{class_initial_calibration_1_1_initial_calibration_af6d9f1fa8ae15369176c6c878c37a94f}{bundleAdjustExtrinsics}}(imageSet,\ state,\ refCamId=imageSet.cameraIds[0])}
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00437}00437\ }
+\DoxyCodeLine{\Hypertarget{_initial_calibration_8py_source_l00438}00438\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ state}
 
 \end{DoxyCode}

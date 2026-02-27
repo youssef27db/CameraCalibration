@@ -86,274 +86,274 @@ Initial\+Calibration.\+Initial\+Calibration.\+bundle\+Adjust\+Extrinsics (\begin
 \end{DoxyVerb}
  
 
-Definition at line \mbox{\hyperlink{_initial_calibration_8py_source_l00155}{155}} of file \mbox{\hyperlink{_initial_calibration_8py_source}{Initial\+Calibration.\+py}}.
+Definition at line \mbox{\hyperlink{_initial_calibration_8py_source_l00156}{156}} of file \mbox{\hyperlink{_initial_calibration_8py_source}{Initial\+Calibration.\+py}}.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00155\ \ \ \ \ \textcolor{keyword}{def\ }bundleAdjustExtrinsics(self,\ imageSet,\ state,\ refCamId): }
-\DoxyCodeLine{00156\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{} }}
-\DoxyCodeLine{00157\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @brief\ Global\ bundle\ adjustment\ optimizing\ extrinsics\ and\ board\ poses. }}
-\DoxyCodeLine{00158\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \  }}
-\DoxyCodeLine{00159\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ imageSet\ ImageSet\ object\ containing\ calibration\ images }}
-\DoxyCodeLine{00160\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ state\ CalibrationState\ with\ initial\ intrinsics\ and\ extrinsics }}
-\DoxyCodeLine{00161\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ refCamId\ Camera\ ID\ to\ use\ as\ reference\ coordinate\ system }}
-\DoxyCodeLine{00162\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @return\ Updated\ CalibrationState\ with\ refined\ extrinsics\ after\ bundle\ adjustment }}
-\DoxyCodeLine{00163\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}} }
-\DoxyCodeLine{00164\ \ \ \ \ \ \ \ \ objp\ =\ self.createObjectPoints() }
-\DoxyCodeLine{00165\ \ \ \ \ \ \ \ \ cameraIds\ =\ list(imageSet.cameraIds) }
-\DoxyCodeLine{00166\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ refCamId\ \textcolor{keywordflow}{not}\ \textcolor{keywordflow}{in}\ cameraIds: }
-\DoxyCodeLine{00167\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{raise}\ ValueError(\textcolor{stringliteral}{"{}refCamId\ not\ in\ imageSet.cameraIds"{}}) }
-\DoxyCodeLine{00168\  }
-\DoxyCodeLine{00169\ \ \ \ \ \ \ \ \ ref\_idx\ =\ cameraIds.index(refCamId) }
-\DoxyCodeLine{00170\  }
-\DoxyCodeLine{00171\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Initialize\ board\ poses\ via\ PnP-\/RANSAC\ in\ reference\ camera }}
-\DoxyCodeLine{00172\ \ \ \ \ \ \ \ \ K\_ref\ =\ state.intrinsics[refCamId][\textcolor{stringliteral}{"{}cameraMatrix"{}}] }
-\DoxyCodeLine{00173\ \ \ \ \ \ \ \ \ dist\_ref\ =\ state.intrinsics[refCamId][\textcolor{stringliteral}{"{}distortionCoeffs"{}}] }
-\DoxyCodeLine{00174\  }
-\DoxyCodeLine{00175\ \ \ \ \ \ \ \ \ pose\_rvecs\ =\ \{\} }
-\DoxyCodeLine{00176\ \ \ \ \ \ \ \ \ pose\_tvecs\ =\ \{\} }
-\DoxyCodeLine{00177\ \ \ \ \ \ \ \ \ valid\_poses\ =\ [] }
-\DoxyCodeLine{00178\  }
-\DoxyCodeLine{00179\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ pose\ \textcolor{keywordflow}{in}\ range(imageSet.numPoses): }
-\DoxyCodeLine{00180\ \ \ \ \ \ \ \ \ \ \ \ \ img\_path\ =\ imageSet.getImagePath(pose,\ refCamId) }
-\DoxyCodeLine{00181\ \ \ \ \ \ \ \ \ \ \ \ \ ok,\ corners,\ size\ =\ self.detectCorners(img\_path) }
-\DoxyCodeLine{00182\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ ok: }
-\DoxyCodeLine{00183\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue} }
-\DoxyCodeLine{00184\  }
-\DoxyCodeLine{00185\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Use\ PnP-\/RANSAC\ for\ robust\ board\ pose\ estimation }}
-\DoxyCodeLine{00186\ \ \ \ \ \ \ \ \ \ \ \ \ ok\_pnp,\ rvec,\ tvec,\ inliers\ =\ cv2.solvePnPRansac( }
-\DoxyCodeLine{00187\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ objp, }
-\DoxyCodeLine{00188\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ corners, }
-\DoxyCodeLine{00189\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ K\_ref, }
-\DoxyCodeLine{00190\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ dist\_ref, }
-\DoxyCodeLine{00191\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ reprojectionError=2.0,\ \ \  }
-\DoxyCodeLine{00192\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ confidence=0.99, }
-\DoxyCodeLine{00193\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ flags=cv2.SOLVEPNP\_ITERATIVE }
-\DoxyCodeLine{00194\ \ \ \ \ \ \ \ \ \ \ \ \ ) }
-\DoxyCodeLine{00195\  }
-\DoxyCodeLine{00196\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ ok\_pnp\ \textcolor{keywordflow}{or}\ inliers\ \textcolor{keywordflow}{is}\ \textcolor{keywordtype}{None}\ \textcolor{keywordflow}{or}\ len(inliers)\ <\ 10: }
-\DoxyCodeLine{00197\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Skip\ pose\ if\ too\ few\ reliable\ points }}
-\DoxyCodeLine{00198\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue} }
-\DoxyCodeLine{00199\  }
-\DoxyCodeLine{00200\ \ \ \ \ \ \ \ \ \ \ \ \ pose\_rvecs[pose]\ =\ rvec.astype(np.float64).reshape(3) }
-\DoxyCodeLine{00201\ \ \ \ \ \ \ \ \ \ \ \ \ pose\_tvecs[pose]\ =\ tvec.astype(np.float64).reshape(3) }
-\DoxyCodeLine{00202\ \ \ \ \ \ \ \ \ \ \ \ \ valid\_poses.append(pose) }
-\DoxyCodeLine{00203\  }
-\DoxyCodeLine{00204\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ len(valid\_poses)\ <\ 3: }
-\DoxyCodeLine{00205\ \ \ \ \ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}[BA]\ Not\ enough\ valid\ poses\ for\ bundle\ adjustment."{}}) }
-\DoxyCodeLine{00206\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ state }
-\DoxyCodeLine{00207\  }
-\DoxyCodeLine{00208\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Initialize\ extrinsics\ from\ state }}
-\DoxyCodeLine{00209\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Only\ optimize\ non-\/reference\ cameras }}
-\DoxyCodeLine{00210\ \ \ \ \ \ \ \ \ optim\_cams\ =\ [] }
-\DoxyCodeLine{00211\ \ \ \ \ \ \ \ \ cam\_param\_index\ =\ \{\} }
-\DoxyCodeLine{00212\  }
-\DoxyCodeLine{00213\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ ci,\ cam\ \textcolor{keywordflow}{in}\ enumerate(cameraIds): }
-\DoxyCodeLine{00214\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ cam\ ==\ refCamId: }
-\DoxyCodeLine{00215\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue} }
-\DoxyCodeLine{00216\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ cam\ \textcolor{keywordflow}{not}\ \textcolor{keywordflow}{in}\ state.extrinsics: }
-\DoxyCodeLine{00217\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue} }
-\DoxyCodeLine{00218\  }
-\DoxyCodeLine{00219\ \ \ \ \ \ \ \ \ \ \ \ \ optim\_cams.append(ci) }
-\DoxyCodeLine{00220\ \ \ \ \ \ \ \ \ \ \ \ \ cam\_param\_index[ci]\ =\ len(cam\_param\_index) }
-\DoxyCodeLine{00221\  }
-\DoxyCodeLine{00222\ \ \ \ \ \ \ \ \ num\_optim\_cams\ =\ len(optim\_cams) }
-\DoxyCodeLine{00223\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ num\_optim\_cams\ ==\ 0: }
-\DoxyCodeLine{00224\ \ \ \ \ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}[BA]\ No\ extrinsic\ data\ to\ optimize,\ skipping\ BA."{}}) }
-\DoxyCodeLine{00225\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ state }
-\DoxyCodeLine{00226\  }
-\DoxyCodeLine{00227\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Collect\ measurements\ (all\ cameras,\ all\ valid\ poses) }}
-\DoxyCodeLine{00228\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Each\ measurement:\ (cam\_idx,\ pose,\ 2D\ points) }}
-\DoxyCodeLine{00229\ \ \ \ \ \ \ \ \ measurements\ =\ [] }
-\DoxyCodeLine{00230\  }
-\DoxyCodeLine{00231\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ ci,\ cam\ \textcolor{keywordflow}{in}\ enumerate(cameraIds): }
-\DoxyCodeLine{00232\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ pose\ \textcolor{keywordflow}{in}\ valid\_poses: }
-\DoxyCodeLine{00233\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ img\_path\ =\ imageSet.getImagePath(pose,\ cam) }
-\DoxyCodeLine{00234\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ok,\ corners,\ size\ =\ self.detectCorners(img\_path) }
-\DoxyCodeLine{00235\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ ok: }
-\DoxyCodeLine{00236\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue} }
-\DoxyCodeLine{00237\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pts2d\ =\ corners.reshape(-\/1,\ 2).astype(np.float64) }
-\DoxyCodeLine{00238\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ measurements.append((ci,\ pose,\ pts2d)) }
-\DoxyCodeLine{00239\  }
-\DoxyCodeLine{00240\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ len(measurements)\ ==\ 0: }
-\DoxyCodeLine{00241\ \ \ \ \ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}[BA]\ No\ overlapping\ detections\ found,\ skipping\ BA."{}}) }
-\DoxyCodeLine{00242\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ state }
-\DoxyCodeLine{00243\  }
-\DoxyCodeLine{00244\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Initialize\ parameter\ vector }}
-\DoxyCodeLine{00245\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Layout:\ [cams\ (without\ ref):\ (r\_cam(3),\ t\_cam(3))...\ ,\ poses:\ (r\_p(3),\ t\_p(3))...] }}
-\DoxyCodeLine{00246\  }
-\DoxyCodeLine{00247\ \ \ \ \ \ \ \ \ param\_cam\ =\ [] }
-\DoxyCodeLine{00248\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ ci\ \textcolor{keywordflow}{in}\ optim\_cams: }
-\DoxyCodeLine{00249\ \ \ \ \ \ \ \ \ \ \ \ \ cam\ =\ cameraIds[ci] }
-\DoxyCodeLine{00250\ \ \ \ \ \ \ \ \ \ \ \ \ extr\ =\ state.extrinsics[cam] }
-\DoxyCodeLine{00251\ \ \ \ \ \ \ \ \ \ \ \ \ R\ =\ extr[\textcolor{stringliteral}{"{}rotationMatrix"{}}] }
-\DoxyCodeLine{00252\ \ \ \ \ \ \ \ \ \ \ \ \ T\ =\ extr[\textcolor{stringliteral}{"{}translationVector"{}}].reshape(3) }
-\DoxyCodeLine{00253\ \ \ \ \ \ \ \ \ \ \ \ \ rvec\_cam,\ \_\ =\ cv2.Rodrigues(R) }
-\DoxyCodeLine{00254\ \ \ \ \ \ \ \ \ \ \ \ \ param\_cam.append(rvec\_cam.reshape(3)) }
-\DoxyCodeLine{00255\ \ \ \ \ \ \ \ \ \ \ \ \ param\_cam.append(T) }
-\DoxyCodeLine{00256\ \ \ \ \ \ \ \ \ param\_cam\ =\ np.concatenate(param\_cam).astype(np.float64) }
-\DoxyCodeLine{00257\  }
-\DoxyCodeLine{00258\ \ \ \ \ \ \ \ \ param\_pose\ =\ [] }
-\DoxyCodeLine{00259\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ pose\ \textcolor{keywordflow}{in}\ valid\_poses: }
-\DoxyCodeLine{00260\ \ \ \ \ \ \ \ \ \ \ \ \ param\_pose.append(pose\_rvecs[pose]) }
-\DoxyCodeLine{00261\ \ \ \ \ \ \ \ \ \ \ \ \ param\_pose.append(pose\_tvecs[pose]) }
-\DoxyCodeLine{00262\ \ \ \ \ \ \ \ \ param\_pose\ =\ np.concatenate(param\_pose).astype(np.float64) }
-\DoxyCodeLine{00263\  }
-\DoxyCodeLine{00264\ \ \ \ \ \ \ \ \ x0\ =\ np.concatenate([param\_cam,\ param\_pose]) }
-\DoxyCodeLine{00265\  }
-\DoxyCodeLine{00266\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Helper\ functions\ for\ parameter\ decoding }}
-\DoxyCodeLine{00267\ \ \ \ \ \ \ \ \ \textcolor{keyword}{def\ }decode\_params(params): }
-\DoxyCodeLine{00268\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Cameras }}
-\DoxyCodeLine{00269\ \ \ \ \ \ \ \ \ \ \ \ \ cam\_rvecs\ =\ \{\} }
-\DoxyCodeLine{00270\ \ \ \ \ \ \ \ \ \ \ \ \ cam\_tvecs\ =\ \{\} }
-\DoxyCodeLine{00271\ \ \ \ \ \ \ \ \ \ \ \ \ idx\ =\ 0 }
-\DoxyCodeLine{00272\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ ci\ \textcolor{keywordflow}{in}\ optim\_cams: }
-\DoxyCodeLine{00273\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ r\ =\ params[idx:idx+3];\ idx\ +=\ 3 }
-\DoxyCodeLine{00274\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ t\ =\ params[idx:idx+3];\ idx\ +=\ 3 }
-\DoxyCodeLine{00275\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cam\_rvecs[ci]\ =\ r }
-\DoxyCodeLine{00276\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cam\_tvecs[ci]\ =\ t }
-\DoxyCodeLine{00277\  }
-\DoxyCodeLine{00278\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Poses }}
-\DoxyCodeLine{00279\ \ \ \ \ \ \ \ \ \ \ \ \ pose\_r\ =\ \{\} }
-\DoxyCodeLine{00280\ \ \ \ \ \ \ \ \ \ \ \ \ pose\_t\ =\ \{\} }
-\DoxyCodeLine{00281\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ pose\ \textcolor{keywordflow}{in}\ valid\_poses: }
-\DoxyCodeLine{00282\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ r\ =\ params[idx:idx+3];\ idx\ +=\ 3 }
-\DoxyCodeLine{00283\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ t\ =\ params[idx:idx+3];\ idx\ +=\ 3 }
-\DoxyCodeLine{00284\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pose\_r[pose]\ =\ r }
-\DoxyCodeLine{00285\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pose\_t[pose]\ =\ t }
-\DoxyCodeLine{00286\  }
-\DoxyCodeLine{00287\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ cam\_rvecs,\ cam\_tvecs,\ pose\_r,\ pose\_t }
-\DoxyCodeLine{00288\  }
-\DoxyCodeLine{00289\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Residuals\ function }}
-\DoxyCodeLine{00290\ \ \ \ \ \ \ \ \ \textcolor{keyword}{def\ }residuals(params): }
-\DoxyCodeLine{00291\ \ \ \ \ \ \ \ \ \ \ \ \ cam\_rvecs,\ cam\_tvecs,\ pose\_r,\ pose\_t\ =\ decode\_params(params) }
-\DoxyCodeLine{00292\  }
-\DoxyCodeLine{00293\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Precompute\ rotation\ matrices }}
-\DoxyCodeLine{00294\ \ \ \ \ \ \ \ \ \ \ \ \ R\_cam\ =\ \{\} }
-\DoxyCodeLine{00295\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ ci,\ r\ \textcolor{keywordflow}{in}\ cam\_rvecs.items(): }
-\DoxyCodeLine{00296\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ R\_cam[ci],\ \_\ =\ cv2.Rodrigues(r.astype(np.float64)) }
-\DoxyCodeLine{00297\  }
-\DoxyCodeLine{00298\ \ \ \ \ \ \ \ \ \ \ \ \ R\_pose\ =\ \{\} }
-\DoxyCodeLine{00299\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ pose,\ r\ \textcolor{keywordflow}{in}\ pose\_r.items(): }
-\DoxyCodeLine{00300\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ R\_pose[pose],\ \_\ =\ cv2.Rodrigues(r.astype(np.float64)) }
-\DoxyCodeLine{00301\  }
-\DoxyCodeLine{00302\ \ \ \ \ \ \ \ \ \ \ \ \ residual\_list\ =\ [] }
-\DoxyCodeLine{00303\  }
-\DoxyCodeLine{00304\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ ci,\ pose,\ pts2d\ \textcolor{keywordflow}{in}\ measurements: }
-\DoxyCodeLine{00305\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cam\_id\ =\ cameraIds[ci] }
-\DoxyCodeLine{00306\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ K\ =\ state.intrinsics[cam\_id][\textcolor{stringliteral}{"{}cameraMatrix"{}}] }
-\DoxyCodeLine{00307\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ dist\ =\ state.intrinsics[cam\_id][\textcolor{stringliteral}{"{}distortionCoeffs"{}}] }
-\DoxyCodeLine{00308\  }
-\DoxyCodeLine{00309\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Board\ pose\ in\ reference\ frame }}
-\DoxyCodeLine{00310\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ r\_p\ =\ pose\_r[pose] }
-\DoxyCodeLine{00311\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ t\_p\ =\ pose\_t[pose] }
-\DoxyCodeLine{00312\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ R\_p\ =\ R\_pose[pose] }
-\DoxyCodeLine{00313\  }
-\DoxyCodeLine{00314\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ci\ ==\ ref\_idx: }
-\DoxyCodeLine{00315\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Reference\ camera:\ use\ board\ pose\ directly }}
-\DoxyCodeLine{00316\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ r\_total\ =\ r\_p }
-\DoxyCodeLine{00317\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ t\_total\ =\ t\_p }
-\DoxyCodeLine{00318\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}: }
-\DoxyCodeLine{00319\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ci\ \textcolor{keywordflow}{not}\ \textcolor{keywordflow}{in}\ cam\_rvecs: }
-\DoxyCodeLine{00320\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ For\ non-\/optimized\ cameras,\ use\ static\ extrinsics }}
-\DoxyCodeLine{00321\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ extr\ =\ state.extrinsics[cam\_id] }
-\DoxyCodeLine{00322\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ R\_c\ =\ extr[\textcolor{stringliteral}{"{}rotationMatrix"{}}] }
-\DoxyCodeLine{00323\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ t\_c\ =\ extr[\textcolor{stringliteral}{"{}translationVector"{}}].reshape(3) }
-\DoxyCodeLine{00324\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}: }
-\DoxyCodeLine{00325\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ R\_c\ =\ R\_cam[ci] }
-\DoxyCodeLine{00326\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ t\_c\ =\ cam\_tvecs[ci] }
-\DoxyCodeLine{00327\  }
-\DoxyCodeLine{00328\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Composition:\ X\_cam\ =\ R\_c\ *\ (R\_p\ *\ X\ +\ t\_p)\ +\ t\_c }}
-\DoxyCodeLine{00329\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ R\_total\ =\ R\_c\ @\ R\_p }
-\DoxyCodeLine{00330\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ t\_total\ =\ R\_c\ @\ t\_p\ +\ t\_c }
-\DoxyCodeLine{00331\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ r\_total,\ \_\ =\ cv2.Rodrigues(R\_total.astype(np.float64)) }
-\DoxyCodeLine{00332\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ r\_total\ =\ r\_total.reshape(3) }
-\DoxyCodeLine{00333\  }
-\DoxyCodeLine{00334\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Projection }}
-\DoxyCodeLine{00335\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ proj,\ \_\ =\ cv2.projectPoints( }
-\DoxyCodeLine{00336\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ objp, }
-\DoxyCodeLine{00337\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ r\_total.astype(np.float64), }
-\DoxyCodeLine{00338\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ t\_total.astype(np.float64), }
-\DoxyCodeLine{00339\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ K, }
-\DoxyCodeLine{00340\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ dist }
-\DoxyCodeLine{00341\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ) }
-\DoxyCodeLine{00342\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ proj\ =\ proj.reshape(-\/1,\ 2) }
-\DoxyCodeLine{00343\  }
-\DoxyCodeLine{00344\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ res\ =\ (proj\ -\/\ pts2d).reshape(-\/1) }
-\DoxyCodeLine{00345\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ residual\_list.append(res) }
-\DoxyCodeLine{00346\  }
-\DoxyCodeLine{00347\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ residual\_list: }
-\DoxyCodeLine{00348\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ np.zeros(0,\ dtype=np.float64) }
-\DoxyCodeLine{00349\  }
-\DoxyCodeLine{00350\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ np.concatenate(residual\_list) }
-\DoxyCodeLine{00351\  }
-\DoxyCodeLine{00352\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Optimization\ (robust,\ soft\_l1) }}
-\DoxyCodeLine{00353\ \ \ \ \ \ \ \ \ result\ =\ least\_squares( }
-\DoxyCodeLine{00354\ \ \ \ \ \ \ \ \ \ \ \ \ residuals, }
-\DoxyCodeLine{00355\ \ \ \ \ \ \ \ \ \ \ \ \ x0, }
-\DoxyCodeLine{00356\ \ \ \ \ \ \ \ \ \ \ \ \ verbose=2, }
-\DoxyCodeLine{00357\ \ \ \ \ \ \ \ \ \ \ \ \ method=\textcolor{stringliteral}{"{}trf"{}},\ \ \ \ \ \ \  }
-\DoxyCodeLine{00358\ \ \ \ \ \ \ \ \ \ \ \ \ loss=\textcolor{stringliteral}{"{}soft\_l1"{}},\ \ \ \ \  }
-\DoxyCodeLine{00359\ \ \ \ \ \ \ \ \ \ \ \ \ f\_scale=1.0\ \ \ \ \ \ \ \ \  }
-\DoxyCodeLine{00360\ \ \ \ \ \ \ \ \ ) }
-\DoxyCodeLine{00361\  }
-\DoxyCodeLine{00362\ \ \ \ \ \ \ \ \ print( }
-\DoxyCodeLine{00363\ \ \ \ \ \ \ \ \ \ \ \ \ f\textcolor{stringliteral}{"{}[BA]\ Done.\ Final\ cost:\ \{result.cost:.4f\},\ "{}} }
-\DoxyCodeLine{00364\ \ \ \ \ \ \ \ \ \ \ \ \ f\textcolor{stringliteral}{"{}RMS\ per\ coord:\ \{np.sqrt(2*result.cost/len(result.fun)):.4f\}\ px"{}} }
-\DoxyCodeLine{00365\ \ \ \ \ \ \ \ \ ) }
-\DoxyCodeLine{00366\  }
-\DoxyCodeLine{00367\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Write\ results\ back\ to\ state.extrinsics }}
-\DoxyCodeLine{00368\ \ \ \ \ \ \ \ \ cam\_rvecs\_opt,\ cam\_tvecs\_opt,\ pose\_r\_opt,\ pose\_t\_opt\ =\ decode\_params(result.x) }
-\DoxyCodeLine{00369\  }
-\DoxyCodeLine{00370\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Reference\ camera\ remains\ identity }}
-\DoxyCodeLine{00371\ \ \ \ \ \ \ \ \ state.setExtrinsics( }
-\DoxyCodeLine{00372\ \ \ \ \ \ \ \ \ \ \ \ \ refCamId, }
-\DoxyCodeLine{00373\ \ \ \ \ \ \ \ \ \ \ \ \ np.eye(3,\ dtype=np.float64), }
-\DoxyCodeLine{00374\ \ \ \ \ \ \ \ \ \ \ \ \ np.zeros((3,\ 1),\ dtype=np.float64), }
-\DoxyCodeLine{00375\ \ \ \ \ \ \ \ \ \ \ \ \ 0.0 }
-\DoxyCodeLine{00376\ \ \ \ \ \ \ \ \ ) }
-\DoxyCodeLine{00377\  }
-\DoxyCodeLine{00378\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Store\ optimized\ cameras }}
-\DoxyCodeLine{00379\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ ci\ \textcolor{keywordflow}{in}\ optim\_cams: }
-\DoxyCodeLine{00380\ \ \ \ \ \ \ \ \ \ \ \ \ cam\_id\ =\ cameraIds[ci] }
-\DoxyCodeLine{00381\ \ \ \ \ \ \ \ \ \ \ \ \ r\ =\ cam\_rvecs\_opt[ci] }
-\DoxyCodeLine{00382\ \ \ \ \ \ \ \ \ \ \ \ \ t\ =\ cam\_tvecs\_opt[ci] }
-\DoxyCodeLine{00383\ \ \ \ \ \ \ \ \ \ \ \ \ R,\ \_\ =\ cv2.Rodrigues(r.astype(np.float64)) }
-\DoxyCodeLine{00384\ \ \ \ \ \ \ \ \ \ \ \ \ T\ =\ t.reshape(3,\ 1).astype(np.float64) }
-\DoxyCodeLine{00385\  }
-\DoxyCodeLine{00386\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Approximate\ RMS\ for\ this\ camera\ from\ global\ residuals }}
-\DoxyCodeLine{00387\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ (simple\ average\ across\ all\ measurements) }}
-\DoxyCodeLine{00388\ \ \ \ \ \ \ \ \ \ \ \ \ cam\_residuals\ =\ [] }
-\DoxyCodeLine{00389\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ m\_ci,\ pose,\ pts2d\ \textcolor{keywordflow}{in}\ measurements: }
-\DoxyCodeLine{00390\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ m\_ci\ !=\ ci: }
-\DoxyCodeLine{00391\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue} }
-\DoxyCodeLine{00392\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Reproject\ with\ final\ parameters }}
-\DoxyCodeLine{00393\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ R\_p,\ \_\ =\ cv2.Rodrigues(pose\_r\_opt[pose].astype(np.float64)) }
-\DoxyCodeLine{00394\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ t\_p\ =\ pose\_t\_opt[pose].astype(np.float64) }
-\DoxyCodeLine{00395\  }
-\DoxyCodeLine{00396\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ R\_total\ =\ R\ @\ R\_p }
-\DoxyCodeLine{00397\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ t\_total\ =\ R\ @\ t\_p\ +\ t.flatten() }
-\DoxyCodeLine{00398\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ r\_total,\ \_\ =\ cv2.Rodrigues(R\_total) }
-\DoxyCodeLine{00399\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ K\ =\ state.intrinsics[cam\_id][\textcolor{stringliteral}{"{}cameraMatrix"{}}] }
-\DoxyCodeLine{00400\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ dist\ =\ state.intrinsics[cam\_id][\textcolor{stringliteral}{"{}distortionCoeffs"{}}] }
-\DoxyCodeLine{00401\  }
-\DoxyCodeLine{00402\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ proj,\ \_\ =\ cv2.projectPoints( }
-\DoxyCodeLine{00403\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ objp,\ r\_total,\ t\_total,\ K,\ dist }
-\DoxyCodeLine{00404\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ) }
-\DoxyCodeLine{00405\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ proj\ =\ proj.reshape(-\/1,\ 2) }
-\DoxyCodeLine{00406\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ res\ =\ (proj\ -\/\ pts2d).reshape(-\/1) }
-\DoxyCodeLine{00407\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cam\_residuals.append(res) }
-\DoxyCodeLine{00408\  }
-\DoxyCodeLine{00409\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ cam\_residuals: }
-\DoxyCodeLine{00410\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cam\_residuals\ =\ np.concatenate(cam\_residuals) }
-\DoxyCodeLine{00411\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stereo\_rms\ =\ float(np.sqrt(np.mean(cam\_residuals**2))) }
-\DoxyCodeLine{00412\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}: }
-\DoxyCodeLine{00413\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stereo\_rms\ =\ state.extrinsics[cam\_id].get(\textcolor{stringliteral}{"{}stereoRms"{}},\ 0.0) }
-\DoxyCodeLine{00414\  }
-\DoxyCodeLine{00415\ \ \ \ \ \ \ \ \ \ \ \ \ state.setExtrinsics(cam\_id,\ R,\ T,\ stereo\_rms) }
-\DoxyCodeLine{00416\  }
-\DoxyCodeLine{00417\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ state }
-\DoxyCodeLine{00418\  }
+\DoxyCodeLine{00156\ \ \ \ \ \textcolor{keyword}{def\ }bundleAdjustExtrinsics(self,\ imageSet,\ state,\ refCamId): }
+\DoxyCodeLine{00157\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{} }}
+\DoxyCodeLine{00158\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @brief\ Global\ bundle\ adjustment\ optimizing\ extrinsics\ and\ board\ poses. }}
+\DoxyCodeLine{00159\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \  }}
+\DoxyCodeLine{00160\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ imageSet\ ImageSet\ object\ containing\ calibration\ images }}
+\DoxyCodeLine{00161\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ state\ CalibrationState\ with\ initial\ intrinsics\ and\ extrinsics }}
+\DoxyCodeLine{00162\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ refCamId\ Camera\ ID\ to\ use\ as\ reference\ coordinate\ system }}
+\DoxyCodeLine{00163\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @return\ Updated\ CalibrationState\ with\ refined\ extrinsics\ after\ bundle\ adjustment }}
+\DoxyCodeLine{00164\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00165\ \ \ \ \ \ \ \ \ objp\ =\ self.createObjectPoints() }
+\DoxyCodeLine{00166\ \ \ \ \ \ \ \ \ cameraIds\ =\ list(imageSet.cameraIds) }
+\DoxyCodeLine{00167\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ refCamId\ \textcolor{keywordflow}{not}\ \textcolor{keywordflow}{in}\ cameraIds: }
+\DoxyCodeLine{00168\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{raise}\ ValueError(\textcolor{stringliteral}{"{}refCamId\ not\ in\ imageSet.cameraIds"{}}) }
+\DoxyCodeLine{00169\  }
+\DoxyCodeLine{00170\ \ \ \ \ \ \ \ \ ref\_idx\ =\ cameraIds.index(refCamId) }
+\DoxyCodeLine{00171\  }
+\DoxyCodeLine{00172\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Initialize\ board\ poses\ via\ PnP-\/RANSAC\ in\ reference\ camera }}
+\DoxyCodeLine{00173\ \ \ \ \ \ \ \ \ K\_ref\ =\ state.intrinsics[refCamId][\textcolor{stringliteral}{"{}cameraMatrix"{}}] }
+\DoxyCodeLine{00174\ \ \ \ \ \ \ \ \ dist\_ref\ =\ state.intrinsics[refCamId][\textcolor{stringliteral}{"{}distortionCoeffs"{}}] }
+\DoxyCodeLine{00175\  }
+\DoxyCodeLine{00176\ \ \ \ \ \ \ \ \ pose\_rvecs\ =\ \{\} }
+\DoxyCodeLine{00177\ \ \ \ \ \ \ \ \ pose\_tvecs\ =\ \{\} }
+\DoxyCodeLine{00178\ \ \ \ \ \ \ \ \ valid\_poses\ =\ [] }
+\DoxyCodeLine{00179\  }
+\DoxyCodeLine{00180\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ pose\ \textcolor{keywordflow}{in}\ range(imageSet.numPoses): }
+\DoxyCodeLine{00181\ \ \ \ \ \ \ \ \ \ \ \ \ img\_path\ =\ imageSet.getImagePath(pose,\ refCamId) }
+\DoxyCodeLine{00182\ \ \ \ \ \ \ \ \ \ \ \ \ ok,\ corners,\ size\ =\ self.detectCorners(img\_path) }
+\DoxyCodeLine{00183\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ ok: }
+\DoxyCodeLine{00184\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue} }
+\DoxyCodeLine{00185\  }
+\DoxyCodeLine{00186\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Use\ PnP-\/RANSAC\ for\ robust\ board\ pose\ estimation }}
+\DoxyCodeLine{00187\ \ \ \ \ \ \ \ \ \ \ \ \ ok\_pnp,\ rvec,\ tvec,\ inliers\ =\ cv2.solvePnPRansac( }
+\DoxyCodeLine{00188\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ objp, }
+\DoxyCodeLine{00189\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ corners, }
+\DoxyCodeLine{00190\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ K\_ref, }
+\DoxyCodeLine{00191\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ dist\_ref, }
+\DoxyCodeLine{00192\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ reprojectionError=2.0,\ \ \  }
+\DoxyCodeLine{00193\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ confidence=0.99, }
+\DoxyCodeLine{00194\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ flags=cv2.SOLVEPNP\_ITERATIVE }
+\DoxyCodeLine{00195\ \ \ \ \ \ \ \ \ \ \ \ \ ) }
+\DoxyCodeLine{00196\  }
+\DoxyCodeLine{00197\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ ok\_pnp\ \textcolor{keywordflow}{or}\ inliers\ \textcolor{keywordflow}{is}\ \textcolor{keywordtype}{None}\ \textcolor{keywordflow}{or}\ len(inliers)\ <\ 10: }
+\DoxyCodeLine{00198\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Skip\ pose\ if\ too\ few\ reliable\ points }}
+\DoxyCodeLine{00199\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue} }
+\DoxyCodeLine{00200\  }
+\DoxyCodeLine{00201\ \ \ \ \ \ \ \ \ \ \ \ \ pose\_rvecs[pose]\ =\ rvec.astype(np.float64).reshape(3) }
+\DoxyCodeLine{00202\ \ \ \ \ \ \ \ \ \ \ \ \ pose\_tvecs[pose]\ =\ tvec.astype(np.float64).reshape(3) }
+\DoxyCodeLine{00203\ \ \ \ \ \ \ \ \ \ \ \ \ valid\_poses.append(pose) }
+\DoxyCodeLine{00204\  }
+\DoxyCodeLine{00205\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ len(valid\_poses)\ <\ 3: }
+\DoxyCodeLine{00206\ \ \ \ \ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}[BA]\ Not\ enough\ valid\ poses\ for\ bundle\ adjustment."{}}) }
+\DoxyCodeLine{00207\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ state }
+\DoxyCodeLine{00208\  }
+\DoxyCodeLine{00209\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Initialize\ extrinsics\ from\ state }}
+\DoxyCodeLine{00210\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Only\ optimize\ non-\/reference\ cameras }}
+\DoxyCodeLine{00211\ \ \ \ \ \ \ \ \ optim\_cams\ =\ [] }
+\DoxyCodeLine{00212\ \ \ \ \ \ \ \ \ cam\_param\_index\ =\ \{\} }
+\DoxyCodeLine{00213\  }
+\DoxyCodeLine{00214\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ ci,\ cam\ \textcolor{keywordflow}{in}\ enumerate(cameraIds): }
+\DoxyCodeLine{00215\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ cam\ ==\ refCamId: }
+\DoxyCodeLine{00216\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue} }
+\DoxyCodeLine{00217\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ cam\ \textcolor{keywordflow}{not}\ \textcolor{keywordflow}{in}\ state.extrinsics: }
+\DoxyCodeLine{00218\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue} }
+\DoxyCodeLine{00219\  }
+\DoxyCodeLine{00220\ \ \ \ \ \ \ \ \ \ \ \ \ optim\_cams.append(ci) }
+\DoxyCodeLine{00221\ \ \ \ \ \ \ \ \ \ \ \ \ cam\_param\_index[ci]\ =\ len(cam\_param\_index) }
+\DoxyCodeLine{00222\  }
+\DoxyCodeLine{00223\ \ \ \ \ \ \ \ \ num\_optim\_cams\ =\ len(optim\_cams) }
+\DoxyCodeLine{00224\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ num\_optim\_cams\ ==\ 0: }
+\DoxyCodeLine{00225\ \ \ \ \ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}[BA]\ No\ extrinsic\ data\ to\ optimize,\ skipping\ BA."{}}) }
+\DoxyCodeLine{00226\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ state }
+\DoxyCodeLine{00227\  }
+\DoxyCodeLine{00228\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Collect\ measurements\ (all\ cameras,\ all\ valid\ poses) }}
+\DoxyCodeLine{00229\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Each\ measurement:\ (cam\_idx,\ pose,\ 2D\ points) }}
+\DoxyCodeLine{00230\ \ \ \ \ \ \ \ \ measurements\ =\ [] }
+\DoxyCodeLine{00231\  }
+\DoxyCodeLine{00232\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ ci,\ cam\ \textcolor{keywordflow}{in}\ enumerate(cameraIds): }
+\DoxyCodeLine{00233\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ pose\ \textcolor{keywordflow}{in}\ valid\_poses: }
+\DoxyCodeLine{00234\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ img\_path\ =\ imageSet.getImagePath(pose,\ cam) }
+\DoxyCodeLine{00235\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ok,\ corners,\ size\ =\ self.detectCorners(img\_path) }
+\DoxyCodeLine{00236\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ ok: }
+\DoxyCodeLine{00237\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue} }
+\DoxyCodeLine{00238\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pts2d\ =\ corners.reshape(-\/1,\ 2).astype(np.float64) }
+\DoxyCodeLine{00239\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ measurements.append((ci,\ pose,\ pts2d)) }
+\DoxyCodeLine{00240\  }
+\DoxyCodeLine{00241\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ len(measurements)\ ==\ 0: }
+\DoxyCodeLine{00242\ \ \ \ \ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}[BA]\ No\ overlapping\ detections\ found,\ skipping\ BA."{}}) }
+\DoxyCodeLine{00243\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ state }
+\DoxyCodeLine{00244\  }
+\DoxyCodeLine{00245\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Initialize\ parameter\ vector }}
+\DoxyCodeLine{00246\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Layout:\ [cams\ (without\ ref):\ (r\_cam(3),\ t\_cam(3))...\ ,\ poses:\ (r\_p(3),\ t\_p(3))...] }}
+\DoxyCodeLine{00247\  }
+\DoxyCodeLine{00248\ \ \ \ \ \ \ \ \ param\_cam\ =\ [] }
+\DoxyCodeLine{00249\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ ci\ \textcolor{keywordflow}{in}\ optim\_cams: }
+\DoxyCodeLine{00250\ \ \ \ \ \ \ \ \ \ \ \ \ cam\ =\ cameraIds[ci] }
+\DoxyCodeLine{00251\ \ \ \ \ \ \ \ \ \ \ \ \ extr\ =\ state.extrinsics[cam] }
+\DoxyCodeLine{00252\ \ \ \ \ \ \ \ \ \ \ \ \ R\ =\ extr[\textcolor{stringliteral}{"{}rotationMatrix"{}}] }
+\DoxyCodeLine{00253\ \ \ \ \ \ \ \ \ \ \ \ \ T\ =\ extr[\textcolor{stringliteral}{"{}translationVector"{}}].reshape(3) }
+\DoxyCodeLine{00254\ \ \ \ \ \ \ \ \ \ \ \ \ rvec\_cam,\ \_\ =\ cv2.Rodrigues(R) }
+\DoxyCodeLine{00255\ \ \ \ \ \ \ \ \ \ \ \ \ param\_cam.append(rvec\_cam.reshape(3)) }
+\DoxyCodeLine{00256\ \ \ \ \ \ \ \ \ \ \ \ \ param\_cam.append(T) }
+\DoxyCodeLine{00257\ \ \ \ \ \ \ \ \ param\_cam\ =\ np.concatenate(param\_cam).astype(np.float64) }
+\DoxyCodeLine{00258\  }
+\DoxyCodeLine{00259\ \ \ \ \ \ \ \ \ param\_pose\ =\ [] }
+\DoxyCodeLine{00260\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ pose\ \textcolor{keywordflow}{in}\ valid\_poses: }
+\DoxyCodeLine{00261\ \ \ \ \ \ \ \ \ \ \ \ \ param\_pose.append(pose\_rvecs[pose]) }
+\DoxyCodeLine{00262\ \ \ \ \ \ \ \ \ \ \ \ \ param\_pose.append(pose\_tvecs[pose]) }
+\DoxyCodeLine{00263\ \ \ \ \ \ \ \ \ param\_pose\ =\ np.concatenate(param\_pose).astype(np.float64) }
+\DoxyCodeLine{00264\  }
+\DoxyCodeLine{00265\ \ \ \ \ \ \ \ \ x0\ =\ np.concatenate([param\_cam,\ param\_pose]) }
+\DoxyCodeLine{00266\  }
+\DoxyCodeLine{00267\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Helper\ functions\ for\ parameter\ decoding }}
+\DoxyCodeLine{00268\ \ \ \ \ \ \ \ \ \textcolor{keyword}{def\ }decode\_params(params): }
+\DoxyCodeLine{00269\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Cameras }}
+\DoxyCodeLine{00270\ \ \ \ \ \ \ \ \ \ \ \ \ cam\_rvecs\ =\ \{\} }
+\DoxyCodeLine{00271\ \ \ \ \ \ \ \ \ \ \ \ \ cam\_tvecs\ =\ \{\} }
+\DoxyCodeLine{00272\ \ \ \ \ \ \ \ \ \ \ \ \ idx\ =\ 0 }
+\DoxyCodeLine{00273\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ ci\ \textcolor{keywordflow}{in}\ optim\_cams: }
+\DoxyCodeLine{00274\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ r\ =\ params[idx:idx+3];\ idx\ +=\ 3 }
+\DoxyCodeLine{00275\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ t\ =\ params[idx:idx+3];\ idx\ +=\ 3 }
+\DoxyCodeLine{00276\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cam\_rvecs[ci]\ =\ r }
+\DoxyCodeLine{00277\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cam\_tvecs[ci]\ =\ t }
+\DoxyCodeLine{00278\  }
+\DoxyCodeLine{00279\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Poses }}
+\DoxyCodeLine{00280\ \ \ \ \ \ \ \ \ \ \ \ \ pose\_r\ =\ \{\} }
+\DoxyCodeLine{00281\ \ \ \ \ \ \ \ \ \ \ \ \ pose\_t\ =\ \{\} }
+\DoxyCodeLine{00282\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ pose\ \textcolor{keywordflow}{in}\ valid\_poses: }
+\DoxyCodeLine{00283\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ r\ =\ params[idx:idx+3];\ idx\ +=\ 3 }
+\DoxyCodeLine{00284\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ t\ =\ params[idx:idx+3];\ idx\ +=\ 3 }
+\DoxyCodeLine{00285\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pose\_r[pose]\ =\ r }
+\DoxyCodeLine{00286\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pose\_t[pose]\ =\ t }
+\DoxyCodeLine{00287\  }
+\DoxyCodeLine{00288\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ cam\_rvecs,\ cam\_tvecs,\ pose\_r,\ pose\_t }
+\DoxyCodeLine{00289\  }
+\DoxyCodeLine{00290\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Residuals\ function }}
+\DoxyCodeLine{00291\ \ \ \ \ \ \ \ \ \textcolor{keyword}{def\ }residuals(params): }
+\DoxyCodeLine{00292\ \ \ \ \ \ \ \ \ \ \ \ \ cam\_rvecs,\ cam\_tvecs,\ pose\_r,\ pose\_t\ =\ decode\_params(params) }
+\DoxyCodeLine{00293\  }
+\DoxyCodeLine{00294\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Precompute\ rotation\ matrices }}
+\DoxyCodeLine{00295\ \ \ \ \ \ \ \ \ \ \ \ \ R\_cam\ =\ \{\} }
+\DoxyCodeLine{00296\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ ci,\ r\ \textcolor{keywordflow}{in}\ cam\_rvecs.items(): }
+\DoxyCodeLine{00297\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ R\_cam[ci],\ \_\ =\ cv2.Rodrigues(r.astype(np.float64)) }
+\DoxyCodeLine{00298\  }
+\DoxyCodeLine{00299\ \ \ \ \ \ \ \ \ \ \ \ \ R\_pose\ =\ \{\} }
+\DoxyCodeLine{00300\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ pose,\ r\ \textcolor{keywordflow}{in}\ pose\_r.items(): }
+\DoxyCodeLine{00301\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ R\_pose[pose],\ \_\ =\ cv2.Rodrigues(r.astype(np.float64)) }
+\DoxyCodeLine{00302\  }
+\DoxyCodeLine{00303\ \ \ \ \ \ \ \ \ \ \ \ \ residual\_list\ =\ [] }
+\DoxyCodeLine{00304\  }
+\DoxyCodeLine{00305\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ ci,\ pose,\ pts2d\ \textcolor{keywordflow}{in}\ measurements: }
+\DoxyCodeLine{00306\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cam\_id\ =\ cameraIds[ci] }
+\DoxyCodeLine{00307\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ K\ =\ state.intrinsics[cam\_id][\textcolor{stringliteral}{"{}cameraMatrix"{}}] }
+\DoxyCodeLine{00308\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ dist\ =\ state.intrinsics[cam\_id][\textcolor{stringliteral}{"{}distortionCoeffs"{}}] }
+\DoxyCodeLine{00309\  }
+\DoxyCodeLine{00310\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Board\ pose\ in\ reference\ frame }}
+\DoxyCodeLine{00311\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ r\_p\ =\ pose\_r[pose] }
+\DoxyCodeLine{00312\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ t\_p\ =\ pose\_t[pose] }
+\DoxyCodeLine{00313\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ R\_p\ =\ R\_pose[pose] }
+\DoxyCodeLine{00314\  }
+\DoxyCodeLine{00315\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ci\ ==\ ref\_idx: }
+\DoxyCodeLine{00316\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Reference\ camera:\ use\ board\ pose\ directly }}
+\DoxyCodeLine{00317\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ r\_total\ =\ r\_p }
+\DoxyCodeLine{00318\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ t\_total\ =\ t\_p }
+\DoxyCodeLine{00319\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}: }
+\DoxyCodeLine{00320\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ci\ \textcolor{keywordflow}{not}\ \textcolor{keywordflow}{in}\ cam\_rvecs: }
+\DoxyCodeLine{00321\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ For\ non-\/optimized\ cameras,\ use\ static\ extrinsics }}
+\DoxyCodeLine{00322\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ extr\ =\ state.extrinsics[cam\_id] }
+\DoxyCodeLine{00323\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ R\_c\ =\ extr[\textcolor{stringliteral}{"{}rotationMatrix"{}}] }
+\DoxyCodeLine{00324\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ t\_c\ =\ extr[\textcolor{stringliteral}{"{}translationVector"{}}].reshape(3) }
+\DoxyCodeLine{00325\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}: }
+\DoxyCodeLine{00326\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ R\_c\ =\ R\_cam[ci] }
+\DoxyCodeLine{00327\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ t\_c\ =\ cam\_tvecs[ci] }
+\DoxyCodeLine{00328\  }
+\DoxyCodeLine{00329\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Composition:\ X\_cam\ =\ R\_c\ *\ (R\_p\ *\ X\ +\ t\_p)\ +\ t\_c }}
+\DoxyCodeLine{00330\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ R\_total\ =\ R\_c\ @\ R\_p }
+\DoxyCodeLine{00331\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ t\_total\ =\ R\_c\ @\ t\_p\ +\ t\_c }
+\DoxyCodeLine{00332\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ r\_total,\ \_\ =\ cv2.Rodrigues(R\_total.astype(np.float64)) }
+\DoxyCodeLine{00333\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ r\_total\ =\ r\_total.reshape(3) }
+\DoxyCodeLine{00334\  }
+\DoxyCodeLine{00335\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Projection }}
+\DoxyCodeLine{00336\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ proj,\ \_\ =\ cv2.projectPoints( }
+\DoxyCodeLine{00337\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ objp, }
+\DoxyCodeLine{00338\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ r\_total.astype(np.float64), }
+\DoxyCodeLine{00339\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ t\_total.astype(np.float64), }
+\DoxyCodeLine{00340\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ K, }
+\DoxyCodeLine{00341\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ dist }
+\DoxyCodeLine{00342\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ) }
+\DoxyCodeLine{00343\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ proj\ =\ proj.reshape(-\/1,\ 2) }
+\DoxyCodeLine{00344\  }
+\DoxyCodeLine{00345\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ res\ =\ (proj\ -\/\ pts2d).reshape(-\/1) }
+\DoxyCodeLine{00346\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ residual\_list.append(res) }
+\DoxyCodeLine{00347\  }
+\DoxyCodeLine{00348\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ residual\_list: }
+\DoxyCodeLine{00349\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ np.zeros(0,\ dtype=np.float64) }
+\DoxyCodeLine{00350\  }
+\DoxyCodeLine{00351\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ np.concatenate(residual\_list) }
+\DoxyCodeLine{00352\  }
+\DoxyCodeLine{00353\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Optimization\ (robust,\ soft\_l1) }}
+\DoxyCodeLine{00354\ \ \ \ \ \ \ \ \ result\ =\ least\_squares( }
+\DoxyCodeLine{00355\ \ \ \ \ \ \ \ \ \ \ \ \ residuals, }
+\DoxyCodeLine{00356\ \ \ \ \ \ \ \ \ \ \ \ \ x0, }
+\DoxyCodeLine{00357\ \ \ \ \ \ \ \ \ \ \ \ \ verbose=2, }
+\DoxyCodeLine{00358\ \ \ \ \ \ \ \ \ \ \ \ \ method=\textcolor{stringliteral}{"{}trf"{}},\ \ \ \ \ \ \  }
+\DoxyCodeLine{00359\ \ \ \ \ \ \ \ \ \ \ \ \ loss=\textcolor{stringliteral}{"{}soft\_l1"{}},\ \ \ \ \  }
+\DoxyCodeLine{00360\ \ \ \ \ \ \ \ \ \ \ \ \ f\_scale=1.0\ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00361\ \ \ \ \ \ \ \ \ ) }
+\DoxyCodeLine{00362\  }
+\DoxyCodeLine{00363\ \ \ \ \ \ \ \ \ print( }
+\DoxyCodeLine{00364\ \ \ \ \ \ \ \ \ \ \ \ \ f\textcolor{stringliteral}{"{}[BA]\ Done.\ Final\ cost:\ \{result.cost:.4f\},\ "{}} }
+\DoxyCodeLine{00365\ \ \ \ \ \ \ \ \ \ \ \ \ f\textcolor{stringliteral}{"{}RMS\ per\ coord:\ \{np.sqrt(2*result.cost/len(result.fun)):.4f\}\ px"{}} }
+\DoxyCodeLine{00366\ \ \ \ \ \ \ \ \ ) }
+\DoxyCodeLine{00367\  }
+\DoxyCodeLine{00368\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Write\ results\ back\ to\ state.extrinsics }}
+\DoxyCodeLine{00369\ \ \ \ \ \ \ \ \ cam\_rvecs\_opt,\ cam\_tvecs\_opt,\ pose\_r\_opt,\ pose\_t\_opt\ =\ decode\_params(result.x) }
+\DoxyCodeLine{00370\  }
+\DoxyCodeLine{00371\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Reference\ camera\ remains\ identity }}
+\DoxyCodeLine{00372\ \ \ \ \ \ \ \ \ state.setExtrinsics( }
+\DoxyCodeLine{00373\ \ \ \ \ \ \ \ \ \ \ \ \ refCamId, }
+\DoxyCodeLine{00374\ \ \ \ \ \ \ \ \ \ \ \ \ np.eye(3,\ dtype=np.float64), }
+\DoxyCodeLine{00375\ \ \ \ \ \ \ \ \ \ \ \ \ np.zeros((3,\ 1),\ dtype=np.float64), }
+\DoxyCodeLine{00376\ \ \ \ \ \ \ \ \ \ \ \ \ 0.0 }
+\DoxyCodeLine{00377\ \ \ \ \ \ \ \ \ ) }
+\DoxyCodeLine{00378\  }
+\DoxyCodeLine{00379\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Store\ optimized\ cameras }}
+\DoxyCodeLine{00380\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ ci\ \textcolor{keywordflow}{in}\ optim\_cams: }
+\DoxyCodeLine{00381\ \ \ \ \ \ \ \ \ \ \ \ \ cam\_id\ =\ cameraIds[ci] }
+\DoxyCodeLine{00382\ \ \ \ \ \ \ \ \ \ \ \ \ r\ =\ cam\_rvecs\_opt[ci] }
+\DoxyCodeLine{00383\ \ \ \ \ \ \ \ \ \ \ \ \ t\ =\ cam\_tvecs\_opt[ci] }
+\DoxyCodeLine{00384\ \ \ \ \ \ \ \ \ \ \ \ \ R,\ \_\ =\ cv2.Rodrigues(r.astype(np.float64)) }
+\DoxyCodeLine{00385\ \ \ \ \ \ \ \ \ \ \ \ \ T\ =\ t.reshape(3,\ 1).astype(np.float64) }
+\DoxyCodeLine{00386\  }
+\DoxyCodeLine{00387\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Approximate\ RMS\ for\ this\ camera\ from\ global\ residuals }}
+\DoxyCodeLine{00388\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ (simple\ average\ across\ all\ measurements) }}
+\DoxyCodeLine{00389\ \ \ \ \ \ \ \ \ \ \ \ \ cam\_residuals\ =\ [] }
+\DoxyCodeLine{00390\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ m\_ci,\ pose,\ pts2d\ \textcolor{keywordflow}{in}\ measurements: }
+\DoxyCodeLine{00391\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ m\_ci\ !=\ ci: }
+\DoxyCodeLine{00392\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue} }
+\DoxyCodeLine{00393\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Reproject\ with\ final\ parameters }}
+\DoxyCodeLine{00394\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ R\_p,\ \_\ =\ cv2.Rodrigues(pose\_r\_opt[pose].astype(np.float64)) }
+\DoxyCodeLine{00395\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ t\_p\ =\ pose\_t\_opt[pose].astype(np.float64) }
+\DoxyCodeLine{00396\  }
+\DoxyCodeLine{00397\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ R\_total\ =\ R\ @\ R\_p }
+\DoxyCodeLine{00398\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ t\_total\ =\ R\ @\ t\_p\ +\ t.flatten() }
+\DoxyCodeLine{00399\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ r\_total,\ \_\ =\ cv2.Rodrigues(R\_total) }
+\DoxyCodeLine{00400\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ K\ =\ state.intrinsics[cam\_id][\textcolor{stringliteral}{"{}cameraMatrix"{}}] }
+\DoxyCodeLine{00401\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ dist\ =\ state.intrinsics[cam\_id][\textcolor{stringliteral}{"{}distortionCoeffs"{}}] }
+\DoxyCodeLine{00402\  }
+\DoxyCodeLine{00403\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ proj,\ \_\ =\ cv2.projectPoints( }
+\DoxyCodeLine{00404\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ objp,\ r\_total,\ t\_total,\ K,\ dist }
+\DoxyCodeLine{00405\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ) }
+\DoxyCodeLine{00406\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ proj\ =\ proj.reshape(-\/1,\ 2) }
+\DoxyCodeLine{00407\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ res\ =\ (proj\ -\/\ pts2d).reshape(-\/1) }
+\DoxyCodeLine{00408\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cam\_residuals.append(res) }
+\DoxyCodeLine{00409\  }
+\DoxyCodeLine{00410\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ cam\_residuals: }
+\DoxyCodeLine{00411\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cam\_residuals\ =\ np.concatenate(cam\_residuals) }
+\DoxyCodeLine{00412\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stereo\_rms\ =\ float(np.sqrt(np.mean(cam\_residuals**2))) }
+\DoxyCodeLine{00413\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}: }
+\DoxyCodeLine{00414\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stereo\_rms\ =\ state.extrinsics[cam\_id].get(\textcolor{stringliteral}{"{}stereoRms"{}},\ 0.0) }
+\DoxyCodeLine{00415\  }
+\DoxyCodeLine{00416\ \ \ \ \ \ \ \ \ \ \ \ \ state.setExtrinsics(cam\_id,\ R,\ T,\ stereo\_rms) }
+\DoxyCodeLine{00417\  }
+\DoxyCodeLine{00418\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ state }
+\DoxyCodeLine{00419\  }
 
 \end{DoxyCode}
 \Hypertarget{class_initial_calibration_1_1_initial_calibration_acfd129347ae61b94bc62fca90c13c58a}\index{InitialCalibration.InitialCalibration@{InitialCalibration.InitialCalibration}!calibrateExtrinsics@{calibrateExtrinsics}}
@@ -371,74 +371,74 @@ Initial\+Calibration.\+Initial\+Calibration.\+calibrate\+Extrinsics (\begin{Doxy
 \end{DoxyVerb}
  
 
-Definition at line \mbox{\hyperlink{_initial_calibration_8py_source_l00091}{91}} of file \mbox{\hyperlink{_initial_calibration_8py_source}{Initial\+Calibration.\+py}}.
+Definition at line \mbox{\hyperlink{_initial_calibration_8py_source_l00092}{92}} of file \mbox{\hyperlink{_initial_calibration_8py_source}{Initial\+Calibration.\+py}}.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00091\ \ \ \ \ \textcolor{keyword}{def\ }calibrateExtrinsics(self,\ imageSet,\ state,\ refCamId): }
-\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{} }}
-\DoxyCodeLine{00093\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @brief\ Compute\ pairwise\ stereo\ calibration\ between\ reference\ and\ each\ other\ camera. }}
-\DoxyCodeLine{00094\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \  }}
-\DoxyCodeLine{00095\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ imageSet\ ImageSet\ object\ containing\ calibration\ images }}
-\DoxyCodeLine{00096\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ state\ CalibrationState\ with\ intrinsics\ already\ computed }}
-\DoxyCodeLine{00097\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ refCamId\ Camera\ ID\ to\ use\ as\ reference\ coordinate\ system }}
-\DoxyCodeLine{00098\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @return\ Updated\ CalibrationState\ with\ extrinsics\ for\ all\ cameras }}
-\DoxyCodeLine{00099\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}} }
-\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ objectPoints\ =\ self.createObjectPoints() }
-\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ K\_ref\ =\ state.intrinsics[refCamId][\textcolor{stringliteral}{"{}cameraMatrix"{}}] }
-\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ dist\_ref\ =\ state.intrinsics[refCamId][\textcolor{stringliteral}{"{}distortionCoeffs"{}}] }
-\DoxyCodeLine{00103\  }
-\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ cam\ \textcolor{keywordflow}{in}\ imageSet.cameraIds: }
-\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ cam\ ==\ refCamId: }
-\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ state.setExtrinsics(cam,\ np.eye(3),\ np.zeros((3,1)),\ 0.0) }
-\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue} }
-\DoxyCodeLine{00108\  }
-\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ cam\ \textcolor{keywordflow}{not}\ \textcolor{keywordflow}{in}\ state.intrinsics: }
-\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue} }
-\DoxyCodeLine{00111\  }
-\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \ \ \ \ K\_cam\ =\ state.intrinsics[cam][\textcolor{stringliteral}{"{}cameraMatrix"{}}] }
-\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ \ \ \ \ dist\_cam\ =\ state.intrinsics[cam][\textcolor{stringliteral}{"{}distortionCoeffs"{}}] }
-\DoxyCodeLine{00114\  }
-\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \ \ \ \ objList\ =\ [] }
-\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ \ \ \ \ imgRef\ =\ [] }
-\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \ \ \ \ imgCam\ =\ [] }
-\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \ \ \ \ imageSize\ =\ \textcolor{keywordtype}{None} }
-\DoxyCodeLine{00119\  }
-\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ pose\ \textcolor{keywordflow}{in}\ range(imageSet.numPoses): }
-\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pRef\ =\ imageSet.getImagePath(pose,\ refCamId) }
-\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pCam\ =\ imageSet.getImagePath(pose,\ cam) }
-\DoxyCodeLine{00123\  }
-\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ okR,\ cornersR,\ sizeR\ =\ self.detectCorners(pRef) }
-\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ okC,\ cornersC,\ sizeC\ =\ self.detectCorners(pCam) }
-\DoxyCodeLine{00126\  }
-\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ okR\ \textcolor{keywordflow}{and}\ okC: }
-\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ objList.append(objectPoints) }
-\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ imgRef.append(cornersR) }
-\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ imgCam.append(cornersC) }
-\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ imageSize\ =\ sizeR }
-\DoxyCodeLine{00132\  }
-\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ len(objList)\ <\ 3: }
-\DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue} }
-\DoxyCodeLine{00135\  }
-\DoxyCodeLine{00136\ \ \ \ \ \ \ \ \ \ \ \ \ flags\ =\ cv2.CALIB\_FIX\_INTRINSIC }
-\DoxyCodeLine{00137\  }
-\DoxyCodeLine{00138\ \ \ \ \ \ \ \ \ \ \ \ \ stereo\_rms,\ KR0,\ d0,\ KC1,\ d1,\ R,\ T,\ E,\ F\ =\ cv2.stereoCalibrate( }
-\DoxyCodeLine{00139\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ objList, }
-\DoxyCodeLine{00140\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ imgRef, }
-\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ imgCam, }
-\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ K\_ref, }
-\DoxyCodeLine{00143\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ dist\_ref, }
-\DoxyCodeLine{00144\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ K\_cam, }
-\DoxyCodeLine{00145\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ dist\_cam, }
-\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ imageSize, }
-\DoxyCodeLine{00147\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ criteria=self.criteria, }
-\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ flags=flags }
-\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ \ \ \ \ ) }
-\DoxyCodeLine{00150\  }
-\DoxyCodeLine{00151\ \ \ \ \ \ \ \ \ \ \ \ \ state.setExtrinsics(cam,\ R,\ T,\ stereo\_rms) }
-\DoxyCodeLine{00152\  }
-\DoxyCodeLine{00153\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ state }
-\DoxyCodeLine{00154\ \ \ \ \  }
+\DoxyCodeLine{00092\ \ \ \ \ \textcolor{keyword}{def\ }calibrateExtrinsics(self,\ imageSet,\ state,\ refCamId): }
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{} }}
+\DoxyCodeLine{00094\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @brief\ Compute\ pairwise\ stereo\ calibration\ between\ reference\ and\ each\ other\ camera. }}
+\DoxyCodeLine{00095\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \  }}
+\DoxyCodeLine{00096\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ imageSet\ ImageSet\ object\ containing\ calibration\ images }}
+\DoxyCodeLine{00097\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ state\ CalibrationState\ with\ intrinsics\ already\ computed }}
+\DoxyCodeLine{00098\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ refCamId\ Camera\ ID\ to\ use\ as\ reference\ coordinate\ system }}
+\DoxyCodeLine{00099\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @return\ Updated\ CalibrationState\ with\ extrinsics\ for\ all\ cameras }}
+\DoxyCodeLine{00100\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ objectPoints\ =\ self.createObjectPoints() }
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ K\_ref\ =\ state.intrinsics[refCamId][\textcolor{stringliteral}{"{}cameraMatrix"{}}] }
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ dist\_ref\ =\ state.intrinsics[refCamId][\textcolor{stringliteral}{"{}distortionCoeffs"{}}] }
+\DoxyCodeLine{00104\  }
+\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ cam\ \textcolor{keywordflow}{in}\ imageSet.cameraIds: }
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ cam\ ==\ refCamId: }
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ state.setExtrinsics(cam,\ np.eye(3),\ np.zeros((3,1)),\ 0.0) }
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue} }
+\DoxyCodeLine{00109\  }
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ cam\ \textcolor{keywordflow}{not}\ \textcolor{keywordflow}{in}\ state.intrinsics: }
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue} }
+\DoxyCodeLine{00112\  }
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ \ \ \ \ K\_cam\ =\ state.intrinsics[cam][\textcolor{stringliteral}{"{}cameraMatrix"{}}] }
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \ \ \ \ dist\_cam\ =\ state.intrinsics[cam][\textcolor{stringliteral}{"{}distortionCoeffs"{}}] }
+\DoxyCodeLine{00115\  }
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ \ \ \ \ objList\ =\ [] }
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \ \ \ \ imgRef\ =\ [] }
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \ \ \ \ imgCam\ =\ [] }
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \ \ \ \ imageSize\ =\ \textcolor{keywordtype}{None} }
+\DoxyCodeLine{00120\  }
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ pose\ \textcolor{keywordflow}{in}\ range(imageSet.numPoses): }
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pRef\ =\ imageSet.getImagePath(pose,\ refCamId) }
+\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pCam\ =\ imageSet.getImagePath(pose,\ cam) }
+\DoxyCodeLine{00124\  }
+\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ okR,\ cornersR,\ sizeR\ =\ self.detectCorners(pRef) }
+\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ okC,\ cornersC,\ sizeC\ =\ self.detectCorners(pCam) }
+\DoxyCodeLine{00127\  }
+\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ okR\ \textcolor{keywordflow}{and}\ okC: }
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ objList.append(objectPoints) }
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ imgRef.append(cornersR) }
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ imgCam.append(cornersC) }
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ imageSize\ =\ sizeR }
+\DoxyCodeLine{00133\  }
+\DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ len(objList)\ <\ 3: }
+\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue} }
+\DoxyCodeLine{00136\  }
+\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ \ \ \ \ flags\ =\ cv2.CALIB\_FIX\_INTRINSIC }
+\DoxyCodeLine{00138\  }
+\DoxyCodeLine{00139\ \ \ \ \ \ \ \ \ \ \ \ \ stereo\_rms,\ KR0,\ d0,\ KC1,\ d1,\ R,\ T,\ E,\ F\ =\ cv2.stereoCalibrate( }
+\DoxyCodeLine{00140\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ objList, }
+\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ imgRef, }
+\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ imgCam, }
+\DoxyCodeLine{00143\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ K\_ref, }
+\DoxyCodeLine{00144\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ dist\_ref, }
+\DoxyCodeLine{00145\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ K\_cam, }
+\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ dist\_cam, }
+\DoxyCodeLine{00147\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ imageSize, }
+\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ criteria=self.criteria, }
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ flags=flags }
+\DoxyCodeLine{00150\ \ \ \ \ \ \ \ \ \ \ \ \ ) }
+\DoxyCodeLine{00151\  }
+\DoxyCodeLine{00152\ \ \ \ \ \ \ \ \ \ \ \ \ state.setExtrinsics(cam,\ R,\ T,\ stereo\_rms) }
+\DoxyCodeLine{00153\  }
+\DoxyCodeLine{00154\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ state }
+\DoxyCodeLine{00155\ \ \ \ \  }
 
 \end{DoxyCode}
 \Hypertarget{class_initial_calibration_1_1_initial_calibration_a2feadd4ca2e73100f81eaa590ff6a00d}\index{InitialCalibration.InitialCalibration@{InitialCalibration.InitialCalibration}!calibrateIntrinsics@{calibrateIntrinsics}}
@@ -454,47 +454,47 @@ Initial\+Calibration.\+Initial\+Calibration.\+calibrate\+Intrinsics (\begin{Doxy
 \end{DoxyVerb}
  
 
-Definition at line \mbox{\hyperlink{_initial_calibration_8py_source_l00054}{54}} of file \mbox{\hyperlink{_initial_calibration_8py_source}{Initial\+Calibration.\+py}}.
+Definition at line \mbox{\hyperlink{_initial_calibration_8py_source_l00055}{55}} of file \mbox{\hyperlink{_initial_calibration_8py_source}{Initial\+Calibration.\+py}}.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00054\ \ \ \ \ \textcolor{keyword}{def\ }calibrateIntrinsics(self,\ imageSet): }
-\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{} }}
-\DoxyCodeLine{00056\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @brief\ Calibrate\ intrinsic\ parameters\ independently\ for\ each\ camera. }}
-\DoxyCodeLine{00057\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \  }}
-\DoxyCodeLine{00058\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ imageSet\ ImageSet\ object\ containing\ calibration\ images }}
-\DoxyCodeLine{00059\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @return\ CalibrationState\ with\ populated\ intrinsics\ for\ all\ cameras }}
-\DoxyCodeLine{00060\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}} }
-\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ state\ =\ \mbox{\hyperlink{namespace_calibration_state}{CalibrationState}}() }
-\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ objp\ =\ self.createObjectPoints() }
-\DoxyCodeLine{00063\  }
-\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ objpoints\ =\ \{cam:\ []\ \textcolor{keywordflow}{for}\ cam\ \textcolor{keywordflow}{in}\ imageSet.cameraIds\} }
-\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ imgpoints\ =\ \{cam:\ []\ \textcolor{keywordflow}{for}\ cam\ \textcolor{keywordflow}{in}\ imageSet.cameraIds\} }
-\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ imgsize\ =\ \{\} }
-\DoxyCodeLine{00067\  }
-\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Collect\ corner\ points\ from\ all\ poses\ for\ each\ camera }}
-\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ pose\ \textcolor{keywordflow}{in}\ range(imageSet.numPoses): }
-\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ cam\ \textcolor{keywordflow}{in}\ imageSet.cameraIds: }
-\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ path\ =\ imageSet.getImagePath(pose,\ cam) }
-\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ok,\ corners,\ size\ =\ self.detectCorners(path) }
-\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ok: }
-\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ objpoints[cam].append(objp) }
-\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ imgpoints[cam].append(corners) }
-\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ imgsize[cam]\ =\ size }
-\DoxyCodeLine{00077\  }
-\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Calibrate\ each\ camera\ separately }}
-\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ cam\ \textcolor{keywordflow}{in}\ imageSet.cameraIds: }
-\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ len(objpoints[cam])\ <\ 5: }
-\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}[WARN]\ Not\ enough\ samples\ for\ camera\ \{cam\}"{}}) }
-\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue} }
-\DoxyCodeLine{00083\  }
-\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \ \ \ \ err,\ K,\ dist,\ rvecs,\ tvecs\ =\ cv2.calibrateCamera( }
-\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ objpoints[cam],\ imgpoints[cam],\ imgsize[cam],\ \textcolor{keywordtype}{None},\ \textcolor{keywordtype}{None}) }
-\DoxyCodeLine{00086\  }
-\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \ \ \ \ state.setIntrinsics(cam,\ K,\ dist,\ err) }
-\DoxyCodeLine{00088\  }
-\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ state }
-\DoxyCodeLine{00090\  }
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keyword}{def\ }calibrateIntrinsics(self,\ imageSet): }
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{} }}
+\DoxyCodeLine{00057\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @brief\ Calibrate\ intrinsic\ parameters\ independently\ for\ each\ camera. }}
+\DoxyCodeLine{00058\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \  }}
+\DoxyCodeLine{00059\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ imageSet\ ImageSet\ object\ containing\ calibration\ images }}
+\DoxyCodeLine{00060\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @return\ CalibrationState\ with\ populated\ intrinsics\ for\ all\ cameras }}
+\DoxyCodeLine{00061\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ state\ =\ \mbox{\hyperlink{namespace_calibration_state}{CalibrationState}}() }
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ objp\ =\ self.createObjectPoints() }
+\DoxyCodeLine{00064\  }
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ objpoints\ =\ \{cam:\ []\ \textcolor{keywordflow}{for}\ cam\ \textcolor{keywordflow}{in}\ imageSet.cameraIds\} }
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ imgpoints\ =\ \{cam:\ []\ \textcolor{keywordflow}{for}\ cam\ \textcolor{keywordflow}{in}\ imageSet.cameraIds\} }
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ imgsize\ =\ \{\} }
+\DoxyCodeLine{00068\  }
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Collect\ corner\ points\ from\ all\ poses\ for\ each\ camera }}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ pose\ \textcolor{keywordflow}{in}\ range(imageSet.numPoses): }
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ cam\ \textcolor{keywordflow}{in}\ imageSet.cameraIds: }
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ path\ =\ imageSet.getImagePath(pose,\ cam) }
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ok,\ corners,\ size\ =\ self.detectCorners(path) }
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ok: }
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ objpoints[cam].append(objp) }
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ imgpoints[cam].append(corners) }
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ imgsize[cam]\ =\ size }
+\DoxyCodeLine{00078\  }
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Calibrate\ each\ camera\ separately }}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ cam\ \textcolor{keywordflow}{in}\ imageSet.cameraIds: }
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ len(objpoints[cam])\ <\ 5: }
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}[WARN]\ Not\ enough\ samples\ for\ camera\ \{cam\}"{}}) }
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue} }
+\DoxyCodeLine{00084\  }
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \ \ \ \ err,\ K,\ dist,\ rvecs,\ tvecs\ =\ cv2.calibrateCamera( }
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ objpoints[cam],\ imgpoints[cam],\ imgsize[cam],\ \textcolor{keywordtype}{None},\ \textcolor{keywordtype}{None}) }
+\DoxyCodeLine{00087\  }
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \ \ \ \ state.setIntrinsics(cam,\ K,\ dist,\ err) }
+\DoxyCodeLine{00089\  }
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ state }
+\DoxyCodeLine{00091\  }
 
 \end{DoxyCode}
 \Hypertarget{class_initial_calibration_1_1_initial_calibration_a548c80ecafbb6d9f98d7feba772647bd}\index{InitialCalibration.InitialCalibration@{InitialCalibration.InitialCalibration}!createObjectPoints@{createObjectPoints}}
@@ -536,7 +536,8 @@ Initial\+Calibration.\+Initial\+Calibration.\+detect\+Corners (\begin{DoxyParamC
 \begin{DoxyVerb}@brief Detect and refine chessboard corner positions in image.
 
 @param imagePath Path to the image file
-@return Tuple (success, corners, imageSize) where success is bool, corners are refined 2D points, and imageSize is (width, height)
+@return Tuple (success, corners, imageSize) where success is bool, 
+corners are refined 2D points, and imageSize is (width, height)
 \end{DoxyVerb}
  
 
@@ -549,20 +550,21 @@ Definition at line \mbox{\hyperlink{_initial_calibration_8py_source_l00035}{35}}
 \DoxyCodeLine{00037\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @brief\ Detect\ and\ refine\ chessboard\ corner\ positions\ in\ image. }}
 \DoxyCodeLine{00038\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \  }}
 \DoxyCodeLine{00039\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ imagePath\ Path\ to\ the\ image\ file }}
-\DoxyCodeLine{00040\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @return\ Tuple\ (success,\ corners,\ imageSize)\ where\ success\ is\ bool,\ corners\ are\ refined\ 2D\ points,\ and\ imageSize\ is\ (width,\ height) }}
-\DoxyCodeLine{00041\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}} }
-\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ img\ =\ cv2.imread(imagePath) }
-\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ img\ \textcolor{keywordflow}{is}\ \textcolor{keywordtype}{None}: }
-\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{False},\ \textcolor{keywordtype}{None},\ \textcolor{keywordtype}{None} }
-\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ gray\ =\ cv2.cvtColor(img,\ cv2.COLOR\_BGR2GRAY) }
-\DoxyCodeLine{00046\  }
-\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ found,\ corners\ =\ cv2.findChessboardCorners(gray,\ self.chessboardSize) }
-\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ found: }
-\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{False},\ \textcolor{keywordtype}{None},\ \textcolor{keywordtype}{None} }
-\DoxyCodeLine{00050\  }
-\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ refined\ =\ cv2.cornerSubPix(gray,\ corners,\ (11,\ 11),\ (-\/1,\ -\/1),\ self.criteria) }
-\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{True},\ refined,\ gray.shape[::-\/1] }
-\DoxyCodeLine{00053\  }
+\DoxyCodeLine{00040\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @return\ Tuple\ (success,\ corners,\ imageSize)\ where\ success\ is\ bool,\  }}
+\DoxyCodeLine{00041\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ corners\ are\ refined\ 2D\ points,\ and\ imageSize\ is\ (width,\ height) }}
+\DoxyCodeLine{00042\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ img\ =\ cv2.imread(imagePath) }
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ img\ \textcolor{keywordflow}{is}\ \textcolor{keywordtype}{None}: }
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{False},\ \textcolor{keywordtype}{None},\ \textcolor{keywordtype}{None} }
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ gray\ =\ cv2.cvtColor(img,\ cv2.COLOR\_BGR2GRAY) }
+\DoxyCodeLine{00047\  }
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ found,\ corners\ =\ cv2.findChessboardCorners(gray,\ self.chessboardSize) }
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ found: }
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{False},\ \textcolor{keywordtype}{None},\ \textcolor{keywordtype}{None} }
+\DoxyCodeLine{00051\  }
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ refined\ =\ cv2.cornerSubPix(gray,\ corners,\ (11,\ 11),\ (-\/1,\ -\/1),\ self.criteria) }
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{True},\ refined,\ gray.shape[::-\/1] }
+\DoxyCodeLine{00054\  }
 
 \end{DoxyCode}
 \Hypertarget{class_initial_calibration_1_1_initial_calibration_af1f856bd64d46e7a47f7768347364d36}\index{InitialCalibration.InitialCalibration@{InitialCalibration.InitialCalibration}!run@{run}}
@@ -579,29 +581,29 @@ Initial\+Calibration.\+Initial\+Calibration.\+run (\begin{DoxyParamCaption}\item
 \end{DoxyVerb}
  
 
-Definition at line \mbox{\hyperlink{_initial_calibration_8py_source_l00419}{419}} of file \mbox{\hyperlink{_initial_calibration_8py_source}{Initial\+Calibration.\+py}}.
+Definition at line \mbox{\hyperlink{_initial_calibration_8py_source_l00420}{420}} of file \mbox{\hyperlink{_initial_calibration_8py_source}{Initial\+Calibration.\+py}}.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00419\ \ \ \ \ \textcolor{keyword}{def\ }run(self,\ imageSet,\ bundleAdjust=True): }
-\DoxyCodeLine{00420\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{} }}
-\DoxyCodeLine{00421\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @brief\ Main\ entry\ point\ for\ calibration\ pipeline. }}
-\DoxyCodeLine{00422\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \  }}
-\DoxyCodeLine{00423\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ imageSet\ ImageSet\ object\ containing\ calibration\ images }}
-\DoxyCodeLine{00424\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ bundleAdjust\ Whether\ to\ apply\ bundle\ adjustment\ (default:\ True) }}
-\DoxyCodeLine{00425\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @return\ CalibrationState\ with\ complete\ intrinsic\ and\ extrinsic\ calibration }}
-\DoxyCodeLine{00426\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}} }
-\DoxyCodeLine{00427\ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}Running\ intrinsic\ calibration..."{}}) }
-\DoxyCodeLine{00428\ \ \ \ \ \ \ \ \ state\ =\ self.calibrateIntrinsics(imageSet) }
-\DoxyCodeLine{00429\  }
-\DoxyCodeLine{00430\ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}\(\backslash\)nRunning\ pairwise\ extrinsic\ calibration..."{}}) }
-\DoxyCodeLine{00431\ \ \ \ \ \ \ \ \ state\ =\ self.calibrateExtrinsics(imageSet,\ state,\ refCamId=imageSet.cameraIds[0]) }
-\DoxyCodeLine{00432\  }
-\DoxyCodeLine{00433\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ bundleAdjust: }
-\DoxyCodeLine{00434\ \ \ \ \ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}\(\backslash\)nRunning\ global\ bundle\ adjustment\ on\ extrinsics..."{}}) }
-\DoxyCodeLine{00435\ \ \ \ \ \ \ \ \ \ \ \ \ state\ =\ self.bundleAdjustExtrinsics(imageSet,\ state,\ refCamId=imageSet.cameraIds[0]) }
-\DoxyCodeLine{00436\  }
-\DoxyCodeLine{00437\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ state }
+\DoxyCodeLine{00420\ \ \ \ \ \textcolor{keyword}{def\ }run(self,\ imageSet,\ bundleAdjust=True): }
+\DoxyCodeLine{00421\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{} }}
+\DoxyCodeLine{00422\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @brief\ Main\ entry\ point\ for\ calibration\ pipeline. }}
+\DoxyCodeLine{00423\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \  }}
+\DoxyCodeLine{00424\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ imageSet\ ImageSet\ object\ containing\ calibration\ images }}
+\DoxyCodeLine{00425\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @param\ bundleAdjust\ Whether\ to\ apply\ bundle\ adjustment\ (default:\ True) }}
+\DoxyCodeLine{00426\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ @return\ CalibrationState\ with\ complete\ intrinsic\ and\ extrinsic\ calibration }}
+\DoxyCodeLine{00427\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00428\ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}Running\ intrinsic\ calibration..."{}}) }
+\DoxyCodeLine{00429\ \ \ \ \ \ \ \ \ state\ =\ self.calibrateIntrinsics(imageSet) }
+\DoxyCodeLine{00430\  }
+\DoxyCodeLine{00431\ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}\(\backslash\)nRunning\ pairwise\ extrinsic\ calibration..."{}}) }
+\DoxyCodeLine{00432\ \ \ \ \ \ \ \ \ state\ =\ self.calibrateExtrinsics(imageSet,\ state,\ refCamId=imageSet.cameraIds[0]) }
+\DoxyCodeLine{00433\  }
+\DoxyCodeLine{00434\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ bundleAdjust: }
+\DoxyCodeLine{00435\ \ \ \ \ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}\(\backslash\)nRunning\ global\ bundle\ adjustment\ on\ extrinsics..."{}}) }
+\DoxyCodeLine{00436\ \ \ \ \ \ \ \ \ \ \ \ \ state\ =\ self.bundleAdjustExtrinsics(imageSet,\ state,\ refCamId=imageSet.cameraIds[0]) }
+\DoxyCodeLine{00437\  }
+\DoxyCodeLine{00438\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ state }
 
 \end{DoxyCode}
 
