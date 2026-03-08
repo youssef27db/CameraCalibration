@@ -13,12 +13,12 @@ PROJECT_ROOT = os.path.dirname(CALIB_LFC_DIR)
 
 CALIB_PATH = os.path.join(
     CALIB_LFC_DIR, "results",
-    "calibration_initial_imageset7_20251215_203849.json"  
+    "calibration_initial_imageset5_20251217_011656.json"  
 )
 
 GT_PATH = os.path.join(
     PROJECT_ROOT, "TestEnvironment", "params",
-    "groundtruth_extrinsics_Rig3_set7.json"
+    "groundtruth_extrinsics_Rig1_set5.json"
 )
 
 CAM_IDS = [

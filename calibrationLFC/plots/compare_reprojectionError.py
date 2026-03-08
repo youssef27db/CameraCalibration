@@ -15,7 +15,7 @@ CALIB_LFC_DIR = os.path.dirname(THIS_DIR)
 
 # Path to calibration result
 CALIB_RESULT_PATH = os.path.join(
-    CALIB_LFC_DIR, "results", "calibration_initial_imageset7_20251215_203849.json"
+    CALIB_LFC_DIR, "results", "calibration_initial_imageset5_20251217_011656.json"
 )
 
 def load_reprojection_errors(path):
@@ -57,6 +57,7 @@ def main():
     plt.ylabel("Reprojection Error (pixels)")
     plt.title("Reprojection Error per Camera")
     plt.grid(alpha=0.3)
+    plt.ylim(0.029, 0.032)
     plt.legend()
 
     plt.tight_layout()
