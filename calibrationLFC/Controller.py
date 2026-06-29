@@ -9,7 +9,7 @@ class Controller:
     
     @details Orchestrates the complete calibration process including initial calibration,
     health monitoring, and result logging. Manages the calibration state and maintains
-    a history of health scores.
+    the history of health scores.
     """
 
     def __init__(self, bundleAdjust):
